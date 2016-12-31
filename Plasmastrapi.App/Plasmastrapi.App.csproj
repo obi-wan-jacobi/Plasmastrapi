@@ -100,7 +100,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
-    <Content Include="README.md" />
     <Content Include="bower_components\system.js\.bower.json" />
     <Content Include="bower_components\system.js\bower.json" />
     <Content Include="bower_components\system.js\dist\system-csp-production.js.map" />
@@ -120,6 +119,7 @@
     <Content Include="bower_components\traceur\bower.json" />
     <Content Include="bower_components\traceur\README.md" />
     <Content Include="bower_components\traceur\traceur.min.js.map" />
+    <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

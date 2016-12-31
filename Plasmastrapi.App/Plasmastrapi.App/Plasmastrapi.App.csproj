@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57F7ABFE-A627-47A0-A58E-83DDAAA011BE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Plasmastrapi.App</RootNamespace>
+    <AssemblyName>Plasmastrapi.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId>/subscriptions/2518565f-0c19-4713-9615-fe00d886d297/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/Plasmastrapi.App</ApplicationInsightsResourceId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="README.md" />
+    <Content Include="bower_components\system.js\.bower.json" />
+    <Content Include="bower_components\system.js\bower.json" />
+    <Content Include="bower_components\system.js\dist\system-csp-production.js.map" />
+    <Content Include="bower_components\system.js\dist\system-polyfills.js.map" />
+    <Content Include="bower_components\system.js\dist\system-register-only.js.map" />
+    <Content Include="bower_components\system.js\dist\system.js.map" />
+    <Content Include="bower_components\system.js\docs\config-api.md" />
+    <Content Include="bower_components\system.js\docs\creating-plugins.md" />
+    <Content Include="bower_components\system.js\docs\es6-modules-overview.md" />
+    <Content Include="bower_components\system.js\docs\module-formats.md" />
+    <Content Include="bower_components\system.js\docs\overview.md" />
+    <Content Include="bower_components\system.js\docs\production-workflows.md" />
+    <Content Include="bower_components\system.js\docs\system-api.md" />
+    <Content Include="bower_components\system.js\LICENSE" />
+    <Content Include="bower_components\system.js\README.md" />
+    <Content Include="bower_components\traceur\.bower.json" />
+    <Content Include="bower_components\traceur\bower.json" />
+    <Content Include="bower_components\traceur\README.md" />
+    <Content Include="bower_components\traceur\traceur.min.js.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\system.js\bench\cjs-sample\cjs.js" />
+    <Content Include="bower_components\system.js\bench\config-example\config.js" />
+    <Content Include="bower_components\system.js\bench\config-example\normalize-data.js" />
+    <Content Include="bower_components\system.js\bench\config-example\pkg-configs.js" />
+    <Content Include="bower_components\system.js\bench\get-cjs-deps.js" />
+    <Content Include="bower_components\system.js\bench\normalize-perf.js" />
+    <Content Include="bower_components\system.js\dist\system-csp-production.js" />
+    <Content Include="bower_components\system.js\dist\system-csp-production.src.js" />
+    <Content Include="bower_components\system.js\dist\system-polyfills.js" />
+    <Content Include="bower_components\system.js\dist\system-polyfills.src.js" />
+    <Content Include="bower_components\system.js\dist\system-register-only.js" />
+    <Content Include="bower_components\system.js\dist\system-register-only.src.js" />
+    <Content Include="bower_components\system.js\dist\system.js" />
+    <Content Include="bower_components\system.js\dist\system.src.js" />
+    <Content Include="bower_components\traceur\traceur.js" />
+    <Content Include="bower_components\traceur\traceur.min.js" />
+    <Content Include="img\AndGate.png" />
+    <Content Include="img\Backgrounds\blueprint-paper.jpg" />
+    <Content Include="img\Backgrounds\BlueprintBackground.jpg" />
+    <Content Include="img\Coloured\AndGate.png" />
+    <Content Include="img\Cutter_closed.png" />
+    <Content Include="img\Cutter_open.png" />
+    <Content Include="img\HoverSwitch.png" />
+    <Content Include="img\LightBulb_closed.png" />
+    <Content Include="img\LightBulb_open.png" />
+    <Content Include="img\LightScreen_closed.png" />
+    <Content Include="img\LightScreen_open.png" />
+    <Content Include="img\NandGate.png" />
+    <Content Include="img\old\AndGate.png" />
+    <Content Include="img\old\NandGate.png" />
+    <Content Include="img\old\OrGate.png" />
+    <Content Include="img\old\XorGate.png" />
+    <Content Include="img\OrGate.png" />
+    <Content Include="img\PowerSource.png" />
+    <Content Include="img\PushSwitch_closed.png" />
+    <Content Include="img\PushSwitch_open.png" />
+    <Content Include="img\SOC_14.png" />
+    <Content Include="img\Terminal_hovered.png" />
+    <Content Include="img\Terminal_in.png" />
+    <Content Include="img\Terminal_out.png" />
+    <Content Include="img\Trashcan.png" />
+    <Content Include="img\XorGate.png" />
+    <Content Include="index.html" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\engine\Components\catalogue.js" />
+    <Content Include="js\engine\Components\core\CollidableComponent.js" />
+    <Content Include="js\engine\Components\core\DrawableComponent.js" />
+    <Content Include="js\engine\Components\core\ImageComponent.js" />
+    <Content Include="js\engine\Components\core\InputComponent.js" />
+    <Content Include="js\engine\Components\core\LineComponent.js" />
+    <Content Include="js\engine\Components\core\MeshComponent.js" />
+    <Content Include="js\engine\Components\core\MotionComponent.js" />
+    <Content Include="js\engine\Components\core\PickableComponent.js" />
+    <Content Include="js\engine\Components\core\PoseComponent.js" />
+    <Content Include="js\engine\Components\core\SpriteComponent.js" />
+    <Content Include="js\engine\Controllers\catalogue.js" />
+    <Content Include="js\engine\Controllers\core\SceneController.js" />
+    <Content Include="js\engine\Controllers\core\ToolController.js" />
+    <Content Include="js\engine\Data\catalogue.js" />
+    <Content Include="js\engine\Data\core\Geometry.js" />
+    <Content Include="js\engine\Data\core\Graphics.js" />
+    <Content Include="js\engine\Data\core\Physics.js" />
+    <Content Include="js\engine\DI\container.js" />
+    <Content Include="js\engine\engine.js" />
+    <Content Include="js\engine\Loaders\catalogue.js" />
+    <Content Include="js\engine\Loaders\core\AssetLoader.js" />
+    <Content Include="js\engine\Objects\catalogue.js" />
+    <Content Include="js\engine\Objects\core\Component.js" />
+    <Content Include="js\engine\Objects\core\Controller.js" />
+    <Content Include="js\engine\Objects\core\Entity.js" />
+    <Content Include="js\engine\Objects\core\EventEmitter.js" />
+    <Content Include="js\engine\Objects\core\Loader.js" />
+    <Content Include="js\engine\Objects\core\Repository.js" />
+    <Content Include="js\engine\Objects\core\Scene.js" />
+    <Content Include="js\engine\Objects\core\System.js" />
+    <Content Include="js\engine\Objects\core\Tool.js" />
+    <Content Include="js\engine\Objects\misc\AtomicArray.js" />
+    <Content Include="js\engine\Objects\misc\AtomicKeyPairArray.js" />
+    <Content Include="js\engine\Objects\misc\AtomicLink.js" />
+    <Content Include="js\engine\Repositories\catalogue.js" />
+    <Content Include="js\engine\Repositories\core\EntityRepository.js" />
+    <Content Include="js\engine\Repositories\core\EventEmitterRepository.js" />
+    <Content Include="js\engine\Systems\catalogue.js" />
+    <Content Include="js\engine\Systems\core\CollisionSystem.js" />
+    <Content Include="js\engine\Systems\core\DrawSystem.js" />
+    <Content Include="js\engine\Systems\core\InputSystem.js" />
+    <Content Include="js\engine\Systems\core\MotionSystem.js" />
+    <Content Include="js\game\assets.js" />
+    <Content Include="js\game\game.js" />
+    <Content Include="js\game\lab.js" />
+    <Content Include="js\game\Repositories\WireService.js" />
+    <Content Include="js\game\scenes.js" />
+    <Content Include="js\game\Services\RevisionService.js" />
+    <Content Include="js\game\tools.js" />
+    <Content Include="js\game\ui.js" />
+    <Content Include="TODO.txt" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plasmastrapi.App\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55979/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

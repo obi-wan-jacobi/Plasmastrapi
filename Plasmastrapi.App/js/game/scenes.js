@@ -1,4 +1,4 @@
-export default (function(engineInstancePromise, Scene, UI, Lab) {
+define(function(engineInstancePromise, Scene, UI, Lab) {
     
     var $ = {}, canvas;
 

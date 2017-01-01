@@ -172,49 +172,41 @@
     <Content Include="img\XorGate.png" />
     <Content Include="index.html" />
     <Content Include="js\bootstrap.js" />
-    <Content Include="js\engine\Components\catalogue.js" />
-    <Content Include="js\engine\Components\core\CollidableComponent.js" />
-    <Content Include="js\engine\Components\core\DrawableComponent.js" />
-    <Content Include="js\engine\Components\core\ImageComponent.js" />
-    <Content Include="js\engine\Components\core\InputComponent.js" />
-    <Content Include="js\engine\Components\core\LineComponent.js" />
-    <Content Include="js\engine\Components\core\MeshComponent.js" />
-    <Content Include="js\engine\Components\core\MotionComponent.js" />
-    <Content Include="js\engine\Components\core\PickableComponent.js" />
-    <Content Include="js\engine\Components\core\PoseComponent.js" />
-    <Content Include="js\engine\Components\core\SpriteComponent.js" />
-    <Content Include="js\engine\Controllers\catalogue.js" />
-    <Content Include="js\engine\Controllers\core\SceneController.js" />
-    <Content Include="js\engine\Controllers\core\ToolController.js" />
-    <Content Include="js\engine\Data\catalogue.js" />
-    <Content Include="js\engine\Data\core\Geometry.js" />
-    <Content Include="js\engine\Data\core\Graphics.js" />
-    <Content Include="js\engine\Data\core\Physics.js" />
-    <Content Include="js\engine\DI\container.js" />
+    <Content Include="js\engine\Components\CollidableComponent.js" />
+    <Content Include="js\engine\Components\DrawableComponent.js" />
+    <Content Include="js\engine\Components\ImageComponent.js" />
+    <Content Include="js\engine\Components\InputComponent.js" />
+    <Content Include="js\engine\Components\LineComponent.js" />
+    <Content Include="js\engine\Components\MeshComponent.js" />
+    <Content Include="js\engine\Components\MotionComponent.js" />
+    <Content Include="js\engine\Components\PickableComponent.js" />
+    <Content Include="js\engine\Components\PoseComponent.js" />
+    <Content Include="js\engine\Components\SpriteComponent.js" />
+    <Content Include="js\engine\Controllers\SceneController.js" />
+    <Content Include="js\engine\Controllers\ToolController.js" />
+    <Content Include="js\engine\Data\Geometry.js" />
+    <Content Include="js\engine\Data\Graphics.js" />
+    <Content Include="js\engine\Data\Physics.js" />
     <Content Include="js\engine\engine.js" />
-    <Content Include="js\engine\Loaders\catalogue.js" />
-    <Content Include="js\engine\Loaders\core\AssetLoader.js" />
-    <Content Include="js\engine\Objects\catalogue.js" />
-    <Content Include="js\engine\Objects\core\Component.js" />
-    <Content Include="js\engine\Objects\core\Controller.js" />
+    <Content Include="js\engine\Loaders\AssetLoader.js" />
+    <Content Include="js\engine\Objects\Component.js" />
+    <Content Include="js\engine\Objects\Controller.js" />
     <Content Include="js\engine\Objects\core\Entity.js" />
     <Content Include="js\engine\Objects\core\EventEmitter.js" />
-    <Content Include="js\engine\Objects\core\Loader.js" />
-    <Content Include="js\engine\Objects\core\Repository.js" />
-    <Content Include="js\engine\Objects\core\Scene.js" />
-    <Content Include="js\engine\Objects\core\System.js" />
-    <Content Include="js\engine\Objects\core\Tool.js" />
-    <Content Include="js\engine\Objects\misc\AtomicArray.js" />
-    <Content Include="js\engine\Objects\misc\AtomicKeyPairArray.js" />
-    <Content Include="js\engine\Objects\misc\AtomicLink.js" />
-    <Content Include="js\engine\Repositories\catalogue.js" />
-    <Content Include="js\engine\Repositories\core\EntityRepository.js" />
-    <Content Include="js\engine\Repositories\core\EventEmitterRepository.js" />
-    <Content Include="js\engine\Systems\catalogue.js" />
-    <Content Include="js\engine\Systems\core\CollisionSystem.js" />
-    <Content Include="js\engine\Systems\core\DrawSystem.js" />
-    <Content Include="js\engine\Systems\core\InputSystem.js" />
-    <Content Include="js\engine\Systems\core\MotionSystem.js" />
+    <Content Include="js\engine\Objects\Loader.js" />
+    <Content Include="js\engine\Objects\Repository.js" />
+    <Content Include="js\engine\Objects\Scene.js" />
+    <Content Include="js\engine\Objects\System.js" />
+    <Content Include="js\engine\Objects\Tool.js" />
+    <Content Include="js\engine\Objects\AtomicArray.js" />
+    <Content Include="js\engine\Objects\AtomicKeyPairArray.js" />
+    <Content Include="js\engine\Objects\AtomicLink.js" />
+    <Content Include="js\engine\Repositories\EntityRepository.js" />
+    <Content Include="js\engine\Repositories\EventEmitterRepository.js" />
+    <Content Include="js\engine\Systems\CollisionSystem.js" />
+    <Content Include="js\engine\Systems\DrawSystem.js" />
+    <Content Include="js\engine\Systems\InputSystem.js" />
+    <Content Include="js\engine\Systems\MotionSystem.js" />
     <Content Include="js\game\assets.js" />
     <Content Include="js\game\game.js" />
     <Content Include="js\game\lab.js" />
@@ -232,9 +224,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Plasmastrapi.App\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,24 +1,9 @@
-export default (function(engineInstancePromise, AtomicKeyPairArray) {
-
-    var eventEmitterRepository;
-
-    // receive a live instance of engine
-    engineInstancePromise.then(function(engine) {
-        eventEmitterRepository = engine.eventEmitterRepository;
-    });
+define(["./AtomicKeyPairArray"], function(AtomicKeyPairArray) {
 
     // CLASS EventEmitter
     function EventEmitter() {
         // private variables
         this.__events = {};
-        // This is a special case where properties of the live engine instance rely on EventEmitter.
-        // In order to store these instances we must await instantiation of the EventEmitter repository
-        engineInstancePromise.then((function() {
-            // don't store the eventEmitterRepository as a member of itself!
-            if (this !== eventEmitterRepository) {
-                eventEmitterRepository.store(this);
-            }
-        }).bind(this));
     };
     // private prototypal variables
     EventEmitter.prototype.__eventList = [];
@@ -41,7 +26,7 @@ export default (function(engineInstancePromise, AtomicKeyPairArray) {
             throw new Error(this.constructor.name + ':validateCallback - ' + ' A callback must be supplied as a function.');
         }
     };
-    EventEmitter.prototype.__implementEvents = function(/* event1, event2, etc. */) {
+    EventEmitter.prototype.__registerEvents = function(/* event1, event2, etc. */) {
         for (var i = 0, L = arguments.length; i < L; i++) {
             var event = arguments[i];
             if (this.hasEvent(event)) {
@@ -60,6 +45,16 @@ export default (function(engineInstancePromise, AtomicKeyPairArray) {
         }
     };
     // public methods
+    EventEmitter.prototype.injectEngine = function(engine) {
+        if (!this.__engine) {
+            this.__engine = engine;
+            if (!(this == engine.eventEmitterRepository)) {
+                this.__engine.eventEmitterRepository.store(this);
+            }
+            return true;
+        }
+        return false;
+    };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {
         this.__validateEventIsImplemented(event);
         this.__validateSubscriber(subscriber);
@@ -108,7 +103,7 @@ export default (function(engineInstancePromise, AtomicKeyPairArray) {
         });
         target.create = Destructible.prototype.create;
         target.destroy = Destructible.prototype.destroy;
-        target.__implementEvents(
+        target.__registerEvents(
             'ondestroy'
         );
     };
@@ -119,8 +114,7 @@ export default (function(engineInstancePromise, AtomicKeyPairArray) {
             if (this.isLoaded) {
                 this.unload();
             }
-            eventEmitterRepository.release(this);
-            eventEmitterRepository.purgeEventListenersBoundTo(this);
+            this.__engine.eventEmitterRepository.purge(this);
         }
     };
 
@@ -151,7 +145,7 @@ export default (function(engineInstancePromise, AtomicKeyPairArray) {
         target.load = Loadable.prototype.load;
         target.unload = Loadable.prototype.unload;
         target.reload = Loadable.prototype.reload;
-        target.__implementEvents(
+        target.__registerEvents(
             'oninit',
             'onload',
             'onunload'

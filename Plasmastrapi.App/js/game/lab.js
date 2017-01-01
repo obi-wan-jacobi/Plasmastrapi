@@ -1,4 +1,4 @@
-export default (function(engineInstancePromise, Entity, Components, Geometry, Graphics, UI) {
+define(function(engineInstancePromise, Entity, Components, Geometry, Graphics, UI) {
 
     var $ = {}, toolController, tools, DISPLAYLAYERS;
 

@@ -1,6 +1,6 @@
 // LEGACY (JUNK) TO BE RE-IMPLEMENTED
 
-// export default (function() {
+// define(function() {
 	
 // 	var undoStack = [];
 // 	var redoStack = [];

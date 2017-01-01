@@ -69,7 +69,7 @@ Sometimes one doesn't want to write an import name at all. For this we can use t
 
 export-default.js:
 ```javascript
-  export default function foo() {
+  definefunction foo() {
     console.log('foo');
   }
 ```
@@ -94,8 +94,8 @@ import { $ as jQuery } from 'jquery';   // import a named export to a different 
 export var x = 42;                      // export a named variable
 export function foo() {};               // export a named function
 
-export default 42;                      // export the default export
-export default function foo() {};       // export the default export as a function
+define42;                      // export the default export
+definefunction foo() {};       // export the default export as a function
 
 export { encrypt };                     // export an existing variable
 export { decrypt as dec };              // export a variable as a new name

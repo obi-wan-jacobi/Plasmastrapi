@@ -1,4 +1,4 @@
-export default (function(engineInstancePromise, Tool, Components, Geometry, UI, Lab) {
+define(function(engineInstancePromise, Tool, Components, Geometry, UI, Lab) {
 
 	// ***** Tool Methods Template ***** 
 	/* *********************************

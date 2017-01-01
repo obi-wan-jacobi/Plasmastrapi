@@ -1,4 +1,4 @@
-export default (function(Repository) {
+define(function(Repository) {
 
     // CLASS WireRepository
     WireRepository.prototype = Object.create(Repository.prototype);

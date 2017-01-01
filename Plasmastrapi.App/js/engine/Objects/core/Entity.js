@@ -1,11 +1,4 @@
-export default (function(engineInstancePromise, EventEmitter, Component, AtomicArray) {
-
-    var entityRepository;
-
-    // receive a live instance of engine
-    engineInstancePromise.then(function(engine) {
-        entityRepository = engine.entityRepository;
-    });
+define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitter, Component, AtomicArray) {
 
     // CLASS Entity
     Entity.prototype = Object.create(EventEmitter.prototype);
@@ -21,7 +14,7 @@ export default (function(engineInstancePromise, EventEmitter, Component, AtomicA
         this.addEventListener('onunload', this, this.__onunload);
         this.addEventListener('ondestroy', this, this.__ondestroy);
         // store instance of entity
-        entityRepository.store(this);
+        this.__engine.entityRepository.store(this);
     };
     // private methods
     Entity.prototype.__validateNoDuplicateComponentNames = function(component) {
@@ -57,7 +50,7 @@ export default (function(engineInstancePromise, EventEmitter, Component, AtomicA
         this.__components.forEach(function(component) {
             component.destroy();  
         }, this);
-        entityRepository.release(this);
+        this.__engine.entityRepository.release(this);
     };
     // public methods
     Entity.prototype.addComponent = function(component) {

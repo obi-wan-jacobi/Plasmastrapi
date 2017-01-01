@@ -1,4 +1,11 @@
 in progress:
+- grand refactor to use require.js
+- engine injection
+- entity injection (Component.js)
+- EventEmitter event registration ("InputSystem.prototype.__registerEvents"...?)
+- InputSystem --> InputQueue (currently a lazy/non-explicit singleton)
+- AssetLoader should be broken up into ImageLoader and SpriteLoader
+
 - wireTool logic
 	- disallow multiple wires between the same two terminals
 	

@@ -1831,7 +1831,7 @@ hook('translate', function(systemTranslate) {
  *
  * Module is returned as if written:
  *
- * export default {JSON}
+ * define{JSON}
  *
  * No named exports are provided
  *

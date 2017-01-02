@@ -13,8 +13,6 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         this.addEventListener('onload', this, this.__onload);
         this.addEventListener('onunload', this, this.__onunload);
         this.addEventListener('ondestroy', this, this.__ondestroy);
-        // store instance of entity
-        this.__engine.entityRepository.store(this);
     };
     // private methods
     Entity.prototype.__validateNoDuplicateComponentNames = function(component) {
@@ -53,14 +51,14 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         this.__engine.entityRepository.release(this);
     };
     // public methods
+    Entity.prototype.injectEngine = function (engine) {
+        EventEmitter.injectEngine.call(this, engine);
+        this.__engine.entityRepository.store(this);
+    };
     Entity.prototype.addComponent = function(component) {
         this.__validateNoDuplicateComponentNames(component);
-        if (!component.injectEntity(this)) {
-            throw new Error(this.constructor.name + ':addComponent - Component configuration error: ' + component.constructor.name + ' has been configured for another entity.');
-        }
-        if (!component.injectEntity(this.__engine)) {
-            throw new Error(this.constructor.name + ':addComponent - Component configuration error: ' + component.constructor.name + ' does not contain an engine reference.');
-        }
+        component.injectEntity(this);
+        component.injectEntity(this.__engine);
         this.__components.push(component);
         if (this.isLoaded) {
             this.reload();

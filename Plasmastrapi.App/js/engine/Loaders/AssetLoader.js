@@ -1,4 +1,4 @@
-define(["./Loader", "./Graphics"], function(Loader, Graphics) {
+define(["../Objects/Loader", "../Data/Graphics"], function(Loader, Graphics) {
 	
 	// CLASS AssetLoader
 	AssetLoader.prototype = Object.create(Loader.prototype);

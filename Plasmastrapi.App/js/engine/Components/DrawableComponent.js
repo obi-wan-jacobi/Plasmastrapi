@@ -1,4 +1,4 @@
-define(["./Component", "./LineComponent", "./MeshComponent", "./ImageComponent", "./SpriteComponent"],
+define(["../Objects/Component", "./LineComponent", "./MeshComponent", "./ImageComponent", "./SpriteComponent"],
     function (Component, LineComponent, MeshComponent, ImageComponent, SpriteComponent) {
 
 	// CLASS DrawableComponent

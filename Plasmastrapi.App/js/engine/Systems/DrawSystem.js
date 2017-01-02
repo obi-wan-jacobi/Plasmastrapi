@@ -1,4 +1,4 @@
-define(["./System"],function(System) {
+define(["../Objects/System"],function(System) {
 
 	// CLASS DrawSystem
 	DrawSystem.prototype = Object.create(System.prototype);

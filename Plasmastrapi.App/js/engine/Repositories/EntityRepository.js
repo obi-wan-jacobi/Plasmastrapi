@@ -1,4 +1,4 @@
-define(["./Repository", "./Entity"], function(Repository, Entity) {
+define(["../Objects/Repository", "../Objects/Entity"], function (Repository, Entity) {
 
     // CLASS EntityRepository
     EntityRepository.prototype = Object.create(Repository.prototype);

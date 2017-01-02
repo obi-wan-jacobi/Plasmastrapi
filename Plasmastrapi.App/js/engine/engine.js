@@ -1,16 +1,15 @@
-import {generateIoCContainer} from './DI/container.js';
-
-export function createEngineInstance(canvas) {
-	
-	var IoCContainer = generateIoCContainer();
-	var $ = IoCContainer.$;
+define(["./Objects/System",
+    "./Loaders/AssetLoader",
+    "./Repositories/EntityRepository", "../Repositories/EventEmitterRepository",
+    "./Systems/InputSystem", "./Systems/DrawSystem",
+    "./Controllers/SceneController", "./Controllers/ToolController"],
+    function(System, AssetLoader, EntityRepository, EventEmitterRepository, InputSystem, DrawSystem, SceneController, ToolController) {
 
 	// CLASS Engine
-	Engine.prototype = Object.create($.Objects.System.prototype);
+	Engine.prototype = Object.create(System.prototype);
     Engine.prototype.constructor = Engine;
 	function Engine(canvas) {
-		$.Objects.System.call(this);
-		this.$ = $;
+		System.call(this);
 		this.canvas = canvas;
 		this.__isLoaded = false;
 		this.__isPaused = false;
@@ -21,13 +20,22 @@ export function createEngineInstance(canvas) {
 		this.__registerRepositories();
 		this.__registerSystems();
 		this.__registerControllers();
+		this.addEventListener('oninit', this, this.__oninit);
 		this.addEventListener('onload', this, this.__onload);
 		this.addEventListener('onunload', this, this.__onunload);
 		this.addEventListener('onframe', this, this.__onframe);
 		this.addEventListener('onpause', this, this.__onpause);
 		this.addEventListener('onunpause', this, this.__onunpause);
 	};
-	// private methods
+    // private methods
+	Engine.prototype.__oninit = function () {
+	    for (var i = 0, L = this.__systems.length; i < L; i++) {
+	        this.__systems[i].injectEngine(this);
+	    }
+	    for (var i = 0, L = this.__controllers.length; i < L; i++) {
+	        this.__controllers[i].injectEngine(this);
+	    }
+	};
 	Engine.prototype.__onload = function() {
 		for (var i = 0, L = this.__systems.length; i < L; i++) {
 			this.__systems[i].load();
@@ -61,23 +69,22 @@ export function createEngineInstance(canvas) {
 		this.start;
 	};
 	Engine.prototype.__registerLoaders = function() {
-		this.assetLoader = new $.Loaders.AssetLoader();
-	};
-	Engine.prototype.__registerRepositories = function() {
-		this.entityRepository = new $.Repositories.EntityRepository();
-		this.eventEmitterRepository = new $.Repositories.EventEmitterRepository();
+		this.assetLoader = new AssetLoader();
 	};
 	Engine.prototype.__registerSystems = function() {
-		this.inputSystem = new $.Systems.InputSystem();
+		this.inputSystem = new InputSystem();
 		this.__systems.push(this.inputSystem);
-		this.drawSystem = new $.Systems.DrawSystem();
+		this.drawSystem = new DrawSystem();
 		this.__systems.push(this.drawSystem);
 	};
 	Engine.prototype.__registerControllers = function() {
-		this.sceneController = new $.Controllers.SceneController();
+		this.sceneController = new SceneController();
 		this.__controllers.push(this.sceneController);
-		this.toolController = new $.Controllers.ToolController();
+		this.toolController = new ToolController();
 		this.__controllers.push(this.toolController);
+	};
+	Engine.prototype.__registerFactories = function () {
+	    this.entityFactory = new EntityFactory(this);
 	};
 	Engine.prototype.__beginMainLoop = function() {
 		var self = this;
@@ -111,11 +118,6 @@ export function createEngineInstance(canvas) {
 		this.__beginMainLoop();
 	};
 
-	var engine = new Engine(canvas);
+	return Engine;
 
-	// resolve engine instance dependencies now that the engine has been instantiated
-	IoCContainer.engineInstancePromise.resolve(engine);
-
-	return engine;
-
-};
+});

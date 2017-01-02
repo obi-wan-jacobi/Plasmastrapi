@@ -1,4 +1,4 @@
-define(["./Repository", "./EventEmitter"], function(Repository, EventEmitter) {
+define(["../Objects/Repository", "../Objects/EventEmitter"], function (Repository, EventEmitter) {
 
     // CLASS EventEmitterRepository
     EventEmitterRepository.prototype = Object.create(Repository.prototype);

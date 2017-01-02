@@ -7,21 +7,12 @@ define(["./EventEmitter"], function(EventEmitter) {
         EventEmitter.call(this);
         // private variables
         this.__entity = null;
-        this.__engine = null;
     };
     Component.prototype.injectEntity = function(entity) {
-        if (!this.__entity) {
-            this.__entity = entity;
-            return true;
+        if (this.__entity) {
+            throw new Error(this.constructor.name + " has already received an entity instance.");
         }
-        return false;
-    };
-    Component.prototype.injectEngine = function(engine) {
-        if (!this.__engine) {
-            this.__engine = engine;
-            return true;
-        }
-        return false;
+        this.__entitye = entity;
     };
 
     // apply event mixins

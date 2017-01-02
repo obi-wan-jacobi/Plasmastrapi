@@ -17,7 +17,6 @@ define(function() {
 		this.lengthModifier = lengthModifier || 1;
 	};
 
-
     return $;
 
 });

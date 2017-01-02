@@ -1,4 +1,4 @@
-define(["./System", "./Geometry"], function(System, Geometry) {
+define(["../Objects/System", "../Data/Geometry"], function(System, Geometry) {
 
 	function InputQueue(inputSystem) {
 		var system = inputSystem;

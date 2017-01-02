@@ -95,30 +95,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bower_components\require.js" />
+    <Content Include="js\engine\Objects\Base.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
-    <Content Include="bower_components\system.js\.bower.json" />
-    <Content Include="bower_components\system.js\bower.json" />
-    <Content Include="bower_components\system.js\dist\system-csp-production.js.map" />
-    <Content Include="bower_components\system.js\dist\system-polyfills.js.map" />
-    <Content Include="bower_components\system.js\dist\system-register-only.js.map" />
-    <Content Include="bower_components\system.js\dist\system.js.map" />
-    <Content Include="bower_components\system.js\docs\config-api.md" />
-    <Content Include="bower_components\system.js\docs\creating-plugins.md" />
-    <Content Include="bower_components\system.js\docs\es6-modules-overview.md" />
-    <Content Include="bower_components\system.js\docs\module-formats.md" />
-    <Content Include="bower_components\system.js\docs\overview.md" />
-    <Content Include="bower_components\system.js\docs\production-workflows.md" />
-    <Content Include="bower_components\system.js\docs\system-api.md" />
-    <Content Include="bower_components\system.js\LICENSE" />
-    <Content Include="bower_components\system.js\README.md" />
-    <Content Include="bower_components\traceur\.bower.json" />
-    <Content Include="bower_components\traceur\bower.json" />
-    <Content Include="bower_components\traceur\README.md" />
-    <Content Include="bower_components\traceur\traceur.min.js.map" />
     <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -128,22 +111,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bower_components\system.js\bench\cjs-sample\cjs.js" />
-    <Content Include="bower_components\system.js\bench\config-example\config.js" />
-    <Content Include="bower_components\system.js\bench\config-example\normalize-data.js" />
-    <Content Include="bower_components\system.js\bench\config-example\pkg-configs.js" />
-    <Content Include="bower_components\system.js\bench\get-cjs-deps.js" />
-    <Content Include="bower_components\system.js\bench\normalize-perf.js" />
-    <Content Include="bower_components\system.js\dist\system-csp-production.js" />
-    <Content Include="bower_components\system.js\dist\system-csp-production.src.js" />
-    <Content Include="bower_components\system.js\dist\system-polyfills.js" />
-    <Content Include="bower_components\system.js\dist\system-polyfills.src.js" />
-    <Content Include="bower_components\system.js\dist\system-register-only.js" />
-    <Content Include="bower_components\system.js\dist\system-register-only.src.js" />
-    <Content Include="bower_components\system.js\dist\system.js" />
-    <Content Include="bower_components\system.js\dist\system.src.js" />
-    <Content Include="bower_components\traceur\traceur.js" />
-    <Content Include="bower_components\traceur\traceur.min.js" />
     <Content Include="img\AndGate.png" />
     <Content Include="img\Backgrounds\blueprint-paper.jpg" />
     <Content Include="img\Backgrounds\BlueprintBackground.jpg" />
@@ -171,7 +138,7 @@
     <Content Include="img\Trashcan.png" />
     <Content Include="img\XorGate.png" />
     <Content Include="index.html" />
-    <Content Include="js\bootstrap.js" />
+    <Content Include="js\main.js" />
     <Content Include="js\engine\Components\CollidableComponent.js" />
     <Content Include="js\engine\Components\DrawableComponent.js" />
     <Content Include="js\engine\Components\ImageComponent.js" />
@@ -187,12 +154,12 @@
     <Content Include="js\engine\Data\Geometry.js" />
     <Content Include="js\engine\Data\Graphics.js" />
     <Content Include="js\engine\Data\Physics.js" />
-    <Content Include="js\engine\engine.js" />
+    <Content Include="js\engine\Engine.js" />
     <Content Include="js\engine\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Objects\Component.js" />
     <Content Include="js\engine\Objects\Controller.js" />
-    <Content Include="js\engine\Objects\core\Entity.js" />
-    <Content Include="js\engine\Objects\core\EventEmitter.js" />
+    <Content Include="js\engine\Objects\Entity.js" />
+    <Content Include="js\engine\Objects\EventEmitter.js" />
     <Content Include="js\engine\Objects\Loader.js" />
     <Content Include="js\engine\Objects\Repository.js" />
     <Content Include="js\engine\Objects\Scene.js" />
@@ -208,7 +175,7 @@
     <Content Include="js\engine\Systems\InputSystem.js" />
     <Content Include="js\engine\Systems\MotionSystem.js" />
     <Content Include="js\game\assets.js" />
-    <Content Include="js\game\game.js" />
+    <Content Include="js\game\Game.js" />
     <Content Include="js\game\lab.js" />
     <Content Include="js\game\Repositories\WireService.js" />
     <Content Include="js\game\scenes.js" />

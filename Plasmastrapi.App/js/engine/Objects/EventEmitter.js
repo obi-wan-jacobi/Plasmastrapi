@@ -1,6 +1,8 @@
-define(["./AtomicKeyPairArray"], function(AtomicKeyPairArray) {
+define(["./Base", "./AtomicKeyPairArray"], function(Base, AtomicKeyPairArray) {
 
     // CLASS EventEmitter
+    EventEmitter.prototype = Object.create(Base.prototype);
+    EventEmitter.prototype.constructor = EventEmitter;
     function EventEmitter() {
         // private variables
         this.__events = {};
@@ -46,14 +48,8 @@ define(["./AtomicKeyPairArray"], function(AtomicKeyPairArray) {
     };
     // public methods
     EventEmitter.prototype.injectEngine = function(engine) {
-        if (!this.__engine) {
-            this.__engine = engine;
-            if (!(this == engine.eventEmitterRepository)) {
-                this.__engine.eventEmitterRepository.store(this);
-            }
-            return true;
-        }
-        return false;
+        Base.injectEngine.call(this, engine);
+        this.__engine.eventEmitterRepository.store(this);
     };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {
         this.__validateEventIsImplemented(event);

@@ -1,4 +1,4 @@
-define(["./Component", "./MeshComponent"], function (Component, MeshComponent) {
+define(["../Objects/Component", "./MeshComponent"], function (Component, MeshComponent) {
 
 	// CLASS PickableComponent
 	PickableComponent.prototype = Object.create(Component.prototype);

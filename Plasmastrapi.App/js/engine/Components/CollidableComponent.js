@@ -1,4 +1,4 @@
-define(["./Component"], function(Component) {
+define(["../Objects/Component"], function(Component) {
     
 	// CLASS CollidableComponent
 	CollidableComponent.prototype = Object.create(Component.prototype);

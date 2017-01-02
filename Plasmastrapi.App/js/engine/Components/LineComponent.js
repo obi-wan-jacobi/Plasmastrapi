@@ -1,4 +1,4 @@
-define(["./Component", "./Geometry"], function(Component, Geometry) {
+define(["../Objects/Component", "../Data/Geometry"], function (Component, Geometry) {
 
 	function pow2(arg) {
         return Math.pow(arg, 2);

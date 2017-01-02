@@ -1,4 +1,4 @@
-define(["./Component", "./Geometry"], function (Component, Geometry) {
+define(["../Objects/Component", "../Data/Geometry"], function (Component, Geometry) {
 
 	// CLASS PoseComponent
 	PoseComponent.prototype = Object.create(Component.prototype);

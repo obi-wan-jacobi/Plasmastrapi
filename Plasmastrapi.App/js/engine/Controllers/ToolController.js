@@ -1,4 +1,4 @@
-define(["./Controller"], function(Controller) {
+define(["../Objects/Controller"], function (Controller) {
 
 	// CLASS ToolController
 	ToolController.prototype = Object.create(Controller.prototype);

@@ -48,7 +48,7 @@ define(["./Base", "./AtomicKeyPairArray"], function(Base, AtomicKeyPairArray) {
     };
     // public methods
     EventEmitter.prototype.injectEngine = function(engine) {
-        Base.injectEngine.call(this, engine);
+        Base.prototype.injectEngine.call(this, engine);
         this.__engine.eventEmitterRepository.store(this);
     };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {

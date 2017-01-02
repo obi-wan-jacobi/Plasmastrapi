@@ -1,6 +1,6 @@
 define(["./Objects/System",
     "./Loaders/AssetLoader",
-    "./Repositories/EntityRepository", "../Repositories/EventEmitterRepository",
+    "./Repositories/EntityRepository", "./Repositories/EventEmitterRepository",
     "./Systems/InputSystem", "./Systems/DrawSystem",
     "./Controllers/SceneController", "./Controllers/ToolController"],
     function(System, AssetLoader, EntityRepository, EventEmitterRepository, InputSystem, DrawSystem, SceneController, ToolController) {
@@ -71,6 +71,12 @@ define(["./Objects/System",
 	Engine.prototype.__registerLoaders = function() {
 		this.assetLoader = new AssetLoader();
 	};
+	Engine.prototype.__registerRepositories = function () {
+	    this.eventEmitterRepository = new EventEmitterRepository();
+	    this.eventEmitterRepository.injectEngine(this);
+	    this.entityRepository = new EntityRepository();
+	    this.entityRepository.injectEngine(this);
+	};
 	Engine.prototype.__registerSystems = function() {
 		this.inputSystem = new InputSystem();
 		this.__systems.push(this.inputSystem);
@@ -82,9 +88,6 @@ define(["./Objects/System",
 		this.__controllers.push(this.sceneController);
 		this.toolController = new ToolController();
 		this.__controllers.push(this.toolController);
-	};
-	Engine.prototype.__registerFactories = function () {
-	    this.entityFactory = new EntityFactory(this);
 	};
 	Engine.prototype.__beginMainLoop = function() {
 		var self = this;

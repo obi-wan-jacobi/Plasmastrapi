@@ -2,9 +2,9 @@ require.config({
     baseUrl: 'js'
 });
 
-define(["game/Game"], function (Game) {
+define(["./game/Game"], function (Game) {
 
-    var game = null; //new Game(document.getelementbyid("game-canvas"));
+    var game = new Game(document.getElementById("game-canvas"));
 
      // load assets
     //game.assetloader.load(assetmaps.imagemap, assetmaps.spritemap).done(function () {
@@ -12,6 +12,6 @@ define(["game/Game"], function (Game) {
     //    game.toolcontroller.equip(game.tools.mastertool);
     //});
 
-    //game.start();
+    game.start();
 
 });

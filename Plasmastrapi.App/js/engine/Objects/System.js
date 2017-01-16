@@ -5,33 +5,13 @@ define(["./EventEmitter"], function (EventEmitter) {
     System.prototype.constructor = System;
     function System() {
         EventEmitter.call(this);
-        this.__isPaused = false;
     };
-    Object.defineProperties(System.prototype, {
-		'isPaused': {
-			get: function() {
-				return this.__isPaused;
-			}
-		}
-	});
-    System.prototype.loopOnce = function(deltaMs) {
-        if (this.isLoaded && !this.isPaused) {
-            this.__fire('onframe', deltaMs);
-            return true;
-        }
-        return false;
-    };
-    System.prototype.pause = function() {
-        if (!this.__isPaused) {
-            this.__isPaused = true;
-            this.__fire('onpause');
-        }
-    };
-    System.prototype.unpause = function() {
-        if (this.__isPaused) {
-            this.__isPaused = false;
-            this.__fire('onunpause');
-        }
+    System.prototype.injectEngine = function (engine) {
+        EventEmiiter.prototype.injectEngine.call(this, engine);
+        this.__engine.addEventListener('onload', this, this.load);
+        this.__engine.addEventListener('onunload', this, this.unload);
+        this.__engine.addEventListener('onpause', this, this.pause);
+        this.__engine.addEventListener('onunpause', this, this.unpause);
     };
     System.prototype.restart = function() {
         this.unpause();
@@ -40,13 +20,7 @@ define(["./EventEmitter"], function (EventEmitter) {
 
     // apply event mixins
     EventEmitter.Mixins.Loadable.call(System.prototype);
-    
-    // events
-    System.prototype.__registerEvents(
-        'onframe',
-        'onpause',
-        'onunpause'
-    );
+    EventEmitter.Mixins.Pausable.call(System.prototype);
 
     return System;
 

@@ -7,11 +7,14 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         // inherits from
         EventEmitter.call(this);
         // private variables
-        this.__children = new AtomicArray(Entity);
+        this.__parent = null;
         this.__components = new AtomicArray(Component);
+        // configure engine injection
+        this.injectEngine = function (engine) {
+            this.injectEngine(engine);
+            this.__engine.entityRepository.store(this);
+        };
         // configure event methods
-        this.addEventListener('onload', this, this.__onload);
-        this.addEventListener('onunload', this, this.__onunload);
         this.addEventListener('ondestroy', this, this.__ondestroy);
     };
     // private methods
@@ -22,43 +25,34 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
             }
         }, this);
     };
-    Entity.prototype.__onload = function() {
-        // load components before loading children
-        this.__components.forEach(function(component) {
-            component.load();  
-        });
-        this.__children.forEach(function(child) {
-            child.load();  
-        });
-    };
-    Entity.prototype.__onunload = function() {
-        // unload children before unloading components
-        this.__children.forEach(function(child) {
-            child.unload();  
-        }, this);
-        this.__components.forEach(function(component) {
-            component.unload();  
-        }, this);
-    };
-    Entity.prototype.__ondestroy = function() {
-        // destroy children before destroying components
-        this.__children.forEach(function(child) {
-            child.destroy();  
-        }, this);
-        this.__components.forEach(function(component) {
-            component.destroy();  
-        }, this);
+    Entity.prototype.__ondestroy = function () {
         this.__engine.entityRepository.release(this);
     };
-    // public methods
-    Entity.prototype.injectEngine = function (engine) {
-        EventEmitter.injectEngine.call(this, engine);
-        this.__engine.entityRepository.store(this);
+    Entity.prototype.__addParent = function (parent) {
+        if (this.__parent) {
+            throw new Error(this.constructor.name + ':addParent - This entity already has a parent.');
+        }
+        if (!(parent instanceof Entity)) {
+            throw new Error(this.constructor.name + ':addParent - Parent must be of type Entity.');
+        }
+        this.__parent = parent;
+        // wire up event subscriptions
+        this.__parent.addEventListener('onload', this, this.load);
+        this.__parent.addEventListener('onunload', this, this.unload);
+        this.__parent.addEventListener('ondestroy', this, this.destroy);
     };
+    Entity.prototype.__removeParent = function () {
+        this.__parent = null;
+        // unwire event subscription
+        this.__parent.removeEventListener('onload', this, this.load);
+        this.__parent.removeEventListener('onunload', this, this.unload);
+        this.__parent.removeEventListener('ondestroy', this, this.destroy);
+    };
+    // public methods
     Entity.prototype.addComponent = function(component) {
         this.__validateNoDuplicateComponentNames(component);
+        component.injectEngine(this.__engine);
         component.injectEntity(this);
-        component.injectEntity(this.__engine);
         this.__components.push(component);
         if (this.isLoaded) {
             this.reload();
@@ -68,7 +62,7 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         var removedComponent = this.__components.splice(component);
         if (removedComponent) {
             removedComponent.destroy();
-        };
+        }
     };
     Entity.prototype.getComponent = function(componentClass) {
         return this.__components.forEach(function(ownedComponent) {
@@ -81,16 +75,7 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         return this.getComponent(componentClass) ? true : false;
     };
     Entity.prototype.addChild = function(childEntity) {
-        this.__children.push(childEntity);
-    };
-    Entity.prototype.removeChild = function(childEntity) {
-        var removedChild = this.__children.splice(childEntity);
-        if (removedChild) {
-            removedChild.destroy();
-        };
-    };
-    Entity.prototype.hasChild = function(childEntity) {
-        return this.__children.contains(childEntity);
+        childEntity.__addParent(this);
     };
 
     // apply event mixins

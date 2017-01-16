@@ -12,7 +12,10 @@ define(["./EventEmitter"], function(EventEmitter) {
         if (this.__entity) {
             throw new Error(this.constructor.name + " has already received an entity instance.");
         }
-        this.__entitye = entity;
+        this.__entity = entity;
+        this.__entity.addEventListener('onload', this, this.load);
+        this.__entity.addEventListener('unload', this, this.unload);
+        this.__entity.addEventListener('ondestroy', this, this.destroy);
     };
 
     // apply event mixins

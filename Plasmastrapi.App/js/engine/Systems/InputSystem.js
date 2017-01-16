@@ -1,34 +1,11 @@
-define(["../Objects/System", "../Data/Geometry"], function(System, Geometry) {
-
-	function InputQueue(inputSystem) {
-		var system = inputSystem;
-		var queue = [];
-		var isExecuting = false;
-		function process() {
-			if (isExecuting) {
-				return;
-			}
-			isExecuting = true;
-			while (queue.length > 0) {
-				var input = queue.shift();
-				system.__fire(input.event, input.message);
-			}
-			isExecuting = false;
-		};
-		return {
-			push: function(event, message) {
-				queue.push({event: event, message: message});
-			},
-			process: process
-		};
-	};
+define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], function(System, EventQueue, Geometry) {
 
 	// CLASS InputSystem
 	InputSystem.prototype = Object.create(System.prototype);
 	InputSystem.prototype.constructor = InputSystem;
 	function InputSystem() {
 		System.call(this);
-		this.__inputQueue = new InputQueue(this);
+		this.__inputQueue = new EventQueue(this);
 		this.addEventListener('onload', this, this.__onload);
 		this.addEventListener('onunload', this, this.__onunload);
 		this.addEventListener('onframe', this, this.__onframe);

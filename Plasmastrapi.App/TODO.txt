@@ -1,10 +1,12 @@
+needs testing:
+- engine injection (create callbacks in injection method for load/unload, pause/unpause etc.)
+- entity injection (create callbacks in injection method for load/unload, destroy etc.)
+
 in progress:
-- grand refactor to use require.js
-- engine injection
-- entity injection (Component.js)
-- EventEmitter event registration ("InputSystem.prototype.__registerEvents"...?)
-- InputSystem --> InputQueue (currently a lazy/non-explicit singleton)
+- finish refactoring components
+- move tools and controllers to game folder
 - AssetLoader should be broken up into ImageLoader and SpriteLoader
+- refactor /game to use require.js
 
 - wireTool logic
 	- disallow multiple wires between the same two terminals

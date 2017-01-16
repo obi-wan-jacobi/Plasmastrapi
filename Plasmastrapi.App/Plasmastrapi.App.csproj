@@ -96,7 +96,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\require.js" />
+    <Content Include="js\engine\Components\Mixins\Drawable.js" />
+    <Content Include="js\engine\Components\Mixins\Mixins.js" />
     <Content Include="js\engine\Objects\Base.js" />
+    <Content Include="js\engine\Objects\EventQueue.js" />
+    <Content Include="js\engine\Objects\Mixins\Destructible.js" />
+    <Content Include="js\engine\Objects\Mixins\Loadable.js" />
+    <Content Include="js\engine\Objects\Mixins\Mixins.js" />
+    <Content Include="js\engine\Objects\Mixins\Pausable.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

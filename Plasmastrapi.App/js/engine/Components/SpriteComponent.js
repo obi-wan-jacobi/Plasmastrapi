@@ -1,15 +1,27 @@
-define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"], function (Component, Geometry, PoseComponent) {
+define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./DrawableComponent"],
+    function (Component, Geometry, PoseComponent, DrawableComponent) {
     
 	// CLASS SpriteComponent
 	SpriteComponent.prototype = Object.create(Component.prototype);
 	SpriteComponent.prototype.constructor = SpriteComponent;
-    function SpriteComponent(sprite) {
+    function SpriteComponent(sprite, displayLayer) {
 		// inherits from
 		Component.call(this);
 		// private variables
 		this.__sprite = sprite;
+		this.__displayLayer = displayLayer;
 		this.__currentFrameIndex = 0;
-	};
+        // configure events
+		this.addEventListener('onload', this, this.__onload);
+		this.addEventListener('onunload', this, this.__onunload);
+    };
+    // private methods
+    SpriteComponent.prototype.__onload = function() {
+        this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
+    };
+    SpriteComponent.prototype.__onunload = function() {
+        this.__entity.getComponent(DrawableComponent).removeEventListener(this.__displayLayer, this, this.draw);
+    };
 	// public prototypal variables
 	Object.defineProperties(SpriteComponent.prototype, {
 		'width': {
@@ -35,16 +47,16 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"], function
 			this.__currentFrameIndex = sprite.frames.length - 1;
 		} else if (frameNumber < this.__sprite.frames.length) {
 			this.__currentFrameIndex = frameNumber;
-		} else {
-			this.__currentFrameIndex = 0;
+		} else if (frameNumber >= this.__sprite.frames.length) {
+		    this.__currentFrameIndex = 0;
 		}
 		this.__fire('onframechange');
 	};
 	SpriteComponent.prototype.nextFrame = function() {
-		setAnimationFrame(this.__currentFrameIndex + 1);
+	    this.setFrame(this.__currentFrameIndex + 1);
 	};
 	SpriteComponent.prototype.previousFrame = function() {
-		setAnimationFrame(this.__currentFrameIndex - 1);
+	    this.setFrame(this.__currentFrameIndex - 1);
 	};
 	SpriteComponent.prototype.draw = function(ctx) {
 		var currentFrame = this.__sprite.frames[this.__currentFrameIndex];

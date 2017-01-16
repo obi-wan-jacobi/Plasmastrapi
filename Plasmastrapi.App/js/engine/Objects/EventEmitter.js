@@ -1,4 +1,4 @@
-define(["./Base", "./AtomicKeyPairArray", "./Mixins/Mixins"], function(Base, AtomicKeyPairArray, Mixins) {
+define(["./Base", "./AtomicKeyPairArray", "./mixins/mixins"], function(Base, AtomicKeyPairArray, mixins) {
 
     // CLASS EventEmitter
     EventEmitter.prototype = Object.create(Base.prototype);
@@ -80,7 +80,7 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Mixins"], function(Base, Ato
     };
 
     // mixins
-    EventEmitter.Mixins = Mixins;
+    EventEmitter.mixins = mixins;
 
     return EventEmitter;
 

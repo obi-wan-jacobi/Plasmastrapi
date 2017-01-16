@@ -7,6 +7,4 @@ define(function(Repository) {
         Repository.call(this);
     };
 
-}(
-    ENGINENAME.OBJECTS.Repository
-));
+});

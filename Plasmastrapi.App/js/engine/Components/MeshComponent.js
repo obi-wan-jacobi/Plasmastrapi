@@ -1,14 +1,15 @@
-define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"], function (Component, Geometry, PoseComponent) {
+define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./DrawableComponent"],
+    function (Component, Geometry, PoseComponent, DrawableComponent) {
 
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
 	MeshComponent.prototype.constructor = MeshComponent;
-    function MeshComponent(mesh, optionalMeshStyleTemplate) {
+    function MeshComponent(mesh, /* options */ meshDisplayOptions) {
 		// inherits from
 		Component.call(this);
 		// private variables
 		this.__mesh = mesh;
-		this.__style = optionalMeshStyleTemplate;
+		this.__options = meshDisplayOptions;
 		// configure component
 		this.addEventListener('oninit', this, this.__oninit);
 		this.addEventListener('onload', this, this.__onload);
@@ -26,11 +27,13 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"], function
 		}
 		poseComponent.addEventListener('onpositionchange', this, this.__translate);
 		poseComponent.addEventListener('onorientationchange', this, this.__rotate);
+		this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
 	};
 	MeshComponent.prototype.__onunload = function() {
 		var poseComponent = this.__entity.getComponent(PoseComponent);
 		poseComponent.removeEventListener('onpositionchange', this, this.__translate);
 		poseComponent.removeEventListener('onorientationchange', this, this.__rotate);
+		this.__entity.getComponent(DrawableComponent).removeEventListener(this.__displayLayer, this, this.draw);
 	};
 	MeshComponent.prototype.__translate = function(newPosition, oldPosition) {
 		var mesh = this.__mesh;
@@ -111,11 +114,11 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"], function
 	};
 	MeshComponent.prototype.draw = function(ctx) {
 		var vertices = this.__mesh.vertices;
-		var style = this.__style;
-		if (!style) {
+		var options = this.__options;
+		if (!options) {
 			return;
 		}
-		// draw mesh and apply styles
+		// draw mesh and apply optionss
 		ctx.save();
 		ctx.beginPath();
 		ctx.moveTo(vertices[0].x, vertices[0].y);
@@ -124,10 +127,10 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"], function
 			ctx.lineTo(vertex.x, vertex.y);
 		}
 		ctx.closePath();
-		ctx.strokeStyle = style.strokeStyle;
-		ctx.lineWidth = style.lineWidth;
+		ctx.strokeStyle = options.strokeStyle;
+		ctx.lineWidth = options.lineWidth;
 		ctx.stroke()
-		ctx.fillStyle = style.fillStyle;
+		ctx.fillStyle = options.fillStyle;
 		ctx.fill();
 		ctx.restore();
 	};

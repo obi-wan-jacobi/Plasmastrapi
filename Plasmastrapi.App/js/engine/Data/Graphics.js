@@ -49,18 +49,19 @@ define(function() {
         this.frames = imageArray;
     };
 
-    $.LineStyleTemplate = function(strokeStyle, lineWidth) {
+    $.LineDisplayOptions = function (strokeStyle, lineWidth) {
         this.strokeStyle = strokeStyle || 'black';
         this.lineWidth = lineWidth || 1;
     };
 
-    $.MeshStyleTemplate = function(strokeStyle, fillStyle, lineWidth) {
+    $.MeshDisplayOptions = function (strokeStyle, fillStyle, lineWidth) {
         this.strokeStyle = strokeStyle || 'black';
         this.fillStyle = fillStyle;
         this.lineWidth = lineWidth || 1;
     };
 
-    $.ImageStyleTemplate = function(sourceX, sourceY, sourceWidth, sourceHeight, destWidth, destHeight) {
+    $.ImageDisplayOptions = function(displayLayer, sourceX, sourceY, sourceWidth, sourceHeight, destWidth, destHeight) {
+        this.displayLayer = displayLayer;
         this.sourceX = sourceX;
         this.sourceY = sourceY;
         this.sourceWidth = sourceWidth;

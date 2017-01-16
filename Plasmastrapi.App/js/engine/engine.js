@@ -1,9 +1,8 @@
 define(["./Objects/System",
-    "./Loaders/AssetLoader",
+    "./Loaders/ImageLoader", "./Loaders/SpriteLoader",
     "./Repositories/EntityRepository", "./Repositories/EventEmitterRepository",
-    "./Systems/InputSystem", "./Systems/DrawSystem",
-    "./Controllers/SceneController", "./Controllers/ToolController"],
-    function(System, AssetLoader, EntityRepository, EventEmitterRepository, InputSystem, DrawSystem, SceneController, ToolController) {
+    "./Systems/InputSystem", "./Systems/DrawSystem"],
+    function(System, ImageLoader, SpriteLoader, EntityRepository, EventEmitterRepository, InputSystem, DrawSystem) {
 
 	// CLASS Engine
 	Engine.prototype = Object.create(System.prototype);
@@ -19,28 +18,18 @@ define(["./Objects/System",
 	    this.__registerLoaders();
 	    this.__registerRepositories();
 	    this.__registerSystems();
-	    this.__registerControllers();
 	};
 	Engine.prototype.__registerLoaders = function() {
-		this.assetLoader = new AssetLoader();
+	    this.register('imageLoader', new ImageLoader());
+	    this.register('spriteLoader', new SpriteLoader());
 	};
 	Engine.prototype.__registerRepositories = function () {
-	    this.eventEmitterRepository = new EventEmitterRepository();
-	    this.eventEmitterRepository.injectEngine(this);
-	    this.entityRepository = new EntityRepository();
-	    this.entityRepository.injectEngine(this);
+	    this.register('eventEmitterRepository', new EventEmitterRepository());
+	    this.register('entityRepository', new EntityRepository());
 	};
 	Engine.prototype.__registerSystems = function() {
-		this.inputSystem = new InputSystem();
-		this.__systems.push(this.inputSystem);
-		this.drawSystem = new DrawSystem();
-		this.__systems.push(this.drawSystem);
-	};
-	Engine.prototype.__registerControllers = function() {
-		this.sceneController = new SceneController();
-		this.__controllers.push(this.sceneController);
-		this.toolController = new ToolController();
-		this.__controllers.push(this.toolController);
+		this.register('inputSystem', new InputSystem());
+		this.register('drawSystem', new DrawSystem());
 	};
 	Engine.prototype.__beginMainLoop = function() {
 		var self = this;
@@ -67,6 +56,13 @@ define(["./Objects/System",
 		loop(lastFrame);
 	};
 	// public methods
+	Engine.prototype.register = function (objectName, objectHandle) {
+	    if (!objectHandle.injectEngine) {
+	        throw new Error(this.constructor.name + ":register - The supplied object must implement an 'injectEngine' post-bind method.");
+	    }
+	    objectHandle.injectEngine(this);
+	    this[objectName] = objectHandle;
+	};
 	Engine.prototype.start = function() {
 		if (!this.isLoaded) {
 			this.load();

@@ -96,14 +96,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\require.js" />
-    <Content Include="js\engine\Components\Mixins\Drawable.js" />
-    <Content Include="js\engine\Components\Mixins\Mixins.js" />
+    <Content Include="js\engine\Loaders\ImageLoader.js" />
+    <Content Include="js\engine\Loaders\SpriteLoader.js" />
     <Content Include="js\engine\Objects\Base.js" />
     <Content Include="js\engine\Objects\EventQueue.js" />
     <Content Include="js\engine\Objects\Mixins\Destructible.js" />
     <Content Include="js\engine\Objects\Mixins\Loadable.js" />
-    <Content Include="js\engine\Objects\Mixins\Mixins.js" />
+    <Content Include="js\engine\Objects\Mixins\mixins.js" />
     <Content Include="js\engine\Objects\Mixins\Pausable.js" />
+    <Content Include="js\game\Assets\images.js" />
+    <Content Include="js\game\Assets\sprites.js" />
+    <Content Include="js\game\Lab\LabElement.js" />
+    <Content Include="js\game\Lab\TerminalWire.js" />
+    <Content Include="js\game\Lab\TerminalWireAnchor.js" />
+    <Content Include="js\game\Lab\Wire.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -156,13 +162,12 @@
     <Content Include="js\engine\Components\PickableComponent.js" />
     <Content Include="js\engine\Components\PoseComponent.js" />
     <Content Include="js\engine\Components\SpriteComponent.js" />
-    <Content Include="js\engine\Controllers\SceneController.js" />
-    <Content Include="js\engine\Controllers\ToolController.js" />
+    <Content Include="js\game\Controllers\SceneController.js" />
+    <Content Include="js\game\Controllers\ToolController.js" />
     <Content Include="js\engine\Data\Geometry.js" />
     <Content Include="js\engine\Data\Graphics.js" />
     <Content Include="js\engine\Data\Physics.js" />
     <Content Include="js\engine\Engine.js" />
-    <Content Include="js\engine\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Objects\Component.js" />
     <Content Include="js\engine\Objects\Controller.js" />
     <Content Include="js\engine\Objects\Entity.js" />
@@ -171,7 +176,7 @@
     <Content Include="js\engine\Objects\Repository.js" />
     <Content Include="js\engine\Objects\Scene.js" />
     <Content Include="js\engine\Objects\System.js" />
-    <Content Include="js\engine\Objects\Tool.js" />
+    <Content Include="js\game\Objects\Tool.js" />
     <Content Include="js\engine\Objects\AtomicArray.js" />
     <Content Include="js\engine\Objects\AtomicKeyPairArray.js" />
     <Content Include="js\engine\Objects\AtomicLink.js" />
@@ -181,14 +186,13 @@
     <Content Include="js\engine\Systems\DrawSystem.js" />
     <Content Include="js\engine\Systems\InputSystem.js" />
     <Content Include="js\engine\Systems\MotionSystem.js" />
-    <Content Include="js\game\assets.js" />
     <Content Include="js\game\Game.js" />
-    <Content Include="js\game\lab.js" />
+    <Content Include="js\game\Lab\lab.js" />
     <Content Include="js\game\Repositories\WireService.js" />
-    <Content Include="js\game\scenes.js" />
+    <Content Include="js\game\Scenes\scenes.js" />
     <Content Include="js\game\Services\RevisionService.js" />
-    <Content Include="js\game\tools.js" />
-    <Content Include="js\game\ui.js" />
+    <Content Include="js\game\Tools\tools.js" />
+    <Content Include="js\game\UI\ui.js" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>

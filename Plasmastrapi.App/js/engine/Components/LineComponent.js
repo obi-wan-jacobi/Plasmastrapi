@@ -1,40 +1,42 @@
-define(["../Objects/Component", "../Data/Geometry"], function (Component, Geometry) {
+define(["../Objects/Component", "../Data/Geometry", "./DrawableComponent"], function (Component, Geometry, DrawableComponent) {
 
 	function pow2(arg) {
         return Math.pow(arg, 2);
     };
 
-    function distanceBetweenPoints(p1, p2) {
+    function euclideanDistance(p1, p2) {
         return Math.sqrt(pow2(p2.x - p1.x) + pow2(p2.y - p1.y));
     };
 
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
-    function LineComponent(tailPoseComponent, headPoseComponent, lineStyleTemplate, optionalLineCollisionParameters) {
+	function LineComponent(tailPoseComponent, headPoseComponent, lineDisplayOptions, /* optional */ lineCollisionOptions) {
 		// inherits from
 		Component.call(this);
 		// private variables
 		this.__tailPose = tailPoseComponent,
 		this.__headPose = headPoseComponent,
-        this.__style = lineStyleTemplate,
-        this.__collisionParams = optionalLineCollisionParameters;
+        this.__options = lineDisplayOptions,
+        this.__collisionOptions = lineCollisionOptions;
 		// configure component
 		this.addEventListener('onload', this, this.__onload);
 		this.addEventListener('onunload', this, this.__onunload);
 	};
 	// private methods
-	LineComponent.prototype.__onload = function() {
+	LineComponent.prototype.__onload = function () {
 		this.__tailPose.addEventListener('onpositionchange', this, this.__onpositionchange);
 		this.__tailPose.addEventListener('onorientationchange', this, this.__onorientationchange);
 		this.__headPose.addEventListener('onpositionchange', this, this.__onpositionchange);
 		this.__headPose.addEventListener('onorientationchange', this, this.__onorientationchange);
+		this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
 	};
 	LineComponent.prototype.__onunload = function() {
 		this.__tailPose.removeEventListener('onpositionchange', this, this.__onpositionchange);
 		this.__tailPose.removeEventListener('onorientationchange', this, this.__onorientationchange);
 		this.__headPose.removeEventListener('onpositionchange', this, this.__onpositionchange);
 		this.__headPose.removeEventListener('onorientationchange', this, this.__onorientationchange);
+		this.__entity.getComponent(DrawableComponent).removeEventListener(this.__displayLayer, this, this.draw);
 	};
 	LineComponent.prototype.__onpositionchange = function() {
 		this.__fire('onpositionchange', this.position);
@@ -64,17 +66,17 @@ define(["../Objects/Component", "../Data/Geometry"], function (Component, Geomet
 		},
 		'length': { // euclidean distance from tail to head
 			get: function() {
-				return distanceBetweenPoints(this.__tailPose.position, this.__headPose.position);
+				return euclideanDistance(this.__tailPose.position, this.__headPose.position);
 			}
 		},
 		'mesh': { // line converted into static rectangular mesh
 			get: function() {
-				if (!this.__collisionParams) {
-					throw new Error(this.constructor.name + ':get mesh - No LineCollisionParameters have been specified.');
+				if (!this.__collisionOptions) {
+					throw new Error(this.constructor.name + ':get mesh - No LineCollisionOptions have been specified.');
 				}
 				var rectangle = new Geometry.Rectangle(
-					this.length*this.__collisionParams.lengthModifier,
-					this.__collisionParams.lineWidth
+					this.length * this.__collisionOptions.lengthModifier,
+					this.__collisionOptions.lineWidth
 				);
 				return new Geometry.Mesh(rectangle);
 			}
@@ -82,16 +84,16 @@ define(["../Objects/Component", "../Data/Geometry"], function (Component, Geomet
 	});
 	// public methods
 	LineComponent.prototype.draw = function(ctx) {
-		// draw line and apply styles
+		// draw line and apply optionss
 		var head = this.__headPose.position;
 		var tail = this.__tailPose.position;
-		var style = this.__style;
+		var options = this.__options;
 		ctx.save();
 		ctx.beginPath();
 		ctx.moveTo(tail.x, tail.y);
 		ctx.lineTo(head.x, head.y);
-		ctx.strokeStyle = style.strokeStyle;
-		ctx.lineWidth = style.lineWidth;
+		ctx.strokeStyle = options.strokeStyle;
+		ctx.lineWidth = options.lineWidth;
 		ctx.stroke()
 		ctx.restore();
 	};

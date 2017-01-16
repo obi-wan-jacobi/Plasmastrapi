@@ -4,9 +4,7 @@ define(["../Objects/Repository", "../Objects/Entity"], function (Repository, Ent
     EntityRepository.prototype = Object.create(Repository.prototype);
     EntityRepository.prototype.constructor = EntityRepository;
     function EntityRepository() {
-
         Repository.call(this, Entity);
-
     };
 
     return EntityRepository;

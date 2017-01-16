@@ -40,7 +40,5 @@ define(["./EventEmitter", "./Entity", "./AtomicArray"], function (EventEmitter, 
 	// apply event mixins
     EventEmitter.Mixins.Loadable.call(Scene.prototype);
 
-
 	return Scene;
-
 });

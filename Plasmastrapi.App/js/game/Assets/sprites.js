@@ -1,12 +1,6 @@
-define(function(Graphics, Lab) {
+﻿define(["../../engine/Data/Graphics", "../Lab/lab"], function (Graphics, Lab) {
 
-    var $ = {};
-
-    $.imageMap = new Graphics.ImageMap(
-        new Graphics.ImageSourcePair(Lab.CircuitDesignArea.prototype, 'img/Backgrounds/blueprint-paper.jpg')
-    );
-
-    $.spriteMap = new Graphics.SpriteMap(
+    return new Graphics.SpriteMap(
         new Graphics.SpriteSourcePair(Lab.Terminal.prototype, ['img/Terminal_out.png', 'img/Terminal_in.png', 'img/Terminal_hovered.png']),
         new Graphics.SpriteSourcePair(Lab.AndGate.prototype, ['img/AndGate.png']),
         new Graphics.SpriteSourcePair(Lab.NandGate.prototype, ['img/NandGate.png']),
@@ -20,7 +14,4 @@ define(function(Graphics, Lab) {
         // new Graphics.SpriteSourcePair(Lab.CutterIcon.prototype, ['img/Cutter_closed.png', 'img/Cutter_open.png']),
         // new Graphics.SpriteSourcePair(Lab.TrashcanIcon.prototype, ['img/Trashcan.png'])
     );
-
-    return $;
-
 });

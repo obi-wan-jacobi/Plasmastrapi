@@ -10,29 +10,8 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 		this.__isEnabled = false;
 		this.__isHovered = false;
 		this.__isSelected = false;
-		// configure component
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
 	};
 	// private methods
-	PickableComponent.prototype.__onload = function() {
-		this.__engine.toolController.addEventListener('onequip', this, this.__resolveToolCompatibility);
-	};
-	PickableComponent.prototype.__onunload = function() {
-		this.__engine.toolController.removeEventListener('onequip', this, this.__resolveToolCompatibility);
-		this.disable();
-	};
-	PickableComponent.prototype.__resolveToolCompatibility = function(compatibleEntityClassesArray) {
-		if (compatibleEntityClassesArray.length == 0) {
-			return this.enable();
-		}
-		for (var i = 0, L = compatibleEntityClassesArray.length; i < L; i++) {
-			if (this.__entity instanceof compatibleEntityClassesArray[i]) {
-				return this.enable();
-			}
-		}
-		return this.disable();
-	};
 	PickableComponent.prototype.__onmousemove = function(cursor) {
 		var meshComponent = this.__entity.getComponent(MeshComponent);
 		if (!meshComponent) {
@@ -44,25 +23,26 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 			this.__unhover();
 		}
 	};
-	PickableComponent.prototype.__signalGetPickOnPickable = function(cursor) {
-		if (this.__isHovered) {
-			this.__engine.toolController.signalGetPickOnPickable(this.__entity);
-		}
+	PickableComponent.prototype.__onmousedown = function(cursor) {
+	    this.__fire('onmousedown');
+	};
+	PickableComponent.prototype.__onmouseup = function(cursor) {
+	    this.__fire('onmouseup');
+	};
+	PickableComponent.prototype.__onclick = function(cursor) {
+	    this.__fire('onclick');
 	};
 	PickableComponent.prototype.__hover = function() {
 		if (!this.__isHovered) {
 			this.__isHovered = true;
 			this.__fire('onmouseenter');
-			this.__engine.toolController.signalMouseEnterOnPickable(this.__entity);
 		}
 		this.__fire('onmousehover');
-		this.__engine.toolController.signalMouseHoverOnPickable(this.__entity);
 	};
 	PickableComponent.prototype.__unhover = function() {
 		if (this.__isHovered) {
 			this.__isHovered = false;
 			this.__fire('onmouseleave');
-			this.__engine.toolController.signalMouseLeaveOnPickable(this.__entity);
 		}
 	};
 	// public prototypal variables
@@ -86,17 +66,21 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 	// public methods
 	PickableComponent.prototype.enable = function() {
 		if (!this.__isEnabled) {
-			this.__isEnabled = true;
-			this.__engine.toolController.addEventListener('onmousemove', this, this.__onmousemove);
-			this.__engine.toolController.addEventListener('ongetpicks', this, this.__signalGetPickOnPickable);
-			this.__fire('onenable');
+		    this.__isEnabled = true;
+		    this.__engine.inputSystem.addEventListener('onmousemove', this, this.__onmousemove);
+		    this.__engine.inputSystem.addEventListener('onmousedown', this, this.__onmousedown);
+		    this.__engine.inputSystem.addEventListener('onmouseup', this, this.__onmouseup);
+		    this.__engine.inputSystem.addEventListener('onclick', this, this.__onclick);
+		    this.__fire('onenable');
 		}
 	};
 	PickableComponent.prototype.disable = function() {
 		if (this.__isEnabled) {
-			this.__isEnabled = false;
-			this.__engine.toolController.removeEventListener('onmousemove', this, this.__onmousemove);
-			this.__engine.toolController.removeEventListener('ongetpicks', this, this.__signalGetPickOnPickable);
+		    this.__isEnabled = false;
+		    this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__onmousemove);
+		    this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__onmousedown);
+		    this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__onmouseup);
+		    this.__engine.inputSystem.removeEventListener('onclick', this, this.__onclick);
 			this.__unhover();
 			this.__fire('ondisable');
 		}
@@ -126,7 +110,11 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 		'ondeselect',
 		'onmouseenter',
 		'onmousehover',
-		'onmouseleave'
+		'onmouseleave',
+        'onmousemove',
+		'onmousedown',
+		'onmouseup',
+		'onclick',
     );
 
 	return PickableComponent;

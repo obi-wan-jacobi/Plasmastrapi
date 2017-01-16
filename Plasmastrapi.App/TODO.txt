@@ -1,12 +1,11 @@
 needs testing:
 - engine injection (create callbacks in injection method for load/unload, pause/unpause etc.)
 - entity injection (create callbacks in injection method for load/unload, destroy etc.)
+- loading assets
 
 in progress:
-- finish refactoring components
-- move tools and controllers to game folder
-- AssetLoader should be broken up into ImageLoader and SpriteLoader
-- refactor /game to use require.js
+- refactoring lab.js into class files
+- refactoring /game to use require.js
 
 - wireTool logic
 	- disallow multiple wires between the same two terminals

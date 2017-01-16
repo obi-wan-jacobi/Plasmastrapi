@@ -12,7 +12,7 @@ define(function() {
 		this.angularTerm = angularTerm;
 	};
 
-	$.LineCollisionParameters = function(lineWidth, lengthModifier) {
+	$.LineCollisionOptions = function(lineWidth, lengthModifier) {
 		this.lineWidth = lineWidth || 20;
 		this.lengthModifier = lengthModifier || 1;
 	};

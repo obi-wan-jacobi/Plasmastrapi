@@ -1,4 +1,4 @@
-define(["../Objects/Controller"], function(Controller) {
+define(["../../engine/Objects/Controller"], function(Controller) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);

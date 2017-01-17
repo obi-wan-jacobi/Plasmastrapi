@@ -110,6 +110,11 @@
     <Content Include="js\game\Lab\TerminalWire.js" />
     <Content Include="js\game\Lab\TerminalWireAnchor.js" />
     <Content Include="js\game\Lab\Wire.js" />
+    <Content Include="js\game\Services\PickService.js" />
+    <Content Include="js\game\Tools\MasterTool.js" />
+    <Content Include="js\game\Tools\NoTool.js" />
+    <Content Include="js\game\Tools\PlacingTool.js" />
+    <Content Include="js\game\Tools\WireTool.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

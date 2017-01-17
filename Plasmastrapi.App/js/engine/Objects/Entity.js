@@ -12,7 +12,7 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         // configure engine injection
         this.injectEngine = function (engine) {
             this.injectEngine(engine);
-            this.__engine.entityRepository.store(this);
+            this.__engine.entityContainer.add(this);
         };
         // configure event methods
         this.addEventListener('ondestroy', this, this.__ondestroy);
@@ -26,7 +26,7 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         }, this);
     };
     Entity.prototype.__ondestroy = function () {
-        this.__engine.entityRepository.release(this);
+        this.__engine.entityContainer.remove(this);
     };
     Entity.prototype.__addParent = function (parent) {
         if (this.__parent) {

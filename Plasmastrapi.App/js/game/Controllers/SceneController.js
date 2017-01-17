@@ -18,13 +18,13 @@ define(["../../engine/Objects/Controller"], function(Controller) {
 		if (this.__scene) {
 			this.__scene.load();
 		}
-		this.__engine.entityRepository.addEventListener('onstore', this, this.addToCurrentScene);
+		this.__engine.entityRepository.addEventListener('onadd', this, this.addToCurrentScene);
 	};
 	SceneController.prototype.__onunload = function() {
 		if (this.__scene) {
 			this.__scene.unload();
 		}
-		this.__engine.entityRepository.removeEventListener('onstore', this, this.addToCurrentScene);
+		this.__engine.entityRepository.removeEventListener('onadd', this, this.addToCurrentScene);
 	};
 	// public methods
 	SceneController.prototype.setCurrentScene = function(scene) {

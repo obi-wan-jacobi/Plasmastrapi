@@ -34,7 +34,6 @@ user experience:
 tech debt:
 - code smell in scenes.js
 	- we have to rely on addEventListener 'oninit' for initializing scenes?
-- DI framework for engine-instance injection
 - EventEmitter::DynamicallyShrinkableSubscriberArray should be refactored as multiple 'functional' object classes
 	- purge contains its own for-loop (not functional programming!)
 - project manifest
@@ -44,11 +43,8 @@ tech debt:
 - give canvas tabIndex so we can addEventListener for keyboard events/focus
 	- http://www.dbp-consulting.com/tutorials/canvas/CanvasKeyEvents.html
 	- nothing should ever touch window (save for index.html)
-- naming conventions (service, controller, system, etc...)
-	- rename subdirectories to be classes, mixins, singletons, etc. instead of just 'core'
 - throwing exceptions (refactor using a framework)
 - run memory analysis/profiler diagnostics
-- refactor for better memory (closures, prototype functions, function caching)
 - unit tests
 - JSDocs/automated documentation
 

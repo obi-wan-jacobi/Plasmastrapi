@@ -1,8 +1,8 @@
 define(["./Objects/System",
     "./Loaders/ImageLoader", "./Loaders/SpriteLoader",
-    "./Repositories/EntityRepository", "./Repositories/EventEmitterRepository",
-    "./Systems/InputSystem", "./Systems/DrawSystem"],
-    function(System, ImageLoader, SpriteLoader, EntityRepository, EventEmitterRepository, InputSystem, DrawSystem) {
+    "./Containers/EntityContainer", "./Containers/EventEmitterContainer",
+    "./Systems/InputSystem", "./Systems/DrawSystem", "./Systems/PickSystem"],
+    function(System, ImageLoader, SpriteLoader, EntityContainer, EventEmitterContainer, InputSystem, DrawSystem) {
 
 	// CLASS Engine
 	Engine.prototype = Object.create(System.prototype);
@@ -24,12 +24,13 @@ define(["./Objects/System",
 	    this.register('spriteLoader', new SpriteLoader());
 	};
 	Engine.prototype.__registerRepositories = function () {
-	    this.register('eventEmitterRepository', new EventEmitterRepository());
-	    this.register('entityRepository', new EntityRepository());
+	    this.register('eventEmitterContainer', new EventEmitterContainer());
+	    this.register('entityContainer', new EntityContainer());
 	};
 	Engine.prototype.__registerSystems = function() {
 		this.register('inputSystem', new InputSystem());
 		this.register('drawSystem', new DrawSystem());
+		this.register('pickSystem', new PickSystem());
 	};
 	Engine.prototype.__beginMainLoop = function() {
 		var self = this;

@@ -114,7 +114,7 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
         'onmousemove',
 		'onmousedown',
 		'onmouseup',
-		'onclick',
+		'onclick'
     );
 
 	return PickableComponent;

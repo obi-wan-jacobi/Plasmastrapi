@@ -50,7 +50,7 @@ define(["./Base", "./AtomicKeyPairArray", "./mixins/mixins"], function(Base, Ato
     // public methods
     EventEmitter.prototype.injectEngine = function(engine) {
         Base.prototype.injectEngine.call(this, engine);
-        this.__engine.eventEmitterRepository.store(this);
+        this.__engine.eventEmitterContainer.add(this);
     };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {
         this.__validateEventIsImplemented(event);

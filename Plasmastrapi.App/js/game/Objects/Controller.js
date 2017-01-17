@@ -1,4 +1,4 @@
-define(["./EventEmitter"], function(EventEmitter) {
+define(["../../engine/Objects/EventEmitter"], function (EventEmitter) {
 
     // CLASS Controller
     Controller.prototype = Object.create(EventEmitter.prototype);

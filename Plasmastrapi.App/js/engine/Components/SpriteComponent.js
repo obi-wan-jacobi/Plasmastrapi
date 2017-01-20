@@ -16,7 +16,9 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		this.addEventListener('onunload', this, this.__onunload);
     };
     // private methods
-    SpriteComponent.prototype.__onload = function() {
+    SpriteComponent.prototype.__onload = function () {
+        if (!this.__entity.hasComponent(DrawableComponent))
+            throw new Error(this.constructor.name + ":onload - Entity does not contain a DrawableComponent.")
         this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
     };
     SpriteComponent.prototype.__onunload = function() {

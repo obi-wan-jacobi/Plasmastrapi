@@ -107,15 +107,32 @@
     <Content Include="js\engine\Systems\PickSystem.js" />
     <Content Include="js\game\Assets\images.js" />
     <Content Include="js\game\Assets\sprites.js" />
-    <Content Include="js\game\Lab\LabElement.js" />
-    <Content Include="js\game\Lab\TerminalWire.js" />
-    <Content Include="js\game\Lab\TerminalWireAnchor.js" />
-    <Content Include="js\game\Lab\Wire.js" />
+    <Content Include="js\game\Lab\Base\CircuitElement.js" />
+    <Content Include="js\game\Lab\Gates\AndGate.js" />
+    <Content Include="js\game\Lab\Gates\Gate.js" />
+    <Content Include="js\game\Lab\Gates\NandGate.js" />
+    <Content Include="js\game\Lab\Gates\OrGate.js" />
+    <Content Include="js\game\Lab\Gates\XorGate.js" />
+    <Content Include="js\game\Lab\Helpers\ToolHandle.js" />
+    <Content Include="js\game\Lab\Base\LabElement.js" />
+    <Content Include="js\game\Lab\Power\PowerSource.js" />
+    <Content Include="js\game\Lab\Terminals\InputTerminal.js" />
+    <Content Include="js\game\Lab\Terminals\OutputTerminal.js" />
+    <Content Include="js\game\Lab\Terminals\Terminal.js" />
+    <Content Include="js\game\Lab\Wires\TerminalWire.js" />
+    <Content Include="js\game\Lab\Wires\TerminalWireAnchor.js" />
+    <Content Include="js\game\Lab\Wires\Wire.js" />
     <Content Include="js\game\Services\PickService.js" />
     <Content Include="js\game\Tools\MasterTool.js" />
     <Content Include="js\game\Tools\NoTool.js" />
     <Content Include="js\game\Tools\PlacingTool.js" />
     <Content Include="js\game\Tools\WireTool.js" />
+    <Content Include="js\game\Objects\Area.js" />
+    <Content Include="js\game\UI\Areas\CircuitDesignArea.js" />
+    <Content Include="js\game\UI\Base\UIElement.js" />
+    <Content Include="js\game\Objects\Button.js" />
+    <Content Include="js\game\UI\Panels\CircuitDesignToolbar.js" />
+    <Content Include="js\game\Objects\Panel.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -168,7 +185,6 @@
     <Content Include="js\engine\Components\PoseComponent.js" />
     <Content Include="js\engine\Components\SpriteComponent.js" />
     <Content Include="js\game\Controllers\SceneController.js" />
-    <Content Include="js\game\Controllers\ToolController.js" />
     <Content Include="js\engine\Data\Geometry.js" />
     <Content Include="js\engine\Data\Graphics.js" />
     <Content Include="js\engine\Data\Physics.js" />
@@ -204,7 +220,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="js\game\Lab\FlipFlops\" />
+    <Folder Include="js\game\Lab\Switches\" />
+    <Folder Include="js\game\UI\Buttons\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -7,7 +7,8 @@
         "./MotionComponent",
         "./PickableComponent",
         "./PoseComponent",
-        "./SpriteComponent"],
+        "./SpriteComponent"
+    ],
     function (
         CollidableComponent,
         DrawableComponent, 

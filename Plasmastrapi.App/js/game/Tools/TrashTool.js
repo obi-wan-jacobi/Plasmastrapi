@@ -3,7 +3,7 @@
     TrashTool.prototype = Object.create(Tool.prototype);
     TrashTool.prototype.constructor = TrashTool;
     function TrashTool() {
-        Tool.prototype.call(this, [/* works with */]);
+        Tool.call(this, [/* works with */]);
     };
 
     return TrashTool;

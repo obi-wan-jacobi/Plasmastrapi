@@ -18,17 +18,10 @@
                 }
             }
         });
-        target.injectEngine = function (engine) {
-            target.injectEngine(engine);
-            Destructible.prototype.injectEngine.call(this);
-        };
         target.destroy = Destructible.prototype.destroy;
         target.__registerEvents(
             'ondestroy'
         );
-    };
-    Destructible.prototype.injectEngine = function (engine) {
-        this.__engine.addEventListener('ondestroy', this, this.destroy);
     };
     Destructible.prototype.destroy = function () {
         if (!this.__isDestroyed) {

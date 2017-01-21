@@ -9,7 +9,7 @@
     // CLASS ToolController
     ToolController.prototype = Object.create(Controller.prototype);
     ToolController.prototype.constructor = ToolController;
-    function ToolController(entityRepository) {
+    function ToolController(entityContainer) {
         Controller.call(this);
         this.__tool = null;
     };
@@ -25,6 +25,7 @@
             this.__tool.discard();
         }
         this.__tool = tool;
+        this.__tool.injectEngine(this.__engine);
         this.__tool.equip();
     };
     // public methods

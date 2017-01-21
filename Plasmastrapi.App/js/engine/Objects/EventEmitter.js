@@ -48,9 +48,9 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
     };
     EventEmitter.prototype.__fire = function(event /*, argument1, argument2, etc... */) {
         this.__validateEventIsImplemented(event);
+        var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
+        this["__" + event].apply(this, args);
         if (this.__events[event]) {
-            var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
-            this["__" + event]();
             this.__events[event].forEach(function (subscriber, callback) {
                 callback.apply(subscriber, args);
             });

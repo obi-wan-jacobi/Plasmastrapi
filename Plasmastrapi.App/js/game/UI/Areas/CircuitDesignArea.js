@@ -1,18 +1,23 @@
-﻿define(["../Base/UILabElement", "../../../engine/Components/$Components"], function (UILabElement, $) {
+﻿define(["../Base/UILabElement",
+        "../../../engine/Components/$Components",
+        "../../../engine/Data/Geometry",
+        "../../../engine/Data/Graphics"
+    ],
+    function (UILabElement, $, Geometry, Graphics) {
 
     // CLASS CircuitDesignArea
     CircuitDesignArea.prototype = Object.create(UILabElement.prototype);
     CircuitDesignArea.prototype.constructor = CircuitDesignArea;
     function CircuitDesignArea(x, y, width, height) {
-        // inherits from
         UILabElement.call(this);
-
+    };
+    CircuitDesignArea.prototype.__oninit = function () {
         // pose
         var position = new Geometry.Position(x, y);
         var poseComponent = new $.PoseComponent(position, 0);
 
         // image
-        var imageStyleTemplate = new Graphics.ImageDisplayOptions(this.__engine.drawSystem.DISPLAYLAYERS.GAMEBACKGROUND, 115, 63, width/2, height/2, width, height);
+        var imageStyleTemplate = new Graphics.ImageDisplayOptions(this.__engine.drawSystem.DISPLAYLAYERS.GAMEBACKGROUND, 115, 63, width / 2, height / 2, width, height);
         var imageComponent = new $.ImageComponent(this.image, imageStyleTemplate);
 
         // drawable on game background layer

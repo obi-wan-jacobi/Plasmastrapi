@@ -11,25 +11,33 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 	};
 	// private methods
 	Scene.prototype.__onload = function() {
-		this.__contents.forEach(function(element) {
-			element.load();
+		this.__contents.forEach(function(entity) {
+			entity.load();
 		});
 	};
 	Scene.prototype.__onunload = function() {
-		this.__contents.forEach(function(element) {
-			element.unload();
+		this.__contents.forEach(function(entity) {
+			entity.unload();
 		});
 	};
-	// public methods
-	Scene.prototype.add = function(element) {
-		this.__contents.push(element);
-		element.addEventListener('ondestroy', this, this.remove);
+    // public methods
+	Scene.prototype.injectEngine = function (engine) {
+	    EventEmitter.prototype.injectEngine.call(this, engine);
+	    this.__engine.addEventListener('onload', this, this.load);
+	    this.__engine.addEventListener('onunload', this, this.unload);
+	};
+	Scene.prototype.add = function(entity) {
+		this.__contents.push(entity);
+		entity.addEventListener('ondestroy', this, this.remove);
 		if (this.isLoaded) {
-			element.load();
+		    if (!entity.__engine) {
+		        entity.injectEngine(this.__engine);
+		    }
+			entity.load();
 		}
 	};
-	Scene.prototype.remove = function(element) {
-		var removedElement = this.__contents.splice(element);
+	Scene.prototype.remove = function(entity) {
+		var removedElement = this.__contents.splice(entity);
 		if (removedElement) {
 			removedElement.removeEventListener('ondestroy', this, this.remove);
 		}

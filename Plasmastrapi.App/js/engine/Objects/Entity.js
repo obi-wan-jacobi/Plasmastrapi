@@ -10,10 +10,11 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         this.__parent = null;
         this.__components = new AtomicArray(Component);
         // configure engine injection
+        var superInjectEngine = this.injectEngine;
         this.injectEngine = function (engine) {
-            this.injectEngine(engine);
+            superInjectEngine.call(this, engine);
             this.__engine.entityContainer.add(this);
-        };
+        }.bind(this);
     };
     // private methods
     Entity.prototype.__validateNoDuplicateComponentNames = function(component) {

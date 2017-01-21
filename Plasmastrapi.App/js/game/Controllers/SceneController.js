@@ -5,8 +5,9 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
 	SceneController.prototype.constructor = SceneController;
-	function SceneController(entityRepository) {
-		Controller.call(this);
+	function SceneController(entityContainer) {
+	    Controller.call(this);
+	    this.__scene = null;
 		this.__scenes = {
 		    LabScene: new LabScene()
 		};
@@ -16,17 +17,20 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
 			throw new Error(this.constructor.name + ':validateSceneIsLoaded - No scene has been loaded.')
 		}
 	};
+	SceneController.prototype.__oninit = function () {
+	    this.__scenes.LabScene.injectEngine(this.__engine);
+	};
 	SceneController.prototype.__onload = function() {
 		if (this.__scene) {
 			this.__scene.load();
 		}
-		this.__engine.entityRepository.addEventListener('onadd', this, this.addToCurrentScene);
+		this.__engine.entityContainer.addEventListener('onadd', this, this.addToCurrentScene);
 	};
 	SceneController.prototype.__onunload = function() {
 		if (this.__scene) {
 			this.__scene.unload();
 		}
-		this.__engine.entityRepository.removeEventListener('onadd', this, this.addToCurrentScene);
+		this.__engine.entityContainer.removeEventListener('onadd', this, this.addToCurrentScene);
 	};
 	SceneController.prototype.__setCurrentScene = function (scene) {
 	    if (this.__scene) {

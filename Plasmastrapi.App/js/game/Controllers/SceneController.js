@@ -6,8 +6,6 @@ define(["../Objects/Controller", "../Objects/Scene", "../../engine/Objects/Entit
 	function SceneController(entityRepository) {
 		Controller.call(this);
 		this.__scene = null;
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
 	};
 	SceneController.prototype.__validateSceneIsLoaded = function() {
 		if (!this.__scene) {

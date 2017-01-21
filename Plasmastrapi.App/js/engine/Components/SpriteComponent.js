@@ -11,9 +11,6 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		this.__sprite = sprite;
 		this.__displayLayer = displayLayer;
 		this.__currentFrameIndex = 0;
-        // configure events
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
     };
     // private methods
     SpriteComponent.prototype.__onload = function () {

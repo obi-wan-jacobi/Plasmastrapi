@@ -4,7 +4,7 @@
     CircuitDesignArea.prototype = Object.create(LabElement.prototype);
     CircuitDesignArea.prototype.constructor = CircuitDesignArea;
     function CircuitDesignArea(x, y, width, height) {
-
+        // inherits from
         LabElement.call(this);
 
         // pose

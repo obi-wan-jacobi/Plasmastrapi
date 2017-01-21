@@ -1,4 +1,4 @@
-﻿define(["../../engine/Objects/Entity", "../../engine/Components/nsComponents"], function (Entity, $) {
+﻿define(["../../engine/Objects/Entity", "../../engine/Components/$Components"], function (Entity, $) {
 
     Panel.prototype = Object.create(Entity.prototype);
     Panel.prototype.constructor = Panel;

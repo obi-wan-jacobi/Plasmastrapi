@@ -19,30 +19,21 @@ define(["../Objects/Component", "../Data/Geometry", "./DrawableComponent"], func
 		this.__headPose = headPoseComponent,
         this.__options = lineDisplayOptions,
         this.__collisionOptions = lineCollisionOptions;
-		// configure component
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
 	};
 	// private methods
 	LineComponent.prototype.__onload = function () {
-		this.__tailPose.addEventListener('onpositionchange', this, this.__onpositionchange);
-		this.__tailPose.addEventListener('onorientationchange', this, this.__onorientationchange);
-		this.__headPose.addEventListener('onpositionchange', this, this.__onpositionchange);
-		this.__headPose.addEventListener('onorientationchange', this, this.__onorientationchange);
+		this.__tailPose.addEventListener('onpositionchange', this, this.__$onpositionchange);
+		this.__tailPose.addEventListener('onorientationchange', this, this.__$onorientationchange);
+		this.__headPose.addEventListener('onpositionchange', this, this.__$onpositionchange);
+		this.__headPose.addEventListener('onorientationchange', this, this.__$onorientationchange);
 		this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
 	};
 	LineComponent.prototype.__onunload = function() {
-		this.__tailPose.removeEventListener('onpositionchange', this, this.__onpositionchange);
-		this.__tailPose.removeEventListener('onorientationchange', this, this.__onorientationchange);
-		this.__headPose.removeEventListener('onpositionchange', this, this.__onpositionchange);
-		this.__headPose.removeEventListener('onorientationchange', this, this.__onorientationchange);
+	    this.__tailPose.removeEventListener('onpositionchange', this, this.__$onpositionchange);
+	    this.__tailPose.removeEventListener('onorientationchange', this, this.__$onorientationchange);
+	    this.__headPose.removeEventListener('onpositionchange', this, this.__$onpositionchange);
+	    this.__headPose.removeEventListener('onorientationchange', this, this.__$onorientationchange);
 		this.__entity.getComponent(DrawableComponent).removeEventListener(this.__displayLayer, this, this.draw);
-	};
-	LineComponent.prototype.__onpositionchange = function() {
-		this.__fire('onpositionchange', this.position);
-	};
-	LineComponent.prototype.__onorientationchange = function() {
-		this.__fire('onorientationchange', this.orientation);
 	};
 	// public prototypal variables
 	Object.defineProperties(LineComponent.prototype, {

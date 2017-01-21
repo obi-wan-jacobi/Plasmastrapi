@@ -10,10 +10,6 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		// private variables
 		this.__mesh = mesh;
 		this.__options = meshDisplayOptions;
-		// configure component
-		this.addEventListener('oninit', this, this.__oninit);
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
 	};
 	// private methods
 	MeshComponent.prototype.__oninit = function() {

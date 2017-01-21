@@ -6,9 +6,6 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 	function InputSystem() {
 		System.call(this);
 		this.__inputQueue = new EventQueue(this);
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
-		this.addEventListener('onframe', this, this.__onframe);
 	};
 	InputSystem.prototype.__onload = function() {
 		this.__engine.canvas.onmousemove = this.__onmousemove.bind(this);

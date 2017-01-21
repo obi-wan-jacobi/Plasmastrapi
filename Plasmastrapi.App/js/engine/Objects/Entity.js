@@ -14,8 +14,6 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
             this.injectEngine(engine);
             this.__engine.entityContainer.add(this);
         };
-        // configure event methods
-        this.addEventListener('ondestroy', this, this.__ondestroy);
     };
     // private methods
     Entity.prototype.__validateNoDuplicateComponentNames = function(component) {

@@ -36,6 +36,13 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
             if (this.hasEvent(event)) {
                 throw new Error(this.constructor.name + ':implementEvents - ' + event + ' has already been implemented.');
             }
+            if (!this["__" + event]) {
+                this["__" + event] = function () { };
+            }
+            this["__$" + event] = function () {
+                arguments.unshift(event);
+                this.__fire.apply(this, arguments);
+            };
             this.__eventList = this.__eventList.concat(event);
         }
     };
@@ -43,7 +50,8 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
         this.__validateEventIsImplemented(event);
         if (this.__events[event]) {
             var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
-            this.__events[event].forEach(function(subscriber, callback) {
+            this["__" + event]();
+            this.__events[event].forEach(function (subscriber, callback) {
                 callback.apply(subscriber, args);
             });
         }

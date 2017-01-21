@@ -10,7 +10,6 @@ define(["./Objects/System",
 	function Engine(canvas) {
 		System.call(this);
 		this.canvas = canvas;
-		this.addEventListener('oninit', this, this.__oninit);
 	};
     // private methods
 	Engine.prototype.__oninit = function () {

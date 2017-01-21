@@ -12,8 +12,6 @@
     function ToolController(entityRepository) {
         Controller.call(this);
         this.__tool = null;
-        this.addEventListener('onload', this, this.__onload);
-        this.addEventListener('onunload', this, this.__onunload);
     };
     // private methods
     ToolController.prototype.__onload = function () {

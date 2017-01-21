@@ -5,15 +5,12 @@ define(["../Objects/System"],function(System) {
 	DrawSystem.prototype.constructor = DrawSystem;
 	function DrawSystem() {
 		System.call(this);
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
-		this.addEventListener('onframe', this, this.__onframe);
 	};
 	DrawSystem.prototype.__onload = function() {
-		window.addEventListener('onresize', this.__onresize);
+		window.addEventListener('onwindowresize', this.__$onwindowresize);
 	};
 	DrawSystem.prototype.__onunload = function() {
-		window.removeEventListener('onresize', this.__onresize);
+		window.removeEventListener('onwindowresize', this.__$onwindowresize);
 	};
 	DrawSystem.prototype.__onframe = function() {
 		var ctx = this.__engine.canvas.getContext("2d");
@@ -27,7 +24,7 @@ define(["../Objects/System"],function(System) {
 		this.__fire('ondrawuiforeground', ctx);
 		this.__fire('ondrawuientities', ctx);
 	};
-	DrawSystem.prototype.__onresize = function() {
+	DrawSystem.prototype.__onwindowresize = function() {
 		/*
 		var ctx = this.__engine.canvas.getContext("2d");
 		ctx.width = this.__engine.canvas.width = this.__engine.canvas.clientWidth;
@@ -37,7 +34,8 @@ define(["../Objects/System"],function(System) {
 	};
 
 	// events
-    DrawSystem.prototype.__registerEvents(
+	DrawSystem.prototype.__registerEvents(
+        'onwindowresize',
         'ondrawgamebackground',
 		'ondrawgameforeground',
 		'ondrawgameentities',

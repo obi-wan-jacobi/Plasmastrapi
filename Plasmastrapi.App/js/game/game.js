@@ -4,7 +4,6 @@ define(["../engine/Engine", "./Controllers/ToolController", "./Controllers/Scene
     Game.prototype.constructor = Game;
     function Game(canvas) {
         Engine.call(this, canvas);
-        this.addEventListener('oninit', this, this.__oninit);
     };
     // private methods
     Game.prototype.__oninit = function () {

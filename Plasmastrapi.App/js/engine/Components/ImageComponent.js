@@ -10,9 +10,6 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		// private variables
 		this.__image = image;
 		this.__options = imageDisplayOptions;
-        // configure events
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
     };
     // private methods
     ImageComponent.prototype.__onload = function () {

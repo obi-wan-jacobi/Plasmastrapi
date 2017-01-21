@@ -8,9 +8,6 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
         EventEmitter.call(this);
 		// private variables
 		this.__contents = new AtomicArray(Entity);
-		// configure load events
-		this.addEventListener('onload', this, this.__onload);
-		this.addEventListener('onunload', this, this.__onunload);
 	};
 	// private methods
 	Scene.prototype.__onload = function() {

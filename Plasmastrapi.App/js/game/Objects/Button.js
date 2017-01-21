@@ -1,4 +1,4 @@
-﻿define(["../../engine/Objects/Entity", "../../engine/Components/nsComponents"], function (Entity, $) {
+﻿define(["../../engine/Objects/Entity", "../../engine/Components/$Components"], function (Entity, $) {
 
     // CLASS Button
     Button.prototype = Object.create(Entity.prototype);

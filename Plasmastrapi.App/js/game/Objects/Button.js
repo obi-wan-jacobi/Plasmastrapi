@@ -1,35 +1,31 @@
-﻿define(function () {
+﻿define(["../../engine/Objects/Entity", "../../engine/Components/nsComponents"], function (Entity, $) {
 
-    // CLASS SpawnerButton
-    SpawnerButton.prototype = Object.create(ToolbarElement.prototype);
-    SpawnerButton.prototype.constructor = SpawnerButton;
-    function SpawnerButton(x, y, circuitElementClass) {
-
-        ToolbarElement.call(this);
+    // CLASS Button
+    Button.prototype = Object.create(Entity.prototype);
+    Button.prototype.constructor = Button;
+    function Button(x, y, fnOnClick) {
+        // inherits from
+        Entity.call(this);
 
         // pose
         var position = new Geometry.Position(x, y);
-        var poseComponent = new Components.PoseComponent(position, 0);
+        var poseComponent = new $.PoseComponent(position, 0);
 
         // sprite
         var sprite = circuitElementClass.prototype.sprite;
-        var spriteComponent = new Components.SpriteComponent(sprite);
+        var spriteComponent = new $.SpriteComponent(sprite);
 
         // configure sprite as graphic
-        var drawableComponent = new Components.DrawableComponent(DISPLAYLAYERS.UIENTITIES);
+        var drawableComponent = new $.DrawableComponent(DISPLAYLAYERS.UIENTITIES);
 
         // configure sprite as collision mesh
-        var meshComponent = new Components.MeshComponent(spriteComponent.mesh);
+        var meshComponent = new $.MeshComponent(spriteComponent.mesh);
 
-        // button is pickable
-        var pickableComponent = new Components.PickableComponent();
+        // entity is pickable
+        var pickableComponent = new $.PickableComponent();
 
-        // configure pick action
-        pickableComponent.addEventListener('onpick', this, function () {
-            var element = new circuitElementClass(position.x, position.y);
-            // place spawned element
-            toolController.equip(tools.placingTool, element);
-        });
+        // configure click action
+        pickableComponent.addEventListener('onclick', this, fnOnClick);
 
         // compose entity
         this.addComponent(poseComponent);
@@ -39,5 +35,5 @@
         this.addComponent(pickableComponent);
     };
     
-    return SpawnerButton;
+    return Button;
 });

@@ -102,7 +102,6 @@
     <Content Include="js\engine\Objects\EventQueue.js" />
     <Content Include="js\engine\Objects\Mixins\Destructible.js" />
     <Content Include="js\engine\Objects\Mixins\Loadable.js" />
-    <Content Include="js\engine\Objects\Mixins\mixins.js" />
     <Content Include="js\engine\Objects\Mixins\Pausable.js" />
     <Content Include="js\engine\Systems\PickSystem.js" />
     <Content Include="js\game\Assets\images.js" />
@@ -123,6 +122,7 @@
     <Content Include="js\game\Lab\Wires\TerminalWire.js" />
     <Content Include="js\game\Lab\Wires\TerminalWireAnchor.js" />
     <Content Include="js\game\Lab\Wires\Wire.js" />
+    <Content Include="js\engine\Components\nsComponents.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Tools\TrashTool.js" />
     <Content Include="js\game\Tools\MasterTool.js" />

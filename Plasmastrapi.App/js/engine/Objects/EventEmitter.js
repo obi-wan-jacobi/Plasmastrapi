@@ -80,7 +80,7 @@ define(["./Base", "./AtomicKeyPairArray", "./mixins/mixins"], function(Base, Ato
     };
 
     // mixins
-    EventEmitter.mixins = mixins;
+    EventEmitter.Mixins = mixins;
 
     return EventEmitter;
 

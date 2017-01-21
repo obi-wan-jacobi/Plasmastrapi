@@ -1,4 +1,4 @@
-define(function (Component) {
+define(["../Objects/Component"], function (Component) {
 
 	// CLASS DrawableComponent
 	DrawableComponent.prototype = Object.create(Component.prototype);

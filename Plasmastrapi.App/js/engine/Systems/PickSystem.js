@@ -1,4 +1,4 @@
-﻿define(["../Objects/System"], function (System) {
+﻿define(["../Objects/System", "../Components/PickableComponent"], function (System, PickableComponent) {
 
     // CLASS InputSystem
     PickSystem.prototype = Object.create(System.prototype);

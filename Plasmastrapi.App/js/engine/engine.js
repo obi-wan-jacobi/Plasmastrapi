@@ -2,7 +2,7 @@ define(["./Objects/System",
     "./Loaders/ImageLoader", "./Loaders/SpriteLoader",
     "./Containers/EntityContainer", "./Containers/EventEmitterContainer",
     "./Systems/InputSystem", "./Systems/DrawSystem", "./Systems/PickSystem"],
-    function(System, ImageLoader, SpriteLoader, EntityContainer, EventEmitterContainer, InputSystem, DrawSystem) {
+    function(System, ImageLoader, SpriteLoader, EntityContainer, EventEmitterContainer, InputSystem, DrawSystem, PickSystem) {
 
 	// CLASS Engine
 	Engine.prototype = Object.create(System.prototype);
@@ -16,14 +16,14 @@ define(["./Objects/System",
 	Engine.prototype.__oninit = function () {
 	    // configure engine
 	    this.__registerLoaders();
-	    this.__registerRepositories();
+	    this.__registerContainers();
 	    this.__registerSystems();
 	};
 	Engine.prototype.__registerLoaders = function() {
-	    this.register('imageLoader', new ImageLoader());
-	    this.register('spriteLoader', new SpriteLoader());
+	    this['imageLoader'] = new ImageLoader();
+	    this['spriteLoader'] = new SpriteLoader();
 	};
-	Engine.prototype.__registerRepositories = function () {
+	Engine.prototype.__registerContainers = function () {
 	    this.register('eventEmitterContainer', new EventEmitterContainer());
 	    this.register('entityContainer', new EntityContainer());
 	};
@@ -61,8 +61,8 @@ define(["./Objects/System",
 	    if (!objectHandle.injectEngine) {
 	        throw new Error(this.constructor.name + ":register - The supplied object must implement an 'injectEngine' post-bind method.");
 	    }
-	    objectHandle.injectEngine(this);
 	    this[objectName] = objectHandle;
+	    objectHandle.injectEngine(this);
 	};
 	Engine.prototype.start = function() {
 		if (!this.isLoaded) {

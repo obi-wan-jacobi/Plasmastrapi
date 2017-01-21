@@ -13,16 +13,16 @@
         this.__mousedown = [];
         this.__click = [];
         this.addEventListener('onload', this, this.__onload);
-        this.addEventListener('onload', this, this.__unload);
+        this.addEventListener('onload', this, this.__onunload);
         this.addEventListener('onframe', this, this.__onframe);
     };
     PickSystem.prototype.__onload = function () {
-        this.__engine.entityRepository.addEventListener('onadd', this, this.__watch);
-        this.__engine.entityRepository.addEventListener('onremove', this, this.__unwatch);
+        this.__engine.entityContainer.addEventListener('onadd', this, this.__watch);
+        this.__engine.entityContainer.addEventListener('onremove', this, this.__unwatch);
     };
     PickSystem.prototype.__onunload = function () {
-        this.__engine.entityRepository.removeEventListener('onadd', this, this.__watch);
-        this.__engine.entityRepository.removeEventListener('onremove', this, this.__unwatch);
+        this.__engine.entityContainer.removeEventListener('onadd', this, this.__watch);
+        this.__engine.entityContainer.removeEventListener('onremove', this, this.__unwatch);
         this.__mouseenter = [];
         this.__mousehover = [];
         this.__mouseleave = [];

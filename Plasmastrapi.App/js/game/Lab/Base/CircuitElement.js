@@ -4,7 +4,7 @@
     CircuitElement.prototype = Object.create(LabElement.prototype);
     CircuitElement.prototype.constructor = CircuitElement;
     function CircuitElement(x, y) {
-
+        // inherits from
         LabElement.call(this);
 
         // pose

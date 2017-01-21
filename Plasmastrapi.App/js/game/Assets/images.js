@@ -1,6 +1,6 @@
-﻿define(["../../engine/Data/Graphics", "../Lab/lab"], function (Graphics, Lab) {
+﻿define(["../../engine/Data/Graphics", "../UI/Areas/CircuitDesignArea"], function (Graphics, CircuitDesignArea) {
 
     return new Graphics.ImageMap(
-        new Graphics.ImageSourcePair(Lab.CircuitDesignArea.prototype, 'img/Backgrounds/blueprint-paper.jpg')
+        new Graphics.ImageSourcePair(CircuitDesignArea.prototype, 'img/Backgrounds/blueprint-paper.jpg')
     );
 });

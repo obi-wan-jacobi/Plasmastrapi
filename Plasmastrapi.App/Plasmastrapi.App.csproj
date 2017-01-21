@@ -136,6 +136,7 @@
     <Content Include="js\game\UI\Areas\CircuitDesignArea.js" />
     <Content Include="js\game\UI\Base\UIElement.js" />
     <Content Include="js\game\Objects\Button.js" />
+    <Content Include="js\game\UI\Base\UILabElement.js" />
     <Content Include="js\game\UI\Panels\CircuitDesignToolbar.js" />
     <Content Include="js\game\Objects\Panel.js" />
     <Content Include="packages.config" />
@@ -215,7 +216,6 @@
     <Content Include="js\game\Game.js" />
     <Content Include="js\game\Lab\%24Lab.js" />
     <Content Include="js\game\Containers\WireContainer.js" />
-    <Content Include="js\game\Scenes\scenes.js" />
     <Content Include="js\game\Services\RevisionService.js" />
     <Content Include="js\game\UI\%24UI.js" />
     <Content Include="TODO.txt" />

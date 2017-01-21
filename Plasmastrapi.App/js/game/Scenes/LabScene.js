@@ -4,21 +4,16 @@
     LabScene.prototype.constructor = LabScene;
     function LabScene() {
         Scene.call(this);
-        this.addEventListener('oninit', this, this.__init);
     };
-
-    $.labScene.addEventListener('oninit', $.labScene, function () {
-
-        var designArea = new Lab.CircuitDesignArea(
+    LabScene.prototype.__oninit = function () {
+        this.add(new Lab.CircuitDesignArea(
             canvas.clientWidth / 2,
             canvas.clientHeight / 2,
             canvas.clientWidth,
             canvas.clientHeight
-        );
-
-        var andGateButton = new Lab.SpawnerButton(50, 40, Lab.AndGate)
-
-    });
+        ));
+        //var andGateButton = new Lab.SpawnerButton(50, 40, Lab.AndGate)
+    };
 
     return LabScene;
 });

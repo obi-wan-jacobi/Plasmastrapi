@@ -1,11 +1,15 @@
-define(["../Objects/Controller", "../Objects/Scene", "../../engine/Objects/Entity"], function (Controller, Scene, Entity) {
+define(["../Objects/Controller", "../../engine/Objects/Entity",
+        "../Scenes/LabScene"],
+    function (Controller, Entity, LabScene) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
 	SceneController.prototype.constructor = SceneController;
 	function SceneController(entityRepository) {
 		Controller.call(this);
-		this.__scene = null;
+		this.__scenes = {
+		    LabScene: new LabScene()
+		};
 	};
 	SceneController.prototype.__validateSceneIsLoaded = function() {
 		if (!this.__scene) {
@@ -24,16 +28,16 @@ define(["../Objects/Controller", "../Objects/Scene", "../../engine/Objects/Entit
 		}
 		this.__engine.entityRepository.removeEventListener('onadd', this, this.addToCurrentScene);
 	};
-	// public methods
-	SceneController.prototype.setCurrentScene = function(scene) {
-	    if (!(scene instanceof Scene)) {
-	        throw new Error(this.constructor.name + ":setCurrentScene - " + scene.constructor.name + " is not an instance of Scene!");
-	    }
+	SceneController.prototype.__setCurrentScene = function (scene) {
 	    if (this.__scene) {
-			this.__scene.unload();
-		}
-		this.__scene = scene;
-		this.__scene.load();
+	        this.__scene.unload();
+	    }
+	    this.__scene = scene;
+	    this.__scene.load();
+	};
+	// public methods
+	SceneController.prototype.setLabScene = function (entity) {
+	    this.__setCurrentScene(this.__scenes.LabScene);
 	};
 	SceneController.prototype.addToCurrentScene = function (entity) {
 	    if (!(entity instanceof Entity)) {

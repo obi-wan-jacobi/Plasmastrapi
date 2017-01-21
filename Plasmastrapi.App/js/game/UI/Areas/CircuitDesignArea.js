@@ -1,28 +1,28 @@
-﻿define(function () {
+﻿define(["../Base/UILabElement", "../../../engine/Components/$Components"], function (UILabElement, $) {
 
     // CLASS CircuitDesignArea
-    CircuitDesignArea.prototype = Object.create(LabElement.prototype);
+    CircuitDesignArea.prototype = Object.create(UILabElement.prototype);
     CircuitDesignArea.prototype.constructor = CircuitDesignArea;
     function CircuitDesignArea(x, y, width, height) {
         // inherits from
-        LabElement.call(this);
+        UILabElement.call(this);
 
         // pose
         var position = new Geometry.Position(x, y);
-        var poseComponent = new Components.PoseComponent(position, 0);
+        var poseComponent = new $.PoseComponent(position, 0);
 
         // image
-        var imageStyleTemplate = new Graphics.ImageStyleTemplate(115, 63, width / 2, height / 2, width, height);
-        var imageComponent = new Components.ImageComponent(this.image, imageStyleTemplate);
+        var imageStyleTemplate = new Graphics.ImageDisplayOptions(this.__engine.drawSystem.DISPLAYLAYERS.GAMEBACKGROUND, 115, 63, width/2, height/2, width, height);
+        var imageComponent = new $.ImageComponent(this.image, imageStyleTemplate);
 
         // drawable on game background layer
-        var drawableComponent = new Components.DrawableComponent(DISPLAYLAYERS.GAMEBACKGROUND);
+        var drawableComponent = new $.DrawableComponent();
 
         // configure image as collision mesh
-        var meshComponent = new Components.MeshComponent(imageComponent.mesh);
+        var meshComponent = new $.MeshComponent(imageComponent.mesh);
 
         // design area is pickable
-        var pickableComponent = new Components.PickableComponent();
+        var pickableComponent = new $.PickableComponent();
 
         // compose entity
         this.addComponent(poseComponent);

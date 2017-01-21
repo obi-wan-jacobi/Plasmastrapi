@@ -1,14 +1,10 @@
-﻿define(function (Entity) {
-
-    var $ = {};
+﻿define(["../../../engine/Objects/Entity"], function (Entity) {
 
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;
     function UIElement() {
         Entity.call(this);
     };
-    $.UIElement = UIElement;
 
-    return $;
-
+    return UIElement;
 });

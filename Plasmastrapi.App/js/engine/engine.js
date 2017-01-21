@@ -10,14 +10,12 @@ define(["./Objects/System",
 	function Engine(canvas) {
 		System.call(this);
 		this.canvas = canvas;
+	    // pre-init configuration
+		this.__registerLoaders();
+		this.__registerContainers();
+		this.__registerSystems();
 	};
     // private methods
-	Engine.prototype.__oninit = function () {
-	    // configure engine
-	    this.__registerLoaders();
-	    this.__registerContainers();
-	    this.__registerSystems();
-	};
 	Engine.prototype.__registerLoaders = function() {
 	    this['imageLoader'] = new ImageLoader();
 	    this['spriteLoader'] = new SpriteLoader();

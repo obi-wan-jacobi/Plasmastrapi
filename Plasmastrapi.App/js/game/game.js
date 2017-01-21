@@ -4,12 +4,10 @@ define(["../engine/Engine", "./Controllers/ToolController", "./Controllers/Scene
     Game.prototype.constructor = Game;
     function Game(canvas) {
         Engine.call(this, canvas);
-    };
-    // private methods
-    Game.prototype.__oninit = function () {
-        Engine.prototype.__oninit.call(this);
+        // pre-init configuration
         this.__registerControllers();
     };
+    // private methods
     Game.prototype.__registerControllers = function () {
         this.register('toolController', new ToolController());
         this.register('sceneController', new SceneController());

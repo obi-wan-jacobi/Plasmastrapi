@@ -7,6 +7,9 @@
         if (this.__engine) {
             throw new Error(this.constructor.name + " has already received an engine instance.");
         }
+        if (!engine) {
+            throw new Error(this.constructor.name + " cannot be given a null engine instance.");
+        }
         this.__engine = engine;
     };
 

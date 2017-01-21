@@ -1,4 +1,4 @@
-define(["../../engine/Objects/Controller"], function(Controller) {
+define(["../Objects/Controller", "../Objects/Scene", "../../engine/Objects/Entity"], function (Controller, Scene, Entity) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
@@ -28,13 +28,19 @@ define(["../../engine/Objects/Controller"], function(Controller) {
 	};
 	// public methods
 	SceneController.prototype.setCurrentScene = function(scene) {
-		if (this.__scene) {
+	    if (!(scene instanceof Scene)) {
+	        throw new Error(this.constructor.name + ":setCurrentScene - " + scene.constructor.name + " is not an instance of Scene!");
+	    }
+	    if (this.__scene) {
 			this.__scene.unload();
 		}
 		this.__scene = scene;
 		this.__scene.load();
 	};
-	SceneController.prototype.addToCurrentScene = function(entity) {
+	SceneController.prototype.addToCurrentScene = function (entity) {
+	    if (!(entity instanceof Entity)) {
+	        throw new Error(this.constructor.name + ":addToCurrentScene " + entity.constructor.name + " is not an instance of Entity!");
+	    }
 		this.__validateSceneIsLoaded();
 		this.__scene.add(entity);
 	};
@@ -44,5 +50,4 @@ define(["../../engine/Objects/Controller"], function(Controller) {
 	};
 
 	return SceneController
-	
 });

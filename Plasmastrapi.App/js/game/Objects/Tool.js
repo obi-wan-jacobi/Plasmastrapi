@@ -53,7 +53,7 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__engine.pickSystem.removeEventListener('onmouseleave', this, this.__pick_onmouseleave);
     };
 
-    PickSystem.prototype.__registerEvents(
+    Tool.prototype.__registerEvents(
         'input_onmousemove',
 		'input_onmousedown',
 		'input_onmouseup',

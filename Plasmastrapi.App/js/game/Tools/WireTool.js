@@ -1,5 +1,8 @@
-﻿define(function () {
-    $.wireTool = (function () {
+﻿define(["../Objects/Tool"], function (Tool) {
+
+    WireTool.prototype = Object.create(Tool.prototype);
+    WireTool.prototype.constructor = WireTool;
+    function WireTool() {
         var tool = new Tool();
         var toolHandle, intermediateWire, equippedTerminal;
         tool.pickableEntityClassesList = [Lab.Terminal];
@@ -52,5 +55,7 @@
             toolController.equip($.masterTool);
         };
         return tool;
-    }());
+    };
+
+    return WireTool;
 });

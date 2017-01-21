@@ -1,4 +1,10 @@
-﻿define(["../../engine/Objects/Controller"], function (Controller) {
+﻿define(["../Objects/Controller",
+        "../Tools/MasterTool",
+        "../Tools/PlacingTool",
+        "../Tools/WireTool",
+        "../Tools/CuttingTool",
+        "../Tools/TrashTool"],
+    function (Controller, MasterTool, PlacingTool, WireTool, CuttingTool, TrashTool) {
 
     // CLASS ToolController
     ToolController.prototype = Object.create(Controller.prototype);
@@ -11,9 +17,9 @@
     };
     // private methods
     ToolController.prototype.__onload = function () {
-        this.equipMaterTool();
+        this.equipMasterTool();
     };
-    ToolController.prototype.__onload = function () {
+    ToolController.prototype.__onunload = function () {
         this.__tool.discard();
     };
     ToolController.prototype.__equip = function (tool) {
@@ -40,4 +46,5 @@
         this.__equip(new TrashTool());
     };
 
+    return ToolController;
 });

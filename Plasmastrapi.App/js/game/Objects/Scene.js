@@ -1,4 +1,5 @@
-define(["./EventEmitter", "./Entity", "./AtomicArray"], function (EventEmitter, Entity, AtomicArray) {
+define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../../engine/Objects/AtomicArray"],
+    function (EventEmitter, Entity, AtomicArray) {
 
     // CLASS Scene
     Scene.prototype = Object.create(EventEmitter.prototype);

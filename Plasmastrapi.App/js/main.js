@@ -13,5 +13,4 @@ define(["./game/Game"], function (Game) {
     //});
 
     game.start();
-
 });

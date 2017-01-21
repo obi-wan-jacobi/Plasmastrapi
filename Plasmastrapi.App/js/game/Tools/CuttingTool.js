@@ -1,8 +1,8 @@
 ﻿define(["../Objects/Tool"], function (Tool) {
 
-    MasterTool.prototype = Object.create(Tool.prototype);
-    MasterTool.prototype.constructor = MasterTool;
-    function MasterTool() {
+    CuttingTool.prototype = Object.create(Tool.prototype);
+    CuttingTool.prototype.constructor = CuttingTool;
+    function CuttingTool() {
         Tool.prototype.call(this, [/* works with */]);
         tool.mousedown = function () {
             // master tool does the picking
@@ -11,5 +11,5 @@
         };
     };
 
-    return MasterTool;
+    return CuttingTool;
 });

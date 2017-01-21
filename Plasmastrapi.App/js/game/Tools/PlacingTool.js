@@ -1,5 +1,8 @@
-﻿define(function () {
-    $.placingTool = (function () {
+﻿define(["../Objects/Tool"], function (Tool) {
+
+    PlacingTool.prototype = Object.create(Tool.prototype);
+    PlacingTool.prototype.constructor = PlacingTool;
+    function PlacingTool() {
         var tool = new Tool();
         var equippedEntity, handlePosition;
         tool.pickableEntityClassesList = [UI.UIElement, Lab.CircuitDesignArea];
@@ -27,5 +30,7 @@
             toolController.equip($.masterTool);
         };
         return tool;
-    }());
+    };
+
+    return PlacingTool;
 });

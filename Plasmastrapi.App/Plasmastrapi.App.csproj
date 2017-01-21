@@ -123,7 +123,8 @@
     <Content Include="js\game\Lab\Wires\TerminalWire.js" />
     <Content Include="js\game\Lab\Wires\TerminalWireAnchor.js" />
     <Content Include="js\game\Lab\Wires\Wire.js" />
-    <Content Include="js\game\Services\PickService.js" />
+    <Content Include="js\game\Tools\CuttingTool.js" />
+    <Content Include="js\game\Tools\TrashTool.js" />
     <Content Include="js\game\Tools\MasterTool.js" />
     <Content Include="js\game\Tools\NoTool.js" />
     <Content Include="js\game\Tools\PlacingTool.js" />
@@ -196,7 +197,7 @@
     <Content Include="js\engine\Objects\EventEmitter.js" />
     <Content Include="js\engine\Objects\Loader.js" />
     <Content Include="js\engine\Objects\Container.js" />
-    <Content Include="js\engine\Objects\Scene.js" />
+    <Content Include="js\game\Objects\Scene.js" />
     <Content Include="js\engine\Objects\System.js" />
     <Content Include="js\game\Objects\Tool.js" />
     <Content Include="js\engine\Objects\AtomicArray.js" />
@@ -213,7 +214,6 @@
     <Content Include="js\game\Containers\WireContainer.js" />
     <Content Include="js\game\Scenes\scenes.js" />
     <Content Include="js\game\Services\RevisionService.js" />
-    <Content Include="js\game\Tools\tools.js" />
     <Content Include="js\game\UI\ui.js" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />

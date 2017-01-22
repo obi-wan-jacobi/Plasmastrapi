@@ -11,7 +11,7 @@ define(["./EventEmitter"], function(EventEmitter) {
         EventEmitter.Mixins.Loadable.call(this);
         EventEmitter.Mixins.Destructible.call(this);
     };
-    Component.prototype.injectEngine = function(entity) {
+    Component.prototype.injectEntity = function(entity) {
         EventEmitter.prototype.injectEngine.call(this, entity.__engine);
         this.__entity = entity;
         this.__entity.addEventListener('onload', this, this.load);

@@ -1,8 +1,8 @@
-define(["./Objects/System",
-    "./Loaders/ImageLoader", "./Loaders/SpriteLoader",
-    "./Containers/EntityContainer", "./Containers/EventEmitterContainer",
-    "./Systems/InputSystem", "./Systems/DrawSystem", "./Systems/PickSystem"],
-    function(System, ImageLoader, SpriteLoader, EntityContainer, EventEmitterContainer, InputSystem, DrawSystem, PickSystem) {
+define(["./Objects/System", "./Objects/Injector",
+        "./Loaders/ImageLoader", "./Loaders/SpriteLoader",
+        "./Containers/EntityContainer", "./Containers/EventEmitterContainer",
+        "./Systems/InputSystem", "./Systems/DrawSystem", "./Systems/PickSystem"],
+    function(System, Injector, ImageLoader, SpriteLoader, EntityContainer, EventEmitterContainer, InputSystem, DrawSystem, PickSystem) {
 
 	// CLASS Engine
 	Engine.prototype = Object.create(System.prototype);
@@ -13,7 +13,8 @@ define(["./Objects/System",
 	    delete this.injectEngine;
 	    delete this.__engine;
         // public variables
-		this.canvas = canvas;
+	    this.canvas = canvas;
+	    this.injector = new Injector(this);
 	    // pre-init configuration
 		this.__registerLoaders();
 		this.__registerContainers();

@@ -65,7 +65,7 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
     Entity.prototype.addComponent = function(component) {
         this.__validateNoDuplicateComponentNames(component);
         if (this.isEngineInjected && !component.isEngineInjected) {
-            component.injectEngine(this);
+            component.injectEntity(this);
         }
         this.__components.push(component);
         if (this.isLoaded) {

@@ -38,7 +38,7 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 	        removedElement.unload();
 	    }
 	};
-        // public methods
+    // public methods
 	Scene.prototype.injectEngine = function (engine) {
 	    EventEmitter.prototype.injectEngine.call(this, engine);
 	    this.__contents.forEach(function (entity) {

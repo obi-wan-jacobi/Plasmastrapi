@@ -1,44 +1,54 @@
+
+general framework quirks:
+- this.__engine cannot be used in constructor methods because the engine instance has not yet been injected
+
 needs testing:
 - engine injection (create callbacks in injection method for load/unload, pause/unpause etc.)
 - entity injection (create callbacks in injection method for load/unload, destroy etc.)
 - loading assets
 
 in progress:
+- engine instance injector (injector.resolve())
 - building/loading scenes
 	- PickSystem should be listening to a PickablesContainer rather than EntityContainer?
-
+- child entities must have their engine instance injected
 - wireTool logic
 	- disallow multiple wires between the same two terminals
 	
 missing features:
 - lab scene
-	- flip flops (x3)
-	- timers
+	- elements
+		- flip flops (x3)
+		- timers
+		- SOCs + contexts/scene controller (tabs? overlay?)
+	- design editor
+		- save/load design
+		- drag-select multiple elements
+		- undo/redo
+		- copy/paste
+		- wire routing
+		- rotatable components
+		- zoom in/out
+		- resize with window
+	- circuit testing ("debug" mode)
+		- pause/stop/play
+		- breakpoints?
+		- step forward/backward
 		- sliding global timer
-	- SOCs + contexts/scene controller (tabs? overlay?)
-	- save/load design
-		- breakpoint
-	- wire routing
-	- rotatable components
-	- play, pause, step, rewind
-	- undo/redo
 - game menu (MainMenu Scene)
 	- UI panels
 	- UI buttons with text labels
-- zoom in/out
-	- window resize
 
 user experience:
 - 
 
 tech debt:
-- code smell in this.instantiate
+- code smell in this.injectEngine
 	- no complex logic in class constructors
-	- validating instantiation
-- code smell in scenes.js
-	- we have to rely on oninstantiate to add objects to the scene?
+	- validating engine injection
 - EventEmitter::DynamicallyShrinkableSubscriberArray should be refactored as multiple 'functional' object classes
 	- purge contains its own for-loop (not functional programming!)
+- require.js -- use key names rather than file paths
 - project manifest
 	- debug mode
 		- inject style templates into all drawable objects
@@ -48,8 +58,8 @@ tech debt:
 	- nothing should ever touch window (save for index.html)
 - throwing exceptions (refactor using a framework)
 - run memory analysis/profiler diagnostics
-- unit tests
 - JSDocs/automated documentation
+- unit tests
 
 scalability concerns:
 - single-canvas viewport
@@ -58,9 +68,6 @@ known issues:
 - asset loading -- images set to load last are 'loaded' with 0 width and height
 
 technology:
-- ECMAScript 6
-	- traceur/babel transpiler
-	- Closure Compiler
 - linting
 	- ESlint (http://eslint.org/)
 	- intellisense typings (vscode)

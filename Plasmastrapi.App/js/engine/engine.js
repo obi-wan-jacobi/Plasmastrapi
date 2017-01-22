@@ -9,8 +9,8 @@ define(["./Objects/System",
     Engine.prototype.constructor = Engine;
 	function Engine(canvas) {
 	    System.call(this);
-	    // engine is implicitly instantiated
-	    delete this.instantiate;
+	    // engine instance is it's own reference
+	    delete this.injectEngine;
 	    delete this.__engine;
         // public variables
 		this.canvas = canvas;
@@ -35,20 +35,20 @@ define(["./Objects/System",
 	};
     // public prototypal variables
 	Object.defineProperties(Engine.prototype, {
-	    'isInstantiated': {
+	    'isEngineInjected': {
 	        get: function () {
-	            // engine is implicitly instantiated
+	            // engine is implicitly it's own reference
 	            return true;
 	        }
 	    }
 	});
 	// public methods
 	Engine.prototype.register = function (objectName, objectHandle) {
-	    if (!objectHandle.instantiate) {
-	        throw new Error(this.constructor.name + ":register - The supplied object must implement an 'instantiate' post-bind method.");
+	    if (!objectHandle.injectEngine) {
+	        throw new Error(this.constructor.name + ":register - The supplied object must implement an 'injectEngine' post-bind method.");
 	    }
 	    this[objectName] = objectHandle;
-	    objectHandle.instantiate(this);
+	    objectHandle.injectEngine(this);
 	};
 
 	return Engine;

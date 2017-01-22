@@ -1,6 +1,6 @@
 ﻿define([], function () {
 
-    function Pausable(isPausedWithEngine) {
+    function Pausable(isPausedByEngine) {
         var target = this;
         if (!(target.__registerEvents)) {
             throw new Error(Pausable.name + ':constructor - Target must be an instance of EventEmitter');
@@ -27,15 +27,15 @@
             'onpause',
             'onunpause'
         );
-        if (isPausedWithEngine) {
-            var fnInstantiate = target.instantiate || function () { };
-            target.instantiate = function (engine) {
-                fnInstantiate.call(target, engine);
-                Pausable.prototype.instantiate.call(target, engine);
+        if (isPausedByEngine) {
+            var fnInjectEngineProxy = target.injectEngine || function () { };
+            target.injectEngine = function (engine) {
+                fnInjectEngineProxy.call(target, engine);
+                Pausable.prototype.injectEngine.call(target, engine);
             };
         }
     };
-    Pausable.prototype.instantiate = function (engine) {
+    Pausable.prototype.injectEngine = function (engine) {
         this.__engine.addEventListener('onpause', this, this.pause);
         this.__engine.addEventListener('onunpause', this, this.unpause);
     };

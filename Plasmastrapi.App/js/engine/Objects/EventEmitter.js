@@ -9,7 +9,7 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
         this.__events = {};
         // events
         this.__registerEvents(
-            'oninstantiate'
+            'oninjectengine'
         );
     };
     // private methods
@@ -56,10 +56,10 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
         });
     };
     // public methods
-    EventEmitter.prototype.instantiate = function(engine) {
-        Base.prototype.instantiate.call(this, engine);
+    EventEmitter.prototype.injectEngine = function(engine) {
+        Base.prototype.injectEngine.call(this, engine);
         this.__engine.eventEmitterContainer.add(this);
-        this.__fire('oninstantiate', engine);
+        this.__fire('oninjectengine', engine);
     };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {
         this.__validateEventIsImplemented(event);

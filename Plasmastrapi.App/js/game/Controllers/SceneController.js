@@ -5,15 +5,12 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
 	SceneController.prototype.constructor = SceneController;
-	function SceneController(entityContainer) {
+	function SceneController() {
 	    Controller.call(this);
 	    this.__scene = null;
 		this.__scenes = {
 		    LabScene: new LabScene()
 		};
-	};
-	SceneController.prototype.__oninstantiate = function () {
-	    this.__scenes.LabScene.instantiate(this.__engine);
 	};
 	SceneController.prototype.__onload = function() {
 	    if (this.__scene) {
@@ -32,7 +29,11 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
 	    this.__scene = scene;
 	    this.__scene.load();
 	};
-	// public methods
+    // public methods
+	SceneController.prototype.injectEngine = function (engine) {
+        Controller.prototype.injectEngine.call(this, engine)
+	    this.__scenes.LabScene.injectEngine(this.__engine);
+	};
 	SceneController.prototype.setLabScene = function (entity) {
 	    this.__setCurrentScene(this.__scenes.LabScene);
 	};

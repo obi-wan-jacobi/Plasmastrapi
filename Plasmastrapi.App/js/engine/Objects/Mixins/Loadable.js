@@ -1,6 +1,6 @@
 ﻿define([], function () {
 
-    function Loadable(isLoadedWithEngine) {
+    function Loadable(isLoadedByEngine) {
         var target = this;
         if (!(target.__registerEvents)) {
             throw new Error(Loadable.name + ':constructor - Target must be an instance of EventEmitter');
@@ -32,21 +32,21 @@
             'onload',
             'onunload'
         );
-        if (isLoadedWithEngine) {
-            var fnInstantiate = target.instantiate || function () { };
-            target.instantiate = function (engine) {
-                fnInstantiate.call(target, engine);
-                Loadable.prototype.instantiate.call(target, engine);
+        if (isLoadedByEngine) {
+            var fnInjectEngineProxy = target.injectEngine || function () { };
+            target.injectEngine = function (engine) {
+                fnInjectEngineProxy.call(target, engine);
+                Loadable.prototype.injectEngine.call(target, engine);
             };
         }
     };
-    Loadable.prototype.instantiate = function (engine) {
+    Loadable.prototype.injectEngine = function (engine) {
         this.__engine.addEventListener('onload', this, this.load);
         this.__engine.addEventListener('onunload', this, this.unload);
     };
     Loadable.prototype.load = function () {
-        if (!this.isInstantiated) {
-            throw new Error(this.constructor.name + ":load - This object cannot be loaded without first being instantiated!");
+        if (!this.isEngineInjected) {
+            throw new Error(this.constructor.name + ":load - This object cannot be loaded without first receiving an engine instance!");
         }
         if (!this.__isLoaded) {
             this.__isLoaded = true;

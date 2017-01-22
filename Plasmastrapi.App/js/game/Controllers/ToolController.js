@@ -25,7 +25,7 @@
             this.__tool.discard();
         }
         this.__tool = tool;
-        this.__tool.instantiate(this.__engine);
+        this.__tool.injectEngine(this.__engine);
         this.__tool.equip();
     };
     // public methods

@@ -33,7 +33,7 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         }
         this.__parent = parent;
         // wire up event subscriptions
-        this.__parent.addEventListener('oninstantiate', this, this.instantiate);
+        this.__parent.addEventListener('oninjectengine', this, this.injectEngine);
         this.__parent.addEventListener('onload', this, this.load);
         this.__parent.addEventListener('onunload', this, this.unload);
         this.__parent.addEventListener('ondestroy', this, this.destroy);
@@ -41,25 +41,31 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
     Entity.prototype.__removeParent = function () {
         this.__parent = null;
         // unwire event subscription
-        this.__parent.removeEventListener('oninstantiate', this, this.instantiate);
+        this.__parent.removeEventListener('oninjectengine', this, this.injectEngine);
         this.__parent.removeEventListener('onload', this, this.load);
         this.__parent.removeEventListener('onunload', this, this.unload);
         this.__parent.removeEventListener('ondestroy', this, this.destroy);
     };
     // public methods
-    Entity.prototype.instantiate = function (engine) {
-        EventEmitter.prototype.instantiate.call(this, engine);
+    Entity.prototype.injectEngine = function (engine) {
+        EventEmitter.prototype.injectEngine.call(this, engine);
         this.__engine.entityContainer.add(this);
         this.__components.forEach(function (component) {
-            if (!component.isInstantiated) {
-                component.instantiate(this);
+            if (!component.isEngineInjected) {
+                component.injectEngine(this);
             }
         });
     };
+    Entity.prototype.addChild = function (childEntity) {
+        childEntity.__addParent(this);
+        if (this.isEngineInjected) {
+            childEntity.injectEngine(this.__engine);
+        }
+    };
     Entity.prototype.addComponent = function(component) {
         this.__validateNoDuplicateComponentNames(component);
-        if (this.isInstantiated && !component.isInstantiated) {
-            component.instantiate(this);
+        if (this.isEngineInjected && !component.isEngineInjected) {
+            component.injectEngine(this);
         }
         this.__components.push(component);
         if (this.isLoaded) {
@@ -81,9 +87,6 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
     };
     Entity.prototype.hasComponent = function(componentClass) {
         return this.getComponent(componentClass) ? true : false;
-    };
-    Entity.prototype.addChild = function(childEntity) {
-        childEntity.__addParent(this);
     };
 
     return Entity;

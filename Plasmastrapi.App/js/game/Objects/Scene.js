@@ -39,18 +39,18 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 	    }
 	};
         // public methods
-	Scene.prototype.instantiate = function (engine) {
-	    EventEmitter.prototype.instantiate.call(this, engine);
+	Scene.prototype.injectEngine = function (engine) {
+	    EventEmitter.prototype.injectEngine.call(this, engine);
 	    this.__contents.forEach(function (entity) {
-	        if (!entity.isInstantiated) {
-	            entity.instantiate(this.__engine);
+	        if (!entity.isEngineInjected) {
+	            entity.injectEngine(this.__engine);
 	        }
 	    });
 	};
 	Scene.prototype.add = function (entity) {
-	    if (this.isInstantiated && !entity.isInstantiated) {
+	    if (this.isEngineInjected && !entity.isEngineInjected) {
 	        // this will trigger entityContainer-->onadd-->entity
-	        entity.instantiate(this.__engine);
+	        entity.injectEngine(this.__engine);
 	    }
 	    // if scene is loaded we're already listening on the entity being added to it's container
         // so only explicitly add the entity if we aren't loaded

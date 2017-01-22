@@ -1,7 +1,7 @@
-﻿define(["../Base"], function (Base) {
+﻿define([], function () {
 
-    function Loadable(ClassPrototype) {
-        var target = ClassPrototype || this;
+    function Loadable(isLoadedWithEngine) {
+        var target = this;
         if (!(target.__registerEvents)) {
             throw new Error(Loadable.name + ':constructor - Target must be an instance of EventEmitter');
         }
@@ -32,8 +32,22 @@
             'onload',
             'onunload'
         );
+        if (isLoadedWithEngine) {
+            var fnInstantiate = target.instantiate || function () { };
+            target.instantiate = function (engine) {
+                fnInstantiate.call(target, engine);
+                Loadable.prototype.instantiate.call(target, engine);
+            };
+        }
+    };
+    Loadable.prototype.instantiate = function (engine) {
+        this.__engine.addEventListener('onload', this, this.load);
+        this.__engine.addEventListener('onunload', this, this.unload);
     };
     Loadable.prototype.load = function () {
+        if (!this.isInstantiated) {
+            throw new Error(this.constructor.name + ":load - This object cannot be loaded without first being instantiated!");
+        }
         if (!this.__isLoaded) {
             this.__isLoaded = true;
             if (!this.__isInitialized) {

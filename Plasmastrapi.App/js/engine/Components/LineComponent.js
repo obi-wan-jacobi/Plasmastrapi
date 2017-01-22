@@ -19,6 +19,11 @@ define(["../Objects/Component", "../Data/Geometry", "./DrawableComponent"], func
 		this.__headPose = headPoseComponent,
         this.__options = lineDisplayOptions,
         this.__collisionOptions = lineCollisionOptions;
+	    // events
+		this.__registerEvents(
+            'onpositionchange',
+            'onorientationchange'
+        );
 	};
 	// private methods
 	LineComponent.prototype.__onload = function () {
@@ -89,12 +94,5 @@ define(["../Objects/Component", "../Data/Geometry", "./DrawableComponent"], func
 		ctx.restore();
 	};
 
-	// events
-    LineComponent.prototype.__registerEvents(
-        'onpositionchange',
-		'onorientationchange'
-    );
-
 	return LineComponent;
-
 });

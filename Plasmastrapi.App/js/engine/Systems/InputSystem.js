@@ -6,6 +6,15 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 	function InputSystem() {
 		System.call(this);
 		this.__inputQueue = new EventQueue(this);
+	    // events
+		this.__registerEvents(
+            'onmousemove',
+            'onmousedown',
+            'onmouseup',
+            'onclick',
+            'onkeydown',
+            'onkeyup'
+        );
 	};
 	InputSystem.prototype.__onload = function() {
 		this.__engine.canvas.onmousemove = this.__onmousemove.bind(this);
@@ -78,17 +87,6 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 		this.__inputQueue.push('onkeyup', e.keyCode);
 	};
 
-	// events
-    InputSystem.prototype.__registerEvents(
-        'onmousemove',
-		'onmousedown',
-		'onmouseup',
-		'onclick',
-		'onkeydown',
-		'onkeyup'
-    );
-
 	return InputSystem;
-
 });
 

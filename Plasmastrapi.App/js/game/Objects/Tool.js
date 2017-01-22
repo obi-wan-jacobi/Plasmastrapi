@@ -4,6 +4,21 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
     Tool.prototype.constructor = Tool;
     function Tool() {
         EventEmitter.call(this);
+        this.__registerEvents(
+            'input_onmousemove',
+		    'input_onmousedown',
+		    'input_onmouseup',
+		    'input_onclick',
+            'input_onkeydown',
+		    'input_onkeyup',
+            'pick_onmouseenter',
+		    'pick_onmousehover',
+		    'pick_onmouseleave',
+            'pick_onmousemove',
+		    'pick_onmousedown',
+		    'pick_onmouseup',
+		    'pick_onclick'
+        );
     };
     // private methods
     // public prototypal variables
@@ -40,22 +55,5 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__engine.pickSystem.removeEventListener('onmouseleave', this, this.__$pick_onmouseleave);
     };
 
-    Tool.prototype.__registerEvents(
-        'input_onmousemove',
-		'input_onmousedown',
-		'input_onmouseup',
-		'input_onclick',
-        'input_onkeydown',
-		'input_onkeyup',
-        'pick_onmouseenter',
-		'pick_onmousehover',
-		'pick_onmouseleave',
-        'pick_onmousemove',
-		'pick_onmousedown',
-		'pick_onmouseup',
-		'pick_onclick'
-    );
-
     return Tool;
-
 });

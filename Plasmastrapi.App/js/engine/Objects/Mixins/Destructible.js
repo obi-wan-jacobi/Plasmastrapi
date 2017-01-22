@@ -1,7 +1,7 @@
-﻿define(["../Base"], function (Base) {
+﻿define([], function () {
 
-    function Destructible(ClassPrototype) {
-        var target = ClassPrototype || this;
+    function Destructible() {
+        var target = this;
         if (!(target.__registerEvents)) {
             throw new Error(Destructible.name + ':constructor - Target must be an instance of EventEmitter');
         }

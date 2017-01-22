@@ -6,6 +6,11 @@ define(["./EventEmitter", "./AtomicArray"], function(EventEmitter, AtomicArray) 
     function Container(/* optional */ memberClass) {
         EventEmitter.call(this);
         this.__members = new AtomicArray(memberClass);
+        // events
+        this.__registerEvents(
+            'onadd',
+            'onremove'
+        );
     };
     // public methods
     Container.prototype.forEach = function(fn, caller) {
@@ -20,12 +25,5 @@ define(["./EventEmitter", "./AtomicArray"], function(EventEmitter, AtomicArray) 
         this.__fire('onremove', member);
     };
 
-    // events
-    Container.prototype.__registerEvents(
-        'onadd',
-        'onremove'
-    );
-
     return Container;
-
 });

@@ -7,21 +7,17 @@ define(["./EventEmitter"], function(EventEmitter) {
         EventEmitter.call(this);
         // private variables
         this.__entity = null;
+        // apply event mixins
+        EventEmitter.Mixins.Loadable.call(this);
+        EventEmitter.Mixins.Destructible.call(this);
     };
-    Component.prototype.injectEntity = function(entity) {
-        if (this.__entity) {
-            throw new Error(this.constructor.name + " has already received an entity instance.");
-        }
+    Component.prototype.instantiate = function(entity) {
+        EventEmitter.prototype.instantiate.call(this, entity.__engine);
         this.__entity = entity;
         this.__entity.addEventListener('onload', this, this.load);
         this.__entity.addEventListener('unload', this, this.unload);
         this.__entity.addEventListener('ondestroy', this, this.destroy);
     };
 
-    // apply event mixins
-    EventEmitter.Mixins.Loadable.call(Component.prototype);
-    EventEmitter.Mixins.Destructible.call(Component.prototype);
-
     return Component;
-
 });

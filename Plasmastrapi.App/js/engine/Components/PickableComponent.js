@@ -10,6 +10,20 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 		this.__isEnabled = false;
 		this.__isHovered = false;
 		this.__isSelected = false;
+        // events
+		this.__registerEvents(
+            'onenable',
+            'ondisable',
+            'onselect',
+            'ondeselect',
+            'onmouseenter',
+            'onmousehover',
+            'onmouseleave',
+            'onmousemove',
+            'onmousedown',
+            'onmouseup',
+            'onclick'
+        );
 	};
 	// private methods
 	PickableComponent.prototype.__onmousemove = function(cursor) {
@@ -89,21 +103,5 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 		}
 	};
 
-	// events
-    PickableComponent.prototype.__registerEvents(
-        'onenable',
-		'ondisable',
-		'onselect',
-		'ondeselect',
-		'onmouseenter',
-		'onmousehover',
-		'onmouseleave',
-        'onmousemove',
-		'onmousedown',
-		'onmouseup',
-		'onclick'
-    );
-
 	return PickableComponent;
-
 });

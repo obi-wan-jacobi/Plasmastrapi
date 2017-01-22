@@ -7,10 +7,14 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 	function Scene() {
         EventEmitter.call(this);
 		// private variables
-		this.__contents = new AtomicArray(Entity);
+        this.__contents = new AtomicArray(Entity);
+	    // apply event mixins
+        EventEmitter.Mixins.Loadable.call(this, true);
 	};
-	// private methods
-	Scene.prototype.__onload = function() {
+    // private methods
+	Scene.prototype.__onload = function () {
+	    this.__engine.entityContainer.addEventListener('onadd', this, this.__onEntityAdd);
+	    this.__engine.entityContainer.addEventListener('onremove', this, this.__onEntityRemove);
 		this.__contents.forEach(function(entity) {
 			entity.load();
 		});
@@ -19,32 +23,44 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 		this.__contents.forEach(function(entity) {
 			entity.unload();
 		});
+		this.__engine.entityContainer.removeEventListener('onadd', this, this.__addEntity);
+		this.__engine.entityContainer.removeEventListener('onremove', this, this.__removeEntity);
 	};
-    // public methods
-	Scene.prototype.injectEngine = function (engine) {
-	    EventEmitter.prototype.injectEngine.call(this, engine);
-	    this.__engine.addEventListener('onload', this, this.load);
-	    this.__engine.addEventListener('onunload', this, this.unload);
+	Scene.prototype.__addEntity = function (entity) {
+	    this.__contents.push(entity);
+	    if (this.isLoaded) {
+	        entity.load();
+	    }
 	};
-	Scene.prototype.add = function(entity) {
-		this.__contents.push(entity);
-		entity.addEventListener('ondestroy', this, this.remove);
-		if (this.isLoaded) {
-		    if (!entity.__engine) {
-		        entity.injectEngine(this.__engine);
-		    }
-			entity.load();
-		}
+	Scene.prototype.__removeEntity = function (entity) {
+	    var removedElement = this.__contents.splice(entity);
+	    if (removedElement.isLoaded) {
+	        removedElement.unload();
+	    }
 	};
-	Scene.prototype.remove = function(entity) {
-		var removedElement = this.__contents.splice(entity);
-		if (removedElement) {
-			removedElement.removeEventListener('ondestroy', this, this.remove);
-		}
+        // public methods
+	Scene.prototype.instantiate = function (engine) {
+	    EventEmitter.prototype.instantiate.call(this, engine);
+	    this.__contents.forEach(function (entity) {
+	        if (!entity.isInstantiated) {
+	            entity.instantiate(this.__engine);
+	        }
+	    });
 	};
-
-	// apply event mixins
-    EventEmitter.Mixins.Loadable.call(Scene.prototype);
+	Scene.prototype.add = function (entity) {
+	    if (this.isInstantiated && !entity.isInstantiated) {
+	        // this will trigger entityContainer-->onadd-->entity
+	        entity.instantiate(this.__engine);
+	    }
+	    // if scene is loaded we're already listening on the entity being added to it's container
+        // so only explicitly add the entity if we aren't loaded
+	    if (!this.isLoaded) {
+	        this.__addEntity(entity);
+	    }
+	};
+	Scene.prototype.remove = function (entity) {
+	    this.__removeEntity(entity);
+	};
 
 	return Scene;
 });

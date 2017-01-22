@@ -4,7 +4,17 @@ define(["../Objects/System"],function(System) {
 	DrawSystem.prototype = Object.create(System.prototype);
 	DrawSystem.prototype.constructor = DrawSystem;
 	function DrawSystem() {
-		System.call(this);
+	    System.call(this);
+	    // events
+	    this.__registerEvents(
+            'onwindowresize',
+            'ondrawgamebackground',
+            'ondrawgameforeground',
+            'ondrawgameentities',
+            'ondrawuibackground',
+            'ondrawuiforeground',
+            'ondrawuientities'
+        );
 	};
 	DrawSystem.prototype.__onload = function() {
 		window.addEventListener('onwindowresize', this.__$onwindowresize);
@@ -33,17 +43,6 @@ define(["../Objects/System"],function(System) {
 		*/
 	};
 
-	// events
-	DrawSystem.prototype.__registerEvents(
-        'onwindowresize',
-        'ondrawgamebackground',
-		'ondrawgameforeground',
-		'ondrawgameentities',
-		'ondrawuibackground',
-		'ondrawuiforeground',
-		'ondrawuientities'
-    );
-
 	// display layers
 	DrawSystem.prototype.DISPLAYLAYERS = {
 		GAMEBACKGROUND: 'ondrawgamebackground',
@@ -55,5 +54,4 @@ define(["../Objects/System"],function(System) {
 	};
 
 	return DrawSystem;
-	
 });

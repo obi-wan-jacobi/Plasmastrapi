@@ -12,25 +12,18 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
 		    LabScene: new LabScene()
 		};
 	};
-	SceneController.prototype.__validateSceneIsLoaded = function() {
-		if (!this.__scene) {
-			throw new Error(this.constructor.name + ':validateSceneIsLoaded - No scene has been loaded.')
-		}
-	};
-	SceneController.prototype.__oninit = function () {
-	    this.__scenes.LabScene.injectEngine(this.__engine);
+	SceneController.prototype.__oninstantiate = function () {
+	    this.__scenes.LabScene.instantiate(this.__engine);
 	};
 	SceneController.prototype.__onload = function() {
-		if (this.__scene) {
+	    if (this.__scene) {
 			this.__scene.load();
 		}
-		this.__engine.entityContainer.addEventListener('onadd', this, this.addToCurrentScene);
 	};
 	SceneController.prototype.__onunload = function() {
 		if (this.__scene) {
 			this.__scene.unload();
 		}
-		this.__engine.entityContainer.removeEventListener('onadd', this, this.addToCurrentScene);
 	};
 	SceneController.prototype.__setCurrentScene = function (scene) {
 	    if (this.__scene) {
@@ -42,17 +35,6 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
 	// public methods
 	SceneController.prototype.setLabScene = function (entity) {
 	    this.__setCurrentScene(this.__scenes.LabScene);
-	};
-	SceneController.prototype.addToCurrentScene = function (entity) {
-	    if (!(entity instanceof Entity)) {
-	        throw new Error(this.constructor.name + ":addToCurrentScene " + entity.constructor.name + " is not an instance of Entity!");
-	    }
-		this.__validateSceneIsLoaded();
-		this.__scene.add(entity);
-	};
-	SceneController.prototype.removeFromCurrentScene = function(entity) {
-		this.__validateSceneIsLoaded();
-		this.__scene.remove(entity);
 	};
 
 	return SceneController

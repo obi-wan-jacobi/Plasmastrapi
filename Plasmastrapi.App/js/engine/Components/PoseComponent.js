@@ -9,6 +9,11 @@ define(["../Objects/Component", "../Data/Geometry"], function (Component, Geomet
 		// private variables
 		this.__position = position;
 		this.__orientation = orientation;
+	    // events
+		this.__registerEvents(
+            'onpositionchange',
+            'onorientationchange'
+        );
 	};
 	// public prototypal variables
 	Object.defineProperties(PoseComponent.prototype, {
@@ -36,13 +41,6 @@ define(["../Objects/Component", "../Data/Geometry"], function (Component, Geomet
 			}
 		}
 	});
-	
-	// events
-    PoseComponent.prototype.__registerEvents(
-        'onpositionchange',
-		'onorientationchange'
-    );
 
     return PoseComponent;
-	
 });

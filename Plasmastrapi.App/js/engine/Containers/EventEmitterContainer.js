@@ -7,7 +7,7 @@ define(["../Objects/Container", "../Objects/EventEmitter"], function (Container,
         Container.call(this, EventEmitter);
     };
     EventEmitterContainer.prototype.purge = function (subscriber) {
-        this.release(subscriber);
+        this.remove(subscriber);
         this.forEach(function(eventEmitter) {
             eventEmitter.purgeEventListenersBoundTo(subscriber);
         });

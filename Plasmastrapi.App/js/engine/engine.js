@@ -8,7 +8,11 @@ define(["./Objects/System",
 	Engine.prototype = Object.create(System.prototype);
     Engine.prototype.constructor = Engine;
 	function Engine(canvas) {
-		System.call(this);
+	    System.call(this);
+	    // engine is implicitly instantiated
+	    delete this.instantiate;
+	    delete this.__engine;
+        // public variables
 		this.canvas = canvas;
 	    // pre-init configuration
 		this.__registerLoaders();
@@ -24,50 +28,28 @@ define(["./Objects/System",
 	    this.register('eventEmitterContainer', new EventEmitterContainer());
 	    this.register('entityContainer', new EntityContainer());
 	};
-	Engine.prototype.__registerSystems = function() {
-		this.register('inputSystem', new InputSystem());
-		this.register('drawSystem', new DrawSystem());
-		this.register('pickSystem', new PickSystem());
+	Engine.prototype.__registerSystems = function () {
+	    this.register('inputSystem', new InputSystem());
+	    this.register('drawSystem', new DrawSystem());
+	    this.register('pickSystem', new PickSystem());
 	};
-	Engine.prototype.__beginMainLoop = function() {
-		var self = this;
-		var running = true, lastFrame = +new Date;
-		var	raf = requestAnimationFrame ||
-			window.mozRequestAnimationFrame ||
-			window.webkitRequestAnimationFrame ||
-			window.msRequestAnimationFrame ||
-			window.oRequestAnimationFrame ||
-			function (callback) {
-				return window.setTimeout(callback, 1000 / 60);
-			};
-		function loop(now) {
-			// stop the loop if loopOnce returned false
-			if (running) {
-				raf(loop);
-				var deltaMs = now - lastFrame;
-				if (deltaMs < 2000) {
-					running = self.loopOnce(deltaMs);
-				}
-				lastFrame = now;
-			}
-		};
-		loop(lastFrame);
-	};
+    // public prototypal variables
+	Object.defineProperties(Engine.prototype, {
+	    'isInstantiated': {
+	        get: function () {
+	            // engine is implicitly instantiated
+	            return true;
+	        }
+	    }
+	});
 	// public methods
 	Engine.prototype.register = function (objectName, objectHandle) {
-	    if (!objectHandle.injectEngine) {
-	        throw new Error(this.constructor.name + ":register - The supplied object must implement an 'injectEngine' post-bind method.");
+	    if (!objectHandle.instantiate) {
+	        throw new Error(this.constructor.name + ":register - The supplied object must implement an 'instantiate' post-bind method.");
 	    }
 	    this[objectName] = objectHandle;
-	    objectHandle.injectEngine(this);
-	};
-	Engine.prototype.start = function() {
-		if (!this.isLoaded) {
-			this.load();
-		}
-		this.__beginMainLoop();
+	    objectHandle.instantiate(this);
 	};
 
 	return Engine;
-
 });

@@ -11,6 +11,10 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		this.__sprite = sprite;
 		this.__displayLayer = displayLayer;
 		this.__currentFrameIndex = 0;
+        // events
+		this.__registerEvents(
+            'onframechange'
+        );
     };
     // private methods
     SpriteComponent.prototype.__onload = function () {
@@ -71,11 +75,5 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		ctx.restore();
 	};
 
-	// events
-    SpriteComponent.prototype.__registerEvents(
-        'onframechange'
-    );
-
 	return SpriteComponent;
-
 });

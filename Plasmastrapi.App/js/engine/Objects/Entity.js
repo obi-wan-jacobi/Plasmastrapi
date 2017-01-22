@@ -9,12 +9,9 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         // private variables
         this.__parent = null;
         this.__components = new AtomicArray(Component);
-        // configure engine injection
-        var superInjectEngine = this.injectEngine;
-        this.injectEngine = function (engine) {
-            superInjectEngine.call(this, engine);
-            this.__engine.entityContainer.add(this);
-        }.bind(this);
+        // apply event mixins
+        EventEmitter.Mixins.Loadable.call(this);
+        EventEmitter.Mixins.Destructible.call(this);
     };
     // private methods
     Entity.prototype.__validateNoDuplicateComponentNames = function(component) {
@@ -36,6 +33,7 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         }
         this.__parent = parent;
         // wire up event subscriptions
+        this.__parent.addEventListener('oninstantiate', this, this.instantiate);
         this.__parent.addEventListener('onload', this, this.load);
         this.__parent.addEventListener('onunload', this, this.unload);
         this.__parent.addEventListener('ondestroy', this, this.destroy);
@@ -43,15 +41,26 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
     Entity.prototype.__removeParent = function () {
         this.__parent = null;
         // unwire event subscription
+        this.__parent.removeEventListener('oninstantiate', this, this.instantiate);
         this.__parent.removeEventListener('onload', this, this.load);
         this.__parent.removeEventListener('onunload', this, this.unload);
         this.__parent.removeEventListener('ondestroy', this, this.destroy);
     };
     // public methods
+    Entity.prototype.instantiate = function (engine) {
+        EventEmitter.prototype.instantiate.call(this, engine);
+        this.__engine.entityContainer.add(this);
+        this.__components.forEach(function (component) {
+            if (!component.isInstantiated) {
+                component.instantiate(this);
+            }
+        });
+    };
     Entity.prototype.addComponent = function(component) {
         this.__validateNoDuplicateComponentNames(component);
-        component.injectEngine(this.__engine);
-        component.injectEntity(this);
+        if (this.isInstantiated && !component.isInstantiated) {
+            component.instantiate(this);
+        }
         this.__components.push(component);
         if (this.isLoaded) {
             this.reload();
@@ -77,10 +86,5 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         childEntity.__addParent(this);
     };
 
-    // apply event mixins
-    EventEmitter.Mixins.Loadable.call(Entity.prototype);
-    EventEmitter.Mixins.Destructible.call(Entity.prototype);
-
     return Entity;
-
 });

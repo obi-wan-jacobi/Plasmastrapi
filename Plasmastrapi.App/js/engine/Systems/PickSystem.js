@@ -12,6 +12,15 @@
         this.__mouseup = [];
         this.__mousedown = [];
         this.__click = [];
+        this.__registerEvents(
+            'onmouseenter',
+		    'onmousehover',
+		    'onmouseleave',
+            'onmousemove',
+		    'onmousedown',
+		    'onmouseup',
+		    'onclick'
+        );
     };
     PickSystem.prototype.__onload = function () {
         this.__engine.entityContainer.addEventListener('onadd', this, this.__watch);
@@ -85,16 +94,6 @@
         pickableComponent.removeEventListener('onmouseup', this, this.__$onmouseup);
         pickableComponent.removeEventListener('onclick', this, this.__$onclick);
     };
-
-    PickSystem.prototype.__registerEvents(
-        'onmouseenter',
-		'onmousehover',
-		'onmouseleave',
-        'onmousemove',
-		'onmousedown',
-		'onmouseup',
-		'onclick'
-    );
 
     return PickSystem;
 });

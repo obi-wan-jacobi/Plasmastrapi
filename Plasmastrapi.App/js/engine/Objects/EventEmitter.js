@@ -6,11 +6,12 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
     EventEmitter.prototype.constructor = EventEmitter;
     function EventEmitter() {
         Base.call(this);
-        // private variables
         this.__events = {};
+        // events
+        this.__registerEvents(
+            'oninstantiate'
+        );
     };
-    // private prototypal variables
-    EventEmitter.prototype.__eventList = [];
     // private methods
     EventEmitter.prototype.__validateEventIsImplemented = function(event) {
         if (!this.hasEvent(event)) {
@@ -43,31 +44,27 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
                 arguments.unshift(event);
                 this.__fire.apply(this, arguments);
             };
-            this.__eventList = this.__eventList.concat(event);
+            this.__events[event] = new AtomicKeyPairArray();
         }
     };
     EventEmitter.prototype.__fire = function(event /*, argument1, argument2, etc... */) {
         this.__validateEventIsImplemented(event);
         var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
         this["__" + event].apply(this, args);
-        if (this.__events[event]) {
-            this.__events[event].forEach(function (subscriber, callback) {
-                callback.apply(subscriber, args);
-            });
-        }
+        this.__events[event].forEach(function (subscriber, callback) {
+            callback.apply(subscriber, args);
+        });
     };
     // public methods
-    EventEmitter.prototype.injectEngine = function(engine) {
-        Base.prototype.injectEngine.call(this, engine);
+    EventEmitter.prototype.instantiate = function(engine) {
+        Base.prototype.instantiate.call(this, engine);
         this.__engine.eventEmitterContainer.add(this);
+        this.__fire('oninstantiate', engine);
     };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {
         this.__validateEventIsImplemented(event);
         this.__validateSubscriber(subscriber);
         this.__validateCallback(callback);
-        if (!this.__events[event]) {
-            this.__events[event] = new AtomicKeyPairArray();
-        }
         this.__events[event].push(subscriber, callback);
     };
     EventEmitter.prototype.removeEventListener = function(event, subscriber, callback) {
@@ -85,7 +82,7 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
         }
     };
     EventEmitter.prototype.hasEvent = function(event) {
-        return this.__eventList.indexOf(event) > -1 ? true : false;
+        return this.__events[event] ? true : false;
     };
 
     // mixins
@@ -96,5 +93,4 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
     };
 
     return EventEmitter;
-
 });

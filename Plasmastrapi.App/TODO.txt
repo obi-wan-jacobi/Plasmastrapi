@@ -4,8 +4,8 @@ needs testing:
 - loading assets
 
 in progress:
-- refactoring lab.js into class files
-- refactoring /game to use require.js
+- building/loading scenes
+	- PickSystem should be listening to a PickablesContainer rather than EntityContainer?
 
 - wireTool logic
 	- disallow multiple wires between the same two terminals
@@ -32,8 +32,11 @@ user experience:
 - 
 
 tech debt:
+- code smell in this.instantiate
+	- no complex logic in class constructors
+	- validating instantiation
 - code smell in scenes.js
-	- we have to rely on addEventListener 'oninit' for initializing scenes?
+	- we have to rely on oninstantiate to add objects to the scene?
 - EventEmitter::DynamicallyShrinkableSubscriberArray should be refactored as multiple 'functional' object classes
 	- purge contains its own for-loop (not functional programming!)
 - project manifest

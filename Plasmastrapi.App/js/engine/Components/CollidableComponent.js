@@ -4,16 +4,15 @@ define(["../Objects/Component"], function(Component) {
 	CollidableComponent.prototype = Object.create(Component.prototype);
 	CollidableComponent.prototype.constructor = CollidableComponent;
     function CollidableComponent() {
-		Component.call(this);
+        Component.call(this);
+        // events
+        this.__registerEvents(
+            'oncollision'
+        );
 	};
 	CollidableComponent.prototype.collide = function(withEntity) {
 		this.__fire('oncollision', withEntity);
 	};
-	
-	// events
-    CollidableComponent.prototype.__registerEvents(
-	    'oncollision'
-    );
 
 	return CollidableComponent;
 

@@ -8,7 +8,17 @@ define(["../Objects/Component"], function (Component) {
 		Component.call(this);
 		// private variables
 		this.__isVisible = false;
-		// configure component
+        // events
+		this.__registerEvents(
+            'onshow',
+            'onhide',
+            'ondrawgamebackground',
+            'ondrawgameforeground',
+            'ondrawgameentities',
+            'ondrawuibackground',
+            'ondrawuiforeground',
+            'ondrawuientities'
+        );
 	};
     // private methods
     DrawableComponent.prototype.__onload = function () {
@@ -40,32 +50,20 @@ define(["../Objects/Component"], function (Component) {
 			this.__engine.drawSystem.addEventListener('ondrawuientities', this, this.__$ondrawuientities);
 		}
 	};
-	DrawableComponent.prototype.hide = function() {
-		if (this.__isVisible) {
-			this.__isVisible = false;
-			this.__engine.drawSystem.removeEventListener(this.__displayLayer, this, this.__draw);
-			this.__fire('onhide');
-		    // unwire subscriptions to draw system
-			this.__engine.drawSystem.removeEventListener('ondrawgamebackground', this, this.__$ondrawgamebackground);
-			this.__engine.drawSystem.removeEventListener('ondrawgameforeground', this, this.__$ondrawgameforeground);
-			this.__engine.drawSystem.removeEventListener('ondrawgameentities', this, this.__$ondrawgameentities);
-			this.__engine.drawSystem.removeEventListener('ondrawuibackground', this, this.__$ondrawuibackground);
-			this.__engine.drawSystem.removeEventListener('ondrawuiforeground', this, this.__$ondrawuiforeground);
-			this.__engine.drawSystem.removeEventListener('ondrawuientities', this, this.__$ondrawuientities);
-		}
+	DrawableComponent.prototype.hide = function () {
+	    if (this.__isVisible) {
+	        this.__isVisible = false;
+	        this.__engine.drawSystem.removeEventListener(this.__displayLayer, this, this.__draw);
+	        this.__fire('onhide');
+	        // unwire subscriptions to draw system
+	        this.__engine.drawSystem.removeEventListener('ondrawgamebackground', this, this.__$ondrawgamebackground);
+	        this.__engine.drawSystem.removeEventListener('ondrawgameforeground', this, this.__$ondrawgameforeground);
+	        this.__engine.drawSystem.removeEventListener('ondrawgameentities', this, this.__$ondrawgameentities);
+	        this.__engine.drawSystem.removeEventListener('ondrawuibackground', this, this.__$ondrawuibackground);
+	        this.__engine.drawSystem.removeEventListener('ondrawuiforeground', this, this.__$ondrawuiforeground);
+	        this.__engine.drawSystem.removeEventListener('ondrawuientities', this, this.__$ondrawuientities);
+	    }
 	};
-
-	// events
-    DrawableComponent.prototype.__registerEvents(
-        'onshow',
-        'onhide',
-        'ondrawgamebackground',
-		'ondrawgameforeground',
-		'ondrawgameentities',
-		'ondrawuibackground',
-		'ondrawuiforeground',
-		'ondrawuientities'
-    );
 
 	return DrawableComponent;
 });

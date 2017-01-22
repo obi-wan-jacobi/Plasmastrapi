@@ -12,7 +12,7 @@
             this.__engine.canvas.clientWidth,
             this.__engine.canvas.clientHeight
         ));
-        //var andGateButton = new Lab.SpawnerButton(50, 40, Lab.AndGate)
+        //var andGateButton = new Lab.SpawnerButton(50, 40, Lab.AndGate);
     };
 
     return LabScene;

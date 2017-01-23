@@ -15,5 +15,4 @@ define(["../Objects/Component"], function(Component) {
 	};
 
 	return CollidableComponent;
-
 });

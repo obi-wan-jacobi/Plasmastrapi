@@ -2,8 +2,8 @@
 
     function Destructible() {
         var target = this;
-        if (!(target.__registerEvents)) {
-            throw new Error(Destructible.name + ':constructor - Target must be an instance of EventEmitter');
+        if (!target.__registerEvents) {
+            throw new Error(target.constructor.name + ':' + Destructible.constructor.name + ' - Target must be an instance of EventEmitter');
         }
         target.__isDestroyed = false;
         Object.defineProperties(target, {

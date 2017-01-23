@@ -9,7 +9,6 @@
         var meshComponent = new $.MeshComponent();
         var pickableComponent = new $.PickableComponent();
         var imageComponent = new $.ImageComponent();
-        var drawableComponent = new $.DrawableComponent();
         this.addComponent(poseComponent);
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);

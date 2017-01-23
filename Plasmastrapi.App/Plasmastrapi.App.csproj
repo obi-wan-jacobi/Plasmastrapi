@@ -101,9 +101,9 @@
     <Content Include="js\engine\Objects\Base.js" />
     <Content Include="js\engine\Objects\EventQueue.js" />
     <Content Include="js\engine\Objects\Injector.js" />
-    <Content Include="js\engine\Objects\Mixins\Destructible.js" />
-    <Content Include="js\engine\Objects\Mixins\Loadable.js" />
-    <Content Include="js\engine\Objects\Mixins\Pausable.js" />
+    <Content Include="js\engine\Objects\Decorators\Destructible.js" />
+    <Content Include="js\engine\Objects\Decorators\Loadable.js" />
+    <Content Include="js\engine\Objects\Decorators\Pausable.js" />
     <Content Include="js\engine\Systems\PickSystem.js" />
     <Content Include="js\game\Assets\images.js" />
     <Content Include="js\game\Assets\sprites.js" />
@@ -180,7 +180,7 @@
     <Content Include="index.html" />
     <Content Include="js\main.js" />
     <Content Include="js\engine\Components\CollidableComponent.js" />
-    <Content Include="js\engine\Components\DrawableComponent.js" />
+    <Content Include="js\engine\Components\Decorators\Drawable.js" />
     <Content Include="js\engine\Components\ImageComponent.js" />
     <Content Include="js\engine\Components\InputComponent.js" />
     <Content Include="js\engine\Components\LineComponent.js" />
@@ -224,6 +224,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="js\game\Assets\Images\" />
     <Folder Include="js\game\Circuits\FlipFlops\" />
     <Folder Include="js\game\Circuits\Switches\" />
   </ItemGroup>

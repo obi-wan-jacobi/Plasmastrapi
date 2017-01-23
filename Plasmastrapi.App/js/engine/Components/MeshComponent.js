@@ -1,5 +1,5 @@
-define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./DrawableComponent"],
-    function (Component, Geometry, PoseComponent, DrawableComponent) {
+define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
+    function (Component, Geometry, PoseComponent) {
 
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
@@ -10,6 +10,10 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		// private variables
 		this.__mesh = mesh;
 		this.__options = meshDisplayOptions;
+        // apply decorators
+		if (this.__options) {
+		    Component.Decorators.Drawable.call(this, this.__options.displayLayer);
+		}
 	};
 	// private methods
 	MeshComponent.prototype.__oninit = function() {
@@ -23,13 +27,11 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		}
 		poseComponent.addEventListener('onpositionchange', this, this.__translate);
 		poseComponent.addEventListener('onorientationchange', this, this.__rotate);
-		this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
 	};
 	MeshComponent.prototype.__onunload = function() {
 		var poseComponent = this.__entity.getComponent(PoseComponent);
 		poseComponent.removeEventListener('onpositionchange', this, this.__translate);
 		poseComponent.removeEventListener('onorientationchange', this, this.__rotate);
-		this.__entity.getComponent(DrawableComponent).removeEventListener(this.__displayLayer, this, this.draw);
 	};
 	MeshComponent.prototype.__translate = function(newPosition, oldPosition) {
 		var mesh = this.__mesh;
@@ -109,11 +111,11 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		return false;
 	};
 	MeshComponent.prototype.draw = function(ctx) {
-		var vertices = this.__mesh.vertices;
+	    if (!this.__options) {
+	        return;
+	    }
+	    var vertices = this.__mesh.vertices;
 		var options = this.__options;
-		if (!options) {
-			return;
-		}
 		// draw mesh and apply optionss
 		ctx.save();
 		ctx.beginPath();
@@ -132,5 +134,4 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 	};
 
 	return MeshComponent;
-
 });

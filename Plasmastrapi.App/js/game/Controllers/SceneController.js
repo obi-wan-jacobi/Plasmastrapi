@@ -27,16 +27,18 @@ define(["../../engine/Objects/Controller", "../../engine/Objects/Entity",
 	        this.__scene.unload();
 	    }
 	    this.__scene = scene;
-	    this.__scene.load();
+	    if (this.isLoaded) {
+            this.__scene.load();
+	    }
 	};
-    // public methods
-	SceneController.prototype.injectEngine = function (engine) {
+	// public methods
+    SceneController.prototype.injectEngine = function (engine) {
         Controller.prototype.injectEngine.call(this, engine)
-	    this.__scenes.CircuitDesignScene.injectEngine(this.__engine);
-	};
-	SceneController.prototype.setCircuitDesignScene = function (entity) {
-	    this.__setCurrentScene(this.__scenes.CircuitDesignScene);
-	};
+        this.__scenes.CircuitDesignScene.injectEngine(this.__engine);
+        };
+    SceneController.prototype.setCircuitDesignScene = function (entity) {
+        this.__setCurrentScene(this.__scenes.CircuitDesignScene);
+        };
 
-	return SceneController
+    return SceneController
 });

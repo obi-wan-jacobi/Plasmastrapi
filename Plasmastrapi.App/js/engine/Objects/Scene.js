@@ -8,13 +8,11 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
         EventEmitter.call(this);
 		// private variables
         this.__contents = new AtomicArray(Entity);
-	    // apply event mixins
-        EventEmitter.Mixins.Loadable.call(this, true);
+	    // apply decorators
+        EventEmitter.Decorators.Loadable.call(this);
 	};
     // private methods
 	Scene.prototype.__onload = function () {
-	    this.__engine.entityContainer.addEventListener('onadd', this, this.__addEntity);
-	    this.__engine.entityContainer.addEventListener('onremove', this, this.__removeEntity);
 		this.__contents.forEach(function(entity) {
 			entity.load();
 		});
@@ -23,8 +21,6 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 		this.__contents.forEach(function(entity) {
 			entity.unload();
 		});
-		this.__engine.entityContainer.removeEventListener('onadd', this, this.__addEntity);
-		this.__engine.entityContainer.removeEventListener('onremove', this, this.__removeEntity);
 	};
 	Scene.prototype.__addEntity = function (entity) {
 	    this.__contents.push(entity);
@@ -49,14 +45,9 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 	};
 	Scene.prototype.add = function (entity) {
 	    if (this.isEngineInjected && !entity.isEngineInjected) {
-	        // this will trigger entityContainer-->onadd-->entity
 	        entity.injectEngine(this.__engine);
 	    }
-	    // if scene is loaded we're already listening on the entity being added to it's container
-        // so only explicitly add the entity if we aren't loaded
-	    if (!this.isLoaded) {
-	        this.__addEntity(entity);
-	    }
+	    this.__addEntity(entity);
 	};
 	Scene.prototype.remove = function (entity) {
 	    this.__removeEntity(entity);

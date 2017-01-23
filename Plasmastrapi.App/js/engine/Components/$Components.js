@@ -1,5 +1,4 @@
 ﻿define(["./CollidableComponent",
-        "./DrawableComponent",
         "./ImageComponent",
         "./InputComponent",
         "./LineComponent",
@@ -11,7 +10,6 @@
     ],
     function (
         CollidableComponent,
-        DrawableComponent, 
         ImageComponent,
         InputComponent,
         LineComponent,
@@ -24,7 +22,6 @@
 
     return {
         CollidableComponent,
-        DrawableComponent,
         ImageComponent,
         InputComponent,
         LineComponent,

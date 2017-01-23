@@ -15,9 +15,6 @@
         var sprite = circuitElementClass.prototype.sprite;
         var spriteComponent = new $.SpriteComponent(sprite);
 
-        // configure sprite as graphic
-        var drawableComponent = new $.DrawableComponent(DISPLAYLAYERS.UIENTITIES);
-
         // configure sprite as collision mesh
         var meshComponent = new $.MeshComponent(spriteComponent.mesh);
 
@@ -30,7 +27,6 @@
         // compose entity
         this.addComponent(poseComponent);
         this.addComponent(spriteComponent);
-        this.addComponent(drawableComponent);
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
     };

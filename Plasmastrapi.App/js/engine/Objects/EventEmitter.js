@@ -1,4 +1,4 @@
-define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loadable", "./Mixins/Pausable"],
+define(["./Base", "./AtomicKeyPairArray", "./Decorators/Destructible", "./Decorators/Loadable", "./Decorators/Pausable"],
     function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
 
     // CLASS EventEmitter
@@ -37,11 +37,13 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
             if (this.hasEvent(event)) {
                 throw new Error(this.constructor.name + ':implementEvents - ' + event + ' has already been implemented.');
             }
+            // initialize this.__on{event} method
             if (!this["__" + event]) {
                 this["__" + event] = function () { };
             }
+            // initialize this.__$on{event} "pass-through" method
             this["__$" + event] = function () {
-                arguments.unshift(event);
+                Array.prototype.unshift.call(arguments, event);
                 this.__fire.apply(this, arguments);
             };
             this.__events[event] = new AtomicKeyPairArray();
@@ -85,8 +87,8 @@ define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loa
         return this.__events[event] ? true : false;
     };
 
-    // mixins
-    EventEmitter.Mixins = {
+    // decorators
+    EventEmitter.Decorators = {
         Destructible,
         Loadable,
         Pausable

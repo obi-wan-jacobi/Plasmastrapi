@@ -1,4 +1,4 @@
-define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitter, Component, AtomicArray) {
+define(["./EventEmitter", "../Objects/Component", "./AtomicArray"], function (EventEmitter, Component, AtomicArray) {
 
     // CLASS Entity
     Entity.prototype = Object.create(EventEmitter.prototype);
@@ -9,9 +9,9 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         // private variables
         this.__parent = null;
         this.__components = new AtomicArray(Component);
-        // apply event mixins
-        EventEmitter.Mixins.Loadable.call(this);
-        EventEmitter.Mixins.Destructible.call(this);
+        // apply decorators
+        EventEmitter.Decorators.Loadable.call(this);
+        EventEmitter.Decorators.Destructible.call(this);
     };
     // private methods
     Entity.prototype.__validateNoDuplicateComponentNames = function(component) {

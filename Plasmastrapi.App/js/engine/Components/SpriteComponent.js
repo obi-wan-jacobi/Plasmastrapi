@@ -1,5 +1,5 @@
-define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./DrawableComponent"],
-    function (Component, Geometry, PoseComponent, DrawableComponent) {
+define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
+    function (Component, Geometry, PoseComponent) {
     
 	// CLASS SpriteComponent
 	SpriteComponent.prototype = Object.create(Component.prototype);
@@ -9,21 +9,12 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 		Component.call(this);
 		// private variables
 		this.__sprite = sprite;
-		this.__displayLayer = displayLayer;
 		this.__currentFrameIndex = 0;
         // events
 		this.__registerEvents(
             'onframechange'
         );
-    };
-    // private methods
-    SpriteComponent.prototype.__onload = function () {
-        if (!this.__entity.hasComponent(DrawableComponent))
-            throw new Error(this.constructor.name + ":onload - Entity does not contain a DrawableComponent.")
-        this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
-    };
-    SpriteComponent.prototype.__onunload = function() {
-        this.__entity.getComponent(DrawableComponent).removeEventListener(this.__displayLayer, this, this.draw);
+		Component.Decorators.Drawable.call(this, displayLayer);
     };
 	// public prototypal variables
 	Object.defineProperties(SpriteComponent.prototype, {

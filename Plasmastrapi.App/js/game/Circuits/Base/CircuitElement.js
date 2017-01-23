@@ -14,9 +14,6 @@
         // sprite
         var spriteComponent = new Components.SpriteComponent(this.sprite);
 
-        // drawable on game entity layer
-        var drawableComponent = new Components.DrawableComponent(DISPLAYLAYERS.GAMEENTITIES);
-
         // configure sprite as collision mesh
         var meshComponent = new Components.MeshComponent(spriteComponent.mesh);
 
@@ -29,7 +26,6 @@
         // compose entity
         this.addComponent(poseComponent);
         this.addComponent(spriteComponent);
-        this.addComponent(drawableComponent);
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
     };

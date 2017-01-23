@@ -5,13 +5,9 @@ define(["./EventEmitter"], function (EventEmitter) {
     System.prototype.constructor = System;
     function System() {
         EventEmitter.call(this);
-        // apply event mixins
-        EventEmitter.Mixins.Loadable.call(this, true);
-        EventEmitter.Mixins.Pausable.call(this, true);
-    };
-    System.prototype.restart = function() {
-        this.unpause();
-        this.reload();
+        // apply decorators
+        EventEmitter.Decorators.Loadable.call(this, true);
+        EventEmitter.Decorators.Pausable.call(this, true);
     };
 
     return System;

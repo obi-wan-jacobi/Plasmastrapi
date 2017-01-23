@@ -1,35 +1,27 @@
-define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./DrawableComponent"],
-    function (Component, Geometry, PoseComponent, DrawableComponent) {
+define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
+    function (Component, Geometry, PoseComponent) {
     
 	// CLASS ImageComponent
 	ImageComponent.prototype = Object.create(Component.prototype);
 	ImageComponent.prototype.constructor = ImageComponent;
-    function ImageComponent(image, imageDisplayOptions) {
+    function ImageComponent(imageHandle) {
 		// inherits from
 		Component.call(this);
 		// private variables
-		this.__image = image;
-		this.__options = imageDisplayOptions;
-    };
-    // private methods
-    ImageComponent.prototype.__onload = function () {
-        if (!this.__entity.hasComponent(DrawableComponent))
-            throw new Error(this.constructor.name + ":onload - Entity does not contain a DrawableComponent.")
-        this.__entity.getComponent(DrawableComponent).addEventListener(this.__displayLayer, this, this.draw);
-    };
-    ImageComponent.prototype.__onunload = function () {
-        this.__entity.getComponent(DrawableComponent).removeEventListener(this.__displayLayer, this, this.draw);
+		this.__imageHandle = imageHandle;
+        // apply decorators
+		Component.Decorators.Drawable.call(this, this.__imageHandle.displayLayer);
     };
 	// public prototypal variables
 	Object.defineProperties(ImageComponent.prototype, {
 		'width': {
 			get: function() {
-				return this.__options.width;
+				return this.__imageHandle.width;
 			}
 		},
 		'height': {
 			get: function() {
-				return this.__options.height;
+				return this.__imageHandle.height;
 			}
 		},
 		'mesh': {
@@ -41,18 +33,26 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "./Drawab
 	});
 	// public methods
 	ImageComponent.prototype.draw = function(ctx) {
-		var image = this.__image;
-		var options = this.__options;
+		var imageHandle = this.__imageHandle;
 		var pose = this.__entity.getComponent(PoseComponent);
 		var position = pose.position;
 		var orientation = pose.orientation;
 		ctx.save();
 		ctx.translate(position.x, position.y);
 		ctx.rotate(orientation);
-		ctx.drawImage(image, options.sourceX, options.sourceY, options.sourceWidth, options.sourceHeight, -options.destWidth/2, -options.destHeight/2, options.destWidth, options.destHeight);
+		ctx.drawImage(
+            imageHandle.image,
+            imageHandle.sourceX,
+            imageHandle.sourceY,
+            imageHandle.sourceWidth,
+            imageHandle.sourceHeight,
+            -imageHandle.destWidth / 2,
+            -imageHandle.destHeight / 2,
+            imageHandle.destWidth,
+            imageHandle.destHeight
+        );
 		ctx.restore();
 	};
 
 	return ImageComponent;
-
 });

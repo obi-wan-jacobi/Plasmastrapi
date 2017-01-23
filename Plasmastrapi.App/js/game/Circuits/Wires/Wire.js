@@ -13,10 +13,7 @@
             lineDisplayOptionsn //new Graphics.LineStyleTemplate('#FFFFFF', 2)
         );
 
-        var drawableComponent = new Components.DrawableComponent(DISPLAYLAYERS.GAMEENTITIES);
-
         this.addComponent(lineComponent);
-        this.addComponent(drawableComponent);
     };
 
     return Wire;

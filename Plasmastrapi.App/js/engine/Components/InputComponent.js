@@ -8,5 +8,4 @@ define(["../Objects/Component"], function (Component) {
     };
 
     return InputComponent;
-
 });

@@ -2,8 +2,8 @@
 
     function Loadable(isLoadedByEngine) {
         var target = this;
-        if (!(target.__registerEvents)) {
-            throw new Error(Loadable.name + ':constructor - Target must be an instance of EventEmitter');
+        if (!target.__registerEvents) {
+            throw new Error(target.constructor.name + ':' + Loadable.constructor.name + ' - Target must be an instance of EventEmitter');
         }
         target.__isLoaded = false;
         target.__isInitialized = false;

@@ -19,12 +19,8 @@
         var spriteComponent = new Components.SpriteComponent(this.sprite);
         spriteComponent.setFrame(0);
 
-        // drawable on game entity layer
-        var drawableComponent = new Components.DrawableComponent(DISPLAYLAYERS.GAMEENTITIES);
-
         // compose entity
         this.addComponent(spriteComponent);
-        this.addComponent(drawableComponent);
     };
     
     return OutputTerminal;

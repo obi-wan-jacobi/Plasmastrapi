@@ -49,18 +49,20 @@ define(function() {
         this.frames = imageArray;
     };
 
-    $.LineDisplayOptions = function (strokeStyle, lineWidth) {
+    $.LineDisplayOptions = function (displayLayer, strokeStyle, lineWidth) {
+        this.displayLayer = displayLayer;
         this.strokeStyle = strokeStyle || 'black';
         this.lineWidth = lineWidth || 1;
     };
 
-    $.MeshDisplayOptions = function (strokeStyle, fillStyle, lineWidth) {
+    $.MeshDisplayOptions = function (displayLayer, strokeStyle, fillStyle, lineWidth) {
+        this.displayLayer = displayLayer;
         this.strokeStyle = strokeStyle || 'black';
         this.fillStyle = fillStyle;
         this.lineWidth = lineWidth || 1;
     };
 
-    $.ImageDisplayOptions = function(displayLayer, sourceX, sourceY, sourceWidth, sourceHeight, destWidth, destHeight) {
+    $.ImageHandle = function(displayLayer, sourceX, sourceY, sourceWidth, sourceHeight, destWidth, destHeight, image) {
         this.displayLayer = displayLayer;
         this.sourceX = sourceX;
         this.sourceY = sourceY;
@@ -68,6 +70,7 @@ define(function() {
         this.sourceHeight = sourceHeight;
         this.destWidth = destWidth;
         this.destHeight = destHeight;
+        this.image = image;
     };
 
 

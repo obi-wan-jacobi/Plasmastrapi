@@ -2,8 +2,8 @@
 
     function Pausable(isPausedByEngine) {
         var target = this;
-        if (!(target.__registerEvents)) {
-            throw new Error(Pausable.name + ':constructor - Target must be an instance of EventEmitter');
+        if (!target.__registerEvents) {
+            throw new Error(target.constructor.name + ':' + Pausable.constructor.name + ' - Target must be an instance of EventEmitter');
         }
         target.__isPaused = false;
         Object.defineProperties(target, {
@@ -36,6 +36,7 @@
         }
     };
     Pausable.prototype.injectEngine = function (engine) {
+        this.__engine.addEventListener('onframe', this, this.loopOnce);
         this.__engine.addEventListener('onpause', this, this.pause);
         this.__engine.addEventListener('onunpause', this, this.unpause);
     };

@@ -1,11 +1,11 @@
-﻿define(["./LabElement"], function (LabElement) {
+﻿define(["../Base/CircuitElement"], function (CircuitElement) {
 
     // CLASS Wire
-    Wire.prototype = Object.create(LabElement.prototype);
+    Wire.prototype = Object.create(CircuitElement.prototype);
     Wire.prototype.constructor = Wire;
     function Wire(tailObject, headObject, lineDisplayOptions) {
 
-        LabElement.call(this);
+        CircuitElement.call(this);
 
         var lineComponent = new Components.LineComponent(
             tailObject.getComponent(Components.PoseComponent),

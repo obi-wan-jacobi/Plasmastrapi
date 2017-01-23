@@ -52,9 +52,9 @@ define(["./EventEmitter", "./Component", "./AtomicArray"], function (EventEmitte
         this.__engine.entityContainer.add(this);
         this.__components.forEach(function (component) {
             if (!component.isEngineInjected) {
-                component.injectEngine(this);
+                component.injectEntity(this);
             }
-        });
+        }, this);
     };
     Entity.prototype.addChild = function (childEntity) {
         childEntity.__addParent(this);

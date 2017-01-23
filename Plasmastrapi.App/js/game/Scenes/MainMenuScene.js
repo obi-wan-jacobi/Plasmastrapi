@@ -1,4 +1,4 @@
-﻿define(["../Objects/Scene"], function (Scene) {
+﻿define(["../../engine/Objects/Scene"], function (Scene) {
 
     MainMenuScene.prototype = Object.create(Scene.prototype);
     MainMenuScene.prototype.constructor = MainMenuScene;

@@ -1,4 +1,4 @@
-﻿define(["../Objects/Tool"], function (Tool) {
+﻿define(["../../engine/Objects/Tool"], function (Tool) {
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;

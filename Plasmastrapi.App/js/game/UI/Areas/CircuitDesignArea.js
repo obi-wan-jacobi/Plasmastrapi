@@ -1,15 +1,15 @@
-﻿define(["../Base/UILabElement",
+﻿define(["./Area",
         "../../../engine/Components/$Components",
         "../../../engine/Data/Geometry",
         "../../../engine/Data/Graphics"
     ],
-    function (UILabElement, $, Geometry, Graphics) {
+    function (Area, $, Geometry, Graphics) {
 
     // CLASS CircuitDesignArea
-    CircuitDesignArea.prototype = Object.create(UILabElement.prototype);
+    CircuitDesignArea.prototype = Object.create(Area.prototype);
     CircuitDesignArea.prototype.constructor = CircuitDesignArea;
     function CircuitDesignArea(x, y, width, height) {
-        UILabElement.call(this);
+        Area.call(this);
     };
     CircuitDesignArea.prototype.__oninit = function () {
         // pose

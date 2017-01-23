@@ -1,4 +1,4 @@
-﻿define(["../Objects/Scene"], function (Scene) {
+﻿define(["../../engine/Objects/Scene"], function (Scene) {
 
     NoScene.prototype = Object.create(Scene.prototype);
     NoScene.prototype.constructor = NoScene;

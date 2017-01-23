@@ -1,11 +1,11 @@
-﻿define(function () {
+﻿define(["../../engine/Objects/Entity"], function (Entity) {
 
     // CLASS CircuitElement
-    CircuitElement.prototype = Object.create(LabElement.prototype);
+    CircuitElement.prototype = Object.create(Entity.prototype);
     CircuitElement.prototype.constructor = CircuitElement;
     function CircuitElement(x, y) {
         // inherits from
-        LabElement.call(this);
+        Entity.call(this);
 
         // pose
         var position = new Geometry.Position(x, y);

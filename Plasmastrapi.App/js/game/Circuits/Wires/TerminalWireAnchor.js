@@ -1,11 +1,11 @@
-﻿define(["./LabElement"], function (LabElement) {
+﻿define(["../Base/CircuitElement"], function (CircuitElement) {
 
     // CLASS TerminalWireAnchor
-    TerminalWireAnchor.prototype = Object.create(LabElement.prototype);
+    TerminalWireAnchor.prototype = Object.create(CircuitElement.prototype);
     TerminalWireAnchor.prototype.constructor = TerminalWireAnchor;
     function TerminalWireAnchor(offsetPosition, circuitElement) {
 
-        LabElement.call(this);
+        CircuitElement.call(this);
 
         this.offset = offsetPosition;
         this.circuitElement = circuitElement;

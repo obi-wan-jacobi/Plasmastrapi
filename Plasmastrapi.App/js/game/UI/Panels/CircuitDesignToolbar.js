@@ -1,9 +1,9 @@
-﻿define(["../Base/UILabElement"], function (UILabElement) {
+﻿define(["./Panel"], function (Panel) {
 
-    CircuitDesignToolbar.prototype = Object.create(UIElement.prototype);
+    CircuitDesignToolbar.prototype = Object.create(Panel.prototype);
     CircuitDesignToolbar.prototype.constructor = CircuitDesignToolbar;
     function CircuitDesignToolbar() {
-        UIElement.call(this);
+        Panel.call(this);
     };
 
     return CircuitDesignToolbar;

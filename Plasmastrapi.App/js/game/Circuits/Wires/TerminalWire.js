@@ -1,12 +1,12 @@
-﻿define(["./LabElement"], function (LabElement) {
+﻿define(["../Base/CircuitElement"], function (CircuitElement) {
 
     // CLASS TerminalWire
     // forms the inner wire between a circuit element and one of its terminals
-    TerminalWire.prototype = Object.create(LabElement.prototype);
+    TerminalWire.prototype = Object.create(CircuitElement.prototype);
     TerminalWire.prototype.constructor = TerminalWire;
     function TerminalWire(terminalWireAnchor, terminal, lineDisplayOptions) {
 
-        LabElement.call(this);
+        CircuitElement.call(this);
 
         var lineComponent = new Components.LineComponent(
             terminalWireAnchor.getComponent(Components.PoseComponent),

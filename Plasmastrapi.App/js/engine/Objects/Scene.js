@@ -13,8 +13,8 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 	};
     // private methods
 	Scene.prototype.__onload = function () {
-	    this.__engine.entityContainer.addEventListener('onadd', this, this.__onEntityAdd);
-	    this.__engine.entityContainer.addEventListener('onremove', this, this.__onEntityRemove);
+	    this.__engine.entityContainer.addEventListener('onadd', this, this.__addEntity);
+	    this.__engine.entityContainer.addEventListener('onremove', this, this.__removeEntity);
 		this.__contents.forEach(function(entity) {
 			entity.load();
 		});

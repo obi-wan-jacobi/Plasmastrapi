@@ -1,6 +1,6 @@
-define(["../Objects/Controller", "../../engine/Objects/Entity",
-        "../Scenes/LabScene"],
-    function (Controller, Entity, LabScene) {
+define(["../../engine/Objects/Controller", "../../engine/Objects/Entity",
+        "../Scenes/CircuitDesignScene"],
+    function (Controller, Entity, CircuitDesignScene) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
@@ -9,7 +9,7 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
 	    Controller.call(this);
 	    this.__scene = null;
 		this.__scenes = {
-		    LabScene: new LabScene()
+		    CircuitDesignScene: new CircuitDesignScene()
 		};
 	};
 	SceneController.prototype.__onload = function() {
@@ -32,10 +32,10 @@ define(["../Objects/Controller", "../../engine/Objects/Entity",
     // public methods
 	SceneController.prototype.injectEngine = function (engine) {
         Controller.prototype.injectEngine.call(this, engine)
-	    this.__scenes.LabScene.injectEngine(this.__engine);
+	    this.__scenes.CircuitDesignScene.injectEngine(this.__engine);
 	};
-	SceneController.prototype.setLabScene = function (entity) {
-	    this.__setCurrentScene(this.__scenes.LabScene);
+	SceneController.prototype.setCircuitDesignScene = function (entity) {
+	    this.__setCurrentScene(this.__scenes.CircuitDesignScene);
 	};
 
 	return SceneController

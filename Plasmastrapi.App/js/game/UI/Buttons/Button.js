@@ -1,11 +1,11 @@
-﻿define(["../../engine/Objects/Entity", "../../engine/Components/$Components"], function (Entity, $) {
+﻿define(["../Base/UIElement", "../../../engine/Components/$Components"], function (UIElement, $) {
 
     // CLASS Button
-    Button.prototype = Object.create(Entity.prototype);
+    Button.prototype = Object.create(UIElement.prototype);
     Button.prototype.constructor = Button;
     function Button(x, y, fnOnClick) {
         // inherits from
-        Entity.call(this);
+        UIElement.call(this);
 
         // pose
         var position = new Geometry.Position(x, y);

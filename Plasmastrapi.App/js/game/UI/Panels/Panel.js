@@ -1,9 +1,9 @@
-﻿define(["../../engine/Objects/Entity", "../../engine/Components/$Components"], function (Entity, $) {
+﻿define(["../Base/UIElement", "../../../engine/Components/$Components"], function (UIElement, $) {
 
-    Panel.prototype = Object.create(Entity.prototype);
+    Panel.prototype = Object.create(UIElement.prototype);
     Panel.prototype.constructor = Panel;
     function Panel() {
-        Entity.call(this);
+        UIElement.call(this);
         // Configure entity
         var poseComponent = new $.PoseComponent();
         var meshComponent = new $.MeshComponent();

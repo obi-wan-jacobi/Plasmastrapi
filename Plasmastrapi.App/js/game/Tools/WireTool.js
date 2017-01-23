@@ -1,4 +1,4 @@
-﻿define(["../Objects/Tool"], function (Tool) {
+﻿define(["../../engine/Objects/Tool"], function (Tool) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;

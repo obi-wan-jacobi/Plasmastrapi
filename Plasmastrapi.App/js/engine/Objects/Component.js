@@ -15,7 +15,7 @@ define(["./EventEmitter"], function(EventEmitter) {
         EventEmitter.prototype.injectEngine.call(this, entity.__engine);
         this.__entity = entity;
         this.__entity.addEventListener('onload', this, this.load);
-        this.__entity.addEventListener('unload', this, this.unload);
+        this.__entity.addEventListener('onunload', this, this.unload);
         this.__entity.addEventListener('ondestroy', this, this.destroy);
     };
 

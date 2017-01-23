@@ -1,4 +1,4 @@
-﻿define(["../Objects/Controller",
+﻿define(["../../engine/Objects/Controller",
         "../Tools/MasterTool",
         "../Tools/PlacingTool",
         "../Tools/WireTool",

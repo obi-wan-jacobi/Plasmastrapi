@@ -11,7 +11,7 @@ define(["./game/Game", "./game/Assets/images"], function (Game, images) {
 
     // load assets
     game.imageLoader.download(images).done(function () {
-        game.sceneController.setLabScene();
+        game.sceneController.setCircuitDesignScene();
     //    game.toolcontroller.equip(game.tools.mastertool);
     });
 });

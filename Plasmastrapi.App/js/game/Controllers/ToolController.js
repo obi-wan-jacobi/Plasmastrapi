@@ -1,10 +1,11 @@
 ﻿define(["../../engine/Objects/Controller",
+        "../Tools/NoTool",
         "../Tools/MasterTool",
         "../Tools/PlacingTool",
         "../Tools/WireTool",
         "../Tools/CuttingTool",
         "../Tools/TrashTool"],
-    function (Controller, MasterTool, PlacingTool, WireTool, CuttingTool, TrashTool) {
+    function (Controller, NoTool, MasterTool, PlacingTool, WireTool, CuttingTool, TrashTool) {
 
     // CLASS ToolController
     ToolController.prototype = Object.create(Controller.prototype);
@@ -15,10 +16,10 @@
     };
     // private methods
     ToolController.prototype.__onload = function () {
-        this.equipMasterTool();
+        //this.equipNoTool();
     };
     ToolController.prototype.__onunload = function () {
-        this.__tool.discard();
+        //this.__tool.discard();
     };
     ToolController.prototype.__equip = function (tool) {
         if (this.__tool) {
@@ -29,6 +30,9 @@
         this.__tool.equip();
     };
     // public methods
+    ToolController.prototype.equipNoTool = function () {
+        this.__equip(new NoTool());
+    };
     ToolController.prototype.equipMasterTool = function () {
         this.__equip(new MasterTool());
     };

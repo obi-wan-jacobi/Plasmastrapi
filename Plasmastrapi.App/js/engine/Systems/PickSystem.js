@@ -5,13 +5,13 @@
     PickSystem.prototype.constructor = PickSystem;
     function PickSystem() {
         System.call(this);
-        this.__mouseenter = [];
-        this.__mousehover = [];
-        this.__mouseleave = [];
-        this.__mousemove = [];
-        this.__mouseup = [];
-        this.__mousedown = [];
-        this.__click = [];
+        this.__queue_mouseenter = [];
+        this.__queue_mousehover = [];
+        this.__queue_mouseleave = [];
+        this.__queue_mousemove = [];
+        this.__queue_mouseup = [];
+        this.__queue_mousedown = [];
+        this.__queue_click = [];
         this.__registerEvents(
             'onmouseenter',
 		    'onmousehover',
@@ -29,70 +29,70 @@
     PickSystem.prototype.__onunload = function () {
         this.__engine.entityContainer.removeEventListener('onadd', this, this.__watch);
         this.__engine.entityContainer.removeEventListener('onremove', this, this.__unwatch);
-        this.__mouseenter = [];
-        this.__mousehover = [];
-        this.__mouseleave = [];
-        this.__mousemove = [];
-        this.__mouseup = [];
-        this.__mousedown = [];
-        this.__click = [];
+        this.__queue_mouseenter = [];
+        this.__queue_mousehover = [];
+        this.__queue_mouseleave = [];
+        this.__queue_mousemove = [];
+        this.__queue_mouseup = [];
+        this.__queue_mousedown = [];
+        this.__queue_click = [];
     };
     PickSystem.prototype.__onframe = function () {
-        this.__fire('onmouseenter', this.__mouseenter);
-        this.__fire('onmousehover', this.__mousehover);
-        this.__fire('onmouseleave', this.__mouseleave);
-        this.__fire('onmousemove', this.__mousemove);
-        this.__fire('onmousedown', this.__mousedown);
-        this.__fire('onmouseup', this.__mouseup);
-        this.__fire('onclick', this.__click);
-        this.__mouseenter = [];
-        this.__mousehover = [];
-        this.__mouseleave = [];
-        this.__mousemove = [];
-        this.__mouseup = [];
-        this.__mousedown = [];
-        this.__click = [];
+        this.__fire('onmouseenter', this.__queue_mouseenter);
+        this.__fire('onmousehover', this.__queue_mousehover);
+        this.__fire('onmouseleave', this.__queue_mouseleave);
+        this.__fire('onmousemove', this.__queue_mousemove);
+        this.__fire('onmousedown', this.__queue_mousedown);
+        this.__fire('onmouseup', this.__queue_mouseup);
+        this.__fire('onclick', this.__queue_click);
+        this.__queue_mouseenter = [];
+        this.__queue_mousehover = [];
+        this.__queue_mouseleave = [];
+        this.__queue_mousemove = [];
+        this.__queue_mouseup = [];
+        this.__queue_mousedown = [];
+        this.__queue_click = [];
     };
-    PickSystem.prototype.__onmouseenter = function (entity) {
-         this.__mouseenter.push(entity);
+    PickSystem.prototype.__enqueue_mouseenter = function (entity) {
+        this.__queue_mouseenter.push(entity);
     };
-    PickSystem.prototype.__onmousehover = function (entity) {
-        this.__mousehover.push(entity);
+    PickSystem.prototype.__enqueue_mousehover = function (entity) {
+        this.__queue_mousehover.push(entity);
     };
-    PickSystem.prototype.__onmouseleave = function (entity) {
-        this.__mouseleave.push(entity);
+    PickSystem.prototype.__enqueue_mouseleave = function (entity) {
+        this.__queue_mouseleave.push(entity);
     };
-    PickSystem.prototype.__onmousemove = function (entity) {
-        this.__mousemove.push(entity);
+    PickSystem.prototype.__enqueue_mousemove = function (entity) {
+        this.__queue_mousemove.push(entity);
     };
-    PickSystem.prototype.__onmousedown = function (entity) {
-        this.__mousedown.push(entity);
+    PickSystem.prototype.__enqueue_mousedown = function (entity) {
+        this.__queue_mousedown.push(entity);
     };
-    PickSystem.prototype.__onmouseup = function (entity) {
-        this.__mouseup.push(entity);
+    PickSystem.prototype.__enqueue_mouseup = function (entity) {
+        this.__queue_mouseup.push(entity);
     };
-    PickSystem.prototype.__onclick = function (entity) {
-        this.__click.push(entity);
+    PickSystem.prototype.__enqueue_click = function (entity) {
+        this.__queue_click.push(entity);
     };
     PickSystem.prototype.__watch = function (entity) {
         var pickableComponent = entity.getComponent(PickableComponent);
-        pickableComponent.addEventListener('onmouseenter', this, this.__$onmouseenter);
-        pickableComponent.addEventListener('onmousehover', this, this.__$onmousehover);
-        pickableComponent.addEventListener('onmouseleave', this, this.__$onmouseleave);
-        pickableComponent.addEventListener('onmousemove', this, this.__$onmousemove);
-        pickableComponent.addEventListener('onmousedown', this, this.__$onmousedown);
-        pickableComponent.addEventListener('onmouseup', this, this.__$onmouseup);
-        pickableComponent.addEventListener('onclick', this, this.__$onclick);
+        pickableComponent.addEventListener('onmouseenter', this, this.__enqueue_mouseenter);
+        pickableComponent.addEventListener('onmousehover', this, this.__enqueue_mousehover);
+        pickableComponent.addEventListener('onmouseleave', this, this.__enqueue_mouseleave);
+        pickableComponent.addEventListener('onmousemove', this, this.__enqueue_mousemove);
+        pickableComponent.addEventListener('onmousedown', this, this.__enqueue_mousedown);
+        pickableComponent.addEventListener('onmouseup', this, this.__enqueue_mouseup);
+        pickableComponent.addEventListener('onclick', this, this.__enqueue_click);
     };
     PickSystem.prototype.__unwatch = function (entity) {
         var pickableComponent = entity.getComponent(PickableComponent);
-        pickableComponent.removeEventListener('onmouseenter', this, this.__$onmouseenter);
-        pickableComponent.removeEventListener('onmousehover', this, this.__$onmousehover);
-        pickableComponent.removeEventListener('onmouseleave', this, this.__$onmouseleave);
-        pickableComponent.removeEventListener('onmousemove', this, this.__$onmousemove);
-        pickableComponent.removeEventListener('onmousedown', this, this.__$onmousedown);
-        pickableComponent.removeEventListener('onmouseup', this, this.__$onmouseup);
-        pickableComponent.removeEventListener('onclick', this, this.__$onclick);
+        pickableComponent.removeEventListener('onmouseenter', this, this.__enqueue_mouseenter);
+        pickableComponent.removeEventListener('onmousehover', this, this.__enqueue_mousehover);
+        pickableComponent.removeEventListener('onmouseleave', this, this.__enqueue_mouseleave);
+        pickableComponent.removeEventListener('onmousemove', this, this.__enqueue_mousemove);
+        pickableComponent.removeEventListener('onmousedown', this, this.__enqueue_mousedown);
+        pickableComponent.removeEventListener('onmouseup', this, this.__enqueue_mouseup);
+        pickableComponent.removeEventListener('onclick', this, this.__enqueue_click);
     };
 
     return PickSystem;

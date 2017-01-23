@@ -20,7 +20,7 @@
             var event = this.__queue.shift();
             this.__eventOwner.__fire(event.name, event.args);
         }
-        isExecuting = false;
+        this.__isExecuting = false;
     };
 
     return EventQueue;

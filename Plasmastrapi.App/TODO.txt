@@ -3,15 +3,11 @@ general framework quirks:
 - this.__engine cannot be used in constructor methods because the engine instance has not yet been injected
 
 needs testing:
-- engine injection (create callbacks in injection method for load/unload, pause/unpause etc.)
-- entity injection (create callbacks in injection method for load/unload, destroy etc.)
-- loading assets
+- child entities must have their engine instance injected
 
 in progress:
-- engine instance injector (injector.resolve())
 - building/loading scenes
 	- PickSystem should be listening to a PickablesContainer rather than EntityContainer?
-- child entities must have their engine instance injected
 - wireTool logic
 	- disallow multiple wires between the same two terminals
 	

@@ -17,12 +17,12 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
         );
 	};
 	InputSystem.prototype.__onload = function() {
-		this.__engine.canvas.onmousemove = this.__onmousemove.bind(this);
-		this.__engine.canvas.onmousedown = this.__onmousedown.bind(this);
-		this.__engine.canvas.onmouseup = this.__onmouseup.bind(this);
-		this.__engine.canvas.onclick = this.__onclick.bind(this);
-		window.onkeydown = this.__onkeydown.bind(this);
-		window.onkeyup = this.__onkeyup.bind(this);
+		this.__engine.canvas.onmousemove = this.__$onmousemove.bind(this);
+		this.__engine.canvas.onmousedown = this.__$onmousedown.bind(this);
+		this.__engine.canvas.onmouseup = this.__$onmouseup.bind(this);
+		this.__engine.canvas.onclick = this.__$onclick.bind(this);
+		window.onkeydown = this.__$onkeydown.bind(this);
+		window.onkeyup = this.__$onkeyup.bind(this);
 	};
 	InputSystem.prototype.__onunload = function() {
 		this.__engine.canvas.onmousemove = null;
@@ -82,7 +82,6 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 	InputSystem.prototype.__onkeydown = function(e) {
 		this.__inputQueue.push('onkeydown', e.keyCode);
 	};
-
 	InputSystem.prototype.__onkeyup = function(e) {
 		this.__inputQueue.push('onkeyup', e.keyCode);
 	};

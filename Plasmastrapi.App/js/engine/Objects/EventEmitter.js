@@ -42,10 +42,12 @@ define(["./Base", "./AtomicKeyPairArray", "./Decorators/Destructible", "./Decora
                 this["__" + event] = function () { };
             }
             // initialize this.__$on{event} "pass-through" method
-            this["__$" + event] = function () {
-                Array.prototype.unshift.call(arguments, event);
-                this.__fire.apply(this, arguments);
-            };
+            this["__$" + event] = function (event) {
+                return function () {
+                    Array.prototype.unshift.call(arguments, event);
+                    this.__fire.apply(this, arguments);
+                };
+            }(event);
             this.__events[event] = new AtomicKeyPairArray();
         }
     };

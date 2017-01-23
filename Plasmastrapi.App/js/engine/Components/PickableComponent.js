@@ -25,7 +25,13 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
             'onclick'
         );
 	};
-	// private methods
+    // private methods
+    PickableComponent.prototype.__onload = function () {
+        this.enable();
+    };
+    PickableComponent.prototype.__onunload = function () {
+        this.disable();
+    };
 	PickableComponent.prototype.__onmousemove = function(cursor) {
 		var meshComponent = this.__entity.getComponent(MeshComponent);
 		if (!meshComponent) {

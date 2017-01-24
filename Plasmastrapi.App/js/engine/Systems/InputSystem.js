@@ -17,12 +17,12 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
         );
 	};
 	InputSystem.prototype.__onload = function() {
-		this.__engine.canvas.onmousemove = this.__$onmousemove.bind(this);
-		this.__engine.canvas.onmousedown = this.__$onmousedown.bind(this);
-		this.__engine.canvas.onmouseup = this.__$onmouseup.bind(this);
-		this.__engine.canvas.onclick = this.__$onclick.bind(this);
-		window.onkeydown = this.__$onkeydown.bind(this);
-		window.onkeyup = this.__$onkeyup.bind(this);
+		this.__engine.canvas.onmousemove = this.__domousemove.bind(this);
+		this.__engine.canvas.onmousedown = this.__domousedown.bind(this);
+		this.__engine.canvas.onmouseup = this.__domouseup.bind(this);
+		this.__engine.canvas.onclick = this.__doclick.bind(this);
+		window.onkeydown = this.__dokeydown.bind(this);
+	    window.onkeyup = this.__dokeyup.bind(this);
 	};
 	InputSystem.prototype.__onunload = function() {
 		this.__engine.canvas.onmousemove = null;
@@ -35,7 +35,7 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 	InputSystem.prototype.__onframe = function() {
 		this.__inputQueue.process();
 	};
-	InputSystem.prototype.__onmousemove = function(e) {
+	InputSystem.prototype.__domousemove = function(e) {
 		var mouseX, mouseY;
 		if (e.offsetX) {
 			mouseX = e.offsetX;
@@ -46,7 +46,7 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 		}
 		this.__inputQueue.push('onmousemove', new Geometry.Position(mouseX, mouseY));
 	};
-	InputSystem.prototype.__onmousedown = function(e) {
+	InputSystem.prototype.__domousedown = function(e) {
 		var mouseX, mouseY;
 		if (e.offsetX) {
 			mouseX = e.offsetX;
@@ -57,7 +57,7 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 		}
 		this.__inputQueue.push('onmousedown', new Geometry.Position(mouseX, mouseY));
 	};
-	InputSystem.prototype.__onmouseup = function(e) {
+	InputSystem.prototype.__domouseup = function(e) {
 		var mouseX, mouseY;
 		if (e.offsetX) {
 			mouseX = e.offsetX;
@@ -68,7 +68,7 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 		}
 		this.__inputQueue.push('onmouseup', new Geometry.Position(mouseX, mouseY));
 	};
-	InputSystem.prototype.__onclick = function(e) {
+	InputSystem.prototype.__doclick = function(e) {
 		var mouseX, mouseY;
 		if (e.offsetX) {
 			mouseX = e.offsetX;
@@ -79,10 +79,10 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 		}
 		this.__inputQueue.push('onclick', new Geometry.Position(mouseX, mouseY));
 	};
-	InputSystem.prototype.__onkeydown = function(e) {
-		this.__inputQueue.push('onkeydown', e.keyCode);
+	InputSystem.prototype.__dokeydown = function (e) {
+	    this.__inputQueue.push('onkeydown', e.keyCode);
 	};
-	InputSystem.prototype.__onkeyup = function(e) {
+	InputSystem.prototype.__dokeyup = function(e) {
 		this.__inputQueue.push('onkeyup', e.keyCode);
 	};
 

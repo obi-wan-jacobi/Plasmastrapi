@@ -4,17 +4,18 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 	// CLASS SpriteComponent
 	SpriteComponent.prototype = Object.create(Component.prototype);
 	SpriteComponent.prototype.constructor = SpriteComponent;
-    function SpriteComponent(sprite, displayLayer) {
+    function SpriteComponent(spriteHandle) {
 		// inherits from
 		Component.call(this);
 		// private variables
-		this.__sprite = sprite;
+		this.__sprite = spriteHandle.sprite;
+		this.__options = spriteHandle.displayOptions;
 		this.__currentFrameIndex = 0;
         // events
 		this.__registerEvents(
             'onframechange'
         );
-		Component.Decorators.Drawable.call(this, displayLayer);
+		Component.Decorators.Drawable.call(this, spriteHandle.displayLayer);
     };
 	// public prototypal variables
 	Object.defineProperties(SpriteComponent.prototype, {
@@ -33,7 +34,12 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 				var rectangle = new Geometry.Rectangle(this.width, this.height);
 				return new Geometry.Mesh(rectangle);
 			}
-		}
+		},
+		'frameIndex': {
+		    get: function () {
+		        return this.__currentFrameIndex;
+		    }
+		},
 	});
 	// public methods
 	SpriteComponent.prototype.setFrame = function(frameNumber) {

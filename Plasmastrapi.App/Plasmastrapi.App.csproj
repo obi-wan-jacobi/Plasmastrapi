@@ -107,6 +107,7 @@
     <Content Include="js\engine\Systems\PickSystem.js" />
     <Content Include="js\game\Assets\images.js" />
     <Content Include="js\game\Assets\sprites.js" />
+    <Content Include="js\game\Circuits\Base\WireElement.js" />
     <Content Include="js\game\Controllers\ToolController.js" />
     <Content Include="js\game\Circuits\Base\CircuitElement.js" />
     <Content Include="js\game\Circuits\Gates\AndGate.js" />

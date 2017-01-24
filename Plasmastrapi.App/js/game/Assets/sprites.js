@@ -1,17 +1,17 @@
-﻿define(["../../engine/Data/Graphics", "../Lab/lab"], function (Graphics, Lab) {
+﻿define(["../../engine/Data/Graphics", "../Circuits/$Circuits"], function (Graphics, $) {
 
     return new Graphics.SpriteMap(
-        new Graphics.SpriteSourcePair(Lab.Terminal.prototype, ['img/Terminal_out.png', 'img/Terminal_in.png', 'img/Terminal_hovered.png']),
-        new Graphics.SpriteSourcePair(Lab.AndGate.prototype, ['img/AndGate.png']),
-        new Graphics.SpriteSourcePair(Lab.NandGate.prototype, ['img/NandGate.png']),
-        new Graphics.SpriteSourcePair(Lab.OrGate.prototype, ['img/OrGate.png']),
-        new Graphics.SpriteSourcePair(Lab.XorGate.prototype, ['img/XorGate.png']),
-        new Graphics.SpriteSourcePair(Lab.PowerSource.prototype, ['img/PowerSource.png'])
-        // new Graphics.SpriteSourcePair(Lab.PushSwitch.prototype, ['img/PushSwitch_open.png', 'img/PushSwitch_closed.png']),
-        // new Graphics.SpriteSourcePair(Lab.HoverSwitch.prototype, ['img/HoverSwitch.png']),
-        // new Graphics.SpriteSourcePair(Lab.LightBulb.prototype, ['img/LightBulb_open.png', 'img/LightBulb_closed.png']),
-        // new Graphics.SpriteSourcePair(Lab.LightScreen.prototype, ['img/LightScreen_open.png', 'img/LightScreen_closed.png']),
-        // new Graphics.SpriteSourcePair(Lab.CutterIcon.prototype, ['img/Cutter_closed.png', 'img/Cutter_open.png']),
-        // new Graphics.SpriteSourcePair(Lab.TrashcanIcon.prototype, ['img/Trashcan.png'])
+        new Graphics.SpriteSourcePair($.Terminal.prototype, ['img/Terminal_out.png', 'img/Terminal_in.png', 'img/Terminal_hovered.png']),
+        new Graphics.SpriteSourcePair($.AndGate.prototype, ['img/AndGate.png']),
+        new Graphics.SpriteSourcePair($.NandGate.prototype, ['img/NandGate.png']),
+        new Graphics.SpriteSourcePair($.OrGate.prototype, ['img/OrGate.png']),
+        new Graphics.SpriteSourcePair($.XorGate.prototype, ['img/XorGate.png']),
+        new Graphics.SpriteSourcePair($.PowerSource.prototype, ['img/PowerSource.png'])
+        // new Graphics.SpriteSourcePair($.PushSwitch.prototype, ['img/PushSwitch_open.png', 'img/PushSwitch_closed.png']),
+        // new Graphics.SpriteSourcePair($.HoverSwitch.prototype, ['img/HoverSwitch.png']),
+        // new Graphics.SpriteSourcePair($.LightBulb.prototype, ['img/LightBulb_open.png', 'img/LightBulb_closed.png']),
+        // new Graphics.SpriteSourcePair($.LightScreen.prototype, ['img/LightScreen_open.png', 'img/LightScreen_closed.png']),
+        // new Graphics.SpriteSourcePair($.CutterIcon.prototype, ['img/Cutter_closed.png', 'img/Cutter_open.png']),
+        // new Graphics.SpriteSourcePair($.TrashcanIcon.prototype, ['img/Trashcan.png'])
     );
 });

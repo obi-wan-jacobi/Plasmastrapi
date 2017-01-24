@@ -1,4 +1,4 @@
-﻿define(["../../engine/Objects/Entity"], function (Entity) {
+﻿define(["../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(Entity.prototype);
@@ -12,7 +12,8 @@
         var poseComponent = new Components.PoseComponent(position, 0);
 
         // sprite
-        var spriteComponent = new Components.SpriteComponent(this.sprite);
+        var spriteHandle = new Graphics.SpriteHandle(this.__engine.drawSystem.DISPLAYLAYERS.GAMEENTITIES, this.sprite);
+        var spriteComponent = new Components.SpriteComponent(spriteHandle);
 
         // configure sprite as collision mesh
         var meshComponent = new Components.MeshComponent(spriteComponent.mesh);
@@ -21,7 +22,7 @@
         var pickableComponent = new Components.PickableComponent();
 
         // configure pick action
-        pickableComponent.addEventListener('onpick', this, this.__onpick);
+        pickableComponent.addEventListener('onselect', this, this.__onselect);
 
         // compose entity
         this.addComponent(poseComponent);
@@ -29,8 +30,8 @@
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
     };
-    CircuitElement.prototype.__onpick = function () {
-        toolController.equip(tools.placingTool, this);
+    CircuitElement.prototype.__onselect = function () {
+        this.__engine.toolController.equipPlacingTool(this);
     };
     
     return Gate;

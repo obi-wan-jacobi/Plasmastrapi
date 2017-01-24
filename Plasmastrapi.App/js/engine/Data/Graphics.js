@@ -73,6 +73,11 @@ define(function() {
         this.image = image;
     };
 
+    $.SpriteHandle = function (displayLayer, sprite) {
+        this.displayLayer = displayLayer;
+        this.sprite = sprite;
+    };
+
 
     // ctx.fillStyle = '#51ED39';
     // ctx.strokeStyle = (powered) ? ((state) ? '#00FF00' : '#FF5AC8') : 'black';

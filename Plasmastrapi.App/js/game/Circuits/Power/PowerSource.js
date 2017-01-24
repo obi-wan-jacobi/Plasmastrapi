@@ -1,11 +1,11 @@
-﻿define(function () {
+﻿define(["../Base/CircuitElement"], function (CircuitElement) {
 
     // CLASS PowerSource
     PowerSource.prototype = Object.create(CircuitElement.prototype);
     PowerSource.prototype.constructor = PowerSource;
     function PowerSource(x, y) {
-
-        CircuitElement.call(this);
+        // inherits from
+        CircuitElement.call(this, x, y);
 
         // terminals
         var terminalOffsetMargin = 35;

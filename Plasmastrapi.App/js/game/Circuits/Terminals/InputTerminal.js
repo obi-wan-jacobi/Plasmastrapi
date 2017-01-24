@@ -1,26 +1,17 @@
-﻿define(function () {
+﻿define(["./Terminal"], function (Terminal) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
     InputTerminal.prototype.constructor = InputTerminal;
-    function InputTerminal(offsetPosition, circuitElement) {
+    function InputTerminal(offsetPosition, parentElement) {
 
         // inherits from
-        Terminal.call(this, offsetPosition, circuitElement);
+        Terminal.call(this, offsetPosition, parentElement);
 
-        // modify parent to include OutputTerminal container
-        if (!this.circuitElement.inputTerminals) {
-            this.circuitElement.inputTerminals = [];
-        }
-
-        this.circuitElement.inputTerminals.push(this);
-
-        // sprite
+        // set default sprite frame
+        this.__defaultFrameIndex = 1;
         var spriteComponent = new Components.SpriteComponent(this.sprite);
-        spriteComponent.setFrame(1);
-
-        // compose entity
-        this.addComponent(spriteComponent);
+        spriteComponent.setFrame(this.__defaultFrameIndex);
     };
     
     return InputTerminal;

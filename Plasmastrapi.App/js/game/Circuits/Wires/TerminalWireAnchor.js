@@ -1,22 +1,22 @@
-﻿define(["../Base/CircuitElement"], function (CircuitElement) {
+﻿define(["../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
 
     // CLASS TerminalWireAnchor
-    TerminalWireAnchor.prototype = Object.create(CircuitElement.prototype);
+    TerminalWireAnchor.prototype = Object.create(Entity.prototype);
     TerminalWireAnchor.prototype.constructor = TerminalWireAnchor;
-    function TerminalWireAnchor(offsetPosition, circuitElement) {
+    function TerminalWireAnchor(offsetPosition, parentElement) {
 
-        CircuitElement.call(this);
+        Entity.call(this);
 
         this.offset = offsetPosition;
-        this.circuitElement = circuitElement;
+        this.parentElement = parentElement;
 
         // pose
-        var circuitElementPose = this.circuitElement.getComponent(Components.PoseComponent);
-        var poseComponent = new Components.PoseComponent(new Geometry.Position(0, 0), 0);
+        var parentElementPose = this.parentElement.getComponent($.PoseComponent);
+        var poseComponent = new $.PoseComponent(new Geometry.Position(0, 0), 0);
 
-        // configure circuitElement position following
-        circuitElementPose.addEventListener('onpositionchange', this, this.__setPoseRelativeToCircuitElement);
-        circuitElementPose.addEventListener('onorientationchange', this, this.__setPoseRelativeToCircuitElement);
+        // configure parentElement position following
+        parentElementPose.addEventListener('onpositionchange', this, this.__setPoseRelativeToCircuitElement);
+        parentElementPose.addEventListener('onorientationchange', this, this.__setPoseRelativeToCircuitElement);
 
         // compose entity
         this.addComponent(poseComponent);
@@ -25,14 +25,14 @@
         this.addEventListener('oninit', this, this.__setPoseRelativeToCircuitElement);
     };
     TerminalWireAnchor.prototype.__setPoseRelativeToCircuitElement = function () {
-        var circuitElementPose = this.circuitElement.getComponent(Components.PoseComponent)
-        var position = circuitElementPose.position;
-        var orientation = circuitElementPose.orientation;
+        var parentElementPose = this.parentElement.getComponent($.PoseComponent)
+        var position = parentElementPose.position;
+        var orientation = parentElementPose.orientation;
         var templateX = this.offset.x;
         var templateY = this.offset.y;
         var x = templateX * Math.cos(orientation) - templateY * Math.sin(orientation) + position.x;
         var y = templateX * Math.sin(orientation) + templateY * Math.cos(orientation) + position.y;
-        var poseComponent = this.getComponent(Components.PoseComponent);
+        var poseComponent = this.getComponent($.PoseComponent);
         poseComponent.position = new Geometry.Position(x, y);
         poseComponent.orientation = orientation;
     };

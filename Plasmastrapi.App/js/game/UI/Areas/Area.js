@@ -11,7 +11,6 @@
         var poseComponent = new $.PoseComponent(position, 0);
 
         // image
-        imageHandle.image = this.image;
         var imageComponent = new $.ImageComponent(imageHandle);
 
         // configure image as collision mesh

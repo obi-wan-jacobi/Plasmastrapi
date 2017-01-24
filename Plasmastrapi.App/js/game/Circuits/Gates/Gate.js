@@ -1,19 +1,18 @@
-﻿define(function () {
+﻿define(["../Base/CircuitElement"], function (CircuitElement) {
 
     // CLASS Gate
     Gate.prototype = Object.create(CircuitElement.prototype);
     Gate.prototype.constructor = Gate;
     function Gate(x, y) {
-
+        // inherits from
         CircuitElement.call(this, x, y);
 
         // terminals
-        var terminalOffsetMargin = 35;
-
+        var terminalOffsetMarginY = 35;
         var spriteComponent = this.getComponent(Components.SpriteComponent);
 
         // output terminal
-        var outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMargin), this);
+        var outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMarginY), this);
         var outputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, -spriteComponent.height / 2), this);
         var outputTerminalWire = new TerminalWire(outputTerminal, outputTerminalAnchor);
         // configure dependencies
@@ -22,7 +21,7 @@
         this.addChild(outputTerminalWire);
 
         // input terminal
-        var inputTerminal = new InputTerminal(new Geometry.Position(0, terminalOffsetMargin), this);
+        var inputTerminal = new InputTerminal(new Geometry.Position(0, terminalOffsetMarginY), this);
         var inputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, spriteComponent.height / 2), this);
         var inputTerminalWire = new TerminalWire(inputTerminal, inputTerminalAnchor);
         // configure dependencies

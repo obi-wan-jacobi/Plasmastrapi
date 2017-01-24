@@ -1,4 +1,4 @@
-﻿define(function () {
+﻿define(["./Terminal"], function (Terminal) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
@@ -8,19 +8,10 @@
         // inherits from
         Terminal.call(this, offsetPosition, circuitElement);
 
-        // modify parent to include OutputTerminal container
-        if (!this.circuitElement.outputTerminals) {
-            this.circuitElement.outputTerminals = [];
-        }
-
-        this.circuitElement.outputTerminals.push(this);
-
-        // sprite
+        // set default sprite frame
+        this.__defaultFrameIndex = 0;
         var spriteComponent = new Components.SpriteComponent(this.sprite);
-        spriteComponent.setFrame(0);
-
-        // compose entity
-        this.addComponent(spriteComponent);
+        spriteComponent.setFrame(this.__defaultFrameIndex);
     };
     
     return OutputTerminal;

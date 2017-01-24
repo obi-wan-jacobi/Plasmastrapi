@@ -12,7 +12,7 @@
         var width = this.__engine.canvas.clientWidth;
         var height = this.__engine.canvas.clientHeight;
         var displayLayer = this.__engine.drawSystem.DISPLAYLAYERS.GAMEBACKGROUND;
-        var imageHandle = new Graphics.ImageHandle(displayLayer, 115, 63, x, y, width, height);
+        var imageHandle = new Graphics.ImageHandle(displayLayer, 115, 63, x, y, width, height, CircuitDesignArea.image);
         // add scene objects
         this.add(new CircuitDesignArea(x, y, imageHandle));
         //var andGateButton = new Lab.SpawnerButton(50, 40, Lab.AndGate);

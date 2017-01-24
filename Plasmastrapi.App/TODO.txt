@@ -6,8 +6,8 @@ needs testing:
 - child entities must have their engine instance injected
 
 in progress:
-- building/loading scenes
-	- PickSystem should be listening to a PickablesContainer rather than EntityContainer?
+- replace this.__engine.drawSystem.DISPLAYLAYERS in CircuitElement and wires with a non-engine reference 
+- loaders need to be atomic
 - wireTool logic
 	- disallow multiple wires between the same two terminals
 	

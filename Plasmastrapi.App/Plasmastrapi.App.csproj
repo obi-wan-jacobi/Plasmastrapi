@@ -137,6 +137,7 @@
     <Content Include="js\game\UI\Areas\CircuitDesignArea.js" />
     <Content Include="js\game\UI\Base\UIElement.js" />
     <Content Include="js\game\UI\Buttons\Button.js" />
+    <Content Include="js\game\UI\Buttons\SpawnerButton.js" />
     <Content Include="js\game\UI\Panels\CircuitDesignToolbar.js" />
     <Content Include="js\game\UI\Panels\Panel.js" />
     <Content Include="packages.config" />

@@ -1,28 +1,14 @@
-﻿define(["../Base/UIElement", "../../../engine/Components/$Components"], function (UIElement, $) {
+﻿define(["../Base/UIElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (UIElement, $, Geometry) {
 
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
     Button.prototype.constructor = Button;
-    function Button(x, y, fnOnClick) {
+    function Button(x, y, image, fnOnSelect) {
         // inherits from
-        UIElement.call(this);
-
-        // pose
-        var position = new Geometry.Position(x, y);
-        var poseComponent = new $.PoseComponent(position, 0);
-
-        // sprite
-        var sprite = circuitElementClass.prototype.sprite;
-        var spriteComponent = new $.SpriteComponent(sprite);
-
-        // configure sprite as collision mesh
-        var meshComponent = new $.MeshComponent(spriteComponent.mesh);
-
-        // entity is pickable
-        var pickableComponent = new $.PickableComponent();
+        UIElement.call(this, x, y, image);
 
         // configure click action
-        pickableComponent.addEventListener('onclick', this, fnOnClick);
+        pickableComponent.addEventListener('onselect', this, fnOnSelect);
 
         // compose entity
         this.addComponent(poseComponent);

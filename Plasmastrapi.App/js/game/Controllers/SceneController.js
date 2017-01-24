@@ -1,6 +1,6 @@
 define(["../../engine/Objects/Controller", "../../engine/Objects/Entity",
         "../Scenes/CircuitDesignScene"],
-    function (Controller, Entity, CircuitDesignScene) {
+function (Controller, Entity, CircuitDesignScene) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
@@ -35,10 +35,16 @@ define(["../../engine/Objects/Controller", "../../engine/Objects/Entity",
     SceneController.prototype.injectEngine = function (engine) {
         Controller.prototype.injectEngine.call(this, engine)
         this.__scenes.CircuitDesignScene.injectEngine(this.__engine);
-        };
+    };
     SceneController.prototype.setCircuitDesignScene = function (entity) {
         this.__setCurrentScene(this.__scenes.CircuitDesignScene);
-        };
+    };
+    SceneController.prototype.addToCurrentScene = function(entity) {
+        this.__scene.add(entity);
+    };
+    SceneController.prototype.removeFromCurrentScene = function (entity) {
+        this.__scene.remove(entity);
+    };
 
     return SceneController
 });

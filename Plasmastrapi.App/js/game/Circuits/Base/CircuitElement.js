@@ -12,7 +12,7 @@
         var poseComponent = new Components.PoseComponent(position, 0);
 
         // sprite
-        var spriteHandle = new Graphics.SpriteHandle(this.__engine.drawSystem.DISPLAYLAYERS.GAMEENTITIES, this.sprite);
+        var spriteHandle = new Graphics.SpriteHandle('ondrawgameentities', this.sprite);
         var spriteComponent = new Components.SpriteComponent(spriteHandle);
 
         // configure sprite as collision mesh

@@ -43,15 +43,5 @@ define(["../Objects/System"],function(System) {
 		*/
 	};
 
-	// display layers
-	DrawSystem.prototype.DISPLAYLAYERS = {
-		GAMEBACKGROUND: 'ondrawgamebackground',
-		GAMEFOREGROUND: 'ondrawgameforeground',
-		GAMEENTITIES: 'ondrawgameentities',
-		UIBACKGROUND: 'ondrawuibackground',
-		UIFOREGROUND: 'ondrawuiforeground',
-		UIENTITIES: 'ondrawuientities'
-	};
-
 	return DrawSystem;
 });

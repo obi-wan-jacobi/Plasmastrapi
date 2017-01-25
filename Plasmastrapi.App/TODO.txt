@@ -5,8 +5,7 @@ general framework quirks:
 needs testing:
 - child entities must have their engine instance injected
 
-in progress:
-- replace this.__engine.drawSystem.DISPLAYLAYERS in CircuitElement and wires with a non-engine reference 
+in progress: 
 - loaders need to be atomic
 - wireTool logic
 	- disallow multiple wires between the same two terminals

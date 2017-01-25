@@ -10,7 +10,7 @@
         var lineComponent = new $.LineComponent(
             tailObject.getComponent($.PoseComponent),
             headObject.getComponent($.PoseComponent),
-            new Graphics.LineDisplayOptions(this.__engine.drawSystem.DISPLAYLAYERS.GAMEENTITIES, '#FFFFFF', 2)
+            new Graphics.LineDisplayOptions('ondrawgameentities', '#FFFFFF', 2)
         );
 
         lineComponent.addEventListener('onpositionchange', this, this.__updateMeshComponent);

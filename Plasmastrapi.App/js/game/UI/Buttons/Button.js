@@ -1,20 +1,15 @@
-﻿define(["../Base/UIElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (UIElement, $, Geometry) {
+﻿define(["../Base/UIElement", "../../../engine/Components/$Components"], function (UIElement, $) {
 
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
     Button.prototype.constructor = Button;
-    function Button(x, y, image, fnOnSelect) {
+    function Button(x, y, imageHandle, fnOnSelect) {
         // inherits from
-        UIElement.call(this, x, y, image);
+        UIElement.call(this, x, y, imageHandle);
 
         // configure click action
+        var pickableComponent = this.getComponent($.PickableComponent);
         pickableComponent.addEventListener('onselect', this, fnOnSelect);
-
-        // compose entity
-        this.addComponent(poseComponent);
-        this.addComponent(spriteComponent);
-        this.addComponent(meshComponent);
-        this.addComponent(pickableComponent);
     };
     
     return Button;

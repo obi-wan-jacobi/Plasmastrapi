@@ -1,19 +1,19 @@
-﻿define(["../../../engine/Objects/Entity"], function (Entity) {
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
 
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;
-    function UIElement() {
+    function UIElement(x, y, imageHandle) {
+        // inherits from
         Entity.call(this);
 
         // pose
         var position = new Geometry.Position(x, y);
         var poseComponent = new $.PoseComponent(position, 0);
 
-        // sprite
-        var 
-        var imageComponent = new $.ImageComponent(sprite);
+        // image
+        var imageComponent = new $.ImageComponent(imageHandle);
 
-        // configure sprite as collision mesh
+        // configure image as collision mesh
         var meshComponent = new $.MeshComponent(imageComponent.mesh);
 
         // entity is pickable

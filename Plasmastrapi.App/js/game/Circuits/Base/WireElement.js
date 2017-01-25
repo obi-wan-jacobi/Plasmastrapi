@@ -1,19 +1,20 @@
-﻿define(["../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Graphics"], function (Entity, $, Graphics) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);
     WireElement.prototype.constructor = WireElement;
-    function WireElement() {
+    function WireElement(tailObject, headObject) {
 
         Entity.call(this);
 
-        var meshComponent = new Components.MeshComponent();
-        var pickableComponent = new Components.PickableComponent();
+        var lineComponent = new $.LineComponent(
+            tailObject.getComponent($.PoseComponent),
+            headObject.getComponent($.PoseComponent),
+            new Graphics.LineDisplayOptions('ondrawgameentities', '#FFFFFF', 2)
+        );
 
-        // compose entity
-        this.addComponent(meshComponent);
-        this.addComponent(pickableComponent);
+        this.addComponent(lineComponent);
     };
 
-    return Gate;
+    return WireElement;
 });

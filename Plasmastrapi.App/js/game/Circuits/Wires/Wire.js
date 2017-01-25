@@ -1,23 +1,22 @@
-﻿define(["../Base/WireElement", "../../../engine/Components/$Components", "../../../engine/Data/Graphics"], function (WireElement, $, Graphics) {
+﻿define(["../Base/WireElement", "../../../engine/Components/$Components"], function (WireElement, $) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
     Wire.prototype.constructor = Wire;
     function Wire(tailObject, headObject) {
+        WireElement.call(this, tailObject, headObject);
 
-        WireElement.call(this);
-
-        var lineComponent = new $.LineComponent(
-            tailObject.getComponent($.PoseComponent),
-            headObject.getComponent($.PoseComponent),
-            new Graphics.LineDisplayOptions('ondrawgameentities', '#FFFFFF', 2)
-        );
-
+        var lineComponent = this.getComponent($LineComponent);
         lineComponent.addEventListener('onpositionchange', this, this.__updateMeshComponent);
         lineComponent.addEventListener('onorientationchange', this, this.__updateMeshComponent);
 
-        this.addComponent(lineComponent);
+        var meshComponent = new $.MeshComponent(lineComponent.mesh);
+        var pickableComponent = new $.PickableComponent();
+
+        this.addComponent(meshComponent);
+        this.addComponent(pickableComponent);
     };
+
     Wire.prototype.__updateMeshComponent = function () {
         var lineComponent = this.getComponent($.LineComponent);
         var meshComponent = this.getComponent($.MeshComponent);

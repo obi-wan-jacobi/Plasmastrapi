@@ -1,4 +1,4 @@
-﻿define(function () {
+﻿define(["./Gate"], function (Gate) {
 
     // CLASS XorGate
     XorGate.prototype = Object.create(Gate.prototype);

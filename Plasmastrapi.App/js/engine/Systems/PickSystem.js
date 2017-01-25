@@ -76,23 +76,27 @@
     };
     PickSystem.prototype.__watch = function (entity) {
         var pickableComponent = entity.getComponent(PickableComponent);
-        pickableComponent.addEventListener('onmouseenter', this, this.__$onmouseenter);
-        pickableComponent.addEventListener('onmousehover', this, this.__$onmousehover);
-        pickableComponent.addEventListener('onmouseleave', this, this.__$onmouseleave);
-        pickableComponent.addEventListener('onmousemove', this, this.__$onmousemove);
-        pickableComponent.addEventListener('onmousedown', this, this.__$onmousedown);
-        pickableComponent.addEventListener('onmouseup', this, this.__$onmouseup);
-        pickableComponent.addEventListener('onclick', this, this.__$onclick);
+        if (pickableComponent) {
+            pickableComponent.addEventListener('onmouseenter', this, this.__$onmouseenter);
+            pickableComponent.addEventListener('onmousehover', this, this.__$onmousehover);
+            pickableComponent.addEventListener('onmouseleave', this, this.__$onmouseleave);
+            pickableComponent.addEventListener('onmousemove', this, this.__$onmousemove);
+            pickableComponent.addEventListener('onmousedown', this, this.__$onmousedown);
+            pickableComponent.addEventListener('onmouseup', this, this.__$onmouseup);
+            pickableComponent.addEventListener('onclick', this, this.__$onclick);
+        }
     };
     PickSystem.prototype.__unwatch = function (entity) {
         var pickableComponent = entity.getComponent(PickableComponent);
-        pickableComponent.removeEventListener('onmouseenter', this, this.__$onmouseenter);
-        pickableComponent.removeEventListener('onmousehover', this, this.__$onmousehover);
-        pickableComponent.removeEventListener('onmouseleave', this, this.__$onmouseleave);
-        pickableComponent.removeEventListener('onmousemove', this, this.__$onmousemove);
-        pickableComponent.removeEventListener('onmousedown', this, this.__$onmousedown);
-        pickableComponent.removeEventListener('onmouseup', this, this.__$onmouseup);
-        pickableComponent.removeEventListener('onclick', this, this.__$onclick);
+        if (pickableComponent) {
+            pickableComponent.removeEventListener('onmouseenter', this, this.__$onmouseenter);
+            pickableComponent.removeEventListener('onmousehover', this, this.__$onmousehover);
+            pickableComponent.removeEventListener('onmouseleave', this, this.__$onmouseleave);
+            pickableComponent.removeEventListener('onmousemove', this, this.__$onmousemove);
+            pickableComponent.removeEventListener('onmousedown', this, this.__$onmousedown);
+            pickableComponent.removeEventListener('onmouseup', this, this.__$onmouseup);
+            pickableComponent.removeEventListener('onclick', this, this.__$onclick);
+        }
     };
 
     return PickSystem;

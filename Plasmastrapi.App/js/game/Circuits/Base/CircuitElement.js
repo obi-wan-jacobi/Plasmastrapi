@@ -1,4 +1,5 @@
-﻿define(["../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry", "../../../engine/Data/Graphics"],
+function (Entity, $, Geometry, Graphics) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(Entity.prototype);
@@ -9,17 +10,17 @@
 
         // pose
         var position = new Geometry.Position(x, y);
-        var poseComponent = new Components.PoseComponent(position, 0);
+        var poseComponent = new $.PoseComponent(position, 0);
 
         // sprite
         var spriteHandle = new Graphics.SpriteHandle('ondrawgameentities', this.sprite);
-        var spriteComponent = new Components.SpriteComponent(spriteHandle);
+        var spriteComponent = new $.SpriteComponent(spriteHandle);
 
         // configure sprite as collision mesh
-        var meshComponent = new Components.MeshComponent(spriteComponent.mesh);
+        var meshComponent = new $.MeshComponent(spriteComponent.mesh);
 
         // entity is pickable
-        var pickableComponent = new Components.PickableComponent();
+        var pickableComponent = new $.PickableComponent();
 
         // configure pick action
         pickableComponent.addEventListener('onselect', this, this.__onselect);
@@ -34,5 +35,5 @@
         this.__engine.toolController.equipPlacingTool(this);
     };
     
-    return Gate;
+    return CircuitElement;
 });

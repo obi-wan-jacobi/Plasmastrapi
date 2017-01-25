@@ -1,4 +1,4 @@
-﻿define(["../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
 
     // CLASS TerminalWireAnchor
     TerminalWireAnchor.prototype = Object.create(Entity.prototype);
@@ -20,9 +20,10 @@
 
         // compose entity
         this.addComponent(poseComponent);
-
-        // initialize the terminal's location (must come after the PoseComponent has been added to the entity)
-        this.addEventListener('oninit', this, this.__setPoseRelativeToCircuitElement);
+    };
+    TerminalWireAnchor.prototype.__oninit = function () {
+        // initialize position
+        this.__setPoseRelativeToCircuitElement();
     };
     TerminalWireAnchor.prototype.__setPoseRelativeToCircuitElement = function () {
         var parentElementPose = this.parentElement.getComponent($.PoseComponent)

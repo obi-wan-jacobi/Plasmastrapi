@@ -1,4 +1,4 @@
-﻿define(["./Gate", "../../../engine/Data/Graphics"], function (Gate, Graphics) {
+﻿define(["./Gate"], function (Gate) {
 
     // CLASS AndGate
     AndGate.prototype = Object.create(Gate.prototype);

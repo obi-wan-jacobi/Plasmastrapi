@@ -1,4 +1,4 @@
-﻿define(function () {
+﻿define(["./Gate"], function (Gate) {
 
     // CLASS NandGate
     NandGate.prototype = Object.create(Gate.prototype);

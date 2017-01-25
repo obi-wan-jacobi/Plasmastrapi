@@ -1,13 +1,13 @@
-﻿define(["../Base/ParentElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"],
+﻿define(["../Base/CircuitElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"],
 
-function (ParentElement, $, Geometry) {
+function (CircuitElement, $, Geometry) {
 
     // CLASS Terminal
-    Terminal.prototype = Object.create(ParentElement.prototype);
+    Terminal.prototype = Object.create(CircuitElement.prototype);
     Terminal.prototype.constructor = Terminal;
     function Terminal(offsetPosition, parentElement) {
 
-        ParentElement.call(this, 0, 0);
+        CircuitElement.call(this, 0, 0);
 
         this.__defaultFrameIndex = null;
         this.offset = offsetPosition;
@@ -21,21 +21,21 @@ function (ParentElement, $, Geometry) {
         parentElementPose.addEventListener('onpositionchange', this, this.__setPoseRelativeToParentElement);
         parentElementPose.addEventListener('onorientationchange', this, this.__setPoseRelativeToParentElement);
 
-        // set custom pickable bounds
-        var collisionBounds = new Geometry.Rectangle(20, 20);
-        var mesh = new Geometry.Mesh(collisionBounds);
-        var meshComponent = this.getComponent($.MeshComponent);
-        meshComponent.mesh = mesh
-
         // configure pick and hover actions
         var pickableComponent = this.getComponent($.PickableComponent);
         pickableComponent.addEventListener('onselect', this, this.__onselect);
         pickableComponent.addEventListener('ondeselect', this, this.__ondeselect);
         pickableComponent.addEventListener('onmouseenter', this, this.__onmouseenter);
         pickableComponent.addEventListener('onmouseleave', this, this.__onmouseleave);
-
-        // initialize the terminal's location (must come after the PoseComponent has been added to the entity)
-        this.addEventListener('oninit', this, this.__setPoseRelativeToParentElement);
+    };
+    Terminal.prototype.__oninit = function () {
+        // set custom pickable bounds
+        var collisionBounds = new Geometry.Rectangle(20, 20);
+        var mesh = new Geometry.Mesh(collisionBounds);
+        var meshComponent = this.getComponent($.MeshComponent);
+        meshComponent.mesh = mesh
+        // initialize position
+        this.__setPoseRelativeToParentElement();
     };
     Terminal.prototype.__setPoseRelativeToParentElement = function () {
         var parentElementPose = this.parentElement.getComponent($.PoseComponent)

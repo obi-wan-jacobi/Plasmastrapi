@@ -1,4 +1,4 @@
-﻿define(["./Terminal"], function (Terminal) {
+﻿define(["./Terminal", "../../../engine/Components/$Components"], function (Terminal, $) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
@@ -10,7 +10,7 @@
 
         // set default sprite frame
         this.__defaultFrameIndex = 1;
-        var spriteComponent = new Components.SpriteComponent(this.sprite);
+        var spriteComponent = this.getComponent($.SpriteComponent);
         spriteComponent.setFrame(this.__defaultFrameIndex);
     };
     

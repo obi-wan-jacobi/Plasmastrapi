@@ -1,4 +1,4 @@
-﻿define(["../../engine/Objects/Scene", "../UI/Areas/CircuitDesignArea"], function (Scene, CircuitDesignArea) {
+﻿define(["../../engine/Objects/Scene", "../UI/Areas/CircuitDesignArea", "../Circuits/Gates/AndGate"], function (Scene, CircuitDesignArea, AndGate) {
 
     CircuitDesignScene.prototype = Object.create(Scene.prototype);
     CircuitDesignScene.prototype.constructor = CircuitDesignScene;
@@ -8,7 +8,7 @@
     CircuitDesignScene.prototype.__oninit = function () {
         // add scene objects
         this.add(new CircuitDesignArea());
-        //var andGateButton = new Lab.SpawnerButton(50, 40, Lab.AndGate);
+        this.add(new AndGate(50, 40));
     };
 
     return CircuitDesignScene;

@@ -21,16 +21,16 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 		this.__engine.canvas.onmousedown = this.__domousedown.bind(this);
 		this.__engine.canvas.onmouseup = this.__domouseup.bind(this);
 		this.__engine.canvas.onclick = this.__doclick.bind(this);
-		window.onkeydown = this.__dokeydown.bind(this);
-	    window.onkeyup = this.__dokeyup.bind(this);
+		this.__engine.canvas.onkeydown = this.__dokeydown.bind(this);
+	    this.__engine.canvas.onkeyup = this.__dokeyup.bind(this);
 	};
 	InputSystem.prototype.__onunload = function() {
 		this.__engine.canvas.onmousemove = null;
 		this.__engine.canvas.onmousedown = null;
 		this.__engine.canvas.onmouseup = null;
 		this.__engine.canvas.onclick = null;
-		window.onkeydown = null;
-		window.onkeyup = null;
+		this.__engine.canvas.onkeydown = null;
+		this.__engine.canvas.onkeyup = null;
 	};
 	InputSystem.prototype.__onframe = function() {
 		this.__inputQueue.process();

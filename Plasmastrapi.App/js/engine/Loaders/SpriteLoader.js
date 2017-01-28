@@ -17,10 +17,11 @@
             for (var k = 0, K = spriteMap[j].src.length; k < K; k++) {
                 var frame = new Image();
                 frame.onload = this.__itemFinishedLoading.bind(this);
-                frame.onerror = this.__itemFinishedLoadingWithError;
+                frame.onerror = this.__itemFinishedLoadingWithError.bind(frame);
                 frame.src = spriteMap[j].src[k];
                 frames.push(frame);
             }
+            var target = spriteMap[j].target;
             spriteMap[j].target.sprite = new Graphics.Sprite(frames);
         }
         return this;

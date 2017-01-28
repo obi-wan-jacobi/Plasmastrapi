@@ -21,7 +21,7 @@ define(function() {
         }
     };
     Loader.prototype.__itemFinishedLoadingWithError = function(){
-        throw new Error(this + ' failed to load.');
+        throw new Error(this.constructor.name + ' failed to load.');
     };
     // public prototypal variables
     Object.defineProperties(Loader.prototype, {

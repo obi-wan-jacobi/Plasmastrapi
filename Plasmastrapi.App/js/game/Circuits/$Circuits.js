@@ -4,7 +4,6 @@ define([
     "./Gates/NandGate",
     "./Gates/OrGate",
     "./Gates/XorGate",
-    "./Gates/AndGate",
     "./Power/PowerSource"
 ],
 function (Terminal, AndGate, NandGate, OrGate, XorGate, PowerSource) {

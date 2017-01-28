@@ -40,6 +40,9 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		ctx.save();
 		ctx.translate(position.x, position.y);
 		ctx.rotate(orientation);
+	    // source coords are translated against dest of image's centre such source coords will
+	    // translate the image about its centre rather than the top left corner
+	    // https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D/drawImage
 		ctx.drawImage(
             imageHandle.image,
             imageHandle.sourceX,

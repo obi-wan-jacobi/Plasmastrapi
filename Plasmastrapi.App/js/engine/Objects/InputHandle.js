@@ -1,8 +1,8 @@
 define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
 
-    Tool.prototype = Object.create(EventEmitter.prototype);
-    Tool.prototype.constructor = Tool;
-    function Tool() {
+    InputHandle.prototype = Object.create(EventEmitter.prototype);
+    InputHandle.prototype.constructor = InputHandle;
+    function InputHandle() {
         EventEmitter.call(this);
         this.__registerEvents(
             'input_onmousemove',
@@ -22,9 +22,9 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
     };
     // private methods
     // public prototypal variables
-    Tool.prototype.compatibleEntityClassesList = [];
+    InputHandle.prototype.compatibleEntityClassesList = [];
     // public methods
-    Tool.prototype.equip = function () {
+    InputHandle.prototype.equip = function () {
         this.__engine.inputSystem.addEventListener('onmousemove', this, this.__$input_onmousemove);
         this.__engine.inputSystem.addEventListener('onmousedown', this, this.__$input_onmousedown);
         this.__engine.inputSystem.addEventListener('onmouseup', this, this.__$input_onmouseup);
@@ -39,7 +39,7 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__engine.pickSystem.addEventListener('onmousehover', this, this.__$pick_onmousehover);
         this.__engine.pickSystem.addEventListener('onmouseleave', this, this.__$pick_onmouseleave);
     };
-    Tool.prototype.discard = function () {
+    InputHandle.prototype.discard = function () {
         this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__$input_onmousemove);
         this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__$input_onmousedown);
         this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__$input_onmouseup);
@@ -55,5 +55,5 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__engine.pickSystem.removeEventListener('onmouseleave', this, this.__$pick_onmouseleave);
     };
 
-    return Tool;
+    return InputHandle;
 });

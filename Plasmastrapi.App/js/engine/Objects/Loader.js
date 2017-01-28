@@ -12,7 +12,7 @@ define(function() {
     // private methods
     Loader.prototype.__itemFinishedLoading = function () {
         this.__loadCounter++;
-        if (this.__loadCounter == this.__loadTotal) {
+        if (this.__loadCounter === this.__loadTotal) {
             this.__isfinishedloading = true;
             while(this.__callbacks.length > 0) {
                 this.__callbacks.shift()();

@@ -127,7 +127,12 @@
     <Content Include="js\game\Scenes\CircuitDesignScene.js" />
     <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\game\Scenes\NoScene.js" />
+    <Content Include="js\game\Tools\Compatibility\Cuttable.js" />
+    <Content Include="js\game\Tools\Compatibility\Placeable.js" />
+    <Content Include="js\game\Tools\Compatibility\Trashable.js" />
+    <Content Include="js\game\Tools\Compatibility\Wireable.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
+    <Content Include="js\game\Objects\Tool.js" />
     <Content Include="js\game\Tools\TrashTool.js" />
     <Content Include="js\game\Tools\MasterTool.js" />
     <Content Include="js\game\Tools\NoTool.js" />
@@ -204,7 +209,7 @@
     <Content Include="js\engine\Objects\Container.js" />
     <Content Include="js\engine\Objects\Scene.js" />
     <Content Include="js\engine\Objects\System.js" />
-    <Content Include="js\engine\Objects\Tool.js" />
+    <Content Include="js\engine\Objects\InputHandle.js" />
     <Content Include="js\engine\Objects\AtomicArray.js" />
     <Content Include="js\engine\Objects\AtomicKeyPairArray.js" />
     <Content Include="js\engine\Objects\AtomicLink.js" />

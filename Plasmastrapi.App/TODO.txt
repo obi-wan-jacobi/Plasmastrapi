@@ -40,7 +40,7 @@ user experience:
 
 tech debt:
 - blue background image is needlessly large
-- require.js -- use key names rather than file paths
+- require.js --> configure paths for easier module loading
 - project manifest
 	- debug mode
 		- inject style templates into all drawable objects

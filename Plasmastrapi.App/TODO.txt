@@ -39,9 +39,6 @@ user experience:
 
 tech debt:
 - blue background image is needlessly large
-- give canvas tabIndex so we can addEventListener for keyboard events/focus
-	- http://www.dbp-consulting.com/tutorials/canvas/CanvasKeyEvents.html
-	- nothing should ever touch window (save for index.html)
 - require.js -- use key names rather than file paths
 - project manifest
 	- debug mode

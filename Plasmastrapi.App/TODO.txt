@@ -38,9 +38,7 @@ user experience:
 - 
 
 tech debt:
-- code smell in this.injectEngine
-	- no complex logic in class constructors
-	- validating engine injection
+- blue background image is needlessly large
 - EventEmitter::DynamicallyShrinkableSubscriberArray should be refactored as multiple 'functional' object classes
 	- purge contains its own for-loop (not functional programming!)
 - require.js -- use key names rather than file paths

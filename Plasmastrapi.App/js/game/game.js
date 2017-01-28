@@ -1,14 +1,15 @@
-define(["../engine/Engine", "./Controllers/ToolController", "./Controllers/SceneController"], function (Engine, ToolController, SceneController) {
+define(["../engine/Engine", "./Controllers/ToolController", "./Controllers/SceneController"],
+function (Engine, ToolController, SceneController, EntitySystem) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
     function Game(canvas) {
         Engine.call(this, canvas);
         // pre-init configuration
-        this.__registerControllers();
+        this.__registerAll();
     };
     // private methods
-    Game.prototype.__registerControllers = function () {
+    Game.prototype.__registerAll = function () {
         this.register('toolController', new ToolController());
         this.register('sceneController', new SceneController());
     };

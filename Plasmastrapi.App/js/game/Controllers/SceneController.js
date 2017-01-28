@@ -1,5 +1,4 @@
-define(["../../engine/Objects/Controller", "../../engine/Objects/Entity",
-        "../Scenes/CircuitDesignScene"],
+define(["../../engine/Objects/Controller", "../../engine/Objects/Entity", "../Scenes/CircuitDesignScene"],
 function (Controller, Entity, CircuitDesignScene) {
 
 	// CLASS SceneController
@@ -8,9 +7,13 @@ function (Controller, Entity, CircuitDesignScene) {
 	function SceneController() {
 	    Controller.call(this);
 	    this.__scene = null;
-		this.__scenes = {
-		    CircuitDesignScene: new CircuitDesignScene()
-		};
+	    this.__scenes = [];
+	};
+	SceneController.prototype.__oninit = function () {
+	    this.__scenes.circuitDesignScene = this.__scenes[0] = new CircuitDesignScene(this.__engine.canvas)
+	    this.__scenes.forEach(function (scene) {
+	        scene.injectEngine(this.__engine);
+	    }, this);
 	};
 	SceneController.prototype.__onload = function() {
 	    if (this.__scene) {
@@ -28,22 +31,19 @@ function (Controller, Entity, CircuitDesignScene) {
 	    }
 	    this.__scene = scene;
 	    if (this.isLoaded) {
-            this.__scene.load();
+	        this.__scene.load();
 	    }
 	};
 	// public methods
     SceneController.prototype.injectEngine = function (engine) {
-        Controller.prototype.injectEngine.call(this, engine)
-        this.__scenes.CircuitDesignScene.injectEngine(this.__engine);
+        Controller.prototype.injectEngine.call(this, engine);
     };
-    SceneController.prototype.setCircuitDesignScene = function (entity) {
-        this.__setCurrentScene(this.__scenes.CircuitDesignScene);
-    };
-    SceneController.prototype.addToCurrentScene = function(entity) {
+    SceneController.prototype.addToCurrentScene = function (entity) {
         this.__scene.add(entity);
     };
-    SceneController.prototype.removeFromCurrentScene = function (entity) {
-        this.__scene.remove(entity);
+    // scenes
+    SceneController.prototype.setCircuitDesignScene = function (entity) {
+        this.__setCurrentScene(this.__scenes.circuitDesignScene);
     };
 
     return SceneController

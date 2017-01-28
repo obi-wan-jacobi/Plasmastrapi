@@ -22,18 +22,6 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 			entity.unload();
 		});
 	};
-	Scene.prototype.__addEntity = function (entity) {
-	    this.__contents.push(entity);
-	    if (this.isLoaded) {
-	        entity.load();
-	    }
-	};
-	Scene.prototype.__removeEntity = function (entity) {
-	    var removedElement = this.__contents.splice(entity);
-	    if (removedElement.isLoaded) {
-	        removedElement.unload();
-	    }
-	};
     // public methods
 	Scene.prototype.injectEngine = function (engine) {
 	    EventEmitter.prototype.injectEngine.call(this, engine);
@@ -41,16 +29,23 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
 	        if (!entity.isEngineInjected) {
 	            entity.injectEngine(this.__engine);
 	        }
-	    });
+	    }, this);
 	};
 	Scene.prototype.add = function (entity) {
 	    if (this.isEngineInjected && !entity.isEngineInjected) {
 	        entity.injectEngine(this.__engine);
 	    }
-	    this.__addEntity(entity);
+	    this.__contents.push(entity);
+	    if (this.isLoaded) {
+	        entity.load();
+	    }
+	    entity.addEventListener('ondestroy', this, this.remove);
 	};
 	Scene.prototype.remove = function (entity) {
-	    this.__removeEntity(entity);
+	    var removedElement = this.__contents.splice(entity);
+	    if (removedElement.isLoaded) {
+	        removedElement.unload();
+	    }
 	};
 
 	return Scene;

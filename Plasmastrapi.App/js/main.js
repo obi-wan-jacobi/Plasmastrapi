@@ -9,11 +9,12 @@ define(["./game/Game", "./game/Assets/images", "./game/Assets/sprites"], functio
     // load assets
     game.imageLoader.download(images).done(function () {
         game.spriteLoader.download(sprites).done(function () {
+            // load game/engine
+            game.start();
+
             game.sceneController.setCircuitDesignScene();
             //    game.toolcontroller.equip(game.tools.mastertool);
 
-            // load game/engine
-            game.start();
         });
     });
 });

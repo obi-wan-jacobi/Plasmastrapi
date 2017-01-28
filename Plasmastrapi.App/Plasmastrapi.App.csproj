@@ -229,6 +229,7 @@
     <Folder Include="js\game\Assets\Images\" />
     <Folder Include="js\game\Circuits\FlipFlops\" />
     <Folder Include="js\game\Circuits\Switches\" />
+    <Folder Include="js\game\Systems\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,10 +11,10 @@ function (Scene, $UI, $Circuits) {
         this.add(new $UI.SpawnerButton(100, 40, $Circuits.NandGate));
         this.add(new $UI.SpawnerButton(150, 40, $Circuits.OrGate));
         this.add(new $UI.SpawnerButton(200, 40, $Circuits.XorGate));
-        this.add(new $Circuits.AndGate(50, 140));
-        this.add(new $Circuits.NandGate(100, 140));
-        this.add(new $Circuits.OrGate(150, 140));
-        this.add(new $Circuits.XorGate(200, 140));
+        //this.add(new $Circuits.AndGate(50, 140));
+        //this.add(new $Circuits.NandGate(100, 140));
+        //this.add(new $Circuits.OrGate(150, 140));
+        //this.add(new $Circuits.XorGate(200, 140));
     };
 
     return CircuitDesignScene;

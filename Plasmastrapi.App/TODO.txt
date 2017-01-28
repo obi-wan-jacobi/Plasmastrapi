@@ -7,6 +7,7 @@ needs testing:
 - destroy->purge
 
 in progress:
+- masterTool, placingTool
 - wireTool logic
 	- disallow multiple wires between the same two terminals
 	
@@ -52,7 +53,7 @@ scalability concerns:
 - single-canvas viewport
 
 known issues:
-- asset loading -- images set to load last are 'loaded' with 0 width and height
+- 
 
 technology:
 - linting

@@ -10,14 +10,14 @@ define(function() {
         this.__loadCounter = 0;
     };
     // private methods
-    Loader.prototype.__itemFinishedLoading = function(){
+    Loader.prototype.__itemFinishedLoading = function () {
         this.__loadCounter++;
         if (this.__loadCounter == this.__loadTotal) {
-            this.__isFinishedLoading = true;
+            this.__isfinishedloading = true;
             while(this.__callbacks.length > 0) {
                 this.__callbacks.shift()();
             }
-            this.__isExecuting = false;
+            this.__isexecuting = false;
         }
     };
     Loader.prototype.__itemFinishedLoadingWithError = function(){
@@ -31,11 +31,21 @@ define(function() {
 			}
 		}
 	});
-    Loader.prototype.download = function () {
+    Loader.prototype.download = function (assetMap) {
         if (this.__isExecuting) {
             throw new Error(this.constructor.name + ":download - A download is already in progress.");
         }
         this.__isFinishedLoading = false;
+        this.__loadCounter = 0;
+        for (var i = 0, L = assetMap.length; i < L; i++) {
+            if (assetMap[i].src instanceof Array) {
+                for (var j = 0, K = assetMap[i].src.length; j < K; j++) {
+                    this.__loadTotal++;
+                }
+            } else {
+                this.__loadTotal++;
+            }
+        }
     };
     Loader.prototype.done = function(callback) {
         if (this.__isFinishedLoading) {

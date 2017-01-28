@@ -10,14 +10,13 @@
         if (!(imageMap instanceof Graphics.ImageMap)) {
             throw new Error(this.constructor.name + ":download - Argument must be an instance of Graphics.ImageMap");
         }
-        Loader.prototype.download.call(this);
-        this.__loadTotal += imageMap.length;
+        Loader.prototype.download.call(this, imageMap);
         for (var j = 0, J = imageMap.length; j < J; j++) {
             var image = new Image();
             image.onload = this.__itemFinishedLoading.bind(this);
             image.onerror = this.__itemFinishedLoadingWithError;
-            image.src = imageMap[j].src;
             imageMap[j].target.image = image;
+            image.src = imageMap[j].src;
         }
         return this;
     };

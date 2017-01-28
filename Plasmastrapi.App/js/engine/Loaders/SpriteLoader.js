@@ -10,19 +10,20 @@
         if (!(spriteMap instanceof Graphics.SpriteMap)) {
             throw new Error(this.constructor.name + ":download - Argument must be an instance of Graphics.SpriteMap");
         }
-        Loader.prototype.download.call(this);
-        this.__loadTotal += spriteMap.length;
+        Loader.prototype.download.call(this, spriteMap);
+        var fnItemFinishedLoading = this.__itemFinishedLoading.bind(this);
+        var fnItemFinishedLoadingWithError = this.__itemFinishedLoadingWithError;
         for (var j = 0, J = spriteMap.length; j < J; j++) {
             var frames = [];
+            var target = spriteMap[j].target;
+            spriteMap[j].target.sprite = new Graphics.Sprite(frames);
             for (var k = 0, K = spriteMap[j].src.length; k < K; k++) {
                 var frame = new Image();
-                frame.onload = this.__itemFinishedLoading.bind(this);
-                frame.onerror = this.__itemFinishedLoadingWithError.bind(frame);
+                frame.onload = fnItemFinishedLoading;
+                frame.onerror = fnItemFinishedLoadingWithError;
                 frame.src = spriteMap[j].src[k];
                 frames.push(frame);
             }
-            var target = spriteMap[j].target;
-            spriteMap[j].target.sprite = new Graphics.Sprite(frames);
         }
         return this;
     };

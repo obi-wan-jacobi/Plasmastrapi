@@ -6,26 +6,25 @@ define(["./AtomicLink"], function (AtomicLink) {
         this.__memberClass = memberClass;
         this.__start = null;
     };
-    AtomicArray.prototype.__validateMemberClass = function(member) {
+    AtomicArray.prototype.__validateMemberClass = function(item) {
         if (this.__memberClass) {
-            if (!(member instanceof this.__memberClass)) {
-                throw new Error(this.constructor.name + ':validateMemberClass - ' + member + ' must be an instance of ' + this.__memberClass.constructor.name);
+            if (!(item instanceof this.__memberClass)) {
+                throw new Error(this.constructor.name + ':validateMemberClass - ' + item.constructor.name + ' must be an instance of ' + this.__memberClass.constructor.name);
             }
         }
     };
-    AtomicArray.prototype.__validateNoDuplicateEntries = function(entry) {
-        this.forEach(function(ownedEntry) {
-            if (ownedEntry === entry) {
-                throw new Error(this.constructor.name + ':validateNoDuplicateEntries - Duplicate entry found on ' + entry + '.');
+    AtomicArray.prototype.__validateNoDuplicateItems = function(item) {
+        this.forEach(function(ownedItem) {
+            if (ownedItem === item) {
+                throw new Error(this.constructor.name + ':validateNoDuplicateItems - Duplicate item found on ' + item + '.');
             }
         }, this);
     };
-    AtomicArray.prototype.forEach = function(fn, /* optional */ caller) {
+    AtomicArray.prototype.__forEachLink = function (fn) {
         var link = this.__start;
         var result;
-        while(link) {
-            var entry = link.get();
-            result = fn.call(caller, entry);
+        while (link) {
+            result = fn.call(this, link);
             if (result) {
                 break;
             }
@@ -33,49 +32,56 @@ define(["./AtomicLink"], function (AtomicLink) {
         }
         return result;
     };
-    AtomicArray.prototype.push = function(entry) {
-        this.__validateMemberClass(entry);
-        this.__validateNoDuplicateEntries(entry);
-        var newLink = new AtomicLink(entry);
+    AtomicArray.prototype.forEach = function(fn, /* optional */ caller) {
+        var link = this.__start;
+        var result;
+        while(link) {
+            var item = link.val();
+            result = fn.call(caller, item);
+            if (result) {
+                break;
+            }
+            link = link.next();
+        }
+        return result;
+    };
+    AtomicArray.prototype.push = function(item) {
+        this.__validateMemberClass(item);
+        this.__validateNoDuplicateItems(item);
+        var newLink = new AtomicLink(item);
         if (!this.__start) {
             this.__start = newLink;
-            return;
+            return true;
         }
-        var link = this.__start;
-        while(link) {
+        this.__forEachLink(function (link) {
             if (!link.hasNext()) {
                 link.setNext(newLink);
-                return;
-            }
-            link = link.next();
-        }
-    };
-    AtomicArray.prototype.splice = function(entry) {
-        var link = this.__start, previousLink = this.__start;
-        while(link) {
-            var ownedEntry = link.get();
-            if (ownedEntry === entry) {
-                if (link === this.__start) {
-                    this.__start = link.next();
-                } else {
-                    previousLink.setNext(link.next()); 
-                }
-                return entry;
-            }
-            previousLink = link;
-            link = link.next();
-        }
-        return null;
-    };
-    AtomicArray.prototype.contains = function(entry) {
-        var result = this.forEach(function(ownedEntry) {
-            if (ownedEntry === entry) {
                 return true;
             }
         });
-        return result ? true : false;
+    };
+    AtomicArray.prototype.splice = function(item) {
+        var previousLink = this.__start;
+        return this.__forEachLink(function (link) {
+            var ownedItem = link.get();
+            if (ownedItem === item) {
+                if (link === this.__start) {
+                    this.__start = link.next();
+                } else {
+                    previousLink.setNext(link.next());
+                }
+                return item;
+            }
+            previousLink = link;
+        });
+    };
+    AtomicArray.prototype.contains = function(item) {
+        return this.__forEachLink(function (ownedItem) {
+            if (ownedItem === item) {
+                return true;
+            }
+        });
     };
 
     return AtomicArray;
-
 });

@@ -8,8 +8,8 @@ define(["../../engine/Objects/EventEmitter", "../../engine/Objects/Entity", "../
         EventEmitter.call(this);
 		// private variables
         this.__contents = new AtomicArray(Entity);
-	    // apply decorators
-        EventEmitter.Decorators.Loadable.call(this);
+	    // apply mixins
+        EventEmitter.Mixins.Loadable.call(this);
 	};
     // private methods
 	Scene.prototype.__onload = function () {

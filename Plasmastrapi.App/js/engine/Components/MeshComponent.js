@@ -10,9 +10,9 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		// private variables
 		this.__mesh = mesh;
 		this.__options = meshDisplayOptions;
-        // apply decorators
+        // apply mixins
 		if (this.__options) {
-		    Component.Decorators.Drawable.call(this, this.__options.displayLayer);
+		    Component.Mixins.Drawable.call(this, this.__options.displayLayer);
 		}
 	};
 	// private methods

@@ -19,10 +19,9 @@ define(function() {
     AtomicLink.prototype.next = function() {
         return this.__next;
     };
-    AtomicLink.prototype.get = function() {
+    AtomicLink.prototype.val = function() {
         return this.__value;
     };
 
     return AtomicLink;
-
 });

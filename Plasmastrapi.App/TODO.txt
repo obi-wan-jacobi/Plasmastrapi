@@ -1,12 +1,12 @@
 
 general framework quirks:
 - this.__engine cannot be used in constructor methods because the engine instance has not yet been injected
+- Entities/EventEmiters will not be added to their respective Container until they have had their engine instance injected
 
 needs testing:
-- child entities must have their engine instance injected
+- destroy->purge
 
-in progress: 
-- loaders need to be atomic
+in progress:
 - wireTool logic
 	- disallow multiple wires between the same two terminals
 	
@@ -39,17 +39,14 @@ user experience:
 
 tech debt:
 - blue background image is needlessly large
-- EventEmitter::DynamicallyShrinkableSubscriberArray should be refactored as multiple 'functional' object classes
-	- purge contains its own for-loop (not functional programming!)
+- give canvas tabIndex so we can addEventListener for keyboard events/focus
+	- http://www.dbp-consulting.com/tutorials/canvas/CanvasKeyEvents.html
+	- nothing should ever touch window (save for index.html)
 - require.js -- use key names rather than file paths
 - project manifest
 	- debug mode
 		- inject style templates into all drawable objects
 		- draw collision boundaries
-- give canvas tabIndex so we can addEventListener for keyboard events/focus
-	- http://www.dbp-consulting.com/tutorials/canvas/CanvasKeyEvents.html
-	- nothing should ever touch window (save for index.html)
-- throwing exceptions (refactor using a framework)
 - run memory analysis/profiler diagnostics
 - JSDocs/automated documentation
 - unit tests

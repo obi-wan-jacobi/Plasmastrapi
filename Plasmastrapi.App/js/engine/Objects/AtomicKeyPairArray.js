@@ -5,18 +5,30 @@ define(["./AtomicLink"], function (AtomicLink) {
         this.__start = null;
     };
     AtomicKeyPairArray.prototype.__validateNoDuplicatePairs = function(key, value) {
-        this.forEach(function(ownedEntry) {
-            if (ownedEntry.key === key && ownedEntry.value === value) {
-                throw new Error(this.constructor.name + ':validateNoDuplicatePairs - Duplicate entry found on key: ' + key + ' value: ' + value);
+        this.forEach(function(ownedItem) {
+            if (ownedItem.key === key && ownedItem.value === value) {
+                throw new Error(this.constructor.name + ':validateNoDuplicatePairs - Duplicate item found on key: ' + key + ' value: ' + value);
             }
         }, this);
+    };
+    AtomicKeyPairArray.prototype.__forEachLink = function (fn) {
+        var link = this.__start;
+        var result;
+        while (link) {
+            result = fn.call(this, link);
+            if (result) {
+                break;
+            }
+            link = link.next();
+        }
+        return result;
     };
     AtomicKeyPairArray.prototype.forEach = function(fn, /* optional */ caller) {
         var link = this.__start;
         var result;
         while(link) {
-            var entry = link.get();
-            result = fn.call(caller, entry.key, entry.value);
+            var item = link.val();
+            result = fn.call(caller, item.key, item.value);
             if (result) {
                 break;
             }
@@ -31,50 +43,44 @@ define(["./AtomicLink"], function (AtomicLink) {
             this.__start = newLink;
             return;
         }
-        var link = this.__start;
-        while(link) {
+        return this.__forEachLink(function (link) {
             if (!link.hasNext()) {
                 link.setNext(newLink);
-                return;
+                return true;
             }
-            link = link.next();
-        }
+        });
     };
     AtomicKeyPairArray.prototype.splice = function(key, value) {
-        var link = this.__start, previousLink = this.__start;
-        while(link) {
-            var entry = link.get();
-            if (entry.key === key && entry.value === value) {
+        var previousLink = this.__start;
+        return this.__forEachLink(function (link) {
+            var item = link.val();
+            if (item.key === key && item.value === value) {
                 if (link === this.__start) {
                     this.__start = link.next();
                 } else {
-                    previousLink.setNext(link.next()); 
+                    previousLink.setNext(link.next());
                 }
-                return entry;
+                return item;
             }
             previousLink = link;
-            link = link.next();
-        }
-        return null;
+        });
     };
-    AtomicKeyPairArray.prototype.purgeEntriesWithKey = function(key) {
-        var link = this.__start, previousLink = this.__start;
-        while(link) {
-            var entry = link.get();
-            if (entry.key === key) {
+    AtomicKeyPairArray.prototype.purgeItemsWithKey = function(key) {
+        var previousLink = this.__start;
+        this.__forEachLink(function (link) {
+            var item = link.val();
+            if (item.key === key) {
                 if (link === this.__start) {
-                    this.__start = link.next();
+                    this.__start = previousLink = link.next();
+                    return;
                 } else {
-                    previousLink.setNext(link.next()); 
+                    previousLink.setNext(link.next());
+                    return;
                 }
-                return entry;
             }
             previousLink = link;
-            link = link.next();
-        }
-        return null;
+        });
     };
 
     return AtomicKeyPairArray;
-
 });

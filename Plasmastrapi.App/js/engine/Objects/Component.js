@@ -1,4 +1,4 @@
-define(["./EventEmitter", "../Components/Decorators/Drawable"], function(EventEmitter, Drawable) {
+define(["./EventEmitter", "../Components/Mixins/Drawable"], function(EventEmitter, Drawable) {
 
     // CLASS Component
     Component.prototype = Object.create(EventEmitter.prototype);
@@ -7,9 +7,9 @@ define(["./EventEmitter", "../Components/Decorators/Drawable"], function(EventEm
         EventEmitter.call(this);
         // private variables
         this.__entity = null;
-        // apply decorators
-        EventEmitter.Decorators.Loadable.call(this);
-        EventEmitter.Decorators.Destructible.call(this);
+        // apply mixins
+        EventEmitter.Mixins.Loadable.call(this);
+        EventEmitter.Mixins.Destructible.call(this);
     };
     Component.prototype.injectEntity = function(entity) {
         EventEmitter.prototype.injectEngine.call(this, entity.__engine);
@@ -19,8 +19,8 @@ define(["./EventEmitter", "../Components/Decorators/Drawable"], function(EventEm
         this.__entity.addEventListener('ondestroy', this, this.destroy);
     };
 
-    // decorators
-    Component.Decorators = {
+    // mixins
+    Component.Mixins = {
         Drawable
     };
 

@@ -15,7 +15,7 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		this.__registerEvents(
             'onframechange'
         );
-		Component.Decorators.Drawable.call(this, spriteHandle.displayLayer);
+		Component.Mixins.Drawable.call(this, spriteHandle.displayLayer);
     };
 	// public prototypal variables
 	Object.defineProperties(SpriteComponent.prototype, {

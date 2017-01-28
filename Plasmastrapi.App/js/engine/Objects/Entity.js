@@ -9,9 +9,9 @@ define(["./EventEmitter", "../Objects/Component", "./AtomicArray"], function (Ev
         // private variables
         this.__parent = null;
         this.__components = new AtomicArray(Component);
-        // apply decorators
-        EventEmitter.Decorators.Loadable.call(this);
-        EventEmitter.Decorators.Destructible.call(this);
+        // apply mixins
+        EventEmitter.Mixins.Loadable.call(this);
+        EventEmitter.Mixins.Destructible.call(this);
     };
     // private methods
     Entity.prototype.__validateNoDuplicateComponentNames = function(component) {

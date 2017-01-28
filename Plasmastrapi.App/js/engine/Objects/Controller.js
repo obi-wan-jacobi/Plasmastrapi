@@ -5,8 +5,8 @@ define(["../../engine/Objects/EventEmitter"], function (EventEmitter) {
     Controller.prototype.constructor = Controller;
     function Controller() {
         EventEmitter.call(this);
-        // apply decorators
-        EventEmitter.Decorators.Loadable.call(this, true);
+        // apply mixins
+        EventEmitter.Mixins.Loadable.call(this, true);
     };
     
     return Controller;

@@ -24,8 +24,8 @@ define(["../Objects/Component", "../Data/Geometry"], function (Component, Geomet
             'onpositionchange',
             'onorientationchange'
         );
-	    // apply decorators
-		Component.Decorators.Drawable.call(this, this.__options.displayLayer);
+	    // apply mixins
+		Component.Mixins.Drawable.call(this, this.__options.displayLayer);
 	};
 	// private methods
 	LineComponent.prototype.__onload = function () {

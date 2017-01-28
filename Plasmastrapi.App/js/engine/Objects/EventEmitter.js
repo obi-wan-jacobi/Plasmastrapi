@@ -1,4 +1,4 @@
-define(["./Base", "./AtomicKeyPairArray", "./Decorators/Destructible", "./Decorators/Loadable", "./Decorators/Pausable"],
+define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loadable", "./Mixins/Pausable"],
     function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
 
     // CLASS EventEmitter
@@ -20,15 +20,15 @@ define(["./Base", "./AtomicKeyPairArray", "./Decorators/Destructible", "./Decora
     };
     EventEmitter.prototype.__validateSubscriber = function(subscriber) {
         if (!subscriber) {
-            throw new Error(this.constructor.name + ':validateSubscriber - ' + ' A subscriber object must be supplied.');
+            throw new Error(this.constructor.name + ':validateSubscriber - A subscriber object must be supplied.');
         }
         if (Object.getOwnPropertyNames(subscriber).length === 0) {
-            throw new Error(this.constructor.name + ':validateSubscriber - ' + ' Subscribers cannot be empty objects.');
+            throw new Error(this.constructor.name + ':validateSubscriber - Subscribers cannot be empty objects.');
         }
     };
     EventEmitter.prototype.__validateCallback = function(callback) {
         if (typeof callback !== 'function') {
-            throw new Error(this.constructor.name + ':validateCallback - ' + ' A callback must be supplied as a function.');
+            throw new Error(this.constructor.name + ':validateCallback - A callback must be supplied as a function.');
         }
     };
     EventEmitter.prototype.__registerEvents = function(/* event1, event2, etc. */) {
@@ -37,11 +37,11 @@ define(["./Base", "./AtomicKeyPairArray", "./Decorators/Destructible", "./Decora
             if (this.hasEvent(event)) {
                 throw new Error(this.constructor.name + ':implementEvents - ' + event + ' has already been implemented.');
             }
-            // initialize this.__on{event} method
+            // initialize this.__onevent method
             if (!this["__" + event]) {
                 this["__" + event] = function () { };
             }
-            // initialize this.__$on{event} "pass-through" method
+            // initialize this.__$onevent "pass-through" method
             this["__$" + event] = function (event) {
                 return function () {
                     Array.prototype.unshift.call(arguments, event);
@@ -81,7 +81,7 @@ define(["./Base", "./AtomicKeyPairArray", "./Decorators/Destructible", "./Decora
         this.__validateSubscriber(subscriber);
         for (var event in this.__events) {
             if (this.__events.hasOwnProperty(event)) {
-                this.__events[event].purgeEntriesWithKey(subscriber);
+                this.__events[event].purgeItemsWithKey(subscriber);
             }
         }
     };
@@ -89,8 +89,8 @@ define(["./Base", "./AtomicKeyPairArray", "./Decorators/Destructible", "./Decora
         return this.__events[event] ? true : false;
     };
 
-    // decorators
-    EventEmitter.Decorators = {
+    // mixins
+    EventEmitter.Mixins = {
         Destructible,
         Loadable,
         Pausable

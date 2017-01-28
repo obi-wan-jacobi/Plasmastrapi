@@ -9,8 +9,8 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		Component.call(this);
 		// private variables
 		this.__imageHandle = imageHandle;
-        // apply decorators
-		Component.Decorators.Drawable.call(this, this.__imageHandle.displayLayer);
+        // apply mixins
+		Component.Mixins.Drawable.call(this, this.__imageHandle.displayLayer);
     };
 	// public prototypal variables
 	Object.defineProperties(ImageComponent.prototype, {

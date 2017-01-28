@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html>
 
 <style>
-	
-	#stage {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-	}
-	
-	#game-canvas {
-		position: absolute;
-		top: 5%;
-		left: 50%;
-		width: 1440px;
-		height: 900px;
-		transform: translate(-50%,0);
-		background-color: white;
-	}
-	
+    #stage {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+    #game-canvas {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        width: 1300px;
+        height: 700px;
+        transform: translate(-50%,0);
+        background-color: white;
+    }
 </style>
 
-<head>
+<html>
+    <head>
 
-    <script data-main="js/main.js" src="bower_components/require.js"></script>
+        <script data-main="js/main.js" src="bower_components/require.js"></script>
 
-	<title>Game</title>
+	    <title>Game</title>
 
-</head>
+    </head>
 
-<body bgcolor="black">
-	<div id="stage">
-		<canvas id="game-canvas"></canvas>
-	</div>
-</body>
+    <body bgcolor="black">
+	    <div id="stage">
+		    <canvas id="game-canvas"></canvas>
+	    </div>
+    </body>
 </html>

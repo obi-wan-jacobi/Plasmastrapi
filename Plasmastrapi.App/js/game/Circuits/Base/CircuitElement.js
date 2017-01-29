@@ -23,7 +23,7 @@ function (Entity, $, Geometry, Graphics, $Compatibility) {
         var pickableComponent = new $.PickableComponent();
 
         // configure pick action
-        pickableComponent.addEventListener('onselect', this, this.__onselect);
+        pickableComponent.addEventListener('onpick', this, this.__onpick);
 
         // compose entity
         this.addComponent(poseComponent);
@@ -35,7 +35,7 @@ function (Entity, $, Geometry, Graphics, $Compatibility) {
         $Compatibility.Selectable.call(pickableComponent);
         $Compatibility.Trashable.call(pickableComponent);
     };
-    CircuitElement.prototype.__onselect = function () {
+    CircuitElement.prototype.__onpick = function () {
         this.__engine.toolController.equipPlacingTool(this);
     };
     

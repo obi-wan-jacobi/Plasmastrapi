@@ -8,11 +8,10 @@
         var displayLayer = 'ondrawuientities';
         var spriteFrame = circuitElementConstructor.prototype.sprite.frames[0];
         var imageHandle = new Graphics.ImageHandle(displayLayer, 0, 0, spriteFrame.width, spriteFrame.height, spriteFrame.width, spriteFrame.height, spriteFrame);
-        Button.call(this, x, y, imageHandle, this.__onselect);
+        Button.call(this, x, y, imageHandle, this.__onpick);
         this.__circuitElementConstructor = circuitElementConstructor;
     };
-    SpawnerButton.prototype.__onselect = function () {
-        Button.prototype.__onselect.call(this);
+    SpawnerButton.prototype.__onpick = function () {
         var poseComponent = this.getComponent($.PoseComponent);
         var circuitElement = new this.__circuitElementConstructor(poseComponent.position.x, poseComponent.position.y);
         this.__engine.sceneController.addToCurrentScene(circuitElement);

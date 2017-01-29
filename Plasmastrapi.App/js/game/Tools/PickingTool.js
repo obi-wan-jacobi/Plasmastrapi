@@ -9,7 +9,7 @@
         this.filterByCompatibility($Compatibility.Selectable);
     };
     PickingTool.prototype.__pick_onmousedown = function (entities) {
-        entities[0].getComponent($.PickableComponent).select();
+        entities[0].getComponent($.PickableComponent).pick();
     };
 
     return PickingTool;

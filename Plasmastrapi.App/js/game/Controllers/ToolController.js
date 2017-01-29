@@ -18,7 +18,7 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
         this.__noTool = this.__tools[0] = new NoTool();
         this.__pickingTool = this.__tools[1] = new PickingTool();
         this.__placingTool = this.__tools[2] = new PlacingTool();
-        this.__wireTool = this.__tools[3] = new WireTool();
+        //this.__wireTool = this.__tools[3] = new WireTool();
         //this.__CuttingTool = this.__tools[4] = new CuttingTool();
         //this.__TrashTool = this.__tools[5] = new TrashTool();
     };

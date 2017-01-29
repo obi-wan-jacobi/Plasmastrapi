@@ -14,6 +14,7 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 		this.__registerEvents(
             'onenable',
             'ondisable',
+            'onpick',
             'onselect',
             'ondeselect',
             'onmouseenter',
@@ -117,6 +118,9 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 			this.__unhover();
 			this.__fire('ondisable');
 		}
+	};
+	PickableComponent.prototype.pick = function () {
+	    this.__fire('onpick');
 	};
 	PickableComponent.prototype.select = function() {
 		if (!this.__isSelected) {

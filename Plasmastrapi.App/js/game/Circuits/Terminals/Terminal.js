@@ -23,8 +23,7 @@ function (CircuitElement, $, Geometry) {
 
         // configure pick and hover actions
         var pickableComponent = this.getComponent($.PickableComponent);
-        pickableComponent.addEventListener('onselect', this, this.__onselect);
-        pickableComponent.addEventListener('ondeselect', this, this.__ondeselect);
+        pickableComponent.addEventListener('onpick', this, this.__onpick);
         pickableComponent.addEventListener('onmouseenter', this, this.__onmouseenter);
         pickableComponent.addEventListener('onmouseleave', this, this.__onmouseleave);
     };
@@ -49,14 +48,8 @@ function (CircuitElement, $, Geometry) {
         poseComponent.position = new Geometry.Position(x, y);
         poseComponent.orientation = orientation;
     };
-    Terminal.prototype.__onselect = function () {
-        var spriteComponent = this.getComponent($.SpriteComponent);
-        spriteComponent.setFrame(2);
+    Terminal.prototype.__onpick = function () {
         this.__engine.toolController.equipWireTool(this);
-    };
-    Terminal.prototype.__ondeselect = function () {
-        var spriteComponent = this.getComponent($.SpriteComponent);
-        spriteComponent.setFrame(this.__defaultFrameIndex);
     };
     Terminal.prototype.__onmouseenter = function () {
         var spriteComponent = this.getComponent($.SpriteComponent);

@@ -12,9 +12,6 @@ function (Entity, $, Graphics, $Compatibility) {
             new Graphics.LineDisplayOptions('ondrawgameentities', '#FFFFFF', 2)
         );
         this.addComponent(lineComponent);
-        // tool compatibility
-        $Compatibility.Selectable.call(this);
-        $Compatibility.Cuttable.call(this);
     };
 
     return WireElement;

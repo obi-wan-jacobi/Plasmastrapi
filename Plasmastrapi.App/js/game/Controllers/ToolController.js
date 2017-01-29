@@ -16,9 +16,9 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
         this.__tool = null;
         this.__tools = [];
         this.__noTool = this.__tools[0] = new NoTool();
-        this.__placingTool = this.__tools[1] = new PlacingTool();
-        this.__pickingTool = this.__tools[2] = new PickingTool();
-        //this.__wireTool = this.__tools[3] = new WireTool();
+        this.__pickingTool = this.__tools[1] = new PickingTool();
+        this.__placingTool = this.__tools[2] = new PlacingTool();
+        this.__wireTool = this.__tools[3] = new WireTool();
         //this.__CuttingTool = this.__tools[4] = new CuttingTool();
         //this.__TrashTool = this.__tools[5] = new TrashTool();
     };
@@ -73,14 +73,14 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
     ToolController.prototype.equipPickingTool = function () {
         this.__equip(this.__pickingTool);
     };
-    ToolController.prototype.equipPlacingTool = function () {
-        this.__equip(this.__placingTool);
+    ToolController.prototype.equipPlacingTool = function (entity) {
+        this.__equip(this.__placingTool, entity);
     };
-    ToolController.prototype.equipWireTool = function () {
-        this.__equip(this.__wireTool);
+    ToolController.prototype.equipWireTool = function (entity) {
+        this.__equip(this.__wireTool, entity);
     };
-    ToolController.prototype.equipCuttingTool = function (entity) {
-        this.__equip(this.__cuttingTool, entity);
+    ToolController.prototype.equipCuttingTool = function () {
+        this.__equip(this.__cuttingTool);
     };
     ToolController.prototype.equipTrashTool = function () {
         this.__equip(this.__trashTool);

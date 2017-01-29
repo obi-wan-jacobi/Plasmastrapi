@@ -15,8 +15,11 @@
 
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
-    };
 
+        // tool compatibility
+        $Compatibility.Selectable.call(pickableComponent);
+        $Compatibility.Cuttable.call(pickableComponent);
+    };
     Wire.prototype.__updateMeshComponent = function () {
         var lineComponent = this.getComponent($.LineComponent);
         var meshComponent = this.getComponent($.MeshComponent);

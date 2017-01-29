@@ -12,7 +12,10 @@
         pickableComponent.addEventListener('onselect', this, fnOnSelect);
 
         // tool compatibility
-        $Compatibility.Selectable.call(this);
+        $Compatibility.Selectable.call(pickableComponent);
+    };
+    Button.prototype.__onselect = function () {
+        this.getComponent($.PickableComponent).deselect();
     };
     
     return Button;

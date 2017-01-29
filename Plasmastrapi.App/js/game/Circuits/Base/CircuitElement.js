@@ -32,8 +32,8 @@ function (Entity, $, Geometry, Graphics, $Compatibility) {
         this.addComponent(pickableComponent);
 
         // tool compatibility
-        $Compatibility.Selectable.call(this);
-        $Compatibility.Trashable.call(this);
+        $Compatibility.Selectable.call(pickableComponent);
+        $Compatibility.Trashable.call(pickableComponent);
     };
     CircuitElement.prototype.__onselect = function () {
         this.__engine.toolController.equipPlacingTool(this);

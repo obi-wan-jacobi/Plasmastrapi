@@ -1,4 +1,4 @@
-﻿define(["./Area", "../../../engine/Data/Graphics"], function (Area, Graphics) {
+﻿define(["./Area", "../../../engine/Data/Graphics", "../Traits/$Traits"], function (Area, Graphics, $Traits) {
 
     // CLASS CircuitDesignArea
     CircuitDesignArea.prototype = Object.create(Area.prototype);
@@ -9,6 +9,8 @@
         var imageHandle = new Graphics.ImageHandle(displayLayer, x, y, this.image.width, this.image.height, width, height, this.image);
         // inherits from
         Area.call(this, x, y, imageHandle);
+        // apply traits
+        $Traits.DesignZone.call(this);
     };
     
     return CircuitDesignArea;

@@ -1,13 +1,7 @@
-﻿define(function () {
+﻿define(["./Compatible"], function (Compatible) {
 
     function Placeable() {
-        Object.defineProperties(this, {
-            'isPlaceable': {
-                get: function () {
-                    return true;
-                }
-            }
-        });
+        Compatible.call(this, Placeable);
     };
 
     return Placeable;

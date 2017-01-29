@@ -1,4 +1,4 @@
-﻿define(["../Base/UIElement", "../../../engine/Components/$Components"], function (UIElement, $) {
+﻿define(["../Base/UIElement", "../../../engine/Components/$Components", "../../Tools/Compatibility/$Compatibility"], function (UIElement, $, $Compatibility) {
 
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
@@ -10,6 +10,9 @@
         // configure click action
         var pickableComponent = this.getComponent($.PickableComponent);
         pickableComponent.addEventListener('onselect', this, fnOnSelect);
+
+        // tool compatibility
+        $Compatibility.Selectable.call(this);
     };
     
     return Button;

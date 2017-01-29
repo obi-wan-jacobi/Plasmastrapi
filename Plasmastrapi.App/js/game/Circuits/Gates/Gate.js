@@ -1,5 +1,5 @@
 ﻿define(["../Base/CircuitElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry", "../../../engine/Data/Graphics",
-"../Terminals/OutputTerminal", "../Terminals/InputTerminal", "../Wires/TerminalWireAnchor", "../Wires/TerminalWire"],
+"../Terminals/OutputTerminal", "../Terminals/InputTerminal", "../Terminals/TerminalWireAnchor", "../Wires/TerminalWire"],
 function (CircuitElement, $, Geometry, Graphics, OutputTerminal, InputTerminal, TerminalWireAnchor, TerminalWire) {
 
     // CLASS Gate

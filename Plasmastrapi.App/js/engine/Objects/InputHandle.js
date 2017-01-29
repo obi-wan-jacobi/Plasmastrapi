@@ -24,7 +24,7 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
     // public prototypal variables
     InputHandle.prototype.compatibleEntityClassesList = [];
     // public methods
-    InputHandle.prototype.equip = function () {
+    InputHandle.prototype.load = function () {
         this.__engine.inputSystem.addEventListener('onmousemove', this, this.__$input_onmousemove);
         this.__engine.inputSystem.addEventListener('onmousedown', this, this.__$input_onmousedown);
         this.__engine.inputSystem.addEventListener('onmouseup', this, this.__$input_onmouseup);
@@ -39,7 +39,7 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__engine.pickSystem.addEventListener('onmousehover', this, this.__$pick_onmousehover);
         this.__engine.pickSystem.addEventListener('onmouseleave', this, this.__$pick_onmouseleave);
     };
-    InputHandle.prototype.discard = function () {
+    InputHandle.prototype.unload = function () {
         this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__$input_onmousemove);
         this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__$input_onmousedown);
         this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__$input_onmouseup);

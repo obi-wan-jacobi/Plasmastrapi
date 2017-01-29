@@ -1,13 +1,7 @@
-﻿define(function () {
+﻿define(["./Compatible"], function (Compatible) {
 
     function Wireable() {
-        Object.defineProperties(this, {
-            'isWireable': {
-                get: function () {
-                    return true;
-                }
-            }
-        });
+        Compatible.call(this, Wireable);
     };
 
     return Wireable;

@@ -1,13 +1,7 @@
-﻿define(function () {
+﻿define(["./Compatible"], function (Compatible) {
 
     function Trashable() {
-        Object.defineProperties(this, {
-            'isTrashable': {
-                get: function () {
-                    return true;
-                }
-            }
-        });
+        Compatible.call(this, Trashable);
     };
 
     return Trashable;

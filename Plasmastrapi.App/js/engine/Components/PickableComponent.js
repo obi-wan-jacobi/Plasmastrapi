@@ -32,16 +32,34 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
     PickableComponent.prototype.__onunload = function () {
         this.disable();
     };
+    PickableComponent.prototype.__checkPointCollision = function (cursor) {
+        var meshComponent = this.__entity.getComponent(MeshComponent);
+        if (!meshComponent) {
+            throw new Error(this.constructor.name + ':pick - ' + this.__entity.constructor.name + ' does not contain a MeshComponent.');
+        }
+        return meshComponent.checkPointCollision(cursor);
+    };
+    PickableComponent.prototype.__pick_onmousedown = function (cursor) {
+        if (this.__checkPointCollision(cursor)) {
+            this.__fire('onmousedown', this.__entity);
+        }
+    };
+    PickableComponent.prototype.__pick_onmouseup = function (cursor) {
+        if (this.__checkPointCollision(cursor)) {
+            this.__fire('onmouseup', this.__entity);
+        }
+    };
+    PickableComponent.prototype.__pick_onclick = function (cursor) {
+        if (this.__checkPointCollision(cursor)) {
+            this.__fire('onclick', this.__entity);
+        }
+    };
 	PickableComponent.prototype.__onmousemove = function(cursor) {
-		var meshComponent = this.__entity.getComponent(MeshComponent);
-		if (!meshComponent) {
-			throw new Error(this.constructor.name + ':pick - ' + this.__entity.constructor.name + ' does not contain a MeshComponent.');
-		}
-		if (meshComponent.checkPointCollision(cursor)) {
-			this.__hover(); 
-		} else {
-			this.__unhover();
-		}
+	    if (this.__checkPointCollision(cursor)) {
+	        this.__hover();
+	    } else {
+	        this.__unhover();
+	    }
 	};
 	PickableComponent.prototype.__hover = function() {
 		if (!this.__isHovered) {
@@ -74,14 +92,18 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 			}
 		}
 	});
-	// public methods
+    // public methods
+	PickableComponent.prototype.injectEntity = function (entity) {
+	    Component.prototype.injectEntity.call(this, entity);
+	    this.__engine.pickablesContainer.add(this);
+	};
 	PickableComponent.prototype.enable = function() {
 		if (!this.__isEnabled) {
 		    this.__isEnabled = true;
 		    this.__engine.inputSystem.addEventListener('onmousemove', this, this.__$onmousemove);
-		    this.__engine.inputSystem.addEventListener('onmousedown', this, this.__$onmousedown);
-		    this.__engine.inputSystem.addEventListener('onmouseup', this, this.__$onmouseup);
-		    this.__engine.inputSystem.addEventListener('onclick', this, this.__$onclick);
+		    this.__engine.inputSystem.addEventListener('onmousedown', this, this.__pick_onmousedown);
+		    this.__engine.inputSystem.addEventListener('onmouseup', this, this.__pick_onmouseup);
+		    this.__engine.inputSystem.addEventListener('onclick', this, this.__pick_onclick);
 		    this.__fire('onenable');
 		}
 	};
@@ -89,9 +111,9 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 		if (this.__isEnabled) {
 		    this.__isEnabled = false;
 		    this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__$onmousemove);
-		    this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__$onmousedown);
-		    this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__$onmouseup);
-		    this.__engine.inputSystem.removeEventListener('onclick', this, this.__$onclick);
+		    this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__pick_onmousedown);
+		    this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__pick_onmouseup);
+		    this.__engine.inputSystem.removeEventListener('onclick', this, this.__pick_onclick);
 			this.__unhover();
 			this.__fire('ondisable');
 		}

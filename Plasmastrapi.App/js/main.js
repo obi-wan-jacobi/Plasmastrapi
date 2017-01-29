@@ -13,8 +13,7 @@ define(["./game/Game", "./game/Assets/images", "./game/Assets/sprites"], functio
             game.start();
 
             game.sceneController.setCircuitDesignScene();
-            //    game.toolcontroller.equip(game.tools.mastertool);
-
+            game.toolController.equipPickingTool();
         });
     });
 });

@@ -1,5 +1,5 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry", "../../../engine/Data/Graphics"],
-function (Entity, $, Geometry, Graphics) {
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry", "../../../engine/Data/Graphics", "../../Tools/Compatibility/$Compatibility"],
+function (Entity, $, Geometry, Graphics, $Compatibility) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(Entity.prototype);
@@ -30,6 +30,10 @@ function (Entity, $, Geometry, Graphics) {
         this.addComponent(spriteComponent);
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
+
+        // tool compatibility
+        $Compatibility.Selectable.call(this);
+        $Compatibility.Trashable.call(this);
     };
     CircuitElement.prototype.__onselect = function () {
         this.__engine.toolController.equipPlacingTool(this);

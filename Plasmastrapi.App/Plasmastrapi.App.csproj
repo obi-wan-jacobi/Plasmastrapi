@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\require.js" />
+    <Content Include="js\engine\Containers\PickablesContainer.js" />
     <Content Include="js\engine\Loaders\ImageLoader.js" />
     <Content Include="js\engine\Loaders\SpriteLoader.js" />
     <Content Include="js\engine\Objects\Base.js" />
@@ -121,20 +122,27 @@
     <Content Include="js\game\Circuits\Terminals\OutputTerminal.js" />
     <Content Include="js\game\Circuits\Terminals\Terminal.js" />
     <Content Include="js\game\Circuits\Wires\TerminalWire.js" />
-    <Content Include="js\game\Circuits\Wires\TerminalWireAnchor.js" />
+    <Content Include="js\game\Circuits\Terminals\TerminalWireAnchor.js" />
     <Content Include="js\game\Circuits\Wires\Wire.js" />
     <Content Include="js\engine\Components\%24Components.js" />
     <Content Include="js\game\Scenes\CircuitDesignScene.js" />
     <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\game\Scenes\NoScene.js" />
+    <Content Include="js\game\Tools\Compatibility\%24Compatibility.js" />
+    <Content Include="js\game\Tools\Compatibility\Compatible.js" />
     <Content Include="js\game\Tools\Compatibility\Cuttable.js" />
     <Content Include="js\game\Tools\Compatibility\Placeable.js" />
+    <Content Include="js\game\Tools\Compatibility\Selectable.js" />
     <Content Include="js\game\Tools\Compatibility\Trashable.js" />
     <Content Include="js\game\Tools\Compatibility\Wireable.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Objects\Tool.js" />
+    <Content Include="js\game\UI\Traits\%24Traits.js" />
+    <Content Include="js\game\UI\Traits\Trait.js" />
+    <Content Include="js\game\UI\Traits\DesignZone.js" />
+    <Content Include="js\game\UI\Traits\DestructionZone.js" />
     <Content Include="js\game\Tools\TrashTool.js" />
-    <Content Include="js\game\Tools\MasterTool.js" />
+    <Content Include="js\game\Tools\PickingTool.js" />
     <Content Include="js\game\Tools\NoTool.js" />
     <Content Include="js\game\Tools\PlacingTool.js" />
     <Content Include="js\game\Tools\WireTool.js" />

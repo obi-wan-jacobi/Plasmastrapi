@@ -1,13 +1,7 @@
-﻿define(function () {
+﻿define(["./Compatible"], function (Compatible) {
 
     function Cuttable() {
-        Object.defineProperties(this, {
-            'isCuttable': {
-                get: function () {
-                    return true;
-                }
-            }
-        });
+        Compatible.call(this, Cuttable);
     };
 
     return Cuttable;

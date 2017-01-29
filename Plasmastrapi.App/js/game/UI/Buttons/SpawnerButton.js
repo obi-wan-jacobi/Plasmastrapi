@@ -14,6 +14,7 @@
     SpawnerButton.prototype.__onselect = function () {
         var poseComponent = this.getComponent($.PoseComponent);
         var circuitElement = new this.__circuitElementConstructor(poseComponent.position.x, poseComponent.position.y);
+        this.__engine.sceneController.addToCurrentScene(circuitElement);
         this.__engine.toolController.equipPlacingTool(circuitElement);
     };
 

@@ -8,5 +8,4 @@ define(["../Objects/Container", "../Objects/Entity"], function (Container, Entit
     };
 
     return EntityContainer;
-
 });

@@ -16,12 +16,12 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 	Object.defineProperties(ImageComponent.prototype, {
 		'width': {
 			get: function() {
-				return this.__imageHandle.width;
+				return this.__imageHandle.image.width;
 			}
 		},
 		'height': {
 			get: function() {
-				return this.__imageHandle.height;
+				return this.__imageHandle.image.height;
 			}
 		},
 		'mesh': {

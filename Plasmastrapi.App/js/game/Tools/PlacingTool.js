@@ -1,35 +1,26 @@
-﻿define(["../Objects/Tool"], function (Tool) {
+﻿define(["../Objects/Tool", "../../engine/Components/$Components", "../../engine/Data/Geometry", "../UI/Traits/$Traits"], function (Tool, $, Geometry, $Traits) {
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool() {
-        var tool = new Tool();
-        var equippedEntity, handlePosition;
-        tool.pickableEntityClassesList = [UI.UIElement, Lab.CircuitDesignArea];
-        tool.equip = function (entity) {
-            if (!entity) {
-                throw new Error('placingTool:equip - The entity to be placed must be defined.');
-            }
-            equippedEntity = entity;
-            handlePosition = toolController.lastCursorPosition;
-        };
-        tool.mousemove = function (cursor) {
-            var poseComponent = equippedEntity.getComponent(Components.PoseComponent)
-            var position = poseComponent.position;
-            poseComponent.position = new Geometry.Position(
-				position.x + (cursor.x - handlePosition.x),
-				position.y + (cursor.y - handlePosition.y)
-			);
-            handlePosition = cursor;
-        };
-        tool.mouseup = function () {
-            var entity = resolveFirstPick(toolController.getPicks());
-            if (entity instanceof UI.UIElement) {
-                equippedEntity.destroy();
-            }
-            toolController.equip($.masterTool);
-        };
-        return tool;
+        Tool.call(this);
+        this.__equippedEntity = null;
+    };
+    PlacingTool.prototype.__onequip = function (entity) {
+        this.filterByCompatibility($Traits.DesignZone);
+        this.__equippedEntity = entity;
+    };
+    PlacingTool.prototype.__input_onmousemove = function (cursor) {
+        var poseComponent = this.__equippedEntity.getComponent($.PoseComponent)
+        var position = poseComponent.position;
+        poseComponent.position = new Geometry.Position(
+			cursor.x,
+			cursor.y
+		);
+    };
+    PlacingTool.prototype.__input_onmouseup = function (cursor) {
+        this.__equippedEntity.getComponent($.PickableComponent).deselect();
+        this.__engine.toolController.equipPickingTool();
     };
 
     return PlacingTool;

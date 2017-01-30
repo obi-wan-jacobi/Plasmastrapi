@@ -18,7 +18,7 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
         this.__noTool = this.__tools[0] = new NoTool();
         this.__pickingTool = this.__tools[1] = new PickingTool();
         this.__placingTool = this.__tools[2] = new PlacingTool();
-        //this.__wireTool = this.__tools[3] = new WireTool();
+        this.__wireTool = this.__tools[3] = new WireTool();
         //this.__CuttingTool = this.__tools[4] = new CuttingTool();
         //this.__TrashTool = this.__tools[5] = new TrashTool();
     };
@@ -51,16 +51,16 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
     };
     ToolController.prototype.filterByCompatibility = function (Compatibility) {
         this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (Compatibility.isSatisfiedBy(pickableComponent)) {
+            if (Compatibility.resolve(pickableComponent)) {
                 pickableComponent.enable();
             } else {
                 pickableComponent.disable();
             }
         });
     };
-    ToolController.prototype.filterByTrait = function (Trait) {
+    ToolController.prototype.filterByTraits = function (Trait) {
         this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (Trait.isSatisfiedBy(pickableComponent)) {
+            if (Trait.resolve(pickableComponent)) {
                 pickableComponent.enable();
             } else {
                 pickableComponent.disable();
@@ -73,11 +73,11 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
     ToolController.prototype.equipPickingTool = function () {
         this.__equip(this.__pickingTool);
     };
-    ToolController.prototype.equipPlacingTool = function (entity) {
-        this.__equip(this.__placingTool, entity);
+    ToolController.prototype.equipPlacingTool = function (circuitElement) {
+        this.__equip(this.__placingTool, circuitElement);
     };
-    ToolController.prototype.equipWireTool = function (entity) {
-        this.__equip(this.__wireTool, entity);
+    ToolController.prototype.equipWireTool = function (terminal) {
+        this.__equip(this.__wireTool, terminal);
     };
     ToolController.prototype.equipCuttingTool = function () {
         this.__equip(this.__cuttingTool);

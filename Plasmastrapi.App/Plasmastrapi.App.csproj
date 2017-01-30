@@ -109,6 +109,7 @@
     <Content Include="js\game\Assets\images.js" />
     <Content Include="js\game\Assets\sprites.js" />
     <Content Include="js\game\Circuits\Base\WireElement.js" />
+    <Content Include="js\game\Circuits\Wires\ToolWire.js" />
     <Content Include="js\game\Controllers\ToolController.js" />
     <Content Include="js\game\Circuits\Base\CircuitElement.js" />
     <Content Include="js\game\Circuits\Gates\AndGate.js" />
@@ -116,7 +117,7 @@
     <Content Include="js\game\Circuits\Gates\NandGate.js" />
     <Content Include="js\game\Circuits\Gates\OrGate.js" />
     <Content Include="js\game\Circuits\Gates\XorGate.js" />
-    <Content Include="js\game\Circuits\Helpers\ToolHandle.js" />
+    <Content Include="js\game\Circuits\Terminals\TerminalHandle.js" />
     <Content Include="js\game\Circuits\Power\PowerSource.js" />
     <Content Include="js\game\Circuits\Terminals\InputTerminal.js" />
     <Content Include="js\game\Circuits\Terminals\OutputTerminal.js" />
@@ -132,9 +133,10 @@
     <Content Include="js\game\Tools\Compatibility\Compatible.js" />
     <Content Include="js\game\Tools\Compatibility\Cuttable.js" />
     <Content Include="js\game\Tools\Compatibility\Placeable.js" />
-    <Content Include="js\game\Tools\Compatibility\Selectable.js" />
+    <Content Include="js\game\Tools\Compatibility\Pickable.js" />
     <Content Include="js\game\Tools\Compatibility\Trashable.js" />
-    <Content Include="js\game\Tools\Compatibility\Wireable.js" />
+    <Content Include="js\game\Tools\Compatibility\WireableAsInput.js" />
+    <Content Include="js\game\Tools\Compatibility\WireableAsOutput.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Objects\Tool.js" />
     <Content Include="js\game\UI\Traits\%24Traits.js" />
@@ -241,6 +243,7 @@
   <ItemGroup>
     <Folder Include="js\game\Assets\Images\" />
     <Folder Include="js\game\Circuits\FlipFlops\" />
+    <Folder Include="js\game\Circuits\Helpers\" />
     <Folder Include="js\game\Circuits\Switches\" />
     <Folder Include="js\game\Systems\" />
   </ItemGroup>

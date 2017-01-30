@@ -8,9 +8,9 @@
                 }
             }
         });
-        Compatibility.isSatisfiedBy = Compatible.prototype.isSatisfiedBy.bind(Compatibility);
+        Compatibility.resolve = Compatible.prototype.resolve.bind(Compatibility);
     };
-    Compatible.prototype.isSatisfiedBy = function (entity) {
+    Compatible.prototype.resolve = function (entity) {
         if (entity["is" + this.name]) {
             return true;
         }

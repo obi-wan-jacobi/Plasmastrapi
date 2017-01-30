@@ -1,5 +1,4 @@
 ﻿define(["../Base/CircuitElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"],
-
 function (CircuitElement, $, Geometry) {
 
     // CLASS Terminal
@@ -23,7 +22,6 @@ function (CircuitElement, $, Geometry) {
 
         // configure pick and hover actions
         var pickableComponent = this.getComponent($.PickableComponent);
-        pickableComponent.addEventListener('onpick', this, this.__onpick);
         pickableComponent.addEventListener('onmouseenter', this, this.__onmouseenter);
         pickableComponent.addEventListener('onmouseleave', this, this.__onmouseleave);
     };

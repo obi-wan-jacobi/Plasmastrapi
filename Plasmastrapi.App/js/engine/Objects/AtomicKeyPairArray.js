@@ -5,9 +5,10 @@ define(["./AtomicLink"], function (AtomicLink) {
         this.__start = null;
     };
     AtomicKeyPairArray.prototype.__validateNoDuplicatePairs = function(key, value) {
-        this.forEach(function(ownedItem) {
-            if (ownedItem.key === key && ownedItem.value === value) {
-                throw new Error(this.constructor.name + ':validateNoDuplicatePairs - Duplicate item found on key: ' + key + ' value: ' + value);
+        this.forEach(function(ownedItemKey, ownedItemValue) {
+            if (ownedItemKey === key && ownedItemValue === value) {
+                throw new Error(this.constructor.name + ':validateNoDuplicatePairs - Duplicate item found on key: ' + key.constructor.name + ' value: ' + value.constructor.name);
+                var test = 'test';
             }
         }, this);
     };

@@ -1,11 +1,12 @@
-﻿define(["./Cuttable", "./Placeable", "./Selectable", "./Trashable", "./Wireable"],
-function (Cuttable, Placeable, Selectable, Trashable, Wireable) {
+﻿define(["./Cuttable", "./Placeable", "./Pickable", "./Trashable", "./WireableAsInput", "./WireableAsOutput"],
+function (Cuttable, Placeable, Pickable, Trashable, WireableAsInput, WireableAsOutput) {
 
     return {
         Cuttable,
         Placeable,
-        Selectable,
+        Pickable,
         Trashable,
-        Wireable
+        WireableAsInput,
+        WireableAsOutput
     };
 });

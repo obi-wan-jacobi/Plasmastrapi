@@ -32,7 +32,7 @@ function (Entity, $, Geometry, Graphics, $Compatibility) {
         this.addComponent(pickableComponent);
 
         // tool compatibility
-        $Compatibility.Selectable.call(pickableComponent);
+        $Compatibility.Pickable.call(pickableComponent);
         $Compatibility.Trashable.call(pickableComponent);
     };
     CircuitElement.prototype.__onpick = function () {

@@ -4,9 +4,12 @@ define([
     "./Gates/NandGate",
     "./Gates/OrGate",
     "./Gates/XorGate",
-    "./Power/PowerSource"
+    "./Power/PowerSource",
+    "./Wires/Wire",
+    "./Terminals/TerminalHandle",
+    "./Wires/ToolWire"
 ],
-function (Terminal, AndGate, NandGate, OrGate, XorGate, PowerSource) {
+function (Terminal, AndGate, NandGate, OrGate, XorGate, PowerSource, Wire, TerminalHandle, ToolWire) {
 
     return {
         Terminal,
@@ -14,6 +17,9 @@ function (Terminal, AndGate, NandGate, OrGate, XorGate, PowerSource) {
         NandGate,
         OrGate,
         XorGate,
-        PowerSource
+        PowerSource,
+        Wire,
+        TerminalHandle,
+        ToolWire
     };
 });

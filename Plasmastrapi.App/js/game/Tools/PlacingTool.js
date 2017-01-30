@@ -8,7 +8,7 @@
         this.__previousCursorPosition = null
     };
     PlacingTool.prototype.__onequip = function (entity) {
-        this.filterByCompatibility($Traits.DesignZone);
+        this.filterByTraits($Traits.DesignZone);
         this.__equippedEntity = entity;
         this.__previousCursorPosition = null;
     };

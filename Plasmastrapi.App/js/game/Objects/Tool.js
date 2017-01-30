@@ -20,8 +20,8 @@
     Tool.prototype.filterByCompatibility = function (Compatibility) {
         this.__engine.toolController.filterByCompatibility(Compatibility);
     };
-    Tool.prototype.filterByTrait = function (Trait) {
-        this.__engine.toolController.filterByCompatibility(Trait);
+    Tool.prototype.filterByTraits = function (Trait) {
+        this.__engine.toolController.filterByTraits(Trait);
     };
 
     return Tool;

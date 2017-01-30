@@ -7,7 +7,7 @@ needs testing:
 - destroy->purge
 
 in progress:
-- masterTool, placingTool
+- pickingTool, placingTool
 - wireTool logic
 	- disallow multiple wires between the same two terminals
 	

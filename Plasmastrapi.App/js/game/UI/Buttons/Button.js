@@ -12,7 +12,7 @@
         pickableComponent.addEventListener('onpick', this, fnOnPick);
 
         // tool compatibility
-        $Compatibility.Selectable.call(pickableComponent);
+        $Compatibility.Pickable.call(pickableComponent);
     };
     
     return Button;

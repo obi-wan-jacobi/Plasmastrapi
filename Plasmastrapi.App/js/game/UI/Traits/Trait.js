@@ -8,9 +8,9 @@
                 }
             }
         });
-        TraitType.isSatisfiedBy = Trait.prototype.isSatisfiedBy.bind(TraitType);
+        TraitType.resolve = Trait.prototype.resolve.bind(TraitType);
     };
-    Trait.prototype.isSatisfiedBy = function (entity) {
+    Trait.prototype.resolve = function (entity) {
         if (entity["is" + this.name]) {
             return true;
         }

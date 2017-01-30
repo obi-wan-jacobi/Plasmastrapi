@@ -27,12 +27,16 @@ function (Engine, ToolController, SceneController, EntitySystem) {
         function loop(now) {
             // stop the loop if loopOnce returned false
             if (running) {
-                raf(loop);
-                var deltaMs = now - lastFrame;
-                if (deltaMs < 2000) {
-                    running = self.loopOnce(deltaMs);
+                try {
+                    var deltaMs = now - lastFrame;
+                    if (deltaMs < 2000) {
+                        running = self.loopOnce(deltaMs);
+                    }
+                    lastFrame = now;
+                    raf(loop);
+                } catch (e) {
+                    throw e;
                 }
-                lastFrame = now;
             }
         };
         loop(lastFrame);

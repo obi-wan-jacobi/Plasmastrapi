@@ -63,7 +63,7 @@ define(["./AtomicLink"], function (AtomicLink) {
     AtomicArray.prototype.splice = function(item) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
-            var ownedItem = link.get();
+            var ownedItem = link.val();
             if (ownedItem === item) {
                 if (link === this.__start) {
                     this.__start = link.next();

@@ -6,7 +6,7 @@
         Tool.call(this);
     };
     PickingTool.prototype.__onequip = function () {
-        this.filterByCompatibility($Compatibility.Selectable);
+        this.filterByCompatibility($Compatibility.Pickable);
     };
     PickingTool.prototype.__pick_onmousedown = function (entities) {
         entities[0].getComponent($.PickableComponent).pick();

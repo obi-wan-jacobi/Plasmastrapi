@@ -30,7 +30,7 @@
             if (this.isLoaded) {
                 this.unload();
             }
-            this.__engine.eventEmitterRepository.purge(this);
+            this.__engine.eventEmitterContainer.purge(this);
         }
     };
 

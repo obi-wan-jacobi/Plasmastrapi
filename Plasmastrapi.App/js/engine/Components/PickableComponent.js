@@ -75,6 +75,9 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 			this.__fire('onmouseleave');
 		}
 	};
+	PickableComponent.prototype.__ondestroy = function () {
+	    this.__engine.pickablesContainer.remove(this);
+	};
 	// public prototypal variables
 	Object.defineProperties(PickableComponent.prototype, {
 		'isEnabled': {

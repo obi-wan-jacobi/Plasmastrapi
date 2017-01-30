@@ -1,5 +1,5 @@
 define(["./Base", "./AtomicKeyPairArray", "./Mixins/Destructible", "./Mixins/Loadable", "./Mixins/Pausable"],
-    function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
+function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
 
     // CLASS EventEmitter
     EventEmitter.prototype = Object.create(Base.prototype);

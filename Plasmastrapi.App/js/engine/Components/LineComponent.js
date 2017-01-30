@@ -1,4 +1,4 @@
-define(["../Objects/Component", "../Data/Geometry"], function (Component, Geometry) {
+define(["../Objects/Component", "../Data/Geometry", "../Data/Physics"], function (Component, Geometry, Physics) {
 
 	function pow2(arg) {
         return Math.pow(arg, 2);
@@ -76,6 +76,14 @@ define(["../Objects/Component", "../Data/Geometry"], function (Component, Geomet
 				);
 				return new Geometry.Mesh(rectangle);
 			}
+		},
+		'collisionOptions': { // line converted into static rectangular mesh
+		    set: function (collisionOptions) {
+		        if (!(collisionOptions instanceof Physics.LineCollisionOptions)) {
+		            throw new Error(this.constructor.name + ":set collisionOptions - " + collisionOptions.constructor.name + " must be of type " + Physics.LineCollisionOptions.name);
+		        }
+		        this.__collisionOptions = collisionOptions;
+		    }
 		}
 	});
 	// public methods

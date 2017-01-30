@@ -6,7 +6,7 @@ define(["../Objects/System"],function(System) {
 	function DrawSystem() {
 	    System.call(this);
 	    // events
-	    this.__registerEvents(
+	    this.registerEvents(
             'onwindowresize',
             'ondrawgamebackground',
             'ondrawgameforeground',

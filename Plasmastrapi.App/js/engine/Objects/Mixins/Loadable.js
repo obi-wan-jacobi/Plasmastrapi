@@ -2,7 +2,7 @@
 
     function Loadable(isLoadedByEngine) {
         var target = this;
-        if (!target.__registerEvents) {
+        if (!target.registerEvents) {
             throw new Error(target.constructor.name + ':' + Loadable.constructor.name + ' - Target must be an instance of EventEmitter');
         }
         target.__isLoaded = false;
@@ -27,7 +27,7 @@
         target.load = Loadable.prototype.load;
         target.unload = Loadable.prototype.unload;
         target.reload = Loadable.prototype.reload;
-        target.__registerEvents(
+        target.registerEvents(
             'oninit',
             'onload',
             'onunload'

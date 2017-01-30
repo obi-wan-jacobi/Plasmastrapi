@@ -8,7 +8,7 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
         Base.call(this);
         this.__events = {};
         // events
-        this.__registerEvents(
+        this.registerEvents(
             'oninjectengine'
         );
     };
@@ -31,7 +31,21 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
             throw new Error(this.constructor.name + ':validateCallback - A callback must be supplied as a function.');
         }
     };
-    EventEmitter.prototype.__registerEvents = function(/* event1, event2, etc. */) {
+    EventEmitter.prototype.__fire = function(event /*, argument1, argument2, etc... */) {
+        this.__validateEventIsImplemented(event);
+        var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
+        this["__" + event].apply(this, args);
+        this.__events[event].forEach(function (subscriber, callback) {
+            callback.apply(subscriber, args);
+        });
+    };
+    // public methods
+    EventEmitter.prototype.injectEngine = function(engine) {
+        Base.prototype.injectEngine.call(this, engine);
+        this.__engine.eventEmitterContainer.add(this);
+        this.__fire('oninjectengine', engine);
+    };
+    EventEmitter.prototype.registerEvents = function (/* event1, event2, etc. */) {
         for (var i = 0, L = arguments.length; i < L; i++) {
             var event = arguments[i];
             if (this.hasEvent(event)) {
@@ -50,20 +64,6 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
             }(event);
             this.__events[event] = new AtomicKeyPairArray();
         }
-    };
-    EventEmitter.prototype.__fire = function(event /*, argument1, argument2, etc... */) {
-        this.__validateEventIsImplemented(event);
-        var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
-        this["__" + event].apply(this, args);
-        this.__events[event].forEach(function (subscriber, callback) {
-            callback.apply(subscriber, args);
-        });
-    };
-    // public methods
-    EventEmitter.prototype.injectEngine = function(engine) {
-        Base.prototype.injectEngine.call(this, engine);
-        this.__engine.eventEmitterContainer.add(this);
-        this.__fire('oninjectengine', engine);
     };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {
         this.__validateEventIsImplemented(event);

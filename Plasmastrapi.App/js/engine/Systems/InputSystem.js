@@ -7,7 +7,7 @@ define(["../Objects/System", "../Objects/EventQueue", "../Data/Geometry"], funct
 		System.call(this);
 		this.__inputQueue = new EventQueue(this);
 	    // events
-		this.__registerEvents(
+		this.registerEvents(
             'onmousemove',
             'onmousedown',
             'onmouseup',

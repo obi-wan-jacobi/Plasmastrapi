@@ -12,7 +12,7 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		this.__options = spriteHandle.displayOptions;
 		this.__currentFrameIndex = 0;
         // events
-		this.__registerEvents(
+		this.registerEvents(
             'onframechange'
         );
 		Component.Mixins.Drawable.call(this, spriteHandle.displayLayer);

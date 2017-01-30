@@ -20,7 +20,7 @@ define(["../Objects/Component", "../Data/Geometry", "../Data/Physics"], function
         this.__options = lineDisplayOptions,
         this.__collisionOptions = lineCollisionOptions;
 	    // events
-		this.__registerEvents(
+		this.registerEvents(
             'onpositionchange',
             'onorientationchange'
         );

@@ -7,7 +7,7 @@ define(["./EventEmitter", "./AtomicArray"], function(EventEmitter, AtomicArray) 
         EventEmitter.call(this);
         this.__members = new AtomicArray(memberClass);
         // events
-        this.__registerEvents(
+        this.registerEvents(
             'onadd',
             'onremove'
         );

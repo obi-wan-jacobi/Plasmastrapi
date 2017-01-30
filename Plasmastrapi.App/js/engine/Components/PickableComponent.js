@@ -11,7 +11,7 @@ define(["../Objects/Component", "./MeshComponent"], function (Component, MeshCom
 		this.__isHovered = false;
 		this.__isSelected = false;
         // events
-		this.__registerEvents(
+		this.registerEvents(
             'onenable',
             'ondisable',
             'onpick',

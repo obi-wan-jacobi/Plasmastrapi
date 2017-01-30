@@ -4,7 +4,7 @@
     Tool.prototype.constructor = Tool;
     function Tool() {
         InputHandle.call(this);
-        this.__registerEvents(
+        this.registerEvents(
             'onequip',
             'ondiscard'
         );

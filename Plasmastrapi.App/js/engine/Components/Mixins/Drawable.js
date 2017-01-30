@@ -2,7 +2,7 @@ define(function () {
 
     function Drawable(displayLayer) {
         var target = this;
-        if (!target.__registerEvents) {
+        if (!target.registerEvents) {
             throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target must be an instance of EventEmitter');
         }
         if (!target.draw) {
@@ -27,7 +27,7 @@ define(function () {
         });
         target.show = Drawable.prototype.show;
         target.hide = Drawable.prototype.hide;
-        this.__registerEvents(
+        this.registerEvents(
             'onshow',
             'onhide'
         );

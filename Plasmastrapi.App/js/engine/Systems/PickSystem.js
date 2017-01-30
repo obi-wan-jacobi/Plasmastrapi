@@ -12,7 +12,7 @@
         this.__list_mouseup = [];
         this.__list_mousedown = [];
         this.__list_click = [];
-        this.__registerEvents(
+        this.registerEvents(
             'onmouseenter',
 		    'onmousehover',
 		    'onmouseleave',

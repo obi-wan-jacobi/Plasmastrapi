@@ -2,7 +2,7 @@
 
     function Destructible() {
         var target = this;
-        if (!target.__registerEvents) {
+        if (!target.registerEvents) {
             throw new Error(target.constructor.name + ':' + Destructible.constructor.name + ' - Target must be an instance of EventEmitter');
         }
         target.__isDestroyed = false;
@@ -19,7 +19,7 @@
             }
         });
         target.destroy = Destructible.prototype.destroy;
-        target.__registerEvents(
+        target.registerEvents(
             'ondestroy'
         );
     };

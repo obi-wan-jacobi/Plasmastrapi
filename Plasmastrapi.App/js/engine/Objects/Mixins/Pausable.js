@@ -2,7 +2,7 @@
 
     function Pausable(isPausedByEngine) {
         var target = this;
-        if (!target.__registerEvents) {
+        if (!target.registerEvents) {
             throw new Error(target.constructor.name + ':' + Pausable.constructor.name + ' - Target must be an instance of EventEmitter');
         }
         target.__isPaused = false;
@@ -22,7 +22,7 @@
         target.pause = Pausable.prototype.pause;
         target.unpause = Pausable.prototype.unpause;
         target.restart = Pausable.prototype.restart;
-        target.__registerEvents(
+        target.registerEvents(
             'onframe',
             'onpause',
             'onunpause'

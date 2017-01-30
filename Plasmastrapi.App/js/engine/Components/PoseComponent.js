@@ -10,7 +10,7 @@ define(["../Objects/Component", "../Data/Geometry"], function (Component, Geomet
 		this.__position = position;
 		this.__orientation = orientation;
 	    // events
-		this.__registerEvents(
+		this.registerEvents(
             'onpositionchange',
             'onorientationchange'
         );

@@ -6,7 +6,7 @@ define(["../Objects/Component"], function(Component) {
     function CollidableComponent() {
         Component.call(this);
         // events
-        this.__registerEvents(
+        this.registerEvents(
             'oncollision'
         );
 	};

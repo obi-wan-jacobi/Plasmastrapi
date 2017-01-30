@@ -4,7 +4,7 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
     InputHandle.prototype.constructor = InputHandle;
     function InputHandle() {
         EventEmitter.call(this);
-        this.__registerEvents(
+        this.registerEvents(
             'input_onmousemove',
 		    'input_onmousedown',
 		    'input_onmouseup',

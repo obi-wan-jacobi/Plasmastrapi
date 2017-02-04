@@ -1,4 +1,4 @@
-﻿define(["../Base/UIElement", "../../../engine/Components/$Components", "../../Tools/Compatibility/$Compatibility"], function (UIElement, $, $Compatibility) {
+﻿define(["../Base/UIElement", "../../../engine/Namespaces/$Components", "../../Tools/PickableTraits/$PickableTraits"], function (UIElement, $, $PickableTraits) {
 
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
@@ -12,7 +12,7 @@
         pickableComponent.addEventListener('onpick', this, fnOnPick);
 
         // tool compatibility
-        $Compatibility.Pickable.call(pickableComponent);
+        $PickableTraits.Default.call(pickableComponent);
     };
     
     return Button;

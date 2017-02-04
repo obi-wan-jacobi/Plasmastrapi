@@ -1,4 +1,4 @@
-﻿define(["../Base/UIElement", "../../../engine/Components/$Components"], function (UIElement, $) {
+﻿define(["../Base/UIElement", "../../../engine/Namespaces/$Components"], function (UIElement, $) {
 
     Panel.prototype = Object.create(UIElement.prototype);
     Panel.prototype.constructor = Panel;

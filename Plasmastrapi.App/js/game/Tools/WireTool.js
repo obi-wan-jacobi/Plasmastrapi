@@ -1,5 +1,5 @@
-﻿define(["../Objects/Tool", "../../engine/Components/$Components", "../../engine/Data/Geometry", "./Compatibility/$Compatibility", "../Circuits/$Circuits"],
-function (Tool, $, Geometry, $Compatibility, $Circuits) {
+﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Data/Geometry", , "../Namespaces/$Circuits"],
+function (Tool, $, Geometry, $PickableTraits, $Circuits) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
@@ -12,19 +12,22 @@ function (Tool, $, Geometry, $Compatibility, $Circuits) {
     };
     WireTool.prototype.__onequip = function (terminal) {
         // filter pickable entities according to whether we're selecting an input or output terminal
-        var compatibility;
+        var terminalCompatibility;
         this.__selectedTerminal = terminal;
         var pickableComponent = this.__selectedTerminal.getComponent($.PickableComponent);
-        if ($Compatibility.WireableAsInput.resolve(pickableComponent)) {
-            compatibility = $Compatibility.WireableAsOutput
+        if ($PickableTraits.WireableAsInput.resolve(pickableComponent)) {
+            terminalCompatibility = $PickableTraits.WireableAsOutput
             this.__isSelectedTerminalAnInput = true;
-        } else if ($Compatibility.WireableAsOutput.resolve(pickableComponent)) {
-            compatibility = $Compatibility.WireableAsInput
+        } else if ($PickableTraits.WireableAsOutput.resolve(pickableComponent)) {
+            terminalCompatibility = $PickableTraits.WireableAsInput
             this.__isSelectedTerminalAnInput = false;
         } else {
             throw new Error(this.constructor.name + ":onequip - " + terminal.constructor.name + " is not compatible with this tool");
         }
-        this.filterByCompatibility(compatibility);
+        this.filterByTraitsAndCompatibility(
+            new PickableTraitList(terminalCompatibility),
+            new $Traits.TraitList($Traits.DestructionZone, $Traits.DesignZone)
+        );
         // select terminal
         pickableComponent.select();
     };
@@ -60,14 +63,22 @@ function (Tool, $, Geometry, $Compatibility, $Circuits) {
         }
     };
     WireTool.prototype.__pick_onmouseup = function (entities) {
-        // replace the tool wire with a real wire
-        var wire, terminal = entities[0];
-        if (this.__isSelectedTerminalAnInput) {
-            wire = new $Circuits.Wire(terminal, this.__selectedTerminal);
-        } else {
-            wire = new $Circuits.Wire(this.__selectedTerminal, terminal);
+        var wire, terminal = null;
+        // get first terminal
+        for (var i = 0, L = entities.length; i < L; i++) {
+            var pickableComponent = entities[i].getComponent($.PickableComponent);
+            if ($PickableTraits.WireableAsInput.resolve(pickableComponent) || $PickableTraits.WireableAsOutput.resolve(pickableComponent)) {
+                // replace the tool wire with a real wire
+                terminal = entities[i];
+                if (this.__isSelectedTerminalAnInput) {
+                    wire = new $Circuits.Wire(terminal, this.__selectedTerminal);
+                } else {
+                    wire = new $Circuits.Wire(this.__selectedTerminal, terminal);
+                }
+                this.__engine.sceneController.addToCurrentScene(wire);
+                break;
+            }
         }
-        this.__engine.sceneController.addToCurrentScene(wire);
         this.__engine.toolController.equipPickingTool();
     };
 

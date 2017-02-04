@@ -1,5 +1,5 @@
-define(["../engine/Engine", "./Controllers/ToolController", "./Controllers/SceneController"],
-function (Engine, ToolController, SceneController, EntitySystem) {
+define(["../engine/Engine", "./Namespaces/$Controllers"],
+function (Engine, $Controllers) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -10,8 +10,8 @@ function (Engine, ToolController, SceneController, EntitySystem) {
     };
     // private methods
     Game.prototype.__registerAll = function () {
-        this.register('toolController', new ToolController());
-        this.register('sceneController', new SceneController());
+        this.register('toolController', new $Controllers.ToolController());
+        this.register('sceneController', new $Controllers.SceneController());
     };
     Game.prototype.__beginMainLoop = function () {
         var self = this;

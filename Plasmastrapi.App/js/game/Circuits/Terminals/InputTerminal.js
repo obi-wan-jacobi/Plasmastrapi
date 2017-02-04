@@ -1,4 +1,4 @@
-﻿define(["./Terminal", "../../../engine/Components/$Components", "../../Tools/Compatibility/$Compatibility"], function (Terminal, $, $Compatibility) {
+﻿define(["../Base/Terminal", "../../../engine/Namespaces/$Components", "../../Tools/PickableTraits/$PickableTraits"], function (Terminal, $, $PickableTraits) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
@@ -15,7 +15,7 @@
 
         // tool compatibility
         var pickableComponent = this.getComponent($.PickableComponent);
-        $Compatibility.WireableAsInput.call(pickableComponent);
+        $PickableTraits.WireableAsInput.call(pickableComponent);
     };
     
     return InputTerminal;

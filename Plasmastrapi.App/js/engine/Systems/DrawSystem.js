@@ -28,11 +28,11 @@ define(["../Objects/System"],function(System) {
 		ctx.height = this.__engine.canvas.height = this.__engine.canvas.clientHeight;
 		ctx.clearRect(0, 0, ctx.width, ctx.height);
 		this.__fire('ondrawgamebackground', ctx);
-		this.__fire('ondrawgameforeground', ctx);
 		this.__fire('ondrawgameentities', ctx);
+		this.__fire('ondrawgameforeground', ctx);
 		this.__fire('ondrawuibackground', ctx);
-		this.__fire('ondrawuiforeground', ctx);
 		this.__fire('ondrawuientities', ctx);
+		this.__fire('ondrawuiforeground', ctx);
 	};
 	DrawSystem.prototype.__onwindowresize = function() {
 		/*

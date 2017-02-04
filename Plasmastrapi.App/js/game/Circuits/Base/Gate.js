@@ -1,6 +1,6 @@
-﻿define(["../Base/CircuitElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry", "../../../engine/Data/Graphics",
+﻿define(["../Base/CircuitElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry",
 "../Terminals/OutputTerminal", "../Terminals/InputTerminal", "../Terminals/TerminalWireAnchor", "../Wires/TerminalWire"],
-function (CircuitElement, $, Geometry, Graphics, OutputTerminal, InputTerminal, TerminalWireAnchor, TerminalWire) {
+function (CircuitElement, $, Geometry, OutputTerminal, InputTerminal, TerminalWireAnchor, TerminalWire) {
 
     // CLASS Gate
     Gate.prototype = Object.create(CircuitElement.prototype);

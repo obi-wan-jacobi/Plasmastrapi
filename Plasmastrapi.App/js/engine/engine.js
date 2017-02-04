@@ -1,20 +1,21 @@
-define(["./Objects/System", "./Objects/Injector",
-        "./Loaders/ImageLoader", "./Loaders/SpriteLoader",
-        "./Containers/EntityContainer", "./Containers/EventEmitterContainer", "./Containers/PickablesContainer",
-        "./Systems/InputSystem", "./Systems/DrawSystem", "./Systems/PickSystem"],
-    function(System, Injector, ImageLoader, SpriteLoader, EntityContainer, EventEmitterContainer, PickablesContainer, InputSystem, DrawSystem, PickSystem) {
+define([
+    "./Namespaces/$Containers",
+    "./Namespaces/$Loaders",
+    "./Namespaces/$Objects",
+    "./Namespaces/$Systems",
+],
+function ($Containers, $Loaders, $Objects, $Systems) {
 
 	// CLASS Engine
-	Engine.prototype = Object.create(System.prototype);
+    Engine.prototype = Object.create($Objects.System.prototype);
     Engine.prototype.constructor = Engine;
 	function Engine(canvas) {
-	    System.call(this);
+	    $Objects.System.call(this);
 	    // engine instance is it's own reference
 	    delete this.injectEngine;
 	    delete this.__engine;
         // public variables
 	    this.canvas = canvas;
-	    this.injector = new Injector(this);
 	    // pre-init configuration
 		this.__registerLoaders();
 		this.__registerContainers();
@@ -22,18 +23,18 @@ define(["./Objects/System", "./Objects/Injector",
 	};
     // private methods
 	Engine.prototype.__registerLoaders = function() {
-	    this['imageLoader'] = new ImageLoader();
-	    this['spriteLoader'] = new SpriteLoader();
+	    this['imageLoader'] = new $Loaders.ImageLoader();
+	    this['spriteLoader'] = new $Loaders.SpriteLoader();
 	};
 	Engine.prototype.__registerContainers = function () {
-	    this.register('eventEmitterContainer', new EventEmitterContainer());
-	    this.register('entityContainer', new EntityContainer());
-	    this.register('pickablesContainer', new PickablesContainer());
+	    this.register('eventEmitterContainer', new $Containers.EventEmitterContainer());
+	    this.register('entityContainer', new $Containers.EntityContainer());
+	    this.register('pickablesContainer', new $Containers.PickableComponentContainer());
 	};
 	Engine.prototype.__registerSystems = function () {
-	    this.register('inputSystem', new InputSystem());
-	    this.register('drawSystem', new DrawSystem());
-	    this.register('pickSystem', new PickSystem());
+	    this.register('inputSystem', new $Systems.InputSystem());
+	    this.register('drawSystem', new $Systems.DrawSystem());
+	    this.register('pickSystem', new $Systems.PickSystem());
 	};
     // public prototypal variables
 	Object.defineProperties(Engine.prototype, {

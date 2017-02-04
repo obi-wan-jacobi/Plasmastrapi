@@ -1,6 +1,6 @@
-﻿define(["../Base/WireElement", "../../../engine/Components/$Components", "../../../engine/Data/Physics", "../Terminals/InputTerminal", "../Terminals/OutputTerminal",
-"../../Tools/Compatibility/$Compatibility"],
-function (WireElement, $, Physics, InputTerminal, OutputTerminal, $Compatibility) {
+﻿define(["../Base/WireElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Physics", "../Terminals/InputTerminal", "../Terminals/OutputTerminal",
+"../../Tools/PickableTraits/$PickableTraits"],
+function (WireElement, $, Physics, InputTerminal, OutputTerminal, $PickableTraits) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
@@ -27,7 +27,7 @@ function (WireElement, $, Physics, InputTerminal, OutputTerminal, $Compatibility
         this.addComponent(pickableComponent);
 
         // tool compatibility
-        $Compatibility.Cuttable.call(pickableComponent);
+        $PickableTraits.Cuttable.call(pickableComponent);
     };
     Wire.prototype.__updateMeshComponent = function () {
         var lineComponent = this.getComponent($.LineComponent);

@@ -1,4 +1,4 @@
-﻿define(["../Objects/Tool", "../../engine/Components/$Components", "../../engine/Data/Geometry", "../UI/Traits/$Traits"], function (Tool, $, Geometry, $Traits) {
+﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Data/Geometry", "../UI/Traits/$Traits"], function (Tool, $, Geometry, $Traits) {
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
@@ -8,7 +8,7 @@
         this.__previousCursorPosition = null
     };
     PlacingTool.prototype.__onequip = function (entity) {
-        this.filterByTraits($Traits.DesignZone);
+        this.filterByTraits(new $Traits.TraitList($Traits.DestructionZone, $Traits.DesignZone));
         this.__equippedEntity = entity;
         this.__previousCursorPosition = null;
     };

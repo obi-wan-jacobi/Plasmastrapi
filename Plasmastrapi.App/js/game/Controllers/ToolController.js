@@ -1,12 +1,7 @@
 ﻿define(["../../engine/Objects/Controller",
-        "../../engine/Components/$Components",
-        "../Tools/NoTool",
-        "../Tools/PickingTool",
-        "../Tools/PlacingTool",
-        "../Tools/WireTool",
-        "../Tools/CuttingTool",
-        "../Tools/TrashTool"],
-function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool, TrashTool) {
+        "../../engine/Namespaces/$Components",
+        "../Tools/$Tools"],
+function (Controller, $, $Tools) {
 
     // CLASS ToolController
     ToolController.prototype = Object.create(Controller.prototype);
@@ -15,10 +10,10 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
         Controller.call(this);
         this.__tool = null;
         this.__tools = [];
-        this.__noTool = this.__tools[0] = new NoTool();
-        this.__pickingTool = this.__tools[1] = new PickingTool();
-        this.__placingTool = this.__tools[2] = new PlacingTool();
-        this.__wireTool = this.__tools[3] = new WireTool();
+        this.__noTool = this.__tools[0] = new $Tools.NoTool();
+        this.__pickingTool = this.__tools[1] = new $Tools.PickingTool();
+        this.__placingTool = this.__tools[2] = new $Tools.PlacingTool();
+        this.__wireTool = this.__tools[3] = new $Tools.WireTool();
         //this.__CuttingTool = this.__tools[4] = new CuttingTool();
         //this.__TrashTool = this.__tools[5] = new TrashTool();
     };
@@ -49,18 +44,27 @@ function (Controller, $, NoTool, PickingTool, PlacingTool, WireTool, CuttingTool
             }
         }
     };
-    ToolController.prototype.filterByCompatibility = function (Compatibility) {
+    ToolController.prototype.filterByTraits = function (traitList) {
         this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (Compatibility.resolve(pickableComponent)) {
+            if (traitList.resolve(pickableComponent)) {
                 pickableComponent.enable();
             } else {
                 pickableComponent.disable();
             }
         });
     };
-    ToolController.prototype.filterByTraits = function (Trait) {
+    ToolController.prototype.filterByCompatibility = function (compatibilityList) {
         this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (Trait.resolve(pickableComponent)) {
+            if (compatibilityList.resolve(pickableComponent)) {
+                pickableComponent.enable();
+            } else {
+                pickableComponent.disable();
+            }
+        });
+    };
+    ToolController.prototype.filterByTraitsAndCompatibility = function (traitList, compatibilityList) {
+        this.__engine.pickablesContainer.forEach(function (pickableComponent) {
+            if (traitList.resolve(pickableComponent) || compatibilityList.resolve(pickableComponent)) {
                 pickableComponent.enable();
             } else {
                 pickableComponent.disable();

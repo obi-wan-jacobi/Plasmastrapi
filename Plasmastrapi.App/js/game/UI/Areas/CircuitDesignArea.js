@@ -1,4 +1,4 @@
-﻿define(["./Area", "../../../engine/Data/Graphics", "../Traits/$Traits"], function (Area, Graphics, $Traits) {
+﻿define(["./Area", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../Traits/$Traits"], function (Area, $, Graphics, $Traits) {
 
     // CLASS CircuitDesignArea
     CircuitDesignArea.prototype = Object.create(Area.prototype);
@@ -10,7 +10,8 @@
         // inherits from
         Area.call(this, x, y, imageHandle);
         // apply traits
-        $Traits.DesignZone.call(this);
+        var pickableComponent = this.getComponent($.PickableComponent);
+        $Traits.DesignZone.call(pickableComponent);
     };
     
     return CircuitDesignArea;

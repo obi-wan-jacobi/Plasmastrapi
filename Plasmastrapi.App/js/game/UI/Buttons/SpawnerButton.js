@@ -1,4 +1,4 @@
-﻿define(["./Button", "../../../engine/Components/$Components", "../../../engine/Data/Graphics"], function (Button, $, Graphics) {
+﻿define(["./Button", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics"], function (Button, $, Graphics) {
 
     // CLASS SpawnerButton
     SpawnerButton.prototype = Object.create(Button.prototype);

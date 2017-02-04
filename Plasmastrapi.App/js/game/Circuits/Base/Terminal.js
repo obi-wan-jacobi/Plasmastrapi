@@ -1,4 +1,4 @@
-﻿define(["../Base/CircuitElement", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"],
+﻿define(["../Base/CircuitElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry"],
 function (CircuitElement, $, Geometry) {
 
     // CLASS Terminal

@@ -1,4 +1,4 @@
-﻿define(["./Terminal", "../../../engine/Components/$Components", "../../Tools/Compatibility/$Compatibility"], function (Terminal, $, $Compatibility) {
+﻿define(["../Base/Terminal", "../../../engine/Namespaces/$Components", "../../Tools/PickableTraits/$PickableTraits"], function (Terminal, $, $PickableTraits) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
@@ -8,7 +8,7 @@
         this.__defaultFrameIndex = 0;
         // tool compatibility
         var pickableComponent = this.getComponent($.PickableComponent);
-        $Compatibility.WireableAsOutput.call(pickableComponent);
+        $PickableTraits.WireableAsOutput.call(pickableComponent);
     };
     
     return OutputTerminal;

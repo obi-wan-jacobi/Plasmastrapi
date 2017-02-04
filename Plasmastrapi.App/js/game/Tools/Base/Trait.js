@@ -1,21 +1,20 @@
 ﻿define(function () {
 
-    function Compatible(Compatibility) {
+    function Trait(TraitType) {
         Object.defineProperties(this, {
-            ['is' + Compatibility.name]: {
+            ['is' +TraitType.name]: {
                 get: function () {
                     return true;
                 }
             }
         });
-        Compatibility.resolve = Compatible.prototype.resolve.bind(Compatibility);
     };
-    Compatible.prototype.resolve = function (entity) {
+    Trait.prototype.resolve = function (entity) {
         if (entity["is" + this.name]) {
             return true;
         }
         return false;
     };
 
-    return Compatible;
+    return Trait;
 });

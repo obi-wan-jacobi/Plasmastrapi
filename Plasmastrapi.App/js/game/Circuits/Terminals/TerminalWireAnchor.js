@@ -1,4 +1,4 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
 
     // CLASS TerminalWireAnchor
     TerminalWireAnchor.prototype = Object.create(Entity.prototype);

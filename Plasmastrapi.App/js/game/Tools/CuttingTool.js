@@ -1,4 +1,4 @@
-﻿define(["../Objects/Tool"], function (Tool) {
+﻿define(["./Base/Tool"], function (Tool) {
 
     CuttingTool.prototype = Object.create(Tool.prototype);
     CuttingTool.prototype.constructor = CuttingTool;

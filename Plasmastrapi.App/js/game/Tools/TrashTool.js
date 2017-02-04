@@ -1,4 +1,4 @@
-﻿define(["../Objects/Tool"], function (Tool) {
+﻿define(["./Base/Tool"], function (Tool) {
 
     TrashTool.prototype = Object.create(Tool.prototype);
     TrashTool.prototype.constructor = TrashTool;

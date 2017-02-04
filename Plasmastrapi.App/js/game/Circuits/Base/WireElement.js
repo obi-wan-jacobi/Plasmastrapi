@@ -1,5 +1,5 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Components/$Components", "../../../engine/Data/Graphics", "../../Tools/Compatibility/$Compatibility"],
-function (Entity, $, Graphics, $Compatibility) {
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Tools/PickableTraits/$PickableTraits"],
+function (Entity, $, Graphics, $PickableTraits) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);

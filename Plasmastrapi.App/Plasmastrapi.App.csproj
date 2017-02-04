@@ -96,12 +96,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\require.js" />
-    <Content Include="js\engine\Containers\PickablesContainer.js" />
+    <Content Include="js\engine\Containers\PickableComponentContainer.js" />
     <Content Include="js\engine\Loaders\ImageLoader.js" />
     <Content Include="js\engine\Loaders\SpriteLoader.js" />
+    <Content Include="js\engine\Namespaces\%24Containers.js" />
+    <Content Include="js\engine\Namespaces\%24Data.js" />
+    <Content Include="js\engine\Namespaces\%24Objects.js" />
+    <Content Include="js\engine\Namespaces\%24Systems.js" />
+    <Content Include="js\engine\Namespaces\%24Loaders.js" />
     <Content Include="js\engine\Objects\Base.js" />
     <Content Include="js\engine\Objects\EventQueue.js" />
-    <Content Include="js\engine\Objects\Injector.js" />
     <Content Include="js\engine\Objects\Mixins\Destructible.js" />
     <Content Include="js\engine\Objects\Mixins\Loadable.js" />
     <Content Include="js\engine\Objects\Mixins\Pausable.js" />
@@ -113,7 +117,7 @@
     <Content Include="js\game\Controllers\ToolController.js" />
     <Content Include="js\game\Circuits\Base\CircuitElement.js" />
     <Content Include="js\game\Circuits\Gates\AndGate.js" />
-    <Content Include="js\game\Circuits\Gates\Gate.js" />
+    <Content Include="js\game\Circuits\Base\Gate.js" />
     <Content Include="js\game\Circuits\Gates\NandGate.js" />
     <Content Include="js\game\Circuits\Gates\OrGate.js" />
     <Content Include="js\game\Circuits\Gates\XorGate.js" />
@@ -121,40 +125,47 @@
     <Content Include="js\game\Circuits\Power\PowerSource.js" />
     <Content Include="js\game\Circuits\Terminals\InputTerminal.js" />
     <Content Include="js\game\Circuits\Terminals\OutputTerminal.js" />
-    <Content Include="js\game\Circuits\Terminals\Terminal.js" />
+    <Content Include="js\game\Circuits\Base\Terminal.js" />
     <Content Include="js\game\Circuits\Wires\TerminalWire.js" />
     <Content Include="js\game\Circuits\Terminals\TerminalWireAnchor.js" />
     <Content Include="js\game\Circuits\Wires\Wire.js" />
-    <Content Include="js\engine\Components\%24Components.js" />
+    <Content Include="js\engine\Namespaces\%24Components.js" />
+    <Content Include="js\game\Namespaces\%24Assets.js" />
+    <Content Include="js\game\Namespaces\%24Containers.js" />
+    <Content Include="js\game\Namespaces\%24Scenes.js" />
+    <Content Include="js\game\Namespaces\%24Controllers.js" />
     <Content Include="js\game\Scenes\CircuitDesignScene.js" />
     <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\game\Scenes\NoScene.js" />
-    <Content Include="js\game\Tools\Compatibility\%24Compatibility.js" />
-    <Content Include="js\game\Tools\Compatibility\Compatible.js" />
-    <Content Include="js\game\Tools\Compatibility\Cuttable.js" />
-    <Content Include="js\game\Tools\Compatibility\Placeable.js" />
-    <Content Include="js\game\Tools\Compatibility\Pickable.js" />
-    <Content Include="js\game\Tools\Compatibility\Trashable.js" />
-    <Content Include="js\game\Tools\Compatibility\WireableAsInput.js" />
-    <Content Include="js\game\Tools\Compatibility\WireableAsOutput.js" />
+    <Content Include="js\game\Namespaces\%24Tools.js" />
+    <Content Include="js\game\Tools\PickableTraits\Cuttable.js" />
+    <Content Include="js\game\Tools\PickableTraits\Placeable.js" />
+    <Content Include="js\game\Tools\PickableTraits\Default.js" />
+    <Content Include="js\game\Tools\PickableTraits\Trashable.js" />
+    <Content Include="js\game\Tools\PickableTraits\WireableAsInput.js" />
+    <Content Include="js\game\Tools\PickableTraits\WireableAsOutput.js" />
+    <Content Include="js\game\Tools\Base\Cursor.js" />
+    <Content Include="js\game\Tools\Cursors\CuttingToolCursor.js" />
+    <Content Include="js\game\Tools\Cursors\TrashToolCursor.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
-    <Content Include="js\game\Objects\Tool.js" />
-    <Content Include="js\game\UI\Traits\%24Traits.js" />
-    <Content Include="js\game\UI\Traits\Trait.js" />
-    <Content Include="js\game\UI\Traits\DesignZone.js" />
-    <Content Include="js\game\UI\Traits\DestructionZone.js" />
+    <Content Include="js\game\Tools\Base\Tool.js" />
+    <Content Include="js\game\UI\Buttons\ToolButton.js" />
+    <Content Include="js\game\Tools\Base\Trait.js" />
+    <Content Include="js\game\Tools\PickableTraits\DesignZone.js" />
+    <Content Include="js\game\Tools\PickableTraits\DestructionZone.js" />
     <Content Include="js\game\Tools\TrashTool.js" />
     <Content Include="js\game\Tools\PickingTool.js" />
     <Content Include="js\game\Tools\NoTool.js" />
     <Content Include="js\game\Tools\PlacingTool.js" />
     <Content Include="js\game\Tools\WireTool.js" />
-    <Content Include="js\game\UI\Areas\Area.js" />
+    <Content Include="js\game\UI\Base\Area.js" />
     <Content Include="js\game\UI\Areas\CircuitDesignArea.js" />
     <Content Include="js\game\UI\Base\UIElement.js" />
-    <Content Include="js\game\UI\Buttons\Button.js" />
+    <Content Include="js\game\UI\Base\Button.js" />
     <Content Include="js\game\UI\Buttons\SpawnerButton.js" />
     <Content Include="js\game\UI\Panels\CircuitDesignToolbar.js" />
-    <Content Include="js\game\UI\Panels\Panel.js" />
+    <Content Include="js\game\UI\Base\Panel.js" />
+    <Content Include="js\game\Tools\PickableTraits\PickableTraitList.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -230,10 +241,10 @@
     <Content Include="js\engine\Systems\InputSystem.js" />
     <Content Include="js\engine\Systems\MotionSystem.js" />
     <Content Include="js\game\Game.js" />
-    <Content Include="js\game\Circuits\%24Circuits.js" />
+    <Content Include="js\game\Namespaces\%24Circuits.js" />
     <Content Include="js\game\Containers\WireContainer.js" />
     <Content Include="js\game\Services\RevisionService.js" />
-    <Content Include="js\game\UI\%24UI.js" />
+    <Content Include="js\game\Namespaces\%24UI.js" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -241,9 +252,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="js\game\Assets\Images\" />
     <Folder Include="js\game\Circuits\FlipFlops\" />
-    <Folder Include="js\game\Circuits\Helpers\" />
     <Folder Include="js\game\Circuits\Switches\" />
     <Folder Include="js\game\Systems\" />
   </ItemGroup>

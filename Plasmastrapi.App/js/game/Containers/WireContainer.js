@@ -1,4 +1,4 @@
-define(["../../engine/Objects/Container", "../Lab/Wires/Wire"], function(Container, Wire) {
+define(["../../engine/Objects/Container", "../Ciruits/Wires/Wire"], function(Container, Wire) {
 
     // CLASS WireContainer
     WireContainer.prototype = Object.create(Container.prototype);

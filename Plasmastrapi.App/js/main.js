@@ -2,13 +2,13 @@ require.config({
     baseUrl: 'js'
 });
 
-define(["./game/Game", "./game/Assets/images", "./game/Assets/sprites"], function (Game, images, sprites) {
+define(["./game/Game", "./Namespaces/$Assets"], function (Game, $Assets) {
 
     var game = new Game(document.getElementById("game-canvas"));
 
     // load assets
-    game.imageLoader.download(images).done(function () {
-        game.spriteLoader.download(sprites).done(function () {
+    game.imageLoader.download($Assets.images).done(function () {
+        game.spriteLoader.download($Assets.sprites).done(function () {
             // load game/engine
             game.start();
 

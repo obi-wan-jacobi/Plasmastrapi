@@ -1,4 +1,4 @@
-﻿define(["../Base/UIElement", "../../../engine/Namespaces/$Components", "../../Tools/PickableTraits/$PickableTraits"], function (UIElement, $, $PickableTraits) {
+﻿define(["../Base/UIElement", "../../../engine/Namespaces/$Components", "../../Namespaces/$PickableTraits"], function (UIElement, $, $PickableTraits) {
 
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);

@@ -1,20 +1,20 @@
 ﻿define(function () {
 
-    function Trait(TraitType) {
+    function PickableTrait(PickableTraitType) {
         Object.defineProperties(this, {
-            ['is' +TraitType.name]: {
+            ['is' +PickableTraitType.name]: {
                 get: function () {
                     return true;
                 }
             }
         });
     };
-    Trait.prototype.resolve = function (entity) {
+    PickableTrait.prototype.resolve = function (entity) {
         if (entity["is" + this.name]) {
             return true;
         }
         return false;
     };
 
-    return Trait;
+    return PickableTrait;
 });

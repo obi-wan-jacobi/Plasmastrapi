@@ -1,4 +1,4 @@
-﻿define(["../Base/Terminal", "../../../engine/Namespaces/$Components", "../../Tools/PickableTraits/$PickableTraits"], function (Terminal, $, $PickableTraits) {
+﻿define(["../Base/Terminal", "../../../engine/Namespaces/$Components", "../../Namespaces/$PickableTraits"], function (Terminal, $, $PickableTraits) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);

@@ -1,9 +1,9 @@
-﻿define(["./Compatible"], function (Compatible) {
+﻿define(["../Base/PickableTrait"], function (PickableTrait) {
 
     function Default() {
-        Compatible.call(this, Default);
+        PickableTrait.call(this, Default);
     };
-    Default.resolve = Compatible.prototype.resolve;
+    Default.resolve = PickableTrait.prototype.resolve;
 
     return Default;
 });

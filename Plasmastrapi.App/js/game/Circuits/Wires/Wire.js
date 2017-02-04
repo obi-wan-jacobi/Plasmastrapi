@@ -1,5 +1,5 @@
 ﻿define(["../Base/WireElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Physics", "../Terminals/InputTerminal", "../Terminals/OutputTerminal",
-"../../Tools/PickableTraits/$PickableTraits"],
+"../../Namespaces/$PickableTraits"],
 function (WireElement, $, Physics, InputTerminal, OutputTerminal, $PickableTraits) {
 
     // CLASS Wire

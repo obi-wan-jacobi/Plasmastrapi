@@ -1,4 +1,4 @@
-﻿define(["./Area", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../Traits/$Traits"], function (Area, $, $Traits) {
+﻿define(["../Base/Panel", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../Namespaces/$PickableTraits"], function (Panel, $, $PickableTraits) {
 
     CircuitDesignToolbar.prototype = Object.create(Panel.prototype);
     CircuitDesignToolbar.prototype.constructor = CircuitDesignToolbar;
@@ -6,7 +6,7 @@
         Panel.call(this);
         // apply traits
         var pickableComponent = this.getComponent($.PickableComponent);
-        $Traits.DestructionZone.call(pickableComponent);
+        $PickableTraits.DestructionZone.call(pickableComponent);
     };
 
     return CircuitDesignToolbar;

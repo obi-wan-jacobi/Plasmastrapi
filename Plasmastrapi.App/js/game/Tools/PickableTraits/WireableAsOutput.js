@@ -1,9 +1,9 @@
-﻿define(["./Compatible"], function (Compatible) {
+﻿define(["../Base/PickableTrait"], function (PickableTrait) {
 
     function WireableAsOutput() {
-        Compatible.call(this, WireableAsOutput);
+        PickableTrait.call(this, WireableAsOutput);
     };
-    WireableAsOutput.resolve = Compatible.prototype.resolve;
+    WireableAsOutput.resolve = PickableTrait.prototype.resolve;
 
     return WireableAsOutput;
 });

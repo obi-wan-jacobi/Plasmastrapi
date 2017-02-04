@@ -1,9 +1,9 @@
-﻿define(["./Compatible"], function (Compatible) {
+﻿define(["../Base/PickableTrait"], function (PickableTrait) {
 
     function Trashable() {
-        Compatible.call(this, Trashable);
+        PickableTrait.call(this, Trashable);
     };
-    Trashable.resolve = Compatible.prototype.resolve;
+    Trashable.resolve = PickableTrait.prototype.resolve;
 
     return Trashable;
 });

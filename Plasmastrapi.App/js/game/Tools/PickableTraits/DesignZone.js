@@ -1,9 +1,9 @@
-﻿define(["./Trait"], function (Trait) {
+﻿define(["../Base/PickableTrait"], function (PickableTrait) {
 
     function DesignZone() {
-        Trait.call(this, DesignZone);
+        PickableTrait.call(this, DesignZone);
     };
-    DesignZone.resolve = Trait.prototype.resolve;
+    DesignZone.resolve = PickableTrait.prototype.resolve;
 
     return DesignZone;
 });

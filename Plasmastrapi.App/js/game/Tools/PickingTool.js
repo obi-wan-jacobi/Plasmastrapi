@@ -1,4 +1,4 @@
-﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "./PickableTraits/$PickableTraits"], function (Tool, $, $PickableTraits) {
+﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../Namespaces/$PickableTraits"], function (Tool, $, $PickableTraits) {
 
     PickingTool.prototype = Object.create(Tool.prototype);
     PickingTool.prototype.constructor = PickingTool;

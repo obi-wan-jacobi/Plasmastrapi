@@ -1,4 +1,9 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry", "../../../engine/Data/Graphics", "../../Tools/PickableTraits/$PickableTraits"],
+﻿define([
+    "../../../engine/Objects/Entity",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Data/Geometry",
+    "../../../engine/Data/Graphics",
+    "../../Namespaces/$PickableTraits"],
 function (Entity, $, Geometry, Graphics, $PickableTraits) {
 
     // CLASS CircuitElement

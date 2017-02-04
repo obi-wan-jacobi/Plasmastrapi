@@ -1,4 +1,4 @@
-﻿define(["./Gate"], function (Gate) {
+﻿define(["../Base/Gate"], function (Gate) {
 
     // CLASS OrGate
     OrGate.prototype = Object.create(Gate.prototype);

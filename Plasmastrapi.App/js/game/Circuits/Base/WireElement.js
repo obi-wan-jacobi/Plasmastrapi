@@ -1,4 +1,4 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Tools/PickableTraits/$PickableTraits"],
+﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"],
 function (Entity, $, Graphics, $PickableTraits) {
 
     // CLASS WireElement

@@ -26,7 +26,7 @@ function (Tool, $, Geometry, $PickableTraits, $Circuits) {
         }
         this.filterByTraitsAndCompatibility(
             new PickableTraitList(terminalCompatibility),
-            new $Traits.TraitList($Traits.DestructionZone, $Traits.DesignZone)
+            new $PickableTraits.TraitList($PickableTraits.DestructionZone, $PickableTraits.DesignZone)
         );
         // select terminal
         pickableComponent.select();

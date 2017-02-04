@@ -132,6 +132,8 @@
     <Content Include="js\engine\Namespaces\%24Components.js" />
     <Content Include="js\game\Namespaces\%24Assets.js" />
     <Content Include="js\game\Namespaces\%24Containers.js" />
+    <Content Include="js\game\Namespaces\%24Cursors.js" />
+    <Content Include="js\game\Namespaces\%24PickableTraits.js" />
     <Content Include="js\game\Namespaces\%24Scenes.js" />
     <Content Include="js\game\Namespaces\%24Controllers.js" />
     <Content Include="js\game\Scenes\CircuitDesignScene.js" />
@@ -150,7 +152,7 @@
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Tools\Base\Tool.js" />
     <Content Include="js\game\UI\Buttons\ToolButton.js" />
-    <Content Include="js\game\Tools\Base\Trait.js" />
+    <Content Include="js\game\Tools\Base\PickableTrait.js" />
     <Content Include="js\game\Tools\PickableTraits\DesignZone.js" />
     <Content Include="js\game\Tools\PickableTraits\DestructionZone.js" />
     <Content Include="js\game\Tools\TrashTool.js" />

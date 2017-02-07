@@ -15,11 +15,15 @@
 		    'pick_onmouseup',
 		    'pick_onclick'
         );
-        if (CursorConstructor) {
-            this.cursor = new CursorConstructor(x, y, 15, 15, this);
-        }
+        this.__CursorConstructor = CursorConstructor;
     };
     // private methods
+    Tool.prototype.__oninit = function () {
+        if (this.__CursorConstructor) {
+            this.cursor = new this.__CursorConstructor(0, 0, 35, 35, this);
+            this.cursor.injectEngine(this.__engine);
+        }
+    };
     Tool.prototype.__onload = function () {
         InputHandle.prototype.__onload.call(this);
         this.__engine.pickSystem.addEventListener('onmousemove', this, this.__$pick_onmousemove);
@@ -41,12 +45,6 @@
         this.__engine.pickSystem.removeEventListener('onmouseleave', this, this.__$pick_onmouseleave);
     };
     // public methods
-    Tool.prototype.injectEngine = function (engine) {
-        InputHandle.prototype.injectEngine.call(this, engine);
-        if (this.cursor) {
-            this.cursor.injectEngine(this.__engine);
-        }
-    };
     Tool.prototype.equip = function (entity) {
         this.load();
         this.__fire('onequip', entity);

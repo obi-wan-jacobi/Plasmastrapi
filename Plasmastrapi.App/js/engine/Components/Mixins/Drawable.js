@@ -11,8 +11,8 @@ define(function () {
         if (!displayLayer) {
             throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - A display layer must be specified');
         }
-        this.__displayLayer = displayLayer;
-        this.__isVisible = false;
+        target.__displayLayer = displayLayer;
+        target.__isVisible = false;
         Object.defineProperties(target, {
             'isDrawable': {
                 get: function () {
@@ -33,11 +33,11 @@ define(function () {
         );
         var fnOnLoadProxy = target.__onload || function () { };
         target.__onload = function () {
-            fnOnLoadProxy.call(target);
+            fnOnLoadProxy.call(this);
 	        this.show();
 	    };
 	    var fnOnUnloadProxy = target.__onunload || function () { };
-	    Drawable.prototype.__onunload = function () {
+	    target.__onunload = function () {
 	        fnOnUnloadProxy.call(this);
 	        this.hide();
 	    };

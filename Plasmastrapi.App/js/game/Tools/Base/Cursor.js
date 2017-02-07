@@ -25,12 +25,12 @@ function (Entity, $, Geometry, Graphics) {
 
         // register events
         this.registerEvents(
-            'tool_input_onmousemove',
-		    'tool_input_onmousedown',
-		    'tool_input_onmouseup',
-		    'tool_input_onclick',
-            'tool_input_onkeydown',
-		    'tool_input_onkeyup',
+            'onmousemove',
+		    'onmousedown',
+		    'onmouseup',
+		    'onclick',
+            'onkeydown',
+		    'onkeyup',
             'tool_pick_onmouseenter',
 		    'tool_pick_onmousehover',
 		    'tool_pick_onmouseleave',
@@ -43,12 +43,14 @@ function (Entity, $, Geometry, Graphics) {
         );
 
         // configure tool event listeners
-        tool.addEventListener('onmousemove', this, this.__$tool_input_onmousemove);
-        tool.addEventListener('onmousedown', this, this.__$tool_input_onmousedown);
-        tool.addEventListener('onmouseup', this, this.__$tool_input_onmouseup);
-        tool.addEventListener('onclick', this, this.__$tool_input_onclick);
-        tool.addEventListener('onkeydown', this, this.__$tool_input_onkeydown);
-        tool.addEventListener('onkeyup', this, this.__$tool_input_onkeyup);
+        tool.addEventListener('onload', this, this.load);
+        tool.addEventListener('onunload', this, this.unload);
+        tool.addEventListener('onmousemove', this, this.__$onmousemove);
+        tool.addEventListener('onmousedown', this, this.__$onmousedown);
+        tool.addEventListener('onmouseup', this, this.__$onmouseup);
+        tool.addEventListener('onclick', this, this.__$onclick);
+        tool.addEventListener('onkeydown', this, this.__$onkeydown);
+        tool.addEventListener('onkeyup', this, this.__$onkeyup);
         tool.addEventListener('pick_onmouseenter', this, this.__$tool_pick_onmouseenter);
         tool.addEventListener('pick_onmousehover', this, this.__$tool_pick_onmousehover);
         tool.addEventListener('pick_onmouseleave', this, this.__$tool_pick_onmouseleave);
@@ -59,10 +61,9 @@ function (Entity, $, Geometry, Graphics) {
         tool.addEventListener('onequip', this, this.__$tool_onequip);
         tool.addEventListener('ondiscard', this, this.__$tool_ondiscard);
     };
-    Cursor.prototype.__tool_input_onmousemove = function () {
+    Cursor.prototype.__onmousemove = function (cursor) {
         var poseComponent = this.getComponent($.PoseComponent);
-        var position = poseComponent.position;
-        poseComponent.position = new Geometry.Position(position.x + this.__offsetX, position.y + this.__offsetY);
+        poseComponent.position = new Geometry.Position(cursor.x + this.__offsetX, cursor.y + this.__offsetY);
     };
 
     return Cursor;

@@ -7,10 +7,7 @@ needs testing:
 - destroy->purge
 
 in progress:
-- pickingTool, placingTool
 - wireTool logic
-	- refactor pickables filtering to accept list of compatibilities
-		- need to allow Design/Destruction Zones in order to destroy tool wires if "nothing"/no terminal is selected on mouse-up 
 	- disallow multiple wires between the same two terminals
 	
 missing features:

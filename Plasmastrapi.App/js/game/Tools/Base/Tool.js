@@ -1,9 +1,12 @@
-﻿define(["../../../engine/Objects/InputHandle"], function (InputHandle) {
+﻿define(["../../../engine/Objects/InputHandle", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data"],
+function (InputHandle, $, $Data) {
 
     Tool.prototype = Object.create(InputHandle.prototype);
     Tool.prototype.constructor = Tool;
-    function Tool(x, y, CursorConstructor) {
+    function Tool(CursorConstructor) {
         InputHandle.call(this);
+        this.__cursorOffsetX = 35;
+        this.__cursorOffsetY = 35;
         this.registerEvents(
             'onequip',
             'ondiscard',
@@ -20,8 +23,8 @@
     // private methods
     Tool.prototype.__oninit = function () {
         if (this.__CursorConstructor) {
-            this.cursor = new this.__CursorConstructor(0, 0, 35, 35, this);
-            this.cursor.injectEngine(this.__engine);
+            this.__cursor = new this.__CursorConstructor(this.__cursorOffsetX, this.__cursorOffsetY, this);
+            this.__cursor.injectEngine(this.__engine);
         }
     };
     Tool.prototype.__onload = function () {
@@ -45,8 +48,12 @@
         this.__engine.pickSystem.removeEventListener('onmouseleave', this, this.__$pick_onmouseleave);
     };
     // public methods
-    Tool.prototype.equip = function (entity) {
+    Tool.prototype.equip = function (x, y, entity) {
         this.load();
+        if (this.__cursor) {
+            var poseComponent = this.__cursor.getComponent($.PoseComponent);
+            poseComponent.position = new $Data.Geometry.Position(x + this.__cursorOffsetX, y + this.__cursorOffsetY);
+        }
         this.__fire('onequip', entity);
     };
     Tool.prototype.discard = function () {

@@ -2,8 +2,8 @@
 
     NoTool.prototype = Object.create(Tool.prototype);
     NoTool.prototype.constructor = NoTool;
-    function NoTool(x, y) {
-        Tool.call(this, x, y);
+    function NoTool() {
+        Tool.call(this);
     };
 
     return NoTool;

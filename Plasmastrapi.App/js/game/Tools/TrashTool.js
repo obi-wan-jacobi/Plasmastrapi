@@ -2,8 +2,8 @@
 
     TrashTool.prototype = Object.create(Tool.prototype);
     TrashTool.prototype.constructor = TrashTool;
-    function TrashTool(x, y) {
-        Tool.call(this, x, y, $Cursors.TrashToolCursor);
+    function TrashTool() {
+        Tool.call(this, $Cursors.TrashToolCursor);
     };
     TrashTool.prototype.__onequip = function () {
         this.setPickableTraitListFilter(

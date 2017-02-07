@@ -2,8 +2,8 @@
 
     PickingTool.prototype = Object.create(Tool.prototype);
     PickingTool.prototype.constructor = PickingTool;
-    function PickingTool(x, y) {
-        Tool.call(this, x, y);
+    function PickingTool() {
+        Tool.call(this);
     };
     PickingTool.prototype.__onequip = function () {
         this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.Default));

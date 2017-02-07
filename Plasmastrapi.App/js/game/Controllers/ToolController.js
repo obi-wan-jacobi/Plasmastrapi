@@ -8,6 +8,8 @@ function (Controller, $, $Tools) {
     ToolController.prototype.constructor = ToolController;
     function ToolController() {
         Controller.call(this);
+        this.__x = null;
+        this.__y = null;
         this.__tool = null;
         this.__tools = [];
         this.__noTool = this.__tools[0] = new $Tools.NoTool();
@@ -22,19 +24,25 @@ function (Controller, $, $Tools) {
         if (this.__tool) {
             this.__equip(this__tool);
         }
+        this.__engine.inputSystem.addEventListener('onmousemove', this, this.__updateLastPosition);
     };
     ToolController.prototype.__onunload = function () {
         if (this.__tool) {
             this.__tool.discard();
         }
+        this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__updateLastPosition);
     };
     ToolController.prototype.__equip = function (tool, entity) {
         if (this.__tool) {
             this.__tool.discard();
         }
         this.__tool = tool;
-        this.__tool.equip(entity);
+        this.__tool.equip(this.__x || -100, this.__y, entity);
     };
+    ToolController.prototype.__updateLastPosition = function (position) {
+        this.__x = position.x;
+        this.__y = position.y;
+    }
     // public methods
     ToolController.prototype.injectEngine = function (engine) {
         Controller.prototype.injectEngine.call(this, engine);

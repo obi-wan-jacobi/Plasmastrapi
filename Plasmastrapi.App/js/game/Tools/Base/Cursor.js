@@ -4,15 +4,15 @@ function (Entity, $, Geometry, Graphics) {
     // CLASS Cursor
     Cursor.prototype = Object.create(Entity.prototype);
     Cursor.prototype.constructor = Cursor;
-    function Cursor(x, y, offsetX, offsetY, tool) {
+    function Cursor(offsetX, offsetY, tool) {
         // inherits from
         Entity.call(this);
 
         this.__offsetX = offsetX;
         this.__offsetY = offsetY;
 
-        // pose
-        var position = new Geometry.Position(x, y);
+        // initialize pose to be off-screen
+        var position = new Geometry.Position(-offsetX - this.sprite.frames[0].width, -offsetY - this.sprite.frames[0].height);
         var poseComponent = new $.PoseComponent(position, 0);
 
         // sprite

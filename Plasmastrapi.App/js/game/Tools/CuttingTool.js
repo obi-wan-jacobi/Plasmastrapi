@@ -2,8 +2,8 @@
 
     CuttingTool.prototype = Object.create(Tool.prototype);
     CuttingTool.prototype.constructor = CuttingTool;
-    function CuttingTool(x, y) {
-        Tool.call(this, x, y);
+    function CuttingTool() {
+        Tool.call(this);
     };
 
     return CuttingTool;

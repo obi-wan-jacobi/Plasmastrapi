@@ -3,8 +3,8 @@ function (Tool, $, Geometry, $PickableTraits, $Circuits) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
-    function WireTool(x, y) {
-        Tool.call(this, x, y);
+    function WireTool() {
+        Tool.call(this);
         this.__selectedTerminal = null;
         this.__toolWire = null;
         this.__terminalHandle = null;

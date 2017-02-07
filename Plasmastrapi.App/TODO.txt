@@ -41,6 +41,7 @@ user experience:
 - 
 
 tech debt:
+- EventEmitter mixins should check for an engine instance before being loaded/activated
 - blue background image is needlessly large
 - require.js --> configure paths for easier module loading
 - project manifest

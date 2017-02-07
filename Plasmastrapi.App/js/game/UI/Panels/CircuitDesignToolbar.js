@@ -1,4 +1,4 @@
-﻿define(["../Base/Panel", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../Namespaces/$PickableTraits"], function (Panel, $, $PickableTraits) {
+﻿define(["../Base/Panel", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"], function (Panel, $, $PickableTraits) {
 
     CircuitDesignToolbar.prototype = Object.create(Panel.prototype);
     CircuitDesignToolbar.prototype.constructor = CircuitDesignToolbar;

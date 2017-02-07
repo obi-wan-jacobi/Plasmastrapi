@@ -75,7 +75,10 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
         this.__validateEventIsImplemented(event);
         this.__validateSubscriber(subscriber);
         this.__validateCallback(callback);
-        this.__events[event].splice(subscriber, callback);
+        var removedEventListener = this.__events[event].splice(subscriber, callback);
+        if (!removedEventListener) {
+            throw new Error(this.constructor.name + ':removeEventListener - Event ' + event + ' could not be removed.');
+        }
     };
     EventEmitter.prototype.purgeEventListenersBoundTo = function(subscriber) {
         this.__validateSubscriber(subscriber);

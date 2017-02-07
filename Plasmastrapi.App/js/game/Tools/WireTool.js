@@ -1,10 +1,10 @@
-﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Data/Geometry", , "../Namespaces/$Circuits"],
+﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Data/Geometry", "../Namespaces/$PickableTraits", "../Namespaces/$Circuits"],
 function (Tool, $, Geometry, $PickableTraits, $Circuits) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
-    function WireTool() {
-        Tool.call(this);
+    function WireTool(x, y) {
+        Tool.call(this, x, y);
         this.__selectedTerminal = null;
         this.__toolWire = null;
         this.__terminalHandle = null;
@@ -24,9 +24,8 @@ function (Tool, $, Geometry, $PickableTraits, $Circuits) {
         } else {
             throw new Error(this.constructor.name + ":onequip - " + terminal.constructor.name + " is not compatible with this tool");
         }
-        this.filterByTraitsAndCompatibility(
-            new PickableTraitList(terminalCompatibility),
-            new $PickableTraits.TraitList($PickableTraits.DestructionZone, $PickableTraits.DesignZone)
+        this.setPickableTraitListFilter(
+            new $PickableTraits.PickableTraitList(terminalCompatibility, $PickableTraits.DestructionZone, $PickableTraits.DesignZone)
         );
         // select terminal
         pickableComponent.select();
@@ -41,7 +40,7 @@ function (Tool, $, Geometry, $PickableTraits, $Circuits) {
         this.__terminalHandle = null;
         this.__toolWire = null;
     };
-    WireTool.prototype.__input_onmousemove = function (cursor) {
+    WireTool.prototype.__onmousemove = function (cursor) {
         if (!this.__terminalHandle) {
             // draw a wire from the selected terminal to the cursor
             this.__terminalHandle = new $Circuits.TerminalHandle(cursor.x, cursor.y);

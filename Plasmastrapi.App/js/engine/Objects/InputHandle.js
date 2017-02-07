@@ -4,55 +4,33 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
     InputHandle.prototype.constructor = InputHandle;
     function InputHandle() {
         EventEmitter.call(this);
+        // apply mixins
+        EventEmitter.Mixins.Loadable.call(this);
         this.registerEvents(
-            'input_onmousemove',
-		    'input_onmousedown',
-		    'input_onmouseup',
-		    'input_onclick',
-            'input_onkeydown',
-		    'input_onkeyup',
-            'pick_onmouseenter',
-		    'pick_onmousehover',
-		    'pick_onmouseleave',
-            'pick_onmousemove',
-		    'pick_onmousedown',
-		    'pick_onmouseup',
-		    'pick_onclick'
+            'onmousemove',
+		    'onmousedown',
+		    'onmouseup',
+		    'onclick',
+            'onkeydown',
+		    'onkeyup'
         );
     };
     // private methods
-    // public prototypal variables
-    InputHandle.prototype.compatibleEntityClassesList = [];
-    // public methods
-    InputHandle.prototype.load = function () {
-        this.__engine.inputSystem.addEventListener('onmousemove', this, this.__$input_onmousemove);
-        this.__engine.inputSystem.addEventListener('onmousedown', this, this.__$input_onmousedown);
-        this.__engine.inputSystem.addEventListener('onmouseup', this, this.__$input_onmouseup);
-        this.__engine.inputSystem.addEventListener('onclick', this, this.__$input_onclick);
-        this.__engine.inputSystem.addEventListener('onkeyup', this, this.__$input_onkeyup);
-        this.__engine.inputSystem.addEventListener('onkeydown', this, this.__$input_onkeydown);
-        this.__engine.pickSystem.addEventListener('onmousemove', this, this.__$pick_onmousemove);
-        this.__engine.pickSystem.addEventListener('onmousedown', this, this.__$pick_onmousedown);
-        this.__engine.pickSystem.addEventListener('onmouseup', this, this.__$pick_onmouseup);
-        this.__engine.pickSystem.addEventListener('onclick', this, this.__$pick_onclick);
-        this.__engine.pickSystem.addEventListener('onmouseenter', this, this.__$pick_onmouseenter);
-        this.__engine.pickSystem.addEventListener('onmousehover', this, this.__$pick_onmousehover);
-        this.__engine.pickSystem.addEventListener('onmouseleave', this, this.__$pick_onmouseleave);
+    InputHandle.prototype.__onload = function () {
+        this.__engine.inputSystem.addEventListener('onmousemove', this, this.__$onmousemove);
+        this.__engine.inputSystem.addEventListener('onmousedown', this, this.__$onmousedown);
+        this.__engine.inputSystem.addEventListener('onmouseup', this, this.__$onmouseup);
+        this.__engine.inputSystem.addEventListener('onclick', this, this.__$onclick);
+        this.__engine.inputSystem.addEventListener('onkeyup', this, this.__$onkeyup);
+        this.__engine.inputSystem.addEventListener('onkeydown', this, this.__$onkeydown);
     };
-    InputHandle.prototype.unload = function () {
-        this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__$input_onmousemove);
-        this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__$input_onmousedown);
-        this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__$input_onmouseup);
-        this.__engine.inputSystem.removeEventListener('onclick', this, this.__$input_onclick);
-        this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__$input_onkeyup);
-        this.__engine.inputSystem.removeEventListener('onkeydown', this, this.__$input_onkeydown);
-        this.__engine.pickSystem.removeEventListener('onmousemove', this, this.__$pick_onmousemove);
-        this.__engine.pickSystem.removeEventListener('onmousedown', this, this.__$pick_onmousedown);
-        this.__engine.pickSystem.removeEventListener('onmouseup', this, this.__$pick_onmouseup);
-        this.__engine.pickSystem.removeEventListener('onclick', this, this.__$pick_onclick);
-        this.__engine.pickSystem.removeEventListener('onmouseenter', this, this.__$pick_onmouseenter);
-        this.__engine.pickSystem.removeEventListener('onmousehover', this, this.__$pick_onmousehover);
-        this.__engine.pickSystem.removeEventListener('onmouseleave', this, this.__$pick_onmouseleave);
+    InputHandle.prototype.__onunload = function () {
+        this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__$onmousemove);
+        this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__$onmousedown);
+        this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__$onmouseup);
+        this.__engine.inputSystem.removeEventListener('onclick', this, this.__$onclick);
+        this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__$onkeyup);
+        this.__engine.inputSystem.removeEventListener('onkeydown', this, this.__$onkeydown);
     };
 
     return InputHandle;

@@ -8,11 +8,11 @@
         this.__previousCursorPosition = null
     };
     PlacingTool.prototype.__onequip = function (entity) {
-        this.filterByTraits(new $PickableTraits.TraitList($PickableTraits.DestructionZone, $PickableTraits.DesignZone));
+        this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.DestructionZone, $PickableTraits.DesignZone));
         this.__equippedEntity = entity;
         this.__previousCursorPosition = null;
     };
-    PlacingTool.prototype.__input_onmousemove = function (cursor) {
+    PlacingTool.prototype.__onmousemove = function (cursor) {
         if (!this.__previousCursorPosition) {
             this.__previousCursorPosition = cursor;
             return;
@@ -25,7 +25,7 @@
 		);
         this.__previousCursorPosition = cursor;
     };
-    PlacingTool.prototype.__input_onmouseup = function (cursor) {
+    PlacingTool.prototype.__onmouseup = function (cursor) {
         this.__equippedEntity.getComponent($.PickableComponent).deselect();
         this.__engine.toolController.equipPickingTool();
     };

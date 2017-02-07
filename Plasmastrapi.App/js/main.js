@@ -2,7 +2,7 @@ require.config({
     baseUrl: 'js'
 });
 
-define(["./game/Game", "./Namespaces/$Assets"], function (Game, $Assets) {
+define(["./game/Game", "./game/Namespaces/$Assets"], function (Game, $Assets) {
 
     var game = new Game(document.getElementById("game-canvas"));
 

@@ -1,6 +1,6 @@
-﻿define(["../Container/EntityContainer",
-        "../Container/EventEmitterContainer",
-        "../Container/PickableComponentContainer"
+﻿define(["../Containers/EntityContainer",
+        "../Containers/EventEmitterContainer",
+        "../Containers/PickableComponentContainer"
 ],
 function (
     EntityContainer,

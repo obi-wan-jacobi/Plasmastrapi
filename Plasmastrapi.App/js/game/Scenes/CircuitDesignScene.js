@@ -1,5 +1,5 @@
-﻿define(["../../engine/Objects/Scene", "../Namespaces/$UI", "../Namespaces/$Circuits", "../Namespaces/$Tools"],
-function (Scene, $UI, $Circuits, $Tools) {
+﻿define(["../../engine/Objects/Scene", "../Namespaces/$UI", "../Namespaces/$Circuits", "../Namespaces/$Cursors"],
+function (Scene, $UI, $Circuits, $Cursors) {
 
     CircuitDesignScene.prototype = Object.create(Scene.prototype);
     CircuitDesignScene.prototype.constructor = CircuitDesignScene;
@@ -19,7 +19,7 @@ function (Scene, $UI, $Circuits, $Tools) {
     };
     CircuitDesignScene.prototype.__oninit = function() {
         // toolbar utility buttons
-        this.add(new $UI.ToolButton(1250, 40, $Tools.TrashTool.prototype.sprite.frames[0], this.__engine.toolController.equipTrashTool));
+        this.add(new $UI.ToolButton(1250, 40, $Cursors.TrashToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipTrashTool));
     };
 
     return CircuitDesignScene;

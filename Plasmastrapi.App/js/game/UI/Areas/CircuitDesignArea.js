@@ -1,4 +1,4 @@
-﻿define(["./Area", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../Namespaces/$PickableTraits"], function (Area, $, Graphics, $PickableTraits) {
+﻿define(["../Base/Area", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"], function (Area, $, Graphics, $PickableTraits) {
 
     // CLASS CircuitDesignArea
     CircuitDesignArea.prototype = Object.create(Area.prototype);

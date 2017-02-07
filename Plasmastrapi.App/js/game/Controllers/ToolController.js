@@ -1,6 +1,6 @@
 ﻿define(["../../engine/Objects/Controller",
         "../../engine/Namespaces/$Components",
-        "../Tools/$Tools"],
+        "../Namespaces/$Tools"],
 function (Controller, $, $Tools) {
 
     // CLASS ToolController
@@ -14,8 +14,8 @@ function (Controller, $, $Tools) {
         this.__pickingTool = this.__tools[1] = new $Tools.PickingTool();
         this.__placingTool = this.__tools[2] = new $Tools.PlacingTool();
         this.__wireTool = this.__tools[3] = new $Tools.WireTool();
-        //this.__CuttingTool = this.__tools[4] = new CuttingTool();
-        //this.__TrashTool = this.__tools[5] = new TrashTool();
+        this.__cuttingTool = this.__tools[4] = new $Tools.CuttingTool();
+        this.__trashTool = this.__tools[5] = new $Tools.TrashTool();
     };
     // private methods
     ToolController.prototype.__onload = function () {
@@ -44,27 +44,9 @@ function (Controller, $, $Tools) {
             }
         }
     };
-    ToolController.prototype.filterByTraits = function (traitList) {
+    ToolController.prototype.setPickableTraitListFilter = function (pickableTraitList) {
         this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (traitList.resolve(pickableComponent)) {
-                pickableComponent.enable();
-            } else {
-                pickableComponent.disable();
-            }
-        });
-    };
-    ToolController.prototype.filterByCompatibility = function (compatibilityList) {
-        this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (compatibilityList.resolve(pickableComponent)) {
-                pickableComponent.enable();
-            } else {
-                pickableComponent.disable();
-            }
-        });
-    };
-    ToolController.prototype.filterByTraitsAndCompatibility = function (traitList, compatibilityList) {
-        this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (traitList.resolve(pickableComponent) || compatibilityList.resolve(pickableComponent)) {
+            if (pickableTraitList.resolve(pickableComponent)) {
                 pickableComponent.enable();
             } else {
                 pickableComponent.disable();

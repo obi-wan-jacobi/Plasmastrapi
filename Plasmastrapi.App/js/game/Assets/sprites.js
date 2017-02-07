@@ -1,9 +1,9 @@
-﻿define(["../../engine/Data/Graphics", "../Namespaces/$Circuits", "../Tools/$Tools"], function (Graphics, $, $Tools) {
+﻿define(["../../engine/Data/Graphics", "../Namespaces/$Circuits", "../Namespaces/$Cursors"], function (Graphics, $, $Cursors) {
 
     return new Graphics.SpriteMap(
         // tools
-        new Graphics.SpriteSourcePair($Tools.CuttingTool.prototype, ['img/Cutter_closed.png', 'img/Cutter_open.png']),
-        new Graphics.SpriteSourcePair($Tools.TrashTool.prototype, ['img/Trashcan.png']),
+        new Graphics.SpriteSourcePair($Cursors.CuttingToolCursor.prototype, ['img/Cutter_closed.png', 'img/Cutter_open.png']),
+        new Graphics.SpriteSourcePair($Cursors.TrashToolCursor.prototype, ['img/Trashcan.png']),
         // circuit elements
         new Graphics.SpriteSourcePair($.Terminal.prototype, ['img/Terminal_out.png', 'img/Terminal_in.png', 'img/Terminal_hovered.png']),
         new Graphics.SpriteSourcePair($.AndGate.prototype, ['img/AndGate.png']),

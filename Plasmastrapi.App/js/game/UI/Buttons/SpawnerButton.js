@@ -1,4 +1,4 @@
-﻿define(["./Button", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics"], function (Button, $, Graphics) {
+﻿define(["../Base/Button", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics"], function (Button, $, Graphics) {
 
     // CLASS SpawnerButton
     SpawnerButton.prototype = Object.create(Button.prototype);
@@ -8,7 +8,7 @@
         var displayLayer = 'ondrawuientities';
         var spriteFrame = circuitElementConstructor.prototype.sprite.frames[0];
         var imageHandle = new Graphics.ImageHandle(displayLayer, 0, 0, spriteFrame.width, spriteFrame.height, spriteFrame.width, spriteFrame.height, spriteFrame);
-        Button.call(this, x, y, imageHandle, this.__onpick);
+        Button.call(this, x, y, imageHandle, this, this.__onpick);
         this.__circuitElementConstructor = circuitElementConstructor;
     };
     SpawnerButton.prototype.__onpick = function () {

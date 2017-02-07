@@ -37,7 +37,7 @@ function (Controller, $, $Tools) {
             this.__tool.discard();
         }
         this.__tool = tool;
-        this.__tool.equip(this.__x || -100, this.__y, entity);
+        this.__tool.equip(this.__x || -9999, this.__y || -9999, entity);
     };
     ToolController.prototype.__updateLastPosition = function (position) {
         this.__x = position.x;

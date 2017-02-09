@@ -1,6 +1,6 @@
-﻿define(["../Base/WireElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Physics", "../Terminals/InputTerminal", "../Terminals/OutputTerminal",
+﻿define(["../Base/WireElement", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data", "../Terminals/InputTerminal", "../Terminals/OutputTerminal",
 "../../Namespaces/$PickableTraits"],
-function (WireElement, $, Physics, InputTerminal, OutputTerminal, $PickableTraits) {
+function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
@@ -13,13 +13,19 @@ function (WireElement, $, Physics, InputTerminal, OutputTerminal, $PickableTrait
 
         WireElement.call(this, outputTerminal, inputTerminal);
 
+        outputTerminal.addEventListener('ondestroy', this, this.destroy);
+        inputTerminal.addEventListener('ondestroy', this, this.destroy);
+
         var lineComponent = this.getComponent($.LineComponent);
-        lineComponent.collisionOptions = new Physics.LineCollisionOptions(20, 0.85);
+        lineComponent.collisionOptions = new $Data.Physics.LineCollisionOptions(25, 0.95);
         lineComponent.addEventListener('onpositionchange', this, this.__updateMeshComponent);
         lineComponent.addEventListener('onorientationchange', this, this.__updateMeshComponent);
 
         var poseComponent = new $.PoseComponent(lineComponent.position, lineComponent.orientation);
-        var meshComponent = new $.MeshComponent(lineComponent.mesh);
+
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities')
+        var meshComponent = new $.MeshComponent(lineComponent.mesh, meshDisplayOptions);
+
         var pickableComponent = new $.PickableComponent();
 
         this.addComponent(poseComponent);

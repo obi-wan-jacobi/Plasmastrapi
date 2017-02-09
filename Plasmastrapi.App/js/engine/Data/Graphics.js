@@ -57,7 +57,7 @@ define(function() {
 
     $.MeshDisplayOptions = function (displayLayer, strokeStyle, fillStyle, lineWidth) {
         this.displayLayer = displayLayer;
-        this.strokeStyle = strokeStyle || 'black';
+        this.strokeStyle = strokeStyle || 'white';
         this.fillStyle = fillStyle;
         this.lineWidth = lineWidth || 1;
     };

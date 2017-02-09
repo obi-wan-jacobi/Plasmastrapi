@@ -1,12 +1,12 @@
-﻿define(["../Base/CircuitElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry"],
-function (CircuitElement, $, Geometry) {
+﻿define(["../Base/BaseElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry"],
+function (BaseElement, $, Geometry) {
 
     // CLASS Terminal
-    Terminal.prototype = Object.create(CircuitElement.prototype);
+    Terminal.prototype = Object.create(BaseElement.prototype);
     Terminal.prototype.constructor = Terminal;
     function Terminal(offsetPosition, parentElement) {
 
-        CircuitElement.call(this, 0, 0);
+        BaseElement.call(this, 0, 0);
 
         this.__defaultFrameIndex = null;
         this.offset = offsetPosition;

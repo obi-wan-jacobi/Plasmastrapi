@@ -128,8 +128,10 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		ctx.strokeStyle = options.strokeStyle;
 		ctx.lineWidth = options.lineWidth;
 		ctx.stroke()
-		ctx.fillStyle = options.fillStyle;
-		ctx.fill();
+		if (options.fillStyle) {
+		    ctx.fillStyle = options.fillStyle;
+		    ctx.fill();
+		}
 		ctx.restore();
 	};
 

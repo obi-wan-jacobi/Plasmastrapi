@@ -19,6 +19,7 @@ function (InputHandle, $, $Data) {
 		    'pick_onclick'
         );
         this.__CursorConstructor = CursorConstructor;
+        this.__cursor = null;
     };
     // private methods
     Tool.prototype.__oninit = function () {
@@ -46,6 +47,12 @@ function (InputHandle, $, $Data) {
         this.__engine.pickSystem.removeEventListener('onmouseenter', this, this.__$pick_onmouseenter);
         this.__engine.pickSystem.removeEventListener('onmousehover', this, this.__$pick_onmousehover);
         this.__engine.pickSystem.removeEventListener('onmouseleave', this, this.__$pick_onmouseleave);
+    };
+    Tool.prototype.__onmousedown = function () {
+        InputHandle.prototype.__onmousedown.call(this);
+    };
+    Tool.prototype.__onmouseup = function () {
+        InputHandle.prototype.__onmouseup.call(this);
     };
     // public methods
     Tool.prototype.equip = function (x, y, entity) {

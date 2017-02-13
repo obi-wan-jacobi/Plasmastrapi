@@ -1,5 +1,5 @@
-define(["../engine/Engine", "./Namespaces/$Controllers"],
-function (Engine, $Controllers) {
+define(["../engine/Engine", "./Namespaces/$Controllers", "./Namespaces/$Containers"],
+function (Engine, $Controllers, $Containers) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -10,6 +10,8 @@ function (Engine, $Controllers) {
     };
     // private methods
     Game.prototype.__registerAll = function () {
+        this.register('circuitElementContainer', new $Containers.CircuitElementContainer());
+        this.register('wireContainer', new $Containers.WireContainer());
         this.register('toolController', new $Controllers.ToolController());
         this.register('sceneController', new $Controllers.SceneController());
     };

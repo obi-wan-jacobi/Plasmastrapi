@@ -4,6 +4,8 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
     InputHandle.prototype.constructor = InputHandle;
     function InputHandle() {
         EventEmitter.call(this);
+        // private variables
+        this.__isMouseDown = false;
         // apply mixins
         EventEmitter.Mixins.Loadable.call(this);
         this.registerEvents(
@@ -15,6 +17,14 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
 		    'onkeyup'
         );
     };
+    // public prototypal variables
+    Object.defineProperties(InputHandle.prototype, {
+        'isMouseDown': {
+            get: function () {
+                return this.__isMouseDown;
+            }
+        }
+    });
     // private methods
     InputHandle.prototype.__onload = function () {
         this.__engine.inputSystem.addEventListener('onmousemove', this, this.__$onmousemove);
@@ -31,6 +41,12 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__engine.inputSystem.removeEventListener('onclick', this, this.__$onclick);
         this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__$onkeyup);
         this.__engine.inputSystem.removeEventListener('onkeydown', this, this.__$onkeydown);
+    };
+    InputHandle.prototype.__onmousedown = function () {
+        this.__isMouseDown = true;
+    };
+    InputHandle.prototype.__onmouseup = function () {
+        this.__isMouseDown = false;
     };
 
     return InputHandle;

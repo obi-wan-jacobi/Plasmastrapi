@@ -15,6 +15,15 @@ function (BaseElement, $, $PickableTraits) {
         var pickableComponent = this.getComponent($.PickableComponent);
         $PickableTraits.Trashable.call(pickableComponent);
     };
+    // private methods
+    CircuitElement.prototype.__ondestroy = function () {
+        this.__engine.circuitElementContainer.remove(this);
+    };
+    // public methods
+    CircuitElement.prototype.injectEngine = function (engine) {
+        BaseElement.prototype.injectEngine.call(this, engine);
+        this.__engine.circuitElementContainer.add(this);
+    };
     
     return CircuitElement;
 });

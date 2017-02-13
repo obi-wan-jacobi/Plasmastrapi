@@ -115,6 +115,7 @@
     <Content Include="js\game\Circuits\Base\BaseElement.js" />
     <Content Include="js\game\Circuits\Base\WireElement.js" />
     <Content Include="js\game\Circuits\Wires\ToolWire.js" />
+    <Content Include="js\game\Containers\CircuitElementContainer.js" />
     <Content Include="js\game\Controllers\ToolController.js" />
     <Content Include="js\game\Circuits\Base\CircuitElement.js" />
     <Content Include="js\game\Circuits\Gates\AndGate.js" />
@@ -141,6 +142,7 @@
     <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\game\Scenes\NoScene.js" />
     <Content Include="js\game\Namespaces\%24Tools.js" />
+    <Content Include="js\game\Tools\Helpers\SelectionBox.js" />
     <Content Include="js\game\Tools\PickableTraits\Cuttable.js" />
     <Content Include="js\game\Tools\PickableTraits\Placeable.js" />
     <Content Include="js\game\Tools\PickableTraits\Default.js" />

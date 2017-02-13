@@ -14,7 +14,7 @@ define(["./EventEmitter", "./AtomicArray"], function(EventEmitter, AtomicArray) 
     };
     // public methods
     Container.prototype.forEach = function(fn, caller) {
-        this.__members.forEach(fn, caller);
+        return this.__members.forEach(fn, caller);
     };
     Container.prototype.add = function(member) {
         this.__members.push(member);

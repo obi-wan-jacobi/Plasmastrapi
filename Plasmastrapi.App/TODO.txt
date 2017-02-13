@@ -5,6 +5,8 @@ general framework quirks:
 
 needs testing:
 - destroy->purge
+- wire/mesh clicking region
+- selection box
 
 in progress:
 - wireTool logic

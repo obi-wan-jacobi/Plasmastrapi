@@ -13,8 +13,11 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
 
         WireElement.call(this, outputTerminal, inputTerminal);
 
-        outputTerminal.addEventListener('ondestroy', this, this.destroy);
-        inputTerminal.addEventListener('ondestroy', this, this.destroy);
+        this.outputTerminal = outputTerminal;
+        this.inputTerminal = inputTerminal;
+
+        this.outputTerminal.addEventListener('ondestroy', this, this.destroy);
+        this.inputTerminal.addEventListener('ondestroy', this, this.destroy);
 
         var lineComponent = this.getComponent($.LineComponent);
         lineComponent.collisionOptions = new $Data.Physics.LineCollisionOptions(25, 0.95);
@@ -23,7 +26,7 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
 
         var poseComponent = new $.PoseComponent(lineComponent.position, lineComponent.orientation);
 
-        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities')
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities');
         var meshComponent = new $.MeshComponent(lineComponent.mesh, meshDisplayOptions);
 
         var pickableComponent = new $.PickableComponent();
@@ -35,6 +38,7 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
         // tool compatibility
         $PickableTraits.Cuttable.call(pickableComponent);
     };
+    // private methods
     Wire.prototype.__updateMeshComponent = function () {
         var lineComponent = this.getComponent($.LineComponent);
         var poseComponent = this.getComponent($.PoseComponent);
@@ -42,6 +46,14 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
         poseComponent.orientation = lineComponent.orientation;
         var meshComponent = this.getComponent($.MeshComponent);
         meshComponent.mesh = lineComponent.mesh;
+    };
+    Wire.prototype.__ondestroy = function () {
+        this.__engine.wireContainer.remove(this);
+    };
+    // public methods
+    Wire.prototype.injectEngine = function (engine) {
+        WireElement.prototype.injectEngine.call(this, engine);
+        this.__engine.wireContainer.add(this);
     };
 
     return Wire;

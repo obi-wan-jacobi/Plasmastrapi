@@ -8,7 +8,7 @@
     PickingTool.prototype.__onequip = function () {
         this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.Default));
     };
-    PickingTool.prototype.__pick_onmousedown = function (entities) {
+    PickingTool.prototype.__pick_onmouseup = function (entities) {
         entities[0].getComponent($.PickableComponent).pick();
     };
 

@@ -17,8 +17,8 @@ define(function() {
         this.a = angle;
     };
 
-    $.Shape = function Shape(PositionsArray) {
-        this.vertices = PositionsArray;
+    $.Shape = function Shape(vertices) {
+        this.vertices = vertices;
     };
 
     Rectangle.prototype = Object.create($.Shape.prototype);

@@ -30,6 +30,8 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
         var meshComponent = new $.MeshComponent(lineComponent.mesh, meshDisplayOptions);
 
         var pickableComponent = new $.PickableComponent();
+        pickableComponent.addEventListener('onmouseenter', this, this.__onmouseenter);
+        pickableComponent.addEventListener('onmouseleave', this, this.__onmouseleave);
 
         this.addComponent(poseComponent);
         this.addComponent(meshComponent);
@@ -49,6 +51,16 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
     };
     Wire.prototype.__ondestroy = function () {
         this.__engine.wireContainer.remove(this);
+    };
+    Wire.prototype.__onmouseenter = function () {
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities', 'red');
+        var meshComponent = this.getComponent($.MeshComponent);
+        meshComponent.displayOptions = meshDisplayOptions;
+    };
+    Wire.prototype.__onmouseleave = function () {
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities');
+        var meshComponent = this.getComponent($.MeshComponent);
+        meshComponent.displayOptions = meshDisplayOptions;
     };
     // public methods
     Wire.prototype.injectEngine = function (engine) {

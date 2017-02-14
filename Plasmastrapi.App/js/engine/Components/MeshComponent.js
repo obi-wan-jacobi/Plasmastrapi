@@ -70,6 +70,20 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 				this.__translate(poseComponent.position, new Geometry.Position(0, 0));
 				this.__rotate(poseComponent.orientation);
 			}
+		},
+		'displayOptions': {
+		    get: function () {
+		        return this.__options;
+		    },
+		    set: function (displayOptions) {
+		        if (!this.__options) {
+		            throw new Error(this.constructor.name + ':displayOptions set - Display options can only be replaced, not inject.');
+		        }
+		        if (!displayOptions.displayLayer === this.__options.displayLayer) {
+                    throw new Error(this.constructor.name + ':displayOptions set - The display layer cannot be modified at this level.')
+		        }
+		        this.__options = displayOptions
+		    }
 		}
 	});
 	// public methods
@@ -97,16 +111,31 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 			}
 		}
 		// check if we're inside bounding rectangle
-		if (point.x < maxX && point.x > minX && point.y < maxY && point.y > minY) {
-			// trace ray from point to (minX, minY) and from point to (maxX, maxY)
-			// if the number of intersections between a ray and the mesh's sides is odd --> collision detected
-			/*
-			var sides = [];
-			for (var i = 0, L = mesh.vertices.length - 1; i < L; i++) {
-				sides
+		if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
+			// trace ray from point to (minX, minY)
+		    // if the number of intersections between a ray and the mesh's sides is odd --> collision detected		
+		    var numberOfIntersections = 0;
+		    var vertices = [].concat(mesh.vertices, mesh.vertices[0]);
+		    var m_ray = (minY - point.y) / (minX - point.x);
+		    var b_ray = point.y - m_ray * point.x;
+			for (var i = 0, L = vertices.length - 2; i < L; i++) {
+			    var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
+			    var b_side = vertices[i].y - m_side * vertices[i].x;
+			    var intersectX = (b_side - b_ray) / (m_ray - m_side);
+			    var intersectY = m_ray * intersectX + b_ray;
+			    if (intersectX <= maxX && intersectX >= minX && intersectY <= maxY && intersectY >= minY) {
+			        // if the point of intersection is on a vertex located at minX, minY --> collision detected
+			        if (Math.round(intersectX) === minX && Math.round(intersectY) === minY) {
+			            return true;
+			        } else {
+			            numberOfIntersections++;
+			        }
+			    }
 			}
-			*/
-			return true;
+			
+			if (numberOfIntersections % 2 == 1) {
+			    return true;
+			}
 		}
 		return false;
 	};
@@ -116,7 +145,7 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 	    }
 	    var vertices = this.__mesh.vertices;
 		var options = this.__options;
-		// draw mesh and apply optionss
+		// draw mesh and apply options
 		ctx.save();
 		ctx.beginPath();
 		ctx.moveTo(vertices[0].x, vertices[0].y);

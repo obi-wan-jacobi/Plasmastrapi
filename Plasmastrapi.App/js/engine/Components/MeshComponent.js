@@ -123,9 +123,9 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 			    var b_side = vertices[i].y - m_side * vertices[i].x;
 			    var intersectX = (b_side - b_ray) / (m_ray - m_side);
 			    var intersectY = m_ray * intersectX + b_ray;
-			    if (intersectX <= maxX && intersectX >= minX && intersectY <= maxY && intersectY >= minY) {
+			    if (intersectX <= point.x && intersectX >= minX && intersectY <= point.y && intersectY >= minY) {
 			        // if the point of intersection is on a vertex located at minX, minY --> collision detected
-			        if (Math.round(intersectX) === minX && Math.round(intersectY) === minY) {
+			        if (intersectX === minX && intersectY === minY) {
 			            return true;
 			        } else {
 			            numberOfIntersections++;

@@ -144,6 +144,7 @@
     <Content Include="js\game\Namespaces\%24Tools.js" />
     <Content Include="js\game\Tools\Helpers\SelectionBox.js" />
     <Content Include="js\game\Tools\PickableTraits\Cuttable.js" />
+    <Content Include="js\game\Tools\PickableTraits\Draggable.js" />
     <Content Include="js\game\Tools\PickableTraits\Placeable.js" />
     <Content Include="js\game\Tools\PickableTraits\Default.js" />
     <Content Include="js\game\Tools\PickableTraits\Trashable.js" />

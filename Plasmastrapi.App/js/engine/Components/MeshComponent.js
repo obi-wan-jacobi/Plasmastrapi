@@ -34,15 +34,32 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		poseComponent.removeEventListener('onorientationchange', this, this.__rotate);
 	};
 	MeshComponent.prototype.__translate = function(newPosition, oldPosition) {
-		var mesh = this.__mesh;
+	    var mesh = this.__mesh;
+	    mesh.maxX = mesh.minX = mesh.vertices[0].x;
+	    mesh.maxY = mesh.minY = mesh.vertices[0].y;
 		for (var i = 0, L = mesh.vertices.length; i < L; i++) {
 			mesh.vertices[i].x += (newPosition.x - oldPosition.x);
 			mesh.vertices[i].y += (newPosition.y - oldPosition.y);
+		    // get min/max X and min/max Y for collision checking purposes
+			if (mesh.maxX < mesh.vertices[i].x) {
+			    mesh.maxX = mesh.vertices[i].x;
+			}
+			if (mesh.minX > mesh.vertices[i].x) {
+			    mesh.minX = mesh.vertices[i].x;
+			}
+			if (mesh.maxY < mesh.vertices[i].y) {
+			    mesh.maxY = mesh.vertices[i].y;
+			}
+			if (mesh.minY > mesh.vertices[i].y) {
+			    mesh.minY = mesh.vertices[i].y;
+			}
 		};
 	};
 	MeshComponent.prototype.__rotate = function(newAngle) {
 		var position = this.__entity.getComponent(PoseComponent).position;
 		var mesh = this.__mesh;
+		mesh.maxX = mesh.minX = mesh.vertices[0].x;
+		mesh.maxY = mesh.minY = mesh.vertices[0].y;
 		for (var i = 0, L = mesh.vertices.length; i < L; i++) {
 			// find 'natural' vertex position relative to origin
 			var templateX = mesh.template.vertices[i].x;
@@ -53,6 +70,19 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 			// re-translate vertex back to current relative position
 			mesh.vertices[i].x = position.x + x; 
 			mesh.vertices[i].y = position.y + y;
+		    // get min/max X and min/max Y for collision checking purposes
+			if (mesh.maxX < mesh.vertices[i].x) {
+			    mesh.maxX = mesh.vertices[i].x;
+			}
+			if (mesh.minX > mesh.vertices[i].x) {
+			    mesh.minX = mesh.vertices[i].x;
+			}
+			if (mesh.maxY < mesh.vertices[i].y) {
+			    mesh.maxY = mesh.vertices[i].y;
+			}
+			if (mesh.minY > mesh.vertices[i].y) {
+			    mesh.minY = mesh.vertices[i].y;
+			}
 		};
 	};
 	// public prototypal variables
@@ -91,25 +121,9 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 
 	};
 	MeshComponent.prototype.checkPointCollision = function(point) {
-		var mesh = this.__mesh;
-		// find max/min x and y coordinates for a rectangle that bounds the entire mesh
-		var firstVertex = mesh.vertices[0];
-		var maxX = firstVertex.x, minX = firstVertex.x, maxY = firstVertex.y, minY = firstVertex.y;
-		for (var i = 1, L = mesh.vertices.length; i < L; i++) {
-			var vertex = mesh.vertices[i];
-			if (maxX < vertex.x) {
-				maxX = vertex.x;
-			}
-			if (minX > vertex.x) {
-				minX = vertex.x;
-			}
-			if (maxY < vertex.y) {
-				maxY = vertex.y;
-			}
-			if (minY > vertex.y) {
-				minY = vertex.y;
-			}
-		}
+	    // find max/min x and y coordinates for a rectangle that bounds the entire mesh
+	    var mesh = this.__mesh;
+	    var minX = this.__mesh.minX, maxX = this.__mesh.maxX, minY = this.__mesh.minY, maxY = this.__mesh.maxY;
 		// check if we're inside bounding rectangle
 		if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
 			// trace ray from point to (minX, minY)

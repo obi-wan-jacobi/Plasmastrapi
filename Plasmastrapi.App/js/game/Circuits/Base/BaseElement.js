@@ -37,6 +37,7 @@ function (Entity, $, Geometry, Graphics, $PickableTraits) {
         this.addComponent(pickableComponent);
 
         // tool compatibility
+        $PickableTraits.Draggable.call(pickableComponent);
         $PickableTraits.Default.call(pickableComponent);
     };
     BaseElement.prototype.__onpick = function () {

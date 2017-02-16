@@ -1,4 +1,4 @@
-﻿define(["../Base/Button", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics"], function (Button, $, Graphics) {
+﻿define(["../Base/Button", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"], function (Button, $, Graphics, $PickableTraits) {
 
     // CLASS SpawnerButton
     SpawnerButton.prototype = Object.create(Button.prototype);
@@ -10,6 +10,8 @@
         var imageHandle = new Graphics.ImageHandle(displayLayer, 0, 0, spriteFrame.width, spriteFrame.height, spriteFrame.width, spriteFrame.height, spriteFrame);
         Button.call(this, x, y, imageHandle, this, this.__onpick);
         this.__circuitElementConstructor = circuitElementConstructor;
+        var pickableComponent = this.getComponent($.PickableComponent);
+        $PickableTraits.Draggable.call(pickableComponent);
     };
     SpawnerButton.prototype.__onpick = function () {
         var poseComponent = this.getComponent($.PoseComponent);

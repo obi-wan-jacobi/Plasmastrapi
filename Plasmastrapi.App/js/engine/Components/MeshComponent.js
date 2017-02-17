@@ -135,8 +135,8 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 			for (var i = 0, L = vertices.length - 2; i < L; i++) {
 			    var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
 			    var b_side = vertices[i].y - m_side * vertices[i].x;
-			    var intersectX = (b_side - b_ray) / (m_ray - m_side);
-			    var intersectY = m_ray * intersectX + b_ray;
+			    var intersectX = Math.round((b_side - b_ray) / (m_ray - m_side));
+			    var intersectY = Math.round(m_ray * intersectX + b_ray);
 			    if (intersectX <= point.x && intersectX >= minX && intersectY <= point.y && intersectY >= minY) {
 			        // if the point of intersection is on a vertex located at minX, minY --> collision detected
 			        if (intersectX === minX && intersectY === minY) {

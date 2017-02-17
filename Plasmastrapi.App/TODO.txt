@@ -9,8 +9,7 @@ needs testing:
 - selection box
 
 in progress:
-- wireTool logic
-	- disallow multiple wires between the same two terminals
+- 
 	
 missing features:
 - lab scene
@@ -50,6 +49,9 @@ tech debt:
 - run memory analysis/profiler diagnostics
 - JSDocs/automated documentation
 - unit tests
+
+optimization
+- MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
 
 scalability concerns:
 - single-canvas viewport

@@ -5,12 +5,12 @@
     function PickingTool() {
         Tool.call(this);
         this.__beforeDragBounds = null;
-        this.__dragBoundsAnchor = null;
+        this.__anchor = null;
         this.__pickableOnDrag = null;
     };
     PickingTool.prototype.__onequip = function () {
         this.__beforeDragBounds = new $Data.Geometry.Rectangle(20, 20);
-        this.__dragBoundsAnchor = null;
+        this.__anchor = null;
         this.__pickableOnDrag = null;
         this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.Default));
     };
@@ -27,8 +27,8 @@
         }
     };
     PickingTool.prototype.__onmousedown = function (cursor) {
-        if (!this.__dragBoundsAnchor) {
-            this.__dragBoundsAnchor = new $Data.Geometry.Position(cursor.x, cursor.y);
+        if (!this.__anchor) {
+            this.__anchor = new $Data.Geometry.Position(cursor.x, cursor.y);
             for (var i = 0, L = this.__beforeDragBounds.vertices.length; i < L; i++) {
                 this.__beforeDragBounds.vertices[i].x += cursor.x;
                 this.__beforeDragBounds.vertices[i].y += cursor.y;

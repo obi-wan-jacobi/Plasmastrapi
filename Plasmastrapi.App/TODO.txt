@@ -9,7 +9,8 @@ needs testing:
 - selection box
 
 in progress:
-- 
+- fix wire collision bounds when cutting tool is equipped and multiple wires are in the design area (after their circuit elements have been moved around)
+	- wire collision bounds not following circuit element terminal positions correctly?
 	
 missing features:
 - lab scene

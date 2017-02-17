@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\require.js" />
+    <Content Include="js\engine\Components\CurveComponent.js" />
     <Content Include="js\engine\Containers\PickableComponentContainer.js" />
     <Content Include="js\engine\Loaders\ImageLoader.js" />
     <Content Include="js\engine\Loaders\SpriteLoader.js" />
@@ -172,6 +173,7 @@
     <Content Include="js\game\UI\Panels\CircuitDesignToolbar.js" />
     <Content Include="js\game\UI\Base\Panel.js" />
     <Content Include="js\game\Tools\PickableTraits\PickableTraitList.js" />
+    <Content Include="js\game\UI\Shapes\Curve.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

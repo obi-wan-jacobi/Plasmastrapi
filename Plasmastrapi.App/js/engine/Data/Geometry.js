@@ -2,6 +2,17 @@ define(function() {
     
     var $ = {};
 
+    // utility methods
+    function pow2(arg) {
+        return Math.pow(arg, 2);
+    };
+
+    function euclideanDistance(p1, p2) {
+        return Math.sqrt(pow2(p2.x - p1.x) + pow2(p2.y - p1.y));
+    };
+    $.euclideanDistance = euclideanDistance;
+
+    // objects
     $.Position = function Position(x, y) {
 		this.x = x;
 		this.y = y;

@@ -12,18 +12,6 @@ function (Tool, $, $PickableTraits, $Cursors, SelectionBox) {
             new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Trashable)
         );
     };
-    TrashTool.prototype.__onmousedown = function () {
-        Tool.prototype.__onmousedown.call(this);
-    };
-    TrashTool.prototype.__onmouseup = function () {
-        Tool.prototype.__onmouseup.call(this);
-        if (this.__selectionBox) {
-            this.__selectionBox.fillContents();
-            this.__selectionBox.destroyContents();
-            this.__selectionBox.destroy();
-            this.__selectionBox = null;
-        }
-    };
     TrashTool.prototype.__onmousemove = function (position) {
         if (!this.__selectionBox && this.isMouseDown) {
             this.__selectionBox = new SelectionBox()
@@ -34,6 +22,13 @@ function (Tool, $, $PickableTraits, $Cursors, SelectionBox) {
         }
     };
     TrashTool.prototype.__pick_onmouseup = function (entities) {
+        if (this.__selectionBox) {
+            this.__selectionBox.fillContents();
+            this.__selectionBox.destroyContents();
+            this.__selectionBox.destroy();
+            this.__selectionBox = null;
+            return;
+        }
         for (var i = 0, L = entities.length; i < L; i++) {
             var pickableComponent = entities[i].getComponent($.PickableComponent);
             if ($PickableTraits.Trashable.resolve(pickableComponent)) {

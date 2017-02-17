@@ -1,13 +1,5 @@
 define(["../Objects/Component", "../Data/Geometry", "../Data/Physics"], function (Component, Geometry, Physics) {
 
-	function pow2(arg) {
-        return Math.pow(arg, 2);
-    };
-
-    function euclideanDistance(p1, p2) {
-        return Math.sqrt(pow2(p2.x - p1.x) + pow2(p2.y - p1.y));
-    };
-
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
@@ -65,7 +57,7 @@ define(["../Objects/Component", "../Data/Geometry", "../Data/Physics"], function
 		},
 		'length': { // euclidean distance from tail to head
 			get: function() {
-				return euclideanDistance(this.__tailPose.position, this.__headPose.position);
+				return Geometry.euclideanDistance(this.__tailPose.position, this.__headPose.position);
 			}
 		},
 		'mesh': { // line converted into static rectangular mesh
@@ -91,7 +83,7 @@ define(["../Objects/Component", "../Data/Geometry", "../Data/Physics"], function
 	});
 	// public methods
 	LineComponent.prototype.draw = function(ctx) {
-		// draw line and apply optionss
+		// draw line and apply options
 		var head = this.__headPose.position;
 		var tail = this.__tailPose.position;
 		var options = this.__options;

@@ -1,5 +1,5 @@
-﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Data/Geometry", "../Namespaces/$PickableTraits", "../Namespaces/$Circuits"],
-function (Tool, $, Geometry, $PickableTraits, $Circuits) {
+﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Namespaces/$Data", "../Namespaces/$PickableTraits", "../Namespaces/$Circuits"],
+function (Tool, $, $Data, $PickableTraits, $Circuits) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
@@ -55,7 +55,7 @@ function (Tool, $, Geometry, $PickableTraits, $Circuits) {
         else {
             // move tool handle
             var poseComponent = this.__terminalHandle.getComponent($.PoseComponent)
-            poseComponent.position = new Geometry.Position(
+            poseComponent.position = new $Data.Geometry.Position(
                 cursor.x,
                 cursor.y
             );

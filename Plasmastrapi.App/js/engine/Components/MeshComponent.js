@@ -1,5 +1,5 @@
 define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
-    function (Component, Geometry, PoseComponent) {
+function (Component, Geometry, PoseComponent) {
 
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
@@ -35,8 +35,8 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 	};
 	MeshComponent.prototype.__translate = function(newPosition, oldPosition) {
 	    var mesh = this.__mesh;
-	    mesh.maxX = mesh.minX = mesh.vertices[0].x;
-	    mesh.maxY = mesh.minY = mesh.vertices[0].y;
+	    mesh.minX = mesh.minY = Number.MAX_SAFE_INTEGER;
+	    mesh.maxX = mesh.maxY = -Number.MAX_SAFE_INTEGER;
 		for (var i = 0, L = mesh.vertices.length; i < L; i++) {
 			mesh.vertices[i].x += (newPosition.x - oldPosition.x);
 			mesh.vertices[i].y += (newPosition.y - oldPosition.y);
@@ -58,8 +58,8 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 	MeshComponent.prototype.__rotate = function(newAngle) {
 		var position = this.__entity.getComponent(PoseComponent).position;
 		var mesh = this.__mesh;
-		mesh.maxX = mesh.minX = mesh.vertices[0].x;
-		mesh.maxY = mesh.minY = mesh.vertices[0].y;
+		mesh.minX = mesh.minY = Number.MAX_SAFE_INTEGER;
+		mesh.maxX = mesh.maxY = -Number.MAX_SAFE_INTEGER;
 		for (var i = 0, L = mesh.vertices.length; i < L; i++) {
 			// find 'natural' vertex position relative to origin
 			var templateX = mesh.template.vertices[i].x;
@@ -120,7 +120,9 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 	MeshComponent.prototype.checkMeshCollision = function(mesh) {
 
 	};
-	MeshComponent.prototype.checkPointCollision = function(point) {
+	MeshComponent.prototype.checkPointCollision = function (point) {
+	    // debugging
+	    this.__lastPoint = point;
 	    // find max/min x and y coordinates for a rectangle that bounds the entire mesh
 	    var mesh = this.__mesh;
 	    var minX = this.__mesh.minX, maxX = this.__mesh.maxX, minY = this.__mesh.minY, maxY = this.__mesh.maxY;
@@ -132,7 +134,7 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		    var vertices = [].concat(mesh.vertices, mesh.vertices[0]);
 		    var m_ray = (minY - point.y) / (minX - point.x);
 		    var b_ray = point.y - m_ray * point.x;
-			for (var i = 0, L = vertices.length - 2; i < L; i++) {
+			for (var i = 0, L = vertices.length - 1; i < L; i++) {
 			    var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
 			    var b_side = vertices[i].y - m_side * vertices[i].x;
 			    var intersectX = Math.round((b_side - b_ray) / (m_ray - m_side));
@@ -176,6 +178,72 @@ define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
 		    ctx.fill();
 		}
 		ctx.restore();
+	    // debugging
+		//ctx.save();
+		//for (var i = 0, L = vertices.length; i < L; i++) {
+		//    var vertex = vertices[i];
+		//    ctx.beginPath();
+		//    ctx.arc(vertex.x, vertex.y, 5, 0, 2 * Math.PI, false);
+		//    ctx.closePath();
+		//    ctx.strokeStyle = '#00FFFF';
+		//    ctx.stroke();
+		//}
+		//ctx.beginPath();
+		//ctx.arc(this.__mesh.minX, this.__mesh.minY, 10, 0, 2 * Math.PI, false);
+		//ctx.closePath();
+		//ctx.strokeStyle = 'yellow';
+		//ctx.stroke();
+		//ctx.restore();
+		//if (this.__lastPoint) {
+		//    ctx.save();
+		//    this.drawPointCollision(ctx);
+		//    ctx.restore();
+		//}
+	};
+    // debugging
+	MeshComponent.prototype.drawPointCollision = function (ctx) {
+	    var point = this.__lastPoint;
+	    // find max/min x and y coordinates for a rectangle that bounds the entire mesh
+	    var mesh = this.__mesh;
+	    var minX = this.__mesh.minX, maxX = this.__mesh.maxX, minY = this.__mesh.minY, maxY = this.__mesh.maxY;
+	    // check if we're inside bounding rectangle
+	    if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
+	        // trace ray from point to (minX, minY)
+	        // if the number of intersections between a ray and the mesh's sides is odd --> collision detected		
+	        var numberOfIntersections = 0;
+	        var vertices = [].concat(mesh.vertices, mesh.vertices[0]);
+	        var m_ray = (minY - point.y) / (minX - point.x);
+	        var b_ray = point.y - m_ray * point.x;
+	        for (var i = 0, L = vertices.length - 1; i < L; i++) {
+	            var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
+	            var b_side = vertices[i].y - m_side * vertices[i].x;
+	            var intersectX = Math.round((b_side - b_ray) / (m_ray - m_side));
+	            var intersectY = Math.round(m_ray * intersectX + b_ray);
+	            ctx.beginPath();
+	            ctx.arc(intersectX, intersectY, 10, 0, 2 * Math.PI, false);
+	            ctx.closePath();
+	            ctx.strokeStyle = '#00FF00';
+	            ctx.stroke();
+	            if (intersectX <= point.x && intersectX >= minX && intersectY <= point.y && intersectY >= minY) {
+	                ctx.beginPath();
+	                ctx.arc(intersectX, intersectY, 10, 0, 2 * Math.PI, false);
+	                ctx.closePath();
+	                ctx.strokeStyle = 'red';
+	                ctx.stroke();
+	                // if the point of intersection is on a vertex located at minX, minY --> collision detected
+	                if (intersectX === minX && intersectY === minY) {
+	                    return true;
+	                } else {
+	                    numberOfIntersections++;
+	                }
+	            }
+	        }
+
+	        if (numberOfIntersections % 2 == 1) {
+	            return true;
+	        }
+	    }
+	    return false;
 	};
 
 	return MeshComponent;

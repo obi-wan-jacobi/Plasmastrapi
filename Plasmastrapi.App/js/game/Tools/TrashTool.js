@@ -36,7 +36,11 @@ function (Tool, $, $PickableTraits, $Cursors, SelectionBox) {
                 return;
             }
         }
-        this.__engine.toolController.equipPickingTool();
+        if (this.isShiftKeyDown) {
+            this.__engine.toolController.equipTrashTool();
+        } else {
+            this.__engine.toolController.equipPickingTool();
+        }
     };
 
     return TrashTool;

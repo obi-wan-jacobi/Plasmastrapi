@@ -6,6 +6,7 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         EventEmitter.call(this);
         // private variables
         this.__isMouseDown = false;
+        this.__isShiftKeyDown = false;
         // apply mixins
         EventEmitter.Mixins.Loadable.call(this);
         this.registerEvents(
@@ -23,8 +24,17 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
             get: function () {
                 return this.__isMouseDown;
             }
+        },
+        'isShiftKeyDown': {
+            get: function () {
+                return this.__isShiftKeyDown;
+            }
         }
     });
+    InputHandle.prototype.keyCodes = {
+        shift: 16,
+        escape: 27
+    };
     // private methods
     InputHandle.prototype.__onload = function () {
         this.__engine.inputSystem.addEventListener('onmousemove', this, this.__$onmousemove);
@@ -47,6 +57,16 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
     };
     InputHandle.prototype.__onmouseup = function () {
         this.__isMouseDown = false;
+    };
+    InputHandle.prototype.__onkeydown = function (keyCode) {
+        if (keyCodes.shift === keyCode) {
+            this.__isShiftKeyDown = true;
+        }
+    };
+    InputHandle.prototype.__onkeyup = function (keyCode) {
+        if (keyCodes.shift === keyCode) {
+            this.__isShiftKeyDown = false;
+        }
     };
 
     return InputHandle;

@@ -56,7 +56,7 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
                 return;
             }
         }
-        this.__engine.toolController.equipPickingTool();
+         
     };
 
     return CuttingTool;

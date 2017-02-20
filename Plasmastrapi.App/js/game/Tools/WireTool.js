@@ -3,17 +3,16 @@ function (Tool, $, $Data, $PickableTraits, $Circuits) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
-    function WireTool() {
+    function WireTool(terminal) {
         Tool.call(this);
-        this.__selectedTerminal = null;
+        this.__selectedTerminal = terminal;
         this.__toolWire = null;
         this.__terminalHandle = null;
         this.__isSelectedTerminalAnInput = null;
     };
-    WireTool.prototype.__onequip = function (terminal) {
+    WireTool.prototype.__onequip = function () {
         // filter pickable entities according to whether we're selecting an input or output terminal
         var terminalCompatibility;
-        this.__selectedTerminal = terminal;
         var pickableComponent = this.__selectedTerminal.getComponent($.PickableComponent);
         if ($PickableTraits.WireableAsInput.resolve(pickableComponent)) {
             terminalCompatibility = $PickableTraits.WireableAsOutput
@@ -22,7 +21,7 @@ function (Tool, $, $Data, $PickableTraits, $Circuits) {
             terminalCompatibility = $PickableTraits.WireableAsInput
             this.__isSelectedTerminalAnInput = false;
         } else {
-            throw new Error(this.constructor.name + ":onequip - " + terminal.constructor.name + " is not compatible with this tool");
+            throw new Error(this.constructor.name + ":onequip - " + this.__selectedTerminal.constructor.name + " is not compatible with this tool");
         }
         this.setPickableTraitListFilter(
             new $PickableTraits.PickableTraitList(terminalCompatibility, $PickableTraits.DestructionZone, $PickableTraits.DesignZone)
@@ -37,8 +36,6 @@ function (Tool, $, $Data, $PickableTraits, $Circuits) {
         // clean up the entity space
         this.__terminalHandle.destroy();
         this.__toolWire.destroy();
-        this.__terminalHandle = null;
-        this.__toolWire = null;
     };
     WireTool.prototype.__onmousemove = function (cursor) {
         if (!this.__terminalHandle) {

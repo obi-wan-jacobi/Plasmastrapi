@@ -11,8 +11,6 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
     };
     CuttingTool.prototype.__onequip = function () {
         this.__beforeCuttingBounds = new $Data.Geometry.Rectangle(50, 50);
-        this.__anchor = null;
-        this.__cuttingCurve = null;
         this.setPickableTraitListFilter(
             new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Cuttable)
         );
@@ -55,6 +53,11 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
                 entities[i].destroy();
                 return;
             }
+        }
+        if (this.isShiftKeyDown) {
+            this.__engine.toolController.equipCuttingTool();
+        } else {
+            this.__engine.toolController.equipPickingTool();
         }
          
     };

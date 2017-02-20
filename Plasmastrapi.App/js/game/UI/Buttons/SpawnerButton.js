@@ -14,10 +14,13 @@
         $PickableTraits.Draggable.call(pickableComponent);
     };
     SpawnerButton.prototype.__onpick = function () {
+        this.__fnShiftKeyMouseUp.apply(this);
+    };
+    SpawnerButton.prototype.__fnShiftKeyMouseUp = function () {
         var poseComponent = this.getComponent($.PoseComponent);
         var circuitElement = new this.__circuitElementConstructor(poseComponent.position.x, poseComponent.position.y);
         this.__engine.sceneController.addToCurrentScene(circuitElement);
-        this.__engine.toolController.equipPlacingTool(circuitElement);
+        this.__engine.toolController.equipPlacingTool(circuitElement, this.__fnShiftKeyMouseUp.bind(this));
     };
 
     return SpawnerButton;

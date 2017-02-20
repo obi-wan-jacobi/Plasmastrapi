@@ -10,8 +10,6 @@
     };
     PickingTool.prototype.__onequip = function () {
         this.__beforeDragBounds = new $Data.Geometry.Rectangle(20, 20);
-        this.__anchor = null;
-        this.__pickableOnDrag = null;
         this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.Default));
     };
     PickingTool.prototype.__onmousemove = function (cursor) {

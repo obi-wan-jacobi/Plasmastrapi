@@ -41,16 +41,16 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__engine.inputSystem.addEventListener('onmousedown', this, this.__$onmousedown);
         this.__engine.inputSystem.addEventListener('onmouseup', this, this.__$onmouseup);
         this.__engine.inputSystem.addEventListener('onclick', this, this.__$onclick);
-        this.__engine.inputSystem.addEventListener('onkeyup', this, this.__$onkeyup);
         this.__engine.inputSystem.addEventListener('onkeydown', this, this.__$onkeydown);
+        this.__engine.inputSystem.addEventListener('onkeyup', this, this.__$onkeyup);
     };
     InputHandle.prototype.__onunload = function () {
         this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__$onmousemove);
         this.__engine.inputSystem.removeEventListener('onmousedown', this, this.__$onmousedown);
         this.__engine.inputSystem.removeEventListener('onmouseup', this, this.__$onmouseup);
         this.__engine.inputSystem.removeEventListener('onclick', this, this.__$onclick);
-        this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__$onkeyup);
         this.__engine.inputSystem.removeEventListener('onkeydown', this, this.__$onkeydown);
+        this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__$onkeyup);
     };
     InputHandle.prototype.__onmousedown = function () {
         this.__isMouseDown = true;
@@ -59,12 +59,12 @@ define(["../../engine/Objects/EventEmitter"], function(EventEmitter) {
         this.__isMouseDown = false;
     };
     InputHandle.prototype.__onkeydown = function (keyCode) {
-        if (keyCodes.shift === keyCode) {
+        if (this.keyCodes.shift === keyCode) {
             this.__isShiftKeyDown = true;
         }
     };
     InputHandle.prototype.__onkeyup = function (keyCode) {
-        if (keyCodes.shift === keyCode) {
+        if (this.keyCodes.shift === keyCode) {
             this.__isShiftKeyDown = false;
         }
     };

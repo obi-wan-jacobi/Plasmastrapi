@@ -2,21 +2,17 @@
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
-    function PlacingTool() {
+    function PlacingTool(entity, fnShiftKeyMouseUp) {
         Tool.call(this);
-        this.__equippedEntity = null;
+        this.__equippedEntity = entity;
+        this.__fnShiftKeyMouseUp = fnShiftKeyMouseUp;
         this.__previousCursorPosition = null
     };
-    PlacingTool.prototype.__onequip = function (entity) {
+    PlacingTool.prototype.__onequip = function (x, y) {
         this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.DestructionZone, $PickableTraits.DesignZone));
-        this.__equippedEntity = entity;
-        this.__previousCursorPosition = null;
+        this.__previousCursorPosition = new Geometry.Position(x, y);
     };
     PlacingTool.prototype.__onmousemove = function (cursor) {
-        if (!this.__previousCursorPosition) {
-            this.__previousCursorPosition = cursor;
-            return;
-        }
         var poseComponent = this.__equippedEntity.getComponent($.PoseComponent)
         var position = poseComponent.position;
         poseComponent.position = new Geometry.Position(
@@ -26,8 +22,13 @@
         this.__previousCursorPosition = cursor;
     };
     PlacingTool.prototype.__onmouseup = function (cursor) {
+        Tool.prototype.__onmouseup(cursor);
         this.__equippedEntity.getComponent($.PickableComponent).deselect();
-        this.__engine.toolController.equipPickingTool();
+        if (this.isShiftKeyDown && this.__fnShiftKeyMouseUp) {
+            this.__fnShiftKeyMouseUp();
+        } else {
+            this.__engine.toolController.equipPickingTool();
+        }
     };
 
     return PlacingTool;

@@ -7,11 +7,12 @@ needs testing:
 - destroy->purge
 
 in progress:
-- picking tool selection box
+- drag-select multiple elements
 - toolbar button labels
 - button hotkeys
 - gate logic
 - undo/redo
+- copy/paste
 	
 missing features:
 - lab scene

@@ -22,7 +22,7 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
                 cursor.x < this.__beforeSelectionBounds.vertices[3].x &&
                 cursor.y < this.__beforeSelectionBounds.vertices[3].y
             )) {
-                this.__selectionBox = new SelectionBox()
+                this.__selectionBox = new SelectionBox();
                 this.__selectionBox.startAt(cursor);
                 this.__engine.sceneController.addToCurrentScene(this.__selectionBox);
             }

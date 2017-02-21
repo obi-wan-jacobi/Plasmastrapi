@@ -1,5 +1,5 @@
-﻿define(["../../../engine/Namespaces/$Objects", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data", "../../Namespaces/$Circuits"],
-function ($Objects, $, $Data, $Circuits) {
+﻿define(["../../../engine/Namespaces/$Objects", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data", "../../Namespaces/$Circuits", "../../Namespaces/$PickableTraits"],
+function ($Objects, $, $Data, $Circuits, $PickableTraits) {
 
     SelectionBox.prototype = Object.create($Objects.Entity.prototype);
     SelectionBox.prototype.constructor = SelectionBox;
@@ -19,8 +19,18 @@ function ($Objects, $, $Data, $Circuits) {
         var mesh = new $Data.Geometry.Mesh(rectangle);
         var meshComponent = new $.MeshComponent(mesh, meshDisplayOptions);
 
+        var pickableComponent = new $.PickableComponent();
+        pickableComponent.addEventListener('onpick', this, this.__onpick);
+
         this.addComponent(poseComponent);
         this.addComponent(meshComponent);
+        this.addComponent(pickableComponent);
+
+        $PickableTraits.Default.call(pickableComponent);
+        $PickableTraits.Draggable.call(pickableComponent);
+    };
+    SelectionBox.prototype.__onpick = function () {
+        this.__engine.toolController.equipPlacingTool(this);
     };
     SelectionBox.prototype.startAt = function (startPosition) {
         this.__startPosition = startPosition;

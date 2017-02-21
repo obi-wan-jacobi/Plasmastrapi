@@ -7,8 +7,7 @@ needs testing:
 - destroy->purge
 
 in progress:
-- shift-click
-- selection box
+- picking tool selection box
 - toolbar button labels
 - button hotkeys
 - undo/redo
@@ -55,6 +54,7 @@ tech debt:
 
 optimization
 - MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
+- AtomicKeyPairArray --> store this.__end to avoid O(n) for this.push
 
 scalability concerns:
 - single-canvas viewport

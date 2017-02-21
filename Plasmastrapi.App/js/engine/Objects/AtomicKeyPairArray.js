@@ -37,6 +37,12 @@ define(["./AtomicLink"], function (AtomicLink) {
         }
         return result;
     };
+    AtomicKeyPairArray.prototype.unshift = function (key, value) {
+        this.__validateNoDuplicatePairs(key, value);
+        var newLink = new AtomicLink({ key: key, value: value });
+        newLink.setNext(this.__start);
+        this.__start = newLink;
+    };
     AtomicKeyPairArray.prototype.push = function(key, value) {
         this.__validateNoDuplicatePairs(key, value);
         var newLink = new AtomicLink({key: key, value: value});

@@ -7,6 +7,7 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
     function EventEmitter() {
         Base.call(this);
         this.__events = {};
+        this.__lockedEvents = {};
         // events
         this.registerEvents(
             'oninjectengine'
@@ -35,9 +36,16 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
         this.__validateEventIsImplemented(event);
         var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
         this["__" + event].apply(this, args);
+        // lock new subscriptions on this event to avoid stack overflow
+        this.__lockedEvents[event] = new AtomicKeyPairArray();
         this.__events[event].forEach(function (subscriber, callback) {
             callback.apply(subscriber, args);
         });
+        // process new subscriptions under lock
+        this.__lockedEvents[event].forEach(function (subscriber, callback) {
+            this.__events[event].push(subscriber, callback);
+        }, this)
+        delete this.__lockedEvents[event];
     };
     // public methods
     EventEmitter.prototype.injectEngine = function(engine) {
@@ -69,13 +77,24 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
         this.__validateEventIsImplemented(event);
         this.__validateSubscriber(subscriber);
         this.__validateCallback(callback);
-        this.__events[event].push(subscriber, callback);
+        if (this.__lockedEvents[event]) {
+            this.__lockedEvents[event].push(subscriber, callback);
+        }
+        else {
+            this.__events[event].push(subscriber, callback);
+        }
     };
     EventEmitter.prototype.removeEventListener = function(event, subscriber, callback) {
         this.__validateEventIsImplemented(event);
         this.__validateSubscriber(subscriber);
         this.__validateCallback(callback);
-        var removedEventListener = this.__events[event].splice(subscriber, callback);
+        var removedEventListener = null;
+        if (this.__lockedEvents[event]) {
+            removedEventListener = this.__lockedEvents[event].splice(subscriber, callback);
+        }
+        if (!removedEventListener) {
+            removedEventListener = this.__events[event].splice(subscriber, callback);
+        }
         if (!removedEventListener) {
             throw new Error(this.constructor.name + ':removeEventListener - Event ' + event + ' could not be removed.');
         }

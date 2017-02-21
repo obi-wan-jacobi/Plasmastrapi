@@ -72,6 +72,9 @@ function ($Objects, $, $Data) {
     };
     Tool.prototype.discard = function () {
         this.__fire('ondiscard');
+        if (this.__cursor) {
+            this.__cursor.destroy();
+        }
         this.destroy();
     };
     Tool.prototype.setPickableTraitListFilter = function (pickableTraitList) {

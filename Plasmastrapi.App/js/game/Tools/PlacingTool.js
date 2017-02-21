@@ -25,8 +25,15 @@
         Tool.prototype.__onmouseup(cursor);
         this.__equippedEntity.getComponent($.PickableComponent).deselect();
         if (this.isShiftKeyDown && this.__fnShiftKeyMouseUp) {
-            this.__fnShiftKeyMouseUp();
+            this.__fnShiftKeyMouseUp(cursor.x, cursor.y);
         } else {
+            this.__engine.toolController.equipPickingTool();
+        }
+    };
+    PlacingTool.prototype.__onkeyup = function (keyCode) {
+        Tool.prototype.__onkeyup.call(this, keyCode);
+        if (this.keyCodes.shift === keyCode && this.__fnShiftKeyMouseUp) {
+            this.__equippedEntity.destroy();
             this.__engine.toolController.equipPickingTool();
         }
     };

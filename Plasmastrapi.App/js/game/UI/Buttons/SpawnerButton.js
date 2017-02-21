@@ -14,13 +14,13 @@
         $PickableTraits.Draggable.call(pickableComponent);
     };
     SpawnerButton.prototype.__onpick = function () {
-        this.__fnShiftKeyMouseUp.apply(this);
-    };
-    SpawnerButton.prototype.__fnShiftKeyMouseUp = function () {
         var poseComponent = this.getComponent($.PoseComponent);
-        var circuitElement = new this.__circuitElementConstructor(poseComponent.position.x, poseComponent.position.y);
+        this.__spawnCircuitElement.apply(this, [poseComponent.position.x, poseComponent.position.y]);
+    };
+    SpawnerButton.prototype.__spawnCircuitElement = function (x, y) {
+        var circuitElement = new this.__circuitElementConstructor(x, y);
         this.__engine.sceneController.addToCurrentScene(circuitElement);
-        this.__engine.toolController.equipPlacingTool(circuitElement, this.__fnShiftKeyMouseUp.bind(this));
+        this.__engine.toolController.equipPlacingTool(circuitElement, this.__spawnCircuitElement.bind(this));
     };
 
     return SpawnerButton;

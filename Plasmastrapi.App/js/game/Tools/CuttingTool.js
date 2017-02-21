@@ -5,12 +5,11 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
     CuttingTool.prototype.constructor = CuttingTool;
     function CuttingTool() {
         Tool.call(this, $Cursors.CuttingToolCursor);
-        this.__beforeCuttingBounds = null;
+        this.__beforeCuttingBounds = new $Data.Geometry.Rectangle(50, 50);
         this.__anchor = null;
         this.__cuttingCurve = null;
     };
     CuttingTool.prototype.__onequip = function () {
-        this.__beforeCuttingBounds = new $Data.Geometry.Rectangle(50, 50);
         this.setPickableTraitListFilter(
             new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Cuttable)
         );
@@ -45,7 +44,6 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
             //this.__cuttingCurve.cutOnWireIntersections();
             this.__cuttingCurve.destroy();
             this.__cuttingCurve = null;
-            return;
         }
         for (var i = 0, L = entities.length; i < L; i++) {
             var pickableComponent = entities[i].getComponent($.PickableComponent);
@@ -60,6 +58,12 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
             this.__engine.toolController.equipPickingTool();
         }
          
+    };
+    CuttingTool.prototype.__onkeyup = function (keyCode) {
+        Tool.prototype.__onkeyup.call(this, keyCode);
+        if (this.keyCodes.shift === keyCode) {
+            this.__engine.toolController.equipPickingTool();
+        }
     };
 
     return CuttingTool;

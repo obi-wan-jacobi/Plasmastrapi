@@ -46,12 +46,13 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
             this.__selectionBox.destroyContents();
             this.__selectionBox.destroy();
             this.__selectionBox = null;
-        }
-        for (var i = 0, L = entities.length; i < L; i++) {
-            var pickableComponent = entities[i].getComponent($.PickableComponent);
-            if ($PickableTraits.Trashable.resolve(pickableComponent)) {
-                entities[i].destroy();
-                return;
+        } else {
+            for (var i = 0, L = entities.length; i < L; i++) {
+                var pickableComponent = entities[i].getComponent($.PickableComponent);
+                if ($PickableTraits.Trashable.resolve(pickableComponent)) {
+                    entities[i].destroy();
+                    return;
+                }
             }
         }
         if (this.isShiftKeyDown) {

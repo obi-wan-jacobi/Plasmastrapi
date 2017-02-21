@@ -10,8 +10,8 @@ in progress:
 - picking tool selection box
 - toolbar button labels
 - button hotkeys
-- undo/redo
 - gate logic
+- undo/redo
 	
 missing features:
 - lab scene

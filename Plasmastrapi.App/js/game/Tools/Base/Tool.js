@@ -20,7 +20,6 @@ function ($Objects, $, $Data) {
         );
         this.__CursorConstructor = CursorConstructor;
         this.__cursor = null;
-        $Objects.EventEmitter.Mixins.Destructible.call(this);
     };
     // private methods
     Tool.prototype.__oninit = function () {
@@ -62,20 +61,23 @@ function ($Objects, $, $Data) {
         $Objects.InputHandle.prototype.__onkeyup.call(this, keyCode);
     };
     // public methods
-    Tool.prototype.equip = function (x, y) {
+    Tool.prototype.equip = function () {
         this.load();
         if (this.__cursor) {
+            this.__cursor.load(false);
             var poseComponent = this.__cursor.getComponent($.PoseComponent);
-            poseComponent.position = new $Data.Geometry.Position(x + this.__cursorOffsetX, y + this.__cursorOffsetY);
+            poseComponent.position = new $Data.Geometry.Position(arguments[arguments.length - 2] + this.__cursorOffsetX, arguments[arguments.length - 1] + this.__cursorOffsetY);
+            this.__cursor.getComponent($.SpriteComponent).show();
         }
-        this.__fire('onequip', x, y);
+        [].unshift.call(arguments, 'onequip');
+        this.__fire.apply(this, arguments);
     };
     Tool.prototype.discard = function () {
         this.__fire('ondiscard');
         if (this.__cursor) {
-            this.__cursor.destroy();
+            this.__cursor.unload();
         }
-        this.destroy();
+        this.unload();
     };
     Tool.prototype.setPickableTraitListFilter = function (pickableTraitList) {
         this.__engine.toolController.setPickableTraitListFilter(pickableTraitList);

@@ -11,6 +11,11 @@ function (Controller, $, $Tools) {
         this.__x = null;
         this.__y = null;
         this.__tool = null;
+        this.__pickingTool = new $Tools.PickingTool();
+        this.__placingTool = new $Tools.PlacingTool();
+        this.__wireTool = new $Tools.WireTool();
+        this.__cuttingTool = new $Tools.CuttingTool();
+        this.__trashTool = new $Tools.TrashTool();
     };
     // private methods
     ToolController.prototype.__onload = function () {
@@ -25,13 +30,18 @@ function (Controller, $, $Tools) {
         }
         this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__updateLastPosition);
     };
-    ToolController.prototype.__equip = function (tool, entity) {
+    ToolController.prototype.__equip = function (tool /* arguments 1, argument 2, etc. */) {
         if (this.__tool) {
             this.__tool.discard();
         }
         this.__tool = tool;
-        this.__tool.injectEngine(this.__engine);
-        this.__tool.equip(this.__x || -9999, this.__y || -9999);
+        if (!this.__tool.isEngineInjected) {
+            this.__tool.injectEngine(this.__engine);
+        }
+        [].shift.call(arguments); // remove tool from arguments
+        [].push.call(arguments, this.__x || -9999); // add x coordinate
+        [].push.call(arguments, this.__y || -9999); // add y coordinate
+        this.__tool.equip.apply(this.__tool, arguments);
     };
     ToolController.prototype.__updateLastPosition = function (position) {
         this.__x = position.x;
@@ -47,23 +57,20 @@ function (Controller, $, $Tools) {
             }
         });
     };
-    ToolController.prototype.equipNoTool = function () {
-        this.__equip(new $Tools.NoTool());
-    };
     ToolController.prototype.equipPickingTool = function () {
-        this.__equip(new $Tools.PickingTool());
+        this.__equip(this.__pickingTool);
     };
     ToolController.prototype.equipPlacingTool = function (circuitElement, fnShiftKeyMouseUp) {
-        this.__equip(new $Tools.PlacingTool(circuitElement, fnShiftKeyMouseUp));
+        this.__equip(this.__placingTool, circuitElement, fnShiftKeyMouseUp);
     };
     ToolController.prototype.equipWireTool = function (terminal) {
-        this.__equip(new $Tools.WireTool(terminal));
+        this.__equip(this.__wireTool, terminal);
     };
     ToolController.prototype.equipCuttingTool = function () {
-        this.__equip(new $Tools.CuttingTool());
+        this.__equip(this.__cuttingTool);
     };
     ToolController.prototype.equipTrashTool = function () {
-        this.__equip(new $Tools.TrashTool());
+        this.__equip(this.__trashTool);
     };
 
     return ToolController;

@@ -7,14 +7,17 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox) {
         Tool.call(this);
         // drag bounds before pick on drag
         this.__pickableOnDrag = null;
-        this.__beforeDragBounds = new $Data.Geometry.Rectangle(20, 20);
-        this.__beforeDragAnchor = null;
+        this.__beforeDragBounds = null;
         // selection bounds before selection box on drag
         this.__selectionBox = null;
-        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(30, 30);
-        this.__beforeSelectionAnchor = null;
+        this.__pickableSelectionBox = null;
+        this.__beforeSelectionBounds = null;
+        this.__selectionAnchor = null;
     };
     PickingTool.prototype.__onequip = function () {
+        this.__pickableOnDrag = null;
+        // hack
+        this.__isMouseDown = false;
         this.setPickableTraitListFilter(
             new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Default)
         );
@@ -37,7 +40,7 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox) {
                 cursor.y < this.__beforeSelectionBounds.vertices[3].y
             )) {
                 this.__selectionBox = new SelectionBox();
-                this.__selectionBox.startAt(cursor);
+                this.__selectionBox.startAt(this.__selectionAnchor);
                 this.__engine.sceneController.addToCurrentScene(this.__selectionBox);
             }
         } else if (this.__selectionBox) {
@@ -46,39 +49,51 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox) {
     };
     PickingTool.prototype.__onmousedown = function (cursor) {
         Tool.prototype.__onmousedown.call(this, cursor);
-        if (!this.__beforeDragAnchor) {
-            this.__beforeDragAnchor = new $Data.Geometry.Position(cursor.x, cursor.y);
-            for (var i = 0, L = this.__beforeDragBounds.vertices.length; i < L; i++) {
-                this.__beforeDragBounds.vertices[i].x += cursor.x;
-                this.__beforeDragBounds.vertices[i].y += cursor.y;
-            }
+        this.__beforeDragBounds = new $Data.Geometry.Rectangle(20, 20);
+        for (var i = 0, L = this.__beforeDragBounds.vertices.length; i < L; i++) {
+            this.__beforeDragBounds.vertices[i].x += cursor.x;
+            this.__beforeDragBounds.vertices[i].y += cursor.y;
         }
-        if (!this.__beforeSelectionAnchor) {
-            this.__beforeSelectionAnchor = new $Data.Geometry.Position(cursor.x, cursor.y);
-            for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
-                this.__beforeSelectionBounds.vertices[i].x += cursor.x;
-                this.__beforeSelectionBounds.vertices[i].y += cursor.y;
-            }
+        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(50, 50);
+        this.__selectionAnchor = new $Data.Geometry.Position(cursor.x, cursor.y);
+        for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
+            this.__beforeSelectionBounds.vertices[i].x += cursor.x;
+            this.__beforeSelectionBounds.vertices[i].y += cursor.y;
         }
     };
     PickingTool.prototype.__pick_onmousedown = function (entities) {
-        if ($PickableTraits.Draggable.resolve(entities[0].getComponent($.PickableComponent))) {
-            this.__pickableOnDrag = entities[0].getComponent($.PickableComponent);
+        var entity = null;
+        for (var i = 0, L = entities.length; i < L; i++) {
+            if ($PickableTraits.Draggable.resolve(entities[i].getComponent($.PickableComponent))) {
+                this.__pickableOnDrag = entities[i].getComponent($.PickableComponent);
+                entity = entities[i];
+                break;
+            }
+        }
+        if (this.__pickableSelectionBox && this.__pickableSelectionBox !== entity) {
+            this.__pickableSelectionBox.destroy();
+            this.__pickableSelectionBox = null;
         }
     };
     PickingTool.prototype.__pick_onmouseup = function (entities) {
         if (this.__selectionBox) {
             this.__selectionBox.fillContents();
-            this.__selectionBox = null;
+            if (this.__selectionBox.contents.length == 0) {
+                this.__selectionBox.destroy();
+                this.__selectionBox = null;
+            } else {
+                this.__pickableSelectionBox = this.__selectionBox;
+            }
+            return;
         }
         for (var i = 0, L = entities.length; i < L; i++) {
             var pickableComponent = entities[i].getComponent($.PickableComponent);
-            if ($PickableTraits.Default.resolve(pickableComponent)) {
+            if ($PickableTraits.Default.resolve(pickableComponent) && !(entities[i] === this.__selectionBox)) {
                 pickableComponent.pick();
                 return;
             }
         }
-        this.__engine.toolController.equipPickingTool();
+        return;
     };
 
     return PickingTool;

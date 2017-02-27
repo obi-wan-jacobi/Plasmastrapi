@@ -6,7 +6,7 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
     function TrashTool() {
         Tool.call(this, $Cursors.TrashToolCursor);
         this.__selectionBox = null;
-        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(30, 30);
+        this.__beforeSelectionBounds = null;
         this.__anchor = null;
     };
     TrashTool.prototype.__onequip = function () {
@@ -23,7 +23,7 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
                 cursor.y < this.__beforeSelectionBounds.vertices[3].y
             )) {
                 this.__selectionBox = new SelectionBox();
-                this.__selectionBox.startAt(cursor);
+                this.__selectionBox.startAt(this.__anchor);
                 this.__engine.sceneController.addToCurrentScene(this.__selectionBox);
             }
         } else if (this.__selectionBox) {
@@ -32,12 +32,11 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
     };
     TrashTool.prototype.__onmousedown = function (cursor) {
         Tool.prototype.__onmousedown.call(this, cursor);
-        if (!this.__anchor) {
-            this.__anchor = new $Data.Geometry.Position(cursor.x, cursor.y);
-            for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
-                this.__beforeSelectionBounds.vertices[i].x += cursor.x;
-                this.__beforeSelectionBounds.vertices[i].y += cursor.y;
-            }
+        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(50, 50);
+        this.__anchor = new $Data.Geometry.Position(cursor.x, cursor.y);
+        for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
+            this.__beforeSelectionBounds.vertices[i].x += cursor.x;
+            this.__beforeSelectionBounds.vertices[i].y += cursor.y;
         }
     };
     TrashTool.prototype.__pick_onmouseup = function (entities) {
@@ -45,7 +44,10 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
             this.__selectionBox.fillContents();
             this.__selectionBox.destroyContents();
             this.__selectionBox.destroy();
-            this.__selectionBox = null;
+            if (this.__selectionBox.contents.length > 0) {
+                this.__selectionBox = null;
+                return;
+            }
         } else {
             for (var i = 0, L = entities.length; i < L; i++) {
                 var pickableComponent = entities[i].getComponent($.PickableComponent);
@@ -56,7 +58,7 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
             }
         }
         if (this.isShiftKeyDown) {
-            this.__engine.toolController.equipTrashTool();
+            return;
         } else {
             this.__engine.toolController.equipPickingTool();
         }

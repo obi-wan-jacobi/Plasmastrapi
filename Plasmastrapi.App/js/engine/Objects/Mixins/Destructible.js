@@ -24,14 +24,15 @@
         );
     };
     Destructible.prototype.destroy = function () {
-        if (!this.__isDestroyed) {
-            this.__isDestroyed = true
-            this.__fire('ondestroy', this);
-            if (this.isLoaded) {
-                this.unload();
-            }
-            this.__engine.eventEmitterContainer.purge(this);
+        if (this.__isDestroyed) {
+            throw new Error(this.constructor.name + ":destroy - Objects cannot be destroyed a second time!");
         }
+        this.__isDestroyed = true
+        this.__fire('ondestroy', this);
+        if (this.isLoaded) {
+            this.unload();
+        }
+        this.__engine.eventEmitterContainer.purge(this);
     };
 
     return Destructible;

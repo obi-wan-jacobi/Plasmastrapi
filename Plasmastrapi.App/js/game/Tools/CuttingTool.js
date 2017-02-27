@@ -53,7 +53,7 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
             }
         }
         if (this.isShiftKeyDown) {
-            this.__engine.toolController.equipCuttingTool();
+            return;
         } else {
             this.__engine.toolController.equipPickingTool();
         }

@@ -32,9 +32,11 @@ define(function () {
             'onhide'
         );
         var fnOnLoadProxy = target.__onload || function () { };
-        target.__onload = function () {
+        target.__onload = function (isVisibleByDefault) {
             fnOnLoadProxy.call(this);
-	        this.show();
+            if (isVisibleByDefault || isVisibleByDefault === undefined) {
+                this.show();
+            }
 	    };
 	    var fnOnUnloadProxy = target.__onunload || function () { };
 	    target.__onunload = function () {

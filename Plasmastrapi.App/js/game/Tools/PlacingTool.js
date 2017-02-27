@@ -2,15 +2,17 @@
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
-    function PlacingTool(entity, fnShiftKeyMouseUp) {
+    function PlacingTool() {
         Tool.call(this);
+        this.__equippedEntity = null;
+        this.__fnShiftKeyMouseUp = null;
+        this.__previousCursorPosition = null;
+    };
+    PlacingTool.prototype.__onequip = function (entity, fnShiftKeyMouseUp, x, y) {
+        this.__previousCursorPosition = new Geometry.Position(x, y);
         this.__equippedEntity = entity;
         this.__fnShiftKeyMouseUp = fnShiftKeyMouseUp;
-        this.__previousCursorPosition = null
-    };
-    PlacingTool.prototype.__onequip = function (x, y) {
         this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.DestructionZone, $PickableTraits.DesignZone));
-        this.__previousCursorPosition = new Geometry.Position(x, y);
     };
     PlacingTool.prototype.__onmousemove = function (cursor) {
         var poseComponent = this.__equippedEntity.getComponent($.PoseComponent)

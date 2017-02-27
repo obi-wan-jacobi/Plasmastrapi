@@ -3,14 +3,15 @@ function (Tool, $, $Data, $PickableTraits, $Circuits) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
-    function WireTool(terminal) {
+    function WireTool() {
         Tool.call(this);
-        this.__selectedTerminal = terminal;
+        this.__selectedTerminal = null;
         this.__toolWire = null;
         this.__terminalHandle = null;
         this.__isSelectedTerminalAnInput = null;
     };
-    WireTool.prototype.__onequip = function () {
+    WireTool.prototype.__onequip = function (terminal) {
+        this.__selectedTerminal = terminal;
         // filter pickable entities according to whether we're selecting an input or output terminal
         var terminalCompatibility;
         var pickableComponent = this.__selectedTerminal.getComponent($.PickableComponent);

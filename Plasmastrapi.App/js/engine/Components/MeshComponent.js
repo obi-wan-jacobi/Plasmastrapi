@@ -136,12 +136,16 @@ function (Component, Geometry, PoseComponent) {
 		    var b_ray = point.y - m_ray * point.x;
 		    for (var i = 0, L = vertices.length - 1; i < L; i++) {
 		        var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
+		        m_side = isFinite(m_side) ? m_side : Number.MAX_SAFE_INTEGER;
 			    var b_side = vertices[i].y - m_side * vertices[i].x;
-			    var intersectX = Math.round((b_side - b_ray) / (m_ray - m_side));
-			    var intersectY = Math.round(m_ray * intersectX + b_ray);
+			    var intersectX = (b_side - b_ray) / (m_ray - m_side);
+			    intersectX = isNaN(intersectX) ? Number.MAX_SAFE_INTEGER : intersectX;
+			    var intersectY = m_ray * intersectX + b_ray;
+			    intersectX = Math.round(intersectX * 1000) / 1000;
+			    intersectY = Math.round(intersectY * 1000) / 1000;
 			    if (intersectX <= point.x && intersectX >= minX && intersectY <= point.y && intersectY >= minY) {
 			        // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent edge case
-			        if (intersectX === minX && intersectY === minY) {
+			        if (Math.round(intersectX) === Math.round(minX) && Math.round(intersectY) === Math.round(minY)) {
 			            var m_side_lower = i > 0
                             ? (vertices[i].y - vertices[i - 1].y) / (vertices[i].x - vertices[i - 1].x)
                             : (vertices[i].y - vertices[L - 1].y) / (vertices[i].x - vertices[L - 1].x);
@@ -221,9 +225,13 @@ function (Component, Geometry, PoseComponent) {
 	        var b_ray = point.y - m_ray * point.x;
 	        for (var i = 0, L = vertices.length - 1; i < L; i++) {
 	            var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
+	            m_side = isFinite(m_side) ? m_side : Number.MAX_SAFE_INTEGER;
 	            var b_side = vertices[i].y - m_side * vertices[i].x;
-	            var intersectX = Math.round((b_side - b_ray) / (m_ray - m_side));
-	            var intersectY = Math.round(m_ray * intersectX + b_ray);
+	            var intersectX = (b_side - b_ray) / (m_ray - m_side);
+	            intersectX = isNaN(intersectX) ? Number.MAX_SAFE_INTEGER : intersectX;
+	            var intersectY = m_ray * intersectX + b_ray;
+	            intersectX = Math.round(intersectX * 1000) / 1000;
+	            intersectY = Math.round(intersectY * 1000) / 1000;
 	            ctx.beginPath();
 	            ctx.arc(intersectX, intersectY, 10, 0, 2 * Math.PI, false);
 	            ctx.closePath();
@@ -236,7 +244,7 @@ function (Component, Geometry, PoseComponent) {
 	                ctx.strokeStyle = 'red';
 	                ctx.stroke();
 	                // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent edge case
-	                if (intersectX === Math.round(minX) && intersectY === Math.round(minY)) {
+	                if (Math.round(intersectX) === Math.round(minX) && Math.round(intersectY) === Math.round(minY)) {
 	                    var m_side_lower = i > 0
                             ? (vertices[i].y - vertices[i - 1].y) / (vertices[i].x - vertices[i - 1].x)
                             : (vertices[i].y - vertices[L - 1].y) / (vertices[i].x - vertices[L - 1].x);

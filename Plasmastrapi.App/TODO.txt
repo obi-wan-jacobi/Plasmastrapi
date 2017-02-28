@@ -7,7 +7,7 @@ needs testing:
 - destroy->purge
 
 in progress:
-- collision bounds on very small wires are funky
+- wire collision bounds is weird in the top right corner of a wire that is angle slightly downward left to right
 - button hotkeys
 - gate logic
 - undo/redo
@@ -44,6 +44,7 @@ user experience:
 - 
 
 tech debt:
+- mesh component point collision checking is disgusting
 - add comments/documentation
 - EventEmitter mixins should check for an engine instance before being loaded/activated
 - blue background image is needlessly large

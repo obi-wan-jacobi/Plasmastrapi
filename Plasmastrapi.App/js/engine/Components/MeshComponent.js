@@ -144,7 +144,7 @@ function (Component, Geometry, PoseComponent) {
 			    intersectX = Math.round(intersectX * 1000) / 1000;
 			    intersectY = Math.round(intersectY * 1000) / 1000;
 			    if (intersectX <= point.x && intersectX >= minX && intersectY <= point.y && intersectY >= minY) {
-			        // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent edge case
+			        // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent-to-vertex case
 			        if (Math.round(intersectX) === Math.round(minX) && Math.round(intersectY) === Math.round(minY)) {
 			            var m_side_lower = i > 0
                             ? (vertices[i].y - vertices[i - 1].y) / (vertices[i].x - vertices[i - 1].x)
@@ -243,7 +243,7 @@ function (Component, Geometry, PoseComponent) {
 	                ctx.closePath();
 	                ctx.strokeStyle = 'red';
 	                ctx.stroke();
-	                // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent edge case
+	                // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent-to-vertex case
 	                if (Math.round(intersectX) === Math.round(minX) && Math.round(intersectY) === Math.round(minY)) {
 	                    var m_side_lower = i > 0
                             ? (vertices[i].y - vertices[i - 1].y) / (vertices[i].x - vertices[i - 1].x)

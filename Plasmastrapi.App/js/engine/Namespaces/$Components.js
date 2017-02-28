@@ -8,7 +8,8 @@
     "../Components/MotionComponent",
     "../Components/PickableComponent",
     "../Components/PoseComponent",
-    "../Components/SpriteComponent"
+    "../Components/SpriteComponent",
+    "../Components/TextLabelComponent"
 ],
 function (
     CollidableComponent,
@@ -20,7 +21,8 @@ function (
     MotionComponent,
     PickableComponent,
     PoseComponent,
-    SpriteComponent
+    SpriteComponent,
+    TextLabelComponent
 ) {
 
     return {
@@ -33,6 +35,7 @@ function (
         MotionComponent,
         PickableComponent,
         PoseComponent,
-        SpriteComponent
+        SpriteComponent,
+        TextLabelComponent
     };
 });

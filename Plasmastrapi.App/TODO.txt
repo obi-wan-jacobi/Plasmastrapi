@@ -7,8 +7,7 @@ needs testing:
 - destroy->purge
 
 in progress:
-- drag-select multiple elements
-- toolbar button labels
+- collision bounds on very small wires is funky
 - button hotkeys
 - gate logic
 - undo/redo
@@ -45,6 +44,7 @@ user experience:
 - 
 
 tech debt:
+- add comments/documentation
 - EventEmitter mixins should check for an engine instance before being loaded/activated
 - blue background image is needlessly large
 - require.js --> configure paths for easier module loading

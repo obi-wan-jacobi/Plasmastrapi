@@ -24,20 +24,6 @@ define(["./EventEmitter", "../Objects/Component", "./AtomicArray"], function (Ev
     Entity.prototype.__ondestroy = function () {
         this.__engine.entityContainer.remove(this);
     };
-    Entity.prototype.__addParent = function (parent) {
-        if (this.__parent) {
-            throw new Error(this.constructor.name + ':addParent - This entity already has a parent.');
-        }
-        if (!(parent instanceof Entity)) {
-            throw new Error(this.constructor.name + ':addParent - Parent must be of type Entity.');
-        }
-        this.__parent = parent;
-        // wire up event subscriptions
-        this.__parent.addEventListener('oninjectengine', this, this.injectEngine);
-        this.__parent.addEventListener('onload', this, this.load);
-        this.__parent.addEventListener('onunload', this, this.unload);
-        this.__parent.addEventListener('ondestroy', this, this.destroy);
-    };
     Entity.prototype.__removeParent = function () {
         this.__parent = null;
         // unwire event subscription
@@ -56,10 +42,21 @@ define(["./EventEmitter", "../Objects/Component", "./AtomicArray"], function (Ev
             }
         }, this);
     };
-    Entity.prototype.addChild = function (childEntity) {
-        childEntity.__addParent(this);
-        if (this.isEngineInjected) {
-            childEntity.injectEngine(this.__engine);
+    Entity.prototype.addParent = function (parent) {
+        if (this.__parent) {
+            throw new Error(this.constructor.name + ':addParent - This entity already has a parent.');
+        }
+        if (!(parent instanceof Entity)) {
+            throw new Error(this.constructor.name + ':addParent - Parent must be of type Entity.');
+        }
+        this.__parent = parent;
+        // wire up event subscriptions
+        this.__parent.addEventListener('oninjectengine', this, this.injectEngine);
+        this.__parent.addEventListener('onload', this, this.load);
+        this.__parent.addEventListener('onunload', this, this.unload);
+        this.__parent.addEventListener('ondestroy', this, this.destroy);
+        if (this.__parent.isEngineInjected) {
+            this.injectEngine(this.__parent.__engine);
         }
     };
     Entity.prototype.addComponent = function(component) {

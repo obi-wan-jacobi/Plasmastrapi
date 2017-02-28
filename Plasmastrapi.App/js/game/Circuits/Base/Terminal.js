@@ -9,11 +9,13 @@ function (BaseElement, $, Geometry) {
         BaseElement.call(this, 0, 0);
 
         this.__defaultFrameIndex = null;
-        this.offset = offsetPosition;
-        this.parentElement = parentElement;
+        this.__offset = offsetPosition;
+
+        // configure this.__parent
+        this.addParent(parentElement)
 
         // pose
-        var parentElementPose = this.parentElement.getComponent($.PoseComponent);
+        var parentElementPose = this.__parent.getComponent($.PoseComponent);
         var poseComponent = new $.PoseComponent(new Geometry.Position(0, 0), 0);
 
         // configure parentElement position following
@@ -35,11 +37,11 @@ function (BaseElement, $, Geometry) {
         this.__setPoseRelativeToParentElement();
     };
     Terminal.prototype.__setPoseRelativeToParentElement = function () {
-        var parentElementPose = this.parentElement.getComponent($.PoseComponent)
+        var parentElementPose = this.__parent.getComponent($.PoseComponent)
         var position = parentElementPose.position;
         var orientation = parentElementPose.orientation;
-        var templateX = this.offset.x;
-        var templateY = this.offset.y;
+        var templateX = this.__offset.x;
+        var templateY = this.__offset.y;
         var x = templateX * Math.cos(orientation) - templateY * Math.sin(orientation) + position.x;
         var y = templateX * Math.sin(orientation) + templateY * Math.cos(orientation) + position.y;
         var poseComponent = this.getComponent($.PoseComponent);

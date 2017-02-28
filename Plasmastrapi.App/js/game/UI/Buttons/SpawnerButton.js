@@ -1,14 +1,14 @@
-﻿define(["../Base/Button", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"], function (Button, $, Graphics, $PickableTraits) {
+﻿define(["../Base/ToolbarButton", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"], function (ToolbarButton, $, Graphics, $PickableTraits) {
 
     // CLASS SpawnerButton
-    SpawnerButton.prototype = Object.create(Button.prototype);
+    SpawnerButton.prototype = Object.create(ToolbarButton.prototype);
     SpawnerButton.prototype.constructor = SpawnerButton;
-    function SpawnerButton(x, y, circuitElementConstructor) {
+    function SpawnerButton(x, y, circuitElementConstructor, labelText) {
         // predefined parameters
         var displayLayer = 'ondrawuientities';
         var spriteFrame = circuitElementConstructor.prototype.sprite.frames[0];
         var imageHandle = new Graphics.ImageHandle(displayLayer, 0, 0, spriteFrame.width, spriteFrame.height, spriteFrame.width, spriteFrame.height, spriteFrame);
-        Button.call(this, x, y, imageHandle, this, this.__onpick);
+        ToolbarButton.call(this, x, y, labelText, imageHandle, this, this.__onpick);
         this.__circuitElementConstructor = circuitElementConstructor;
         var pickableComponent = this.getComponent($.PickableComponent);
         $PickableTraits.Draggable.call(pickableComponent);

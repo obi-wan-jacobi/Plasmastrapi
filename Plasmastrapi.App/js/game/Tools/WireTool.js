@@ -10,8 +10,8 @@ function (Tool, $, $Data, $PickableTraits, $Circuits) {
         this.__terminalHandle = null;
         this.__isSelectedTerminalAnInput = null;
     };
-    WireTool.prototype.__onequip = function (terminal) {
-        this.__selectedTerminal = terminal;
+    WireTool.prototype.__setPickableTraitListFilter = function (terminal) {
+        this.__isSelectedTerminalAnInput = null;
         // filter pickable entities according to whether we're selecting an input or output terminal
         var terminalCompatibility;
         var pickableComponent = this.__selectedTerminal.getComponent($.PickableComponent);
@@ -27,16 +27,22 @@ function (Tool, $, $Data, $PickableTraits, $Circuits) {
         this.setPickableTraitListFilter(
             new $PickableTraits.PickableTraitList(terminalCompatibility, $PickableTraits.DestructionZone, $PickableTraits.DesignZone)
         );
+    };
+    WireTool.prototype.__onequip = function (terminal) {
+        this.__selectedTerminal = terminal;
+        this.__setPickableTraitListFilter(this.__selectedTerminal);
         // select terminal
+        var pickableComponent = this.__selectedTerminal.getComponent($.PickableComponent);
         pickableComponent.select();
     };
     WireTool.prototype.__ondiscard = function () {
         // deselect terminal
         var pickableComponent = this.__selectedTerminal.getComponent($.PickableComponent);
         pickableComponent.deselect();
-        // clean up the entity space
         this.__terminalHandle.destroy();
+        this.__terminalHandle = null;
         this.__toolWire.destroy();
+        this.__terminalHandle = null;
     };
     WireTool.prototype.__onmousemove = function (cursor) {
         if (!this.__terminalHandle) {
@@ -76,7 +82,18 @@ function (Tool, $, $Data, $PickableTraits, $Circuits) {
                 break;
             }
         }
-        this.__engine.toolController.equipPickingTool();
+        if (this.isShiftKeyDown) {
+            this.__setPickableTraitListFilter(this.__selectedTerminal);
+            return;
+        } else {
+            this.__engine.toolController.equipPickingTool();
+        }
+    };
+    WireTool.prototype.__onkeyup = function (keyCode) {
+        Tool.prototype.__onkeyup.call(this, keyCode);
+        if (this.keyCodes.shift === keyCode) {
+            this.__engine.toolController.equipPickingTool();
+        }
     };
 
     return WireTool;

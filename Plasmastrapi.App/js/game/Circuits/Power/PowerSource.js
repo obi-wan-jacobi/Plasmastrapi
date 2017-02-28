@@ -17,10 +17,6 @@ function (CircuitElement, $, Geometry, OutputTerminal, InputTerminal, TerminalWi
         var outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMargin), this);
         var outputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, -spriteComponent.height / 2), this);
         var outputTerminalWire = new TerminalWire(outputTerminal, outputTerminalAnchor);
-        // configure dependencies
-        this.addChild(outputTerminal);
-        this.addChild(outputTerminalAnchor);
-        this.addChild(outputTerminalWire);
     };
     
     return PowerSource;

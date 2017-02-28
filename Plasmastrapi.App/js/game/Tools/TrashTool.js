@@ -42,10 +42,11 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
     TrashTool.prototype.__pick_onmouseup = function (entities) {
         if (this.__selectionBox) {
             this.__selectionBox.fillContents();
+            var contentSize = this.__selectionBox.contents.length;
             this.__selectionBox.destroyContents();
             this.__selectionBox.destroy();
-            if (this.__selectionBox.contents.length > 0) {
-                this.__selectionBox = null;
+            this.__selectionBox = null;
+            if (contentSize > 0) {
                 return;
             }
         } else {

@@ -11,16 +11,16 @@ function (Scene, $UI, $Circuits, $Cursors) {
         // toolbar
 
         //toolbar element spawner buttons
-        this.add(new $UI.SpawnerButton(50, 40, $Circuits.AndGate));
-        this.add(new $UI.SpawnerButton(100, 40, $Circuits.NandGate));
-        this.add(new $UI.SpawnerButton(150, 40, $Circuits.OrGate));
-        this.add(new $UI.SpawnerButton(200, 40, $Circuits.XorGate));
-        this.add(new $UI.SpawnerButton(250, 40, $Circuits.PowerSource));
+        this.add(new $UI.SpawnerButton(50, 40, $Circuits.AndGate, "[1]"));
+        this.add(new $UI.SpawnerButton(100, 40, $Circuits.NandGate, "[2]"));
+        this.add(new $UI.SpawnerButton(150, 40, $Circuits.OrGate, "[3]"));
+        this.add(new $UI.SpawnerButton(200, 40, $Circuits.XorGate, "[4]"));
+        this.add(new $UI.SpawnerButton(250, 40, $Circuits.PowerSource, "[5]"));
     };
     CircuitDesignScene.prototype.__oninit = function() {
         // toolbar utility buttons
-        this.add(new $UI.ToolButton(1200, 40, $Cursors.CuttingToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipCuttingTool));
-        this.add(new $UI.ToolButton(1250, 40, $Cursors.TrashToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipTrashTool));
+        this.add(new $UI.ToolButton(1200, 40, "[w]", $Cursors.CuttingToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipCuttingTool));
+        this.add(new $UI.ToolButton(1250, 40, "[q]", $Cursors.TrashToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipTrashTool));
     };
 
     return CircuitDesignScene;

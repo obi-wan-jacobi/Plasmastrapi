@@ -98,6 +98,7 @@
     <Content Include="bower_components\require.js" />
     <Content Include="favicon.ico" />
     <Content Include="js\engine\Components\CurveComponent.js" />
+    <Content Include="js\engine\Components\TextLabelComponent.js" />
     <Content Include="js\engine\Containers\PickableComponentContainer.js" />
     <Content Include="js\engine\Loaders\ImageLoader.js" />
     <Content Include="js\engine\Loaders\SpriteLoader.js" />
@@ -157,6 +158,8 @@
     <Content Include="js\game\Tools\Cursors\TrashToolCursor.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Tools\Base\Tool.js" />
+    <Content Include="js\game\UI\Base\TextLabel.js" />
+    <Content Include="js\game\UI\Base\ToolbarButton.js" />
     <Content Include="js\game\UI\Buttons\ToolButton.js" />
     <Content Include="js\game\Tools\Base\PickableTrait.js" />
     <Content Include="js\game\Tools\PickableTraits\DesignZone.js" />

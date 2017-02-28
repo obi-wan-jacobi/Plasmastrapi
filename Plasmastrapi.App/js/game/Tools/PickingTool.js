@@ -80,10 +80,10 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox) {
             this.__selectionBox.fillContents();
             if (this.__selectionBox.contents.length == 0) {
                 this.__selectionBox.destroy();
-                this.__selectionBox = null;
             } else {
                 this.__pickableSelectionBox = this.__selectionBox;
             }
+            this.__selectionBox = null;
             return;
         }
         for (var i = 0, L = entities.length; i < L; i++) {

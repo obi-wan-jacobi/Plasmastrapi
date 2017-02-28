@@ -132,17 +132,22 @@ function (Component, Geometry, PoseComponent) {
 		    // if the number of intersections between a ray and the mesh's sides is odd --> collision detected		
 		    var numberOfIntersections = 0;
 		    var vertices = [].concat(mesh.vertices, mesh.vertices[0]);
-		    var m_ray = (minY - point.y) / (minX - point.x);
+		    var m_ray = (point.y - minY) / (point.x - minX);
 		    var b_ray = point.y - m_ray * point.x;
-			for (var i = 0, L = vertices.length - 1; i < L; i++) {
-			    var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
+		    for (var i = 0, L = vertices.length - 1; i < L; i++) {
+		        var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
 			    var b_side = vertices[i].y - m_side * vertices[i].x;
 			    var intersectX = Math.round((b_side - b_ray) / (m_ray - m_side));
 			    var intersectY = Math.round(m_ray * intersectX + b_ray);
 			    if (intersectX <= point.x && intersectX >= minX && intersectY <= point.y && intersectY >= minY) {
-			        // if the point of intersection is on a vertex located at minX, minY --> collision detected
+			        // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent edge case
 			        if (intersectX === minX && intersectY === minY) {
-			            return true;
+			            var m_side_lower = i > 0
+                            ? (vertices[i].y - vertices[i - 1].y) / (vertices[i].x - vertices[i - 1].x)
+                            : (vertices[i].y - vertices[L - 1].y) / (vertices[i].x - vertices[L - 1].x);
+			            if (m_ray < isNaN(m_side_lower) ? Number.MAX_SAFE_INTEGER : m_side_lower && m_ray > m_side) {
+			                return true;
+			            }
 			        } else {
 			            numberOfIntersections++;
 			        }
@@ -179,26 +184,26 @@ function (Component, Geometry, PoseComponent) {
 		}
 		ctx.restore();
 	    // debugging
-		//ctx.save();
-		//for (var i = 0, L = vertices.length; i < L; i++) {
-		//    var vertex = vertices[i];
-		//    ctx.beginPath();
-		//    ctx.arc(vertex.x, vertex.y, 5, 0, 2 * Math.PI, false);
-		//    ctx.closePath();
-		//    ctx.strokeStyle = '#00FFFF';
-		//    ctx.stroke();
-		//}
-		//ctx.beginPath();
-		//ctx.arc(this.__mesh.minX, this.__mesh.minY, 10, 0, 2 * Math.PI, false);
-		//ctx.closePath();
-		//ctx.strokeStyle = 'yellow';
-		//ctx.stroke();
-		//ctx.restore();
-		//if (this.__lastPoint) {
-		//    ctx.save();
-		//    this.drawPointCollision(ctx);
-		//    ctx.restore();
-		//}
+		ctx.save();
+		for (var i = 0, L = vertices.length; i < L; i++) {
+		    var vertex = vertices[i];
+		    ctx.beginPath();
+		    ctx.arc(vertex.x, vertex.y, 5, 0, 2 * Math.PI, false);
+		    ctx.closePath();
+		    ctx.strokeStyle = '#00FFFF';
+		    ctx.stroke();
+		}
+		ctx.beginPath();
+		ctx.arc(this.__mesh.minX, this.__mesh.minY, 10, 0, 2 * Math.PI, false);
+		ctx.closePath();
+		ctx.strokeStyle = 'yellow';
+		ctx.stroke();
+		ctx.restore();
+		if (this.__lastPoint) {
+		    ctx.save();
+		    this.drawPointCollision(ctx);
+		    ctx.restore();
+		}
 	};
     // debugging
 	MeshComponent.prototype.drawPointCollision = function (ctx) {
@@ -212,7 +217,7 @@ function (Component, Geometry, PoseComponent) {
 	        // if the number of intersections between a ray and the mesh's sides is odd --> collision detected		
 	        var numberOfIntersections = 0;
 	        var vertices = [].concat(mesh.vertices, mesh.vertices[0]);
-	        var m_ray = (minY - point.y) / (minX - point.x);
+	        var m_ray = (point.y - minY) / (point.x - minX);
 	        var b_ray = point.y - m_ray * point.x;
 	        for (var i = 0, L = vertices.length - 1; i < L; i++) {
 	            var m_side = (vertices[i + 1].y - vertices[i].y) / (vertices[i + 1].x - vertices[i].x);
@@ -230,9 +235,14 @@ function (Component, Geometry, PoseComponent) {
 	                ctx.closePath();
 	                ctx.strokeStyle = 'red';
 	                ctx.stroke();
-	                // if the point of intersection is on a vertex located at minX, minY --> collision detected
-	                if (intersectX === minX && intersectY === minY) {
-	                    return true;
+	                // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent edge case
+	                if (intersectX === Math.round(minX) && intersectY === Math.round(minY)) {
+	                    var m_side_lower = i > 0
+                            ? (vertices[i].y - vertices[i - 1].y) / (vertices[i].x - vertices[i - 1].x)
+                            : (vertices[i].y - vertices[L - 1].y) / (vertices[i].x - vertices[L - 1].x);
+	                    if (m_ray < isNaN(m_side_lower) ? Number.MAX_SAFE_INTEGER : m_side_lower && m_ray > m_side) {
+	                        return true;
+	                    }
 	                } else {
 	                    numberOfIntersections++;
 	                }

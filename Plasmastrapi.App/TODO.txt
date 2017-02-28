@@ -7,7 +7,7 @@ needs testing:
 - destroy->purge
 
 in progress:
-- collision bounds on very small wires is funky
+- collision bounds on very small wires are funky
 - button hotkeys
 - gate logic
 - undo/redo

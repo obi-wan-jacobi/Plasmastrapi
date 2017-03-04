@@ -7,13 +7,10 @@ function (Controller, Entity, CircuitDesignScene) {
 	function SceneController() {
 	    Controller.call(this);
 	    this.__scene = null;
-	    this.__scenes = [];
 	};
 	SceneController.prototype.__oninit = function () {
-	    this.__scenes.circuitDesignScene = this.__scenes[0] = new CircuitDesignScene(this.__engine.canvas)
-	    this.__scenes.forEach(function (scene) {
-	        scene.injectEngine(this.__engine);
-	    }, this);
+	    this.circuitDesignScene = new CircuitDesignScene(this.__engine.canvas)
+	    this.circuitDesignScene.injectEngine(this.__engine);
 	};
 	SceneController.prototype.__onload = function() {
 	    if (this.__scene) {
@@ -43,7 +40,7 @@ function (Controller, Entity, CircuitDesignScene) {
     };
     // scenes
     SceneController.prototype.setCircuitDesignScene = function (entity) {
-        this.__setCurrentScene(this.__scenes.circuitDesignScene);
+        this.__setCurrentScene(this.circuitDesignScene);
     };
 
     return SceneController

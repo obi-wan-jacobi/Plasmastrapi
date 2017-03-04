@@ -11,11 +11,16 @@ function (Scene, $UI, $Circuits, $Cursors) {
         // toolbar
 
         //toolbar element spawner buttons
-        this.add(new $UI.SpawnerButton(50, 40, $Circuits.AndGate, "[1]"));
-        this.add(new $UI.SpawnerButton(100, 40, $Circuits.NandGate, "[2]"));
-        this.add(new $UI.SpawnerButton(150, 40, $Circuits.OrGate, "[3]"));
-        this.add(new $UI.SpawnerButton(200, 40, $Circuits.XorGate, "[4]"));
-        this.add(new $UI.SpawnerButton(250, 40, $Circuits.PowerSource, "[5]"));
+        this.andGateButton = new $UI.SpawnerButton(50, 40, $Circuits.AndGate, "[1]");
+        this.nandGateButton = new $UI.SpawnerButton(100, 40, $Circuits.NandGate, "[2]");
+        this.orGateButton = new $UI.SpawnerButton(150, 40, $Circuits.OrGate, "[3]");
+        this.xorGateButton = new $UI.SpawnerButton(200, 40, $Circuits.XorGate, "[4]");
+        this.powerSourceButton = new $UI.SpawnerButton(250, 40, $Circuits.PowerSource, "[5]");
+        this.add(this.andGateButton);
+        this.add(this.nandGateButton);
+        this.add(this.orGateButton);
+        this.add(this.xorGateButton);
+        this.add(this.powerSourceButton);
     };
     CircuitDesignScene.prototype.__oninit = function() {
         // toolbar utility buttons

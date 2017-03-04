@@ -24,25 +24,13 @@ function (Controller, $, $Tools, $UI, $Circuits) {
     };
     // private methods
     ToolController.prototype.__oninit = function () {
-        var andGateSpawner = new $UI.SpawnerButton(50, 40, $Circuits.AndGate, "[1]");
-        var nandGateSpawner = new $UI.SpawnerButton(100, 40, $Circuits.NandGate, "[2]");
-        var orGateSpawner = new $UI.SpawnerButton(150, 40, $Circuits.OrGate, "[3]");
-        var xorGateSpawner = new $UI.SpawnerButton(200, 40, $Circuits.XorGate, "[4]");
-        var powerSourceSpawner = new $UI.SpawnerButton(250, 40, $Circuits.PowerSource, "[5]");
-
-        andGateSpawner.injectEngine(this.__engine);
-        nandGateSpawner.injectEngine(this.__engine);
-        orGateSpawner.injectEngine(this.__engine);
-        xorGateSpawner.injectEngine(this.__engine);
-        powerSourceSpawner.injectEngine(this.__engine);
-
         var self = this;
         this.__hotkeys = {
-            "1": function () { andGateSpawner.getComponent($.PickableComponent).pick(); },
-            "2": function () { nandGateSpawner.getComponent($.PickableComponent).pick(); },
-            "3": function () { orGateSpawner.getComponent($.PickableComponent).pick(); },
-            "4": function () { xorGateSpawner.getComponent($.PickableComponent).pick(); },
-            "5": function () { powerSourceSpawner.getComponent($.PickableComponent).pick(); },
+            "1": function () { self.__engine.sceneController.circuitDesignScene.andGateButton.getComponent($.PickableComponent).pick(); },
+            "2": function () { self.__engine.sceneController.circuitDesignScene.nandGateButton.getComponent($.PickableComponent).pick(); },
+            "3": function () { self.__engine.sceneController.circuitDesignScene.orGateButton.getComponent($.PickableComponent).pick(); },
+            "4": function () { self.__engine.sceneController.circuitDesignScene.xorGateButton.getComponent($.PickableComponent).pick(); },
+            "5": function () { self.__engine.sceneController.circuitDesignScene.powerSourceButton.getComponent($.PickableComponent).pick(); },
             "w": function () { self.equipCuttingTool(); },
             "q": function () { self.equipTrashTool(); },
         }
@@ -70,8 +58,8 @@ function (Controller, $, $Tools, $UI, $Circuits) {
             this.__tool.injectEngine(this.__engine);
         }
         [].shift.call(arguments); // remove tool from arguments
-        [].push.call(arguments, this.__x || -9999); // add x coordinate
-        [].push.call(arguments, this.__y || -9999); // add y coordinate
+        [].push.call(arguments, this.__x || -Number.MAX_SAFE_INTEGER / 2); // add x coordinate
+        [].push.call(arguments, this.__y || -Number.MAX_SAFE_INTEGER / 2); // add y coordinate
         this.__tool.equip.apply(this.__tool, arguments);
     };
     ToolController.prototype.__updateLastPosition = function (position) {
@@ -79,7 +67,10 @@ function (Controller, $, $Tools, $UI, $Circuits) {
         this.__y = position.y;
     }
     ToolController.prototype.__dohotkey = function (keyCode) {
-        this.__hotkeys[String.fromCharCode(keyCode).toLowerCase()]();
+        var fn = this.__hotkeys[String.fromCharCode(keyCode).toLowerCase()];
+        if (fn) {
+            fn();
+        }
     };
     // public methods
     ToolController.prototype.setPickableTraitListFilter = function (pickableTraitList) {

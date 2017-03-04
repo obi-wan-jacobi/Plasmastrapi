@@ -14,8 +14,7 @@
         $PickableTraits.Draggable.call(pickableComponent);
     };
     SpawnerButton.prototype.__onpick = function () {
-        var poseComponent = this.getComponent($.PoseComponent);
-        this.__spawnCircuitElement.apply(this, [poseComponent.position.x, poseComponent.position.y]);
+        this.__spawnCircuitElement(this.__engine.toolController.__x, this.__engine.toolController.__y);
     };
     SpawnerButton.prototype.__spawnCircuitElement = function (x, y) {
         var circuitElement = new this.__circuitElementConstructor(x, y);

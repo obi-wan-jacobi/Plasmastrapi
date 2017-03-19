@@ -14,14 +14,14 @@ function (CircuitElement, $, Geometry, OutputTerminal, InputTerminal, TerminalWi
         var spriteComponent = this.getComponent($.SpriteComponent);
 
         // output terminal
-        var outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMarginY), this);
+        this.outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMarginY), this);
         var outputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, -spriteComponent.height / 2), this);
-        var outputTerminalWire = new TerminalWire(outputTerminal, outputTerminalAnchor);
+        var outputTerminalWire = new TerminalWire(this.outputTerminal, outputTerminalAnchor);
 
         // input terminal
-        var inputTerminal = new InputTerminal(new Geometry.Position(0, terminalOffsetMarginY), this);
+        this.inputTerminal = new InputTerminal(new Geometry.Position(0, terminalOffsetMarginY), this);
         var inputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, spriteComponent.height / 2), this);
-        var inputTerminalWire = new TerminalWire(inputTerminal, inputTerminalAnchor);
+        var inputTerminalWire = new TerminalWire(this.inputTerminal, inputTerminalAnchor);
     };
     
     return Gate;

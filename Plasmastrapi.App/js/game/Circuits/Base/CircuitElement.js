@@ -24,6 +24,9 @@ function (BaseElement, $, $PickableTraits) {
         BaseElement.prototype.injectEngine.call(this, engine);
         this.__engine.circuitElementContainer.add(this);
     };
+    CircuitElement.prototype.updateState = function (inputState) {
+        throw new Error(this.constructor.name + ':updateState - This method must be overridden!');
+    };
     
     return CircuitElement;
 });

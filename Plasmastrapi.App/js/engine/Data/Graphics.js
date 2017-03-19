@@ -89,20 +89,5 @@ define(function() {
         this.sprite = sprite;
     };
 
-
-    // ctx.fillStyle = '#51ED39';
-    // ctx.strokeStyle = (powered) ? ((state) ? '#00FF00' : '#FF5AC8') : 'black';
-    // function highlightYellow() {
-    //     ctx.save();
-    //     ctx.beginPath();
-    //     ctx.arc(this.connectionAnchor.x, this.connectionAnchor.y, 6, 0, 2 * Math.PI);
-    //     ctx.fillStyle = 'yellow';
-    //     ctx.fill();
-    //     ctx.stroke();
-    //     ctx.restore();
-    // };
-
-
     return $;
-
 });

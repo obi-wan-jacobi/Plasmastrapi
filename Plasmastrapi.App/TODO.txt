@@ -7,7 +7,6 @@ needs testing:
 - destroy->purge
 
 in progress:
-- button hotkeys --> shift-clicking is broken
 - gate logic
 - undo/redo
 - copy/paste
@@ -60,11 +59,13 @@ optimization
 - MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
 - AtomicKeyPairArray --> store this.__end to avoid O(n) for this.push
 - PickableTraits should be put on entities and not pickable components
-- Tool life cycle
 - entity destruction (EventEmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
 
 scalability concerns:
 - single-canvas viewport
+
+    // selection box fillStyle '#51ED39'
+    // powered ? '#00FF00' : '#FF5AC8'
 
 technology:
 - linting

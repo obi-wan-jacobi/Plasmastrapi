@@ -14,9 +14,12 @@ function (CircuitElement, $, Geometry, OutputTerminal, InputTerminal, TerminalWi
         var spriteComponent = this.getComponent($.SpriteComponent);
 
         // output terminal
-        var outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMargin), this);
+        this.outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMargin), this);
         var outputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, -spriteComponent.height / 2), this);
-        var outputTerminalWire = new TerminalWire(outputTerminal, outputTerminalAnchor);
+        var outputTerminalWire = new TerminalWire(this.outputTerminal, outputTerminalAnchor);
+
+        // initialize high
+        this.outputTerminal.state = this.outputTerminal.states.HIGH;
     };
     
     return PowerSource;

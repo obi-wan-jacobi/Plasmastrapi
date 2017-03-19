@@ -107,7 +107,7 @@ function (Component, Geometry, PoseComponent) {
 		    },
 		    set: function (displayOptions) {
 		        if (!this.__options) {
-		            throw new Error(this.constructor.name + ':displayOptions set - Display options can only be replaced, not inject.');
+		            throw new Error(this.constructor.name + ':displayOptions set - Display options can only be replaced, not injected.');
 		        }
 		        if (!displayOptions.displayLayer === this.__options.displayLayer) {
                     throw new Error(this.constructor.name + ':displayOptions set - The display layer cannot be modified at this level.')

@@ -40,6 +40,10 @@ function (Entity, $, Geometry, Graphics, $PickableTraits) {
         $PickableTraits.Draggable.call(pickableComponent);
         $PickableTraits.Default.call(pickableComponent);
     };
+    // private methods
+    BaseElement.prototype.__onpick = function () {
+        this.__engine.toolController.equipPlacingTool(this);
+    };
     BaseElement.prototype.__onpick = function () {
         this.__engine.toolController.equipPlacingTool(this);
     };

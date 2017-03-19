@@ -79,6 +79,20 @@ define(["../Objects/Component", "../Data/Geometry", "../Data/Physics"], function
 		        }
 		        this.__collisionOptions = collisionOptions;
 		    }
+		},
+		'displayOptions': {
+		    get: function () {
+		        return this.__options;
+		    },
+		    set: function (displayOptions) {
+		        if (!this.__options) {
+		            throw new Error(this.constructor.name + ':displayOptions set - Display options can only be replaced, not injected.');
+		        }
+		        if (!displayOptions.displayLayer === this.__options.displayLayer) {
+		            throw new Error(this.constructor.name + ':displayOptions set - The display layer cannot be modified at this level.')
+		        }
+		        this.__options = displayOptions
+		    }
 		}
 	});
 	// public methods

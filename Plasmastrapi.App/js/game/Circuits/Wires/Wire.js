@@ -13,12 +13,7 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
 
         WireElement.call(this, outputTerminal, inputTerminal);
 
-        this.outputTerminal = outputTerminal;
-        this.inputTerminal = inputTerminal;
-
-        this.outputTerminal.addEventListener('ondestroy', this, this.destroy);
-        this.inputTerminal.addEventListener('ondestroy', this, this.destroy);
-
+        // configure components
         var lineComponent = this.getComponent($.LineComponent);
         lineComponent.collisionOptions = new $Data.Physics.LineCollisionOptions(25, 0.95);
         lineComponent.addEventListener('onpositionchange', this, this.__updateMeshComponent);
@@ -37,10 +32,32 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
 
+        // initialize terminal listeners and state
+        this.outputTerminal = outputTerminal;
+        this.inputTerminal = inputTerminal;
+
+        this.inputTerminal.addEventListener('ondestroy', this, this.destroy);
+        this.outputTerminal.addEventListener('ondestroy', this, this.destroy);
+        this.outputTerminal.addEventListener('onstatechange', this, this.__updateState);
+
+        this.inputTerminal.addConnection(this.outputTerminal);
+        this.__updateState();
+
         // tool compatibility
         $PickableTraits.Cuttable.call(pickableComponent);
     };
     // private methods
+    Wire.prototype.__updateState = function () {
+        var lineComponent = this.getComponent($.LineComponent);
+        var lineWidth = 2;
+        if (!this.outputTerminal.isPowered) {
+            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions('ondrawgameentities', 'white', lineWidth);
+        } else if (this.outputTerminal.isHigh) {
+            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions('ondrawgameentities', '#00FF00', lineWidth);
+        } else if (this.outputTerminal.isLow) {
+            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions('ondrawgameentities', '#FF5AC8', lineWidth);
+        }
+    };
     Wire.prototype.__updateMeshComponent = function () {
         var lineComponent = this.getComponent($.LineComponent);
         var poseComponent = this.getComponent($.PoseComponent);
@@ -50,6 +67,7 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
         meshComponent.mesh = lineComponent.mesh;
     };
     Wire.prototype.__ondestroy = function () {
+        this.inputTerminal.removeConnection(this.outputTerminal);
         this.__engine.wireContainer.remove(this);
     };
     Wire.prototype.__onmouseenter = function () {

@@ -4,7 +4,7 @@ function (Component, Geometry, PoseComponent) {
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
 	MeshComponent.prototype.constructor = MeshComponent;
-    function MeshComponent(mesh, /* options */ meshDisplayOptions) {
+    function MeshComponent(mesh, /* optional */ meshDisplayOptions) {
 		// inherits from
 		Component.call(this);
 		// private variables
@@ -187,29 +187,37 @@ function (Component, Geometry, PoseComponent) {
 		    ctx.fill();
 		}
 		ctx.restore();
+
 	    // debugging
-		ctx.save();
-		for (var i = 0, L = vertices.length; i < L; i++) {
-		    var vertex = vertices[i];
-		    ctx.beginPath();
-		    ctx.arc(vertex.x, vertex.y, 5, 0, 2 * Math.PI, false);
-		    ctx.closePath();
-		    ctx.strokeStyle = '#00FFFF';
-		    ctx.stroke();
+		if (!this.__engine.config.debug.isEnabled) {
+		    return;
 		}
-		ctx.beginPath();
-		ctx.arc(this.__mesh.minX, this.__mesh.minY, 10, 0, 2 * Math.PI, false);
-		ctx.closePath();
-		ctx.strokeStyle = 'yellow';
-		ctx.stroke();
-		ctx.restore();
-		if (this.__lastPoint) {
-		    ctx.save();
-		    this.drawPointCollision(ctx);
-		    ctx.restore();
-		}
+		this.drawDebug(ctx);
 	};
     // debugging
+	MeshComponent.prototype.drawDebug = function (ctx) {
+	    var vertices = this.__mesh.vertices;
+	    ctx.save();
+	    for (var i = 0, L = vertices.length; i < L; i++) {
+	        var vertex = vertices[i];
+	        ctx.beginPath();
+	        ctx.arc(vertex.x, vertex.y, 5, 0, 2 * Math.PI, false);
+	        ctx.closePath();
+	        ctx.strokeStyle = '#00FFFF';
+	        ctx.stroke();
+	    }
+	    ctx.beginPath();
+	    ctx.arc(this.__mesh.minX, this.__mesh.minY, 10, 0, 2 * Math.PI, false);
+	    ctx.closePath();
+	    ctx.strokeStyle = 'yellow';
+	    ctx.stroke();
+	    ctx.restore();
+	    if (this.__lastPoint) {
+	        ctx.save();
+	        this.drawPointCollision(ctx);
+	        ctx.restore();
+	    }
+	};
 	MeshComponent.prototype.drawPointCollision = function (ctx) {
 	    var point = this.__lastPoint;
 	    // find max/min x and y coordinates for a rectangle that bounds the entire mesh

@@ -99,7 +99,9 @@
     <Content Include="favicon.ico" />
     <Content Include="js\engine\Components\CurveComponent.js" />
     <Content Include="js\engine\Components\TextLabelComponent.js" />
+    <Content Include="js\engine\config.js" />
     <Content Include="js\engine\Containers\PickableComponentContainer.js" />
+    <Content Include="js\engine\debug.js" />
     <Content Include="js\engine\Loaders\ImageLoader.js" />
     <Content Include="js\engine\Loaders\SpriteLoader.js" />
     <Content Include="js\engine\Namespaces\%24Containers.js" />
@@ -118,6 +120,7 @@
     <Content Include="js\game\Circuits\Base\BaseElement.js" />
     <Content Include="js\game\Circuits\Base\WireElement.js" />
     <Content Include="js\game\Circuits\Wires\ToolWire.js" />
+    <Content Include="js\game\config.js" />
     <Content Include="js\game\Containers\CircuitElementContainer.js" />
     <Content Include="js\game\Controllers\ToolController.js" />
     <Content Include="js\game\Circuits\Base\CircuitElement.js" />
@@ -135,6 +138,7 @@
     <Content Include="js\game\Circuits\Terminals\TerminalWireAnchor.js" />
     <Content Include="js\game\Circuits\Wires\Wire.js" />
     <Content Include="js\engine\Namespaces\%24Components.js" />
+    <Content Include="js\game\debug.js" />
     <Content Include="js\game\Namespaces\%24Assets.js" />
     <Content Include="js\game\Namespaces\%24Containers.js" />
     <Content Include="js\game\Namespaces\%24Cursors.js" />

@@ -3,8 +3,9 @@ define([
     "./Namespaces/$Loaders",
     "./Namespaces/$Objects",
     "./Namespaces/$Systems",
+    "./config"
 ],
-function ($Containers, $Loaders, $Objects, $Systems) {
+function ($Containers, $Loaders, $Objects, $Systems, config) {
 
 	// CLASS Engine
     Engine.prototype = Object.create($Objects.System.prototype);
@@ -53,6 +54,8 @@ function ($Containers, $Loaders, $Objects, $Systems) {
 	    this[objectName] = objectHandle;
 	    objectHandle.injectEngine(this);
 	};
+    // configuration
+	Engine.prototype.config = config;
 
 	return Engine;
 });

@@ -1,4 +1,4 @@
-﻿define(function() {
+﻿define(function () {
 
     function Base() {
         this.__engine = null;

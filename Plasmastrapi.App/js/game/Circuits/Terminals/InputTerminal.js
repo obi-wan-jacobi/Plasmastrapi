@@ -22,7 +22,7 @@
     // public methods
     InputTerminal.prototype.addConnection = function (outputTerminal) {
         if (!(outputTerminal instanceof OutputTerminal)) {
-            throw new Error(this.constructor.name + ':addInputConnection - ' + outputTerminal.constructor.name + ' must be an instance of ' + OutputTerminal.name);
+            throw new Error(this.constructor.name + ':addConnection - ' + outputTerminal.constructor.name + ' must be an instance of ' + OutputTerminal.name);
         }
         this.__connections.push(outputTerminal);
         outputTerminal.addEventListener('onstatechange', this.__parent, this.__parent.updateState);
@@ -31,12 +31,12 @@
     InputTerminal.prototype.removeConnection = function (outputTerminal) {
         var connectionIndex = this.__connections.indexOf(outputTerminal);
         if (!(connectionIndex >= 0)) {
-            throw new Error(this.constructor.name + ':removeInputElement - ' + outputTerminal.constructor.name + ' is not connected to this input terminal');
+            throw new Error(this.constructor.name + ':removeConnection - ' + outputTerminal.constructor.name + ' is not connected to this input terminal');
         }
-        var connectedOutputTerminal = this.__connections[connectionIndex];
-        connectedOutputTerminal.removeEventListener('onstatechange', this.__parent, this.__parent.updateState);
+        var terminalToDisconnect = this.__connections[connectionIndex];
         this.__connections.splice(connectionIndex);
-        this.__parent.updateState(null);
+        terminalToDisconnect.removeEventListener('onstatechange', this.__parent, this.__parent.updateState);
+        this.__parent.updateState(terminalToDisconnect.states.NOPOWER);
     };
     
     return InputTerminal;

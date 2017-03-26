@@ -34,7 +34,7 @@
             throw new Error(this.constructor.name + ':removeConnection - ' + outputTerminal.constructor.name + ' is not connected to this input terminal');
         }
         var terminalToDisconnect = this.__connections[connectionIndex];
-        this.__connections.splice(connectionIndex);
+        this.__connections.splice(connectionIndex, 1);
         terminalToDisconnect.removeEventListener('onstatechange', this.__parent, this.__parent.updateState);
         this.__parent.updateState(terminalToDisconnect.states.NOPOWER);
     };

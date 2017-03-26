@@ -9,29 +9,26 @@
     NandGate.prototype.updateState = function (inputState) {
         var connections = this.inputTerminal.__connections;
         var states = this.outputTerminal.states;
-        var nextState = true;
+        var nextState = states.HIGH;
         var isPowered = false;
         // if this update was initiated by connection removal
-        if (inputState === null) {
+        if (inputState === states.NOPOWER) {
             for (var i = 0, L = connections.length; i < L; i++) {
-                if (connections[i].state.isPowered) {
+                if (connections[i].isPowered) {
                     isPowered = true;
                     nextState = nextState && connections[i].state;
                 }
             }
             if (!isPowered) {
                 this.outputTerminal.state = states.NOPOWER;
-                return;
+            } else {
+                this.outputTerminal.state = !nextState | 0;
             }
-            this.outputTerminal.state = !nextState;
-            return;
         } else {
             if (!this.outputTerminal.isPowered) {
-                this.outputTerminal.state = !inputState;
-                return;
-            } else if (inputState > states.NOPOWER) {
-                this.outputTerminal.state = !(this.outputTerminal.state && inputState);
-                return;
+                this.outputTerminal.state = !inputState | 0;
+            } else if (this.outputTerminal.isLow && inputState === states.LOW) {
+                this.outputTerminal.state = states.HIGH;
             }
         }
     };

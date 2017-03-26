@@ -9,29 +9,26 @@
     OrGate.prototype.updateState = function (inputState) {
         var connections = this.inputTerminal.__connections;
         var states = this.outputTerminal.states;
-        var nextState = false;
+        var nextState = states.LOW;
         var isPowered = false;
         // if this update was initiated by connection removal
-        if (inputState === null) {
+        if (inputState === states.NOPOWER) {
             for (var i = 0, L = connections.length; i < L; i++) {
-                if (connections[i].state.isPowered) {
+                if (connections[i].isPowered) {
                     isPowered = true;
                     nextState = nextState || connections[i].state;
                 }
             }
             if (!isPowered) {
                 this.outputTerminal.state = states.NOPOWER;
-                return;
+            } else {
+                this.outputTerminal.state = nextState;
             }
-            this.outputTerminal.state = nextState;
-            return;
         } else {
             if (!this.outputTerminal.isPowered) {
                 this.outputTerminal.state = inputState;
-                return;
-            } else if (inputState > states.NOPOWER) {
+            } else {
                 this.outputTerminal.state = this.outputTerminal.state || inputState;
-                return;
             }
         }
     };

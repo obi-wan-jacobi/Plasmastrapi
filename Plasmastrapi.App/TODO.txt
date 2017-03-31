@@ -7,9 +7,8 @@ needs testing:
 - destroy->purge
 
 in progress:
+- disable terminals on drag-select
 - wire 'draw-cutting'
-- config.js
-- debug.js
 - copy/paste
 - undo/redo
 	

@@ -1,15 +1,33 @@
-﻿define(["../Base/ToolbarButton", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"], function (ToolbarButton, $, Graphics, $PickableTraits) {
+﻿define([
+    "../Base/ToolbarButton",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Data/Graphics",
+    "../../Namespaces/$PickableTraits",
+    "gameConfig"
+],
+function (ToolbarButton, $, Graphics, $PickableTraits, config) {
 
     // CLASS SpawnerButton
     SpawnerButton.prototype = Object.create(ToolbarButton.prototype);
     SpawnerButton.prototype.constructor = SpawnerButton;
     function SpawnerButton(x, y, circuitElementConstructor, labelText) {
-        // predefined parameters
-        var displayLayer = 'ondrawuientities';
-        var spriteFrame = circuitElementConstructor.prototype.sprite.frames[0];
-        var imageHandle = new Graphics.ImageHandle(displayLayer, 0, 0, spriteFrame.width, spriteFrame.height, spriteFrame.width, spriteFrame.height, spriteFrame);
-        ToolbarButton.call(this, x, y, labelText, imageHandle, this, this.__onpick);
+        // private variables
         this.__circuitElementConstructor = circuitElementConstructor;
+        // predefined parameters
+        var spriteFrame = circuitElementConstructor.prototype.sprite.frames[0];
+        var imageHandle = new Graphics.ImageHandle(
+            config.SpawnerButton.imageHandleDisplayLayer,
+            0,
+            0,
+            spriteFrame.width,
+            spriteFrame.height,
+            spriteFrame.width,
+            spriteFrame.height,
+            spriteFrame
+        );
+        // inherits from
+        ToolbarButton.call(this, x, y, labelText, imageHandle, this, this.__onpick);
+        // configure components
         var pickableComponent = this.getComponent($.PickableComponent);
         $PickableTraits.Draggable.call(pickableComponent);
     };

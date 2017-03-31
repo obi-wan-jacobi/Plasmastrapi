@@ -3,9 +3,10 @@
     "../../../engine/Namespaces/$Components",
     "../../../engine/Namespaces/$Data",
     "../../Namespaces/$PickableTraits",
-    "./TextLabel"
+    "./TextLabel",
+    "gameConfig"
 ],
-function (Button, $, $Data, $PickableTraits, TextLabel) {
+function (Button, $, $Data, $PickableTraits, TextLabel, config) {
 
     // CLASS ToolbarButton
     ToolbarButton.prototype = Object.create(Button.prototype);
@@ -15,7 +16,12 @@ function (Button, $, $Data, $PickableTraits, TextLabel) {
         Button.call(this, x, y, imageHandle, callee, fnOnPick);
 
         // configure label
-        var textLabelDisplayOptions = new $Data.Graphics.TextLabelDisplayOptions('ondrawuientities', new $Data.Geometry.Position(0, imageHandle.image.height + 3), labelText);
+        var textLabelDisplayOptions = new $Data.Graphics.TextLabelDisplayOptions(
+            config.ToolbarButton.textLabelDisplayLayer,
+            new $Data.Geometry.Position(0, imageHandle.image.height + config.ToolbarButton.textLabelOffsetBufferY),
+            labelText
+
+            );
         var label = new TextLabel(this, textLabelDisplayOptions);
     };
 

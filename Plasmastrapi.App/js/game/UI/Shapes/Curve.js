@@ -4,12 +4,12 @@ function (Entity, $, $Data) {
 
     Curve.prototype = Object.create(Entity.prototype);
     Curve.prototype.constructor = Curve;
-    function Curve(position) {
+    function Curve(position, lineDisplayOptions) {
         // inherits from
         Entity.call(this);
 
         // curve
-        var curveComponent = new $.CurveComponent(position, new $Data.Graphics.LineDisplayOptions('ondrawuientities', 'red', 2));
+        var curveComponent = new $.CurveComponent(position, lineDisplayOptions);
 
         // compose entity
         this.addComponent(curveComponent);

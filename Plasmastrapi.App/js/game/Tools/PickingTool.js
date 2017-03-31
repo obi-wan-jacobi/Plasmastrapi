@@ -1,5 +1,12 @@
-﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../Namespaces/$PickableTraits", "../../engine/Namespaces/$Data", "./Helpers/SelectionBox"],
-function (Tool, $, $PickableTraits, $Data, SelectionBox) {
+﻿define([
+    "./Base/Tool",
+    "../../engine/Namespaces/$Components",
+    "../Namespaces/$PickableTraits",
+    "../../engine/Namespaces/$Data",
+    "./Helpers/SelectionBox",
+    "gameConfig"
+],
+function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
 
     PickingTool.prototype = Object.create(Tool.prototype);
     PickingTool.prototype.constructor = PickingTool;
@@ -49,12 +56,12 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox) {
     };
     PickingTool.prototype.__onmousedown = function (cursor) {
         Tool.prototype.__onmousedown.call(this, cursor);
-        this.__beforeDragBounds = new $Data.Geometry.Rectangle(20, 20);
+        this.__beforeDragBounds = config.PickingTool.beforeDragBounds;
         for (var i = 0, L = this.__beforeDragBounds.vertices.length; i < L; i++) {
             this.__beforeDragBounds.vertices[i].x += cursor.x;
             this.__beforeDragBounds.vertices[i].y += cursor.y;
         }
-        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(50, 50);
+        this.__beforeSelectionBounds = config.PickingTool.beforeSelectionBounds;
         this.__selectionAnchor = new $Data.Geometry.Position(cursor.x, cursor.y);
         for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
             this.__beforeSelectionBounds.vertices[i].x += cursor.x;

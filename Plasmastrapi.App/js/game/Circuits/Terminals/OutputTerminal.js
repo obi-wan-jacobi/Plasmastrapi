@@ -1,13 +1,17 @@
-﻿define(["../Base/Terminal", "../../../engine/Namespaces/$Components", "../../Namespaces/$PickableTraits"], function (Terminal, $, $PickableTraits) {
+﻿define([
+    "../Base/Terminal",
+    "../../../engine/Namespaces/$Components",
+    "../../Namespaces/$PickableTraits",
+    "gameConfig"
+],
+function (Terminal, $, $PickableTraits, config) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
     OutputTerminal.prototype.constructor = OutputTerminal;
     function OutputTerminal(offsetPosition, circuitElement) {
 
-        Terminal.call(this, offsetPosition, circuitElement);
-
-        this.__defaultFrameIndex = 0;
+        Terminal.call(this, offsetPosition, circuitElement, config.OutputTerminal.defaultFrameIndex);
 
         // tool compatibility
         var pickableComponent = this.getComponent($.PickableComponent);

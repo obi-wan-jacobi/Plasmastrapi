@@ -1,4 +1,4 @@
-﻿define(["./debug"], function (debug) {
+﻿define(["engine/debug"], function (debug) {
 
     $ = { debug };
 

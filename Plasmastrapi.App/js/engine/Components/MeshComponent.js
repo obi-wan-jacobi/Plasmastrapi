@@ -1,5 +1,5 @@
-define(["../Objects/Component", "../Data/Geometry", "./PoseComponent"],
-function (Component, Geometry, PoseComponent) {
+define(["../Objects/Component", "../Data/Geometry", "./PoseComponent", "engineConfig"],
+function (Component, Geometry, PoseComponent, config) {
 
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
@@ -189,13 +189,14 @@ function (Component, Geometry, PoseComponent) {
 		ctx.restore();
 
 	    // debugging
-		if (!this.__engine.config.debug.isEnabled) {
+		if (!config.debug.isEnabled) {
 		    return;
 		}
 		this.drawDebug(ctx);
 	};
     // debugging
 	MeshComponent.prototype.drawDebug = function (ctx) {
+	    var debug = config.debug.MeshComponent;
 	    var vertices = this.__mesh.vertices;
 	    ctx.save();
 	    for (var i = 0, L = vertices.length; i < L; i++) {
@@ -203,13 +204,13 @@ function (Component, Geometry, PoseComponent) {
 	        ctx.beginPath();
 	        ctx.arc(vertex.x, vertex.y, 5, 0, 2 * Math.PI, false);
 	        ctx.closePath();
-	        ctx.strokeStyle = '#00FFFF';
+	        ctx.strokeStyle = debug.vertexStrokeStyle;
 	        ctx.stroke();
 	    }
 	    ctx.beginPath();
 	    ctx.arc(this.__mesh.minX, this.__mesh.minY, 10, 0, 2 * Math.PI, false);
 	    ctx.closePath();
-	    ctx.strokeStyle = 'yellow';
+	    ctx.strokeStyle = debug.minVertextStrokeStyle;
 	    ctx.stroke();
 	    ctx.restore();
 	    if (this.__lastPoint) {
@@ -219,6 +220,7 @@ function (Component, Geometry, PoseComponent) {
 	    }
 	};
 	MeshComponent.prototype.drawPointCollision = function (ctx) {
+	    var debug = config.debug.MeshComponent;
 	    var point = this.__lastPoint;
 	    // find max/min x and y coordinates for a rectangle that bounds the entire mesh
 	    var mesh = this.__mesh;
@@ -243,13 +245,13 @@ function (Component, Geometry, PoseComponent) {
 	            ctx.beginPath();
 	            ctx.arc(intersectX, intersectY, 10, 0, 2 * Math.PI, false);
 	            ctx.closePath();
-	            ctx.strokeStyle = '#00FF00';
+	            ctx.strokeStyle = debug.outerCollisionStrokeStyle;
 	            ctx.stroke();
 	            if (intersectX <= point.x && intersectX >= minX && intersectY <= point.y && intersectY >= minY) {
 	                ctx.beginPath();
 	                ctx.arc(intersectX, intersectY, 10, 0, 2 * Math.PI, false);
 	                ctx.closePath();
-	                ctx.strokeStyle = 'red';
+	                ctx.strokeStyle = debug.innerCollisionStrokeStyle;
 	                ctx.stroke();
 	                // if the point of intersection is on a vertex located at minX, minY --> check that point is located on the interior to avoid tangent-to-vertex case
 	                if (Math.round(intersectX) === Math.round(minX) && Math.round(intersectY) === Math.round(minY)) {

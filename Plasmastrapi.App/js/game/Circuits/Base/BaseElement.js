@@ -3,8 +3,10 @@
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Geometry",
     "../../../engine/Data/Graphics",
-    "../../Namespaces/$PickableTraits"],
-function (Entity, $, Geometry, Graphics, $PickableTraits) {
+    "../../Namespaces/$PickableTraits",
+    "gameConfig"
+],
+function (Entity, $, Geometry, Graphics, $PickableTraits, config) {
 
     // CLASS BaseElement
     BaseElement.prototype = Object.create(Entity.prototype);
@@ -18,7 +20,7 @@ function (Entity, $, Geometry, Graphics, $PickableTraits) {
         var poseComponent = new $.PoseComponent(position, 0);
 
         // sprite
-        var spriteHandle = new Graphics.SpriteHandle('ondrawgameentities', this.sprite);
+        var spriteHandle = new Graphics.SpriteHandle(config.BaseElement.spriteHandleDisplayLayer, this.sprite);
         var spriteComponent = new $.SpriteComponent(spriteHandle);
 
         // configure sprite as collision mesh

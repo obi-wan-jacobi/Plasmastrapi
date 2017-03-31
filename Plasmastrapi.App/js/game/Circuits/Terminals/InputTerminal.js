@@ -1,4 +1,11 @@
-﻿define(["../Base/Terminal", "./OutputTerminal", "../../../engine/Namespaces/$Components", "../../Namespaces/$PickableTraits"], function (Terminal, OutputTerminal, $, $PickableTraits) {
+﻿define([
+    "../Base/Terminal",
+    "./OutputTerminal",
+    "../../../engine/Namespaces/$Components",
+    "../../Namespaces/$PickableTraits",
+    "gameConfig"
+],
+function (Terminal, OutputTerminal, $, $PickableTraits, config) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
@@ -6,10 +13,9 @@
     function InputTerminal(offsetPosition, parentElement) {
 
         // inherits from
-        Terminal.call(this, offsetPosition, parentElement);
+        Terminal.call(this, offsetPosition, parentElement, config.InputTerminal.defaultFrameIndex);
 
         // set default sprite frame
-        this.__defaultFrameIndex = 1;
         var spriteComponent = this.getComponent($.SpriteComponent);
         spriteComponent.setFrame(this.__defaultFrameIndex);
 

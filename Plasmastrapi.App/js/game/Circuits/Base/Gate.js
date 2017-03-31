@@ -1,6 +1,6 @@
 ﻿define(["../Base/CircuitElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry",
-"../Terminals/OutputTerminal", "../Terminals/InputTerminal", "../Terminals/TerminalWireAnchor", "../Wires/TerminalWire"],
-function (CircuitElement, $, Geometry, OutputTerminal, InputTerminal, TerminalWireAnchor, TerminalWire) {
+"../Terminals/OutputTerminal", "../Terminals/InputTerminal", "../Terminals/TerminalWireAnchor", "../Wires/TerminalWire", "gameConfig"],
+function (CircuitElement, $, Geometry, OutputTerminal, InputTerminal, TerminalWireAnchor, TerminalWire, config) {
 
     // CLASS Gate
     Gate.prototype = Object.create(CircuitElement.prototype);
@@ -10,7 +10,7 @@ function (CircuitElement, $, Geometry, OutputTerminal, InputTerminal, TerminalWi
         CircuitElement.call(this, x, y);
 
         // terminals
-        var terminalOffsetMarginY = 35;
+        var terminalOffsetMarginY = config.Gate.terminalOffsetMarginY;
         var spriteComponent = this.getComponent($.SpriteComponent);
 
         // output terminal

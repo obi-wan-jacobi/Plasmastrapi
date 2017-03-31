@@ -1,5 +1,11 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$PickableTraits"],
-function (Entity, $, Graphics, $PickableTraits) {
+﻿define([
+    "../../../engine/Objects/Entity",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Data/Graphics",
+    "../../Namespaces/$PickableTraits",
+    "gameConfig"
+],
+function (Entity, $, Graphics, $PickableTraits, config) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);
@@ -9,7 +15,7 @@ function (Entity, $, Graphics, $PickableTraits) {
         var lineComponent = new $.LineComponent(
             tailObject.getComponent($.PoseComponent),
             headObject.getComponent($.PoseComponent),
-            new Graphics.LineDisplayOptions('ondrawgameentities', '#FFFFFF', 2)
+            config.WireElement.lineDisplayOptions
         );
         this.addComponent(lineComponent);
     };

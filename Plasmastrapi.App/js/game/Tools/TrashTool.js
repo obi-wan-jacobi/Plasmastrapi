@@ -1,5 +1,13 @@
-﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Namespaces/$Data", "../Namespaces/$PickableTraits", "../Namespaces/$Cursors", "./Helpers/SelectionBox"],
-function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
+﻿define([
+    "./Base/Tool",
+    "../../engine/Namespaces/$Components",
+    "../../engine/Namespaces/$Data",
+    "../Namespaces/$PickableTraits",
+    "../Namespaces/$Cursors",
+    "./Helpers/SelectionBox",
+    "gameConfig"
+],
+function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox, config) {
 
     TrashTool.prototype = Object.create(Tool.prototype);
     TrashTool.prototype.constructor = TrashTool;
@@ -32,7 +40,7 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox) {
     };
     TrashTool.prototype.__onmousedown = function (cursor) {
         Tool.prototype.__onmousedown.call(this, cursor);
-        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(50, 50);
+        this.__beforeSelectionBounds = config.TrashTool.beforeSelectionBounds;
         this.__anchor = new $Data.Geometry.Position(cursor.x, cursor.y);
         for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
             this.__beforeSelectionBounds.vertices[i].x += cursor.x;

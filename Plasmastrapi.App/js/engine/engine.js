@@ -2,17 +2,16 @@ define([
     "./Namespaces/$Containers",
     "./Namespaces/$Loaders",
     "./Namespaces/$Objects",
-    "./Namespaces/$Systems",
-    "./config"
+    "./Namespaces/$Systems"
 ],
-function ($Containers, $Loaders, $Objects, $Systems, config) {
+function ($Containers, $Loaders, $Objects, $Systems) {
 
 	// CLASS Engine
     Engine.prototype = Object.create($Objects.System.prototype);
     Engine.prototype.constructor = Engine;
-	function Engine(canvas) {
+    function Engine(canvas) {
 	    $Objects.System.call(this);
-	    // engine instance is it's own reference
+	    // engine instance is its own reference
 	    delete this.injectEngine;
 	    delete this.__engine;
         // public variables
@@ -41,7 +40,7 @@ function ($Containers, $Loaders, $Objects, $Systems, config) {
 	Object.defineProperties(Engine.prototype, {
 	    'isEngineInjected': {
 	        get: function () {
-	            // engine is implicitly it's own reference
+	            // engine is implicitly its own reference
 	            return true;
 	        }
 	    }
@@ -54,8 +53,6 @@ function ($Containers, $Loaders, $Objects, $Systems, config) {
 	    this[objectName] = objectHandle;
 	    objectHandle.injectEngine(this);
 	};
-    // configuration
-	Engine.prototype.config = config;
 
 	return Engine;
 });

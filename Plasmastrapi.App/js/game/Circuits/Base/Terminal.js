@@ -1,14 +1,14 @@
-﻿define(["../Base/BaseElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry"],
-function (BaseElement, $, Geometry) {
+﻿define(["../Base/BaseElement", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry", "gameConfig"],
+function (BaseElement, $, Geometry, config) {
 
     // CLASS Terminal
     Terminal.prototype = Object.create(BaseElement.prototype);
     Terminal.prototype.constructor = Terminal;
-    function Terminal(offsetPosition, parentElement) {
+    function Terminal(offsetPosition, parentElement, defaultFrameIndex) {
 
         BaseElement.call(this, 0, 0);
 
-        this.__defaultFrameIndex = null;
+        this.__defaultFrameIndex = defaultFrameIndex;
         this.__offset = offsetPosition;
 
         // configure this.__parent
@@ -29,7 +29,7 @@ function (BaseElement, $, Geometry) {
     };
     Terminal.prototype.__oninit = function () {
         // set custom pickable bounds
-        var collisionBounds = new Geometry.Rectangle(20, 20);
+        var collisionBounds = config.Terminal.collisionBounds;
         var mesh = new Geometry.Mesh(collisionBounds);
         var meshComponent = this.getComponent($.MeshComponent);
         meshComponent.mesh = mesh
@@ -53,7 +53,7 @@ function (BaseElement, $, Geometry) {
     };
     Terminal.prototype.__onmouseenter = function () {
         var spriteComponent = this.getComponent($.SpriteComponent);
-        spriteComponent.setFrame(2);
+        spriteComponent.setFrame(config.Terminal.frameOnMouseEnter);
     };
     Terminal.prototype.__onmouseleave = function () {
         var spriteComponent = this.getComponent($.SpriteComponent);

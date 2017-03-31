@@ -1,11 +1,19 @@
-﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../Namespaces/$PickableTraits", "../Namespaces/$Cursors", "../../engine/Namespaces/$Data", "../UI/Shapes/Curve"],
-function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
+﻿define([
+    "./Base/Tool",
+    "../../engine/Namespaces/$Components",
+    "../Namespaces/$PickableTraits",
+    "../Namespaces/$Cursors",
+    "../../engine/Namespaces/$Data",
+    "../UI/Shapes/Curve",
+    "gameConfig"
+],
+function (Tool, $, $PickableTraits, $Cursors, $Data, Curve, config) {
 
     CuttingTool.prototype = Object.create(Tool.prototype);
     CuttingTool.prototype.constructor = CuttingTool;
     function CuttingTool() {
         Tool.call(this, $Cursors.CuttingToolCursor);
-        this.__beforeCuttingBounds = new $Data.Geometry.Rectangle(50, 50);
+        this.__beforeCuttingBounds = config.beforeCuttingBounds;
         this.__anchor = null;
         this.__cuttingCurve = null;
     };
@@ -22,7 +30,7 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve) {
                 cursor.x < this.__beforeCuttingBounds.vertices[3].x &&
                 cursor.y < this.__beforeCuttingBounds.vertices[3].y
             )) {
-                this.__cuttingCurve = new Curve(new $Data.Geometry.Position(cursor.x, cursor.y));
+                this.__cuttingCurve = new Curve(new $Data.Geometry.Position(cursor.x, cursor.y), config.CuttingTool.curveDisplayOptions);
                 this.__engine.sceneController.addToCurrentScene(this.__cuttingCurve);
             }
         } else if (this.__cuttingCurve) {

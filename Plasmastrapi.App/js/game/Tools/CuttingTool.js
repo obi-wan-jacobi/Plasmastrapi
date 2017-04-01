@@ -13,7 +13,10 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve, config) {
     CuttingTool.prototype.constructor = CuttingTool;
     function CuttingTool() {
         Tool.call(this, $Cursors.CuttingToolCursor);
-        this.__beforeCuttingBounds = config.beforeCuttingBounds;
+        this.__beforeCuttingBounds = new $Data.Geometry.Rectangle(
+            config.CuttingTool.beforeCuttingBounds.width,
+            config.CuttingTool.beforeCuttingBounds.height
+        );
         this.__anchor = null;
         this.__cuttingCurve = null;
     };
@@ -30,7 +33,14 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve, config) {
                 cursor.x < this.__beforeCuttingBounds.vertices[3].x &&
                 cursor.y < this.__beforeCuttingBounds.vertices[3].y
             )) {
-                this.__cuttingCurve = new Curve(new $Data.Geometry.Position(cursor.x, cursor.y), config.CuttingTool.curveDisplayOptions);
+                this.__cuttingCurve = new Curve(
+                    new $Data.Geometry.Position(cursor.x, cursor.y),
+                    new $Data.Graphics.LineDisplayOptions(
+                        config.CuttingTool.curveDisplayLayer,
+                        config.CuttingTool.curveDisplayColour,
+                        config.CuttingTool.curveLineThickness
+                    )
+                );
                 this.__engine.sceneController.addToCurrentScene(this.__cuttingCurve);
             }
         } else if (this.__cuttingCurve) {

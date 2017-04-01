@@ -7,7 +7,6 @@ needs testing:
 - destroy->purge
 
 in progress:
-- disable terminals on drag-select
 - wire 'draw-cutting'
 - copy/paste
 - undo/redo

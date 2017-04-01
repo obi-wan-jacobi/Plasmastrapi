@@ -40,7 +40,10 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox, config) {
     };
     TrashTool.prototype.__onmousedown = function (cursor) {
         Tool.prototype.__onmousedown.call(this, cursor);
-        this.__beforeSelectionBounds = config.TrashTool.beforeSelectionBounds;
+        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(
+            config.TrashTool.beforeSelectionBounds.width,
+            config.TrashTool.beforeSelectionBounds.height
+        );
         this.__anchor = new $Data.Geometry.Position(cursor.x, cursor.y);
         for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
             this.__beforeSelectionBounds.vertices[i].x += cursor.x;

@@ -1,4 +1,4 @@
-﻿define(["game/debug", "engine/Namespaces/$Data"], function (debug, $Data) {
+﻿define(["game/debug"], function (debug) {
 
     $ = { debug };
 
@@ -9,11 +9,13 @@
     };
 
     $.WireElement = {
-        lineDisplayOptions: new $Data.Graphics.LineDisplayOptions('ondrawgameentities', '#FFFFFF', 2)
+        displayLayer: 'ondrawgameentities',
+        wireColour:'#FFFFFF',
+        lineThickness: 2
     };
 
     $.Terminal = {
-        collisionBounds: new $Data.Geometry.Rectangle(20, 20),
+        collisionBounds: { width: 20, height: 20 },
         frameOnMouseEnter: 2
     };
 
@@ -43,17 +45,19 @@
     // Tools
 
     $.CuttingTool = {
-        beforeCuttingBounds: new $Data.Geometry.Rectangle(50, 50),
-        curveDisplayOptions: new $Data.Graphics.LineDisplayOptions('ondrawuientities', 'red', 2)
+        beforeCuttingBounds: { width: 10, height: 10 },
+        curveDisplayLayer: 'ondrawuientities', 
+        curveDisplayColour: 'red', 
+        curveLineThickness: 2
     };
 
     $.PickingTool = {
-        beforeDragBounds: new $Data.Geometry.Rectangle(20, 20),
-        beforeSelectionBounds: new $Data.Geometry.Rectangle(50, 50)
+        beforeDragBounds: { width: 20, height: 20 },
+        beforeSelectionBounds: { width: 40, height: 40 }
     };
 
     $.TrashTool = {
-        beforeSelectionBounds: new $Data.Geometry.Rectangle(50, 50)
+        beforeSelectionBounds: { width: 50, height: 50 }
     };
 
     return $;

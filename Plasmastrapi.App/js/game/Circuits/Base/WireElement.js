@@ -15,7 +15,11 @@ function (Entity, $, Graphics, $PickableTraits, config) {
         var lineComponent = new $.LineComponent(
             tailObject.getComponent($.PoseComponent),
             headObject.getComponent($.PoseComponent),
-            config.WireElement.lineDisplayOptions
+            new Graphics.LineDisplayOptions(
+                config.WireElement.displayLayer,
+                config.WireElement.wireColour,
+                config.WireElement.lineThickness
+            )
         );
         this.addComponent(lineComponent);
     };

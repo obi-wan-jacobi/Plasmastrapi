@@ -13,6 +13,7 @@ function (BaseElement, $, $PickableTraits) {
 
         // tool compatibility
         var pickableComponent = this.getComponent($.PickableComponent);
+        $PickableTraits.Placeable.call(pickableComponent);
         $PickableTraits.Trashable.call(pickableComponent);
     };
     // private methods

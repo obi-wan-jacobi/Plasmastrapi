@@ -46,6 +46,9 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
                 cursor.x < this.__beforeSelectionBounds.vertices[3].x &&
                 cursor.y < this.__beforeSelectionBounds.vertices[3].y
             )) {
+                this.setPickableTraitListFilter(
+                    new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Placeable)
+                );
                 this.__selectionBox = new SelectionBox();
                 this.__selectionBox.startAt(this.__selectionAnchor);
                 this.__engine.sceneController.addToCurrentScene(this.__selectionBox);
@@ -56,12 +59,18 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
     };
     PickingTool.prototype.__onmousedown = function (cursor) {
         Tool.prototype.__onmousedown.call(this, cursor);
-        this.__beforeDragBounds = config.PickingTool.beforeDragBounds;
+        this.__beforeDragBounds = new $Data.Geometry.Rectangle(
+            config.PickingTool.beforeDragBounds.width,
+            config.PickingTool.beforeDragBounds.height
+        );
         for (var i = 0, L = this.__beforeDragBounds.vertices.length; i < L; i++) {
             this.__beforeDragBounds.vertices[i].x += cursor.x;
             this.__beforeDragBounds.vertices[i].y += cursor.y;
         }
-        this.__beforeSelectionBounds = config.PickingTool.beforeSelectionBounds;
+        this.__beforeSelectionBounds = new $Data.Geometry.Rectangle(
+            config.PickingTool.beforeSelectionBounds.width,
+            config.PickingTool.beforeSelectionBounds.height
+        );
         this.__selectionAnchor = new $Data.Geometry.Position(cursor.x, cursor.y);
         for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
             this.__beforeSelectionBounds.vertices[i].x += cursor.x;
@@ -91,6 +100,9 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
                 this.__pickableSelectionBox = this.__selectionBox;
             }
             this.__selectionBox = null;
+            this.setPickableTraitListFilter(
+                new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Default)
+            );
             return;
         }
         for (var i = 0, L = entities.length; i < L; i++) {

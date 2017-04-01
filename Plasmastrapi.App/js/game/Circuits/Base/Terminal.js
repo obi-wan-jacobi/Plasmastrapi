@@ -29,7 +29,10 @@ function (BaseElement, $, Geometry, config) {
     };
     Terminal.prototype.__oninit = function () {
         // set custom pickable bounds
-        var collisionBounds = config.Terminal.collisionBounds;
+        var collisionBounds = new Geometry.Rectangle(
+            config.Terminal.collisionBounds.width,
+            config.Terminal.collisionBounds.height
+        );
         var mesh = new Geometry.Mesh(collisionBounds);
         var meshComponent = this.getComponent($.MeshComponent);
         meshComponent.mesh = mesh

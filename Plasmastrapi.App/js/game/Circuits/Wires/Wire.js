@@ -1,6 +1,6 @@
-﻿define(["../Base/WireElement", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data", "../Terminals/InputTerminal", "../Terminals/OutputTerminal",
+﻿define(["../Base/WireElement", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data", "../Terminals/InputTerminal", "../Terminals/OutputTerminal", "gameConfig",
 "../../Namespaces/$PickableTraits"],
-function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits) {
+function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits, config) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
@@ -15,13 +15,16 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
 
         // configure components
         var lineComponent = this.getComponent($.LineComponent);
-        lineComponent.collisionOptions = new $Data.Physics.LineCollisionOptions(25, 0.95);
+        lineComponent.collisionOptions = new $Data.Physics.LineCollisionOptions(
+            config.Wire.collisionWidth,
+            config.Wire.collisionLengthModifier
+        );
         lineComponent.addEventListener('onpositionchange', this, this.__updateMeshComponent);
         lineComponent.addEventListener('onorientationchange', this, this.__updateMeshComponent);
 
         var poseComponent = new $.PoseComponent(lineComponent.position, lineComponent.orientation);
 
-        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities');
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions(config.Wire.displayLayer);
         var meshComponent = new $.MeshComponent(lineComponent.mesh, meshDisplayOptions);
 
         var pickableComponent = new $.PickableComponent();
@@ -49,13 +52,14 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
     // private methods
     Wire.prototype.__updateState = function () {
         var lineComponent = this.getComponent($.LineComponent);
-        var lineWidth = 2;
+        var displayLayer = config.Wire.displayLayer;
+        var lineWidth = config.Wire.poweredLineWidth;
         if (!this.outputTerminal.isPowered) {
-            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions('ondrawgameentities', 'white', lineWidth);
+            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions(displayLayer, config.Wire.noPowerLineColour, lineWidth);
         } else if (this.outputTerminal.isHigh) {
-            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions('ondrawgameentities', '#00FF00', lineWidth);
+            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions(displayLayer, config.Wire.highLineColour, lineWidth);
         } else if (this.outputTerminal.isLow) {
-            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions('ondrawgameentities', '#FF5AC8', lineWidth);
+            lineComponent.displayOptions = new $Data.Graphics.LineDisplayOptions(displayLayer, config.Wire.lowLineColour, lineWidth);
         }
     };
     Wire.prototype.__updateMeshComponent = function () {
@@ -71,12 +75,12 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits)
         this.__engine.wireContainer.remove(this);
     };
     Wire.prototype.__onmouseenter = function () {
-        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities', 'red');
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions(config.Wire.displayLayer, config.Wire.cuttingHoverColour);
         var meshComponent = this.getComponent($.MeshComponent);
         meshComponent.displayOptions = meshDisplayOptions;
     };
     Wire.prototype.__onmouseleave = function () {
-        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities');
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions(config.Wire.displayLayer);
         var meshComponent = this.getComponent($.MeshComponent);
         meshComponent.displayOptions = meshDisplayOptions;
     };

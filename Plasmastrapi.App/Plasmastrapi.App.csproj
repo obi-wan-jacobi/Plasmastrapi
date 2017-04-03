@@ -164,6 +164,7 @@
     <Content Include="js\game\Tools\Base\Tool.js" />
     <Content Include="js\game\UI\Base\TextLabel.js" />
     <Content Include="js\game\UI\Base\ToolbarButton.js" />
+    <Content Include="js\game\UI\Buttons\MenuButton.js" />
     <Content Include="js\game\UI\Buttons\ToolButton.js" />
     <Content Include="js\game\Tools\Base\PickableTrait.js" />
     <Content Include="js\game\Tools\PickableTraits\DesignZone.js" />

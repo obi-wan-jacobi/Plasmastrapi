@@ -3,6 +3,12 @@ general framework quirks:
 - this.__engine cannot be used in constructor methods because the engine instance has not yet been injected
 - Entities/EventEmiters will not be added to their respective Container until they have had their engine instance injected
 
+known issues:
+- 
+
+user experience:
+- terminals are selectable when the circuit element is inside a selection-box
+
 needs testing:
 - destroy->purge
 
@@ -10,47 +16,38 @@ in progress:
 - wire 'draw-cutting'
 - copy/paste
 - undo/redo
-	
+- confine circuit elements to design area
+	- highlight/outline selected tool
+
 missing features:
+- resize with window
+- game menu
+	- UI panels
+	- UI buttons with text labels 
 - lab scene
-	- elements
-		- flip flops (x3)
-		- timers
-		- SOCs + contexts/scene controller (tabs? overlay?)
-	- design editor
-		- save/load design
-		- drag-select multiple elements
-		- undo/redo
-		- copy/paste
-		- wire routing
-		- rotatable components
+	- scenario window
 		- zoom in/out
-		- resize with window
+		- environment
+		- events	
+	- design editor
+		- copy/paste
+		- rotatable components
+		- save/load design
+		- undo/redo
+		- wire routing
 	- circuit testing ("debug" mode)
 		- pause/stop/play
 		- breakpoints?
 		- step forward/backward
-		- sliding global timer
-- game menu (MainMenu Scene)
-	- UI panels
-	- UI buttons with text labels
-
-known issues:
-- 
-
-user experience:
-- 
+		- sliding global timer (signal propagation speed)
+	- elements
+		- flip flops (x3)
+		- timers
+		- SOCs + design contexts (tabs? overlay?)
 
 tech debt:
 - mesh component point collision checking is disgusting
-- add comments/documentation
-- EventEmitter mixins should check for an engine instance before being loaded/activated
 - blue background image is needlessly large
-- require.js --> configure paths for easier module loading
-- project manifest
-	- debug mode
-		- inject style templates into all drawable objects
-		- draw collision boundaries
 - run memory analysis/profiler diagnostics
 - JSDocs/automated documentation
 - unit tests
@@ -63,9 +60,6 @@ optimization
 
 scalability concerns:
 - single-canvas viewport
-
-    // selection box fillStyle '#51ED39'
-    // powered ? '#00FF00' : '#FF5AC8'
 
 technology:
 - linting

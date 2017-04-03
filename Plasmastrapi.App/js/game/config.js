@@ -14,6 +14,17 @@
         lineThickness: 2
     };
 
+    $.Wire = {
+        collisionWidth: 25,
+        collisionLengthModifier: 0.95,
+        displayLayer: 'ondrawgameentities',
+        poweredLineWidth: 2,
+        noPowerLineColour: 'white',
+        lowLineColour: '#FF5AC8',
+        highLineColour: '#00FF00',
+        cuttingHoverColour: 'red'
+    };
+
     $.Terminal = {
         collisionBounds: { width: 20, height: 20 },
         frameOnMouseEnter: 2
@@ -52,6 +63,7 @@
     };
 
     $.PickingTool = {
+        // selection box fillStyle '#51ED39'
         beforeDragBounds: { width: 20, height: 20 },
         beforeSelectionBounds: { width: 40, height: 40 }
     };

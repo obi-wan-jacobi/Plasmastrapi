@@ -1,12 +1,17 @@
-﻿define(["../../../engine/Namespaces/$Objects", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data"],
-function ($Objects, $, $Data) {
+﻿define([
+    "../../../engine/Namespaces/$Objects",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Namespaces/$Data",
+    "gameConfig"
+],
+function ($Objects, $, $Data, config) {
 
     Tool.prototype = Object.create($Objects.InputHandle.prototype);
     Tool.prototype.constructor = Tool;
     function Tool(CursorConstructor) {
         $Objects.InputHandle.call(this);
-        this.__cursorOffsetX = 35;
-        this.__cursorOffsetY = 35;
+        this.__cursorOffsetX = config.Tool.cursorOffsetX;
+        this.__cursorOffsetY = config.Tool.cursorOffsetY;
         this.registerEvents(
             'onequip',
             'ondiscard',
@@ -66,7 +71,10 @@ function ($Objects, $, $Data) {
         if (this.__cursor) {
             this.__cursor.load(false);
             var poseComponent = this.__cursor.getComponent($.PoseComponent);
-            poseComponent.position = new $Data.Geometry.Position(arguments[arguments.length - 2] + this.__cursorOffsetX, arguments[arguments.length - 1] + this.__cursorOffsetY);
+            poseComponent.position = new $Data.Geometry.Position(
+                arguments[arguments.length - 2] + this.__cursorOffsetX,
+                arguments[arguments.length - 1] + this.__cursorOffsetY
+            );
             this.__cursor.getComponent($.SpriteComponent).show();
         }
         [].unshift.call(arguments, 'onequip');

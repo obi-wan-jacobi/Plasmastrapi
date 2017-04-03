@@ -44,6 +44,10 @@
 
     // UI
 
+    $.CircuitDesignArea = {
+        displayLayer: 'ondrawgamebackground'
+    };
+
     $.ToolbarButton = {
         textLabelDisplayLayer: 'ondrawuientities',
         textLabelOffsetBufferY: 3
@@ -53,7 +57,24 @@
         imageHandleDisplayLayer: 'ondrawuientities'
     };
 
+    $.ToolButton = {
+        displayLayer: 'ondrawuientities'
+    };
+
+    $.MenuButton = {
+        displayLayer: 'ondrawuientities'
+    };
+
     // Tools
+
+    $.Tool = {
+        cursorOffsetX: 35,
+        cursorOffsetY: 35
+    };
+
+    $.Cursor = {
+        displayLayer: 'ondrawuiforeground'
+    };
 
     $.CuttingTool = {
         beforeCuttingBounds: { width: 10, height: 10 },
@@ -66,6 +87,10 @@
         // selection box fillStyle '#51ED39'
         beforeDragBounds: { width: 20, height: 20 },
         beforeSelectionBounds: { width: 40, height: 40 }
+    };
+
+    $.SelectionBox = {
+        displayLayer: 'ondrawgameentities'
     };
 
     $.TrashTool = {

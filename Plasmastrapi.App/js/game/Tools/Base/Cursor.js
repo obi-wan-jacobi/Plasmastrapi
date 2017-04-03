@@ -1,5 +1,11 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry", "../../../engine/Data/Graphics"],
-function (Entity, $, Geometry, Graphics) {
+﻿define([
+    "../../../engine/Objects/Entity",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Data/Geometry",
+    "../../../engine/Data/Graphics",
+    "gameConfig"
+],
+function (Entity, $, Geometry, Graphics, config) {
 
     // CLASS Cursor
     Cursor.prototype = Object.create(Entity.prototype);
@@ -16,7 +22,7 @@ function (Entity, $, Geometry, Graphics) {
         var poseComponent = new $.PoseComponent(position, 0);
 
         // sprite
-        var spriteHandle = new Graphics.SpriteHandle('ondrawuiforeground', this.sprite);
+        var spriteHandle = new Graphics.SpriteHandle(config.Cursor.displayLayer, this.sprite);
         var spriteComponent = new $.SpriteComponent(spriteHandle);
 
         // compose entity

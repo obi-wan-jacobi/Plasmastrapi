@@ -1,5 +1,12 @@
-﻿define(["../../../engine/Namespaces/$Objects", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data", "../../Namespaces/$Circuits", "../../Namespaces/$PickableTraits"],
-function ($Objects, $, $Data, $Circuits, $PickableTraits) {
+﻿define([
+    "../../../engine/Namespaces/$Objects",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Namespaces/$Data",
+    "../../Namespaces/$Circuits",
+    "../../Namespaces/$PickableTraits",
+    "gameConfig"
+],
+function ($Objects, $, $Data, $Circuits, $PickableTraits, config) {
 
     SelectionBox.prototype = Object.create($Objects.Entity.prototype);
     SelectionBox.prototype.constructor = SelectionBox;
@@ -15,8 +22,11 @@ function ($Objects, $, $Data, $Circuits, $PickableTraits) {
         var poseComponent = new $.PoseComponent(new $Data.Geometry.Position(0, 0), 0);
         poseComponent.addEventListener('onpositionchange', this, this.__onpositionchange);
 
-        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions('ondrawgameentities');
-        var rectangle = new $Data.Geometry.Rectangle(Math.abs(this.__startPosition.x - this.__endPosition.x), Math.abs(this.__startPosition.y - this.__endPosition.y));
+        var meshDisplayOptions = new $Data.Graphics.MeshDisplayOptions(config.SelectionBox.displayLayer);
+        var rectangle = new $Data.Geometry.Rectangle(
+            Math.abs(this.__startPosition.x - this.__endPosition.x),
+            Math.abs(this.__startPosition.y - this.__endPosition.y)
+        );
         var mesh = new $Data.Geometry.Mesh(rectangle);
         var meshComponent = new $.MeshComponent(mesh, meshDisplayOptions);
 
@@ -56,9 +66,15 @@ function ($Objects, $, $Data, $Circuits, $PickableTraits) {
         this.__endPosition = endPosition;
 
         var poseComponent = this.getComponent($.PoseComponent);
-        poseComponent.position = new $Data.Geometry.Position((this.__startPosition.x + this.__endPosition.x) / 2, (this.__startPosition.y + this.__endPosition.y) / 2);
+        poseComponent.position = new $Data.Geometry.Position(
+            (this.__startPosition.x + this.__endPosition.x) / 2,
+            (this.__startPosition.y + this.__endPosition.y) / 2
+        );
 
-        var rectangle = new $Data.Geometry.Rectangle(Math.abs(this.__startPosition.x - this.__endPosition.x), Math.abs(this.__startPosition.y - this.__endPosition.y));
+        var rectangle = new $Data.Geometry.Rectangle(
+            Math.abs(this.__startPosition.x - this.__endPosition.x),
+            Math.abs(this.__startPosition.y - this.__endPosition.y)
+        );
         var mesh = new $Data.Geometry.Mesh(rectangle);
         var meshComponent = this.getComponent($.MeshComponent);
         meshComponent.mesh = mesh;

@@ -20,8 +20,7 @@ function (Button, $, $Data, $PickableTraits, TextLabel, config) {
             config.ToolbarButton.textLabelDisplayLayer,
             new $Data.Geometry.Position(0, imageHandle.image.height + config.ToolbarButton.textLabelOffsetBufferY),
             labelText
-
-            );
+        );
         var label = new TextLabel(this, textLabelDisplayOptions);
     };
 

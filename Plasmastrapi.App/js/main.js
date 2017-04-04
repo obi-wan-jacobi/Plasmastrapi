@@ -11,8 +11,7 @@ define(["./game/Game", "./game/Namespaces/$Assets"], function (Game, $Assets) {
         game.spriteLoader.download($Assets.sprites).done(function () {
             // load game/engine
             game.start();
-
-            game.sceneController.setCircuitDesignScene();
+            game.sceneController.setMainMenuScene();
             game.toolController.equipPickingTool();
         });
     });

@@ -9,6 +9,8 @@ function (Controller, Entity, CircuitDesignScene) {
 	    this.__scene = null;
 	};
 	SceneController.prototype.__oninit = function () {
+	    this.mainMenuScene = new MainMenuScene(this.__engine.canvas);
+	    this.mainMenuScene.injectEngine(this.__engine);
 	    this.circuitDesignScene = new CircuitDesignScene(this.__engine.canvas)
 	    this.circuitDesignScene.injectEngine(this.__engine);
 	};
@@ -39,7 +41,10 @@ function (Controller, Entity, CircuitDesignScene) {
         this.__scene.add(entity);
     };
     // scenes
-    SceneController.prototype.setCircuitDesignScene = function (entity) {
+    SceneController.prototype.setMainMenuScene = function () {
+        this.__setCurrentScene(this.mainMenuScene);
+    };
+    SceneController.prototype.setCircuitDesignScene = function () {
         this.__setCurrentScene(this.circuitDesignScene);
     };
 

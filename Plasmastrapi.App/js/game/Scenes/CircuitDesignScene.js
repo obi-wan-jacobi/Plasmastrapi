@@ -6,8 +6,8 @@ function (Scene, $UI, $Circuits, $Cursors) {
     function CircuitDesignScene(canvas) {
         Scene.call(this);
         // design area
-        this.add(new $UI.CircuitDesignArea($UI.CircuitDesignArea.prototype.image.width / 2, $UI.CircuitDesignArea.prototype.image.height / 2,
-            $UI.CircuitDesignArea.prototype.image.width, $UI.CircuitDesignArea.prototype.image.height));
+        this.add(new $UI.CircuitDesignBlueprintPanel($UI.CircuitDesignBlueprintPanel.prototype.image.width / 2, $UI.CircuitDesignBlueprintPanel.prototype.image.height / 2,
+            $UI.CircuitDesignBlueprintPanel.prototype.image.width, $UI.CircuitDesignBlueprintPanel.prototype.image.height));
         // toolbar
 
         //toolbar element spawner buttons

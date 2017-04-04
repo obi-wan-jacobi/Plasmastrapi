@@ -1,17 +1,15 @@
-define(["../UI/Areas/CircuitDesignArea",
-        "../UI/Base/Area",
-        "../UI/Base/Button",
+define(["../UI/Panels/CircuitDesignBlueprintPanel",
         "../UI/Base/Panel",
+        "../UI/Base/Button",
         "../UI/Base/UIElement",
         "../UI/Buttons/SpawnerButton",
         "../UI/Buttons/ToolButton",
         "../UI/Panels/CircuitDesignToolbar"
 ],
 function (
-    CircuitDesignArea,
-    Area,
-    Button,
+    CircuitDesignBlueprintPanel,
     Panel,
+    Button,
     UIElement,
     SpawnerButton,
     ToolButton,
@@ -19,8 +17,8 @@ function (
 ) {
 
     return {
-        CircuitDesignArea,
-        Area,
+        CircuitDesignBlueprintPanel,
+        Panel,
         Button,
         Panel,
         UIElement,

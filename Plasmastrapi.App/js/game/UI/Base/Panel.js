@@ -1,18 +1,13 @@
-﻿define(["../Base/UIElement", "../../../engine/Namespaces/$Components"], function (UIElement, $) {
+﻿define([
+    "./UIElement",
+    "../../../engine/Namespaces/$Data"
+],
+function (UIElement, $Data) {
 
     Panel.prototype = Object.create(UIElement.prototype);
     Panel.prototype.constructor = Panel;
-    function Panel() {
-        UIElement.call(this);
-        // Configure entity
-        var poseComponent = new $.PoseComponent();
-        var meshComponent = new $.MeshComponent();
-        var pickableComponent = new $.PickableComponent();
-        var imageComponent = new $.ImageComponent();
-        this.addComponent(poseComponent);
-        this.addComponent(meshComponent);
-        this.addComponent(pickableComponent);
-        this.addComponent(imageComponent);
+    function Panel(x, y, imageHandle, /* optional */ mesh, /* optional */ meshDisplayOptions) {
+        UIElement.call(this, x, y, imageHandle, mesh || $Data.Geometry.MeshFromImageHandle(imageHandle), meshDisplayOptions);
     };
 
     return Panel;

@@ -1,18 +1,18 @@
 ﻿define([
-    "../Base/Area",
+    "../Base/Panel",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Graphics",
     "../../Namespaces/$PickableTraits",
     "gameConfig"
 ],
-function (Area, $, Graphics, $PickableTraits, config) {
+function (Panel, $, Graphics, $PickableTraits, config) {
 
-    // CLASS CircuitDesignArea
-    CircuitDesignArea.prototype = Object.create(Area.prototype);
-    CircuitDesignArea.prototype.constructor = CircuitDesignArea;
-    function CircuitDesignArea(x, y, width, height) {
+    // CLASS MainMenuBackgroundPanel
+    MainMenuBackgroundPanel.prototype = Object.create(Panel.prototype);
+    MainMenuBackgroundPanel.prototype.constructor = MainMenuBackgroundPanel;
+    function MainMenuBackgroundPanel(x, y, width, height) {
         var imageHandle = new Graphics.ImageHandle(
-            config.CircuitDesignArea.displayLayer,
+            config.MainMenuBackgroundPanel.displayLayer,
             x,
             y,
             this.image.width,
@@ -22,11 +22,11 @@ function (Area, $, Graphics, $PickableTraits, config) {
             this.image
         );
         // inherits from
-        Area.call(this, x, y, imageHandle);
+        Panel.call(this, x, y, imageHandle);
         // apply traits
         var pickableComponent = this.getComponent($.PickableComponent);
         $PickableTraits.DesignZone.call(pickableComponent);
     };
-    
-    return CircuitDesignArea;
+
+    return MainMenuBackgroundPanel;
 });

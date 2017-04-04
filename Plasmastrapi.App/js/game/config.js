@@ -44,7 +44,11 @@
 
     // UI
 
-    $.CircuitDesignArea = {
+    $.MainMenuBackgroundPanel = {
+        displayLayer: 'ondrawgamebackground'
+    };
+
+    $.CircuitDesignBlueprintPanel = {
         displayLayer: 'ondrawgamebackground'
     };
 

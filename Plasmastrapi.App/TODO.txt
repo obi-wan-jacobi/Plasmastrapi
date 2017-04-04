@@ -13,14 +13,12 @@ needs testing:
 - destroy->purge
 
 in progress:
-- wire 'draw-cutting'
-- copy/paste
-- undo/redo
-- confine circuit elements to design area
-	- highlight/outline selected tool
+	- UI panels
+	- UI buttons with text labels
 
-missing features:
-- resize with window
+backlog:
+- general
+	- resize with window
 - game menu
 	- UI panels
 	- UI buttons with text labels 
@@ -30,6 +28,9 @@ missing features:
 		- environment
 		- events	
 	- design editor
+		- wire 'draw-cutting'
+		- confine circuit elements to design area
+			- highlight/outline selected tool
 		- copy/paste
 		- rotatable components
 		- save/load design
@@ -46,6 +47,7 @@ missing features:
 		- SOCs + design contexts (tabs? overlay?)
 
 tech debt:
+- main.js --> game.start() before initializing controllers?
 - mesh component point collision checking is disgusting
 - blue background image is needlessly large
 - run memory analysis/profiler diagnostics

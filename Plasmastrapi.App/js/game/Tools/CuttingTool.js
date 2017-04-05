@@ -1,13 +1,13 @@
 ﻿define([
     "./Base/Tool",
     "../../engine/Namespaces/$Components",
-    "../Namespaces/$PickableTraits",
+    "../Namespaces/$Compatibility",
     "../Namespaces/$Cursors",
     "../../engine/Namespaces/$Data",
     "../UI/Lines/Curve",
     "gameConfig"
 ],
-function (Tool, $, $PickableTraits, $Cursors, $Data, Curve, config) {
+function (Tool, $, $Compatibility, $Cursors, $Data, Curve, config) {
 
     CuttingTool.prototype = Object.create(Tool.prototype);
     CuttingTool.prototype.constructor = CuttingTool;
@@ -21,8 +21,8 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve, config) {
         this.__cuttingCurve = null;
     };
     CuttingTool.prototype.__onequip = function () {
-        this.setPickableTraitListFilter(
-            new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Cuttable)
+        this.setCompatibilityFilter(
+            new $Compatibility.Filter($Compatibility.DesignZone, $Compatibility.Cuttable)
         );
     };
     CuttingTool.prototype.__onmousemove = function (cursor) {
@@ -64,8 +64,7 @@ function (Tool, $, $PickableTraits, $Cursors, $Data, Curve, config) {
             this.__cuttingCurve = null;
         }
         for (var i = 0, L = entities.length; i < L; i++) {
-            var pickableComponent = entities[i].getComponent($.PickableComponent);
-            if ($PickableTraits.Cuttable.resolve(pickableComponent)) {
+            if ($Compatibility.Cuttable.resolve(entities[i])) {
                 entities[i].destroy();
                 return;
             }

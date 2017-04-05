@@ -1,6 +1,6 @@
 ﻿define(["../Base/WireElement", "../../../engine/Namespaces/$Components", "../../../engine/Namespaces/$Data", "../Terminals/InputTerminal", "../Terminals/OutputTerminal", "gameConfig",
-"../../Namespaces/$PickableTraits"],
-function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits, config) {
+"../../Namespaces/$Compatibility"],
+function (WireElement, $, $Data, InputTerminal, OutputTerminal, $Compatibility, config) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
@@ -47,7 +47,7 @@ function (WireElement, $, $Data, InputTerminal, OutputTerminal, $PickableTraits,
         this.__updateState();
 
         // tool compatibility
-        $PickableTraits.Cuttable.call(pickableComponent);
+        $Compatibility.Cuttable.call(this);
     };
     // private methods
     Wire.prototype.__updateState = function () {

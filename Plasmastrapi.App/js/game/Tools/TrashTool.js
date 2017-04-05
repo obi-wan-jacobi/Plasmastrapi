@@ -2,12 +2,12 @@
     "./Base/Tool",
     "../../engine/Namespaces/$Components",
     "../../engine/Namespaces/$Data",
-    "../Namespaces/$PickableTraits",
+    "../Namespaces/$Compatibility",
     "../Namespaces/$Cursors",
     "./Helpers/SelectionBox",
     "gameConfig"
 ],
-function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox, config) {
+function (Tool, $, $Data, $Compatibility, $Cursors, SelectionBox, config) {
 
     TrashTool.prototype = Object.create(Tool.prototype);
     TrashTool.prototype.constructor = TrashTool;
@@ -18,8 +18,8 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox, config) {
         this.__anchor = null;
     };
     TrashTool.prototype.__onequip = function () {
-        this.setPickableTraitListFilter(
-            new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Trashable)
+        this.setCompatibilityFilter(
+            new $Compatibility.Filter($Compatibility.DesignZone, $Compatibility.Trashable)
         );
     };
     TrashTool.prototype.__onmousemove = function (cursor) {
@@ -62,8 +62,7 @@ function (Tool, $, $Data, $PickableTraits, $Cursors, SelectionBox, config) {
             }
         } else {
             for (var i = 0, L = entities.length; i < L; i++) {
-                var pickableComponent = entities[i].getComponent($.PickableComponent);
-                if ($PickableTraits.Trashable.resolve(pickableComponent)) {
+                if ($Compatibility.Trashable.resolve(entities[i])) {
                     entities[i].destroy();
                     return;
                 }

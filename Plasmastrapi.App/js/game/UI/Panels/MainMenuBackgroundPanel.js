@@ -2,10 +2,10 @@
     "../Base/Panel",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Graphics",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Panel, $, Graphics, $PickableTraits, config) {
+function (Panel, $, Graphics, $Compatibility, config) {
 
     // CLASS MainMenuBackgroundPanel
     MainMenuBackgroundPanel.prototype = Object.create(Panel.prototype);
@@ -24,9 +24,6 @@ function (Panel, $, Graphics, $PickableTraits, config) {
         );
         // inherits from
         Panel.call(this, x, y, imageHandle);
-        // apply traits
-        var pickableComponent = this.getComponent($.PickableComponent);
-        $PickableTraits.DesignZone.call(pickableComponent);
     };
 
     return MainMenuBackgroundPanel;

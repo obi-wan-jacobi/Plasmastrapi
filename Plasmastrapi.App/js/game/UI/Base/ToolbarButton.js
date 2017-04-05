@@ -2,11 +2,11 @@
     "./Button",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Namespaces/$Data",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "./TextLabel",
     "gameConfig"
 ],
-function (Button, $, $Data, $PickableTraits, TextLabel, config) {
+function (Button, $, $Data, $Compatibility, TextLabel, config) {
 
     // CLASS ToolbarButton
     ToolbarButton.prototype = Object.create(Button.prototype);

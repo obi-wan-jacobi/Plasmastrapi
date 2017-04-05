@@ -2,10 +2,10 @@
     "../Base/Terminal",
     "./OutputTerminal",
     "../../../engine/Namespaces/$Components",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Terminal, OutputTerminal, $, $PickableTraits, config) {
+function (Terminal, OutputTerminal, $, $Compatibility, config) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
@@ -20,8 +20,7 @@ function (Terminal, OutputTerminal, $, $PickableTraits, config) {
         spriteComponent.setFrame(this.__defaultFrameIndex);
 
         // tool compatibility
-        var pickableComponent = this.getComponent($.PickableComponent);
-        $PickableTraits.WireableAsInput.call(pickableComponent);
+        $Compatibility.WireableAsInput.call(this);
 
         this.__connections = [];
     };

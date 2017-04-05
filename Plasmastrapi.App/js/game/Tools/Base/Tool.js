@@ -87,8 +87,8 @@ function ($Objects, $, $Data, config) {
         }
         this.unload();
     };
-    Tool.prototype.setPickableTraitListFilter = function (pickableTraitList) {
-        this.__engine.toolController.setPickableTraitListFilter(pickableTraitList);
+    Tool.prototype.setCompatibilityFilter = function (pickableTraitList) {
+        this.__engine.toolController.setCompatibilityFilter(pickableTraitList);
     };
 
     return Tool;

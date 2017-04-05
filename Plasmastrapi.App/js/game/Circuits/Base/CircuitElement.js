@@ -1,8 +1,8 @@
 ﻿define([
     "./BaseElement",
     "../../../engine/Namespaces/$Components",
-    "../../Namespaces/$PickableTraits"],
-function (BaseElement, $, $PickableTraits) {
+    "../../Namespaces/$Compatibility"],
+function (BaseElement, $, $Compatibility) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(BaseElement.prototype);
@@ -12,9 +12,8 @@ function (BaseElement, $, $PickableTraits) {
         BaseElement.call(this, x, y);
 
         // tool compatibility
-        var pickableComponent = this.getComponent($.PickableComponent);
-        $PickableTraits.Placeable.call(pickableComponent);
-        $PickableTraits.Trashable.call(pickableComponent);
+        $Compatibility.Placeable.call(this);
+        $Compatibility.Trashable.call(this);
     };
     // private methods
     CircuitElement.prototype.__ondestroy = function () {

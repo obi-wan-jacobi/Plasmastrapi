@@ -1,10 +1,10 @@
 ﻿define([
     "../Base/Terminal",
     "../../../engine/Namespaces/$Components",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Terminal, $, $PickableTraits, config) {
+function (Terminal, $, $Compatibility, config) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
@@ -14,9 +14,7 @@ function (Terminal, $, $PickableTraits, config) {
         Terminal.call(this, offsetPosition, circuitElement, config.OutputTerminal.defaultFrameIndex);
 
         // tool compatibility
-        var pickableComponent = this.getComponent($.PickableComponent);
-
-        $PickableTraits.WireableAsOutput.call(pickableComponent);
+        $Compatibility.WireableAsOutput.call(this);
 
         // state
         this.__state = this.states.NOPOWER;

@@ -3,10 +3,10 @@
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Geometry",
     "../../../engine/Data/Graphics",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Entity, $, Geometry, Graphics, $PickableTraits, config) {
+function (Entity, $, Geometry, Graphics, $Compatibility, config) {
 
     // CLASS BaseElement
     BaseElement.prototype = Object.create(Entity.prototype);
@@ -39,8 +39,8 @@ function (Entity, $, Geometry, Graphics, $PickableTraits, config) {
         this.addComponent(pickableComponent);
 
         // tool compatibility
-        $PickableTraits.Draggable.call(pickableComponent);
-        $PickableTraits.Default.call(pickableComponent);
+        $Compatibility.Draggable.call(this);
+        $Compatibility.Pickable.call(this);
     };
     // private methods
     BaseElement.prototype.__onpick = function () {

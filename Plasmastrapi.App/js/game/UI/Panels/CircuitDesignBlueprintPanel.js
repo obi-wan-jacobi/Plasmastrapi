@@ -2,10 +2,10 @@
     "../Base/Panel",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Namespaces/$Data",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Panel, $, $Data, $PickableTraits, config) {
+function (Panel, $, $Data, $Compatibility, config) {
 
     // CLASS CircuitDesignBlueprintPanel
     CircuitDesignBlueprintPanel.prototype = Object.create(Panel.prototype);
@@ -23,9 +23,8 @@ function (Panel, $, $Data, $PickableTraits, config) {
         );
         // inherits from
         Panel.call(this, x, y, imageHandle);
-        // apply traits
-        var pickableComponent = this.getComponent($.PickableComponent);
-        $PickableTraits.DesignZone.call(pickableComponent);
+        // apply tool compatibilities
+        $Compatibility.DesignZone.call(this);
     };
     
     return CircuitDesignBlueprintPanel;

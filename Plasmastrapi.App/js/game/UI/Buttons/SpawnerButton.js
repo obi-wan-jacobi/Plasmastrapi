@@ -2,10 +2,10 @@
     "../Base/ToolbarButton",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Graphics",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (ToolbarButton, $, Graphics, $PickableTraits, config) {
+function (ToolbarButton, $, Graphics, $Compatibility, config) {
 
     // CLASS SpawnerButton
     SpawnerButton.prototype = Object.create(ToolbarButton.prototype);
@@ -27,9 +27,8 @@ function (ToolbarButton, $, Graphics, $PickableTraits, config) {
         );
         // inherits from
         ToolbarButton.call(this, x, y, labelText, imageHandle, this, this.__onpick);
-        // configure components
-        var pickableComponent = this.getComponent($.PickableComponent);
-        $PickableTraits.Draggable.call(pickableComponent);
+        // tool compatibility
+        $Compatibility.Draggable.call(this);
     };
     SpawnerButton.prototype.__onpick = function () {
         this.__spawnCircuitElement(this.__engine.toolController.__x, this.__engine.toolController.__y);

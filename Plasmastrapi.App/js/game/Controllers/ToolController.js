@@ -73,7 +73,7 @@ function (Controller, $, $Tools, $UI, $Circuits) {
         }
     };
     // public methods
-    ToolController.prototype.setPickableTraitListFilter = function (pickableTraitList) {
+    ToolController.prototype.setCompatibilityFilter = function (pickableTraitList) {
         this.__engine.pickablesContainer.forEach(function (pickableComponent) {
             if (pickableTraitList.resolve(pickableComponent)) {
                 pickableComponent.enable();

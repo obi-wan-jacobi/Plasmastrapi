@@ -2,10 +2,10 @@
     "../Shapes/Rectangle",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Graphics",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Rectangle, $, Graphics, $PickableTraits, config) {
+function (Rectangle, $, Graphics, $Compatibility, config) {
 
     // CLASS MainMenuBackgroundPanel
     MainMenuNavigationPanel.prototype = Object.create(Rectangle.prototype);

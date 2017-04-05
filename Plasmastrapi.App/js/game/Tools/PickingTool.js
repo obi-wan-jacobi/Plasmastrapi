@@ -1,12 +1,12 @@
 ﻿define([
     "./Base/Tool",
     "../../engine/Namespaces/$Components",
-    "../Namespaces/$PickableTraits",
+    "../Namespaces/$Compatibility",
     "../../engine/Namespaces/$Data",
     "./Helpers/SelectionBox",
     "gameConfig"
 ],
-function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
+function (Tool, $, $Compatibility, $Data, SelectionBox, config) {
 
     PickingTool.prototype = Object.create(Tool.prototype);
     PickingTool.prototype.constructor = PickingTool;
@@ -25,8 +25,8 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
         this.__pickableOnDrag = null;
         // hack
         this.__isMouseDown = false;
-        this.setPickableTraitListFilter(
-            new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Default)
+        this.setCompatibilityFilter(
+            new $Compatibility.Filter($Compatibility.DesignZone, $Compatibility.Pickable)
         );
     };
     PickingTool.prototype.__onmousemove = function (cursor) {
@@ -46,8 +46,8 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
                 cursor.x < this.__beforeSelectionBounds.vertices[3].x &&
                 cursor.y < this.__beforeSelectionBounds.vertices[3].y
             )) {
-                this.setPickableTraitListFilter(
-                    new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Placeable)
+                this.setCompatibilityFilter(
+                    new $Compatibility.Filter($Compatibility.DesignZone, $Compatibility.Placeable)
                 );
                 this.__selectionBox = new SelectionBox();
                 this.__selectionBox.startAt(this.__selectionAnchor);
@@ -80,7 +80,7 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
     PickingTool.prototype.__pick_onmousedown = function (entities) {
         var entity = null;
         for (var i = 0, L = entities.length; i < L; i++) {
-            if ($PickableTraits.Draggable.resolve(entities[i].getComponent($.PickableComponent))) {
+            if ($Compatibility.Draggable.resolve(entities[i])) {
                 this.__pickableOnDrag = entities[i].getComponent($.PickableComponent);
                 entity = entities[i];
                 break;
@@ -100,14 +100,14 @@ function (Tool, $, $PickableTraits, $Data, SelectionBox, config) {
                 this.__pickableSelectionBox = this.__selectionBox;
             }
             this.__selectionBox = null;
-            this.setPickableTraitListFilter(
-                new $PickableTraits.PickableTraitList($PickableTraits.DesignZone, $PickableTraits.Default)
+            this.setCompatibilityFilter(
+                new $Compatibility.Filter($Compatibility.DesignZone, $Compatibility.Pickable)
             );
             return;
         }
         for (var i = 0, L = entities.length; i < L; i++) {
-            var pickableComponent = entities[i].getComponent($.PickableComponent);
-            if ($PickableTraits.Default.resolve(pickableComponent) && !(entities[i] === this.__selectionBox)) {
+            var entity = entities[i];
+            if ($Compatibility.Pickable.resolve(entity) && !(entity === this.__selectionBox)) {
                 pickableComponent.pick();
                 return;
             }

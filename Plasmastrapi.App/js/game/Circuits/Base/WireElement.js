@@ -2,10 +2,10 @@
     "../../../engine/Objects/Entity",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Graphics",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Entity, $, Graphics, $PickableTraits, config) {
+function (Entity, $, Graphics, $Compatibility, config) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);

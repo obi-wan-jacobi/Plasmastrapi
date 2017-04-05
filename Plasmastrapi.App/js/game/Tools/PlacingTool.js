@@ -1,4 +1,4 @@
-﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Data/Geometry", "../Namespaces/$PickableTraits"], function (Tool, $, Geometry, $PickableTraits) {
+﻿define(["./Base/Tool", "../../engine/Namespaces/$Components", "../../engine/Data/Geometry", "../Namespaces/$Compatibility"], function (Tool, $, Geometry, $Compatibility) {
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
@@ -12,7 +12,7 @@
         this.__previousCursorPosition = new Geometry.Position(x, y);
         this.__equippedEntity = entity;
         this.__fnShiftKeyMouseUp = fnShiftKeyMouseUp;
-        this.setPickableTraitListFilter(new $PickableTraits.PickableTraitList($PickableTraits.DestructionZone, $PickableTraits.DesignZone));
+        this.setCompatibilityFilter(new $Compatibility.Filter($Compatibility.DestructionZone, $Compatibility.DesignZone));
     };
     PlacingTool.prototype.__onmousemove = function (cursor) {
         var poseComponent = this.__equippedEntity.getComponent($.PoseComponent)

@@ -3,10 +3,10 @@
     "../../../engine/Namespaces/$Components",
     "../../../engine/Namespaces/$Data",
     "../../Namespaces/$Circuits",
-    "../../Namespaces/$PickableTraits",
+    "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function ($Objects, $, $Data, $Circuits, $PickableTraits, config) {
+function ($Objects, $, $Data, $Circuits, $Compatibility, config) {
 
     SelectionBox.prototype = Object.create($Objects.Entity.prototype);
     SelectionBox.prototype.constructor = SelectionBox;
@@ -37,8 +37,8 @@ function ($Objects, $, $Data, $Circuits, $PickableTraits, config) {
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
 
-        $PickableTraits.Default.call(pickableComponent);
-        $PickableTraits.Draggable.call(pickableComponent);
+        $Compatibility.Pickable.call(this);
+        $Compatibility.Draggable.call(this);
     };
     SelectionBox.prototype.__onpick = function () {
         this.__engine.toolController.equipPlacingTool(this);

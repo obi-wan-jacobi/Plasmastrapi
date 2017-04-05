@@ -55,17 +55,6 @@ define(function() {
         }
     };
 
-    $.MeshFromImageHandle = function MeshFromImageHandle(imageHandle) {
-        var shape = new Rectangle(imageHandle.image.width, imageHandle.image.height);
-        // mesh has an 'immutable' vertex template 
-        this.template = shape;
-        // mesh has a collection of 'current' vertex positions
-        this.vertices = [];
-        for (var i = 0, L = shape.vertices.length; i < L; i++) {
-            this.vertices.push(new $.Position(shape.vertices[i].x, shape.vertices[i].y));
-        }
-    };
-
     return $;
 
 });

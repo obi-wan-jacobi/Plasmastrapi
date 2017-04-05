@@ -2,7 +2,7 @@
 
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;
-    function UIElement(x, y, imageHandle, mesh, /* optional */ meshDisplayOptions) {
+    function UIElement(x, y, imageHandle, /* optional */ meshDisplayOptions) {
         // inherits from
         Entity.call(this);
 
@@ -14,7 +14,7 @@
         var imageComponent = new $.ImageComponent(imageHandle);
 
         // configure image as collision mesh
-        var meshComponent = new $.MeshComponent(mesh, meshDisplayOptions);
+        var meshComponent = new $.MeshComponent(imageComponent.mesh, meshDisplayOptions);
 
         // entity is pickable
         var pickableComponent = new $.PickableComponent();

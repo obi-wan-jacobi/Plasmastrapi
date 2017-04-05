@@ -4,7 +4,7 @@
     "../Namespaces/$PickableTraits",
     "../Namespaces/$Cursors",
     "../../engine/Namespaces/$Data",
-    "../UI/Shapes/Curve",
+    "../UI/Lines/Curve",
     "gameConfig"
 ],
 function (Tool, $, $PickableTraits, $Cursors, $Data, Curve, config) {

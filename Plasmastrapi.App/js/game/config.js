@@ -45,7 +45,18 @@
     // UI
 
     $.MainMenuBackgroundPanel = {
-        displayLayer: 'ondrawgamebackground'
+        displayLayer: 'ondrawuibackground'
+    };
+
+    $.MainMenuNavigationPanel = {
+        x: 650,
+        y: 350,
+        width: 1000,
+        height: 400,
+        displayLayer: 'ondrawuibackground',
+        strokeStyle: 'white',
+        //fillStyle: 'black',
+        lineWidth: 2
     };
 
     $.CircuitDesignBlueprintPanel = {

@@ -162,6 +162,7 @@
     <Content Include="js\game\Tools\Cursors\TrashToolCursor.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Tools\Base\Tool.js" />
+    <Content Include="js\game\UI\Base\Shape.js" />
     <Content Include="js\game\UI\Base\TextLabel.js" />
     <Content Include="js\game\UI\Base\ToolbarButton.js" />
     <Content Include="js\game\UI\Buttons\MenuButton.js" />
@@ -183,7 +184,8 @@
     <Content Include="js\game\Tools\PickableTraits\PickableTraitList.js" />
     <Content Include="js\game\UI\Panels\MainMenuBackgroundPanel.js" />
     <Content Include="js\game\UI\Panels\MainMenuNavigationPanel.js" />
-    <Content Include="js\game\UI\Shapes\Curve.js" />
+    <Content Include="js\game\UI\Lines\Curve.js" />
+    <Content Include="js\game\UI\Shapes\Rectangle.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

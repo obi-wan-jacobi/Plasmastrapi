@@ -1,29 +1,36 @@
-define(["../UI/Panels/CircuitDesignBlueprintPanel",
-        "../UI/Base/Panel",
-        "../UI/Base/Button",
-        "../UI/Base/UIElement",
-        "../UI/Buttons/SpawnerButton",
-        "../UI/Buttons/ToolButton",
-        "../UI/Panels/CircuitDesignToolbar"
+define([
+    "../UI/Base/Panel",
+    "../UI/Base/Button",
+    "../UI/Base/UIElement",
+    "../UI/Buttons/SpawnerButton",
+    "../UI/Buttons/ToolButton",
+    "../UI/Panels/MainMenuBackgroundPanel",
+    "../UI/Panels/MainMenuNavigationPanel",
+    "../UI/Panels/CircuitDesignBlueprintPanel",
+    "../UI/Panels/CircuitDesignToolbar"
 ],
 function (
-    CircuitDesignBlueprintPanel,
     Panel,
     Button,
     UIElement,
     SpawnerButton,
     ToolButton,
+    MainMenuBackgroundPanel,
+    MainMenuNavigationPanel,
+    CircuitDesignBlueprintPanel,
     CircuitDesignToolbar
 ) {
 
     return {
-        CircuitDesignBlueprintPanel,
         Panel,
         Button,
         Panel,
         UIElement,
         SpawnerButton,
         ToolButton,
+        MainMenuBackgroundPanel,
+        MainMenuNavigationPanel,
+        CircuitDesignBlueprintPanel,
         CircuitDesignToolbar
     };
 });

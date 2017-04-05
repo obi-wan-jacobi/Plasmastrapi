@@ -1,11 +1,11 @@
 ﻿define([
     "../Base/Panel",
     "../../../engine/Namespaces/$Components",
-    "../../Namespaces/$Data",
+    "../../../engine/Namespaces/$Data",
     "../../Namespaces/$PickableTraits",
     "gameConfig"
 ],
-function (Panel, $, Graphics, $PickableTraits, config) {
+function (Panel, $, $Data, $PickableTraits, config) {
 
     // CLASS CircuitDesignBlueprintPanel
     CircuitDesignBlueprintPanel.prototype = Object.create(Panel.prototype);

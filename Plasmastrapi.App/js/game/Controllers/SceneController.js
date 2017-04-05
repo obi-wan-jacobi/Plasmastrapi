@@ -1,5 +1,10 @@
-define(["../../engine/Objects/Controller", "../../engine/Objects/Entity", "../Scenes/CircuitDesignScene"],
-function (Controller, Entity, CircuitDesignScene) {
+define([
+    "../../engine/Objects/Controller",
+    "../../engine/Objects/Entity",
+    "../Scenes/MainMenuScene",
+    "../Scenes/CircuitDesignScene"
+],
+function (Controller, Entity, MainMenuScene, CircuitDesignScene) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);

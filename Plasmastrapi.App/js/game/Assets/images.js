@@ -1,6 +1,6 @@
 ﻿define([
     "../../engine/Data/Graphics",
-    "../UI/Panels/MainMenuBackgorundPanel",
+    "../UI/Panels/MainMenuBackgroundPanel",
     "../UI/Panels/CircuitDesignBlueprintPanel"
 ],
 function (Graphics, MainMenuBackgroundPanel, CircuitDesignBlueprintPanel) {

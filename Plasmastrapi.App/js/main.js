@@ -1,5 +1,17 @@
 require.config({
-    baseUrl: 'js'
+    baseUrl: 'js',
+    paths: {
+        engineConfig: 'engine/config',
+        gameConfig: 'game/config',
+        // engine namespaces
+        $Components: 'engine/Namespaces/$Components',
+        $Containers: 'engine/Namespaces/$Containers',
+        $Data: 'engine/Namespaces/$Data',
+        $Loaders: 'engine/Namespaces/$Loaders',
+        $Objects: 'engine/Namespaces/$Objects',
+        $Systems: 'engine/Namespaces/$Systems'
+        // game namespaces
+    }
 });
 
 define(["./game/Game", "./game/Namespaces/$Assets"], function (Game, $Assets) {

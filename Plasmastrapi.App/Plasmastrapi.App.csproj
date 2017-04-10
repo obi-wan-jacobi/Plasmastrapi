@@ -164,9 +164,8 @@
     <Content Include="js\game\Tools\Base\Tool.js" />
     <Content Include="js\game\UI\Base\Shape.js" />
     <Content Include="js\game\UI\Base\TextLabel.js" />
-    <Content Include="js\game\UI\Base\ToolbarButton.js" />
+    <Content Include="js\game\UI\Buttons\ToolbarButton.js" />
     <Content Include="js\game\UI\Buttons\MenuButton.js" />
-    <Content Include="js\game\UI\Buttons\ToolButton.js" />
     <Content Include="js\game\Tools\Base\Compatible.js" />
     <Content Include="js\game\Tools\Compatibility\DesignZone.js" />
     <Content Include="js\game\Tools\Compatibility\DestructionZone.js" />

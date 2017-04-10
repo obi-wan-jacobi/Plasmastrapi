@@ -57,7 +57,6 @@ tech debt:
 optimization
 - MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
 - AtomicKeyPairArray --> store this.__end to avoid O(n) for this.push
-- PickableTraits should be put on entities and not pickable components
 - entity destruction (EventEmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
 
 scalability concerns:

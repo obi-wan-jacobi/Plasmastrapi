@@ -72,10 +72,6 @@
         imageHandleDisplayLayer: 'ondrawuientities'
     };
 
-    $.ToolButton = {
-        displayLayer: 'ondrawuientities'
-    };
-
     $.MenuButton = {
         displayLayer: 'ondrawuientities'
     };

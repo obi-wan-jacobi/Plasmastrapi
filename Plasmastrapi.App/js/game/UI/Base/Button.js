@@ -3,9 +3,9 @@
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
     Button.prototype.constructor = Button;
-    function Button(x, y, imageHandle, callee, fnOnPick) {
+    function Button(x, y, mesh, meshDisplayOptions, callee, fnOnPick) {
         // inherits from
-        UIElement.call(this, x, y, imageHandle);
+        UIElement.call(this, x, y, mesh, meshDisplayOptions);
 
         // configure click action
         var pickableComponent = this.getComponent($.PickableComponent);

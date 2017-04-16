@@ -1,4 +1,9 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
+﻿define([
+    "../../../engine/Objects/Entity",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Data/Geometry"
+],
+function (Entity, $, Geometry) {
 
     TextLabel.prototype = Object.create(Entity.prototype);
     TextLabel.prototype.constructor = TextLabel;

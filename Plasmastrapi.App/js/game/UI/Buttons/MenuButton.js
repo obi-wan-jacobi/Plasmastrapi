@@ -20,7 +20,10 @@ function (Button, $, Graphics, config) {
             image.height,
             image
         );
-        Button.call(this, x, y, labelText, imageHandle, toolController, fnOnPick);
+        
+        var imageComponent = new $.ImageComponent(imageHandle);
+
+        Button.call(this, x, y, imageHandle.mesh, null, toolController, fnOnPick);
     };
 
     return MenuButton;

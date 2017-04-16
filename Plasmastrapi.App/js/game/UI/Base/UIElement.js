@@ -1,4 +1,10 @@
-﻿define(["../../../engine/Objects/Entity", "../../../engine/Namespaces/$Components", "../../../engine/Data/Geometry"], function (Entity, $, Geometry) {
+﻿define([
+    "../../../engine/Objects/Entity",
+    "../../../engine/Namespaces/$Components",
+    "../../../engine/Data/Geometry",
+    "../../Namespaces/$Compatibility"
+],
+function (Entity, $, Geometry, $Compatibility) {
 
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;

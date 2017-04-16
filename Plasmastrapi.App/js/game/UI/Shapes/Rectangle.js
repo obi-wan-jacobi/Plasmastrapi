@@ -1,15 +1,15 @@
 ﻿define([
-    "../Base/Shape",
+    "../Base/UIElement",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Geometry"
 ],
-function (Shape, $, Geometry) {
+function (UIElement, $, Geometry) {
 
-    Rectangle.prototype = Object.create(Shape.prototype);
+    Rectangle.prototype = Object.create(UIElement.prototype);
     Rectangle.prototype.constructor = Rectangle;
     function Rectangle(x, y, width, height, meshDisplayOptions) {
         // inherits from
-        Shape.call(this, x, y, new Geometry.Mesh(new Geometry.Rectangle(width, height)), meshDisplayOptions);
+        UIElement.call(this, x, y, new Geometry.Mesh(new Geometry.Rectangle(width, height)), meshDisplayOptions);
     };
 
     return Rectangle;

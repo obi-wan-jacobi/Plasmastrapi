@@ -1,20 +1,20 @@
 ﻿define([
-    "../Base/ToolbarButton",
+    "../Base/LabelledButton",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Graphics",
     "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (ToolbarButton, $, Graphics, $Compatibility, config) {
+function (LabelledButton, $, Graphics, $Compatibility, config) {
 
     // CLASS SpawnerButton
-    SpawnerButton.prototype = Object.create(ToolbarButton.prototype);
+    SpawnerButton.prototype = Object.create(LabelledButton.prototype);
     SpawnerButton.prototype.constructor = SpawnerButton;
     function SpawnerButton(x, y, SpawnConstructor, labelText) {
         // private variables
         this.__SpawnConstructor = SpawnConstructor;
         // inherits from
-        ToolbarButton.call(this, x, y, labelText, SpawnConstructor.prototype.sprite.frames[0], this, this.__onpick);
+        LabelledButton.call(this, x, y, labelText, SpawnConstructor.prototype.sprite.frames[0], this, this.__onpick);
         // tool compatibility
         $Compatibility.Draggable.call(this);
     };

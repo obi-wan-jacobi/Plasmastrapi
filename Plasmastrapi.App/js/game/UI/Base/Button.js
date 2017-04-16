@@ -11,7 +11,7 @@
         var pickableComponent = this.getComponent($.PickableComponent);
         pickableComponent.addEventListener('onpick', callee, fnOnPick);
 
-        // tool compatibility
+        // apply tool compatibilities
         $Compatibility.Pickable.call(this);
     };
     

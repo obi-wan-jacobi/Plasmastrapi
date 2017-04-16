@@ -1,11 +1,9 @@
-﻿define(["../Base/Panel", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$Compatibility"], function (Panel, $, $Compatibility) {
+﻿define(["../Base/ImagePanel", "../../../engine/Namespaces/$Components", "../../../engine/Data/Graphics", "../../Namespaces/$Compatibility"], function (ImagePanel, $, $Compatibility) {
 
-    CircuitDesignToolbar.prototype = Object.create(Panel.prototype);
+    CircuitDesignToolbar.prototype = Object.create(ImagePanel.prototype);
     CircuitDesignToolbar.prototype.constructor = CircuitDesignToolbar;
     function CircuitDesignToolbar() {
-        Panel.call(this);
-        // apply tool compatibilities
-        $Compatibility.DestructionZone.call(this);
+        ImagePanel.call(this);
     };
 
     return CircuitDesignToolbar;

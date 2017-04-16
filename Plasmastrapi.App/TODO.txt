@@ -14,14 +14,14 @@ needs testing:
 
 in progress:
 	- UI panels
-	- UI buttons with text labels
+	- menu buttons with text labels
 
 backlog:
 - general
 	- resize with window
 - game menu
 	- UI panels
-	- UI buttons with text labels 
+	- menu buttons with text labels 
 - lab scene
 	- scenario window
 		- zoom in/out

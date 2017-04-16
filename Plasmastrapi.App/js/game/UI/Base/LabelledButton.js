@@ -8,12 +8,12 @@
 ],
 function (Button, $, $Data, $Compatibility, TextLabel, config) {
 
-    // CLASS ToolbarButton
-    ToolbarButton.prototype = Object.create(Button.prototype);
-    ToolbarButton.prototype.constructor = ToolbarButton;
-    function ToolbarButton(x, y, labelText, image, callee, fnOnPick) {
+    // CLASS LabelledButton
+    LabelledButton.prototype = Object.create(Button.prototype);
+    LabelledButton.prototype.constructor = LabelledButton;
+    function LabelledButton(x, y, labelText, image, callee, fnOnPick) {
         var imageHandle = new $Data.Graphics.ImageHandle(
-            config.ToolbarButton.displayLayer,
+            config.LabelledButton.displayLayer,
             0,
             0,
             image.width,
@@ -27,12 +27,12 @@ function (Button, $, $Data, $Compatibility, TextLabel, config) {
 
         // configure label
         var textLabelDisplayOptions = new $Data.Graphics.TextLabelDisplayOptions(
-            config.ToolbarButton.textLabelDisplayLayer,
-            new $Data.Geometry.Position(0, imageHandle.image.height + config.ToolbarButton.textLabelOffsetBufferY),
+            config.LabelledButton.textLabelDisplayLayer,
+            new $Data.Geometry.Position(0, imageHandle.image.height + config.LabelledButton.textLabelOffsetBufferY),
             labelText
         );
         var label = new TextLabel(this, textLabelDisplayOptions);
     };
 
-    return ToolbarButton;
+    return LabelledButton;
 });

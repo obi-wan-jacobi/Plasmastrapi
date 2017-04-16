@@ -1,20 +1,20 @@
 define([
-    "../UI/Base/Panel",
+    "../UI/Base/ImagePanel",
     "../UI/Base/Button",
     "../UI/Base/UIElement",
     "../UI/Buttons/SpawnerButton",
-    "../UI/Buttons/ToolbarButton",
+    "../UI/Buttons/LabelledButton",
     "../UI/Panels/MainMenuBackgroundPanel",
     "../UI/Panels/MainMenuNavigationPanel",
     "../UI/Panels/CircuitDesignBlueprintPanel",
     "../UI/Panels/CircuitDesignToolbar"
 ],
 function (
-    Panel,
+    ImagePanel,
     Button,
     UIElement,
     SpawnerButton,
-    ToolbarButton,
+    LabelledButton,
     MainMenuBackgroundPanel,
     MainMenuNavigationPanel,
     CircuitDesignBlueprintPanel,
@@ -22,12 +22,12 @@ function (
 ) {
 
     return {
-        Panel,
+        ImagePanel,
         Button,
-        Panel,
+        ImagePanel,
         UIElement,
         SpawnerButton,
-        ToolbarButton,
+        LabelledButton,
         MainMenuBackgroundPanel,
         MainMenuNavigationPanel,
         CircuitDesignBlueprintPanel,

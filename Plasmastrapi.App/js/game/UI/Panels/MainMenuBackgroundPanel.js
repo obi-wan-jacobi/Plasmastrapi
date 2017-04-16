@@ -1,14 +1,14 @@
 ﻿define([
-    "../Base/Panel",
+    "../Base/ImagePanel",
     "../../../engine/Namespaces/$Components",
     "../../../engine/Data/Graphics",
     "../../Namespaces/$Compatibility",
     "gameConfig"
 ],
-function (Panel, $, Graphics, $Compatibility, config) {
+function (ImagePanel, $, Graphics, $Compatibility, config) {
 
     // CLASS MainMenuBackgroundPanel
-    MainMenuBackgroundPanel.prototype = Object.create(Panel.prototype);
+    MainMenuBackgroundPanel.prototype = Object.create(ImagePanel.prototype);
     MainMenuBackgroundPanel.prototype.constructor = MainMenuBackgroundPanel;
     function MainMenuBackgroundPanel() {
         var x = this.image.width / 2, y = this.image.height / 2;
@@ -23,7 +23,7 @@ function (Panel, $, Graphics, $Compatibility, config) {
             this.image
         );
         // inherits from
-        Panel.call(this, x, y, imageHandle);
+        ImagePanel.call(this, x, y, imageHandle);
     };
 
     return MainMenuBackgroundPanel;

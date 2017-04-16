@@ -63,7 +63,7 @@
         displayLayer: 'ondrawgamebackground'
     };
 
-    $.ToolbarButton = {
+    $.LabelledButton = {
         textLabelDisplayLayer: 'ondrawuientities',
         textLabelOffsetBufferY: 3
     };

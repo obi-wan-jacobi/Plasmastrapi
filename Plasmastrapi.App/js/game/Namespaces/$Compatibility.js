@@ -1,14 +1,14 @@
 ﻿define([
-    "../Tools/PickableTraits/Cuttable",
-    "../Tools/PickableTraits/Pickable",
-    "../Tools/PickableTraits/DesignZone",
-    "../Tools/PickableTraits/DestructionZone",
-    "../Tools/PickableTraits/Draggable",
-    "../Tools/PickableTraits/Filter",
-    "../Tools/PickableTraits/Placeable",
-    "../Tools/PickableTraits/Trashable",
-    "../Tools/PickableTraits/WireableAsInput",
-    "../Tools/PickableTraits/WireableAsOutput"
+    "../Tools/Compatibility/Cuttable",
+    "../Tools/Compatibility/Pickable",
+    "../Tools/Compatibility/DesignZone",
+    "../Tools/Compatibility/DestructionZone",
+    "../Tools/Compatibility/Draggable",
+    "../Tools/Compatibility/Filter",
+    "../Tools/Compatibility/Placeable",
+    "../Tools/Compatibility/Trashable",
+    "../Tools/Compatibility/WireableAsInput",
+    "../Tools/Compatibility/WireableAsOutput"
 ],
 function (
     Cuttable,

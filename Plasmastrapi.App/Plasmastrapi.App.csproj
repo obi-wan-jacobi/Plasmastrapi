@@ -180,7 +180,7 @@
     <Content Include="js\game\UI\Base\Button.js" />
     <Content Include="js\game\UI\Buttons\SpawnerButton.js" />
     <Content Include="js\game\UI\Panels\CircuitDesignToolbar.js" />
-    <Content Include="js\game\Tools\Compatibility\CompatibilityFilter.js" />
+    <Content Include="js\game\Tools\Compatibility\Filter.js" />
     <Content Include="js\game\UI\Panels\MainMenuBackgroundPanel.js" />
     <Content Include="js\game\UI\Panels\MainMenuNavigationPanel.js" />
     <Content Include="js\game\UI\Lines\Curve.js" />
@@ -226,13 +226,11 @@
     <Content Include="img\XorGate.png" />
     <Content Include="index.html" />
     <Content Include="js\main.js" />
-    <Content Include="js\engine\Components\CollidableComponent.js" />
     <Content Include="js\engine\Components\Mixins\Drawable.js" />
     <Content Include="js\engine\Components\ImageComponent.js" />
     <Content Include="js\engine\Components\InputComponent.js" />
     <Content Include="js\engine\Components\LineComponent.js" />
     <Content Include="js\engine\Components\MeshComponent.js" />
-    <Content Include="js\engine\Components\MotionComponent.js" />
     <Content Include="js\engine\Components\PickableComponent.js" />
     <Content Include="js\engine\Components\PoseComponent.js" />
     <Content Include="js\engine\Components\SpriteComponent.js" />

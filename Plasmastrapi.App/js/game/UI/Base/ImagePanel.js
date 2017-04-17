@@ -1,8 +1,9 @@
 ﻿define([
     "./Panel",
+    "../../../engine/Namespaces/$Components",
     "../../../engine/Namespaces/$Data"
 ],
-function (Panel, $Data) {
+function (Panel, $, $Data) {
 
     ImagePanel.prototype = Object.create(Panel.prototype);
     ImagePanel.prototype.constructor = ImagePanel;

@@ -1,8 +1,9 @@
 ﻿define([
     "./UIElement",
-    "../../../engine/Namespaces/$Data"
+    "../../../engine/Namespaces/$Data",
+    "../../Namespaces/$Compatibility"
 ],
-function (UIElement, $Data) {
+function (UIElement, $Data, $Compatibility) {
 
     Panel.prototype = Object.create(UIElement.prototype);
     Panel.prototype.constructor = Panel;

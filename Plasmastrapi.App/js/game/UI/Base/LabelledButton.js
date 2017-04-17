@@ -23,7 +23,7 @@ function (Button, $, $Data, $Compatibility, TextLabel, config) {
             image
         );
         // inherits from
-        Button.call(this, x, y, new Geometry.Mesh(new Geometry.Rectangle(image.width, image.height)), meshDisplayOptions, callee, fnOnPick);
+        Button.call(this, x, y, new $Data.Geometry.Mesh(new $Data.Geometry.Rectangle(image.width, image.height)), meshDisplayOptions, callee, fnOnPick);
 
         // configure label
         var textLabelDisplayOptions = new $Data.Graphics.TextLabelDisplayOptions(

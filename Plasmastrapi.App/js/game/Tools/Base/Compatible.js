@@ -1,8 +1,8 @@
-﻿define(["../../../engine/Namespaces/$Components"], function ($) {
+﻿define(["../../../engine/Namespaces/$Objects"], function ($Objects) {
 
     function Compatible(PickableTraitType) {
-        if (!(this instanceof $.PickableComponent)) {
-            throw new Error(this.constructor.name + ':' + PickableTraitType.name +  '- Traits may only be applied to PickableComponents.');
+        if (!(this instanceof $Objects.Entity)) {
+            throw new Error(this.constructor.name + ':' + PickableTraitType.name +  '- Traits may only be applied to Entities.');
         }
         Object.defineProperties(this, {
             ['is' +PickableTraitType.name]: {

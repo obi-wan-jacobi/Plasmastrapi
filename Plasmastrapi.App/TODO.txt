@@ -45,6 +45,8 @@ backlog:
 		- flip flops (x3)
 		- timers
 		- SOCs + design contexts (tabs? overlay?)
+- config
+	- scenes
 
 tech debt:
 - main.js --> game.start() before initializing controllers?

@@ -266,7 +266,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="js\" />
     <Folder Include="Scripts\app\game\Circuits\FlipFlops\" />
     <Folder Include="Scripts\app\game\Circuits\Switches\" />
     <Folder Include="Scripts\app\game\Systems\" />

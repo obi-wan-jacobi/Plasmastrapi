@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57F7ABFE-A627-47A0-A58E-83DDAAA011BE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Plasmastrapi.App</RootNamespace>
+    <AssemblyName>Plasmastrapi.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ApplicationInsightsResourceId>/subscriptions/2518565f-0c19-4713-9615-fe00d886d297/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/Plasmastrapi.App</ApplicationInsightsResourceId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="Scripts\app\engine\Components\CurveComponent.js" />
+    <Content Include="Scripts\app\engine\Components\TextLabelComponent.js" />
+    <Content Include="Scripts\app\engine\config.js" />
+    <Content Include="Scripts\app\engine\Containers\PickableComponentContainer.js" />
+    <Content Include="Scripts\app\engine\debug.js" />
+    <Content Include="Scripts\app\engine\Loaders\ImageLoader.js" />
+    <Content Include="Scripts\app\engine\Loaders\SpriteLoader.js" />
+    <Content Include="Scripts\app\engine\Objects\Base.js" />
+    <Content Include="Scripts\app\engine\Objects\EventQueue.js" />
+    <Content Include="Scripts\app\engine\Objects\Mixins\Destructible.js" />
+    <Content Include="Scripts\app\engine\Objects\Mixins\Loadable.js" />
+    <Content Include="Scripts\app\engine\Objects\Mixins\Pausable.js" />
+    <Content Include="Scripts\app\engine\require.config.js" />
+    <Content Include="Scripts\app\engine\Systems\PickSystem.js" />
+    <Content Include="Scripts\app\game\Assets\images.js" />
+    <Content Include="Scripts\app\game\Assets\sprites.js" />
+    <Content Include="Scripts\app\game\Circuits\Base\BaseElement.js" />
+    <Content Include="Scripts\app\game\Circuits\Base\WireElement.js" />
+    <Content Include="Scripts\app\game\Circuits\Wires\ToolWire.js" />
+    <Content Include="Scripts\app\game\config.js" />
+    <Content Include="Scripts\app\game\Containers\CircuitElementContainer.js" />
+    <Content Include="Scripts\app\game\Controllers\ToolController.js" />
+    <Content Include="Scripts\app\game\Circuits\Base\CircuitElement.js" />
+    <Content Include="Scripts\app\game\Circuits\Gates\AndGate.js" />
+    <Content Include="Scripts\app\game\Circuits\Base\Gate.js" />
+    <Content Include="Scripts\app\game\Circuits\Gates\NandGate.js" />
+    <Content Include="Scripts\app\game\Circuits\Gates\OrGate.js" />
+    <Content Include="Scripts\app\game\Circuits\Gates\XorGate.js" />
+    <Content Include="Scripts\app\game\Circuits\Terminals\TerminalHandle.js" />
+    <Content Include="Scripts\app\game\Circuits\Power\PowerSource.js" />
+    <Content Include="Scripts\app\game\Circuits\Terminals\InputTerminal.js" />
+    <Content Include="Scripts\app\game\Circuits\Terminals\OutputTerminal.js" />
+    <Content Include="Scripts\app\game\Circuits\Base\Terminal.js" />
+    <Content Include="Scripts\app\game\Circuits\Wires\TerminalWire.js" />
+    <Content Include="Scripts\app\game\Circuits\Terminals\TerminalWireAnchor.js" />
+    <Content Include="Scripts\app\game\Circuits\Wires\Wire.js" />
+    <Content Include="Scripts\app\game\debug.js" />
+    <Content Include="Scripts\app\game\require.config.js" />
+    <Content Include="Scripts\app\game\Scenes\CircuitDesignScene.js" />
+    <Content Include="Scripts\app\game\Scenes\MainMenuScene.js" />
+    <Content Include="Scripts\app\game\Scenes\NoScene.js" />
+    <Content Include="Scripts\app\game\Tools\Helpers\SelectionBox.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\Cuttable.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\Draggable.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\Placeable.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\Pickable.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\Trashable.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\WireableAsInput.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\WireableAsOutput.js" />
+    <Content Include="Scripts\app\game\Tools\Base\Cursor.js" />
+    <Content Include="Scripts\app\game\Tools\Cursors\CuttingToolCursor.js" />
+    <Content Include="Scripts\app\game\Tools\Cursors\TrashToolCursor.js" />
+    <Content Include="Scripts\app\game\Tools\CuttingTool.js" />
+    <Content Include="Scripts\app\game\Tools\Base\Tool.js" />
+    <Content Include="Scripts\app\game\UI\Base\Panel.js" />
+    <Content Include="Scripts\app\game\UI\Base\TextLabel.js" />
+    <Content Include="Scripts\app\game\UI\Buttons\MenuButton.js" />
+    <Content Include="Scripts\app\game\Tools\Base\Compatible.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\DesignZone.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\DestructionZone.js" />
+    <Content Include="Scripts\app\game\Tools\TrashTool.js" />
+    <Content Include="Scripts\app\game\Tools\PickingTool.js" />
+    <Content Include="Scripts\app\game\Tools\NoTool.js" />
+    <Content Include="Scripts\app\game\Tools\PlacingTool.js" />
+    <Content Include="Scripts\app\game\Tools\WireTool.js" />
+    <Content Include="Scripts\app\game\UI\Base\ImagePanel.js" />
+    <Content Include="Scripts\app\game\UI\Buttons\ToolButton.js" />
+    <Content Include="Scripts\app\game\UI\Decorators\LabelledDecorator.js" />
+    <Content Include="Scripts\app\game\UI\Panels\CircuitDesignBlueprintPanel.js" />
+    <Content Include="Scripts\app\game\UI\Base\UIElement.js" />
+    <Content Include="Scripts\app\game\UI\Base\Button.js" />
+    <Content Include="Scripts\app\game\UI\Buttons\SpawnerButton.js" />
+    <Content Include="Scripts\app\game\UI\Panels\CircuitDesignToolbar.js" />
+    <Content Include="Scripts\app\game\Tools\Compatibility\Filter.js" />
+    <Content Include="Scripts\app\game\UI\Panels\MainMenuBackgroundPanel.js" />
+    <Content Include="Scripts\app\game\UI\Panels\MainMenuNavigationPanel.js" />
+    <Content Include="Scripts\app\game\UI\Lines\Curve.js" />
+    <Content Include="Scripts\app\game\UI\Shapes\Rectangle.js" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="README.md" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\AndGate.png" />
+    <Content Include="img\Backgrounds\blueprint-paper.jpg" />
+    <Content Include="img\Backgrounds\BlueprintBackground.jpg" />
+    <Content Include="img\Coloured\AndGate.png" />
+    <Content Include="img\Cutter_closed.png" />
+    <Content Include="img\Cutter_open.png" />
+    <Content Include="img\HoverSwitch.png" />
+    <Content Include="img\LightBulb_closed.png" />
+    <Content Include="img\LightBulb_open.png" />
+    <Content Include="img\LightScreen_closed.png" />
+    <Content Include="img\LightScreen_open.png" />
+    <Content Include="img\NandGate.png" />
+    <Content Include="img\old\AndGate.png" />
+    <Content Include="img\old\NandGate.png" />
+    <Content Include="img\old\OrGate.png" />
+    <Content Include="img\old\XorGate.png" />
+    <Content Include="img\OrGate.png" />
+    <Content Include="img\PowerSource.png" />
+    <Content Include="img\PushSwitch_closed.png" />
+    <Content Include="img\PushSwitch_open.png" />
+    <Content Include="img\SOC_14.png" />
+    <Content Include="img\Terminal_hovered.png" />
+    <Content Include="img\Terminal_in.png" />
+    <Content Include="img\Terminal_out.png" />
+    <Content Include="img\Trashcan.png" />
+    <Content Include="img\XorGate.png" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\app\engine\Components\Mixins\Drawable.js" />
+    <Content Include="Scripts\app\engine\Components\ImageComponent.js" />
+    <Content Include="Scripts\app\engine\Components\InputComponent.js" />
+    <Content Include="Scripts\app\engine\Components\LineComponent.js" />
+    <Content Include="Scripts\app\engine\Components\MeshComponent.js" />
+    <Content Include="Scripts\app\engine\Components\PickableComponent.js" />
+    <Content Include="Scripts\app\engine\Components\PoseComponent.js" />
+    <Content Include="Scripts\app\engine\Components\SpriteComponent.js" />
+    <Content Include="Scripts\app\game\Controllers\SceneController.js" />
+    <Content Include="Scripts\app\engine\Data\Geometry.js" />
+    <Content Include="Scripts\app\engine\Data\Graphics.js" />
+    <Content Include="Scripts\app\engine\Data\Physics.js" />
+    <Content Include="Scripts\app\engine\Engine.js" />
+    <Content Include="Scripts\app\engine\Objects\Component.js" />
+    <Content Include="Scripts\app\engine\Objects\Controller.js" />
+    <Content Include="Scripts\app\engine\Objects\Entity.js" />
+    <Content Include="Scripts\app\engine\Objects\EventEmitter.js" />
+    <Content Include="Scripts\app\engine\Objects\Loader.js" />
+    <Content Include="Scripts\app\engine\Objects\Container.js" />
+    <Content Include="Scripts\app\engine\Objects\Scene.js" />
+    <Content Include="Scripts\app\engine\Objects\System.js" />
+    <Content Include="Scripts\app\engine\Objects\InputHandle.js" />
+    <Content Include="Scripts\app\engine\Objects\AtomicArray.js" />
+    <Content Include="Scripts\app\engine\Objects\AtomicKeyPairArray.js" />
+    <Content Include="Scripts\app\engine\Objects\AtomicLink.js" />
+    <Content Include="Scripts\app\engine\Containers\EntityContainer.js" />
+    <Content Include="Scripts\app\engine\Containers\EventEmitterContainer.js" />
+    <Content Include="Scripts\app\engine\Systems\CollisionSystem.js" />
+    <Content Include="Scripts\app\engine\Systems\DrawSystem.js" />
+    <Content Include="Scripts\app\engine\Systems\InputSystem.js" />
+    <Content Include="Scripts\app\engine\Systems\MotionSystem.js" />
+    <Content Include="Scripts\app\game\Game.js" />
+    <Content Include="Scripts\app\game\Containers\WireContainer.js" />
+    <Content Include="Scripts\app\game\Services\RevisionService.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\text.js" />
+    <Content Include="TODO.txt" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\app\game\Circuits\FlipFlops\" />
+    <Folder Include="Scripts\app\game\Circuits\Switches\" />
+    <Folder Include="Scripts\app\game\Systems\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55979/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

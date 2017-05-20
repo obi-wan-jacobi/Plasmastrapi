@@ -1,0 +1,86 @@
+
+general framework quirks:
+- this.__engine cannot be used in constructor methods because the engine instance has not yet been injected
+- Entities/EventEmiters will not be added to their respective Container until they have had their engine instance injected
+
+known issues:
+- 
+
+user experience:
+- terminals are selectable when the circuit element is inside a selection-box
+
+needs testing:
+- destroy->purge
+
+in progress:
+	- UI panels
+	- menu buttons with text labels
+
+backlog:
+- general
+	- resize with window
+- game menu
+	- UI panels
+	- menu buttons with text labels 
+- lab scene
+	- scenario window
+		- zoom in/out
+		- environment
+		- events	
+	- design editor
+		- wire 'draw-cutting'
+		- confine circuit elements to design area
+			- highlight/outline selected tool
+		- copy/paste
+		- rotatable components
+		- save/load design
+		- undo/redo
+		- wire routing
+	- circuit testing ("debug" mode)
+		- pause/stop/play
+		- breakpoints?
+		- step forward/backward
+		- sliding global timer (signal propagation speed)
+	- elements
+		- flip flops (x3)
+		- timers
+		- SOCs + design contexts (tabs? overlay?)
+- config
+	- scenes
+
+tech debt:
+- main.js --> game.start() before initializing controllers?
+- mesh component point collision checking is disgusting
+- blue background image is needlessly large
+- run memory analysis/profiler diagnostics
+- JSDocs/automated documentation
+- unit tests
+
+optimization
+- tool compatibility filtering --> sort pickable components using a tree?
+- MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
+- AtomicKeyPairArray --> store this.__end to avoid O(n) for this.push
+- entity destruction (EventEmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
+
+scalability concerns:
+- single-canvas viewport
+
+technology:
+- linting
+	- ESlint (http://eslint.org/)
+	- intellisense typings (vscode)
+- unit tests
+	- jasmine
+	- travis CI (https://docs.travis-ci.com/user/languages/javascript-with-nodejs)
+- grunt
+- bower
+- npm
+- node
+- mongo
+- projectz for readme files (https://github.com/bevry/projectz)
+
+resources:
+- traits and mixins (https://howtonode.org/traitsjs)
+- mixins (https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
+- http://logic.ly/demo/
+- http://www.starscenesoftware.com/vectrosity.html

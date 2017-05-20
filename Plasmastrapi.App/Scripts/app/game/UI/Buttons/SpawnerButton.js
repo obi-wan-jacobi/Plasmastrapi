@@ -13,7 +13,26 @@ function (LabelledButton, Draggable) {
         // private variables
         this.__SpawnConstructor = SpawnConstructor;
         // inherits from
+        var imageHandle = new Graphics.ImageHandle(
+            config.LabelledButton.displayLayer,
+            0,
+            0,
+            image.width,
+            image.height,
+            image.width,
+            image.height,
+            image
+        );
         LabelledButton.call(this, x, y, labelText, SpawnConstructor.prototype.sprite.frames[0], this, this.__onpick);
+        Button.call(this, x, y, new Geometry.Mesh(new Geometry.Rectangle(image.width, image.height)), meshDisplayOptions, callee, fnOnPick);
+
+        // configure label
+        var textLabelDisplayOptions = new Graphics.TextLabelDisplayOptions(
+            config.LabelledButton.textLabelDisplayLayer,
+            new Geometry.Position(0, imageHandle.image.height + config.LabelledButton.textLabelOffsetBufferY),
+            labelText
+        );
+        LabelledDecorator.call(this, textLabelDisplayOptions);
         // tool compatibility
         Draggable.call(this);
     };

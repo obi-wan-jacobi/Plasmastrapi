@@ -1,20 +1,30 @@
 ﻿define([
     // Base
-    'labelled-button',
+    'button',
+    // Decorators
+    'labelled-decorator',
+    // Components
+    'image-component',
+    // Data
+    'geometry',
+    'graphics',
     // Configs
-    'draggable'
+    'draggable',
+    'game-config'
 ],
-function (LabelledButton, Draggable) {
+function (Button, LabelledDecorator, ImageComponent, Geometry, Graphics, Draggable, config) {
 
     // CLASS SpawnerButton
-    SpawnerButton.prototype = Object.create(LabelledButton.prototype);
+    SpawnerButton.prototype = Object.create(Button.prototype);
     SpawnerButton.prototype.constructor = SpawnerButton;
     function SpawnerButton(x, y, SpawnConstructor, labelText) {
         // private variables
         this.__SpawnConstructor = SpawnConstructor;
-        // inherits from
+
+        var image = SpawnConstructor.prototype.sprite.frames[0];
+
         var imageHandle = new Graphics.ImageHandle(
-            config.LabelledButton.displayLayer,
+            config.SpawnerButton.imageHandleDisplayLayer,
             0,
             0,
             image.width,
@@ -23,16 +33,23 @@ function (LabelledButton, Draggable) {
             image.height,
             image
         );
-        LabelledButton.call(this, x, y, labelText, SpawnConstructor.prototype.sprite.frames[0], this, this.__onpick);
-        Button.call(this, x, y, new Geometry.Mesh(new Geometry.Rectangle(image.width, image.height)), meshDisplayOptions, callee, fnOnPick);
+
+        // inherits from
+        Button.call(this, x, y, new Geometry.Mesh(new Geometry.Rectangle(image.width, image.height)), null, this, this.__onpick);
+
+        // configure image
+        var imageComponent = new ImageComponent(imageHandle);
+        this.addComponent(imageComponent);
 
         // configure label
         var textLabelDisplayOptions = new Graphics.TextLabelDisplayOptions(
-            config.LabelledButton.textLabelDisplayLayer,
-            new Geometry.Position(0, imageHandle.image.height + config.LabelledButton.textLabelOffsetBufferY),
+            config.SpawnerButton.textLabelDisplayLayer,
+            new Geometry.Position(0, imageHandle.image.height + config.SpawnerButton.textLabelOffsetBufferY),
             labelText
         );
+
         LabelledDecorator.call(this, textLabelDisplayOptions);
+
         // tool compatibility
         Draggable.call(this);
     };

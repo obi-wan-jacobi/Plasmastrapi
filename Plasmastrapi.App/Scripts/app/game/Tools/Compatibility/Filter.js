@@ -1,11 +1,11 @@
 ﻿define(function () {
 
-    function Filter(/* arguments */) {
-        this.__list = arguments;
+    function Filter(compatiblesArray) {
+        this.__list = compatiblesArray;
     };
-    Filter.prototype.resolve = function (entity) {
+    Filter.prototype.resolve = function (pickableComponent) {
         for (var i = 0, L = this.__list.length; i < L; i++) {
-            if (this.__list[i].resolve(entity)) {
+            if (this.__list[i].resolve(pickableComponent.__entity)) {
                 return true;
             }
         }

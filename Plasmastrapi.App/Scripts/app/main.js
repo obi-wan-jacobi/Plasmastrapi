@@ -7,7 +7,7 @@ define(['game', 'images', 'sprites'], function (Game, images, sprites) {
         game.spriteLoader.download(sprites).done(function () {
             // load game/engine
             game.start();
-            game.sceneController.setMainMenuScene();
+            game.sceneController.setCircuitDesignScene();
             game.toolController.equipPickingTool();
         });
     });

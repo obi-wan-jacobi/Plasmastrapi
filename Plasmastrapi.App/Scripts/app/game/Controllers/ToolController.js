@@ -2,6 +2,7 @@
     // Base
     'controller',
     // Components
+    'pickable-component',
     'pose-component',
     // Tools
     'cutting-tool',
@@ -12,7 +13,7 @@
     'cutting-tool-cursor',
     'trash-tool-cursor',
 ],
-    function (Controller, PoseComponent, CuttingTool, PickingTool, PlacingTool, TrashTool, WireTool, CuttingToolCursor, TrashToolCursor) {
+    function (Controller, PickableComponent, PoseComponent, CuttingTool, PickingTool, PlacingTool, TrashTool, WireTool, CuttingToolCursor, TrashToolCursor) {
 
     // CLASS ToolController
     ToolController.prototype = Object.create(Controller.prototype);

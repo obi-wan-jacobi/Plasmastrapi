@@ -2,13 +2,14 @@
     // Base
     'entity',
     // Components
+    'line-component',
     'pose-component',
     // Data
     'graphics',
     // Configs
     'game-config'
 ],
-function (Entity, PoseComponent, Graphics, config) {
+function (Entity, LineComponent, PoseComponent, Graphics, config) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);

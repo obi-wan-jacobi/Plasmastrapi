@@ -13,7 +13,7 @@
     // Configs
     'game-config'
 ],
-    function (CircuitElement, OutputTerminal, InputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Geometry, config) {
+    function (CircuitElement, InputTerminal, OutputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Geometry, config) {
 
     // CLASS Gate
     Gate.prototype = Object.create(CircuitElement.prototype);

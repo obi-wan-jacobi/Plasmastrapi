@@ -2,7 +2,7 @@
     // Base
     'button',
     // Components
-    'image-component,
+    'image-component',
     // Data
     'graphics',
     // Configs

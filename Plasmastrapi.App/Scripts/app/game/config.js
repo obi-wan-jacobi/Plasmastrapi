@@ -66,13 +66,20 @@ function (debug) {
         displayLayer: 'ondrawgamebackground'
     };
 
-    $.LabelledButton = {
+    $.SpawnerButton = {
+        // image
+        imageHandleDisplayLayer: 'ondrawuientities',
+        // text-label
         textLabelDisplayLayer: 'ondrawuientities',
         textLabelOffsetBufferY: 3
     };
 
-    $.SpawnerButton = {
-        imageHandleDisplayLayer: 'ondrawuientities'
+    $.ToolButton = {
+        // image
+        imageHandleDisplayLayer: 'ondrawuientities',
+        // text-label
+        textLabelDisplayLayer: 'ondrawuientities',
+        textLabelOffsetBufferY: 3
     };
 
     $.MenuButton = {

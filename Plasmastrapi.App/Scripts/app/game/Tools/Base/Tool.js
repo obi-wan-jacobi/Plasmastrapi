@@ -1,6 +1,9 @@
 ﻿define([
     // Base
     'input-handle',
+    // Components
+    'pose-component',
+    'sprite-component',
     // Data
     'geometry',
     // Compatibility
@@ -8,7 +11,7 @@
     // Configs
     'game-config'
 ],
-function (InputHandle, Geometry, Filter, config) {
+function (InputHandle, PoseComponent, SpriteComponent, Geometry, Filter, config) {
 
     Tool.prototype = Object.create(InputHandle.prototype);
     Tool.prototype.constructor = Tool;

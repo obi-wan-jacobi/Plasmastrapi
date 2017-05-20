@@ -5,6 +5,7 @@
     'input-terminal',
     'output-terminal',
     // Components
+    'line-component',
     'mesh-component',
     'pickable-component',
     'pose-component',
@@ -15,7 +16,7 @@
     'cuttable',
     'game-config'
 ],
-    function (WireElement, InputTerminal, OutputTerminal, MeshComponent, PickableComponent, PoseComponent, Graphics, Physics, Cuttable, config) {
+    function (WireElement, InputTerminal, OutputTerminal, LineComponent, MeshComponent, PickableComponent, PoseComponent, Graphics, Physics, Cuttable, config) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);

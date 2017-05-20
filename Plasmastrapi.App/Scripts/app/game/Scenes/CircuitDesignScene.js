@@ -4,6 +4,7 @@
     // UI
     'circuit-design-blueprint-panel',
     'spawner-button',
+    'tool-button',
     // Circuits
     'and-gate',
     'nand-gate',
@@ -14,15 +15,21 @@
     'cutting-tool-cursor',
     'trash-tool-cursor',
 ],
-    function (Scene, CircuitDesignBlueprintPanel, SpawnerButton, AndGate, NandGate, OrGate, XorGate, PowerSource, CuttingToolCursor, TrashToolCursor) {
+    function (Scene, CircuitDesignBlueprintPanel, SpawnerButton, ToolButton, AndGate, NandGate, OrGate, XorGate, PowerSource, CuttingToolCursor, TrashToolCursor) {
 
     CircuitDesignScene.prototype = Object.create(Scene.prototype);
     CircuitDesignScene.prototype.constructor = CircuitDesignScene;
     function CircuitDesignScene(canvas) {
         Scene.call(this);
         // design area
-        this.add(new CircuitDesignBlueprintPanel(CircuitDesignBlueprintPanel.prototype.image.width / 2, CircuitDesignBlueprintPanel.prototype.image.height / 2,
-            CircuitDesignBlueprintPanel.prototype.image.width, CircuitDesignBlueprintPanel.prototype.image.height));
+        this.add(
+            new CircuitDesignBlueprintPanel(
+                CircuitDesignBlueprintPanel.prototype.image.width / 2,
+                CircuitDesignBlueprintPanel.prototype.image.height / 2,
+                CircuitDesignBlueprintPanel.prototype.image.width,
+                CircuitDesignBlueprintPanel.prototype.image.height
+            )
+        );
         // toolbar
 
         //toolbar element spawner buttons
@@ -39,8 +46,8 @@
     };
     CircuitDesignScene.prototype.__oninit = function() {
         // toolbar utility buttons
-        this.add(new LabelledButton(1200, 40, "[w]", CuttingToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipCuttingTool));
-        this.add(new LabelledButton(1250, 40, "[q]", TrashToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipTrashTool));
+        this.add(new ToolButton(1200, 40, "[w]", CuttingToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipCuttingTool));
+        this.add(new ToolButton(1250, 40, "[q]", TrashToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipTrashTool));
     };
 
     return CircuitDesignScene;

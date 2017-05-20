@@ -163,6 +163,7 @@
     <Content Include="Scripts\app\game\Tools\PlacingTool.js" />
     <Content Include="Scripts\app\game\Tools\WireTool.js" />
     <Content Include="Scripts\app\game\UI\Base\ImagePanel.js" />
+    <Content Include="Scripts\app\game\UI\Buttons\ToolButton.js" />
     <Content Include="Scripts\app\game\UI\Decorators\LabelledDecorator.js" />
     <Content Include="Scripts\app\game\UI\Panels\CircuitDesignBlueprintPanel.js" />
     <Content Include="Scripts\app\game\UI\Base\UIElement.js" />

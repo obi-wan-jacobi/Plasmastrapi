@@ -3,10 +3,11 @@
     'entity',
     // Components
     'pose-component',
+    'text-label-component',
     // Data
     'geometry'
 ],
-function (Entity, PoseComponent, Geometry) {
+function (Entity, PoseComponent, TextLabelComponent, Geometry) {
 
     TextLabel.prototype = Object.create(Entity.prototype);
     TextLabel.prototype.constructor = TextLabel;

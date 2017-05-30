@@ -12,7 +12,7 @@
     // Configs
     'draggable',
     'pickable',
-    'game-config'
+    'circuits-config'
 ],
 function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Geometry, Graphics, Draggable, Pickable, config) {
 

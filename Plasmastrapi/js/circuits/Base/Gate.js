@@ -11,7 +11,7 @@
     // Data
     'geometry',
     // Configs
-    'game-config'
+    'circuits-config'
 ],
     function (CircuitElement, InputTerminal, OutputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Geometry, config) {
 

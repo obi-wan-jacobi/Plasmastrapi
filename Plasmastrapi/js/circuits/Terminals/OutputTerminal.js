@@ -3,7 +3,7 @@
     'terminal',
     // Configs
     'wireable-as-output',
-    'game-config'
+    'circuits-config'
 ],
 function (Terminal, WireableAsOutput, config) {
 

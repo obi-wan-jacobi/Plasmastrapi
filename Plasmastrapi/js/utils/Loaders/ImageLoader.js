@@ -7,17 +7,14 @@ function (Loader, Graphics) {
     function ImageLoader() {
         Loader.call(this);
     };
-    ImageLoader.prototype.download = function (imageMap) {
-        if (!(imageMap instanceof Graphics.ImageMap)) {
-            throw new Error(this.constructor.name + ":download - Argument must be an instance of Graphics.ImageMap");
-        }
-        Loader.prototype.download.call(this, imageMap);
-        for (var j = 0, J = imageMap.length; j < J; j++) {
+    ImageLoader.prototype.download = function (container, images) {
+        Loader.prototype.download.call(this, images);
+        for (var url in images) {
             var image = new Image();
             image.onload = this.__itemFinishedLoading.bind(this);
             image.onerror = this.__itemFinishedLoadingWithError;
-            imageMap[j].target.image = image;
-            image.src = imageMap[j].src;
+            container[/* key name */] = image;
+            image.src = url;
         }
         return this;
     };

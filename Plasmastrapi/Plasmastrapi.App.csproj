@@ -103,14 +103,14 @@
     <Content Include="js\data\Geometry\Pose.js" />
     <Content Include="js\data\Geometry\Position.js" />
     <Content Include="js\data\Geometry\Rectangle.js" />
-    <Content Include="js\data\Geometry\Vector.js" />
+    <Content Include="js\data\Geometry\Vertex.js" />
     <Content Include="js\data\Graphics\Handles\ImageHandle.js" />
     <Content Include="js\data\Graphics\DisplaySettings\LineDisplaySettings.js" />
     <Content Include="js\data\Graphics\DisplaySettings\MeshDisplaySettings.js" />
     <Content Include="js\data\Graphics\Handles\SpriteHandle.js" />
     <Content Include="js\data\Graphics\DisplaySettings\TextDisplaySettings.js" />
     <Content Include="js\data\Physics\Acceleration.js" />
-    <Content Include="js\data\Physics\LineCollisionSettings.js" />
+    <Content Include="LineCollisionSettings.js" />
     <Content Include="js\data\Physics\Velocity.js" />
     <Content Include="js\data\require.config.js" />
     <Content Include="js\engine\Components\CurveComponent.js" />

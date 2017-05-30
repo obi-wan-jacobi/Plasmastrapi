@@ -1,12 +1,9 @@
-﻿define([
-    'graphics',
-    'main-menu-background-panel',
-    'circuit-design-blueprint-panel'
-],
-function (Graphics, MainMenuBackgroundPanel, CircuitDesignBlueprintPanel) {
+﻿define(
+function () {
 
-    return new Graphics.ImageMap(
-        new Graphics.ImageSourcePair(MainMenuBackgroundPanel.prototype, 'img/Backgrounds/blueprint-paper.jpg'),
-        new Graphics.ImageSourcePair(CircuitDesignBlueprintPanel.prototype, 'img/Backgrounds/blueprint-paper.jpg')
-    );
+    var images = {
+        'blueprint-background': 'img/Backgrounds/blueprint-paper.jpg'
+    };
+
+    return images;
 });

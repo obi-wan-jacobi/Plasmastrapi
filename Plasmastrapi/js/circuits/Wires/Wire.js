@@ -14,7 +14,7 @@
     'physics',
     // Configs
     'cuttable',
-    'game-config'
+    'circuits-config'
 ],
     function (WireElement, InputTerminal, OutputTerminal, LineComponent, MeshComponent, PickableComponent, PoseComponent, Graphics, Physics, Cuttable, config) {
 

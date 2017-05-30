@@ -7,7 +7,7 @@
     'sprite-component',
     // Configs
     'wireable-as-input',
-    'game-config'
+    'circuits-config'
 ],
 function (Terminal, OutputTerminal, SpriteComponent, WireableAsInput, config) {
 

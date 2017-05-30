@@ -12,6 +12,15 @@ user experience:
 needs testing:
 - destroy->purge
 
+overhaul:
+- AssetManager to load resources
+- Request resources in circuit/ui classes or upon object instantiation within scenes?
+- Encapsulate object compatibility decorations inside of game/ as an init script?
+- Set background to black
+- Refactor UI such that panel content/child positions are relative to parent (percent-based or position-based)
+	- ViewportSystem to listen for screen resize events?
+- Modal panels (move, stretch, close)
+
 in progress:
 	- UI panels
 	- menu buttons with text labels

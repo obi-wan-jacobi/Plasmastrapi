@@ -9,7 +9,7 @@
     // Data
     'geometry',
     // Configs
-    'game-config'
+    'circuits-config'
 ],
 function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Geometry, config) {
 

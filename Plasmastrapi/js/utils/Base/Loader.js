@@ -31,19 +31,21 @@ define(function() {
 			}
 		}
 	});
-    Loader.prototype.download = function (assetMap) {
+    Loader.prototype.download = function (assets) {
         if (this.__isExecuting) {
             throw new Error(this.constructor.name + ":download - A download is already in progress.");
         }
         this.__isFinishedLoading = false;
         this.__loadCounter = 0;
-        for (var i = 0, L = assetMap.length; i < L; i++) {
-            if (assetMap[i].src instanceof Array) {
-                for (var j = 0, K = assetMap[i].src.length; j < K; j++) {
+        for (var asset in assets) {
+            if (assets.hasOwnProperty(asset)) {
+                if (asset instanceof Array) {
+                    for (var i = 0, L = asset.length; i < L; i++) {
+                        this.__loadTotal++;
+                    }
+                } else {
                     this.__loadTotal++;
                 }
-            } else {
-                this.__loadTotal++;
             }
         }
     };

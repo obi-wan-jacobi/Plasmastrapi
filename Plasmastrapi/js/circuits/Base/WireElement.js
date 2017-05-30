@@ -7,7 +7,7 @@
     // Data
     'graphics',
     // Configs
-    'game-config'
+    'circuits-config'
 ],
 function (Entity, LineComponent, PoseComponent, Graphics, config) {
 

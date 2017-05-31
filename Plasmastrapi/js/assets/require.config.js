@@ -1,4 +1,8 @@
-﻿require.paths = $.extend(require.paths, {
-    'images': './assets/images',
-    'sprites': './assets/sprites'
+﻿require.config({
+    paths: {
+        'images': './assets/Images/images',
+        'sprites': './assets/Sprites/sprites',
+        // Resource container
+        'assets': './assets/assets'
+    }
 });

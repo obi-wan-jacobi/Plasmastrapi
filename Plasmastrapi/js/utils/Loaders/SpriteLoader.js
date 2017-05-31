@@ -1,5 +1,5 @@
-﻿define(['loader', 'graphics'],
-function (Loader, Graphics) {
+﻿define(['loader', 'assets'],
+function (Loader, assets) {
 
     // CLASS SpriteLoader
     SpriteLoader.prototype = Object.create(Loader.prototype);
@@ -8,20 +8,18 @@ function (Loader, Graphics) {
         Loader.call(this);
     };
     SpriteLoader.prototype.download = function (container, sprites) {
-        Loader.prototype.download.call(this, sprites);
-        var fnItemFinishedLoading = this.__itemFinishedLoading.bind(this);
-        var fnItemFinishedLoadingWithError = this.__itemFinishedLoadingWithError;
+        this.__beginDownload(sprites);
         for (var sprite in sprites) {
             if (sprites.hasOwnProperty(sprite)) {
                 var frames = [];
-                container[/* key name */] = new Graphics.Sprite(frames);
                 for (var url in sprite) {
                     var frame = new Image();
-                    frame.onload = fnItemFinishedLoading;
-                    frame.onerror = fnItemFinishedLoadingWithError;
-                    frame.src = url;
+                    frame.onload = this.__itemFinishedLoading.bind(this);
+                    frame.onerror = this.__itemFinishedLoadingWithError;
+                    frame.src = sprite[url];
                     frames.push(frame);
                 }
+                assets.sprites[sprite] = frames;
             }
         }
         return this;

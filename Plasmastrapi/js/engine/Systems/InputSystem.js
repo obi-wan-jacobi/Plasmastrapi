@@ -1,5 +1,5 @@
-define(['system', 'event-queue', 'geometry'],
-function (System, EventQueue, Geometry) {
+define(['system', 'event-queue', 'position'],
+function (System, EventQueue, Position) {
 
 	// CLASS InputSystem
 	InputSystem.prototype = Object.create(System.prototype);
@@ -45,7 +45,7 @@ function (System, EventQueue, Geometry) {
 			mouseX = e.layerX;
 			mouseY = e.layerY;
 		}
-		this.__inputQueue.push('onmousemove', new Geometry.Position(mouseX, mouseY));
+		this.__inputQueue.push('onmousemove', new Position(mouseX, mouseY));
 	};
 	InputSystem.prototype.__domousedown = function(e) {
 		var mouseX, mouseY;
@@ -56,7 +56,7 @@ function (System, EventQueue, Geometry) {
 			mouseX = e.layerX;
 			mouseY = e.layerY;
 		}
-		this.__inputQueue.push('onmousedown', new Geometry.Position(mouseX, mouseY));
+		this.__inputQueue.push('onmousedown', new Position(mouseX, mouseY));
 	};
 	InputSystem.prototype.__domouseup = function(e) {
 		var mouseX, mouseY;
@@ -67,7 +67,7 @@ function (System, EventQueue, Geometry) {
 			mouseX = e.layerX;
 			mouseY = e.layerY;
 		}
-		this.__inputQueue.push('onmouseup', new Geometry.Position(mouseX, mouseY));
+		this.__inputQueue.push('onmouseup', new Position(mouseX, mouseY));
 	};
 	InputSystem.prototype.__doclick = function(e) {
 		var mouseX, mouseY;
@@ -78,7 +78,7 @@ function (System, EventQueue, Geometry) {
 			mouseX = e.layerX;
 			mouseY = e.layerY;
 		}
-		this.__inputQueue.push('onclick', new Geometry.Position(mouseX, mouseY));
+		this.__inputQueue.push('onclick', new Position(mouseX, mouseY));
 	};
 	InputSystem.prototype.__dokeydown = function (e) {
 	    this.__inputQueue.push('onkeydown', e.keyCode);

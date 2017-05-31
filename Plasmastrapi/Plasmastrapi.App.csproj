@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="js\assets\assets.js" />
     <Content Include="js\assets\require.config.js" />
     <Content Include="js\circuits\config.js" />
     <Content Include="js\circuits\require.config.js" />
@@ -110,6 +111,7 @@
     <Content Include="js\data\Graphics\Handles\SpriteHandle.js" />
     <Content Include="js\data\Graphics\DisplaySettings\TextDisplaySettings.js" />
     <Content Include="js\data\Physics\Acceleration.js" />
+    <Content Include="js\ui\require.config.js" />
     <Content Include="LineCollisionSettings.js" />
     <Content Include="js\data\Physics\Velocity.js" />
     <Content Include="js\data\require.config.js" />

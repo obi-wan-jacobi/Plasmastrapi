@@ -1,5 +1,5 @@
-define(['component', 'geometry'],
-function (Component, Geometry) {
+define(['component', 'position'],
+function (Component, Position) {
 
 	// CLASS PoseComponent
 	PoseComponent.prototype = Object.create(Component.prototype);
@@ -23,8 +23,8 @@ function (Component, Geometry) {
 				return this.__position;
 			},
 			set: function(newPosition) {
-				if (!(newPosition instanceof Geometry.Position)) {
-					throw new Error(this.constructor.name + ':position set - ' + newPosition + ' is not an instance of Geometry.Position.');
+				if (!(newPosition instanceof Position)) {
+					throw new Error(this.constructor.name + ':position set - ' + newPosition + ' is not an instance of Position.');
 				}
 				var oldPosition = this.__position;
 				this.__position = newPosition;

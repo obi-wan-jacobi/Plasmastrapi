@@ -26,17 +26,22 @@
         <script>
             var require = {
                 baseUrl: 'js/',
-                path: {}
+                path: {},
+                deps: [
+                    'data/require.config',
+                    'assets/require.config',
+                    'utils/require.config',
+                    'engine/require.config',
+                    'circuits/require.config',
+                    'ui/require.config',
+                    'game/require.config'
+                ],
+                callback: function () {
+                    require(['app/main']);
+                }
             };
         </script>
-        <script src="js/data/require.config.js"></script>
-        <script src="js/assets/require.config.js"></script>
-        <script src="js/utils/require.config.js"></script>
-        <script src="js/engine/require.config.js"></script>
-        <script src="js/circuits/require.config.js"></script>
-        <script src="js/ui/require.config.js"></script>
-        <script src="js/game/require.config.js"></script>
-        <script data-main="main.js" src="Scripts/require.js"></script>
+        <script src="Scripts/require.js"></script>
 
 	    <title>Game</title>
 

@@ -1,5 +1,5 @@
-define(['component', 'geometry', 'pose-component', 'engine-config'],
-function (Component, Geometry, PoseComponent, config) {
+define(['component', 'position', 'pose-component', 'engine-config'],
+function (Component, Position, PoseComponent, config) {
 
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
@@ -92,12 +92,12 @@ function (Component, Geometry, PoseComponent, config) {
 				return this.__mesh;
 			},
 			set: function(mesh) {
-				if (!(mesh instanceof Geometry.Mesh)) {
-					throw new Error(this.constructor.name + ':mesh set - ' + mesh + ' is not an instance of Geometry.Mesh.');
+				if (!(mesh instanceof Mesh)) {
+					throw new Error(this.constructor.name + ':mesh set - ' + mesh + ' is not an instance of Mesh.');
 				}
 				this.__mesh = mesh;
 				var poseComponent = this.__entity.getComponent(PoseComponent);
-				this.__translate(poseComponent.position, new Geometry.Position(0, 0));
+				this.__translate(poseComponent.position, new Position(0, 0));
 				this.__rotate(poseComponent.orientation);
 			}
 		},

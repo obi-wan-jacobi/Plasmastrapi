@@ -14,12 +14,13 @@ needs testing:
 
 overhaul:
 - AssetManager to load resources
+- Refactor asset loaders
 - Request resources in circuit/ui classes or upon object instantiation within scenes?
 - Encapsulate object compatibility decorations inside of game/ as an init script?
-- Set background to black
 - Refactor UI such that panel content/child positions are relative to parent (percent-based or position-based)
 	- ViewportSystem to listen for screen resize events?
 - Modal panels (move, stretch, close)
+- Set background to black
 
 in progress:
 	- UI panels

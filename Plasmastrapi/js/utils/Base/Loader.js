@@ -31,7 +31,7 @@ define(function() {
 			}
 		}
 	});
-    Loader.prototype.download = function (assets) {
+    Loader.prototype.__beginDownload = function (assets) {
         if (this.__isExecuting) {
             throw new Error(this.constructor.name + ":download - A download is already in progress.");
         }

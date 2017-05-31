@@ -5,12 +5,12 @@
     'pickable-component',
     'pose-component',
     // Data
-    'geometry',
+    'position',
     // Configs
     'design-zone',
     'destruction-zone'
 ],
-function (Tool, PickableComponent, PoseComponent, Geometry, DesignZone, DestructionZone) {
+function (Tool, PickableComponent, PoseComponent, Position, DesignZone, DestructionZone) {
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
@@ -21,7 +21,7 @@ function (Tool, PickableComponent, PoseComponent, Geometry, DesignZone, Destruct
         this.__previousCursorPosition = null;
     };
     PlacingTool.prototype.__onequip = function (entity, fnShiftKeyMouseUp, x, y) {
-        this.__previousCursorPosition = new Geometry.Position(x, y);
+        this.__previousCursorPosition = new Position(x, y);
         this.__equippedEntity = entity;
         this.__fnShiftKeyMouseUp = fnShiftKeyMouseUp;
         this.setCompatibilityFilter(DestructionZone, DesignZone);
@@ -29,7 +29,7 @@ function (Tool, PickableComponent, PoseComponent, Geometry, DesignZone, Destruct
     PlacingTool.prototype.__onmousemove = function (cursor) {
         var poseComponent = this.__equippedEntity.getComponent(PoseComponent)
         var position = poseComponent.position;
-        poseComponent.position = new Geometry.Position(
+        poseComponent.position = new Position(
 			position.x + (cursor.x - this.__previousCursorPosition.x),
 			position.y + (cursor.y - this.__previousCursorPosition.y)
 		);

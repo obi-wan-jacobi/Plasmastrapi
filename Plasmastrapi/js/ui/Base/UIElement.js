@@ -6,7 +6,7 @@
     'pickable-component',
     'pose-component',
     // Data
-    'geometry',
+    'position',
 ],
 function (Entity, MeshComponent, PickableComponent, PoseComponent, Geometry) {
 
@@ -17,7 +17,7 @@ function (Entity, MeshComponent, PickableComponent, PoseComponent, Geometry) {
         Entity.call(this);
 
         // pose
-        var position = new Geometry.Position(x, y);
+        var position = new Position(x, y);
         var poseComponent = new PoseComponent(position, 0);
 
         // configure image as collision mesh

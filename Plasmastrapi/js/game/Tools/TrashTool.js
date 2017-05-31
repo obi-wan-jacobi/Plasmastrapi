@@ -6,13 +6,13 @@
     // Objects
     'trash-tool-cursor',
     // Data
-    'geometry',
+    'position',
     // Configs
     'design-zone',
     'trashable',
     'game-config'
 ],
-function (Tool, SelectionBox, TrashToolCursor, Geometry, DesignZone, Trashable, config) {
+function (Tool, SelectionBox, TrashToolCursor, Position, DesignZone, Trashable, config) {
 
     TrashTool.prototype = Object.create(Tool.prototype);
     TrashTool.prototype.constructor = TrashTool;
@@ -47,7 +47,7 @@ function (Tool, SelectionBox, TrashToolCursor, Geometry, DesignZone, Trashable, 
             config.TrashTool.beforeSelectionBounds.width,
             config.TrashTool.beforeSelectionBounds.height
         );
-        this.__anchor = new Geometry.Position(cursor.x, cursor.y);
+        this.__anchor = new Position(cursor.x, cursor.y);
         for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
             this.__beforeSelectionBounds.vertices[i].x += cursor.x;
             this.__beforeSelectionBounds.vertices[i].y += cursor.y;

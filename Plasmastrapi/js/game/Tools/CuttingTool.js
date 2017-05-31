@@ -5,14 +5,14 @@
     'cutting-tool-cursor',
     'curve',
     // Data
-    'geometry',
-    'graphics',
+    'position',
+    'line-display-options',
     // Configs
     'cuttable',
     'design-zone',
     'game-config'
 ],
-function (Tool, CuttingToolCursor, Curve, Geometry, Graphics, Cuttable, DesignZone, config) {
+function (Tool, CuttingToolCursor, Curve, Position, LineDisplayOptions, Cuttable, DesignZone, config) {
 
     CuttingTool.prototype = Object.create(Tool.prototype);
     CuttingTool.prototype.constructor = CuttingTool;
@@ -37,8 +37,8 @@ function (Tool, CuttingToolCursor, Curve, Geometry, Graphics, Cuttable, DesignZo
                 cursor.y < this.__beforeCuttingBounds.vertices[3].y
             )) {
                 this.__cuttingCurve = new Curve(
-                    new Geometry.Position(cursor.x, cursor.y),
-                    new Graphics.LineDisplayOptions(
+                    new Position(cursor.x, cursor.y),
+                    new LineDisplayOptions(
                         config.CuttingTool.curveDisplayLayer,
                         config.CuttingTool.curveDisplayColour,
                         config.CuttingTool.curveLineThickness
@@ -47,13 +47,13 @@ function (Tool, CuttingToolCursor, Curve, Geometry, Graphics, Cuttable, DesignZo
                 this.__engine.sceneController.addToCurrentScene(this.__cuttingCurve);
             }
         } else if (this.__cuttingCurve) {
-            this.__cuttingCurve.lineTo(new Geometry.Position(cursor.x, cursor.y));
+            this.__cuttingCurve.lineTo(new Position(cursor.x, cursor.y));
         }
     };
     CuttingTool.prototype.__onmousedown = function (cursor) {
         Tool.prototype.__onmousedown.call(this, cursor);
         if (!this.__anchor) {
-            this.__anchor = new Geometry.Position(cursor.x, cursor.y);
+            this.__anchor = new Position(cursor.x, cursor.y);
             for (var i = 0, L = this.__beforeCuttingBounds.vertices.length; i < L; i++) {
                 this.__beforeCuttingBounds.vertices[i].x += cursor.x;
                 this.__beforeCuttingBounds.vertices[i].y += cursor.y;

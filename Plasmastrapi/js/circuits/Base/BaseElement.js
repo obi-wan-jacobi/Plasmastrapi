@@ -7,14 +7,14 @@
     'pose-component',
     'sprite-component',
     // Data
-    'geometry',
-    'graphics',
+    'position',
+    'sprite-handle',
     // Configs
     'draggable',
     'pickable',
     'circuits-config'
 ],
-function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Geometry, Graphics, Draggable, Pickable, config) {
+function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Position, SpriteHandle, Draggable, Pickable, config) {
 
     // CLASS BaseElement
     BaseElement.prototype = Object.create(Entity.prototype);
@@ -24,11 +24,11 @@ function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteCompone
         Entity.call(this);
 
         // pose
-        var position = new Geometry.Position(x, y);
+        var position = new Position(x, y);
         var poseComponent = new PoseComponent(position, 0);
 
         // sprite
-        var spriteHandle = new Graphics.SpriteHandle(config.BaseElement.spriteHandleDisplayLayer, this.sprite);
+        var spriteHandle = new SpriteHandle(config.BaseElement.spriteHandleDisplayLayer, this.sprite);
         var spriteComponent = new SpriteComponent(spriteHandle);
 
         // configure sprite as collision mesh

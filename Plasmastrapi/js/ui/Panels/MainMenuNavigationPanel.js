@@ -4,12 +4,12 @@
     // UI
     'menu-button',
     // Data
-    'graphics',
+    'mesh-display-options',
     // Configs
     '',
     'game-config'
 ],
-function (Rectangle, MenuButton, Graphics, Compatibility, config) {
+function (Rectangle, MenuButton, MeshDisplayOptions, Compatibility, config) {
 
     // CLASS MainMenuBackgroundPanel
     MainMenuNavigationPanel.prototype = Object.create(Rectangle.prototype);
@@ -22,7 +22,7 @@ function (Rectangle, MenuButton, Graphics, Compatibility, config) {
             config.MainMenuNavigationPanel.y,
             config.MainMenuNavigationPanel.width,
             config.MainMenuNavigationPanel.height,
-            new Graphics.MeshDisplayOptions(
+            new MeshDisplayOptions(
                 config.MainMenuNavigationPanel.displayLayer,
                 config.MainMenuNavigationPanel.strokeStyle,
                 config.MainMenuNavigationPanel.fillStyle,

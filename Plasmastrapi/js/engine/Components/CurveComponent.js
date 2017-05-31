@@ -1,12 +1,12 @@
-﻿define(['component', 'geometry', 'physics'],
-function (Component, Geometry, Physics) {
+﻿define(['component', 'position', 'physics'],
+function (Component, Position, Physics) {
 
     // CLASS CurveComponent
     CurveComponent.prototype = Object.create(Component.prototype);
     CurveComponent.prototype.constructor = CurveComponent;
     function CurveComponent(startPosition, lineDisplayOptions) {
-        if (!(startPosition instanceof Geometry.Position)) {
-            throw new Error(this.constructor.name + ':constructor - Starting position must be an instance of Geometry.Position!');
+        if (!(startPosition instanceof Position)) {
+            throw new Error(this.constructor.name + ':constructor - Starting position must be an instance of Position!');
         }
         // inherits from
         Component.call(this);
@@ -18,8 +18,8 @@ function (Component, Geometry, Physics) {
     };
     // public methods
     CurveComponent.prototype.lineTo = function (position) {
-        if (!(position instanceof Geometry.Position)) {
-            throw new Error(this.constructor.name + ':lineTo - Position must be an instance of Geometry.Position!');
+        if (!(position instanceof Position)) {
+            throw new Error(this.constructor.name + ':lineTo - Position must be an instance of Position!');
         }
         this.__positions.push(position);
     };

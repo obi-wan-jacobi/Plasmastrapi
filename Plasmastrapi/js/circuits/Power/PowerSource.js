@@ -9,7 +9,7 @@
     // Components
     'sprite-component',
     // Data
-    'geometry',
+    'position',
 ],
     function (CircuitElement, InputTerminal, OutputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Geometry) {
 
@@ -25,8 +25,8 @@
         var spriteComponent = this.getComponent(SpriteComponent);
 
         // output terminal
-        this.outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMargin), this);
-        var outputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, -spriteComponent.height / 2), this);
+        this.outputTerminal = new OutputTerminal(new Position(0, -terminalOffsetMargin), this);
+        var outputTerminalAnchor = new TerminalWireAnchor(new Position(0, -spriteComponent.height / 2), this);
         var outputTerminalWire = new TerminalWire(this.outputTerminal, outputTerminalAnchor);
 
         // initialize high

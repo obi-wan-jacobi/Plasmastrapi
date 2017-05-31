@@ -6,13 +6,16 @@
     // Components
     'image-component',
     // Data
-    'geometry',
-    'graphics',
+    'mesh',
+    'position',
+    'rectangle',
+    'image-handle',
+    'text-label-display-options',
     // Configs
     'draggable',
     'game-config'
 ],
-function (Button, LabelledDecorator, ImageComponent, Geometry, Graphics, Draggable, config) {
+function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, ImageHandle, TextLabelDisplayOptions, Draggable, config) {
 
     // CLASS ToolButton
     ToolButton.prototype = Object.create(Button.prototype);
@@ -40,7 +43,7 @@ function (Button, LabelledDecorator, ImageComponent, Geometry, Graphics, Draggab
         // configure label
         var textLabelDisplayOptions = new Graphics.TextLabelDisplayOptions(
             config.ToolButton.textLabelDisplayLayer,
-            new Geometry.Position(0, imageHandle.image.height + config.ToolButton.textLabelOffsetBufferY),
+            new Position(0, imageHandle.image.height + config.ToolButton.textLabelOffsetBufferY),
             labelText
         );
 

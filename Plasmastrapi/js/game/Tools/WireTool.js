@@ -9,14 +9,14 @@
     'pickable-component',
     'pose-component',
     // Data
-    'geometry',
+    'position',
     // Configs
     'design-zone',
     'destruction-zone',
     'wireable-as-input',
     'wireable-as-output',
 ],
-function (Tool, TerminalHandle, ToolWire, Wire, PickableComponent, PoseComponent, Geometry, DesignZone, DestructionZone, WireableAsInput, WireableAsOutput) {
+function (Tool, TerminalHandle, ToolWire, Wire, PickableComponent, PoseComponent, Position, DesignZone, DestructionZone, WireableAsInput, WireableAsOutput) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
@@ -73,7 +73,7 @@ function (Tool, TerminalHandle, ToolWire, Wire, PickableComponent, PoseComponent
         else {
             // move tool handle
             var poseComponent = this.__terminalHandle.getComponent(PoseComponent)
-            poseComponent.position = new Geometry.Position(
+            poseComponent.position = new Position(
                 cursor.x,
                 cursor.y
             );

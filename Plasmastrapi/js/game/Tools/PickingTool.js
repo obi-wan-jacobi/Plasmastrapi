@@ -6,8 +6,7 @@
     // Components
     'pickable-component',
     // Data
-    'geometry',
-    'graphics',
+    'position',
     // Configs
     'design-zone',
     'draggable',
@@ -16,7 +15,7 @@
     'placeable',
     'game-config'
 ],
-    function (Tool, SelectionBox, PickableComponent, Geometry, Graphics, DesignZone, Draggable, Filter, Pickable, Placeable, config) {
+    function (Tool, SelectionBox, PickableComponent, Position, DesignZone, Draggable, Filter, Pickable, Placeable, config) {
 
     PickingTool.prototype = Object.create(Tool.prototype);
     PickingTool.prototype.constructor = PickingTool;
@@ -79,7 +78,7 @@
             config.PickingTool.beforeSelectionBounds.width,
             config.PickingTool.beforeSelectionBounds.height
         );
-        this.__selectionAnchor = new Geometry.Position(cursor.x, cursor.y);
+        this.__selectionAnchor = new Position(cursor.x, cursor.y);
         for (var i = 0, L = this.__beforeSelectionBounds.vertices.length; i < L; i++) {
             this.__beforeSelectionBounds.vertices[i].x += cursor.x;
             this.__beforeSelectionBounds.vertices[i].y += cursor.y;

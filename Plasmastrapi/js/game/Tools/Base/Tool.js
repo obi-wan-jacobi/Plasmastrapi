@@ -5,13 +5,13 @@
     'pose-component',
     'sprite-component',
     // Data
-    'geometry',
+    'position',
     // Compatibility
     'filter',
     // Configs
     'game-config'
 ],
-function (InputHandle, PoseComponent, SpriteComponent, Geometry, Filter, config) {
+function (InputHandle, PoseComponent, SpriteComponent, Position, Filter, config) {
 
     Tool.prototype = Object.create(InputHandle.prototype);
     Tool.prototype.constructor = Tool;
@@ -78,7 +78,7 @@ function (InputHandle, PoseComponent, SpriteComponent, Geometry, Filter, config)
         if (this.__cursor) {
             this.__cursor.load(false);
             var poseComponent = this.__cursor.getComponent(PoseComponent);
-            poseComponent.position = new Geometry.Position(
+            poseComponent.position = new Position(
                 arguments[arguments.length - 2] + this.__cursorOffsetX,
                 arguments[arguments.length - 1] + this.__cursorOffsetY
             );

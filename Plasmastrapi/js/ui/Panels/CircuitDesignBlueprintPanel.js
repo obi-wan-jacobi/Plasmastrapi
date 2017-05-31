@@ -2,18 +2,18 @@
     // Base
     'image-panel',
     // Data
-    'graphics',
+    'image-handle',
     // Configs
     'design-zone',
     'game-config'
 ],
-function (ImagePanel, Graphics, DesignZone, config) {
+function (ImagePanel, ImageHandle, DesignZone, config) {
 
     // CLASS CircuitDesignBlueprintPanel
     CircuitDesignBlueprintPanel.prototype = Object.create(ImagePanel.prototype);
     CircuitDesignBlueprintPanel.prototype.constructor = CircuitDesignBlueprintPanel;
     function CircuitDesignBlueprintPanel(x, y, width, height) {
-        var imageHandle = new Graphics.ImageHandle(
+        var imageHandle = new ImageHandle(
             config.CircuitDesignBlueprintPanel.displayLayer,
             x,
             y,

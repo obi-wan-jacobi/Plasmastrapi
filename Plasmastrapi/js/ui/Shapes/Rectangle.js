@@ -2,7 +2,7 @@
     // Base
     'ui-element',
     // Data
-    'geometry'
+    'position'
 ],
 function (UIElement, Geometry) {
 

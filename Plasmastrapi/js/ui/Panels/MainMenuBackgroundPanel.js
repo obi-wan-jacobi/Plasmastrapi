@@ -2,18 +2,18 @@
     // Base
     'image-panel',
     // Data
-    'graphics',
+    'image-handle',
     // Configs
     'game-config'
 ],
-function (ImagePanel, Graphics, config) {
+function (ImagePanel, ImageHandle, config) {
 
     // CLASS MainMenuBackgroundPanel
     MainMenuBackgroundPanel.prototype = Object.create(ImagePanel.prototype);
     MainMenuBackgroundPanel.prototype.constructor = MainMenuBackgroundPanel;
     function MainMenuBackgroundPanel() {
         var x = this.image.width / 2, y = this.image.height / 2;
-        var imageHandle = new Graphics.ImageHandle(
+        var imageHandle = new ImageHandle(
             config.MainMenuBackgroundPanel.displayLayer,
             x,
             y,

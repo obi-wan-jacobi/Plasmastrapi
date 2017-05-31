@@ -1,5 +1,5 @@
-define(['component', 'geometry', 'physics'],
-function (Component, Geometry, Physics) {
+define(['component', 'position', 'physics'],
+function (Component, Position, Physics) {
 
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
@@ -41,7 +41,7 @@ function (Component, Geometry, Physics) {
 				var tail = this.__tailPose.position;
 				var x = Math.abs(head.x + tail.x)/2;
 				var y = Math.abs(head.y + tail.y)/2;
-				return new Geometry.Position(x, y);
+				return new Position(x, y);
 			}
 		},
 		'orientation': { // heading from tail to head

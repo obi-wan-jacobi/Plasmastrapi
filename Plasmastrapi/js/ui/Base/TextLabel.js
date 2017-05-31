@@ -5,7 +5,7 @@
     'pose-component',
     'text-label-component',
     // Data
-    'geometry'
+    'position'
 ],
 function (Entity, PoseComponent, TextLabelComponent, Geometry) {
 
@@ -16,7 +16,7 @@ function (Entity, PoseComponent, TextLabelComponent, Geometry) {
         Entity.call(this);
 
         // pose
-        var poseComponent = new PoseComponent(new Geometry.Position(0, 0), 0);
+        var poseComponent = new PoseComponent(new Position(0, 0), 0);
 
         var textLabelComponent = new TextLabelComponent(textLabelDisplayOptions);
         
@@ -42,7 +42,7 @@ function (Entity, PoseComponent, TextLabelComponent, Geometry) {
         var x = offsetX + newPosition.x;
         var y = offsetY + newPosition.y;
         var poseComponent = this.getComponent(PoseComponent);
-        poseComponent.position = new Geometry.Position(x, y);
+        poseComponent.position = new Position(x, y);
     };
 
     return TextLabel;

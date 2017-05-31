@@ -4,7 +4,7 @@
     // Components
     'pose-component',
     // Data
-    'geometry'
+    'position'
 ],
 function (Entity, PoseComponent, Geometry) {
 
@@ -13,7 +13,7 @@ function (Entity, PoseComponent, Geometry) {
     TerminalHandle.prototype.constructor = TerminalHandle;
     function TerminalHandle(x, y) {
         Entity.call(this);
-        var poseComponent = new PoseComponent(new Geometry.Position(x, y), 0);
+        var poseComponent = new PoseComponent(new Position(x, y), 0);
         this.addComponent(poseComponent);
     };
 

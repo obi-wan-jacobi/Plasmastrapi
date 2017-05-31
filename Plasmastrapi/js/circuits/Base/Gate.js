@@ -9,11 +9,11 @@
     // Components
     'sprite-component',
     // Data
-    'geometry',
+    'position',
     // Configs
     'circuits-config'
 ],
-    function (CircuitElement, InputTerminal, OutputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Geometry, config) {
+    function (CircuitElement, InputTerminal, OutputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Position, config) {
 
     // CLASS Gate
     Gate.prototype = Object.create(CircuitElement.prototype);
@@ -27,13 +27,13 @@
         var spriteComponent = this.getComponent(SpriteComponent);
 
         // output terminal
-        this.outputTerminal = new OutputTerminal(new Geometry.Position(0, -terminalOffsetMarginY), this);
-        var outputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, -spriteComponent.height / 2), this);
+        this.outputTerminal = new OutputTerminal(new Position(0, -terminalOffsetMarginY), this);
+        var outputTerminalAnchor = new TerminalWireAnchor(new Position(0, -spriteComponent.height / 2), this);
         var outputTerminalWire = new TerminalWire(this.outputTerminal, outputTerminalAnchor);
 
         // input terminal
-        this.inputTerminal = new InputTerminal(new Geometry.Position(0, terminalOffsetMarginY), this);
-        var inputTerminalAnchor = new TerminalWireAnchor(new Geometry.Position(0, spriteComponent.height / 2), this);
+        this.inputTerminal = new InputTerminal(new Position(0, terminalOffsetMarginY), this);
+        var inputTerminalAnchor = new TerminalWireAnchor(new Position(0, spriteComponent.height / 2), this);
         var inputTerminalWire = new TerminalWire(this.inputTerminal, inputTerminalAnchor);
     };
     

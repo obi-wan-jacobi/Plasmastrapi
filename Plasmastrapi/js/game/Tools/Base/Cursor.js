@@ -4,12 +4,12 @@
     // Components
     'pose-component', 'sprite-component',
     // Data
-    'geometry',
-    'graphics',
+    'position',
+    'sprite-handle',
     // Configs
     'game-config'
 ],
-function (Entity, PoseComponent, SpriteComponent, Geometry, Graphics, config) {
+function (Entity, PoseComponent, SpriteComponent, Position, SpriteHandle, config) {
 
     // CLASS Cursor
     Cursor.prototype = Object.create(Entity.prototype);
@@ -22,11 +22,11 @@ function (Entity, PoseComponent, SpriteComponent, Geometry, Graphics, config) {
         this.__offsetY = offsetY;
 
         // initialize pose to be off-screen
-        var position = new Geometry.Position(-offsetX - this.sprite.frames[0].width, -offsetY - this.sprite.frames[0].height);
+        var position = new Position(-offsetX - this.sprite.frames[0].width, -offsetY - this.sprite.frames[0].height);
         var poseComponent = new PoseComponent(position, 0);
 
         // sprite
-        var spriteHandle = new Graphics.SpriteHandle(config.Cursor.displayLayer, this.sprite);
+        var spriteHandle = new SpriteHandle(config.Cursor.displayLayer, this.sprite);
         var spriteComponent = new SpriteComponent(spriteHandle);
 
         // compose entity
@@ -73,7 +73,7 @@ function (Entity, PoseComponent, SpriteComponent, Geometry, Graphics, config) {
     };
     Cursor.prototype.__onmousemove = function (cursor) {
         var poseComponent = this.getComponent(PoseComponent);
-        poseComponent.position = new Geometry.Position(cursor.x + this.__offsetX, cursor.y + this.__offsetY);
+        poseComponent.position = new Position(cursor.x + this.__offsetX, cursor.y + this.__offsetY);
     };
 
     return Cursor;

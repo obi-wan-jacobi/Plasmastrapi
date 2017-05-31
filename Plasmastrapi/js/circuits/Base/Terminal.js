@@ -7,11 +7,11 @@
     'pose-component',
     'sprite-component',
     // Data
-    'geometry',
+    'position',
     // Configs
     'circuits-config'
 ],
-function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Geometry, config) {
+function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Position, config) {
 
     // CLASS Terminal
     Terminal.prototype = Object.create(BaseElement.prototype);
@@ -28,7 +28,7 @@ function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteCo
 
         // pose
         var parentElementPose = this.__parent.getComponent(PoseComponent);
-        var poseComponent = new PoseComponent(new Geometry.Position(0, 0), 0);
+        var poseComponent = new PoseComponent(new Position(0, 0), 0);
 
         // configure parentElement position following
         parentElementPose.addEventListener('onpositionchange', this, this.__setPoseRelativeToParentElement);
@@ -60,7 +60,7 @@ function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteCo
         var x = templateX * Math.cos(orientation) - templateY * Math.sin(orientation) + position.x;
         var y = templateX * Math.sin(orientation) + templateY * Math.cos(orientation) + position.y;
         var poseComponent = this.getComponent(PoseComponent);
-        poseComponent.position = new Geometry.Position(x, y);
+        poseComponent.position = new Position(x, y);
         poseComponent.orientation = orientation;
     };
     Terminal.prototype.__onpick = function () {

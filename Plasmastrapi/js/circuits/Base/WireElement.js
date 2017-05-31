@@ -5,11 +5,11 @@
     'line-component',
     'pose-component',
     // Data
-    'graphics',
+    'line-display-options',
     // Configs
     'circuits-config'
 ],
-function (Entity, LineComponent, PoseComponent, Graphics, config) {
+function (Entity, LineComponent, PoseComponent, LineDisplayOptions, config) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);

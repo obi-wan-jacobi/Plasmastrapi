@@ -1,5 +1,5 @@
-define(['component', 'geometry', 'pose-component'],
-function (Component, Geometry, PoseComponent) {
+define(['component', 'position', 'pose-component'],
+function (Component, Position, PoseComponent) {
     
 	// CLASS ImageComponent
 	ImageComponent.prototype = Object.create(Component.prototype);

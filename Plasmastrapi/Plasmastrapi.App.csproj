@@ -190,7 +190,6 @@
     <Content Include="js\ui\Panels\MainMenuBackgroundPanel.js" />
     <Content Include="js\ui\Panels\MainMenuNavigationPanel.js" />
     <Content Include="js\ui\Lines\Curve.js" />
-    <Content Include="js\ui\Shapes\Rectangle.js" />
     <Content Include="js\utils\require.config.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -283,6 +282,7 @@
   <ItemGroup>
     <Folder Include="js\circuits\FlipFlops\" />
     <Folder Include="js\circuits\Switches\" />
+    <Folder Include="js\ui\Shapes\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -10,14 +10,13 @@
     'pickable-component',
     'pose-component',
     // Data
-    'line-display-options',
-    'mesh-display-options',
-    'physics',
+    'line-display-settings',
+    'mesh-display-settings',
     // Configs
     'cuttable',
     'circuits-config'
 ],
-    function (WireElement, InputTerminal, OutputTerminal, LineComponent, MeshComponent, PickableComponent, PoseComponent, LineDisplayOptions, MeshDisplayOptions, Physics, Cuttable, config) {
+    function (WireElement, InputTerminal, OutputTerminal, LineComponent, MeshComponent, PickableComponent, PoseComponent, LineDisplaySettings, MeshDisplaySettings, Cuttable, config) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
@@ -32,17 +31,13 @@
 
         // configure components
         var lineComponent = this.getComponent(LineComponent);
-        lineComponent.collisionOptions = new Physics.LineCollisionOptions(
-            config.Wire.collisionWidth,
-            config.Wire.collisionLengthModifier
-        );
         lineComponent.addEventListener('onpositionchange', this, this.__updateMeshComponent);
         lineComponent.addEventListener('onorientationchange', this, this.__updateMeshComponent);
 
         var poseComponent = new PoseComponent(lineComponent.position, lineComponent.orientation);
 
-        var meshDisplayOptions = new MeshDisplayOptions(config.Wire.displayLayer);
-        var meshComponent = new MeshComponent(lineComponent.mesh, meshDisplayOptions);
+        var MeshDisplaySettings = new MeshDisplaySettings(config.Wire.displayLayer);
+        var meshComponent = new MeshComponent(lineComponent.mesh, MeshDisplaySettings);
 
         var pickableComponent = new PickableComponent();
         pickableComponent.addEventListener('onmouseenter', this, this.__onmouseenter);
@@ -72,11 +67,11 @@
         var displayLayer = config.Wire.displayLayer;
         var lineWidth = config.Wire.poweredLineWidth;
         if (!this.outputTerminal.isPowered) {
-            lineComponent.displayOptions = new LineDisplayOptions(displayLayer, config.Wire.noPowerLineColour, lineWidth);
+            lineComponent.displayOptions = new LineDisplaySettings(displayLayer, config.Wire.noPowerLineColour, lineWidth);
         } else if (this.outputTerminal.isHigh) {
-            lineComponent.displayOptions = new LineDisplayOptions(displayLayer, config.Wire.highLineColour, lineWidth);
+            lineComponent.displayOptions = new LineDisplaySettings(displayLayer, config.Wire.highLineColour, lineWidth);
         } else if (this.outputTerminal.isLow) {
-            lineComponent.displayOptions = new LineDisplayOptions(displayLayer, config.Wire.lowLineColour, lineWidth);
+            lineComponent.displayOptions = new LineDisplaySettings(displayLayer, config.Wire.lowLineColour, lineWidth);
         }
     };
     Wire.prototype.__updateMeshComponent = function () {
@@ -92,14 +87,14 @@
         this.__engine.wireContainer.remove(this);
     };
     Wire.prototype.__onmouseenter = function () {
-        var meshDisplayOptions = new MeshDisplayOptions(config.Wire.displayLayer, config.Wire.cuttingHoverColour);
+        var MeshDisplaySettings = new MeshDisplaySettings(config.Wire.displayLayer, config.Wire.cuttingHoverColour);
         var meshComponent = this.getComponent(MeshComponent);
-        meshComponent.displayOptions = meshDisplayOptions;
+        meshComponent.displayOptions = MeshDisplaySettings;
     };
     Wire.prototype.__onmouseleave = function () {
-        var meshDisplayOptions = new MeshDisplayOptions(config.Wire.displayLayer);
+        var MeshDisplaySettings = new MeshDisplaySettings(config.Wire.displayLayer);
         var meshComponent = this.getComponent(MeshComponent);
-        meshComponent.displayOptions = meshDisplayOptions;
+        meshComponent.displayOptions = MeshDisplaySettings;
     };
     // public methods
     Wire.prototype.injectEngine = function (engine) {

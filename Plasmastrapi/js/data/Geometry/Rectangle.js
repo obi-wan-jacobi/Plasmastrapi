@@ -1,4 +1,4 @@
-﻿define(['mesh', 'position'], function (Mesh, Postion) {
+﻿define(['mesh', 'position'], function (Mesh, Position) {
 
     function Rectangle(width, height) {
         Mesh.call(this, [

@@ -8,11 +8,11 @@
     // Data
     'position',
 ],
-function (Entity, MeshComponent, PickableComponent, PoseComponent, Geometry) {
+function (Entity, MeshComponent, PickableComponent, PoseComponent, Position) {
 
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;
-    function UIElement(x, y, mesh, meshDisplayOptions) {
+    function UIElement(x, y, mesh, MeshDisplaySettings) {
         // inherits from
         Entity.call(this);
 
@@ -21,7 +21,7 @@ function (Entity, MeshComponent, PickableComponent, PoseComponent, Geometry) {
         var poseComponent = new PoseComponent(position, 0);
 
         // configure image as collision mesh
-        var meshComponent = new MeshComponent(mesh, meshDisplayOptions);
+        var meshComponent = new MeshComponent(mesh, MeshDisplaySettings);
 
         // entity is pickable
         var pickableComponent = new PickableComponent();

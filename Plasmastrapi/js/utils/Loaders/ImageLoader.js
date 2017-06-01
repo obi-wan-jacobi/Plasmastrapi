@@ -7,7 +7,7 @@ function (Loader, assets) {
     function ImageLoader() {
         Loader.call(this);
     };
-    ImageLoader.prototype.download = function (container, images) {
+    ImageLoader.prototype.download = function (images) {
         this.__beginDownload(images);
         for (var img in images) {
             var image = new Image();

@@ -11,9 +11,9 @@ function (UIElement, PickableComponent, Pickable) {
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
     Button.prototype.constructor = Button;
-    function Button(x, y, mesh, meshDisplayOptions, callee, fnOnPick) {
+    function Button(x, y, mesh, MeshDisplaySettings, callee, fnOnPick) {
         // inherits from
-        UIElement.call(this, x, y, mesh, meshDisplayOptions);
+        UIElement.call(this, x, y, mesh, MeshDisplaySettings);
 
         // configure click action
         var pickableComponent = this.getComponent(PickableComponent);

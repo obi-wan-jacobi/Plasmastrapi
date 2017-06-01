@@ -10,13 +10,13 @@
     'mesh',
     'position',
     'rectangle',
-    'mesh-display-options',
+    'mesh-display-settings',
     // Configs
     'draggable',
     'pickable',
     'game-config'
 ],
-function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Mesh, Position, Rectangle, MeshDisplayOptions, Draggable, Pickable, config) {
+function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Mesh, Position, Rectangle, MeshDisplaySettings, Draggable, Pickable, config) {
 
     SelectionBox.prototype = Object.create(Entity.prototype);
     SelectionBox.prototype.constructor = SelectionBox;
@@ -31,13 +31,13 @@ function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteCompone
         var poseComponent = new PoseComponent(new Position(0, 0), 0);
         poseComponent.addEventListener('onpositionchange', this, this.__onpositionchange);
 
-        var meshDisplayOptions = new MeshDisplayOptions(config.SelectionBox.displayLayer);
+        var MeshDisplaySettings = new MeshDisplaySettings(config.SelectionBox.displayLayer);
         var rectangle = new Rectangle(
             Math.abs(this.__startPosition.x - this.__endPosition.x),
             Math.abs(this.__startPosition.y - this.__endPosition.y)
         );
         var mesh = new Mesh(rectangle);
-        var meshComponent = new MeshComponent(mesh, meshDisplayOptions);
+        var meshComponent = new MeshComponent(mesh, MeshDisplaySettings);
 
         var pickableComponent = new PickableComponent();
         pickableComponent.addEventListener('onpick', this, this.__onpick);

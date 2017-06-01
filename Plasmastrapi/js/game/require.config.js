@@ -31,23 +31,6 @@
         'placing-tool': './game/Tools/PlacingTool',
         'trash-tool': './game/Tools/TrashTool',
         'wire-tool': './game/Tools/WireTool',
-        // UI
-        'button': './game/UI/Base/Button',
-        'image-panel': './game/UI/Base/ImagePanel',
-        'panel': './game/UI/Base/Panel',
-        'text-label': './game/UI/Base/TextLabel',
-        'ui-element': './game/UI/Base/UIElement',
-        'menu-button': './game/UI/Buttons/MenuButton',
-        'spawner-button': './game/UI/Buttons/SpawnerButton',
-        'tool-button': './game/UI/Buttons/ToolButton',
-        'curve': './game/UI/Lines/Curve',
-        'circuit-design-blueprint-panel': './game/UI/Panels/CircuitDesignBlueprintPanel',
-        'circuit-design-toolbar': './game/UI/Panels/CircuitDesignToolbar',
-        'main-menu-background-panel': './game/UI/Panels/MainMenuBackgroundPanel',
-        'main-menu-navigation-panel': './game/UI/Panels/MainMenuNavigationPanel',
-        'rectangle': './game/UI/Shapes/Rectangle',
-        // UI -- Decorators
-        'labelled-decorator': './game/UI/Decorators/LabelledDecorator',
         // Configs
         'game-debug': './game/debug',
         'game-config': './game/config',

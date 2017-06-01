@@ -7,11 +7,13 @@
     'pose-component',
     'sprite-component',
     // Data
+    'mesh',
     'position',
+    'rectangle',
     // Configs
     'circuits-config'
 ],
-function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Position, config) {
+function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Mesh, Position, Rectangle, config) {
 
     // CLASS Terminal
     Terminal.prototype = Object.create(BaseElement.prototype);
@@ -41,11 +43,11 @@ function (BaseElement, MeshComponent, PickableComponent, PoseComponent, SpriteCo
     };
     Terminal.prototype.__oninit = function () {
         // set custom pickable bounds
-        var collisionBounds = new Geometry.Rectangle(
+        var collisionBounds = new Rectangle(
             config.Terminal.collisionBounds.width,
             config.Terminal.collisionBounds.height
         );
-        var mesh = new Geometry.Mesh(collisionBounds);
+        var mesh = new Mesh(collisionBounds);
         var meshComponent = this.getComponent(MeshComponent);
         meshComponent.mesh = mesh
         // initialize position

@@ -1,17 +1,17 @@
-define(['component', 'position', 'physics'],
-function (Component, Position, Physics) {
+define(['component', 'mesh', 'position', 'rectangle', 'engine-config'],
+    function (Component, Mesh, Position, Rectangle, config) {
 
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
-	function LineComponent(tailPoseComponent, headPoseComponent, lineDisplayOptions, /* optional */ lineCollisionOptions) {
+	function LineComponent(tailPoseComponent, headPoseComponent, LineDisplaySettings) {
 		// inherits from
 		Component.call(this);
 		// private variables
 		this.__tailPose = tailPoseComponent,
 		this.__headPose = headPoseComponent,
-        this.__options = lineDisplayOptions,
-        this.__collisionOptions = lineCollisionOptions;
+        this.__options = LineDisplaySettings,
+        this.__collisionOptions = LineCollisionSettings;
 	    // events
 		this.registerEvents(
             'onpositionchange',
@@ -63,23 +63,12 @@ function (Component, Position, Physics) {
 		},
 		'mesh': { // line converted into static rectangular mesh
 			get: function() {
-				if (!this.__collisionOptions) {
-					throw new Error(this.constructor.name + ':get mesh - No LineCollisionOptions have been specified.');
-				}
-				var rectangle = new Geometry.Rectangle(
-					this.length * this.__collisionOptions.lengthModifier,
-					this.__collisionOptions.lineWidth
+				var rectangle = new Rectangle(
+					this.length * config.LineComponent.lengthModifier,
+					config.LineComponent.collisionWidth
 				);
-				return new Geometry.Mesh(rectangle);
+				return new Mesh(rectangle);
 			}
-		},
-		'collisionOptions': { // line converted into static rectangular mesh
-		    set: function (collisionOptions) {
-		        if (!(collisionOptions instanceof Physics.LineCollisionOptions)) {
-		            throw new Error(this.constructor.name + ":set collisionOptions - " + collisionOptions.constructor.name + " must be of type " + Physics.LineCollisionOptions.name);
-		        }
-		        this.__collisionOptions = collisionOptions;
-		    }
 		},
 		'displayOptions': {
 		    get: function () {

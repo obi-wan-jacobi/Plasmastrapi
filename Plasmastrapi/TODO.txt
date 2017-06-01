@@ -13,7 +13,6 @@ needs testing:
 - destroy->purge
 
 overhaul:
-- AssetManager to load resources
 - Refactor asset loaders
 - Request resources in circuit/ui classes or upon object instantiation within scenes?
 - Encapsulate object compatibility decorations inside of game/ as an init script?

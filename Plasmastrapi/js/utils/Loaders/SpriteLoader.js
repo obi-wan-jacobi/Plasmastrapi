@@ -7,16 +7,16 @@ function (Loader, assets) {
     function SpriteLoader() {
         Loader.call(this);
     };
-    SpriteLoader.prototype.download = function (container, sprites) {
+    SpriteLoader.prototype.download = function (sprites) {
         this.__beginDownload(sprites);
         for (var sprite in sprites) {
             if (sprites.hasOwnProperty(sprite)) {
                 var frames = [];
-                for (var url in sprite) {
+                for (var url in sprites[sprite]) {
                     var frame = new Image();
                     frame.onload = this.__itemFinishedLoading.bind(this);
                     frame.onerror = this.__itemFinishedLoadingWithError;
-                    frame.src = sprite[url];
+                    frame.src = sprites[sprite][url];
                     frames.push(frame);
                 }
                 assets.sprites[sprite] = frames;

@@ -1,5 +1,5 @@
-define(['component', 'position', 'pose-component'],
-function (Component, Position, PoseComponent) {
+define(['component', 'mesh', 'position', 'rectangle', 'pose-component'],
+function (Component, Mesh, Position, Rectangle, PoseComponent) {
     
 	// CLASS SpriteComponent
 	SpriteComponent.prototype = Object.create(Component.prototype);
@@ -31,8 +31,8 @@ function (Component, Position, PoseComponent) {
 		},
 		'mesh': {
 			get: function() {
-				var rectangle = new Geometry.Rectangle(this.width, this.height);
-				return new Geometry.Mesh(rectangle);
+				var rectangle = new Rectangle(this.width, this.height);
+				return new Mesh(rectangle);
 			}
 		},
 		'frameIndex': {

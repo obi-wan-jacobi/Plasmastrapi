@@ -4,12 +4,12 @@ function (Component, Position, PoseComponent, config) {
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
 	MeshComponent.prototype.constructor = MeshComponent;
-    function MeshComponent(mesh, /* optional */ meshDisplayOptions) {
+    function MeshComponent(mesh, /* optional */ MeshDisplaySettings) {
 		// inherits from
 		Component.call(this);
 		// private variables
 		this.__mesh = mesh;
-		this.__options = meshDisplayOptions;
+		this.__options = MeshDisplaySettings;
         // apply mixins
 		if (this.__options) {
 		    Component.Mixins.Drawable.call(this, this.__options.displayLayer);

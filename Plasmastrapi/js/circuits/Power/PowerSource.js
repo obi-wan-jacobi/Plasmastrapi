@@ -11,7 +11,7 @@
     // Data
     'position',
 ],
-    function (CircuitElement, InputTerminal, OutputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Geometry) {
+    function (CircuitElement, InputTerminal, OutputTerminal, TerminalWireAnchor, TerminalWire, SpriteComponent, Position) {
 
     // CLASS PowerSource
     PowerSource.prototype = Object.create(CircuitElement.prototype);

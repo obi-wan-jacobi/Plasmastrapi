@@ -8,12 +8,12 @@ function (Entity, CurveComponent) {
 
     Curve.prototype = Object.create(Entity.prototype);
     Curve.prototype.constructor = Curve;
-    function Curve(position, lineDisplayOptions) {
+    function Curve(position, LineDisplaySettings) {
         // inherits from
         Entity.call(this);
 
         // curve
-        var curveComponent = new CurveComponent(position, lineDisplayOptions);
+        var curveComponent = new CurveComponent(position, LineDisplaySettings);
 
         // compose entity
         this.addComponent(curveComponent);

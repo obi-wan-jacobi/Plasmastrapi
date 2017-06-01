@@ -7,31 +7,31 @@
     'mesh',
     'position',
     'rectangle',
-    'mesh-display-options',
-    'text-label-display-options',
+    'mesh-display-settings',
+    'text-display-settings',
     // Configs
     'game-config'
 ],
-    function (Button, LabelledDecorator, Mesh, Position, Rectangle, MeshDisplayOptions, TextLabelDisplayOptions, config) {
+    function (Button, LabelledDecorator, Mesh, Position, Rectangle, MeshDisplaySettings, TextDisplaySettings, config) {
 
         // CLASS MenuButton
         MenuButton.prototype = Object.create(Button.prototype);
         MenuButton.prototype.constructor = MenuButton;
         function MenuButton(x, y, width, height, labelText, callee, fnOnPick) {
             // private variables
-            var meshDisplayOptions = new MeshDisplayOptions(config.MenuButton.displayLayer);
+            var MeshDisplaySettings = new MeshDisplaySettings(config.MenuButton.displayLayer);
 
             // inherits from
-            Button.call(this, x, y, new Mesh(new Rectangle(width, height)), meshDisplayOptions, callee, fnOnPick);
+            Button.call(this, x, y, new Mesh(new Rectangle(width, height)), MeshDisplaySettings, callee, fnOnPick);
 
             // configure label
-            var textLabelDisplayOptions = new TextLabelDisplayOptions(
+            var TextDisplaySettings = new TextDisplaySettings(
                 config.MenuButton.displayLayer,
                 new Position(0, 0),
                 labelText
             );
 
-            LabelledDecorator.call(this, textLabelDisplayOptions);
+            LabelledDecorator.call(this, TextDisplaySettings);
         };
 
         return MenuButton;

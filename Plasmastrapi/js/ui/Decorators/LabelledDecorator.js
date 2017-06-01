@@ -4,8 +4,8 @@
 ],
     function (TextLabel) {
 
-        function LabelledDecorator(textLabelDisplayOptions) {
-            this.label = new TextLabel(this, textLabelDisplayOptions);
+        function LabelledDecorator(TextDisplaySettings) {
+            this.label = new TextLabel(this, TextDisplaySettings);
         };
 
         return LabelledDecorator;

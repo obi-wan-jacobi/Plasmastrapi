@@ -1,10 +1,10 @@
-﻿define(['component', 'position', 'physics'],
-function (Component, Position, Physics) {
+﻿define(['component', 'position'],
+function (Component, Position) {
 
     // CLASS CurveComponent
     CurveComponent.prototype = Object.create(Component.prototype);
     CurveComponent.prototype.constructor = CurveComponent;
-    function CurveComponent(startPosition, lineDisplayOptions) {
+    function CurveComponent(startPosition, LineDisplaySettings) {
         if (!(startPosition instanceof Position)) {
             throw new Error(this.constructor.name + ':constructor - Starting position must be an instance of Position!');
         }
@@ -12,7 +12,7 @@ function (Component, Position, Physics) {
         Component.call(this);
         // private variables
         this.__positions = [startPosition];
-        this.__options = lineDisplayOptions,
+        this.__options = LineDisplaySettings,
         // apply mixins
         Component.Mixins.Drawable.call(this, this.__options.displayLayer);
     };

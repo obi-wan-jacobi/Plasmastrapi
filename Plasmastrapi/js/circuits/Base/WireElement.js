@@ -5,11 +5,11 @@
     'line-component',
     'pose-component',
     // Data
-    'line-display-options',
+    'line-display-settings',
     // Configs
     'circuits-config'
 ],
-function (Entity, LineComponent, PoseComponent, LineDisplayOptions, config) {
+function (Entity, LineComponent, PoseComponent, LineDisplaySettings, config) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);
@@ -19,7 +19,7 @@ function (Entity, LineComponent, PoseComponent, LineDisplayOptions, config) {
         var lineComponent = new LineComponent(
             tailObject.getComponent(PoseComponent),
             headObject.getComponent(PoseComponent),
-            new Graphics.LineDisplayOptions(
+            new LineDisplaySettings(
                 config.WireElement.displayLayer,
                 config.WireElement.wireColour,
                 config.WireElement.lineThickness

@@ -10,19 +10,19 @@
     'position',
     'rectangle',
     'image-handle',
-    'text-label-display-options',
+    'text-display-settings',
     // Configs
     'draggable',
     'game-config'
 ],
-function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, ImageHandle, TextLabelDisplayOptions, Draggable, config) {
+function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, ImageHandle, TextDisplaySettings, Draggable, config) {
 
     // CLASS ToolButton
     ToolButton.prototype = Object.create(Button.prototype);
     ToolButton.prototype.constructor = ToolButton;
     function ToolButton(x, y, labelText, image, callee, fnOnPick) {
         // private variables
-        var imageHandle = new Graphics.ImageHandle(
+        var imageHandle = new ImageHandle(
             config.ToolButton.imageHandleDisplayLayer,
             0,
             0,
@@ -34,20 +34,20 @@ function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, 
         );
 
         // inherits from
-        Button.call(this, x, y, new Geometry.Mesh(new Geometry.Rectangle(image.width, image.height)), null, callee, fnOnPick);
+        Button.call(this, x, y, new Mesh(new Rectangle(image.width, image.height)), null, callee, fnOnPick);
 
         // configure image
         var imageComponent = new ImageComponent(imageHandle);
         this.addComponent(imageComponent);
 
         // configure label
-        var textLabelDisplayOptions = new Graphics.TextLabelDisplayOptions(
+        var TextDisplaySettings = new TextDisplaySettings(
             config.ToolButton.textLabelDisplayLayer,
             new Position(0, imageHandle.image.height + config.ToolButton.textLabelOffsetBufferY),
             labelText
         );
 
-        LabelledDecorator.call(this, textLabelDisplayOptions);
+        LabelledDecorator.call(this, TextDisplaySettings);
 
         // tool compatibility
         Draggable.call(this);

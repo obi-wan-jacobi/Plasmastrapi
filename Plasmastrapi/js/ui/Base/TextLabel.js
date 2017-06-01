@@ -7,18 +7,18 @@
     // Data
     'position'
 ],
-function (Entity, PoseComponent, TextLabelComponent, Geometry) {
+function (Entity, PoseComponent, TextLabelComponent, Position) {
 
     TextLabel.prototype = Object.create(Entity.prototype);
     TextLabel.prototype.constructor = TextLabel;
-    function TextLabel(parentElement, textLabelDisplayOptions) {
+    function TextLabel(parentElement, TextDisplaySettings) {
         // inherits from
         Entity.call(this);
 
         // pose
         var poseComponent = new PoseComponent(new Position(0, 0), 0);
 
-        var textLabelComponent = new TextLabelComponent(textLabelDisplayOptions);
+        var textLabelComponent = new TextLabelComponent(TextDisplaySettings);
         
         // compose entity
         this.addComponent(poseComponent);
@@ -36,9 +36,9 @@ function (Entity, PoseComponent, TextLabelComponent, Geometry) {
     };
     TextLabel.prototype.__setPoseRelativeToParentElement = function (newPosition) {
         var textLabelComponent = this.getComponent(TextLabelComponent);
-        var textLabelDisplayOptions = textLabelComponent.displayOptions;
-        var offsetX = textLabelDisplayOptions.offset.x;
-        var offsetY = textLabelDisplayOptions.offset.y;
+        var TextDisplaySettings = textLabelComponent.displayOptions;
+        var offsetX = TextDisplaySettings.offset.x;
+        var offsetY = TextDisplaySettings.offset.y;
         var x = offsetX + newPosition.x;
         var y = offsetY + newPosition.y;
         var poseComponent = this.getComponent(PoseComponent);

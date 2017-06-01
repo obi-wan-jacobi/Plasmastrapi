@@ -6,19 +6,20 @@
     'curve',
     // Data
     'position',
-    'line-display-options',
+    'rectangle',
+    'line-display-settings',
     // Configs
     'cuttable',
     'design-zone',
     'game-config'
 ],
-function (Tool, CuttingToolCursor, Curve, Position, LineDisplayOptions, Cuttable, DesignZone, config) {
+function (Tool, CuttingToolCursor, Curve, Position, Rectangle, LineDisplaySettings, Cuttable, DesignZone, config) {
 
     CuttingTool.prototype = Object.create(Tool.prototype);
     CuttingTool.prototype.constructor = CuttingTool;
     function CuttingTool() {
         Tool.call(this, CuttingToolCursor);
-        this.__beforeCuttingBounds = new Geometry.Rectangle(
+        this.__beforeCuttingBounds = new Rectangle(
             config.CuttingTool.beforeCuttingBounds.width,
             config.CuttingTool.beforeCuttingBounds.height
         );
@@ -38,7 +39,7 @@ function (Tool, CuttingToolCursor, Curve, Position, LineDisplayOptions, Cuttable
             )) {
                 this.__cuttingCurve = new Curve(
                     new Position(cursor.x, cursor.y),
-                    new LineDisplayOptions(
+                    new LineDisplaySettings(
                         config.CuttingTool.curveDisplayLayer,
                         config.CuttingTool.curveDisplayColour,
                         config.CuttingTool.curveLineThickness

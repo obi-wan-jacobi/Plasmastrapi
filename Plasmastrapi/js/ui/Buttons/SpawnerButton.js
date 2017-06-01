@@ -10,12 +10,12 @@
     'position',
     'rectangle',
     'image-handle',
-    'text-label-display-options',
+    'text-display-settings',
     // Configs
     'draggable',
     'game-config'
 ],
-function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, ImageHandle, TextLabelDisplayOptions, Draggable, config) {
+function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, ImageHandle, TextDisplaySettings, Draggable, config) {
 
     // CLASS SpawnerButton
     SpawnerButton.prototype = Object.create(Button.prototype);
@@ -45,13 +45,13 @@ function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, 
         this.addComponent(imageComponent);
 
         // configure label
-        var textLabelDisplayOptions = new TextLabelDisplayOptions(
+        var TextDisplaySettings = new TextDisplaySettings(
             config.SpawnerButton.textLabelDisplayLayer,
             new Position(0, imageHandle.image.height + config.SpawnerButton.textLabelOffsetBufferY),
             labelText
         );
 
-        LabelledDecorator.call(this, textLabelDisplayOptions);
+        LabelledDecorator.call(this, TextDisplaySettings);
 
         // tool compatibility
         Draggable.call(this);

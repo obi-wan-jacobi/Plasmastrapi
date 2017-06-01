@@ -6,7 +6,7 @@
     // Data
     'position'
 ],
-function (Entity, PoseComponent, Geometry) {
+function (Entity, PoseComponent, Position) {
 
     // CLASS TerminalHandle
     TerminalHandle.prototype = Object.create(Entity.prototype);

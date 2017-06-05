@@ -1,22 +1,29 @@
-define(['component', 'line-handle'],
-function (Component, LineHandle) {
+define(['component', 'pose-component', 'line-handle'],
+function (Component, PoseComponent, LineHandle) {
 
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
 	function LineComponent(tailPoseComponent, headPoseComponent) {
+	    this.__validatePoseComponent(tailPoseComponent);
+	    this.__validatePoseComponent(headPoseComponent);
         // private variables
         this.__tailPose = tailPoseComponent;
         this.__headPose = headPoseComponent;
         // inherits from
-        Component.call(this, new LineHandle(this.__tailPose.Position, this.__headPose.Position));
+        Component.call(this, new LineHandle(this.__tailPose.Position, this.__headPose.Position), LineHandle);
 	    // events
 		this.registerEvents(
             'onpositionchange',
             'onorientationchange'
         );
 	};
-	// private methods
+    // private methods
+	LineComponent.prototype.__validatePoseComponent = function (poseComponent) {
+	    if (!(poseComponent instanceof PoseComponent)) {
+	        throw new Error(this.constructor.name + ':validatePoseComponent - ' + poseComponent.constructor.name + ' must be of type ' + PoseComponent.name);
+	    }
+	};
 	LineComponent.prototype.__onload = function () {
 		this.__tailPose.addEventListener('onpositionchange', this, this.__$onpositionchange);
 		this.__tailPose.addEventListener('onorientationchange', this, this.__$onorientationchange);

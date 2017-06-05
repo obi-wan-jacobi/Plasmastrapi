@@ -4,11 +4,13 @@ function (EventEmitter, Drawable) {
     // CLASS Component
     Component.prototype = Object.create(EventEmitter.prototype);
     Component.prototype.constructor = Component;
-    function Component(handle) {
-        EventEmitter.call(this);
+    function Component(handle, HandleType) {
         // private variables
         this.__entity = null;
         this.__handle = handle;
+        this.__validateHandleType(HandleType)
+        // inherits from
+        EventEmitter.call(this);
         // apply mixins
         EventEmitter.Mixins.Loadable.call(this);
         EventEmitter.Mixins.Destructible.call(this);
@@ -17,9 +19,14 @@ function (EventEmitter, Drawable) {
         }
     };
     // private methods
-    EventEmitter.prototype.__validateHandleMethod = function (handleMethodName) {
+    Component.prototype.__validateHandleType = function (HandleType) {
+        if (!(this.__handle instanceof HandleType)) {
+            throw new Error(this.constructor.name + ':validateHandleType - ' + this.__handle.constructor.name + ' must be of type ' + HandleType.name);
+        }
+    };
+    Component.prototype.__validateHandleMethod = function (handleMethodName) {
         if (typeof this.__handle[handleMethodName] !== 'function') {
-            throw new Error(this.constructor.name + ':validateHandleMethod  - The supplied argument must be a function.');
+            throw new Error(this.constructor.name + ':validateHandleMethod - The supplied argument must be a function.');
         }
     };
     Component.prototype.__injectHandleMethodEventCallback = function (handleMethodName, event) {

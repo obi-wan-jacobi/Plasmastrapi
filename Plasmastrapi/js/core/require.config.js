@@ -8,11 +8,10 @@
             'rectangle': './data/Geometry/Rectangle',
             'vertex': './data/Geometry/Vertex',
             // Graphics
+            'image-display-settings': './data/Graphics/DisplaySettings/ImageDisplaySettings',
             'line-display-settings': './data/Graphics/DisplaySettings/LineDisplaySettings',
             'mesh-display-settings': './data/Graphics/DisplaySettings/MeshDisplaySettings',
             'text-display-settings': './data/Graphics/DisplaySettings/TextDisplaySettings',
-            'image-handle': './data/Graphics/Handles/ImageHandle',
-            'sprite-handle': './data/Graphics/Handles/SpriteHandle',
             // Physics
             'acceleration': './data/Physics/Acceleration',
             'velocity': './data/Physics/Velocity'

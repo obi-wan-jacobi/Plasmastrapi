@@ -13,10 +13,9 @@
     'line-display-settings',
     'mesh-display-settings',
     // Configs
-    'cuttable',
     'circuits-config'
 ],
-    function (WireElement, InputTerminal, OutputTerminal, LineComponent, MeshComponent, PickableComponent, PoseComponent, LineDisplaySettings, MeshDisplaySettings, Cuttable, config) {
+    function (WireElement, InputTerminal, OutputTerminal, LineComponent, MeshComponent, PickableComponent, PoseComponent, LineDisplaySettings, MeshDisplaySettings, config) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);

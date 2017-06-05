@@ -13,9 +13,10 @@ needs testing:
 - destroy->purge
 
 overhaul:
-- Refactor asset loaders
+- Handle displayLayer (Component.Mixins.Drawable)
+- Decouple mesh from ImageComponent
 - Request resources in circuit/ui classes or upon object instantiation within scenes?
-- Encapsulate object compatibility decorations inside of game/ as an init script?
+- Refactor compatibility decorations
 - Refactor UI such that panel content/child positions are relative to parent (percent-based or position-based)
 	- ViewportSystem to listen for screen resize events?
 - Modal panels (move, stretch, close)
@@ -53,7 +54,7 @@ backlog:
 	- elements
 		- flip flops (x3)
 		- timers
-		- SOCs + design contexts (tabs? overlay?)
+		- SOCs + design contexts (tabs? overlay? panels?)
 - config
 	- scenes
 

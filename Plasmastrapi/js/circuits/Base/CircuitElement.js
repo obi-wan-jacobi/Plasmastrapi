@@ -1,11 +1,8 @@
 ﻿define([
     // Base
-    'base-element',
-    // Configs
-    'placeable',
-    'trashable'
+    'base-element'
 ],
-function (BaseElement, Placeable, Trashable) {
+function (BaseElement) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(BaseElement.prototype);
@@ -13,10 +10,6 @@ function (BaseElement, Placeable, Trashable) {
     function CircuitElement(x, y) {
         // inherits from
         BaseElement.call(this, x, y);
-
-        // tool compatibility
-        Placeable.call(this);
-        Trashable.call(this);
     };
     // private methods
     CircuitElement.prototype.__ondestroy = function () {

@@ -4,14 +4,38 @@ function (EventEmitter, Drawable) {
     // CLASS Component
     Component.prototype = Object.create(EventEmitter.prototype);
     Component.prototype.constructor = Component;
-    function Component() {
+    function Component(handle) {
         EventEmitter.call(this);
         // private variables
         this.__entity = null;
+        this.__handle = handle;
         // apply mixins
         EventEmitter.Mixins.Loadable.call(this);
         EventEmitter.Mixins.Destructible.call(this);
+        if (this.__handle.draw) {
+            Drawable.call(this);
+        }
     };
+    // private methods
+    EventEmitter.prototype.__validateHandleMethod = function (handleMethodName) {
+        if (typeof this.__handle[handleMethodName] !== 'function') {
+            throw new Error(this.constructor.name + ':validateHandleMethod  - The supplied argument must be a function.');
+        }
+    };
+    Component.prototype.__injectHandleMethodEventCallback = function (handleMethodName, event) {
+        this.__validateEventIsImplemented(event);
+        this.__validateHandleMethod(fn);
+        var self = this;
+        var fnProxy = this.__handle[handleMethodName];
+        this.__handle[handleMethodName] = function () {
+            var returnArgs = fnProxy.apply(this.__handle, arguments) || [];
+            if (!(returnArgs instanceof Array)) {
+                throw new Error('Arguments supplied to event callbacks must take the form of an Array object.');
+            }
+            self.__fire.apply(this, [event].concat(returnArgs));
+        };
+    };
+    // public methods
     Component.prototype.injectEntity = function(entity) {
         EventEmitter.prototype.injectEngine.call(this, entity.__engine);
         this.__entity = entity;
@@ -19,10 +43,11 @@ function (EventEmitter, Drawable) {
         this.__entity.addEventListener('onunload', this, this.unload);
         this.__entity.addEventListener('ondestroy', this, this.destroy);
     };
-
-    // mixins
-    Component.Mixins = {
-        Drawable
+    Component.prototype.getHandle = function () {
+        return this.__handle;
+    };
+    Component.prototype.setHandle = function (handle) {
+        this.__handle = handle;
     };
 
     return Component;

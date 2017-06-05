@@ -6,10 +6,9 @@
     // Data
     'mesh-display-settings',
     // Configs
-    '',
     'game-config'
 ],
-function (Rectangle, MenuButton, MeshDisplaySettings, Compatibility, config) {
+function (Rectangle, MenuButton, MeshDisplaySettings, config) {
 
     // CLASS MainMenuBackgroundPanel
     MainMenuNavigationPanel.prototype = Object.create(Rectangle.prototype);

@@ -4,16 +4,9 @@ function (Component, Position, PoseComponent, config) {
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);
 	MeshComponent.prototype.constructor = MeshComponent;
-    function MeshComponent(mesh, /* optional */ MeshDisplaySettings) {
+    function MeshComponent(meshHandle) {
 		// inherits from
-		Component.call(this);
-		// private variables
-		this.__mesh = mesh;
-		this.__options = MeshDisplaySettings;
-        // apply mixins
-		if (this.__options) {
-		    Component.Mixins.Drawable.call(this, this.__options.displayLayer);
-		}
+		Component.call(this, meshHandle);
 	};
 	// private methods
 	MeshComponent.prototype.__oninit = function() {
@@ -85,37 +78,6 @@ function (Component, Position, PoseComponent, config) {
 			}
 		};
 	};
-	// public prototypal variables
-	Object.defineProperties(MeshComponent.prototype, {
-		'mesh': {
-			get: function() {
-				return this.__mesh;
-			},
-			set: function(mesh) {
-				if (!(mesh instanceof Mesh)) {
-					throw new Error(this.constructor.name + ':mesh set - ' + mesh + ' is not an instance of Mesh.');
-				}
-				this.__mesh = mesh;
-				var poseComponent = this.__entity.getComponent(PoseComponent);
-				this.__translate(poseComponent.position, new Position(0, 0));
-				this.__rotate(poseComponent.orientation);
-			}
-		},
-		'displayOptions': {
-		    get: function () {
-		        return this.__options;
-		    },
-		    set: function (displayOptions) {
-		        if (!this.__options) {
-		            throw new Error(this.constructor.name + ':displayOptions set - Display options can only be replaced, not injected.');
-		        }
-		        if (!displayOptions.displayLayer === this.__options.displayLayer) {
-                    throw new Error(this.constructor.name + ':displayOptions set - The display layer cannot be modified at this level.')
-		        }
-		        this.__options = displayOptions
-		    }
-		}
-	});
 	// public methods
 	MeshComponent.prototype.checkMeshCollision = function(mesh) {
 

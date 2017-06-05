@@ -12,10 +12,9 @@
     'image-handle',
     'text-display-settings',
     // Configs
-    'draggable',
     'game-config'
 ],
-function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, ImageHandle, TextDisplaySettings, Draggable, config) {
+function (Button, LabelDecorator, ImageComponent, Mesh, Position, Rectangle, ImageHandle, TextDisplaySettings, config) {
 
     // CLASS SpawnerButton
     SpawnerButton.prototype = Object.create(Button.prototype);
@@ -51,10 +50,7 @@ function (Button, LabelledDecorator, ImageComponent, Mesh, Position, Rectangle, 
             labelText
         );
 
-        LabelledDecorator.call(this, TextDisplaySettings);
-
-        // tool compatibility
-        Draggable.call(this);
+        LabelDecorator.call(this, TextDisplaySettings);
     };
     SpawnerButton.prototype.__onpick = function () {
         this.__spawnCircuitElement(this.__engine.toolController.__x, this.__engine.toolController.__y);

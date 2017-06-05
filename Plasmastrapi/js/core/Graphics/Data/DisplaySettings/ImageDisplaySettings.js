@@ -1,6 +1,6 @@
 ﻿define([], function () {
 
-    function ImageHandle(displayLayer, sourceX, sourceY, sourceWidth, sourceHeight, destWidth, destHeight, image) {
+    function ImageDisplaySettings(displayLayer, sourceX, sourceY, sourceWidth, sourceHeight, destWidth, destHeight) {
         this.displayLayer = displayLayer;
         this.sourceX = sourceX;
         this.sourceY = sourceY;
@@ -8,8 +8,7 @@
         this.sourceHeight = sourceHeight;
         this.destWidth = destWidth;
         this.destHeight = destHeight;
-        this.image = image;
     };
 
-    return ImageHandle;
+    return ImageDisplaySettings;
 });

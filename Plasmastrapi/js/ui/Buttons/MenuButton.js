@@ -12,7 +12,7 @@
     // Configs
     'game-config'
 ],
-    function (Button, LabelledDecorator, Mesh, Position, Rectangle, MeshDisplaySettings, TextDisplaySettings, config) {
+    function (Button, LabelDecorator, Mesh, Position, Rectangle, MeshDisplaySettings, TextDisplaySettings, config) {
 
         // CLASS MenuButton
         MenuButton.prototype = Object.create(Button.prototype);
@@ -31,7 +31,7 @@
                 labelText
             );
 
-            LabelledDecorator.call(this, TextDisplaySettings);
+            LabelDecorator.call(this, TextDisplaySettings);
         };
 
         return MenuButton;

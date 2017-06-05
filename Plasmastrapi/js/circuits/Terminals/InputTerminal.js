@@ -6,10 +6,9 @@
     // Components
     'sprite-component',
     // Configs
-    'wireable-as-input',
     'circuits-config'
 ],
-function (Terminal, OutputTerminal, SpriteComponent, WireableAsInput, config) {
+function (Terminal, OutputTerminal, SpriteComponent, config) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
@@ -22,9 +21,6 @@ function (Terminal, OutputTerminal, SpriteComponent, WireableAsInput, config) {
         // set default sprite frame
         var spriteComponent = this.getComponent(SpriteComponent);
         spriteComponent.setFrame(this.__defaultFrameIndex);
-
-        // tool compatibility
-        WireableAsInput.call(this);
 
         this.__connections = [];
     };

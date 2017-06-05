@@ -2,10 +2,9 @@
     // Base
     'terminal',
     // Configs
-    'wireable-as-output',
     'circuits-config'
 ],
-function (Terminal, WireableAsOutput, config) {
+function (Terminal, config) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
@@ -13,9 +12,6 @@ function (Terminal, WireableAsOutput, config) {
     function OutputTerminal(offsetPosition, circuitElement) {
 
         Terminal.call(this, offsetPosition, circuitElement, config.OutputTerminal.defaultFrameIndex);
-
-        // tool compatibility
-        WireableAsOutput.call(this);
 
         // state
         this.__state = this.states.NOPOWER;

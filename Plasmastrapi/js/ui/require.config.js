@@ -2,7 +2,6 @@
     paths: {
         // UI
         'button': './ui/Base/Button',
-        'image-panel': './ui/Base/ImagePanel',
         'panel': './ui/Base/Panel',
         'text-label': './ui/Base/TextLabel',
         'ui-element': './ui/Base/UIElement',
@@ -15,6 +14,6 @@
         'main-menu-background-panel': './ui/Panels/MainMenuBackgroundPanel',
         'main-menu-navigation-panel': './ui/Panels/MainMenuNavigationPanel',
         // Decorators
-        'labelled-decorator': './ui/Decorators/LabelledDecorator'
+        'labelled-decorator': './ui/Decorators/LabelDecorator'
     }
 });

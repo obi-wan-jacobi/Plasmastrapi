@@ -1,17 +1,16 @@
-define(function () {
+define(['pose-component'], function (PoseComponent) {
 
-    function Drawable(displayLayer) {
+    function Drawable() {
         var target = this;
         if (!target.registerEvents) {
             throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target must be an instance of EventEmitter');
         }
-        if (!target.draw) {
-            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target must implement a draw method');
+        if (!target.getHandle) {
+            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target must implement a getHandle method');
         }
-        if (!displayLayer) {
-            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - A display layer must be specified');
+        if (!target.getHandle().draw) {
+            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target\'s handle must implement a draw method');
         }
-        target.__displayLayer = displayLayer;
         target.__isVisible = false;
         Object.defineProperties(target, {
             'isDrawable': {
@@ -27,6 +26,7 @@ define(function () {
         });
         target.show = Drawable.prototype.show;
         target.hide = Drawable.prototype.hide;
+        target.draw = Drawable.prototype.draw;
         this.registerEvents(
             'onshow',
             'onhide'
@@ -43,7 +43,13 @@ define(function () {
 	        fnOnUnloadProxy.call(this);
 	        this.hide();
 	    };
-	};
+    };
+    // private methods
+    Drawable.prototype.__validatePoseComponent = function () {
+        if (!this.__entity.getComponent(PoseComponent)) {
+            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target\'s entity must be composed of a ' + PoseComponent.name);
+        }
+    };
     // public methods
 	Drawable.prototype.show = function () {
 	    if (!this.__isVisible) {
@@ -58,7 +64,12 @@ define(function () {
 	        this.__engine.drawSystem.removeEventListener(this.__displayLayer, this, this.draw);
 	        this.__fire('onhide');
 	    }
-	};
+    };
+    Drawable.prototype.draw = function (ctx) {
+        var handle = this.getHandle();
+        var pose = this.__entity.getComponent(PoseComponent);
+        handle.draw(ctx, pose.position, pose.orientation);
+    };
 
 	return Drawable;
 });

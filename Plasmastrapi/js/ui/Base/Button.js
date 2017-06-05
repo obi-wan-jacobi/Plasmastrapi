@@ -2,11 +2,9 @@
     // Base
     'ui-element',
     // Components
-    'pickable-component',
-    // Configs
-    'pickable'
+    'pickable-component'
 ],
-function (UIElement, PickableComponent, Pickable) {
+function (UIElement, PickableComponent) {
 
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
@@ -17,10 +15,6 @@ function (UIElement, PickableComponent, Pickable) {
 
         // configure click action
         var pickableComponent = this.getComponent(PickableComponent);
-        pickableComponent.addEventListener('onpick', callee, fnOnPick);
-
-        // apply tool compatibilities
-        Pickable.call(this);
     };
     
     return Button;

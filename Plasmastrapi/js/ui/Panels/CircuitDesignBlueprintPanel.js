@@ -4,10 +4,9 @@
     // Data
     'image-handle',
     // Configs
-    'design-zone',
     'game-config'
 ],
-function (ImagePanel, ImageHandle, DesignZone, config) {
+function (ImagePanel, ImageHandle, config) {
 
     // CLASS CircuitDesignBlueprintPanel
     CircuitDesignBlueprintPanel.prototype = Object.create(ImagePanel.prototype);
@@ -25,8 +24,6 @@ function (ImagePanel, ImageHandle, DesignZone, config) {
         );
         // inherits from
         ImagePanel.call(this, x, y, imageHandle);
-        // apply tool compatibilities
-        DesignZone.call(this);
     };
     
     return CircuitDesignBlueprintPanel;

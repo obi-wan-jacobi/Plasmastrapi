@@ -10,11 +10,9 @@
     'position',
     'sprite-handle',
     // Configs
-    'draggable',
-    'pickable',
     'circuits-config'
 ],
-function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Position, SpriteHandle, Draggable, Pickable, config) {
+function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Position, SpriteHandle, config) {
 
     // CLASS BaseElement
     BaseElement.prototype = Object.create(Entity.prototype);
@@ -45,10 +43,6 @@ function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteCompone
         this.addComponent(spriteComponent);
         this.addComponent(meshComponent);
         this.addComponent(pickableComponent);
-
-        // tool compatibility
-        Draggable.call(this);
-        Pickable.call(this);
     };
     // private methods
     BaseElement.prototype.__onpick = function () {

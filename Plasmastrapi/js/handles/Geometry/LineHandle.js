@@ -1,17 +1,17 @@
-﻿define([],
-function () {
+﻿define(['handle', 'line', 'line-display-settings'],
+function (Handle, Line, LineDisplaySettings) {
 
-    function LineHandle(line, lineDisplaySettings, lineCollisionSettings) {
-        this.line = line;
-        this.lineDisplaySettings = lineDisplaySettings;
-        this.lineCollisionSettings = lineCollisionSettings;
+    LineHandle.prototype = Object.create(Handle.prototype);
+    LineHandle.prototype.constructor = LineHandle;
+    function LineHandle(line, displaySettings, lineCollisionSettings) {
+        Handle.call(this, line, displaySettings, Line, LineDisplaySettings);
     };
     // public prototypal variables
     Object.defineProperties(LineHandle.prototype, {
         'position': { // location of line's center
             get: function () {
-                var head = this.line.headPosition;
-                var tail = this.line.tailPosition;
+                var head = this.target.headPosition;
+                var tail = this.target.tailPosition;
                 var x = Math.abs(head.x + tail.x) / 2;
                 var y = Math.abs(head.y + tail.y) / 2;
                 return new Position(x, y);
@@ -19,8 +19,8 @@ function () {
         },
         'orientation': { // heading from tail to head
             get: function () {
-                var head = this.line.headPosition;
-                var tail = this.line.tailPosition;
+                var head = this.target.headPosition;
+                var tail = this.target.tailPosition;
                 var x = (head.x - tail.x);
                 var y = (head.y - tail.y);
                 if (x < 0) {
@@ -31,7 +31,7 @@ function () {
         },
         'length': { // euclidean distance from tail to head
             get: function () {
-                return euclideanDistance(this.line.headPosition, this.line.tailPosition);
+                return euclideanDistance(this.target.headPosition, this.target.tailPosition);
             }
         },
         'mesh': { // line converted into static rectangular mesh
@@ -46,15 +46,15 @@ function () {
     });
     LineHandle.prototype.draw = function (ctx) {
         // draw line and apply options
-        var head = this.line.headPosition;
-        var tail = this.line.tailPosition;
-        var lineDisplaySettings = this.lineDisplaySettings;
+        var head = this.target.headPosition;
+        var tail = this.target.tailPosition;
+        var displaySettings = this.displaySettings;
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(tail.x, tail.y);
         ctx.lineTo(head.x, head.y);
-        ctx.strokeStyle = lineDisplaySettings.strokeStyle;
-        ctx.lineWidth = lineDisplaySettings.lineWidth;
+        ctx.strokeStyle = displaySettings.strokeStyle;
+        ctx.lineWidth = displaySettings.lineWidth;
         ctx.stroke()
         ctx.restore();
     };

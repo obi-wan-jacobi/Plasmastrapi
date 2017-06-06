@@ -1,7 +1,10 @@
-﻿define(['mesh'], function (Mesh) {
+﻿define(['handle', 'mesh', 'mesh-display-settings'],
+function (Handle, Mesh, MeshDisplaySettings) {
 
-    function MeshHandle(mesh) {
-        this.__mesh = mesh
+    MeshHandle.prototype = Object.create(Handle.prototype);
+    MeshHandle.prototype.constructor = MeshHandle;
+    function MeshHandle(mesh, displaySettings) {
+        Handle.call(this, mesh, displaySettings, Mesh, MeshDisplaySettings);
     };
     MeshComponent.prototype.__translate = function (newPosition, oldPosition) {
         var mesh = this.__mesh;

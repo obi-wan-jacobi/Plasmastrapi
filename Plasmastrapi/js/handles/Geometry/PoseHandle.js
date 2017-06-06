@@ -1,8 +1,10 @@
-﻿define([],
-function () {
+﻿define(['handle', 'Pose', 'pose-display-settings'],
+function (Handle, Pose, PoseDisplaySettings) {
 
+    PoseHandle.prototype = Object.create(Handle.prototype);
+    PoseHandle.prototype.constructor = PoseHandle;
     function PoseHandle(pose) {
-        this.__pose = pose;
+        Handle.call(this, pose, displaySettings, Pose, PoseDisplaySettings);
     };
     PoseHandle.prototype.getPosition = function () {
         return new Position(this.__pose.x, this.__pose.y);

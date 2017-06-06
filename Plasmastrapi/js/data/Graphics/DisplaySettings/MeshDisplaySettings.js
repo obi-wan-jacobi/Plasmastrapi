@@ -1,7 +1,9 @@
-﻿define([], function () {
+﻿define(['display-settings'], function (DisplaySettings) {
 
+    MeshDisplaySettings.prototype = Object.create(DisplaySettings.prototype);
+    MeshDisplaySettings.prototype.constructor = MeshDisplaySettings;
     function MeshDisplaySettings(displayLayer, strokeStyle, fillStyle, lineWidth) {
-        this.displayLayer = displayLayer;
+        DisplaySettings.call(this, displayLayer);
         this.strokeStyle = strokeStyle || 'white';
         this.fillStyle = fillStyle;
         this.lineWidth = lineWidth || 1;

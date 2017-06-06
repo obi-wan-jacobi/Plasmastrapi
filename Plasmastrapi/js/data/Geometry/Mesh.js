@@ -1,9 +1,12 @@
-﻿define(['vertex'], function (Vertex) {
+﻿define(['primitive', 'vertex'],
+function (Primitive, Vertex) {
 
+    Mesh.prototype = Object.create(Primitive.prototype);
+    Mesh.prototype.constructor = Mesh;
     function Mesh(vertices) {
-        // mesh has an 'immutable' vertex template 
+        Primitive.call(this);
+        this.__validateDataType(vertices, Vertex);
         this.template = vertices;
-        // mesh has a collection of 'current' vertex positions
         this.vertices = [];
         for (var i = 0, L = vertices.length; i < L; i++) {
             this.vertices.push(new Vertex(vertices[i].x, vertices[i].y));

@@ -1,7 +1,9 @@
-﻿define([], function () {
+﻿define(['display-settings'], function (DisplaySettings) {
 
+    LineDisplaySettings.prototype = Object.create(DisplaySettings.prototype);
+    LineDisplaySettings.prototype.constructor = LineDisplaySettings;
     function LineDisplaySettings(displayLayer, strokeStyle, lineWidth) {
-        this.displayLayer = displayLayer;
+        DisplaySettings.call(this, displayLayer);
         this.strokeStyle = strokeStyle || 'white';
         this.lineWidth = lineWidth || 1;
     };

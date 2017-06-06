@@ -6,11 +6,14 @@ function (Primitive, Vertex) {
     function Mesh(vertices) {
         Primitive.call(this);
         this.__validateDataType(vertices, Vertex);
-        this.template = vertices;
-        this.vertices = [];
-        for (var i = 0, L = vertices.length; i < L; i++) {
-            this.vertices.push(new Vertex(vertices[i].x, vertices[i].y));
+        this.vertices = vertices;
+    };
+    Mesh.prototype.clone = function () {
+        var clonedVertices = [];
+        for (var i = 0, L = this.vertices.length; i < L; i++) {
+            clone.push(new Vertex(this.vertices[i].x, this.vertices[i].y));
         }
+        return new Mesh(clonedVertices);
     };
 
     return Mesh;

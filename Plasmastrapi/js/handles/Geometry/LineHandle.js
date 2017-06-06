@@ -1,5 +1,5 @@
-﻿define(['handle', 'line', 'line-display-settings'],
-function (Handle, Line, LineDisplaySettings) {
+﻿define(['handle', 'line', 'line-display-settings', 'position', 'rectangle'],
+function (Handle, Line, LineDisplaySettings, Position, Rectangle) {
 
     LineHandle.prototype = Object.create(Handle.prototype);
     LineHandle.prototype.constructor = LineHandle;
@@ -7,47 +7,39 @@ function (Handle, Line, LineDisplaySettings) {
         Handle.call(this, line, displaySettings, Line, LineDisplaySettings);
     };
     // public prototypal variables
-    Object.defineProperties(LineHandle.prototype, {
-        'position': { // location of line's center
-            get: function () {
-                var head = this.target.headPosition;
-                var tail = this.target.tailPosition;
-                var x = Math.abs(head.x + tail.x) / 2;
-                var y = Math.abs(head.y + tail.y) / 2;
-                return new Position(x, y);
-            }
-        },
-        'orientation': { // heading from tail to head
-            get: function () {
-                var head = this.target.headPosition;
-                var tail = this.target.tailPosition;
-                var x = (head.x - tail.x);
-                var y = (head.y - tail.y);
-                if (x < 0) {
-                    return Math.PI + Math.atan(y / x);
-                }
-                return Math.atan(y / x);
-            }
-        },
-        'length': { // euclidean distance from tail to head
-            get: function () {
-                return euclideanDistance(this.target.headPosition, this.target.tailPosition);
-            }
-        },
-        'mesh': { // line converted into static rectangular mesh
-            get: function () {
-                var rectangle = new Rectangle(
-                    this.length * lineCollisionSettings.lengthModifier,
-                    lineCollisionSettings.collisionWidth
-                );
-                return new Mesh(rectangle);
-            }
+    LineHandle.prototype.getPosition = function () {
+        var head = this.target.headVertex;
+        var tail = this.target.tailVertex;
+        var x = Math.abs(head.x + tail.x) / 2;
+        var y = Math.abs(head.y + tail.y) / 2;
+        return new Position(x, y);
+    };
+    LineHandle.prototype.getOrientation = function () {
+        // heading from tail to head
+        var head = this.target.headVertex;
+        var tail = this.target.tailVertex;
+        var x = (head.x - tail.x);
+        var y = (head.y - tail.y);
+        if (x < 0) {
+            return Math.PI + Math.atan(y / x);
         }
-    });
+        return Math.atan(y / x);
+    };
+    LineHandle.prototype.getLength = function () {
+        // euclidean distance from tail to head
+        return euclideanDistance(this.target.headVertex, this.target.tailVertex);
+    };
+    LineHandle.prototype.getMesh = function () {
+        // line converted into static rectangular mesh
+        return new Rectangle(
+            this.getLength() * lineCollisionSettings.lengthModifier,
+            lineCollisionSettings.collisionWidth
+        );
+    };
     LineHandle.prototype.draw = function (ctx) {
         // draw line and apply options
-        var head = this.target.headPosition;
-        var tail = this.target.tailPosition;
+        var head = this.target.headVertex;
+        var tail = this.target.tailVertex;
         var displaySettings = this.displaySettings;
         ctx.save();
         ctx.beginPath();

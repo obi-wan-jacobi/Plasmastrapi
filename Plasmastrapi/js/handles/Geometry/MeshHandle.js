@@ -1,42 +1,50 @@
-﻿define(['handle', 'mesh', 'mesh-display-settings'],
-function (Handle, Mesh, MeshDisplaySettings) {
+﻿define(['handle', 'mesh', 'mesh-display-settings', 'position'],
+function (Handle, Mesh, MeshDisplaySettings, Position) {
 
     MeshHandle.prototype = Object.create(Handle.prototype);
     MeshHandle.prototype.constructor = MeshHandle;
     function MeshHandle(mesh, displaySettings) {
         Handle.call(this, mesh, displaySettings, Mesh, MeshDisplaySettings);
+        this.__minX = null;
+        this.__minY = null;
+        this.__maxX = null;
+        this.__maxY = null;
+        this.__position = new Position();
+        this.__template = this.target.clone();
     };
-    MeshComponent.prototype.__translate = function (newPosition, oldPosition) {
-        var mesh = this.__mesh;
-        mesh.minX = mesh.minY = Number.MAX_SAFE_INTEGER;
-        mesh.maxX = mesh.maxY = -Number.MAX_SAFE_INTEGER;
+    MeshComponent.prototype.translate = function (newPosition) {
+        this.__validateDataType(newPosition, Position);
+        var mesh = this.target;
+        this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
+        this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
         for (var i = 0, L = mesh.vertices.length; i < L; i++) {
-            mesh.vertices[i].x += (newPosition.x - oldPosition.x);
-            mesh.vertices[i].y += (newPosition.y - oldPosition.y);
+            mesh.vertices[i].x += (newPosition.x - this.__position.x);
+            mesh.vertices[i].y += (newPosition.y - this.__position.y);
             // get min/max X and min/max Y for collision checking purposes
-            if (mesh.maxX < mesh.vertices[i].x) {
-                mesh.maxX = mesh.vertices[i].x;
+            if (this.__maxX < mesh.vertices[i].x) {
+                this.__maxX = mesh.vertices[i].x;
             }
-            if (mesh.minX > mesh.vertices[i].x) {
-                mesh.minX = mesh.vertices[i].x;
+            if (this.__minX > mesh.vertices[i].x) {
+                this.__minX = mesh.vertices[i].x;
             }
-            if (mesh.maxY < mesh.vertices[i].y) {
-                mesh.maxY = mesh.vertices[i].y;
+            if (this.__maxY < mesh.vertices[i].y) {
+                this.__maxY = mesh.vertices[i].y;
             }
-            if (mesh.minY > mesh.vertices[i].y) {
-                mesh.minY = mesh.vertices[i].y;
+            if (this.__minY > mesh.vertices[i].y) {
+                this.__minY = mesh.vertices[i].y;
             }
         };
+        this.__position = newPosition;
     };
     MeshComponent.prototype.__rotate = function (newAngle) {
         var position = this.__entity.getComponent(PoseComponent).position;
-        var mesh = this.__mesh;
-        mesh.minX = mesh.minY = Number.MAX_SAFE_INTEGER;
-        mesh.maxX = mesh.maxY = -Number.MAX_SAFE_INTEGER;
+        var mesh = this.target;
+        this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
+        this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
         for (var i = 0, L = mesh.vertices.length; i < L; i++) {
             // find 'natural' vertex position relative to origin
-            var templateX = mesh.template.vertices[i].x;
-            var templateY = mesh.template.vertices[i].y;
+            var templateX = this.__template.vertices[i].x;
+            var templateY = this.__template.vertices[i].y;
             // perform new rotation
             var x = templateX * Math.cos(newAngle) - templateY * Math.sin(newAngle);
             var y = templateX * Math.sin(newAngle) + templateY * Math.cos(newAngle);
@@ -44,17 +52,17 @@ function (Handle, Mesh, MeshDisplaySettings) {
             mesh.vertices[i].x = position.x + x;
             mesh.vertices[i].y = position.y + y;
             // get min/max X and min/max Y for collision checking purposes
-            if (mesh.maxX < mesh.vertices[i].x) {
-                mesh.maxX = mesh.vertices[i].x;
+            if (this.__maxX < mesh.vertices[i].x) {
+                this.__maxX = mesh.vertices[i].x;
             }
-            if (mesh.minX > mesh.vertices[i].x) {
-                mesh.minX = mesh.vertices[i].x;
+            if (this.__minX > mesh.vertices[i].x) {
+                this.__minX = mesh.vertices[i].x;
             }
-            if (mesh.maxY < mesh.vertices[i].y) {
-                mesh.maxY = mesh.vertices[i].y;
+            if (this.__maxY < mesh.vertices[i].y) {
+                this.__maxY = mesh.vertices[i].y;
             }
-            if (mesh.minY > mesh.vertices[i].y) {
-                mesh.minY = mesh.vertices[i].y;
+            if (this.__minY > mesh.vertices[i].y) {
+                this.__minY = mesh.vertices[i].y;
             }
         };
     };
@@ -66,8 +74,8 @@ function (Handle, Mesh, MeshDisplaySettings) {
         // debugging
         this.__lastPoint = point;
         // find max/min x and y coordinates for a rectangle that bounds the entire mesh
-        var mesh = this.__mesh;
-        var minX = this.__mesh.minX, maxX = this.__mesh.maxX, minY = this.__mesh.minY, maxY = this.__mesh.maxY;
+        var mesh = this.target;
+        var minX = this.target.minX, maxX = this.target.maxX, minY = this.target.minY, maxY = this.target.maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
             // trace ray from point to (minX, minY)
@@ -110,7 +118,7 @@ function (Handle, Mesh, MeshDisplaySettings) {
         if (!this.__options) {
             return;
         }
-        var vertices = this.__mesh.vertices;
+        var vertices = this.target.vertices;
         var options = this.__options;
         // draw mesh and apply options
         ctx.save();
@@ -139,7 +147,7 @@ function (Handle, Mesh, MeshDisplaySettings) {
     // debugging
     MeshComponent.prototype.drawDebug = function (ctx) {
         var debug = config.debug.MeshComponent;
-        var vertices = this.__mesh.vertices;
+        var vertices = this.target.vertices;
         ctx.save();
         for (var i = 0, L = vertices.length; i < L; i++) {
             var vertex = vertices[i];
@@ -150,7 +158,7 @@ function (Handle, Mesh, MeshDisplaySettings) {
             ctx.stroke();
         }
         ctx.beginPath();
-        ctx.arc(this.__mesh.minX, this.__mesh.minY, 10, 0, 2 * Math.PI, false);
+        ctx.arc(this.target.minX, this.target.minY, 10, 0, 2 * Math.PI, false);
         ctx.closePath();
         ctx.strokeStyle = debug.minVertextStrokeStyle;
         ctx.stroke();
@@ -165,8 +173,8 @@ function (Handle, Mesh, MeshDisplaySettings) {
         var debug = config.debug.MeshComponent;
         var point = this.__lastPoint;
         // find max/min x and y coordinates for a rectangle that bounds the entire mesh
-        var mesh = this.__mesh;
-        var minX = this.__mesh.minX, maxX = this.__mesh.maxX, minY = this.__mesh.minY, maxY = this.__mesh.maxY;
+        var mesh = this.target;
+        var minX = this.target.minX, maxX = this.target.maxX, minY = this.target.minY, maxY = this.target.maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
             // trace ray from point to (minX, minY)

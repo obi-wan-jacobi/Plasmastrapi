@@ -72,10 +72,10 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
     };
     MeshComponent.prototype.checkPointCollision = function (point) {
         // debugging
-        this.__lastPoint = point;
+        this.__lastCollisionPoint = point;
         // find max/min x and y coordinates for a rectangle that bounds the entire mesh
         var mesh = this.target;
-        var minX = this.target.minX, maxX = this.target.maxX, minY = this.target.minY, maxY = this.target.maxY;
+        var minX = this.__minX, maxX = this.__maxX, minY = this.__minY, maxY = this.__maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
             // trace ray from point to (minX, minY)
@@ -107,7 +107,6 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
                     }
                 }
             }
-
             if (numberOfIntersections % 2 == 1) {
                 return true;
             }
@@ -115,12 +114,8 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
         return false;
     };
     MeshComponent.prototype.draw = function (ctx) {
-        if (!this.__options) {
-            return;
-        }
         var vertices = this.target.vertices;
-        var options = this.__options;
-        // draw mesh and apply options
+        var displaySettings = this.displaySettings;
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(vertices[0].x, vertices[0].y);
@@ -129,20 +124,14 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
             ctx.lineTo(vertex.x, vertex.y);
         }
         ctx.closePath();
-        ctx.strokeStyle = options.strokeStyle;
-        ctx.lineWidth = options.lineWidth;
+        ctx.strokeStyle = displaySettings.strokeStyle;
+        ctx.lineWidth = displaySettings.lineWidth;
         ctx.stroke()
-        if (options.fillStyle) {
-            ctx.fillStyle = options.fillStyle;
+        if (displaySettings.fillStyle) {
+            ctx.fillStyle = displaySettings.fillStyle;
             ctx.fill();
         }
         ctx.restore();
-
-        // debugging
-        if (!config.debug.DEBUG) {
-            return;
-        }
-        this.drawDebug(ctx);
     };
     // debugging
     MeshComponent.prototype.drawDebug = function (ctx) {
@@ -158,7 +147,7 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
             ctx.stroke();
         }
         ctx.beginPath();
-        ctx.arc(this.target.minX, this.target.minY, 10, 0, 2 * Math.PI, false);
+        ctx.arc(this.__minX, this.__minY, 10, 0, 2 * Math.PI, false);
         ctx.closePath();
         ctx.strokeStyle = debug.minVertextStrokeStyle;
         ctx.stroke();
@@ -171,10 +160,10 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
     };
     MeshComponent.prototype.drawPointCollision = function (ctx) {
         var debug = config.debug.MeshComponent;
-        var point = this.__lastPoint;
+        var point = this.__lastCollisionPoint;
         // find max/min x and y coordinates for a rectangle that bounds the entire mesh
         var mesh = this.target;
-        var minX = this.target.minX, maxX = this.target.maxX, minY = this.target.minY, maxY = this.target.maxY;
+        var minX = this.__minX, maxX = this.__maxX, minY = this.__minY, maxY = this.__maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
             // trace ray from point to (minX, minY)

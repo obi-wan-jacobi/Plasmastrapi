@@ -8,7 +8,7 @@ function (EventEmitter, AtomicArray) {
         EventEmitter.call(this);
         this.__members = new AtomicArray(memberClass);
         // events
-        this.registerEvents(
+        this.__registerEvents(
             'onadd',
             'onremove'
         );

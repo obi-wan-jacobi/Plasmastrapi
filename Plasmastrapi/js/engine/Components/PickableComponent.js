@@ -12,7 +12,7 @@ function (Component, MeshComponent) {
 		this.__isHovered = false;
 		this.__isSelected = false;
         // events
-		this.registerEvents(
+		this.__registerEvents(
             'onenable',
             'ondisable',
             'onpick',

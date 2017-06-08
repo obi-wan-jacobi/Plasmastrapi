@@ -10,7 +10,7 @@ function (EventEmitter) {
         this.__isShiftKeyDown = false;
         // apply mixins
         EventEmitter.Mixins.Loadable.call(this);
-        this.registerEvents(
+        this.__registerEvents(
             'onmousemove',
 		    'onmousedown',
 		    'onmouseup',

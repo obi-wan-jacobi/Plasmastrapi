@@ -9,7 +9,7 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
         this.__events = {};
         this.__lockedEvents = {};
         // events
-        this.registerEvents(
+        this.__registerEvents(
             'oninjectengine'
         );
     };

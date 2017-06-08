@@ -27,7 +27,7 @@ function (EventEmitter, Component, AtomicArray) {
     };
     Entity.prototype.__removeParent = function () {
         this.__parent = null;
-        // unwire event subscription
+        // unwire event subscriptions
         this.__parent.removeEventListener('oninjectengine', this, this.injectEngine);
         this.__parent.removeEventListener('onload', this, this.load);
         this.__parent.removeEventListener('onunload', this, this.unload);

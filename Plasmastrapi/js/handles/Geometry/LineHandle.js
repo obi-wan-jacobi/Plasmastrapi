@@ -5,19 +5,20 @@ function (Handle, Line, LineDisplaySettings, Position, Rectangle) {
     LineHandle.prototype.constructor = LineHandle;
     function LineHandle(line, displaySettings, lineCollisionSettings) {
         Handle.call(this, line, displaySettings, Line, LineDisplaySettings);
+        this.__lineCollisionSettings = lineCollisionSettings;
     };
     // public prototypal variables
     LineHandle.prototype.getPosition = function () {
-        var head = this.target.headVertex;
-        var tail = this.target.tailVertex;
+        var head = this.__target.headVertex;
+        var tail = this.__target.tailVertex;
         var x = Math.abs(head.x + tail.x) / 2;
         var y = Math.abs(head.y + tail.y) / 2;
         return new Position(x, y);
     };
     LineHandle.prototype.getOrientation = function () {
         // heading from tail to head
-        var head = this.target.headVertex;
-        var tail = this.target.tailVertex;
+        var head = this.__target.headVertex;
+        var tail = this.__target.tailVertex;
         var x = (head.x - tail.x);
         var y = (head.y - tail.y);
         if (x < 0) {
@@ -27,20 +28,20 @@ function (Handle, Line, LineDisplaySettings, Position, Rectangle) {
     };
     LineHandle.prototype.getLength = function () {
         // euclidean distance from tail to head
-        return euclideanDistance(this.target.headVertex, this.target.tailVertex);
+        return euclideanDistance(this.__target.headVertex, this.__target.tailVertex);
     };
     LineHandle.prototype.getMesh = function () {
         // line converted into static rectangular mesh
         return new Rectangle(
-            this.getLength() * lineCollisionSettings.lengthModifier,
-            lineCollisionSettings.collisionWidth
+            this.getLength() * this.__lineCollisionSettings.lengthModifier,
+            this.__lineCollisionSettings.collisionWidth
         );
     };
     LineHandle.prototype.draw = function (ctx) {
         // draw line and apply options
-        var head = this.target.headVertex;
-        var tail = this.target.tailVertex;
-        var displaySettings = this.displaySettings;
+        var head = this.__target.headVertex;
+        var tail = this.__target.tailVertex;
+        var displaySettings = this.__displaySettings;
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(tail.x, tail.y);

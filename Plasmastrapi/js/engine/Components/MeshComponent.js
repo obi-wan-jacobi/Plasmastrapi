@@ -18,13 +18,13 @@ function (Component, PoseComponent, config) {
 		if (!poseComponent) {
 			throw new Error(this.constructor.name + ':__onload - ' + this.__entity.constructor.name + ' does not contain a PoseComponent.');
 		}
-		poseComponent.addEventListener('onpositionchange', this, this.__translate);
-		poseComponent.addEventListener('onorientationchange', this, this.__rotate);
+        poseComponent.addEventListener('onpositionchange', this.__handle, this.__handle.translate);
+        poseComponent.addEventListener('onorientationchange', this.__handle, this.__handle.rotate);
 	};
 	MeshComponent.prototype.__onunload = function() {
 		var poseComponent = this.__entity.getComponent(PoseComponent);
-		poseComponent.removeEventListener('onpositionchange', this, this.__translate);
-		poseComponent.removeEventListener('onorientationchange', this, this.__rotate);
+        poseComponent.removeEventListener('onpositionchange', this.__handle, this.__handle.translate);
+        poseComponent.removeEventListener('onorientationchange', this.__handle, this.__handle.rotate);
 	};
 
 	return MeshComponent;

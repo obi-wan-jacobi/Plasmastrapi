@@ -34,7 +34,7 @@ function (Entity, PoseComponent, SpriteComponent, Position, SpriteHandle, config
         this.addComponent(spriteComponent);
 
         // register events
-        this.registerEvents(
+        this.__registerEvents(
             'onmousemove',
 		    'onmousedown',
 		    'onmouseup',

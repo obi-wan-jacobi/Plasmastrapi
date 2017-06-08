@@ -27,7 +27,7 @@ define(['pose-component'], function (PoseComponent) {
         target.show = Drawable.prototype.show;
         target.hide = Drawable.prototype.hide;
         target.draw = Drawable.prototype.draw;
-        this.registerEvents(
+        this.__registerEvents(
             'onshow',
             'onhide'
         );

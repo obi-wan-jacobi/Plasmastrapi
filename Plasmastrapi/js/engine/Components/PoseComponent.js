@@ -8,7 +8,7 @@ function (Component, Position) {
         // inherits from
         Component.call(this, poseHandle);
 	    // events
-		this.registerEvents(
+		this.__registerEvents(
             'onpositionchange',
             'onorientationchange'
         );

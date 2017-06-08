@@ -17,7 +17,7 @@ function (Terminal, config) {
         this.__state = this.states.NOPOWER;
 
         // events
-        this.registerEvents(
+        this.__registerEvents(
             'onstatechange'
         );
     };

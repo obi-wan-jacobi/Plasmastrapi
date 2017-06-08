@@ -1,8 +1,10 @@
-﻿define([], function () {
+﻿define(['handle', 'image-display-settings'],
+function (Handle, ImageDisplaySettings) {
 
+    SpriteFrameHandle.prototype = Object.create(Handle.prototype);
+    SpriteFrameHandle.prototype.constructor = SpriteFrameHandle;
     function SpriteFrameHandle(image, imageDisplaySettings) {
-        this.image = image;
-        this.imageDisplaySettings = imageDisplaySettings;
+        Handle.call(this, image, imageDisplaySettings, Image, ImageDisplaySettings);
     };
     SpriteFrameHandle.prototype.draw = function (ctx, position, orientation) {
         var imageDisplaySettings = this.imageDisplaySettings;

@@ -1,5 +1,5 @@
-define(['component', 'pose-component', 'line-handle'],
-function (Component, PoseComponent, LineHandle) {
+define(['component', 'mesh-component', 'pose-component', 'line-handle'],
+function (Component, MeshComponent, PoseComponent, LineHandle) {
 
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
@@ -13,7 +13,7 @@ function (Component, PoseComponent, LineHandle) {
         // inherits from
         Component.call(this, new LineHandle(this.__tailPose.Position, this.__headPose.Position), LineHandle);
 	    // events
-		this.registerEvents(
+		this.__registerEvents(
             'onpositionchange',
             'onorientationchange'
         );
@@ -35,7 +35,20 @@ function (Component, PoseComponent, LineHandle) {
 	    this.__tailPose.removeEventListener('onorientationchange', this, this.__$onorientationchange);
 	    this.__headPose.removeEventListener('onpositionchange', this, this.__$onpositionchange);
 	    this.__headPose.removeEventListener('onorientationchange', this, this.__$onorientationchange);
-	};
+    };
+    LineComponent.prototype.__onpositionchange = function () {
+        this.__updateMeshComponent();
+    };
+    LineComponent.prototype.__onorientationchange = function () {
+        this.__updateMeshComponent();
+    };
+    LineComponent.prototype.__updateMeshComponent = function () {
+        var meshComponent = this.__entity.getComponent(MeshComponent);
+        if (meshComponent) {
+            var mesh = this.__handle.getMesh();
+            meshComponent.getHandle().setTarget(mesh);
+        }
+    };
 
 	return LineComponent;
 });

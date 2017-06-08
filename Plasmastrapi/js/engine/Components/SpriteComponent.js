@@ -8,7 +8,7 @@ function (Component, Mesh, Position, Rectangle, PoseComponent) {
 		// inherits from
 		Component.call(this, spriteHandle);
         // events
-		this.registerEvents(
+		this.__registerEvents(
             'onframechange'
         );
         // inject event callbacks into handle

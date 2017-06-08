@@ -8,7 +8,7 @@ function (System, EventQueue, Position) {
 		System.call(this);
 		this.__inputQueue = new EventQueue(this);
 	    // events
-		this.registerEvents(
+		this.__registerEvents(
             'onmousemove',
             'onmousedown',
             'onmouseup',

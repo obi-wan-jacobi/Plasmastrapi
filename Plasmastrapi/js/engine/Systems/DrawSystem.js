@@ -7,7 +7,7 @@ function (System) {
 	function DrawSystem() {
 	    System.call(this);
 	    // events
-	    this.registerEvents(
+	    this.__registerEvents(
             'onwindowresize',
             'ondrawgamebackground',
             'ondrawgameforeground',

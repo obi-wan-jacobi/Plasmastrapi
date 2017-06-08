@@ -13,8 +13,8 @@ function (Handle, Curve, LineDisplaySettings) {
         this.curve.vertices.push(position);
     };
     CurveHandle.prototype.draw = function (ctx) {
-        var displaySettings = this.displaySettings;
-        var vertices = this.target.vertices;
+        var displaySettings = this.__displaySettings;
+        var vertices = this.__target.vertices;
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(vertices[0].x, vertices[0].y);

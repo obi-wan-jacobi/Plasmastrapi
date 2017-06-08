@@ -19,7 +19,7 @@ function (InputHandle, PoseComponent, SpriteComponent, Position, Filter, config)
         InputHandle.call(this);
         this.__cursorOffsetX = config.Tool.cursorOffsetX;
         this.__cursorOffsetY = config.Tool.cursorOffsetY;
-        this.registerEvents(
+        this.__registerEvents(
             'onequip',
             'ondiscard',
             'pick_onmouseenter',

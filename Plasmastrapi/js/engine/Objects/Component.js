@@ -37,7 +37,7 @@ function (EventEmitter, Drawable) {
         this.__handle[handleMethodName] = function () {
             var returnArgs = fnProxy.apply(this.__handle, arguments) || [];
             if (!(returnArgs instanceof Array)) {
-                throw new Error('Arguments supplied to event callbacks must take the form of an Array object.');
+                returnArgs = [returnArgs];
             }
             self.__fire.apply(this, [event].concat(returnArgs));
         };
@@ -55,6 +55,9 @@ function (EventEmitter, Drawable) {
     };
     Component.prototype.setHandle = function (handle) {
         this.__handle = handle;
+    };
+    Component.prototype.getTarget = function () {
+        return this.__handle.getTarget();
     };
 
     return Component;

@@ -1,13 +1,11 @@
-﻿define([
-    'gate'
-],
+﻿define(['gate'],
 function (Gate) {
 
     // CLASS OrGate
     OrGate.prototype = Object.create(Gate.prototype);
     OrGate.prototype.constructor = OrGate;
-    function OrGate(x, y) {
-        Gate.call(this, x, y);
+    function OrGate(inputTerminal, outputTerminal) {
+        Gate.call(this, inputTerminal, outputTerminal);
     };
     OrGate.prototype.updateState = function (inputState) {
         var connections = this.inputTerminal.__connections;

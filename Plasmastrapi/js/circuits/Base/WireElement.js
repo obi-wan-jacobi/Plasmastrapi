@@ -1,15 +1,5 @@
-﻿define([
-    // Base
-    'entity',
-    // Components
-    'line-component',
-    'pose-component',
-    // Data
-    'line-display-settings',
-    // Configs
-    'circuits-config'
-],
-function (Entity, LineComponent, PoseComponent, LineDisplaySettings, config) {
+﻿define(['entity', 'line-component', 'pose-component'],
+function (Entity, LineComponent, PoseComponent) {
 
     // CLASS WireElement
     WireElement.prototype = Object.create(Entity.prototype);
@@ -18,12 +8,7 @@ function (Entity, LineComponent, PoseComponent, LineDisplaySettings, config) {
         Entity.call(this);
         var lineComponent = new LineComponent(
             tailObject.getComponent(PoseComponent),
-            headObject.getComponent(PoseComponent),
-            new LineDisplaySettings(
-                config.WireElement.displayLayer,
-                config.WireElement.wireColour,
-                config.WireElement.lineThickness
-            )
+            headObject.getComponent(PoseComponent)
         );
         this.addComponent(lineComponent);
     };

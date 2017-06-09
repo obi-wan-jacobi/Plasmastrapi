@@ -1,13 +1,11 @@
-﻿define([
-    'gate'
-],
+﻿define(['gate'],
 function (Gate) {
 
     // CLASS AndGate
     AndGate.prototype = Object.create(Gate.prototype);
     AndGate.prototype.constructor = AndGate;
-    function AndGate(x, y) {
-        Gate.call(this, x, y);
+    function AndGate(inputTerminal, outputTerminal) {
+        Gate.call(this, inputTerminal, outputTerminal);
     };
     AndGate.prototype.updateState = function (inputState) {
         var connections = this.inputTerminal.__connections;

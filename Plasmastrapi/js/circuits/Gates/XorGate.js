@@ -1,13 +1,11 @@
-﻿define([
-    'gate'
-],
+﻿define(['gate'],
 function (Gate) {
 
-    // CLASS XorGate
+    // CLASS OrGate
     XorGate.prototype = Object.create(Gate.prototype);
     XorGate.prototype.constructor = XorGate;
-    function XorGate(x, y) {
-        Gate.call(this, x, y);
+    function XorGate(inputTerminal, outputTerminal) {
+        Gate.call(this, inputTerminal, outputTerminal);
     };
     XorGate.prototype.updateState = function (inputState) {
         var connections = this.inputTerminal.__connections;

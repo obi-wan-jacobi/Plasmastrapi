@@ -1,15 +1,12 @@
-﻿define([
-    // Base
-    'base-element'
-],
+﻿define(['base-element'],
 function (BaseElement) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(BaseElement.prototype);
     CircuitElement.prototype.constructor = CircuitElement;
-    function CircuitElement(x, y) {
+    function CircuitElement() {
         // inherits from
-        BaseElement.call(this, x, y);
+        BaseElement.call(this);
     };
     // private methods
     CircuitElement.prototype.__ondestroy = function () {

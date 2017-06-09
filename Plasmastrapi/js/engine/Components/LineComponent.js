@@ -41,7 +41,7 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
     };
     LineComponent.prototype.__onorientationchange = function () {
         this.__updateMeshComponent();
-    };
+    }; 
     LineComponent.prototype.__updateMeshComponent = function () {
         var meshComponent = this.__entity.getComponent(MeshComponent);
         if (meshComponent) {

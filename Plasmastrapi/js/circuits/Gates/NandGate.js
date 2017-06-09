@@ -1,13 +1,11 @@
-﻿define([
-    'gate'
-],
+﻿define(['gate'],
 function (Gate) {
 
     // CLASS NandGate
     NandGate.prototype = Object.create(Gate.prototype);
     NandGate.prototype.constructor = NandGate;
-    function NandGate(x, y) {
-        Gate.call(this, x, y);
+    function NandGate(inputTerminal, outputTerminal) {
+        Gate.call(this, inputTerminal, outputTerminal);
     };
     NandGate.prototype.updateState = function (inputState) {
         var connections = this.inputTerminal.__connections;

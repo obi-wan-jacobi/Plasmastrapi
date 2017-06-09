@@ -1,7 +1,4 @@
-﻿define([
-    // Base
-    'wire-element'
-],
+﻿define(['wire-element'],
 function (WireElement) {
 
     // CLASS ToolWire

@@ -1,11 +1,11 @@
 ﻿define([], function () {
 
-    function Handle(target, displaySettings, TargetType, DisplaySettingsType) {
-        this.__target = null;
+    function Handle(data, displaySettings, DataType, DisplaySettingsType) {
+        this.__data = null;
         this.__displaySettings = null;
-        this.__TargetType = TargetType;
+        this.__dataType = DataType;
         this.__DisplaySettingsType = DisplaySettingsType;
-        this.setTarget(target);
+        this.setData(data);
         this.setDisplaySettings(displaySettings);
     };
     Handle.prototype.__validateDataType = function (data, DataType) {
@@ -13,12 +13,12 @@
             throw new Error(this.constructor.name + ':validateDataType - ' + data.constructor.name + ' must be of type ' + DataType.name);
         }
     };
-    Handle.prototype.getTarget = function () {
-        return this.__target;
+    Handle.prototype.getData = function () {
+        return this.__data;
     };
-    Handle.prototype.setTarget = function (target) {
-        this.__validateDataType(target, this.__TargetType);
-        this.__target = target;
+    Handle.prototype.setData = function (data) {
+        this.__validateDataType(data, this.__dataType);
+        this.__data = data;
     };
     Handle.prototype.getDisplaySettings = function () {
         return this.__displaySettings;

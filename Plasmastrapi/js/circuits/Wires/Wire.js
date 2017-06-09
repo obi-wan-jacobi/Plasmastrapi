@@ -1,21 +1,5 @@
-﻿define([
-    // Base
-    'wire-element',
-    // Circuits
-    'input-terminal',
-    'output-terminal',
-    // Components
-    'line-component',
-    'mesh-component',
-    'pickable-component',
-    'pose-component',
-    // Data
-    'line-display-settings',
-    'mesh-display-settings',
-    // Configs
-    'circuits-config'
-],
-    function (WireElement, InputTerminal, OutputTerminal, LineComponent, MeshComponent, PickableComponent, PoseComponent, LineDisplaySettings, MeshDisplaySettings, config) {
+﻿define(['wire-element', 'input-terminal', 'output-terminal', 'line-component'],
+function (WireElement, InputTerminal, OutputTerminal, LineComponent) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
@@ -28,24 +12,6 @@
 
         WireElement.call(this, outputTerminal, inputTerminal);
 
-        // configure components
-        var lineComponent = this.getComponent(LineComponent);
-        lineComponent.addEventListener('onpositionchange', this, this.__updateMeshComponent);
-        lineComponent.addEventListener('onorientationchange', this, this.__updateMeshComponent);
-
-        var poseComponent = new PoseComponent(lineComponent.position, lineComponent.orientation);
-
-        var MeshDisplaySettings = new MeshDisplaySettings(config.Wire.displayLayer);
-        var meshComponent = new MeshComponent(lineComponent.mesh, MeshDisplaySettings);
-
-        var pickableComponent = new PickableComponent();
-        pickableComponent.addEventListener('onmouseenter', this, this.__onmouseenter);
-        pickableComponent.addEventListener('onmouseleave', this, this.__onmouseleave);
-
-        this.addComponent(poseComponent);
-        this.addComponent(meshComponent);
-        this.addComponent(pickableComponent);
-
         // initialize terminal listeners and state
         this.outputTerminal = outputTerminal;
         this.inputTerminal = inputTerminal;
@@ -56,9 +22,6 @@
 
         this.inputTerminal.addConnection(this.outputTerminal);
         this.__updateState();
-
-        // tool compatibility
-        Cuttable.call(this);
     };
     // private methods
     Wire.prototype.__updateState = function () {
@@ -73,27 +36,9 @@
             lineComponent.displayOptions = new LineDisplaySettings(displayLayer, config.Wire.lowLineColour, lineWidth);
         }
     };
-    Wire.prototype.__updateMeshComponent = function () {
-        var lineComponent = this.getComponent(LineComponent);
-        var poseComponent = this.getComponent(PoseComponent);
-        poseComponent.position = lineComponent.position;
-        poseComponent.orientation = lineComponent.orientation;
-        var meshComponent = this.getComponent(MeshComponent);
-        meshComponent.mesh = lineComponent.mesh;
-    };
     Wire.prototype.__ondestroy = function () {
         this.inputTerminal.removeConnection(this.outputTerminal);
         this.__engine.wireContainer.remove(this);
-    };
-    Wire.prototype.__onmouseenter = function () {
-        var MeshDisplaySettings = new MeshDisplaySettings(config.Wire.displayLayer, config.Wire.cuttingHoverColour);
-        var meshComponent = this.getComponent(MeshComponent);
-        meshComponent.displayOptions = MeshDisplaySettings;
-    };
-    Wire.prototype.__onmouseleave = function () {
-        var MeshDisplaySettings = new MeshDisplaySettings(config.Wire.displayLayer);
-        var meshComponent = this.getComponent(MeshComponent);
-        meshComponent.displayOptions = MeshDisplaySettings;
     };
     // public methods
     Wire.prototype.injectEngine = function (engine) {

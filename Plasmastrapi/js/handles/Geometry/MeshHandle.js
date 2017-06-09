@@ -21,19 +21,19 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
             this.__minY = mesh.vertices[i].y;
         }
     };
-    MeshHandle.prototype.setTarget = function (target) {
-        Handle.setTarget.call(this, target);
+    MeshHandle.prototype.setData = function (data) {
+        Handle.setData.call(this, data);
         this.__minX = null;
         this.__minY = null;
         this.__maxX = null;
         this.__maxY = null;
         this.__position = new Position();
-        this.__template = this.__target.clone();
+        this.__template = this.__data.clone();
         this.__lastCollisionPoint = null;
     };
     MeshHandle.prototype.translate = function (newPosition) {
         this.__validateDataType(newPosition, Position);
-        var mesh = this.__target;
+        var mesh = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
         for (var i = 0, L = mesh.vertices.length; i < L; i++) {
@@ -45,7 +45,7 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
     };
     MeshHandle.prototype.rotate = function (newAngle) {
         var position = this.__position;
-        var mesh = this.__target;
+        var mesh = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
         for (var i = 0, L = mesh.vertices.length; i < L; i++) {
@@ -68,7 +68,7 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
     MeshHandle.prototype.checkPointCollision = function (point) {
         this.__lastCollisionPoint = point;
         // find max/min x and y coordinates for a rectangle that bounds the entire mesh
-        var mesh = this.__target;
+        var mesh = this.__data;
         var minX = this.__minX, maxX = this.__maxX, minY = this.__minY, maxY = this.__maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
@@ -108,7 +108,7 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
         return false;
     };
     MeshHandle.prototype.draw = function (ctx) {
-        var vertices = this.__target.vertices;
+        var vertices = this.__data.vertices;
         var displaySettings = this.__displaySettings;
         ctx.save();
         ctx.beginPath();
@@ -130,7 +130,7 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
     // debugging
     MeshHandle.prototype.drawDebug = function (ctx) {
         var debug = config.debug.MeshHandle;
-        var vertices = this.__target.vertices;
+        var vertices = this.__data.vertices;
         ctx.save();
         for (var i = 0, L = vertices.length; i < L; i++) {
             var vertex = vertices[i];
@@ -156,7 +156,7 @@ function (Handle, Mesh, MeshDisplaySettings, Position) {
         var debug = config.debug.MeshHandle;
         var point = this.__lastCollisionPoint;
         // find max/min x and y coordinates for a rectangle that bounds the entire mesh
-        var mesh = this.__target;
+        var mesh = this.__data;
         var minX = this.__minX, maxX = this.__maxX, minY = this.__minY, maxY = this.__maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {

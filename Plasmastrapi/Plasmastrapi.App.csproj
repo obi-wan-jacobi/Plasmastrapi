@@ -131,7 +131,7 @@
     <Content Include="js\engine\Components\CurveComponent.js" />
     <Content Include="js\engine\Components\TextLabelComponent.js" />
     <Content Include="js\engine\config.js" />
-    <Content Include="js\engine\Containers\PickableComponentContainer.js" />
+    <Content Include="js\engine\Containers\PickComponentContainer.js" />
     <Content Include="js\engine\debug.js" />
     <Content Include="js\utils\Loaders\ImageLoader.js" />
     <Content Include="js\utils\Loaders\SpriteLoader.js" />
@@ -256,7 +256,7 @@
     <Content Include="js\engine\Components\InputComponent.js" />
     <Content Include="js\engine\Components\LineComponent.js" />
     <Content Include="js\engine\Components\MeshComponent.js" />
-    <Content Include="js\engine\Components\PickableComponent.js" />
+    <Content Include="js\engine\Components\PickComponent.js" />
     <Content Include="js\engine\Components\PoseComponent.js" />
     <Content Include="js\engine\Components\SpriteComponent.js" />
     <Content Include="js\game\Controllers\SceneController.js" />

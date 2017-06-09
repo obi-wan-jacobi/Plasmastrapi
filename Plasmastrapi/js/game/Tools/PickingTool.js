@@ -4,7 +4,7 @@
     // Helpers
     'selection-box',
     // Components
-    'pickable-component',
+    'pick-component',
     // Data
     'position',
     'rectangle',
@@ -16,7 +16,7 @@
     'placeable',
     'game-config'
 ],
-    function (Tool, SelectionBox, PickableComponent, Position, Rectangle, DesignZone, Draggable, Filter, Pickable, Placeable, config) {
+    function (Tool, SelectionBox, PickComponent, Position, Rectangle, DesignZone, Draggable, Filter, Pickable, Placeable, config) {
 
     PickingTool.prototype = Object.create(Tool.prototype);
     PickingTool.prototype.constructor = PickingTool;
@@ -89,7 +89,7 @@
         var entity = null;
         for (var i = 0, L = entities.length; i < L; i++) {
             if (Draggable.resolve(entities[i])) {
-                this.__pickableOnDrag = entities[i].getComponent(PickableComponent);
+                this.__pickableOnDrag = entities[i].getComponent(PickComponent);
                 entity = entities[i];
                 break;
             }
@@ -116,8 +116,8 @@
         for (var i = 0, L = entities.length; i < L; i++) {
             var entity = entities[i];
             if (Pickable.resolve(entity) && !(entity === this.__selectionBox)) {
-                var pickableComponent = entity.getComponent(PickableComponent);
-                pickableComponent.pick();
+                var pickComponent = entity.getComponent(PickComponent);
+                pickComponent.pick();
                 return;
             }
         }

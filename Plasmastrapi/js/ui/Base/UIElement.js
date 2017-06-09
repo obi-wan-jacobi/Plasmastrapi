@@ -3,12 +3,12 @@
     'entity',
     // Components
     'mesh-component',
-    'pickable-component',
+    'pick-component',
     'pose-component',
     // Data
     'position',
 ],
-function (Entity, MeshComponent, PickableComponent, PoseComponent, Position) {
+function (Entity, MeshComponent, PickComponent, PoseComponent, Position) {
 
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;
@@ -24,12 +24,12 @@ function (Entity, MeshComponent, PickableComponent, PoseComponent, Position) {
         var meshComponent = new MeshComponent(mesh, meshDisplaySettings);
 
         // entity is pickable
-        var pickableComponent = new PickableComponent();
+        var pickComponent = new PickComponent();
 
         // compose entity
         this.addComponent(poseComponent);
         this.addComponent(meshComponent);
-        this.addComponent(pickableComponent);
+        this.addComponent(pickComponent);
     };
 
     return UIElement;

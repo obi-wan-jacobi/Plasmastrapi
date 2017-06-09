@@ -7,10 +7,6 @@ function (Entity) {
     function BaseElement() {
         Entity.call(this);
     };
-    // private methods
-    BaseElement.prototype.__onpick = function () {
-        this.__engine.toolController.equipPlacingTool(this);
-    };
 
     return BaseElement;
 });

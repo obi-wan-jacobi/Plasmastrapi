@@ -9,14 +9,10 @@ function (Component, PoseComponent, config) {
 		Component.call(this, meshHandle);
 	};
 	// private methods
-	MeshComponent.prototype.__oninit = function() {
-		// trigger mesh translation to current pose location
-		this.mesh = this.__mesh;
-	};
 	MeshComponent.prototype.__onload = function() {
 		var poseComponent = this.__entity.getComponent(PoseComponent);
 		if (!poseComponent) {
-			throw new Error(this.constructor.name + ':__onload - ' + this.__entity.constructor.name + ' does not contain a PoseComponent.');
+			throw new Error(this.constructor.name + ':onload - ' + this.__entity.constructor.name + ' does not contain a ' + PoseComponent.name);
 		}
         poseComponent.addEventListener('onpositionchange', this.__handle, this.__handle.translate);
         poseComponent.addEventListener('onorientationchange', this.__handle, this.__handle.rotate);

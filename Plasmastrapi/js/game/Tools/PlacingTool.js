@@ -2,7 +2,7 @@
     // Base
     'tool',
     // Components
-    'pickable-component',
+    'pick-component',
     'pose-component',
     // Data
     'position',
@@ -10,7 +10,7 @@
     'design-zone',
     'destruction-zone'
 ],
-function (Tool, PickableComponent, PoseComponent, Position, DesignZone, DestructionZone) {
+function (Tool, PickComponent, PoseComponent, Position, DesignZone, DestructionZone) {
 
     PlacingTool.prototype = Object.create(Tool.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
@@ -37,7 +37,7 @@ function (Tool, PickableComponent, PoseComponent, Position, DesignZone, Destruct
     };
     PlacingTool.prototype.__onmouseup = function (cursor) {
         Tool.prototype.__onmouseup(cursor);
-        this.__equippedEntity.getComponent(PickableComponent).deselect();
+        this.__equippedEntity.getComponent(PickComponent).deselect();
         if (this.isShiftKeyDown && this.__fnShiftKeyMouseUp) {
             this.__fnShiftKeyMouseUp(cursor.x, cursor.y);
         } else {

@@ -1,12 +1,12 @@
-define(['component', 'image-handle'],
-function (Component, ImageHandle) {
+define(['component'],
+function (Component) {
     
 	// CLASS ImageComponent
 	ImageComponent.prototype = Object.create(Component.prototype);
 	ImageComponent.prototype.constructor = ImageComponent;
     function ImageComponent(imageHandle) {
         // inherits from
-        Component.call(this, imageHandle, ImageHandle);
+        Component.call(this, imageHandle);
     };
 
 	return ImageComponent;

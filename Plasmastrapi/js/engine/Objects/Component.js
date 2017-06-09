@@ -56,8 +56,8 @@ function (EventEmitter, Drawable) {
     Component.prototype.setHandle = function (handle) {
         this.__handle = handle;
     };
-    Component.prototype.getTarget = function () {
-        return this.__handle.getTarget();
+    Component.prototype.getData = function () {
+        return this.__handle.getData();
     };
 
     return Component;

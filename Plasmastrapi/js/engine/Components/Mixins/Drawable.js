@@ -54,21 +54,22 @@ define(['pose-component'], function (PoseComponent) {
 	Drawable.prototype.show = function () {
 	    if (!this.__isVisible) {
 	        this.__isVisible = true;
-	        this.__engine.drawSystem.addEventListener(this.__displayLayer, this, this.draw);
+	        this.__engine.drawSystem.addEventListener(this.__handle.displaySettings.displayLayer, this, this.draw);
 	        this.__fire('onshow');
 	    }
 	};
 	Drawable.prototype.hide = function () {
 	    if (this.__isVisible) {
 	        this.__isVisible = false;
-	        this.__engine.drawSystem.removeEventListener(this.__displayLayer, this, this.draw);
+	        this.__engine.drawSystem.removeEventListener(this.__handle.displaySettings.displayLayer, this, this.draw);
 	        this.__fire('onhide');
 	    }
     };
     Drawable.prototype.draw = function (ctx) {
-        var handle = this.getHandle();
-        var pose = this.__entity.getComponent(PoseComponent);
-        handle.draw(ctx, pose.position, pose.orientation);
+        var poseHandle = this.__entity.getComponent(PoseComponent).getHandle();
+        var position = poseHandle.getPosition();
+        var orientation = poseHandle.getOrientation();
+        this.__handle.draw(ctx, position, orientation);
     };
 
 	return Drawable;

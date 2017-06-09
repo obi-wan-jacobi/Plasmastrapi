@@ -6,7 +6,7 @@
     'tool-wire',
     'wire',
     // Components
-    'pickable-component',
+    'pick-component',
     'pose-component',
     // Data
     'position',
@@ -16,7 +16,7 @@
     'wireable-as-input',
     'wireable-as-output',
 ],
-function (Tool, TerminalHandle, ToolWire, Wire, PickableComponent, PoseComponent, Position, DesignZone, DestructionZone, WireableAsInput, WireableAsOutput) {
+function (Tool, TerminalHandle, ToolWire, Wire, PickComponent, PoseComponent, Position, DesignZone, DestructionZone, WireableAsInput, WireableAsOutput) {
 
     WireTool.prototype = Object.create(Tool.prototype);
     WireTool.prototype.constructor = WireTool;
@@ -46,13 +46,13 @@ function (Tool, TerminalHandle, ToolWire, Wire, PickableComponent, PoseComponent
         this.__selectedTerminal = terminal;
         this.__setCompatibilityFilterRelativeTo(this.__selectedTerminal);
         // select terminal
-        var pickableComponent = this.__selectedTerminal.getComponent(PickableComponent);
-        pickableComponent.select();
+        var pickComponent = this.__selectedTerminal.getComponent(PickComponent);
+        pickComponent.select();
     };
     WireTool.prototype.__ondiscard = function () {
         // deselect terminal
-        var pickableComponent = this.__selectedTerminal.getComponent(PickableComponent);
-        pickableComponent.deselect();
+        var pickComponent = this.__selectedTerminal.getComponent(PickComponent);
+        pickComponent.deselect();
         this.__terminalHandle.destroy();
         this.__terminalHandle = null;
         this.__toolWire.destroy();

@@ -3,7 +3,7 @@
     'entity',
     // Components
     'mesh-component',
-    'pickable-component',
+    'pick-component',
     'pose-component',
     'sprite-component',
     // Data
@@ -16,7 +16,7 @@
     'pickable',
     'game-config'
 ],
-function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteComponent, Mesh, Position, Rectangle, MeshDisplaySettings, Draggable, Pickable, config) {
+function (Entity, MeshComponent, PickComponent, PoseComponent, SpriteComponent, Mesh, Position, Rectangle, MeshDisplaySettings, Draggable, Pickable, config) {
 
     SelectionBox.prototype = Object.create(Entity.prototype);
     SelectionBox.prototype.constructor = SelectionBox;
@@ -39,12 +39,12 @@ function (Entity, MeshComponent, PickableComponent, PoseComponent, SpriteCompone
         var mesh = new Mesh(rectangle);
         var meshComponent = new MeshComponent(mesh, MeshDisplaySettings);
 
-        var pickableComponent = new PickableComponent();
-        pickableComponent.addEventListener('onpick', this, this.__onpick);
+        var pickComponent = new PickComponent();
+        pickComponent.addEventListener('onpick', this, this.__onpick);
 
         this.addComponent(poseComponent);
         this.addComponent(meshComponent);
-        this.addComponent(pickableComponent);
+        this.addComponent(pickComponent);
 
         Pickable.call(this);
         Draggable.call(this);

@@ -1,5 +1,5 @@
-﻿define(['system', 'pickable-component'],
-function (System, PickableComponent) {
+﻿define(['system', 'pick-component'],
+function (System, PickComponent) {
 
     // CLASS InputSystem
     PickSystem.prototype = Object.create(System.prototype);
@@ -76,27 +76,27 @@ function (System, PickableComponent) {
         this.__list_click.push(entity);
     };
     PickSystem.prototype.__watch = function (entity) {
-        var pickableComponent = entity.getComponent(PickableComponent);
-        if (pickableComponent) {
-            pickableComponent.addEventListener('onmouseenter', this, this.__domouseenter);
-            pickableComponent.addEventListener('onmousehover', this, this.__domousehover);
-            pickableComponent.addEventListener('onmouseleave', this, this.__domouseleave);
-            pickableComponent.addEventListener('onmousemove', this, this.__domousemove);
-            pickableComponent.addEventListener('onmousedown', this, this.__domousedown);
-            pickableComponent.addEventListener('onmouseup', this, this.__domouseup);
-            pickableComponent.addEventListener('onclick', this, this.__doclick);
+        var pickComponent = entity.getComponent(PickComponent);
+        if (pickComponent) {
+            pickComponent.addEventListener('onmouseenter', this, this.__domouseenter);
+            pickComponent.addEventListener('onmousehover', this, this.__domousehover);
+            pickComponent.addEventListener('onmouseleave', this, this.__domouseleave);
+            pickComponent.addEventListener('onmousemove', this, this.__domousemove);
+            pickComponent.addEventListener('onmousedown', this, this.__domousedown);
+            pickComponent.addEventListener('onmouseup', this, this.__domouseup);
+            pickComponent.addEventListener('onclick', this, this.__doclick);
         }
     };
     PickSystem.prototype.__unwatch = function (entity) {
-        var pickableComponent = entity.getComponent(PickableComponent);
-        if (pickableComponent) {
-            pickableComponent.removeEventListener('onmouseenter', this, this.__domouseenter);
-            pickableComponent.removeEventListener('onmousehover', this, this.__domousehover);
-            pickableComponent.removeEventListener('onmouseleave', this, this.__domouseleave);
-            pickableComponent.removeEventListener('onmousemove', this, this.__domousemove);
-            pickableComponent.removeEventListener('onmousedown', this, this.__domousedown);
-            pickableComponent.removeEventListener('onmouseup', this, this.__domouseup);
-            pickableComponent.removeEventListener('onclick', this, this.__doclick);
+        var pickComponent = entity.getComponent(PickComponent);
+        if (pickComponent) {
+            pickComponent.removeEventListener('onmouseenter', this, this.__domouseenter);
+            pickComponent.removeEventListener('onmousehover', this, this.__domousehover);
+            pickComponent.removeEventListener('onmouseleave', this, this.__domouseleave);
+            pickComponent.removeEventListener('onmousemove', this, this.__domousemove);
+            pickComponent.removeEventListener('onmousedown', this, this.__domousedown);
+            pickComponent.removeEventListener('onmouseup', this, this.__domouseup);
+            pickComponent.removeEventListener('onclick', this, this.__doclick);
         }
     };
 

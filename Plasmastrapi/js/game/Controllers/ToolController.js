@@ -2,7 +2,7 @@
     // Base
     'controller',
     // Components
-    'pickable-component',
+    'pick-component',
     'pose-component',
     // Tools
     'cutting-tool',
@@ -13,7 +13,7 @@
     'cutting-tool-cursor',
     'trash-tool-cursor',
 ],
-    function (Controller, PickableComponent, PoseComponent, CuttingTool, PickingTool, PlacingTool, TrashTool, WireTool, CuttingToolCursor, TrashToolCursor) {
+    function (Controller, PickComponent, PoseComponent, CuttingTool, PickingTool, PlacingTool, TrashTool, WireTool, CuttingToolCursor, TrashToolCursor) {
 
     // CLASS ToolController
     ToolController.prototype = Object.create(Controller.prototype);
@@ -34,11 +34,11 @@
     ToolController.prototype.__oninit = function () {
         var self = this;
         this.__hotkeys = {
-            "1": function () { self.__engine.sceneController.circuitDesignScene.andGateButton.getComponent(PickableComponent).pick(); },
-            "2": function () { self.__engine.sceneController.circuitDesignScene.nandGateButton.getComponent(PickableComponent).pick(); },
-            "3": function () { self.__engine.sceneController.circuitDesignScene.orGateButton.getComponent(PickableComponent).pick(); },
-            "4": function () { self.__engine.sceneController.circuitDesignScene.xorGateButton.getComponent(PickableComponent).pick(); },
-            "5": function () { self.__engine.sceneController.circuitDesignScene.powerSourceButton.getComponent(PickableComponent).pick(); },
+            "1": function () { self.__engine.sceneController.circuitDesignScene.andGateButton.getComponent(PickComponent).pick(); },
+            "2": function () { self.__engine.sceneController.circuitDesignScene.nandGateButton.getComponent(PickComponent).pick(); },
+            "3": function () { self.__engine.sceneController.circuitDesignScene.orGateButton.getComponent(PickComponent).pick(); },
+            "4": function () { self.__engine.sceneController.circuitDesignScene.xorGateButton.getComponent(PickComponent).pick(); },
+            "5": function () { self.__engine.sceneController.circuitDesignScene.powerSourceButton.getComponent(PickComponent).pick(); },
             "w": function () { self.equipCuttingTool(); },
             "q": function () { self.equipTrashTool(); },
         }
@@ -82,11 +82,11 @@
     };
     // public methods
     ToolController.prototype.setCompatibilityFilter = function (filter) {
-        this.__engine.pickablesContainer.forEach(function (pickableComponent) {
-            if (filter.resolve(pickableComponent)) {
-                pickableComponent.enable();
+        this.__engine.pickablesContainer.forEach(function (pickComponent) {
+            if (filter.resolve(pickComponent)) {
+                pickComponent.enable();
             } else {
-                pickableComponent.disable();
+                pickComponent.disable();
             }
         });
     };

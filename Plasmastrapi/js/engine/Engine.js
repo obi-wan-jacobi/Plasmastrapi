@@ -5,7 +5,7 @@ define([
     // Containers
     'entity-container',
     'event-emitter-container',
-    'pickable-component-container',
+    'pick-component-container',
     // Systems
     'collision-system',
     'draw-system',
@@ -13,7 +13,7 @@ define([
     'motion-system',
     'pick-system'
 ],
-function (System, EntityContainer, EventEmitterContainer, PickableComponentContainer, CollissionSystem, DrawSystem, InputSystem, MotionSystem, PickSystem) {
+function (System, EntityContainer, EventEmitterContainer, PickComponentContainer, CollissionSystem, DrawSystem, InputSystem, MotionSystem, PickSystem) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -33,7 +33,7 @@ function (System, EntityContainer, EventEmitterContainer, PickableComponentConta
 	Engine.prototype.__registerContainers = function () {
 	    this.register('eventEmitterContainer', new EventEmitterContainer());
 	    this.register('entityContainer', new EntityContainer());
-	    this.register('pickablesContainer', new PickableComponentContainer());
+	    this.register('pickablesContainer', new PickComponentContainer());
 	};
 	Engine.prototype.__registerSystems = function () {
 	    this.register('inputSystem', new InputSystem());

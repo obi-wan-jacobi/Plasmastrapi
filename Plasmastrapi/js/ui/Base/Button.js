@@ -2,9 +2,9 @@
     // Base
     'ui-element',
     // Components
-    'pickable-component'
+    'pick-component'
 ],
-function (UIElement, PickableComponent) {
+function (UIElement, PickComponent) {
 
     // CLASS Button
     Button.prototype = Object.create(UIElement.prototype);
@@ -14,7 +14,7 @@ function (UIElement, PickableComponent) {
         UIElement.call(this, x, y, mesh, MeshDisplaySettings);
 
         // configure click action
-        var pickableComponent = this.getComponent(PickableComponent);
+        var pickComponent = this.getComponent(PickComponent);
     };
     
     return Button;

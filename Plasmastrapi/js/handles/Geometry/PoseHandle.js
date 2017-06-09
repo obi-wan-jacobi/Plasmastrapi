@@ -7,20 +7,20 @@ function (Handle, Pose, PoseDisplaySettings) {
         Handle.call(this, pose, displaySettings, Pose, PoseDisplaySettings);
     };
     PoseHandle.prototype.getPosition = function () {
-        return new Position(this.__target.x, this.__target.y);
+        return new Position(this.__data.x, this.__data.y);
     };
     PoseHandle.prototype.setPosition = function (newPosition) {
         if (!(newPosition instanceof Position)) {
             throw new Error(this.constructor.name + ':position set - ' + newPosition + ' is not an instance of ' + Position.name);
         }
-        this.__target = new Pose(newPosition.x, newPosition.y, this.__target.a);
+        this.__data = new Pose(newPosition.x, newPosition.y, this.__data.a);
         return newPosition;
     }
     PoseHandle.prototype.getOrientation = function () {
-        return this.__target.a;
+        return this.__data.a;
     };
     PoseHandle.prototype.setOrientation = function (newOrientation) {
-        this.__target = new Pose(this.__target.x, this.__target.y, newOrientation);
+        this.__data = new Pose(this.__data.x, this.__data.y, newOrientation);
         return newOrientation
     };
 

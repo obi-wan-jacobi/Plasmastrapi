@@ -14,7 +14,7 @@ function (Handle, Curve, LineDisplaySettings) {
     };
     CurveHandle.prototype.draw = function (ctx) {
         var displaySettings = this.__displaySettings;
-        var vertices = this.__target.vertices;
+        var vertices = this.__data.vertices;
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(vertices[0].x, vertices[0].y);

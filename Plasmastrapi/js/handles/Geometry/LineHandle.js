@@ -9,16 +9,16 @@ function (Handle, Line, LineDisplaySettings, Position, Rectangle) {
     };
     // public prototypal variables
     LineHandle.prototype.getPosition = function () {
-        var head = this.__target.headVertex;
-        var tail = this.__target.tailVertex;
+        var head = this.__data.headVertex;
+        var tail = this.__data.tailVertex;
         var x = Math.abs(head.x + tail.x) / 2;
         var y = Math.abs(head.y + tail.y) / 2;
         return new Position(x, y);
     };
     LineHandle.prototype.getOrientation = function () {
         // heading from tail to head
-        var head = this.__target.headVertex;
-        var tail = this.__target.tailVertex;
+        var head = this.__data.headVertex;
+        var tail = this.__data.tailVertex;
         var x = (head.x - tail.x);
         var y = (head.y - tail.y);
         if (x < 0) {
@@ -28,7 +28,7 @@ function (Handle, Line, LineDisplaySettings, Position, Rectangle) {
     };
     LineHandle.prototype.getLength = function () {
         // euclidean distance from tail to head
-        return euclideanDistance(this.__target.headVertex, this.__target.tailVertex);
+        return euclideanDistance(this.__data.headVertex, this.__data.tailVertex);
     };
     LineHandle.prototype.getMesh = function () {
         // line converted into static rectangular mesh
@@ -39,8 +39,8 @@ function (Handle, Line, LineDisplaySettings, Position, Rectangle) {
     };
     LineHandle.prototype.draw = function (ctx) {
         // draw line and apply options
-        var head = this.__target.headVertex;
-        var tail = this.__target.tailVertex;
+        var head = this.__data.headVertex;
+        var tail = this.__data.tailVertex;
         var displaySettings = this.__displaySettings;
         ctx.save();
         ctx.beginPath();

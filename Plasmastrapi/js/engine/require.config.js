@@ -6,7 +6,7 @@
         'input-component': './engine/Components/InputComponent',
         'line-component': './engine/Components/LineComponent',
         'mesh-component': './engine/Components/MeshComponent',
-        'pickable-component': './engine/Components/PickableComponent',
+        'pick-component': './engine/Components/PickComponent',
         'pose-component': './engine/Components/PoseComponent',
         'sprite-component': './engine/Components/SpriteComponent',
         'text-label-component': './engine/Components/TextLabelComponent',
@@ -15,7 +15,7 @@
         // Containers
         'entity-container': './engine/Containers/EntityContainer',
         'event-emitter-container': './engine/Containers/EventEmitterContainer',
-        'pickable-component-container': './engine/Containers/PickableComponentContainer',
+        'pick-component-container': './engine/Containers/PickComponentContainer',
         // Objects
         'atomic-array': './engine/Objects/AtomicArray',
         'atomic-keypair-array': './engine/Objects/AtomicKeyPairArray',

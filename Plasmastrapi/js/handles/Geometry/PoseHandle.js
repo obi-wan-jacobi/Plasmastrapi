@@ -14,14 +14,12 @@ function (Handle, Pose, PoseDisplaySettings) {
             throw new Error(this.constructor.name + ':position set - ' + newPosition + ' is not an instance of ' + Position.name);
         }
         this.__data = new Pose(newPosition.x, newPosition.y, this.__data.a);
-        return newPosition;
     }
     PoseHandle.prototype.getOrientation = function () {
         return this.__data.a;
     };
     PoseHandle.prototype.setOrientation = function (newOrientation) {
         this.__data = new Pose(this.__data.x, this.__data.y, newOrientation);
-        return newOrientation
     };
 
     Terminal.prototype.__setPoseRelativeToParentElement = function () {

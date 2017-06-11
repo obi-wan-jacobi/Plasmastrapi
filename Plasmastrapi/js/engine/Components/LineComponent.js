@@ -17,6 +17,11 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
             'onpositionchange',
             'onorientationchange'
         );
+	    // dependencies
+		this.__registerLoadableDependency(this.__tailPose, 'onpositionchange', this, this.__$onpositionchange);
+		this.__registerLoadableDependency(this.__tailPose, 'onorientationchange', this, this.__$onorientationchange);
+		this.__registerLoadableDependency(this.__headPose, 'onpositionchange', this, this.__$onpositionchange);
+		this.__registerLoadableDependency(this.__headPose, 'onorientationchange', this, this.__$onorientationchange);
 	};
     // private methods
 	LineComponent.prototype.__validatePoseComponent = function (poseComponent) {
@@ -24,18 +29,6 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
 	        throw new Error(this.constructor.name + ':validatePoseComponent - ' + poseComponent.constructor.name + ' must be of type ' + PoseComponent.name);
 	    }
 	};
-	LineComponent.prototype.__onload = function () {
-		this.__tailPose.addEventListener('onpositionchange', this, this.__$onpositionchange);
-		this.__tailPose.addEventListener('onorientationchange', this, this.__$onorientationchange);
-		this.__headPose.addEventListener('onpositionchange', this, this.__$onpositionchange);
-		this.__headPose.addEventListener('onorientationchange', this, this.__$onorientationchange);
-	};
-	LineComponent.prototype.__onunload = function() {
-	    this.__tailPose.removeEventListener('onpositionchange', this, this.__$onpositionchange);
-	    this.__tailPose.removeEventListener('onorientationchange', this, this.__$onorientationchange);
-	    this.__headPose.removeEventListener('onpositionchange', this, this.__$onpositionchange);
-	    this.__headPose.removeEventListener('onorientationchange', this, this.__$onorientationchange);
-    };
     LineComponent.prototype.__onpositionchange = function () {
         this.__updatePoseComponent();
         this.__updateMeshComponent();

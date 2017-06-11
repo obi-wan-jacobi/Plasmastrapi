@@ -29,17 +29,20 @@ function (EventEmitter, Drawable) {
             throw new Error(this.constructor.name + ':validateHandleMethod - The supplied argument must be a function.');
         }
     };
+    Component.prototype.__registerLoadableDependency = function (ComponentType) {
+
+    };
+    Component.prototype.__registerComponentDependency = function (ComponentType) {
+
+    };
     Component.prototype.__injectHandleMethodEventCallback = function (handleMethodName, event) {
         this.__validateEventIsImplemented(event);
         this.__validateHandleMethod(fn);
         var self = this;
         var fnProxy = this.__handle[handleMethodName];
         this.__handle[handleMethodName] = function () {
-            var returnArgs = fnProxy.apply(this.__handle, arguments) || [];
-            if (!(returnArgs instanceof Array)) {
-                returnArgs = [returnArgs];
-            }
-            self.__fire.apply(this, [event].concat(returnArgs));
+            fnProxy.apply(self.__handle, arguments);
+            self.__fire.apply(self, [event, self.__handle]);
         };
     };
     // public methods
@@ -52,9 +55,6 @@ function (EventEmitter, Drawable) {
     };
     Component.prototype.getHandle = function () {
         return this.__handle;
-    };
-    Component.prototype.setHandle = function (handle) {
-        this.__handle = handle;
     };
     Component.prototype.getData = function () {
         return this.__handle.getData();

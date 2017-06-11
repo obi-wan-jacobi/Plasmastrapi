@@ -7,8 +7,6 @@ function (Component, Position, PoseComponent) {
         function TextLabelComponent(textLabelHandle) {
             // inherits from
             Component.call(this, textLabelHandle);
-            // apply mixins
-            Component.Mixins.Drawable.call(this);
         };
 
         return TextLabelComponent;

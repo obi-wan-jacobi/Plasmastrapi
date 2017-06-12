@@ -1,5 +1,5 @@
-define(['event-emitter', 'entity', 'atomic-array'],
-function (EventEmitter, Entity, AtomicArray) {
+define(['event-emitter', 'entity', 'linked-list'],
+function (EventEmitter, Entity, LinkedList) {
 
     // CLASS Scene
     Scene.prototype = Object.create(EventEmitter.prototype);
@@ -7,7 +7,7 @@ function (EventEmitter, Entity, AtomicArray) {
 	function Scene() {
         EventEmitter.call(this);
 		// private variables
-        this.__contents = new AtomicArray(Entity);
+        this.__contents = new LinkedList(Entity);
 	    // apply mixins
         EventEmitter.Mixins.Loadable.call(this);
 	};

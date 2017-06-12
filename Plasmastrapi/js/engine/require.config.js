@@ -17,9 +17,9 @@
         'event-emitter-container': './engine/Containers/EventEmitterContainer',
         'pick-component-container': './engine/Containers/PickComponentContainer',
         // Objects
-        'atomic-array': './engine/Objects/AtomicArray',
-        'atomic-keypair-array': './engine/Objects/AtomicKeyPairArray',
-        'atomic-link': './engine/Objects/AtomicLink',
+        'linked-list': './engine/Objects/LinkedList',
+        'dictionary': './engine/Objects/Dictionary',
+        'link': './engine/Objects/Link',
         'base': './engine/Objects/Base',
         'component': './engine/Objects/Component',
         'container': './engine/Objects/Container',

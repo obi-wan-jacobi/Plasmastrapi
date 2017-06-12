@@ -1,5 +1,5 @@
-define(['base', 'atomic-keypair-array', 'destructible', 'loadable', 'pausable'],
-function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
+define(['base', 'dictionary', 'destructible', 'loadable', 'pausable'],
+function(Base, Dictionary, Destructible, Loadable, Pausable) {
 
     // CLASS EventEmitter
     EventEmitter.prototype = Object.create(Base.prototype);
@@ -37,7 +37,7 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
         var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
         this["__" + event].apply(this, args);
         // lock new subscriptions on this event to avoid callstack overflow
-        this.__lockedEvents[event] = new AtomicKeyPairArray();
+        this.__lockedEvents[event] = new Dictionary();
         this.__events[event].forEach(function (subscriber, callback) {
             callback.apply(subscriber, args);
         });
@@ -70,7 +70,7 @@ function(Base, AtomicKeyPairArray, Destructible, Loadable, Pausable) {
                     this.__fire.apply(this, arguments);
                 };
             }(event);
-            this.__events[event] = new AtomicKeyPairArray();
+            this.__events[event] = new Dictionary();
         }
     };
     EventEmitter.prototype.addEventListener = function(event, subscriber, callback) {

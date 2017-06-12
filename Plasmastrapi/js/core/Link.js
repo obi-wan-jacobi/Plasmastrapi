@@ -1,27 +1,27 @@
 define(function() {
 
-    function AtomicLink(value) {
+    function Link(value) {
         this.__value = value;
         this.__next = null; 
     };
-    AtomicLink.prototype.__validateLink = function(link) {
-        if (link && !(link instanceof AtomicLink)) {
+    Link.prototype.__validateLink = function(link) {
+        if (link && !(link instanceof Link)) {
             throw new Error(this.constructor.name + ':validateLink - ' + link + ' must be an instance of ' + this.constructor.name + ' or must be null.');
         }
     };
-    AtomicLink.prototype.hasNext = function() {
+    Link.prototype.hasNext = function() {
         return (this.next()) ? true : false;
     };
-    AtomicLink.prototype.setNext = function(link) {
+    Link.prototype.setNext = function(link) {
         this.__validateLink(link);
         this.__next = link;
     };
-    AtomicLink.prototype.next = function() {
+    Link.prototype.next = function() {
         return this.__next;
     };
-    AtomicLink.prototype.val = function() {
+    Link.prototype.val = function() {
         return this.__value;
     };
 
-    return AtomicLink;
+    return Link;
 });

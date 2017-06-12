@@ -69,7 +69,7 @@ tech debt:
 optimization
 - tool compatibility filtering --> sort pickable components using a tree?
 - MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
-- AtomicKeyPairArray --> store this.__end to avoid O(n) for this.push
+- Dictionary --> store this.__end to avoid O(n) for this.push
 - entity destruction (EventEmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
 
 scalability concerns:

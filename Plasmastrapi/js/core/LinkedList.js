@@ -1,27 +1,27 @@
-define(['atomic-link'],
-function (AtomicLink) {
+define(['link'],
+function (Link) {
 
     // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle.
     // Index-free iteration.
-    function AtomicArray(/* optional */ memberClass) {
+    function LinkedList(/* optional */ memberClass) {
         this.__memberClass = memberClass;
         this.__start = null;
     };
-    AtomicArray.prototype.__validateMemberClass = function(item) {
+    LinkedList.prototype.__validateMemberClass = function(item) {
         if (this.__memberClass) {
             if (!(item instanceof this.__memberClass)) {
                 throw new Error(this.constructor.name + ':validateMemberClass - ' + item.constructor.name + ' must be an instance of ' + this.__memberClass.constructor.name);
             }
         }
     };
-    AtomicArray.prototype.__validateNoDuplicateItems = function(item) {
+    LinkedList.prototype.__validateNoDuplicateItems = function(item) {
         this.forEach(function(ownedItem) {
             if (ownedItem === item) {
                 throw new Error(this.constructor.name + ':validateNoDuplicateItems - Duplicate item found on ' + item + '.');
             }
         }, this);
     };
-    AtomicArray.prototype.__forEachLink = function (fn) {
+    LinkedList.prototype.__forEachLink = function (fn) {
         var link = this.__start;
         var result;
         while (link) {
@@ -33,7 +33,7 @@ function (AtomicLink) {
         }
         return result;
     };
-    AtomicArray.prototype.forEach = function(fn, /* optional */ caller) {
+    LinkedList.prototype.forEach = function(fn, /* optional */ caller) {
         var link = this.__start;
         var result;
         while(link) {
@@ -46,10 +46,10 @@ function (AtomicLink) {
         }
         return result;
     };
-    AtomicArray.prototype.push = function(item) {
+    LinkedList.prototype.push = function(item) {
         this.__validateMemberClass(item);
         this.__validateNoDuplicateItems(item);
-        var newLink = new AtomicLink(item);
+        var newLink = new Link(item);
         if (!this.__start) {
             this.__start = newLink;
             return true;
@@ -61,7 +61,7 @@ function (AtomicLink) {
             }
         });
     };
-    AtomicArray.prototype.splice = function(item) {
+    LinkedList.prototype.splice = function(item) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
             var ownedItem = link.val();
@@ -76,7 +76,7 @@ function (AtomicLink) {
             previousLink = link;
         });
     };
-    AtomicArray.prototype.contains = function(item) {
+    LinkedList.prototype.contains = function(item) {
         return this.__forEachLink(function (ownedItem) {
             if (ownedItem === item) {
                 return true;
@@ -84,5 +84,5 @@ function (AtomicLink) {
         });
     };
 
-    return AtomicArray;
+    return LinkedList;
 });

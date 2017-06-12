@@ -1,5 +1,5 @@
-define(['event-emitter', 'component', 'atomic-array'],
-function (EventEmitter, Component, AtomicArray) {
+define(['event-emitter', 'component', 'linked-list'],
+function (EventEmitter, Component, LinkedList) {
 
     // CLASS Entity
     Entity.prototype = Object.create(EventEmitter.prototype);
@@ -9,7 +9,7 @@ function (EventEmitter, Component, AtomicArray) {
         EventEmitter.call(this);
         // private variables
         this.__parent = null;
-        this.__components = new AtomicArray(Component);
+        this.__components = new LinkedList(Component);
         // apply mixins
         EventEmitter.Mixins.Loadable.call(this);
         EventEmitter.Mixins.Destructible.call(this);

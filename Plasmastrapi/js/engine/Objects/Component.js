@@ -29,11 +29,33 @@ function (EventEmitter, Drawable) {
             throw new Error(this.constructor.name + ':validateHandleMethod - The supplied argument must be a function.');
         }
     };
-    Component.prototype.__registerLoadableDependency = function (ComponentType) {
-
+    Component.prototype.__registerLoadableDependency = function (subject, event, observer, callback) {
+        var self = this;
+        var fnOnLoadProxy = this.__onload || function () { };
+        this.__onload = function () {
+            fnOnLoadProxy.apply(self, arguments);
+            subject.addEventListener(event, observer, callback);
+        };
+        var fnOnUnloadProxy = function () { };
+        this.__onunload = function () {
+            fnOnUnloadProxy.apply(self, arguments);
+            subject.removeEventListener(event, observer, callback);
+        };
     };
-    Component.prototype.__registerComponentDependency = function (ComponentType) {
-
+    Component.prototype.__registerLoadableComponentDependency = function (ComponentType, event, observer, callback) {
+        var self = this;
+        var fnOnLoadProxy = this.__onload || function () { };
+        this.__onload = function () {
+            var component = this.__entity.getComponent(ComponentType);
+            fnOnLoadProxy.apply(self, arguments);
+            component.addEventListener(event, observer, callback);
+        };
+        var fnOnUnloadProxy = function () { };
+        this.__onunload = function () {
+            var component = this.__entity.getComponent(ComponentType);
+            fnOnUnloadProxy.apply(self, arguments);
+            component.removeEventListener(event, observer, callback);
+        };
     };
     Component.prototype.__injectHandleMethodEventCallback = function (handleMethodName, event) {
         this.__validateEventIsImplemented(event);

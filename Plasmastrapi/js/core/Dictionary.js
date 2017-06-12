@@ -1,19 +1,18 @@
-define(['atomic-link'],
-function (AtomicLink) {
+define(['link'],
+function (Link) {
     
     // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle
-    function AtomicKeyPairArray() {
+    function Dictionary() {
         this.__start = null;
     };
-    AtomicKeyPairArray.prototype.__validateNoDuplicatePairs = function(key, value) {
+    Dictionary.prototype.__validateNoDuplicatePairs = function(key, value) {
         this.forEach(function(ownedItemKey, ownedItemValue) {
             if (ownedItemKey === key && ownedItemValue === value) {
                 throw new Error(this.constructor.name + ':validateNoDuplicatePairs - Duplicate item found on key: ' + key.constructor.name + ' value: ' + value.constructor.name);
-                var test = 'test';
             }
         }, this);
     };
-    AtomicKeyPairArray.prototype.__forEachLink = function (fn) {
+    Dictionary.prototype.__forEachLink = function (fn) {
         var link = this.__start;
         var result;
         while (link) {
@@ -25,7 +24,7 @@ function (AtomicLink) {
         }
         return result;
     };
-    AtomicKeyPairArray.prototype.forEach = function(fn, /* optional */ caller) {
+    Dictionary.prototype.forEach = function(fn, /* optional */ caller) {
         var link = this.__start;
         var result;
         while(link) {
@@ -38,15 +37,15 @@ function (AtomicLink) {
         }
         return result;
     };
-    AtomicKeyPairArray.prototype.unshift = function (key, value) {
+    Dictionary.prototype.unshift = function (key, value) {
         this.__validateNoDuplicatePairs(key, value);
-        var newLink = new AtomicLink({ key: key, value: value });
+        var newLink = new Link({ key: key, value: value });
         newLink.setNext(this.__start);
         this.__start = newLink;
     };
-    AtomicKeyPairArray.prototype.push = function(key, value) {
+    Dictionary.prototype.push = function(key, value) {
         this.__validateNoDuplicatePairs(key, value);
-        var newLink = new AtomicLink({key: key, value: value});
+        var newLink = new Link({key: key, value: value});
         if (!this.__start) {
             this.__start = newLink;
             return;
@@ -58,7 +57,7 @@ function (AtomicLink) {
             }
         });
     };
-    AtomicKeyPairArray.prototype.splice = function(key, value) {
+    Dictionary.prototype.splice = function(key, value) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
             var item = link.val();
@@ -73,7 +72,7 @@ function (AtomicLink) {
             previousLink = link;
         });
     };
-    AtomicKeyPairArray.prototype.purgeItemsWithKey = function(key) {
+    Dictionary.prototype.purgeItemsWithKey = function(key) {
         var previousLink = this.__start;
         this.__forEachLink(function (link) {
             var item = link.val();
@@ -90,5 +89,5 @@ function (AtomicLink) {
         });
     };
 
-    return AtomicKeyPairArray;
+    return Dictionary;
 });

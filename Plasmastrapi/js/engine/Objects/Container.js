@@ -1,12 +1,12 @@
-define(['event-emitter', 'atomic-array'],
-function (EventEmitter, AtomicArray) {
+define(['event-emitter', 'linked-list'],
+function (EventEmitter, LinkedList) {
 
     // CLASS Container
     Container.prototype = Object.create(EventEmitter.prototype);
     Container.prototype.constructor = Container;
     function Container(/* optional */ memberClass) {
         EventEmitter.call(this);
-        this.__members = new AtomicArray(memberClass);
+        this.__members = new LinkedList(memberClass);
         // events
         this.__registerEvents(
             'onadd',

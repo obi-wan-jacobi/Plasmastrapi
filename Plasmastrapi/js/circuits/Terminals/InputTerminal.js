@@ -1,30 +1,18 @@
-﻿define([
-    // Base
-    'terminal',
-    // Circuits
-    'output-terminal',
-    // Components
-    'sprite-component',
-    // Configs
-    'circuits-config'
-],
-function (Terminal, OutputTerminal, SpriteComponent, config) {
+﻿define(['terminal', 'output-terminal'],
+function (Terminal, OutputTerminal) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
     InputTerminal.prototype.constructor = InputTerminal;
-    function InputTerminal(offsetPosition, parentElement) {
-
+    function InputTerminal(circuitElement) {
         // inherits from
-        Terminal.call(this, offsetPosition, parentElement, config.InputTerminal.defaultFrameIndex);
-
-        // set default sprite frame
-        var spriteComponent = this.getComponent(SpriteComponent);
-        spriteComponent.setFrame(this.__defaultFrameIndex);
-
+        Terminal.call(circuitElement);
         this.__connections = [];
     };
     // public methods
+    InputTerminal.prototype.getConnections = function () {
+        return this.__connections;
+    };
     InputTerminal.prototype.addConnection = function (outputTerminal) {
         if (!(outputTerminal instanceof OutputTerminal)) {
             throw new Error(this.constructor.name + ':addConnection - ' + outputTerminal.constructor.name + ' must be an instance of ' + OutputTerminal.name);
@@ -41,7 +29,7 @@ function (Terminal, OutputTerminal, SpriteComponent, config) {
         var terminalToDisconnect = this.__connections[connectionIndex];
         this.__connections.splice(connectionIndex, 1);
         terminalToDisconnect.removeEventListener('onstatechange', this.__parent, this.__parent.updateState);
-        this.__parent.updateState(terminalToDisconnect.states.NOPOWER);
+        this.__parent.updateState(terminalToDisconnect.STATES.NOPOWER);
     };
     
     return InputTerminal;

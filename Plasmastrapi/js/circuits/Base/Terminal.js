@@ -4,11 +4,9 @@ function (BaseElement) {
     // CLASS Terminal
     Terminal.prototype = Object.create(BaseElement.prototype);
     Terminal.prototype.constructor = Terminal;
-    function Terminal(parentElement, terminalWire) {
+    function Terminal(circuitElement) {
         BaseElement.call(this);
-        this.addParent(parentElement)
-        // TODO
-        // add terminal wire
+        this.addParent(circuitElement)
     };
     
     return Terminal;

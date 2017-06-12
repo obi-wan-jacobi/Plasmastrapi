@@ -1,17 +1,13 @@
 ﻿define(['circuit-element', 'output-terminal'],
-function (CircuitElement, OutputTerminal) {
+function (CircuitElement) {
 
     // CLASS PowerSource
     PowerSource.prototype = Object.create(CircuitElement.prototype);
     PowerSource.prototype.constructor = PowerSource;
-    function PowerSource(outputTerminal) {
+    function PowerSource() {
         CircuitElement.call(this);
-
-        // output terminal
-        this.outputTerminal = outputTerminal
-
         // initialize high
-        this.outputTerminal.state = this.outputTerminal.states.HIGH;
+        this.outputTerminal.state = STATES.HIGH;
     };
     
     return PowerSource;

@@ -1,20 +1,15 @@
-﻿define([
-    // Base
-    'terminal',
-    // Configs
-    'circuits-config'
-],
-function (Terminal, config) {
+﻿define(['terminal', 'circuit-constants'],
+function (Terminal, CIRCUITCONSTANTS) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
     OutputTerminal.prototype.constructor = OutputTerminal;
-    function OutputTerminal(offsetPosition, circuitElement) {
+    function OutputTerminal(circuitElement) {
 
-        Terminal.call(this, offsetPosition, circuitElement, config.OutputTerminal.defaultFrameIndex);
+        Terminal.call(this, circuitElement);
 
         // state
-        this.__state = this.states.NOPOWER;
+        this.__state = CIRCUITCONSTANTS.STATES.NOPOWER;
 
         // events
         this.__registerEvents(
@@ -22,40 +17,34 @@ function (Terminal, config) {
         );
     };
     // public prototypal variables
-    OutputTerminal.prototype.states = {
-        NOPOWER: -1,
-        LOW: 0,
-        HIGH: 1
-    };
     Object.defineProperties(OutputTerminal.prototype, {
-        'state': {
-            get: function () {
-                return this.__state;
-            },
-            set: function (state) {
-                if (!(state >= -1 && state <= 1)) {
-                    throw new Error(this.constructor.name + ':state set - State ' + state + ' is not valid.');
-                }
-                this.__state = state;
-                this.__fire('onstatechange', this.__state);
-            }
-        },
         'isPowered': {
             get: function () {
-                return this.__state > this.states.NOPOWER;
+                return this.__state > CIRCUITCONSTANTS.STATES.NOPOWER;
             }
         },
         'isHigh': {
             get: function () {
-                return this.__state === this.states.HIGH;
+                return this.__state === CIRCUITCONSTANTS.STATES.HIGH;
             }
         },
         'isLow': {
             get: function () {
-                return this.__state === this.states.LOW;
+                return this.__state === CIRCUITCONSTANTS.STATES.LOW;
             }
         }
     });
-    
+    // public methods
+    OutputTerminal.prototype.getState = function (state) {
+        return this.__state;
+    };
+    OutputTerminal.prototype.setState = function () {
+        if (!(state >= -1 && state <= 1)) {
+            throw new Error(this.constructor.name + ':state set - State ' + state + ' is not valid.');
+        }
+        this.__state = state;
+        this.__fire('onstatechange', this.__state);
+    };
+
     return OutputTerminal;
 });

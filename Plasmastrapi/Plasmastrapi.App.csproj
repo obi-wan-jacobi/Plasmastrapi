@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="js\circuits\config.js" />
+    <Content Include="js\circuits\constants.js" />
     <Content Include="js\circuits\require.config.js" />
     <Content Include="js\data\Base\DisplaySettings.js" />
     <Content Include="js\data\Base\Primitive.js" />

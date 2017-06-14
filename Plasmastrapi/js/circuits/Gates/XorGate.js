@@ -9,7 +9,7 @@ function (Gate, CIRCUITCONSTANTS) {
     };
     XorGate.prototype.updateState = function (inputState) {
         var STATES = CIRCUITCONSTANTS.STATES;
-        var connections = this.__getInputConnections();
+        var connections = this.__inputs;
         var nextState = STATES.LOW;
         var isPowered = false;
         // if this update was initiated by connection removal

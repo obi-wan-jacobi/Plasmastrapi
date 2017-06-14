@@ -8,6 +8,7 @@ function (Terminal, OutputTerminal) {
         // inherits from
         Terminal.call(circuitElement);
         this.__connections = [];
+        circuitElement.attachInput(this);
     };
     // public methods
     InputTerminal.prototype.getConnections = function () {
@@ -19,7 +20,7 @@ function (Terminal, OutputTerminal) {
         }
         this.__connections.push(outputTerminal);
         outputTerminal.addEventListener('onstatechange', this.__parent, this.__parent.updateState);
-        this.__parent.updateState(outputTerminal.state);
+        this.__parent.updateState(outputTerminal.getState());
     };
     InputTerminal.prototype.removeConnection = function (outputTerminal) {
         var connectionIndex = this.__connections.indexOf(outputTerminal);

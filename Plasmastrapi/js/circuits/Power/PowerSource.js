@@ -1,5 +1,5 @@
-﻿define(['circuit-element', 'output-terminal'],
-function (CircuitElement) {
+﻿define(['circuit-element', 'circuit-constants'],
+function (CircuitElement, CIRCUITCONSTANTS) {
 
     // CLASS PowerSource
     PowerSource.prototype = Object.create(CircuitElement.prototype);
@@ -7,7 +7,7 @@ function (CircuitElement) {
     function PowerSource() {
         CircuitElement.call(this);
         // initialize high
-        this.outputTerminal.state = STATES.HIGH;
+        this.__state = CIRCUITCONSTANTS.STATES.HIGH;
     };
     
     return PowerSource;

@@ -9,10 +9,16 @@ function (Gate, CIRCUITCONSTANTS) {
     };
     AndGate.prototype.updateState = function (inputState) {
         var STATES = CIRCUITCONSTANTS.STATES;
-        var connections = this.__getInputConnections();
+        var connections = this.__inputs;
         var nextState = STATES.HIGH;
         var isPowered = false;
-        // if this update was initiated by connection removal
+
+        if (this.__state > STATES.NOPOWER) {
+
+        } else {
+            this.__state = inputState;
+        }
+
         if (inputState === STATES.NOPOWER) {
             for (var i = 0, L = connections.length; i < L; i++) {
                 if (connections[i].isPowered) {

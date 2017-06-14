@@ -8,6 +8,8 @@ function (Terminal, CIRCUITCONSTANTS) {
 
         Terminal.call(this, circuitElement);
 
+
+
         // state
         this.__state = CIRCUITCONSTANTS.STATES.NOPOWER;
 

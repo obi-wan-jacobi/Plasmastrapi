@@ -1,5 +1,5 @@
-﻿define(['base-element'],
-function (BaseElement) {
+﻿define(['base-element', 'circuit-constants'],
+function (BaseElement, CIRCUITCONSTANTS) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(BaseElement.prototype);
@@ -8,21 +8,19 @@ function (BaseElement) {
         // inherits from
         BaseElement.call(this);
         this.__inputs = [];
+        this.__state = CIRCUITCONSTANTS.STATES.NOPOWER;
     };
     // private methods
     CircuitElement.prototype.__ondestroy = function () {
         this.__engine.circuitElementContainer.remove(this);
     };
-    CircuitElement.prototype.__getInputConnections = function () {
-        var connections = [];
-        for (var input in this.__inputs) {
-            connections.push(input.getConnections());
-        }
-        return connections;
+    CircuitElement.prototype.__setState = function (state) {
+        this.__state = state;
+        this.__fire('onupdatestate');
     };
     // public methods
     CircuitElement.prototype.attachInput = function (inputTerminal) {
-        this.__inputs.push(inputTerminal);
+        this.__inputs = this.__inputs.concat(input.getConnections());
     };
     CircuitElement.prototype.injectEngine = function (engine) {
         BaseElement.prototype.injectEngine.call(this, engine);

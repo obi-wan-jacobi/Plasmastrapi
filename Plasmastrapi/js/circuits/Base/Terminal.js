@@ -6,7 +6,7 @@ function (BaseElement) {
     Terminal.prototype.constructor = Terminal;
     function Terminal(circuitElement) {
         BaseElement.call(this);
-        this.addParent(circuitElement)
+        this.addParent(circuitElement);
     };
     
     return Terminal;

@@ -1,15 +1,15 @@
-define(['event-emitter', 'entity', 'linked-list'],
-function (EventEmitter, Entity, LinkedList) {
+define(['emitter', 'entity', 'linked-list'],
+function (Emitter, Entity, LinkedList) {
 
     // CLASS Scene
-    Scene.prototype = Object.create(EventEmitter.prototype);
+    Scene.prototype = Object.create(Emitter.prototype);
     Scene.prototype.constructor = Scene;
 	function Scene() {
-        EventEmitter.call(this);
+        Emitter.call(this);
 		// private variables
         this.__contents = new LinkedList(Entity);
 	    // apply mixins
-        EventEmitter.Mixins.Loadable.call(this);
+        Emitter.Mixins.Loadable.call(this);
 	};
     // private methods
 	Scene.prototype.__onload = function () {
@@ -24,7 +24,7 @@ function (EventEmitter, Entity, LinkedList) {
 	};
     // public methods
 	Scene.prototype.injectEngine = function (engine) {
-	    EventEmitter.prototype.injectEngine.call(this, engine);
+	    Emitter.prototype.injectEngine.call(this, engine);
 	    this.__contents.forEach(function (entity) {
 	        if (!entity.isEngineInjected) {
 	            entity.injectEngine(this.__engine);

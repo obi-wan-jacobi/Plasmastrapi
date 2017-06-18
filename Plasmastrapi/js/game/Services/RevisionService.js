@@ -42,14 +42,14 @@
 // 		},
 // 		beginTransaction: function() {
 // 			if (isTransactionOpen) {
-// 				throw new Error('Undoservice: Your last transaction was not properly ended.');
+// 				validator.throw('Undoservice: Your last transaction was not properly ended');
 // 			}
 // 			isTransactionOpen = true;
 // 			service.push('begin', null);
 // 		},
 // 		endTransaction: function() {
 // 			if (!isTransactionOpen) {
-// 				throw new Error('Undoservice: Your last transaction was not properly begun.');
+// 				validator.throw('Undoservice: Your last transaction was not properly begun');
 // 			}
 // 			isTransactionOpen = false;
 // 		},

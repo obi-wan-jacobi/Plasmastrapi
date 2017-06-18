@@ -11,7 +11,7 @@ function (Handle, Pose, PoseDisplaySettings) {
     };
     PoseHandle.prototype.setPosition = function (newPosition) {
         if (!(newPosition instanceof Position)) {
-            throw new Error(this.constructor.name + ':position set - ' + newPosition + ' is not an instance of ' + Position.name);
+            validator.throw(this, 'position set', newPosition + ' is not an instance of ' + Position.name);
         }
         this.__data = new Pose(newPosition.x, newPosition.y, this.__data.a);
     }

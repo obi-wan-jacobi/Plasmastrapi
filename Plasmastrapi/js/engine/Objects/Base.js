@@ -1,7 +1,13 @@
-﻿define(function () {
+﻿define(['emitter'], function (Emitter) {
 
+    Base.prototype = Object.create(Emitter.prototype);
+    Base.prototype.constructor = Base;
     function Base() {
         this.__engine = null;
+        // events
+        this.__registerEvents(
+            'oninjectengine'
+        );
     };
     // public prototypal variables
     Object.defineProperties(Base.prototype, {
@@ -12,14 +18,16 @@
         }
     });
     // public methods
-    Base.prototype.injectEngine = function (engine) {
+    Emitter.prototype.injectEngine = function (engine) {
         if (this.__engine) {
-            throw new Error(this.constructor.name + " has already received an engine reference.");
+            validator.throw(this, 'injectEngine', 'An engine reference has already been injected');
         }
         if (!engine) {
-            throw new Error(this.constructor.name + " cannot be given a null engine reference.");
+            validator.throw(this, 'injectEngine', 'The engine reference cannot be null');
         }
         this.__engine = engine;
+        this.__engine.EmitterContainer.add(this);
+        this.__fire('oninjectengine', engine);
     };
 
     return Base;

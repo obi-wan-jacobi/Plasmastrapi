@@ -4,7 +4,7 @@ define([
     'system',
     // Containers
     'entity-container',
-    'event-emitter-container',
+    'emitter-container',
     'pick-component-container',
     // Systems
     'collision-system',
@@ -13,7 +13,7 @@ define([
     'motion-system',
     'pick-system'
 ],
-function (System, EntityContainer, EventEmitterContainer, PickComponentContainer, CollissionSystem, DrawSystem, InputSystem, MotionSystem, PickSystem) {
+function (System, EntityContainer, EmitterContainer, PickComponentContainer, CollissionSystem, DrawSystem, InputSystem, MotionSystem, PickSystem) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -31,7 +31,7 @@ function (System, EntityContainer, EventEmitterContainer, PickComponentContainer
 	};
     // private methods
 	Engine.prototype.__registerContainers = function () {
-	    this.register('eventEmitterContainer', new EventEmitterContainer());
+	    this.register('EmitterContainer', new EmitterContainer());
 	    this.register('entityContainer', new EntityContainer());
 	    this.register('pickablesContainer', new PickComponentContainer());
 	};
@@ -52,7 +52,7 @@ function (System, EntityContainer, EventEmitterContainer, PickComponentContainer
 	// public methods
 	Engine.prototype.register = function (objectName, objectHandle) {
 	    if (!objectHandle.injectEngine) {
-	        throw new Error(this.constructor.name + ":register - The supplied object must implement an 'injectEngine' post-bind method.");
+	        validator.throw(this, 'register', 'The supplied object must implement an \'injectEngine\' post-bind method');
 	    }
 	    this[objectName] = objectHandle;
 	    objectHandle.injectEngine(this);

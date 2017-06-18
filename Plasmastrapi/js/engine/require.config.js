@@ -13,20 +13,13 @@
         // Component Mixins
         'drawable': './engine/Components/Mixins/Drawable',
         // Containers
-        'entity-container': './engine/Containers/EntityContainer',
-        'event-emitter-container': './engine/Containers/EventEmitterContainer',
-        'pick-component-container': './engine/Containers/PickComponentContainer',
+        'emitter-container': './engine/Containers/EmitterContainer',
         // Objects
-        'linked-list': './engine/Objects/LinkedList',
-        'dictionary': './engine/Objects/Dictionary',
-        'link': './engine/Objects/Link',
         'base': './engine/Objects/Base',
         'component': './engine/Objects/Component',
         'container': './engine/Objects/Container',
         'controller': './engine/Objects/Controller',
         'entity': './engine/Objects/Entity',
-        'event-emitter': './engine/Objects/EventEmitter',
-        'event-queue': './engine/Objects/EventQueue',
         'input-handle': './engine/Objects/InputHandle',
         'scene': './engine/Objects/Scene',
         'system': './engine/Objects/System',

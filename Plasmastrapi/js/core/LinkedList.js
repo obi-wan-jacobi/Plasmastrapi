@@ -3,53 +3,39 @@ function (Link) {
 
     // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle.
     // Index-free iteration.
-    function LinkedList(/* optional */ memberClass) {
-        this.__memberClass = memberClass;
+    function LinkedList(/* optional */ ValueType) {
+        this.__ValueType = ValueType;
         this.__start = null;
     };
-    LinkedList.prototype.__validateMemberClass = function(item) {
-        if (this.__memberClass) {
-            if (!(item instanceof this.__memberClass)) {
-                throw new Error(this.constructor.name + ':validateMemberClass - ' + item.constructor.name + ' must be an instance of ' + this.__memberClass.constructor.name);
-            }
-        }
-    };
-    LinkedList.prototype.__validateNoDuplicateItems = function(item) {
-        this.forEach(function(ownedItem) {
-            if (ownedItem === item) {
-                throw new Error(this.constructor.name + ':validateNoDuplicateItems - Duplicate item found on ' + item + '.');
-            }
-        }, this);
-    };
+    // private methods
     LinkedList.prototype.__forEachLink = function (fn) {
         var link = this.__start;
-        var result;
         while (link) {
-            result = fn.call(this, link);
+            var result = fn.call(this, link);
             if (result) {
-                break;
+                return result;
             }
             link = link.next();
         }
         return result;
     };
+    // public methods
     LinkedList.prototype.forEach = function(fn, /* optional */ caller) {
         var link = this.__start;
-        var result;
         while(link) {
-            var item = link.val();
-            result = fn.call(caller, item);
+            var value = link.val();
+            var result = fn.call(caller, value);
             if (result) {
-                break;
+                return result;
             }
             link = link.next();
         }
-        return result;
     };
-    LinkedList.prototype.push = function(item) {
-        this.__validateMemberClass(item);
-        this.__validateNoDuplicateItems(item);
-        var newLink = new Link(item);
+    LinkedList.prototype.push = function(value) {
+        if (this.__ValueType) {
+            validator.validateType(this, value, this.__ValueType);
+        }
+        var newLink = new Link(value);
         if (!this.__start) {
             this.__start = newLink;
             return true;
@@ -61,24 +47,24 @@ function (Link) {
             }
         });
     };
-    LinkedList.prototype.splice = function(item) {
+    LinkedList.prototype.splice = function(value) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
-            var ownedItem = link.val();
-            if (ownedItem === item) {
+            var ownedvalue = link.get();
+            if (ownedvalue === value) {
                 if (link === this.__start) {
                     this.__start = link.next();
                 } else {
                     previousLink.setNext(link.next());
                 }
-                return item;
+                return value;
             }
             previousLink = link;
         });
     };
-    LinkedList.prototype.contains = function(item) {
-        return this.__forEachLink(function (ownedItem) {
-            if (ownedItem === item) {
+    LinkedList.prototype.contains = function(value) {
+        return this.__forEachLink(function (ownedvalue) {
+            if (ownedvalue === value) {
                 return true;
             }
         });

@@ -35,11 +35,8 @@ function (Component, MeshComponent) {
         this.disable();
     };
     PickComponent.prototype.__checkPointCollision = function (cursor) {
-        var meshHandle = this.__entity.getComponent(MeshComponent).getHandle();
-        if (!meshHandle) {
-            throw new Error(this.constructor.name + ':pick - ' + this.__entity.constructor.name + ' does not contain a MeshComponent.');
-        }
-        return meshHandle.checkPointCollision(cursor);
+        var meshComponent = validator.validateEntityHasComponent(this, this.__entity, MeshComponent);
+        return meshComponent.getHandle().checkPointCollision(cursor);
     };
     PickComponent.prototype.__pick_onmousedown = function (cursor) {
         if (this.__checkPointCollision(cursor)) {

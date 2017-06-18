@@ -21,7 +21,7 @@ define(function() {
         }
     };
     Loader.prototype.__itemFinishedLoadingWithError = function(){
-        throw new Error(this.constructor.name + ' failed to load.');
+        validator.throw(this, 'itemFinishedLoadingWithError', 'An asset failed to load');
     };
     // public prototypal variables
     Object.defineProperties(Loader.prototype, {
@@ -33,7 +33,7 @@ define(function() {
 	});
     Loader.prototype.__beginDownload = function (assets) {
         if (this.__isExecuting) {
-            throw new Error(this.constructor.name + ":download - A download is already in progress.");
+            validator.throw(this, 'beginDownload', 'A download is already in progress');
         }
         this.__isFinishedLoading = false;
         this.__loadCounter = 0;

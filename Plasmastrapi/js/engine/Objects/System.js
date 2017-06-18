@@ -1,14 +1,14 @@
-define(['event-emitter'],
-function (EventEmitter) {
+define(['emitter'],
+function (Emitter) {
 
     // CLASS System
-    System.prototype = Object.create(EventEmitter.prototype);
+    System.prototype = Object.create(Emitter.prototype);
     System.prototype.constructor = System;
     function System() {
-        EventEmitter.call(this);
+        Emitter.call(this);
         // apply mixins
-        EventEmitter.Mixins.Loadable.call(this, true);
-        EventEmitter.Mixins.Pausable.call(this, true);
+        Emitter.Mixins.Loadable.call(this, true);
+        Emitter.Mixins.Pausable.call(this, true);
     };
 
     return System;

@@ -1,27 +1,20 @@
-define(['event-emitter', 'component', 'linked-list'],
-function (EventEmitter, Component, LinkedList) {
+define(['emitter', 'component', 'dictionary'],
+function (Emitter, Component, Dictionary) {
 
     // CLASS Entity
-    Entity.prototype = Object.create(EventEmitter.prototype);
+    Entity.prototype = Object.create(Emitter.prototype);
     Entity.prototype.constructor = Entity;
     function Entity() {
         // inherits from
-        EventEmitter.call(this);
+        Emitter.call(this);
         // private variables
         this.__parent = null;
-        this.__components = new LinkedList(Component);
+        this.__components = new Dictionary(Component);
         // apply mixins
-        EventEmitter.Mixins.Loadable.call(this);
-        EventEmitter.Mixins.Destructible.call(this);
+        Emitter.Mixins.Loadable.call(this);
+        Emitter.Mixins.Destructible.call(this);
     };
     // private methods
-    Entity.prototype.__validateNoDuplicateComponentNames = function(component) {
-        this.__components.forEach(function(ownedComponent) {
-            if (ownedComponent.constructor.name === component.constructor.name) {
-                throw new Error(this.constructor.name + ':validateNoDuplicateComponentNames - This entity already contains a ' + component.name + '.');
-            }
-        }, this);
-    };
     Entity.prototype.__ondestroy = function () {
         this.__engine.entityContainer.remove(this);
     };
@@ -35,7 +28,7 @@ function (EventEmitter, Component, LinkedList) {
     };
     // public methods
     Entity.prototype.injectEngine = function (engine) {
-        EventEmitter.prototype.injectEngine.call(this, engine);
+        Emitter.prototype.injectEngine.call(this, engine);
         this.__engine.entityContainer.add(this);
         this.__components.forEach(function (component) {
             if (!component.isEngineInjected) {
@@ -45,11 +38,9 @@ function (EventEmitter, Component, LinkedList) {
     };
     Entity.prototype.addParent = function (parent) {
         if (this.__parent) {
-            throw new Error(this.constructor.name + ':addParent - This entity already has a parent.');
+            validator.throw(this, 'addParent', 'This entity already has a parent');
         }
-        if (!(parent instanceof Entity)) {
-            throw new Error(this.constructor.name + ':addParent - Parent must be of type Entity.');
-        }
+        validator.validateType(this, parent, Entity);
         this.__parent = parent;
         // wire up event subscriptions
         this.__parent.addEventListener('oninjectengine', this, this.injectEngine);

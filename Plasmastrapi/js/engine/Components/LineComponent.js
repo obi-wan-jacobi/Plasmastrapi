@@ -5,8 +5,8 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
 	function LineComponent(tailPoseComponent, headPoseComponent) {
-	    this.__validatePoseComponent(tailPoseComponent);
-	    this.__validatePoseComponent(headPoseComponent);
+	    validator.validateType(this, tailPoseComponent, PoseComponent);
+        validator.validateType(this, headPoseComponent, PoseComponent);
         // private variables
         this.__tailPose = tailPoseComponent;
         this.__headPose = headPoseComponent;
@@ -24,11 +24,6 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
 		this.__registerLoadableDependency(this.__headPose, 'onorientationchange', this, this.__$onorientationchange);
 	};
     // private methods
-	LineComponent.prototype.__validatePoseComponent = function (poseComponent) {
-	    if (!(poseComponent instanceof PoseComponent)) {
-	        throw new Error(this.constructor.name + ':validatePoseComponent - ' + poseComponent.constructor.name + ' must be of type ' + PoseComponent.name);
-	    }
-	};
     LineComponent.prototype.__onpositionchange = function () {
         this.__updatePoseComponent();
         this.__updateMeshComponent();

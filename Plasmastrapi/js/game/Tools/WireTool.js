@@ -38,7 +38,7 @@ function (Tool, TerminalHandle, ToolWire, Wire, PickComponent, PoseComponent, Po
             terminalCompatibility = WireableAsInput
             this.__isSelectedTerminalAnInput = false;
         } else {
-            throw new Error(this.constructor.name + ":onequip - " + this.__selectedTerminal.constructor.name + " is not compatible with this tool");
+            validator.throw(this, 'onequip', this.__selectedTerminal.constructor.name + ' is not compatible with this tool');
         }
         this.setCompatibilityFilter(terminalCompatibility, DestructionZone, DesignZone);
     };

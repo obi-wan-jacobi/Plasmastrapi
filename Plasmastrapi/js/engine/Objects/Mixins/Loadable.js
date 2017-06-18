@@ -3,7 +3,7 @@
     function Loadable(isLoadedByEngine) {
         var target = this;
         if (!target.registerEvents) {
-            throw new Error(target.constructor.name + ':' + Loadable.constructor.name + ' - Target must be an instance of EventEmitter');
+            validator.throw(target.constructor.name, Loadable.constructor.name, 'Target must be an instance of Emitter');
         }
         target.__isLoaded = false;
         target.__isInitialized = false;
@@ -46,7 +46,7 @@
     };
     Loadable.prototype.load = function () {
         if (!this.isEngineInjected) {
-            throw new Error(this.constructor.name + ":load - This object cannot be loaded without first receiving an engine instance!");
+            validator.throw(this, 'load', 'This object cannot be loaded without first receiving an engine instance');
         }
         if (!this.__isLoaded) {
             this.__isLoaded = true;

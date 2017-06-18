@@ -3,7 +3,7 @@
     function Pausable(isPausedByEngine) {
         var target = this;
         if (!target.registerEvents) {
-            throw new Error(target.constructor.name + ':' + Pausable.constructor.name + ' - Target must be an instance of EventEmitter');
+            validator.throw(target.constructor.name, Pausable.constructor.name, 'Target must be an instance of Emitter');
         }
         target.__isPaused = false;
         Object.defineProperties(target, {

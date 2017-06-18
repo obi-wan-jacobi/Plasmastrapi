@@ -97,18 +97,18 @@
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\require.config.js" />
+    <Content Include="js\utils\Validation\Validator.js" />
     <Content Include="LineCollisionSettings.js" />
     <Content Include="js\data\Physics\Velocity.js" />
     <Content Include="js\data\require.config.js" />
     <Content Include="js\engine\Components\CurveComponent.js" />
     <Content Include="js\engine\Components\TextLabelComponent.js" />
     <Content Include="js\engine\config.js" />
-    <Content Include="js\engine\Containers\PickComponentContainer.js" />
     <Content Include="js\engine\debug.js" />
     <Content Include="js\utils\Loaders\ImageLoader.js" />
     <Content Include="js\utils\Loaders\SpriteLoader.js" />
     <Content Include="js\engine\Objects\Base.js" />
-    <Content Include="js\engine\Objects\EventQueue.js" />
+    <Content Include="js\core\EventQueue.js" />
     <Content Include="js\engine\Objects\Mixins\Destructible.js" />
     <Content Include="js\engine\Objects\Mixins\Loadable.js" />
     <Content Include="js\engine\Objects\Mixins\Pausable.js" />
@@ -226,7 +226,7 @@
     <Content Include="js\engine\Objects\Component.js" />
     <Content Include="js\engine\Objects\Controller.js" />
     <Content Include="js\engine\Objects\Entity.js" />
-    <Content Include="js\engine\Objects\EventEmitter.js" />
+    <Content Include="js\core\Emitter.js" />
     <Content Include="js\utils\Base\Loader.js" />
     <Content Include="js\engine\Objects\Container.js" />
     <Content Include="js\engine\Objects\Scene.js" />
@@ -235,7 +235,6 @@
     <Content Include="js\core\LinkedList.js" />
     <Content Include="js\core\Dictionary.js" />
     <Content Include="js\core\Link.js" />
-    <Content Include="js\engine\Containers\EntityContainer.js" />
     <Content Include="js\engine\Containers\EventEmitterContainer.js" />
     <Content Include="js\engine\Systems\CollisionSystem.js" />
     <Content Include="js\engine\Systems\DrawSystem.js" />

@@ -5,7 +5,7 @@ function (Primitive, Vertex) {
     Mesh.prototype.constructor = Mesh;
     function Mesh(vertices) {
         Primitive.call(this);
-        this.__validateDataType(vertices, Vertex);
+        validator.validateType(this, vertices, Vertex);
         this.vertices = vertices;
     };
     Mesh.prototype.clone = function () {

@@ -27,7 +27,7 @@ function (BaseElement, CIRCUITCONSTANTS) {
         this.__engine.circuitElementContainer.add(this);
     };
     CircuitElement.prototype.updateState = function (inputState) {
-        throw new Error(this.constructor.name + ':updateState - This method must be overridden!');
+        validator.throw(this, 'updateState', 'This method must be overridden');
     };
     
     return CircuitElement;

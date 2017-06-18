@@ -1,50 +1,45 @@
 define(['link'],
 function (Link) {
     
-    // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle
-    function Dictionary() {
+    // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle.
+    // Index-free iteration.
+    function Dictionary(/* optional */ ValueType) {
+        this.__ValueType = ValueType;
         this.__start = null;
     };
-    Dictionary.prototype.__validateNoDuplicatePairs = function(key, value) {
-        this.forEach(function(ownedItemKey, ownedItemValue) {
-            if (ownedItemKey === key && ownedItemValue === value) {
-                throw new Error(this.constructor.name + ':validateNoDuplicatePairs - Duplicate item found on key: ' + key.constructor.name + ' value: ' + value.constructor.name);
+    // private methods
+    Dictionary.prototype.__validateNoDuplicateKeys = function(key) {
+        this.forEach(function(linkKey) {
+            if (linkKey === key) {
+                validator.throw(this, 'validateNoDuplicateKeys', 'Duplicate key: ' + key);
             }
         }, this);
     };
     Dictionary.prototype.__forEachLink = function (fn) {
         var link = this.__start;
-        var result;
         while (link) {
-            result = fn.call(this, link);
+            var result = fn.call(this, link);
             if (result) {
-                break;
+                return result;
             }
             link = link.next();
         }
-        return result;
     };
+    // public methods
     Dictionary.prototype.forEach = function(fn, /* optional */ caller) {
         var link = this.__start;
-        var result;
         while(link) {
-            var item = link.val();
-            result = fn.call(caller, item.key, item.value);
+            var item = link.get();
+            var result = fn.call(caller, item.key, item.value);
             if (result) {
-                break;
+                return result;
             }
             link = link.next();
         }
-        return result;
     };
-    Dictionary.prototype.unshift = function (key, value) {
-        this.__validateNoDuplicatePairs(key, value);
-        var newLink = new Link({ key: key, value: value });
-        newLink.setNext(this.__start);
-        this.__start = newLink;
-    };
-    Dictionary.prototype.push = function(key, value) {
-        this.__validateNoDuplicatePairs(key, value);
+    Dictionary.prototype.push = function (key, value) {
+        this.__validateNoDuplicateKeys(key);
+        validator.validateType(this, value, this.__ValueType);
         var newLink = new Link({key: key, value: value});
         if (!this.__start) {
             this.__start = newLink;
@@ -57,33 +52,16 @@ function (Link) {
             }
         });
     };
-    Dictionary.prototype.splice = function(key, value) {
+    Dictionary.prototype.splice = function(key) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
-            var item = link.val();
-            if (item.key === key && item.value === value) {
+            if (link.get().key === key) {
                 if (link === this.__start) {
                     this.__start = link.next();
                 } else {
                     previousLink.setNext(link.next());
                 }
-                return item;
-            }
-            previousLink = link;
-        });
-    };
-    Dictionary.prototype.purgeItemsWithKey = function(key) {
-        var previousLink = this.__start;
-        this.__forEachLink(function (link) {
-            var item = link.val();
-            if (item.key === key) {
-                if (link === this.__start) {
-                    this.__start = previousLink = link.next();
-                    return;
-                } else {
-                    previousLink.setNext(link.next());
-                    return;
-                }
+                return link.get();
             }
             previousLink = link;
         });

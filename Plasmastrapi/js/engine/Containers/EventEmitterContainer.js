@@ -1,19 +1,19 @@
-define(['container', 'event-emitter'],
-function (Container, EventEmitter) {
+define(['container', 'emitter'],
+function (Container, Emitter) {
 
-    // CLASS EventEmitterContainer
-    EventEmitterContainer.prototype = Object.create(Container.prototype);
-    EventEmitterContainer.prototype.constructor = EventEmitterContainer;
-    function EventEmitterContainer() {
-        Container.call(this, EventEmitter);
+    // CLASS EmitterContainer
+    EmitterContainer.prototype = Object.create(Container.prototype);
+    EmitterContainer.prototype.constructor = EmitterContainer;
+    function EmitterContainer() {
+        Container.call(this, Emitter);
     };
-    EventEmitterContainer.prototype.purge = function (subscriber) {
+    EmitterContainer.prototype.purge = function (subscriber) {
         this.remove(subscriber);
-        this.forEach(function(eventEmitter) {
-            eventEmitter.purgeEventListenersBoundTo(subscriber);
+        this.forEach(function(Emitter) {
+            Emitter.purgeEventListenersBoundTo(subscriber);
         });
     };
 
-    return EventEmitterContainer;
+    return EmitterContainer;
 
 });

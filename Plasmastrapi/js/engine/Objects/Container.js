@@ -1,11 +1,11 @@
-define(['event-emitter', 'linked-list'],
-function (EventEmitter, LinkedList) {
+define(['emitter', 'linked-list'],
+function (Emitter, LinkedList) {
 
     // CLASS Container
-    Container.prototype = Object.create(EventEmitter.prototype);
+    Container.prototype = Object.create(Emitter.prototype);
     Container.prototype.constructor = Container;
     function Container(/* optional */ memberClass) {
-        EventEmitter.call(this);
+        Emitter.call(this);
         this.__members = new LinkedList(memberClass);
         // events
         this.__registerEvents(

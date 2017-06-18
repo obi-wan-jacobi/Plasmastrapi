@@ -3,7 +3,7 @@
     function Destructible() {
         var target = this;
         if (!target.registerEvents) {
-            throw new Error(target.constructor.name + ':' + Destructible.constructor.name + ' - Target must be an instance of EventEmitter');
+            validator.throw(target.constructor.name, Destructible.constructor.name, 'Target must be an instance of Emitter');
         }
         target.__isDestroyed = false;
         Object.defineProperties(target, {
@@ -25,14 +25,14 @@
     };
     Destructible.prototype.destroy = function () {
         if (this.__isDestroyed) {
-            throw new Error(this.constructor.name + ":destroy - Objects cannot be destroyed a second time!");
+            validator.throw(this, 'destroy', 'Objects cannot be destroyed more than once');
         }
         this.__isDestroyed = true
         this.__fire('ondestroy', this);
         if (this.isLoaded) {
             this.unload();
         }
-        this.__engine.eventEmitterContainer.purge(this);
+        this.__engine.EmitterContainer.purge(this);
     };
 
     return Destructible;

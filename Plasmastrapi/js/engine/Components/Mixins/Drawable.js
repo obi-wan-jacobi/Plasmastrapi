@@ -2,14 +2,12 @@ define(['pose-component'], function (PoseComponent) {
 
     function Drawable() {
         var target = this;
-        if (!target.registerEvents) {
-            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target must be an instance of EventEmitter');
-        }
+        validator.validateType(target, target, Emitter);
         if (!target.getHandle) {
-            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target must implement a getHandle method');
+            validator.throw(target.constructor.name, Drawable.constructor.name, 'Target must implement a getHandle method');
         }
         if (!target.getHandle().draw) {
-            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target\'s handle must implement a draw method');
+            validator.throw(target.constructor.name, Drawable.constructor.name, 'Target\'s handle must implement a draw method');
         }
         target.__isVisible = false;
         Object.defineProperties(target, {
@@ -43,12 +41,6 @@ define(['pose-component'], function (PoseComponent) {
 	        fnOnUnloadProxy.call(this);
 	        this.hide();
 	    };
-    };
-    // private methods
-    Drawable.prototype.__validatePoseComponent = function () {
-        if (!this.__entity.getComponent(PoseComponent)) {
-            throw new Error(target.constructor.name + ':' + Drawable.constructor.name + ' - Target\'s entity must be composed of a ' + PoseComponent.name);
-        }
     };
     // public methods
 	Drawable.prototype.show = function () {

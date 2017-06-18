@@ -1,13 +1,13 @@
-define(['event-emitter'],
-function (EventEmitter) {
+define(['emitter'],
+function (Emitter) {
 
     // CLASS Controller
-    Controller.prototype = Object.create(EventEmitter.prototype);
+    Controller.prototype = Object.create(Emitter.prototype);
     Controller.prototype.constructor = Controller;
     function Controller() {
-        EventEmitter.call(this);
+        Emitter.call(this);
         // apply mixins
-        EventEmitter.Mixins.Loadable.call(this, true);
+        Emitter.Mixins.Loadable.call(this, true);
     };
     
     return Controller;

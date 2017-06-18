@@ -42,7 +42,7 @@ function (Terminal, CIRCUITCONSTANTS) {
     };
     OutputTerminal.prototype.setState = function () {
         if (!(state >= -1 && state <= 1)) {
-            throw new Error(this.constructor.name + ':state set - State ' + state + ' is not valid.');
+            validator.throw(this, 'setState', 'State ' + state + ' is not valid');
         }
         this.__state = state;
         this.__fire('onstatechange', this.__state);

@@ -6,7 +6,7 @@ function (Entity) {
 
     function Compatible(PickableTraitType) {
         if (!(this instanceof Entity)) {
-            throw new Error(this.constructor.name + ':' + PickableTraitType.name +  '- Traits may only be applied to Entities.');
+            validator.throw(this, PickableTraitType.name, PickableTraitType.name, 'Traits may only be applied to Entities');
         }
         Object.defineProperties(this, {
             ['is' +PickableTraitType.name]: {

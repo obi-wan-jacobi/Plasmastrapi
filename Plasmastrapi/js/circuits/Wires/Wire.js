@@ -6,9 +6,8 @@ function (WireElement, InputTerminal, OutputTerminal, LineComponent) {
     Wire.prototype.constructor = Wire;
     function Wire(outputTerminal, inputTerminal) {
         // validate terminal arguments
-        if (!(outputTerminal instanceof OutputTerminal) || !(inputTerminal instanceof InputTerminal)) {
-            throw new Error(this.constructor.name + ":constructor - output and input terminal arguments must be of their corresponding types!");
-        }
+        validator.validateType(this, outputTerminal, OutputTerminal);
+        validator.validateType(this, inputTerminal, InputTerminal);
 
         WireElement.call(this, outputTerminal, inputTerminal);
 

@@ -1,9 +1,9 @@
-﻿define(['event-emitter'],
-function (EventEmitter) {
+﻿define(['emitter'],
+function (Emitter) {
 
     function EventQueue(emitter) {
-        if (!(emitter instanceof EventEmitter)) {
-            throw new Error(this.constructor.name + ":constructor - Constructor argument must be an instance of EventEmitter.");
+        if (!(emitter instanceof Emitter)) {
+            validator.throw(this, 'constructor',  'Constructor argument must be an instance of Emitter');
         }
         this.__eventOwner = emitter;
         this.__queue = [];

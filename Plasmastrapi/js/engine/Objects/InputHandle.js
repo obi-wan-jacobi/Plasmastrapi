@@ -1,15 +1,15 @@
-define(['event-emitter'],
-function (EventEmitter) {
+define(['emitter'],
+function (Emitter) {
 
-    InputHandle.prototype = Object.create(EventEmitter.prototype);
+    InputHandle.prototype = Object.create(Emitter.prototype);
     InputHandle.prototype.constructor = InputHandle;
     function InputHandle() {
-        EventEmitter.call(this);
+        Emitter.call(this);
         // private variables
         this.__isMouseDown = false;
         this.__isShiftKeyDown = false;
         // apply mixins
-        EventEmitter.Mixins.Loadable.call(this);
+        Emitter.Mixins.Loadable.call(this);
         this.__registerEvents(
             'onmousemove',
 		    'onmousedown',

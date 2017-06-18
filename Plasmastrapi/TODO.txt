@@ -13,14 +13,39 @@ needs testing:
 - destroy->purge
 
 overhaul:
+- move Emitter (+ Component?, + Entity?) to core
+	- Base to inherit from Emitter
+- Entity to store Components in Dictionary
+- handle to validate data against type automatically (require)
+- exceptions
+- factories
+	- handle/component dependencies
+	- containers
+	- logging
 - Handle displayLayer (Component.Mixins.Drawable)
-- Decouple mesh from ImageComponent
 - Request resources in circuit/ui classes or upon object instantiation within scenes?
 - Refactor compatibility decorations
 - Refactor UI such that panel content/child positions are relative to parent (percent-based or position-based)
 	- ViewportSystem to listen for screen resize events?
 - Modal panels (move, stretch, close)
 - Set background to black
+
+tech debt:
+- main.js --> game.start() before initializing controllers?
+- mesh component point collision checking is disgusting
+- blue background image is needlessly large
+- run memory analysis/profiler diagnostics
+- JSDocs/automated documentation
+- unit tests
+
+optimization
+- tool compatibility filtering --> sort pickable components using a tree?
+- MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
+- Dictionary --> store this.__end to avoid O(n) for this.push
+- entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
+
+scalability concerns:
+- single-canvas viewport
 
 in progress:
 	- UI panels
@@ -57,23 +82,6 @@ backlog:
 		- SOCs + design contexts (tabs? overlay? panels?)
 - config
 	- scenes
-
-tech debt:
-- main.js --> game.start() before initializing controllers?
-- mesh component point collision checking is disgusting
-- blue background image is needlessly large
-- run memory analysis/profiler diagnostics
-- JSDocs/automated documentation
-- unit tests
-
-optimization
-- tool compatibility filtering --> sort pickable components using a tree?
-- MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
-- Dictionary --> store this.__end to avoid O(n) for this.push
-- entity destruction (EventEmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
-
-scalability concerns:
-- single-canvas viewport
 
 technology:
 - linting

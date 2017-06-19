@@ -110,9 +110,9 @@
     <Content Include="js\utils\Loaders\SpriteLoader.js" />
     <Content Include="js\engine\Objects\Base.js" />
     <Content Include="js\core\Objects\EventQueue.js" />
-    <Content Include="js\engine\Objects\Mixins\Destructible.js" />
-    <Content Include="js\engine\Objects\Mixins\Loadable.js" />
-    <Content Include="js\engine\Objects\Mixins\Pausable.js" />
+    <Content Include="js\core\Objects\Mixins\Destructible.js" />
+    <Content Include="js\core\Objects\Mixins\Loadable.js" />
+    <Content Include="js\core\Objects\Mixins\Pausable.js" />
     <Content Include="js\engine\require.config.js" />
     <Content Include="js\engine\Systems\PickSystem.js" />
     <Content Include="js\game\images.js" />
@@ -226,7 +226,7 @@
     <Content Include="js\engine\Engine.js" />
     <Content Include="js\engine\Objects\Component.js" />
     <Content Include="js\engine\Objects\Controller.js" />
-    <Content Include="js\engine\Objects\Entity.js" />
+    <Content Include="js\core\Objects\Entity.js" />
     <Content Include="js\core\Objects\Emitter.js" />
     <Content Include="js\utils\Loaders\Base\Loader.js" />
     <Content Include="js\engine\Objects\Container.js" />

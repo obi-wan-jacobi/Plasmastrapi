@@ -14,14 +14,6 @@ function (Emitter, Component, Dictionary) {
         Emitter.Mixins.Loadable.call(this);
         Emitter.Mixins.Destructible.call(this);
     };
-    // private methods
-    Entity.prototype.__removeParent = function () {
-        this.__parent = null;
-        // unwire event subscriptions
-        this.__parent.removeEventListener('onload', this, this.load);
-        this.__parent.removeEventListener('onunload', this, this.unload);
-        this.__parent.removeEventListener('ondestroy', this, this.destroy);
-    };
     // public methods
     Entity.prototype.addParent = function (parent) {
         if (this.__parent) {

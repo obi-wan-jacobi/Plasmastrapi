@@ -18,11 +18,11 @@ function (Emitter, LinkedList) {
         return this.__members.forEach(fn, caller);
     };
     Container.prototype.add = function(member) {
-        this.__members.push(member);
+        this.__members.add(member);
         this.__fire('onadd', member);
     };
     Container.prototype.remove = function(member) {
-        this.__members.splice(member);
+        this.__members.remove(member);
         this.__fire('onremove', member);
     };
 

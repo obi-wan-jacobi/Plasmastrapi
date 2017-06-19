@@ -1,10 +1,8 @@
 ﻿define([], function () {
 
-    function Pausable(isPausedByEngine) {
+    function Pausable() {
         var target = this;
-        if (!target.registerEvents) {
-            validator.throw(target.constructor.name, Pausable.constructor.name, 'Target must be an instance of Emitter');
-        }
+        validator.validateType(target, target, Emitter);
         target.__isPaused = false;
         Object.defineProperties(target, {
             'isPausable': {
@@ -27,18 +25,6 @@
             'onpause',
             'onunpause'
         );
-        if (isPausedByEngine) {
-            var fnInjectEngineProxy = target.injectEngine || function () { };
-            target.injectEngine = function (engine) {
-                fnInjectEngineProxy.call(target, engine);
-                Pausable.prototype.injectEngine.call(target, engine);
-            };
-        }
-    };
-    Pausable.prototype.injectEngine = function (engine) {
-        this.__engine.addEventListener('onframe', this, this.loopOnce);
-        this.__engine.addEventListener('onpause', this, this.pause);
-        this.__engine.addEventListener('onunpause', this, this.unpause);
     };
     Pausable.prototype.loopOnce = function (deltaMs) {
         if (this.isLoaded && !this.isPaused) {

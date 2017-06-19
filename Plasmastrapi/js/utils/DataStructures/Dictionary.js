@@ -37,7 +37,7 @@ function (Link) {
             link = link.next();
         }
     };
-    Dictionary.prototype.push = function (key, value) {
+    Dictionary.prototype.add = function (key, value) {
         this.__validateNoDuplicateKeys(key);
         validator.validateType(this, value, this.__ValueType);
         var newLink = new Link({key: key, value: value});
@@ -52,7 +52,7 @@ function (Link) {
             }
         });
     };
-    Dictionary.prototype.splice = function(key) {
+    Dictionary.prototype.remove = function(key) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
             if (link.get().key === key) {
@@ -65,6 +65,13 @@ function (Link) {
             }
             previousLink = link;
         });
+    };
+    Dictionary.prototype.get = function (keyToFind) {
+        return this.forEach(function (key, value) {
+            if (keyToFind === key) {
+                return value;
+            }
+        }, this);
     };
 
     return Dictionary;

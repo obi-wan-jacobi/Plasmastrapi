@@ -1,10 +1,8 @@
 ﻿define([], function () {
 
-    function Loadable(isLoadedByEngine) {
+    function Loadable() {
         var target = this;
-        if (!target.registerEvents) {
-            validator.throw(target.constructor.name, Loadable.constructor.name, 'Target must be an instance of Emitter');
-        }
+        validator.validateType(target, target, Emitter);
         target.__isLoaded = false;
         target.__isInitialized = false;
         Object.defineProperties(target, {
@@ -32,22 +30,8 @@
             'onload',
             'onunload'
         );
-        if (isLoadedByEngine) {
-            var fnInjectEngineProxy = target.injectEngine || function () { };
-            target.injectEngine = function (engine) {
-                fnInjectEngineProxy.call(target, engine);
-                Loadable.prototype.injectEngine.call(target, engine);
-            };
-        }
-    };
-    Loadable.prototype.injectEngine = function (engine) {
-        this.__engine.addEventListener('onload', this, this.load);
-        this.__engine.addEventListener('onunload', this, this.unload);
     };
     Loadable.prototype.load = function () {
-        if (!this.isEngineInjected) {
-            validator.throw(this, 'load', 'This object cannot be loaded without first receiving an engine instance');
-        }
         if (!this.__isLoaded) {
             this.__isLoaded = true;
             if (!this.__isInitialized) {

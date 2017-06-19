@@ -35,14 +35,14 @@ function (Emitter, Entity, LinkedList) {
 	    if (this.isEngineInjected && !entity.isEngineInjected) {
 	        entity.injectEngine(this.__engine);
 	    }
-	    this.__contents.push(entity);
+	    this.__contents.add(entity);
 	    if (this.isLoaded) {
 	        entity.load();
 	    }
 	    entity.addEventListener('ondestroy', this, this.remove);
 	};
 	Scene.prototype.remove = function (entity) {
-	    var removedElement = this.__contents.splice(entity);
+	    var removedElement = this.__contents.remove(entity);
 	    if (removedElement.isLoaded) {
 	        removedElement.unload();
 	    }

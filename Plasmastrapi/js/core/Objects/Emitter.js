@@ -4,23 +4,24 @@ function(Dictionary) {
     // CLASS Emitter
     function Emitter() {
         this.__events = {};
-        this.__lockedEvents = {};
+        this.__eventsBuffer = {};
     };
     // private methods
     Emitter.prototype.__fire = function (event /*, argument1, argument2, etc... */) {
         validator.validateEventIsImplemented(this, event);
-        var args = arguments.length > 1 ? Array.prototype.slice.call(arguments, 1, arguments.length) : null;
+        var args = arguments.length > 1 ? [].slice.call(arguments, 1, arguments.length) : null;
+        // call owner's event callback first
         this["__" + event].apply(this, args);
-        // lock new subscriptions on this event to avoid callstack overflow
-        this.__lockedEvents[event] = new Dictionary();
+        // buffer new subscriptions on this event to avoid callstack overflow
+        this.__eventsBuffer[event] = new Dictionary();
         this.__events[event].forEach(function (subscriber, callback) {
             callback.apply(subscriber, args);
         });
-        // process new subscriptions under lock
-        this.__lockedEvents[event].forEach(function (subscriber, callback) {
-            this.__events[event].push(subscriber, callback);
+        // process new subscriptions in buffer
+        this.__eventsBuffer[event].forEach(function (subscriber, callback) {
+            this.__events[event].add(subscriber, callback);
         }, this)
-        delete this.__lockedEvents[event];
+        delete this.__eventsBuffer[event];
     };
     // public methods
     Emitter.prototype.registerEvents = function (/* event1, event2, etc... */) {
@@ -47,11 +48,11 @@ function(Dictionary) {
         validator.validateEventIsImplemented(this, event);
         validator.validateObject(subscriber);
         validator.validateFunction(callback); 
-        if (this.__lockedEvents[event]) {
-            this.__lockedEvents[event].push(subscriber, callback);
+        if (this.__eventsBuffer[event]) {
+            this.__eventsBuffer[event].add(subscriber, callback);
         }
         else {
-            this.__events[event].push(subscriber, callback);
+            this.__events[event].add(subscriber, callback);
         }
     };
     Emitter.prototype.removeEventListener = function(event, subscriber, callback) {
@@ -59,8 +60,8 @@ function(Dictionary) {
         validator.validateObject(subscriber);
         validator.validateFunction(callback); 
         var removedEventListener = null;
-        if (this.__lockedEvents[event]) {
-            removedEventListener = this.__lockedEvents[event].splice(subscriber, callback);
+        if (this.__eventsBuffer[event]) {
+            removedEventListener = this.__eventsBuffer[event].splice(subscriber, callback);
         }
         if (!removedEventListener) {
             removedEventListener = this.__events[event].splice(subscriber, callback);
@@ -73,7 +74,7 @@ function(Dictionary) {
         validator.validateObject(subscriber);
         for (var event in this.__events) {
             if (this.__events.hasOwnProperty(event)) {
-                this.__events[event].drop(subscriber);
+                this.__events[event].remove(subscriber);
             }
         }
     };

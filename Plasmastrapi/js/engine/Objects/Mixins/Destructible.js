@@ -2,9 +2,7 @@
 
     function Destructible() {
         var target = this;
-        if (!target.registerEvents) {
-            validator.throw(target.constructor.name, Destructible.constructor.name, 'Target must be an instance of Emitter');
-        }
+        validator.validateType(target, target, Emitter);
         target.__isDestroyed = false;
         Object.defineProperties(target, {
             'isDestructible': {
@@ -32,7 +30,6 @@
         if (this.isLoaded) {
             this.unload();
         }
-        this.__engine.EmitterContainer.purge(this);
     };
 
     return Destructible;

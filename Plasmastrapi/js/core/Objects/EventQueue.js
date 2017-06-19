@@ -2,10 +2,8 @@
 function (Emitter) {
 
     function EventQueue(emitter) {
-        if (!(emitter instanceof Emitter)) {
-            validator.throw(this, 'constructor',  'Constructor argument must be an instance of Emitter');
-        }
-        this.__eventOwner = emitter;
+        validator.validateType(this, emitter, Emitter);
+        this.__emitter = emitter;
         this.__queue = [];
         this.__isExecuting = false;
     };
@@ -19,7 +17,7 @@ function (Emitter) {
         this.__isExecuting = true;
         while (this.__queue.length > 0) {
             var event = this.__queue.shift();
-            this.__eventOwner.__fire(event.name, event.args);
+            this.__emitter.__fire(event.name, event.args);
         }
         this.__isExecuting = false;
     };

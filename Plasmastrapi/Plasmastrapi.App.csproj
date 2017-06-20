@@ -93,7 +93,7 @@
     <Content Include="js\handles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\handles\Graphics\SpriteHandle.js" />
     <Content Include="js\data\Graphics\DisplaySettings\TextDisplaySettings.js" />
-    <Content Include="js\handles\Graphics\TextLabelHandle.js" />
+    <Content Include="js\handles\Graphics\TextHandle.js" />
     <Content Include="js\data\Physics\Acceleration.js" />
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
@@ -103,7 +103,7 @@
     <Content Include="js\data\Physics\Velocity.js" />
     <Content Include="js\data\require.config.js" />
     <Content Include="js\engine\Components\CurveComponent.js" />
-    <Content Include="js\engine\Components\TextLabelComponent.js" />
+    <Content Include="js\engine\Components\TextComponent.js" />
     <Content Include="js\engine\config.js" />
     <Content Include="js\engine\debug.js" />
     <Content Include="js\utils\Loaders\ImageLoader.js" />

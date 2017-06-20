@@ -9,7 +9,7 @@
         'pick-component': './engine/Components/PickComponent',
         'pose-component': './engine/Components/PoseComponent',
         'sprite-component': './engine/Components/SpriteComponent',
-        'text-label-component': './engine/Components/TextLabelComponent',
+        'text-label-component': './engine/Components/TextComponent',
         // Component Mixins
         'drawable': './engine/Components/Mixins/Drawable',
         // Containers

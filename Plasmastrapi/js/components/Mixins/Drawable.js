@@ -2,13 +2,7 @@ define(['pose-component'], function (PoseComponent) {
 
     function Drawable() {
         var target = this;
-        validator.validateType(target, target, Emitter);
-        if (!target.getHandle) {
-            validator.throw(target.constructor.name, Drawable.constructor.name, 'Target must implement a getHandle method');
-        }
-        if (!target.getHandle().draw) {
-            validator.throw(target.constructor.name, Drawable.constructor.name, 'Target\'s handle must implement a draw method');
-        }
+        validator.validateType(target, target, Component); 
         target.__isVisible = false;
         Object.defineProperties(target, {
             'isDrawable': {
@@ -44,18 +38,18 @@ define(['pose-component'], function (PoseComponent) {
     };
     // public methods
 	Drawable.prototype.show = function () {
-	    if (!this.__isVisible) {
-	        this.__isVisible = true;
-	        this.__engine.drawSystem.addEventListener(this.__handle.displaySettings.displayLayer, this, this.draw);
-	        this.__fire('onshow');
-	    }
+	    if (this.__isVisible) {
+            return;
+        }
+        this.__isVisible = true;
+        this.emit('onshow');
 	};
 	Drawable.prototype.hide = function () {
-	    if (this.__isVisible) {
-	        this.__isVisible = false;
-	        this.__engine.drawSystem.removeEventListener(this.__handle.displaySettings.displayLayer, this, this.draw);
-	        this.__fire('onhide');
-	    }
+	    if (!this.__isVisible) {
+            return;
+        }
+        this.__isVisible = false;
+        this.emit('onhide');
     };
     Drawable.prototype.draw = function (ctx) {
         var poseHandle = this.__entity.getComponent(PoseComponent).getHandle();

@@ -7,9 +7,9 @@
         this.x = x || 0;
         this.y = y || 0;
         this.a = a || 0;
-        validator.validateType(this, x, "Number");
-        validator.validateType(this, y, "Number");
-        validator.validateType(this, a, "Number");
+        validator.validateType(this, x, 'number');
+        validator.validateType(this, y, 'number');
+        validator.validateType(this, a, 'number');
     };
 
     return Pose;

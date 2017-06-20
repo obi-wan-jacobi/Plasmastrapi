@@ -1,29 +1,22 @@
-define(['emitter', 'linked-list'],
-function (Emitter, LinkedList) {
+define(['dictionary'],
+function (Dictionary) {
 
     // CLASS Container
-    Container.prototype = Object.create(Emitter.prototype);
-    Container.prototype.constructor = Container;
-    function Container(/* optional */ memberClass) {
-        Emitter.call(this);
-        this.__members = new LinkedList(memberClass);
-        // events
-        this.__registerEvents(
-            'onadd',
-            'onremove'
-        );
+    function Container(memberClass) {
+        this.__members = new Dictionary(memberClass);
     };
     // public methods
     Container.prototype.forEach = function(fn, caller) {
         return this.__members.forEach(fn, caller);
     };
+    Container.prototype.find = function (member) {
+        this.__members.get(member);
+    };
     Container.prototype.add = function(member) {
         this.__members.add(member);
-        this.__fire('onadd', member);
     };
     Container.prototype.remove = function(member) {
         this.__members.remove(member);
-        this.__fire('onremove', member);
     };
 
     return Container;

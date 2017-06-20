@@ -85,10 +85,10 @@ function (InputHandle, PoseComponent, SpriteComponent, Position, Filter, config)
             this.__cursor.getComponent(SpriteComponent).show();
         }
         [].unshift.call(arguments, 'onequip');
-        this.__fire.apply(this, arguments);
+        this.emit.apply(this, arguments);
     };
     Tool.prototype.discard = function () {
-        this.__fire('ondiscard');
+        this.emit('ondiscard');
         if (this.__cursor) {
             this.__cursor.unload();
         }

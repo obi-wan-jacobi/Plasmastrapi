@@ -1,5 +1,5 @@
-define(['emitter'],
-function (Emitter) {
+define([],
+function () {
 
     // CLASS System
     System.prototype = Object.create(Emitter.prototype);

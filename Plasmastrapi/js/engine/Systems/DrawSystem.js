@@ -4,8 +4,9 @@ function (System) {
 	// CLASS DrawSystem
 	DrawSystem.prototype = Object.create(System.prototype);
 	DrawSystem.prototype.constructor = DrawSystem;
-	function DrawSystem() {
-	    System.call(this);
+	function DrawSystem(canvas) {
+        System.call(this);
+        this.__canvas = canvas;
 	    // events
 	    this.__registerEvents(
             'onwindowresize',
@@ -24,23 +25,23 @@ function (System) {
 		window.removeEventListener('onwindowresize', this.__$onwindowresize);
 	};
 	DrawSystem.prototype.__onframe = function() {
-		var ctx = this.__engine.canvas.getContext("2d");
-		ctx.width = this.__engine.canvas.width = this.__engine.canvas.clientWidth;
-		ctx.height = this.__engine.canvas.height = this.__engine.canvas.clientHeight;
+		var ctx = this.__canvas.getContext("2d");
+		ctx.width = this.__canvas.width = this.__canvas.clientWidth;
+		ctx.height = this.__canvas.height = this.__canvas.clientHeight;
 		ctx.clearRect(0, 0, ctx.width, ctx.height);
-		this.__fire('ondrawgamebackground', ctx);
-		this.__fire('ondrawgameentities', ctx);
-		this.__fire('ondrawgameforeground', ctx);
-		this.__fire('ondrawuibackground', ctx);
-		this.__fire('ondrawuientities', ctx);
-		this.__fire('ondrawuiforeground', ctx);
+		this.emit('ondrawgamebackground', ctx);
+		this.emit('ondrawgameentities', ctx);
+		this.emit('ondrawgameforeground', ctx);
+		this.emit('ondrawuibackground', ctx);
+		this.emit('ondrawuientities', ctx);
+		this.emit('ondrawuiforeground', ctx);
 	};
 	DrawSystem.prototype.__onwindowresize = function() {
 		/*
-		var ctx = this.__engine.canvas.getContext("2d");
-		ctx.width = this.__engine.canvas.width = this.__engine.canvas.clientWidth;
-		ctx.height = this.__engine.canvas.height = this.__engine.canvas.clientHeight;
-		this.__fire();
+		var ctx = this.__canvas.getContext("2d");
+		ctx.width = this.__canvas.width = this.__canvas.clientWidth;
+		ctx.height = this.__canvas.height = this.__canvas.clientHeight;
+		this.emit();
 		*/
 	};
 

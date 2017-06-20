@@ -4,7 +4,7 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
-	function LineComponent(tailPoseComponent, headPoseComponent) {
+	function LineComponent(tailPoseComponent, headPoseComponent) { // TODO:
 	    validator.validateType(this, tailPoseComponent, PoseComponent);
         validator.validateType(this, headPoseComponent, PoseComponent);
         // private variables
@@ -18,10 +18,10 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
             'onorientationchange'
         );
 	    // dependencies
-		this.__registerLoadableDependency(this.__tailPose, 'onpositionchange', this, this.__$onpositionchange);
-		this.__registerLoadableDependency(this.__tailPose, 'onorientationchange', this, this.__$onorientationchange);
-		this.__registerLoadableDependency(this.__headPose, 'onpositionchange', this, this.__$onpositionchange);
-		this.__registerLoadableDependency(this.__headPose, 'onorientationchange', this, this.__$onorientationchange);
+		this.__registerDependencyOnLoad(this.__tailPose, 'onpositionchange', this, this.__$onpositionchange);
+		this.__registerDependencyOnLoad(this.__tailPose, 'onorientationchange', this, this.__$onorientationchange);
+		this.__registerDependencyOnLoad(this.__headPose, 'onpositionchange', this, this.__$onpositionchange);
+		this.__registerDependencyOnLoad(this.__headPose, 'onorientationchange', this, this.__$onorientationchange);
 	};
     // private methods
     LineComponent.prototype.__onpositionchange = function () {

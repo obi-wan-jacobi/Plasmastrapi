@@ -10,7 +10,7 @@ function (Container, Emitter) {
     EmitterContainer.prototype.purge = function (subscriber) {
         this.remove(subscriber);
         this.forEach(function(Emitter) {
-            Emitter.purgeEventListenersBoundTo(subscriber);
+            Emitter.purgeEventListener(subscriber);
         });
     };
 

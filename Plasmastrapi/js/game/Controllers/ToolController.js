@@ -31,31 +31,17 @@
         this.__hotkeys = null;
     };
     // private methods
-    ToolController.prototype.__oninit = function () {
+    ToolController.prototype.__init = function () {
         var self = this;
         this.__hotkeys = {
-            "1' function () { self.__engine.sceneController.circuitDesignScene.andGateButton.getComponent(PickComponent).pick(); },
-            "2' function () { self.__engine.sceneController.circuitDesignScene.nandGateButton.getComponent(PickComponent).pick(); },
-            "3' function () { self.__engine.sceneController.circuitDesignScene.orGateButton.getComponent(PickComponent).pick(); },
-            "4' function () { self.__engine.sceneController.circuitDesignScene.xorGateButton.getComponent(PickComponent).pick(); },
-            "5' function () { self.__engine.sceneController.circuitDesignScene.powerSourceButton.getComponent(PickComponent).pick(); },
-            "w' function () { self.equipCuttingTool(); },
-            "q' function () { self.equipTrashTool(); },
+            '1': function () { self.__engine.sceneController.circuitDesignScene.andGateButton.getComponent(PickComponent).pick(); },
+            '2': function () { self.__engine.sceneController.circuitDesignScene.nandGateButton.getComponent(PickComponent).pick(); },
+            '3': function () { self.__engine.sceneController.circuitDesignScene.orGateButton.getComponent(PickComponent).pick(); },
+            '4': function () { self.__engine.sceneController.circuitDesignScene.xorGateButton.getComponent(PickComponent).pick(); },
+            '5': function () { self.__engine.sceneController.circuitDesignScene.powerSourceButton.getComponent(PickComponent).pick(); },
+            'w': function () { self.equipCuttingTool(); },
+            'q': function () { self.equipTrashTool(); },
         }
-    };
-    ToolController.prototype.__onload = function () {
-        if (this.__tool) {
-            this.__equip(this.__tool);
-        }
-        this.__engine.inputSystem.addEventListener('onmousemove', this, this.__updateLastPosition);
-        this.__engine.inputSystem.addEventListener('onkeyup', this, this.__dohotkey);
-    };
-    ToolController.prototype.__onunload = function () {
-        if (this.__tool) {
-            this.__tool.discard();
-        }
-        this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__updateLastPosition);
-        this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__dohotkey);
     };
     ToolController.prototype.__equip = function (tool /* arguments 1, argument 2, etc. */) {
         if (this.__tool) {
@@ -81,6 +67,28 @@
         }
     };
     // public methods
+    ToolController.prototype.load = function () {
+        Controller.prototype.load.call(this);
+        if (this.__isLoaded) {
+            return;
+        }
+        if (this.__tool) {
+            this.__equip(this.__tool);
+        }
+        this.__engine.inputSystem.addEventListener('onmousemove', this, this.__updateLastPosition);
+        this.__engine.inputSystem.addEventListener('onkeyup', this, this.__dohotkey);
+    };
+    ToolController.prototype.unload = function () {
+        Controller.prototype.unload.call(this);
+        if (!this.__isLoaded) {
+            return;
+        }
+        if (this.__tool) {
+            this.__tool.discard();
+        }
+        this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__updateLastPosition);
+        this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__dohotkey);
+    };
     ToolController.prototype.setCompatibilityFilter = function (filter) {
         this.__engine.pickablesContainer.forEach(function (pickComponent) {
             if (filter.resolve(pickComponent)) {
@@ -90,6 +98,7 @@
             }
         });
     };
+    // tools
     ToolController.prototype.equipPickingTool = function () {
         this.__equip(this.__pickingTool);
     };

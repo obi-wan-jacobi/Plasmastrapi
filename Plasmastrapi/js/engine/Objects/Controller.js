@@ -1,13 +1,35 @@
-define(['emitter'],
-function (Emitter) {
+define([],
+function () {
 
     // CLASS Controller
-    Controller.prototype = Object.create(Emitter.prototype);
-    Controller.prototype.constructor = Controller;
     function Controller() {
-        Emitter.call(this);
-        // apply mixins
-        Emitter.Mixins.Loadable.call(this, true);
+        this.__isInitialized = false;
+        this.__isLoaded = false;
+    };
+    // private methods
+    Controller.prototype.__init = function () {
+
+    };
+    // public methods
+    Controller.prototype.load = function () {
+        if (this.__isLoaded) {
+            return;
+        }
+        this.__isLoaded = true;
+        if (!this.__isInitialized) {
+            this.__isInitialized = true;
+            this.__init();
+        }
+    };
+    Controller.prototype.unload = function () {
+        if (!this.__isLoaded) {
+            return;
+        }
+        this.__isLoaded = false;
+    };
+    Controller.prototype.reload = function () {
+        this.unload();
+        this.load();
     };
     
     return Controller;

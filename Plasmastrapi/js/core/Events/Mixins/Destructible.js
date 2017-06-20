@@ -26,10 +26,7 @@
             validator.throw(this, 'destroy', 'Objects cannot be destroyed more than once');
         }
         this.__isDestroyed = true
-        this.__fire('ondestroy', this);
-        if (this.isLoaded) {
-            this.unload();
-        }
+        this.emit('ondestroy', this);
     };
 
     return Destructible;

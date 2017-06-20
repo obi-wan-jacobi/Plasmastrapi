@@ -17,7 +17,7 @@ function (Emitter) {
         this.__isExecuting = true;
         while (this.__queue.length > 0) {
             var event = this.__queue.shift();
-            this.__emitter.__fire(event.name, event.args);
+            this.__emitter.emit(event.name, event.args);
         }
         this.__isExecuting = false;
     };

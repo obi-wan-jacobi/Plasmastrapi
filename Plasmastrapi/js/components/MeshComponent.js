@@ -8,8 +8,8 @@ function (Component, PoseComponent, config) {
 		// inherits from
         Component.call(this, meshHandle);
         // dependencies
-        this.__registerLoadableComponentDependency(PoseComponent, 'onpositionchange', this.__handle, this.__handle.translate);
-        this.__registerLoadableComponentDependency(PoseComponent, 'onorientationchange', this.__handle, this.__handle.rotate);
+        this.__registerComponentDependencyOnLoad(PoseComponent, 'onpositionchange', this.__handle, this.__handle.translate);
+        this.__registerComponentDependencyOnLoad(PoseComponent, 'onorientationchange', this.__handle, this.__handle.rotate);
 	};
 
 	return MeshComponent;

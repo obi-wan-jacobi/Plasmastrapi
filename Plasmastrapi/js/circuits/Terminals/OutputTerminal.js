@@ -45,7 +45,7 @@ function (Terminal, CIRCUITCONSTANTS) {
             validator.throw(this, 'setState', 'State ' + state + ' is not valid');
         }
         this.__state = state;
-        this.__fire('onstatechange', this.__state);
+        this.emit('onstatechange', this.__state);
     };
 
     return OutputTerminal;

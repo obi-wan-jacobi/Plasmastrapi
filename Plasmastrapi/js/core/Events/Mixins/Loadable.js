@@ -32,20 +32,22 @@
         );
     };
     Loadable.prototype.load = function () {
-        if (!this.__isLoaded) {
-            this.__isLoaded = true;
-            if (!this.__isInitialized) {
-                this.__isInitialized = true;
-                this.__fire('oninit');
-            }
-            this.__fire('onload');
+        if (this.__isLoaded) {
+            return;
         }
+        this.__isLoaded = true;
+        if (!this.__isInitialized) {
+            this.__isInitialized = true;
+            this.emit('oninit');
+        }
+        this.emit('onload');
     };
     Loadable.prototype.unload = function () {
-        if (this.__isLoaded) {
-            this.__isLoaded = false;
-            this.__fire('onunload');
+        if (!this.__isLoaded) {
+            return;
         }
+        this.__isLoaded = false;
+        this.emit('onunload');
     };
     Loadable.prototype.reload = function () {
         this.unload();

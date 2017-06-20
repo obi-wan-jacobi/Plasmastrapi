@@ -15138,7 +15138,7 @@ var AST_String = DEFNODE("String", "value quote", {
     }
 }, AST_Constant);
 
-var AST_Number = DEFNODE("Number", "value literal", {
+var AST_Number = DEFNODE('number', "value literal", {
     $documentation: "A number literal",
     $propdoc: {
         value: "[number] the numeric value",
@@ -18936,7 +18936,7 @@ function OutputStream(options) {
         var quote = self.quote;
         if (output.option("quote_keys")) {
             output.print_string(key + "");
-        } else if ((typeof key == "number"
+        } else if ((typeof key == 'number'
                     || !output.option("beautify")
                     && +key + "" == key)
                    && parseFloat(key) >= 0) {
@@ -19371,7 +19371,7 @@ merge(Compressor.prototype, {
             return make_node(AST_String, orig, {
                 value: val
             }).optimize(compressor);
-          case "number":
+          case 'number':
             if (isNaN(val)) {
                 return make_node(AST_NaN, orig);
             }
@@ -21257,7 +21257,7 @@ merge(Compressor.prototype, {
                         right: make_node(AST_String, self, { value: "" })
                     }).transform(compressor);
                     break;
-                  case "Number":
+                  case 'number':
                     if (self.args.length == 0) return make_node(AST_Number, self, {
                         value: 0
                     });
@@ -22398,7 +22398,7 @@ function SourceMap(options) {
               case "string":
                 args.value = val;
                 return new AST_String(args);
-              case "number":
+              case 'number':
                 args.value = val;
                 return new AST_Number(args);
               case "boolean":

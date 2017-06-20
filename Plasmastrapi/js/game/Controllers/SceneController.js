@@ -16,21 +16,11 @@ function (Controller, Entity, MainMenuScene, CircuitDesignScene) {
 	    Controller.call(this);
 	    this.__scene = null;
 	};
-	SceneController.prototype.__oninit = function () {
+	SceneController.prototype.__init = function () {
 	    this.mainMenuScene = new MainMenuScene(this.__engine.canvas);
 	    this.mainMenuScene.injectEngine(this.__engine);
 	    this.circuitDesignScene = new CircuitDesignScene(this.__engine.canvas)
 	    this.circuitDesignScene.injectEngine(this.__engine);
-	};
-	SceneController.prototype.__onload = function() {
-	    if (this.__scene) {
-			this.__scene.load();
-		}
-	};
-	SceneController.prototype.__onunload = function() {
-		if (this.__scene) {
-			this.__scene.unload();
-		}
 	};
 	SceneController.prototype.__setCurrentScene = function (scene) {
 	    if (this.__scene) {
@@ -42,8 +32,23 @@ function (Controller, Entity, MainMenuScene, CircuitDesignScene) {
 	    }
 	};
 	// public methods
-    SceneController.prototype.injectEngine = function (engine) {
-        Controller.prototype.injectEngine.call(this, engine);
+    SceneController.prototype.load = function () {
+        Controller.prototype.load.call(this);
+        if (this.__isLoaded) {
+            return;
+        }
+        if (this.__scene) {
+            this.__scene.load();
+        }
+    };
+    SceneController.prototype.unload = function () {
+        Controller.prototype.unload.call(this);
+        if (!this.__isLoaded) {
+            return;
+        }
+        if (this.__scene) {
+            this.__scene.unload();
+        }
     };
     SceneController.prototype.addToCurrentScene = function (entity) {
         this.__scene.add(entity);

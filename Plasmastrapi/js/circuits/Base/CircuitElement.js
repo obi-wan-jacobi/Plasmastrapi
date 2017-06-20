@@ -16,7 +16,7 @@ function (BaseElement, CIRCUITCONSTANTS) {
     };
     CircuitElement.prototype.__setState = function (state) {
         this.__state = state;
-        this.__fire('onupdatestate');
+        this.emit('onupdatestate');
     };
     // public methods
     CircuitElement.prototype.attachInput = function (inputTerminal) {

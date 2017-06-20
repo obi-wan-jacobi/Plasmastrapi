@@ -13,8 +13,8 @@ function (Component, Position) {
             'onorientationchange'
         );
         // inject event callbacks into handle
-        this.__injectHandleMethodEventCallback('setPosition', 'onpositionchange');
-        this.__injectHandleMethodEventCallback('setOrientation', 'onorientationchange');
+        this.__attachEventTriggerToHandleMethod('setPosition', 'onpositionchange');
+        this.__attachEventTriggerToHandleMethod('setOrientation', 'onorientationchange');
 	};
 
     return PoseComponent;

@@ -27,7 +27,7 @@
         }
         this.__engine = engine;
         this.__engine.EmitterContainer.add(this);
-        this.__fire('oninjectengine', engine);
+        this.emit('oninjectengine', engine);
     };
 
     return Base;

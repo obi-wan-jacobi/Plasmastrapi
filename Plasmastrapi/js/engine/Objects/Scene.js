@@ -1,48 +1,47 @@
-define(['emitter', 'entity', 'linked-list'],
-function (Emitter, Entity, LinkedList) {
+define(['entity', 'dictionary'],
+function (Entity, Dictionary) {
 
     // CLASS Scene
-    Scene.prototype = Object.create(Emitter.prototype);
-    Scene.prototype.constructor = Scene;
 	function Scene() {
-        Emitter.call(this);
 		// private variables
-        this.__contents = new LinkedList(Entity);
-	    // apply mixins
-        Emitter.Mixins.Loadable.call(this);
-	};
-    // private methods
-	Scene.prototype.__onload = function () {
-		this.__contents.forEach(function(entity) {
-			entity.load();
-		});
-	};
-	Scene.prototype.__onunload = function() {
-		this.__contents.forEach(function(entity) {
-			entity.unload();
-		});
+        this.__entities = new Dictionary(Entity);
+        this.__isInitialized = false;
+        this.__isLoaded = false;
 	};
     // public methods
-	Scene.prototype.injectEngine = function (engine) {
-	    Emitter.prototype.injectEngine.call(this, engine);
-	    this.__contents.forEach(function (entity) {
-	        if (!entity.isEngineInjected) {
-	            entity.injectEngine(this.__engine);
-	        }
-	    }, this);
-	};
-	Scene.prototype.add = function (entity) {
-	    if (this.isEngineInjected && !entity.isEngineInjected) {
-	        entity.injectEngine(this.__engine);
-	    }
-	    this.__contents.add(entity);
-	    if (this.isLoaded) {
+    Scene.prototype.load = function () {
+        if (this.__isLoaded) {
+            return;
+        }
+        this.__isLoaded = true;
+        if (!this.__isInitialized) {
+            this.__isInitialized = true;
+            this.__init();
+        }
+        this.__entities.forEach(function (entity) {
+            entity.load();
+        });
+    };
+    Scene.prototype.unload = function () {
+        if (!this.__isLoaded) {
+            return;
+        }
+        this.__entities.forEach(function (entity) {
+            entity.unload();
+        });
+    };
+    Controller.prototype.reload = function () {
+        this.unload();
+        this.load();
+    };
+    Scene.prototype.add = function (entity) {
+	    this.__entities.add(entity);
+	    if (this.__isLoaded) {
 	        entity.load();
 	    }
-	    entity.addEventListener('ondestroy', this, this.remove);
 	};
 	Scene.prototype.remove = function (entity) {
-	    var removedElement = this.__contents.remove(entity);
+	    var removedElement = this.__entities.remove(entity);
 	    if (removedElement.isLoaded) {
 	        removedElement.unload();
 	    }

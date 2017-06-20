@@ -28,24 +28,27 @@
     };
     Pausable.prototype.loopOnce = function (deltaMs) {
         if (this.isLoaded && !this.isPaused) {
-            this.__fire('onframe', deltaMs);
+            this.emit('onframe', deltaMs);
             return true;
         }
         return false;
     };
     Pausable.prototype.pause = function () {
-        if (!this.__isPaused) {
-            this.__isPaused = true;
-            this.__fire('onpause');
+        if (this.__isPaused) {
+            return;
         }
+        this.__isPaused = true;
+        this.emit('onpause');
     };
     Pausable.prototype.unpause = function () {
-        if (this.__isPaused) {
-            this.__isPaused = false;
-            this.__fire('onunpause');
+        if (!this.__isPaused) {
+            return;
         }
+        this.__isPaused = false;
+        this.emit('onunpause');
     };
     Pausable.prototype.restart = function () {
+        this.pause();
         this.unpause();
         if (this.isLoadable) {
             this.reload();

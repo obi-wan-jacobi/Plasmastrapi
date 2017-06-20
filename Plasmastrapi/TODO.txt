@@ -13,6 +13,7 @@ needs testing:
 - destroy->purge
 
 overhaul:
+- Search for TODO's
 - move Emitter (+ Component?, + Entity?) to core
 	- Base to inherit from Emitter
 - Entity to store Components in Dictionary

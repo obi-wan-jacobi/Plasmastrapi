@@ -4,8 +4,8 @@
     Vertex.prototype.constructor = Vertex;
     function Vertex(x, y) {
         Primitive.call(this);
-        validator.validateType(this, x, "Number");
-        validator.validateType(this, y, "Number");
+        validator.validateType(this, x, 'number');
+        validator.validateType(this, y, 'number');
         this.x = x;
         this.y = y;
     };

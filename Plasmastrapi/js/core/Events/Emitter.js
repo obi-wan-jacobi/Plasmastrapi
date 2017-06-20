@@ -7,7 +7,7 @@ function(Dictionary) {
         this.__eventsBuffer = {};
     };
     // private methods
-    Emitter.prototype.__fire = function (event /*, argument1, argument2, etc... */) {
+    Emitter.prototype.emit = function (event /*, argument1, argument2, etc... */) {
         validator.validateEventIsImplemented(this, event);
         var args = arguments.length > 1 ? [].slice.call(arguments, 1, arguments.length) : null;
         // call owner's event callback first
@@ -38,7 +38,7 @@ function(Dictionary) {
             this["__$" + event] = function (event) {
                 return function () {
                     [].unshift.call(arguments, event);
-                    this.__fire.apply(this, arguments);
+                    this.emit.apply(this, arguments);
                 };
             }(event);
             this.__events[event] = new Dictionary();
@@ -70,7 +70,7 @@ function(Dictionary) {
             validator.throw(this, 'removeEventListener', 'Event ' + event + ' could not be removed');
         }
     };
-    Emitter.prototype.purgeEventListenersBoundTo = function(subscriber) {
+    Emitter.prototype.purgeEventListener = function(subscriber) {
         validator.validateObject(subscriber);
         for (var event in this.__events) {
             if (this.__events.hasOwnProperty(event)) {

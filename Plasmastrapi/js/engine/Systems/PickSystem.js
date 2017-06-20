@@ -39,13 +39,13 @@ function (System, PickComponent) {
         this.__list_click = [];
     };
     PickSystem.prototype.__onframe = function () {
-        if (this.__list_mouseenter.length > 0) this.__fire('onmouseenter', this.__list_mouseenter);
-        if (this.__list_mousehover.length > 0) this.__fire('onmousehover', this.__list_mousehover);
-        if (this.__list_mouseleave.length > 0) this.__fire('onmouseleave', this.__list_mouseleave);
-        if (this.__list_mousemove.length > 0) this.__fire('onmousemove', this.__list_mousemove);
-        if (this.__list_mousedown.length > 0) this.__fire('onmousedown', this.__list_mousedown);
-        if (this.__list_mouseup.length > 0) this.__fire('onmouseup', this.__list_mouseup);
-        if (this.__list_click.length > 0) this.__fire('onclick', this.__list_click);
+        if (this.__list_mouseenter.length > 0) this.emit('onmouseenter', this.__list_mouseenter);
+        if (this.__list_mousehover.length > 0) this.emit('onmousehover', this.__list_mousehover);
+        if (this.__list_mouseleave.length > 0) this.emit('onmouseleave', this.__list_mouseleave);
+        if (this.__list_mousemove.length > 0) this.emit('onmousemove', this.__list_mousemove);
+        if (this.__list_mousedown.length > 0) this.emit('onmousedown', this.__list_mousedown);
+        if (this.__list_mouseup.length > 0) this.emit('onmouseup', this.__list_mouseup);
+        if (this.__list_click.length > 0) this.emit('onclick', this.__list_click);
         this.__list_mouseenter = [];
         this.__list_mousehover = [];
         this.__list_mouseleave = [];

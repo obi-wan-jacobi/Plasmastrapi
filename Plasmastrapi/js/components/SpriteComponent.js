@@ -12,9 +12,9 @@ function (Component, Mesh, Position, Rectangle, PoseComponent) {
             'onframechange'
         );
         // inject event callbacks into handle
-        this.__injectHandleMethodEventCallback('setFrame', 'onframechange');
-        this.__injectHandleMethodEventCallback('nextFrame', 'onframechange');
-        this.__injectHandleMethodEventCallback('previousFrame', 'onframechange');
+        this.__attachEventTriggerToHandleMethod('setFrame', 'onframechange');
+        this.__attachEventTriggerToHandleMethod('nextFrame', 'onframechange');
+        this.__attachEventTriggerToHandleMethod('previousFrame', 'onframechange');
     };
 
 	return SpriteComponent;

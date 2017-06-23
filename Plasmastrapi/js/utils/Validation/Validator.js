@@ -1,12 +1,17 @@
 ﻿define(function () {
 
     function Validator() { };
+    // throws
     Validator.prototype.throw = function (ref, methodName, errorString) {
         if (errorString[errorString.length - 1] !== '.') {
             errorString += '.';
         }
         throw new Error(ref.constructor.name + '::' + methodName + ' -- ' + errorString);
     };
+    Validator.prototype.throwMethodMustBeOverridden = function (ref, methodName) {
+        this.throw(ref, methodName, ref.constructor.name + ' must override inherited method ' + methodName);
+    };
+    // validations
     Validator.prototype.validateNotNull = function (object) {
         if (!object) {
             validator.throw(this, 'validateObject', 'Argument cannot be null');

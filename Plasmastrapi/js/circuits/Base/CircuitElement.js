@@ -1,5 +1,5 @@
 ﻿define(['base-element', 'circuit-constants'],
-function (BaseElement, CIRCUITCONSTANTS) {
+function (BaseElement, CIRCUITS) {
 
     // CLASS CircuitElement
     CircuitElement.prototype = Object.create(BaseElement.prototype);
@@ -8,7 +8,7 @@ function (BaseElement, CIRCUITCONSTANTS) {
         // inherits from
         BaseElement.call(this);
         this.__inputs = [];
-        this.__state = CIRCUITCONSTANTS.STATES.NOPOWER;
+        this.__state = CIRCUITS.STATES.NOPOWER;
     };
     // private methods
     CircuitElement.prototype.__ondestroy = function () {

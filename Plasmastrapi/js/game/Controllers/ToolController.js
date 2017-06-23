@@ -75,8 +75,8 @@
         if (this.__tool) {
             this.__equip(this.__tool);
         }
-        this.__engine.inputSystem.addEventListener('onmousemove', this, this.__updateLastPosition);
-        this.__engine.inputSystem.addEventListener('onkeyup', this, this.__dohotkey);
+        this.__engine.MouseSystem.addEventListener('onmousemove', this, this.__updateLastPosition);
+        this.__engine.MouseSystem.addEventListener('onkeyup', this, this.__dohotkey);
     };
     ToolController.prototype.unload = function () {
         Controller.prototype.unload.call(this);
@@ -86,8 +86,8 @@
         if (this.__tool) {
             this.__tool.discard();
         }
-        this.__engine.inputSystem.removeEventListener('onmousemove', this, this.__updateLastPosition);
-        this.__engine.inputSystem.removeEventListener('onkeyup', this, this.__dohotkey);
+        this.__engine.MouseSystem.removeEventListener('onmousemove', this, this.__updateLastPosition);
+        this.__engine.MouseSystem.removeEventListener('onkeyup', this, this.__dohotkey);
     };
     ToolController.prototype.setCompatibilityFilter = function (filter) {
         this.__engine.pickablesContainer.forEach(function (pickComponent) {

@@ -26314,7 +26314,7 @@ define('commonJs', ['env!env/file', 'parse'], function (file, parse) {
                     fileName = fileList[i];
                     convertedFileName = fileName.replace(commonJsPath, savePath);
 
-                    //Handle JS files.
+                    //DataHandle JS files.
                     if (jsFileRegExp.test(fileName)) {
                         fileContents = file.readFile(fileName);
                         fileContents = commonJs.convert(fileName, fileContents);

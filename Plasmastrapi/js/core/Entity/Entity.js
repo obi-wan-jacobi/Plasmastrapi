@@ -28,7 +28,6 @@ function (Emitter, Component, Dictionary) {
     };
     Entity.prototype.addComponent = function(component) {
         this.__components.add(component.constructor.name, component);
-        // TODO:
         if (this.isLoaded) {
             this.reload();
         }

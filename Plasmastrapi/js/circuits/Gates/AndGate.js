@@ -1,5 +1,5 @@
 ﻿define(['gate', 'circuit-constants'],
-function (Gate, CIRCUITCONSTANTS) {
+function (Gate, CIRCUITS) {
 
     // CLASS AndGate
     AndGate.prototype = Object.create(Gate.prototype);
@@ -8,7 +8,7 @@ function (Gate, CIRCUITCONSTANTS) {
         Gate.call(this);
     };
     AndGate.prototype.updateState = function (inputState) {
-        var STATES = CIRCUITCONSTANTS.STATES;
+        var STATES = CIRCUITS.STATES;
         var connections = this.__inputs;
         var nextState = STATES.HIGH;
         var isPowered = false;

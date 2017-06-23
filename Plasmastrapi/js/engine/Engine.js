@@ -9,11 +9,11 @@ define([
     // Systems
     'collision-system',
     'draw-system',
-    'input-system',
+    'mouse-system',
     'motion-system',
     'pick-system'
 ],
-function (System, EntityContainer, EmitterContainer, PickComponentContainer, CollissionSystem, DrawSystem, InputSystem, MotionSystem, PickSystem) {
+function (System, EntityContainer, EmitterContainer, PickComponentContainer, CollissionSystem, DrawSystem, MouseSystem, MotionSystem, PickSystem) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -36,7 +36,7 @@ function (System, EntityContainer, EmitterContainer, PickComponentContainer, Col
 	    this.register('pickablesContainer', new PickComponentContainer());
 	};
 	Engine.prototype.__registerSystems = function () {
-	    this.register('inputSystem', new InputSystem());
+	    this.register('MouseSystem', new MouseSystem());
 	    this.register('drawSystem', new DrawSystem());
 	    this.register('pickSystem', new PickSystem());
 	};

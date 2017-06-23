@@ -1,5 +1,5 @@
 ﻿define(['terminal', 'circuit-constants'],
-function (Terminal, CIRCUITCONSTANTS) {
+function (Terminal, CIRCUITS) {
 
     // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
@@ -11,7 +11,7 @@ function (Terminal, CIRCUITCONSTANTS) {
 
 
         // state
-        this.__state = CIRCUITCONSTANTS.STATES.NOPOWER;
+        this.__state = CIRCUITS.STATES.NOPOWER;
 
         // events
         this.__registerEvents(
@@ -22,17 +22,17 @@ function (Terminal, CIRCUITCONSTANTS) {
     Object.defineProperties(OutputTerminal.prototype, {
         'isPowered': {
             get: function () {
-                return this.__state > CIRCUITCONSTANTS.STATES.NOPOWER;
+                return this.__state > CIRCUITS.STATES.NOPOWER;
             }
         },
         'isHigh': {
             get: function () {
-                return this.__state === CIRCUITCONSTANTS.STATES.HIGH;
+                return this.__state === CIRCUITS.STATES.HIGH;
             }
         },
         'isLow': {
             get: function () {
-                return this.__state === CIRCUITCONSTANTS.STATES.LOW;
+                return this.__state === CIRCUITS.STATES.LOW;
             }
         }
     });

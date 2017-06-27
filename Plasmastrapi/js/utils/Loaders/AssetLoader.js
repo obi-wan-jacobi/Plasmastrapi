@@ -1,4 +1,5 @@
-define(function() {
+define(['validator'],
+function (validator) {
 
     // CLASS AssetLoader
     function AssetLoader() { // TODO:
@@ -24,23 +25,13 @@ define(function() {
     AssetLoader.prototype.__itemFinishedLoadingWithError = function(){
         validator.throw(this, 'itemFinishedLoadingWithError', 'An asset failed to load');
     };
-    AssetLoader.prototype.__beginDownload = function () {
+    AssetLoader.prototype.__initDownload = function (assetUrls) {
         if (this.__isExecuting) {
             validator.throw(this, 'beginDownload', 'A download is already in progress');
         }
         this.__isFinishedLoading = false;
         this.__loadCounter = 0;
-        for (var asset in this.__assets) {
-            if (this.__assets.hasOwnProperty(asset)) {
-                if (asset instanceof Array) {
-                    for (var i = 0, L = asset.length; i < L; i++) {
-                        this.__loadTotal++;
-                    }
-                } else {
-                    this.__loadTotal++;
-                }
-            }
-        }
+        this.__loadTotal = assetUrls.length;
     };
     // public prototypal variables
     Object.defineProperties(AssetLoader.prototype, {
@@ -51,14 +42,14 @@ define(function() {
 		}
     });
     // public methods
-    AssetLoader.prototype.download = function (imageUrls) {
-        this.__beginDownload(images);
-        for (var src in imageUrls) {
+    AssetLoader.prototype.download = function (assetUrls) {
+        this.__initDownload(assetUrls);
+        for (var src in assetUrls) {
             var image = new Image();
             image.onload = this.__itemFinishedLoading.bind(this);
             image.onerror = this.__itemFinishedLoadingWithError;
-            this.__assets[src] = image;
-            image.src = imageUrls[src];
+            this.__assets.push(image);
+            image.src = assetUrls[src];
         }
         return this;
     };

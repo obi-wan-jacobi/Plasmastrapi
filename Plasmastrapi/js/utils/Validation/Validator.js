@@ -33,7 +33,7 @@
             for (var i = 0, L = instance.length; i < L; i++) {
                 this.validateType(ref, instance[i], Type);
             }
-        } else if (typeof instance !== Type || !(instance instanceof Type)) {
+        } else if (typeof instance !== Type && !(instance instanceof Type)) {
             this.throw(ref, 'validateType', instance + ' must be an instance of ' + Type.name);
         }
     };

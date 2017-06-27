@@ -1,5 +1,5 @@
-define(['link'],
-function (Link) {
+define(['link', 'validator'],
+function (Link, validator) {
     
     // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle.
     // Index-free iteration.

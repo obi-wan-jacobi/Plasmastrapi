@@ -1,4 +1,4 @@
-﻿define(['primitive'], function (Primitive) {
+﻿define(['primitive', 'validator'], function (Primitive, validator) {
 
     Position.prototype = Object.create(Primitive.prototype);
     Position.prototype.constructor = Position;

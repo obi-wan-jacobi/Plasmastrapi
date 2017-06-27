@@ -1,4 +1,5 @@
-define(function() {
+define(['validator'],
+function (validator) {
 
     function Link(value) {
         this.__value = value;

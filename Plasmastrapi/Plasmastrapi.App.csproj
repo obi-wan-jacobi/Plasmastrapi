@@ -104,7 +104,7 @@
     <Content Include="js\core\Data\Physics\Acceleration.js" />
     <Content Include="js\engine\Containers\DrawContainer.js" />
     <Content Include="js\engine\Systems\KeyboardSystem.js" />
-    <Content Include="js\factories\Factory.js" />
+    <Content Include="js\engine\Factories\Base\Factory.js" />
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />

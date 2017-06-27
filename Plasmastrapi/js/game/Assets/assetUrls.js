@@ -22,8 +22,8 @@ function () {
         'LightScreen_closed.png'
     ];
 
-    for (var imageUrl in imageUrls) {
-        imageUrl = 'img/' + imageUrl;
+    for (var idx in imageUrls) {
+        imageUrls[idx] = 'img/' + imageUrls[idx];
     }
 
     return imageUrls;

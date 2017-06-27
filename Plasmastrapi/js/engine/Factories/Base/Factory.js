@@ -1,4 +1,14 @@
-﻿Wire.prototype.__updateState = function () {
+﻿define(function () {
+
+    function Factory() {
+
+    };
+
+    return Factory;
+});
+
+/*
+Wire.prototype.__updateState = function () {
     var lineComponent = this.getComponent(LineComponent);
     var displayLayer = config.Wire.displayLayer;
     var lineWidth = config.Wire.poweredLineWidth;
@@ -24,3 +34,4 @@ TerminalWireAnchor.prototype.__setPoseRelativeToLogicElement = function () {
     poseComponent.position = new Position(x, y);
     poseComponent.orientation = orientation;
 };
+*/

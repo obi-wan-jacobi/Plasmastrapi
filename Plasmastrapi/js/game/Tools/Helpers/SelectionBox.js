@@ -90,7 +90,7 @@ function (Entity, MeshComponent, PickComponent, PoseComponent, SpriteComponent, 
     };
     SelectionBox.prototype.fillContents = function () {
         var meshComponent = this.getComponent(MeshComponent);
-        this.__engine.circuitElementContainer.forEach(function (element) {
+        this.__engine.LogicElementContainer.forEach(function (element) {
             var poseComponent = element.getComponent(PoseComponent);
             if (meshComponent.checkPointCollision(poseComponent.position)) {
                 this.__contents.push(element);

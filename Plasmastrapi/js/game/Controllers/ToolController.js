@@ -102,8 +102,8 @@
     ToolController.prototype.equipPickingTool = function () {
         this.__equip(this.__pickingTool);
     };
-    ToolController.prototype.equipPlacingTool = function (circuitElement, fnShiftKeyMouseUp) {
-        this.__equip(this.__placingTool, circuitElement, fnShiftKeyMouseUp);
+    ToolController.prototype.equipPlacingTool = function (LogicElement, fnShiftKeyMouseUp) {
+        this.__equip(this.__placingTool, LogicElement, fnShiftKeyMouseUp);
     };
     ToolController.prototype.equipWireTool = function (terminal) {
         this.__equip(this.__wireTool, terminal);

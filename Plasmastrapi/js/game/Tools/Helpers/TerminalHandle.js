@@ -1,11 +1,4 @@
-﻿define([
-    // Base
-    'entity',
-    // Components
-    'pose-component',
-    // Data
-    'position'
-],
+﻿define(['entity', 'pose-component', 'pose'],
 function (Entity, PoseComponent, Position) {
 
     // CLASS TerminalHandle
@@ -13,7 +6,7 @@ function (Entity, PoseComponent, Position) {
     TerminalHandle.prototype.constructor = TerminalHandle;
     function TerminalHandle(x, y) {
         Entity.call(this);
-        var poseComponent = new PoseComponent(new Position(x, y), 0);
+        var poseComponent = new PoseComponent(new Pose(x, y));
         this.addComponent(poseComponent);
     };
 

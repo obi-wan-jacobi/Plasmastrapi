@@ -1,11 +1,11 @@
-﻿define(['circuit-element', 'circuit-constants'],
-function (CircuitElement, CIRCUITS) {
+﻿define(['logic-element', 'circuit-constants'],
+function (LogicElement, CIRCUITS) {
 
     // CLASS PowerSource
-    PowerSource.prototype = Object.create(CircuitElement.prototype);
+    PowerSource.prototype = Object.create(LogicElement.prototype);
     PowerSource.prototype.constructor = PowerSource;
     function PowerSource() {
-        CircuitElement.call(this);
+        LogicElement.call(this);
         // initialize high
         this.__state = CIRCUITS.STATES.HIGH;
     };

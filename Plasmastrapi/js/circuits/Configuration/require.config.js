@@ -1,7 +1,7 @@
 ﻿require.config({
     paths: {
-        'base-element': './circuits/Base/BaseElement',
         'circuit-element': './circuits/Base/CircuitElement',
+        'logic-element': './circuits/Base/LogicElement',
         'gate': './circuits/Base/Gate',
         'terminal': './circuits/Base/Terminal',
         'wire-element': './circuits/Base/WireElement',

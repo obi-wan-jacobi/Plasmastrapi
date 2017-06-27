@@ -20,7 +20,7 @@
     Validator.prototype.validateObject = function (object) {
         this.validateNotNull(object);
         if (Object.getOwnPropertyNames(object).length === 0) {
-            validator.throw(this, 'validateObject', 'Subscribers cannot be empty objects');
+            validator.throw(this, 'validateObject', 'Argument must be a valid object');
         }
     };
     Validator.prototype.validateFunction = function (fn) {
@@ -37,6 +37,13 @@
             this.throw(ref, 'validateType', instance + ' must be an instance of ' + Type.name);
         }
     };
+    // emitter validations
+    Validator.prototype.validateEventIsImplemented = function (emitter, event) {
+        if (!emitter.hasEvent(event)) {
+            this.throw(emitter, 'validateEventIsImplemented', emitter.constructor.name + ' does not implement event ' + event);
+        }
+    };
+    // entity validations
     Validator.prototype.validateEntityHasComponent = function (ref, entity, Component) {
         var component = entity.getComponent(Component);
         if (!component) {
@@ -44,11 +51,7 @@
         }
         return component;
     };
-    Validator.prototype.validateEventIsImplemented = function (emitter, event) {
-        if (!emitter.hasEvent(event)) {
-            this.throw(emitter, 'validateEventIsImplemented', emitter.constructor.name + ' does not implement event ' + event);
-        }
-    };
 
+    // singleton
     return new Validator();
 });

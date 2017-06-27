@@ -24,14 +24,14 @@ overhaul:
 
 optimization
 - tool compatibility filtering --> sort pickable components using a tree?
-- MeshComponent --> combine translate + rotate into one function (leverage a single forloop)?
+- MeshComponent --> combine translate + rotate into one function (leverage a single for-loop)?
 - Dictionary --> store this.__end to avoid O(n) for this.add
 - entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
 
 tech debt:
 - require dependencies for type-checking in Component and DataHandle
 - main.js --> game.start() before initializing controllers?
-- meshhandle point collision checking is disgusting
+- meshhandle point-collision checking is disgusting
 - blue background image is needlessly large
 - run memory analysis/profiler diagnostics
 - JSDocs/automated documentation
@@ -41,8 +41,7 @@ scalability concerns:
 - single-canvas viewport
 
 in progress:
-	- UI panels
-	- menu buttons with text labels
+- 
 
 backlog:
 - general
@@ -64,7 +63,7 @@ backlog:
 		- save/load design
 		- undo/redo
 		- wire routing
-	- circuit testing ("debug" mode)
+	- circuit testing ('debug' mode)
 		- pause/stop/play
 		- breakpoints?
 		- step forward/backward

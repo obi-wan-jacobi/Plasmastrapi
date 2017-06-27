@@ -2,15 +2,15 @@
     // Base
     'container',
     // Circuits
-    'circuit-element'
+    'logic-element'
 ],
-function (Container, CircuitElement) {
+function (Container, LogicElement) {
 
     // CLASS EntityContainer
     EntityContainer.prototype = Object.create(Container.prototype);
     EntityContainer.prototype.constructor = EntityContainer;
     function EntityContainer() {
-        Container.call(this, CircuitElement);
+        Container.call(this, LogicElement);
     };
 
     return EntityContainer;

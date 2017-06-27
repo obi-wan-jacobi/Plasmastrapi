@@ -1,7 +1,7 @@
 ﻿require.config({
     paths: {
         // Containers
-        'circuit-element-container': './game/Containers/CircuitElementContainer',
+        'logic-element-container': './game/Containers/LogicElementContainer',
         'wire-container': './game/Containers/WireContainer',
         // Controllers
         'scene-controller': './game/Controllers/SceneController',

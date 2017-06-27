@@ -4,11 +4,12 @@ function (Terminal, OutputTerminal) {
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
     InputTerminal.prototype.constructor = InputTerminal;
-    function InputTerminal(circuitElement) {
+    function InputTerminal(LogicElement) {
         // inherits from
-        Terminal.call(circuitElement);
+        Terminal.call(LogicElement);
+        // initialize connections array before attaching input
         this.__connections = [];
-        circuitElement.attachInput(this);
+        LogicElement.attachInput(this);
     };
     // public methods
     InputTerminal.prototype.getConnections = function () {
@@ -28,7 +29,7 @@ function (Terminal, OutputTerminal) {
         var terminalToDisconnect = this.__connections[connectionIndex];
         this.__connections.splice(connectionIndex, 1);
         terminalToDisconnect.removeEventListener('onstatechange', this.__parent, this.__parent.updateState);
-        this.__parent.updateState(terminalToDisconnect.STATES.NOPOWER);
+        this.__parent.updateState();
     };
     
     return InputTerminal;

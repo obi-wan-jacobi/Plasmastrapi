@@ -15,34 +15,31 @@ function (Emitter, Component, Dictionary) {
         Emitter.Mixins.Destructible.call(this);
     };
     // public methods
+    Entity.prototype.addDependency = function (dependency) {
+        validator.validateType(this, dependency, Entity);
+        // wire-up event subscriptions
+        dependency.addEventListener('onload', this, this.load);
+        dependency.addEventListener('onunload', this, this.unload);
+        dependency.addEventListener('ondestroy', this, this.destroy);
+    };
     Entity.prototype.addParent = function (parent) {
         if (this.__parent) {
             validator.throw(this, 'addParent', 'This entity already has a parent');
         }
-        validator.validateType(this, parent, Entity);
+        this.addDependency(parent);
         this.__parent = parent;
-        // wire up event subscriptions
-        this.__parent.addEventListener('onload', this, this.load);
-        this.__parent.addEventListener('onunload', this, this.unload);
-        this.__parent.addEventListener('ondestroy', this, this.destroy);
     };
-    Entity.prototype.addComponent = function(component) {
+    Entity.prototype.addComponent = function (component) {
         this.__components.add(component.constructor.name, component);
         if (this.isLoaded) {
             this.reload();
         }
     };
-    Entity.prototype.removeComponent = function (component) {
-        var removedComponent = this.__components.remove(component.constructor.name);
-        if (removedComponent) {
-            removedComponent.destroy();
-        }
-    };
     Entity.prototype.getComponent = function (ComponentType) {
         return this.__components.get(ComponentType.name);
     };
-    Entity.prototype.hasComponent = function(componentClass) {
-        return this.getComponent(componentClass) ? true : false;
+    Entity.prototype.hasComponent = function (ComponentType) {
+        return this.getComponent(ComponentType) ? true : false;
     };
 
     return Entity;

@@ -104,6 +104,7 @@
     <Content Include="js\core\Data\Physics\Acceleration.js" />
     <Content Include="js\engine\Containers\DrawContainer.js" />
     <Content Include="js\engine\Systems\KeyboardSystem.js" />
+    <Content Include="js\factories\Factory.js" />
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
@@ -122,25 +123,25 @@
     <Content Include="js\engine\Systems\PickSystem.js" />
     <Content Include="js\game\Assets\images.js" />
     <Content Include="js\game\Assets\sprites.js" />
-    <Content Include="js\circuits\Base\BaseElement.js" />
-    <Content Include="js\circuits\Base\WireElement.js" />
-    <Content Include="js\circuits\Wires\ToolWire.js" />
+    <Content Include="js\circuits\Base\CircuitElement.js" />
+    <Content Include="js\circuits\Wires\Base\WireElement.js" />
+    <Content Include="js\game\Tools\Helpers\ToolWire.js" />
     <Content Include="js\game\Configuration\config.js" />
     <Content Include="js\game\Containers\CircuitElementContainer.js" />
     <Content Include="js\game\Controllers\ToolController.js" />
-    <Content Include="js\circuits\Base\CircuitElement.js" />
-    <Content Include="js\circuits\Gates\AndGate.js" />
-    <Content Include="js\circuits\Base\Gate.js" />
-    <Content Include="js\circuits\Gates\NandGate.js" />
-    <Content Include="js\circuits\Gates\OrGate.js" />
-    <Content Include="js\circuits\Gates\XorGate.js" />
-    <Content Include="js\circuits\Terminals\TerminalHandle.js" />
-    <Content Include="js\circuits\Power\PowerSource.js" />
+    <Content Include="js\circuits\LogicElements\Base\LogicElement.js" />
+    <Content Include="js\circuits\LogicElements\Gates\AndGate.js" />
+    <Content Include="js\circuits\LogicElements\Gates\Base\Gate.js" />
+    <Content Include="js\circuits\LogicElements\Gates\NandGate.js" />
+    <Content Include="js\circuits\LogicElements\Gates\OrGate.js" />
+    <Content Include="js\circuits\LogicElements\Gates\XorGate.js" />
+    <Content Include="js\game\Tools\Helpers\TerminalHandle.js" />
+    <Content Include="js\circuits\LogicElements\Power\PowerSource.js" />
     <Content Include="js\circuits\Terminals\InputTerminal.js" />
     <Content Include="js\circuits\Terminals\OutputTerminal.js" />
-    <Content Include="js\circuits\Base\Terminal.js" />
-    <Content Include="js\circuits\Wires\TerminalWire.js" />
-    <Content Include="js\circuits\Terminals\TerminalWireAnchor.js" />
+    <Content Include="js\circuits\Terminals\Base\Terminal.js" />
+    <Content Include="js\TerminalWire.js" />
+    <Content Include="js\TerminalWireAnchor.js" />
     <Content Include="js\circuits\Wires\Wire.js" />
     <Content Include="js\game\Configuration\debug.js" />
     <Content Include="js\game\Configuration\require.config.js" />
@@ -247,9 +248,8 @@
     <Content Include="js\game\Game.js" />
     <Content Include="js\game\Containers\WireContainer.js" />
     <Content Include="js\game\Services\RevisionService.js" />
-    <Content Include="Scripts\r.js" />
-    <Content Include="Scripts\require.js" />
-    <Content Include="Scripts\text.js" />
+    <Content Include="js\lib\r.js" />
+    <Content Include="js\lib\require.js" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -257,8 +257,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="js\circuits\FlipFlops\" />
-    <Folder Include="js\circuits\Switches\" />
+    <Folder Include="js\circuits\LogicElements\FlipFlops\" />
+    <Folder Include="js\circuits\LogicElements\Switches\" />
     <Folder Include="js\core\DataHandles\Physics\" />
     <Folder Include="js\ui\Shapes\" />
   </ItemGroup>

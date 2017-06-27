@@ -1,10 +1,10 @@
 ﻿/*
 *** CIRCUITS ***
 
-BaseElement:
+CircuitElement:
 Draggable, Pickable
 
-CircuitElement:
+LogicElement:
 Placeable, Trashable
 
 InputTerminal:

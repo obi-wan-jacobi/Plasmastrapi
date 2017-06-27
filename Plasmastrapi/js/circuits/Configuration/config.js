@@ -4,7 +4,7 @@ function () {
 
     $ = {};
 
-    $.BaseElement = {
+    $.CircuitElement = {
         spriteHandleDisplayLayer: 'ondrawgameentities'
     };
 

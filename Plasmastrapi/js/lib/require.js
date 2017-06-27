@@ -9,7 +9,7 @@
 
 var requirejs, require, define;
 (function (global, setTimeout) {
-    var req, s, head, baseElement, dataMain, src,
+    var req, s, head, CircuitElement, dataMain, src,
         interactiveScript, currentlyAddingScript, mainScript, subPath,
         version = '2.3.3',
         commentRegExp = /\/\*[\s\S]*?\*\/|([^:"'=]|^)\/\/.*$/mg,
@@ -1856,9 +1856,9 @@ var requirejs, require, define;
         //If BASE tag is in play, using appendChild is a problem for IE6.
         //When that browser dies, this can be removed. Details in this jQuery bug:
         //http://dev.jquery.com/ticket/2709
-        baseElement = document.getElementsByTagName('base')[0];
-        if (baseElement) {
-            head = s.head = baseElement.parentNode;
+        CircuitElement = document.getElementsByTagName('base')[0];
+        if (CircuitElement) {
+            head = s.head = CircuitElement.parentNode;
         }
     }
 
@@ -1955,8 +1955,8 @@ var requirejs, require, define;
             //call to the module name (which is stored on the node), hold on
             //to a reference to this node, but clear after the DOM insertion.
             currentlyAddingScript = node;
-            if (baseElement) {
-                head.insertBefore(node, baseElement);
+            if (CircuitElement) {
+                head.insertBefore(node, CircuitElement);
             } else {
                 head.appendChild(node);
             }

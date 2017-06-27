@@ -53,12 +53,12 @@ function (Button, LabelDecorator, ImageComponent, Mesh, Position, Rectangle, Ima
         LabelDecorator.call(this, TextDisplaySettings);
     };
     SpawnerButton.prototype.__onpick = function () {
-        this.__spawnCircuitElement(this.__engine.toolController.__x, this.__engine.toolController.__y);
+        this.__spawnLogicElement(this.__engine.toolController.__x, this.__engine.toolController.__y);
     };
-    SpawnerButton.prototype.__spawnCircuitElement = function (x, y) {
-        var circuitElement = new this.__SpawnConstructor(x, y);
-        this.__engine.sceneController.addToCurrentScene(circuitElement);
-        this.__engine.toolController.equipPlacingTool(circuitElement, this.__spawnCircuitElement.bind(this));
+    SpawnerButton.prototype.__spawnLogicElement = function (x, y) {
+        var LogicElement = new this.__SpawnConstructor(x, y);
+        this.__engine.sceneController.addToCurrentScene(LogicElement);
+        this.__engine.toolController.equipPlacingTool(LogicElement, this.__spawnLogicElement.bind(this));
     };
 
     return SpawnerButton;

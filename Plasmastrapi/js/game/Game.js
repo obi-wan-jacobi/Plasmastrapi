@@ -2,10 +2,10 @@ define([
     'engine',
     'scene-controller',
     'tool-controller',
-    'circuit-element-container',
+    'logic-element-container',
     'wire-container'
 ],
-function (Engine, SceneController, ToolController, CircuitElementContainer, WireContainer) {
+function (Engine, SceneController, ToolController, LogicElementContainer, WireContainer) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -16,7 +16,7 @@ function (Engine, SceneController, ToolController, CircuitElementContainer, Wire
     };
     // private methods
     Game.prototype.__registerAll = function () {
-        this.register('circuitElementContainer', new CircuitElementContainer());
+        this.register('LogicElementContainer', new LogicElementContainer());
         this.register('wireContainer', new WireContainer());
         this.register('toolController', new ToolController());
         this.register('sceneController', new SceneController());

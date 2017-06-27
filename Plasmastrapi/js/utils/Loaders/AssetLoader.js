@@ -1,7 +1,7 @@
 define(function() {
 
-    // CLASS Loader
-    function Loader() { // TODO:
+    // CLASS AssetLoader
+    function AssetLoader() { // TODO:
         // private variables
         this.__isExecuting = false;
         this.__isFinishedLoading = false;
@@ -11,7 +11,7 @@ define(function() {
         this.__assets = [];
     };
     // private methods
-    Loader.prototype.__itemFinishedLoading = function () {
+    AssetLoader.prototype.__itemFinishedLoading = function () {
         this.__loadCounter++;
         if (this.__loadCounter === this.__loadTotal) {
             this.__isfinishedloading = true;
@@ -21,10 +21,10 @@ define(function() {
             this.__isexecuting = false;
         }
     };
-    Loader.prototype.__itemFinishedLoadingWithError = function(){
+    AssetLoader.prototype.__itemFinishedLoadingWithError = function(){
         validator.throw(this, 'itemFinishedLoadingWithError', 'An asset failed to load');
     };
-    Loader.prototype.__beginDownload = function () {
+    AssetLoader.prototype.__beginDownload = function () {
         if (this.__isExecuting) {
             validator.throw(this, 'beginDownload', 'A download is already in progress');
         }
@@ -43,7 +43,7 @@ define(function() {
         }
     };
     // public prototypal variables
-    Object.defineProperties(Loader.prototype, {
+    Object.defineProperties(AssetLoader.prototype, {
 		'isFinishedLoading': {
 			get: function() {
 				return this.__isFinishedLoading;
@@ -51,7 +51,7 @@ define(function() {
 		}
     });
     // public methods
-    Loader.prototype.download = function (imageUrls) {
+    AssetLoader.prototype.download = function (imageUrls) {
         this.__beginDownload(images);
         for (var src in imageUrls) {
             var image = new Image();
@@ -62,15 +62,15 @@ define(function() {
         }
         return this;
     };
-    Loader.prototype.done = function(callback) {
+    AssetLoader.prototype.done = function(callback) {
         if (this.__isFinishedLoading) {
             return callback();
         }
         this.__callbacks.push(callback);
     };
-    Loader.prototype.get = function () {
+    AssetLoader.prototype.get = function () {
         return this.__assets;
     };
 
-    return Loader;
+    return AssetLoader;
 });

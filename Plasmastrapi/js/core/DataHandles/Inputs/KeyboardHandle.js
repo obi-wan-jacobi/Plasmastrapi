@@ -7,66 +7,50 @@ function (Handle) {
         Handle.call(this);
         // private variables
         this.__keysDown = [];
-        this.__isShiftKeyDown = false;
-        this.__isCtrlKeyDown = false;
+        this.__keyMapper = new Dictionary('number');
+        this.__keyMapper.add(13, 'enter');
+        this.__keyMapper.add(16, 'shift');
+        this.__keyMapper.add(17, 'ctrl');
+        this.__keyMapper.add(27, 'escape');
     };
     // public prototypal variables
     Object.defineProperties(KeyboardHandle.prototype, {
         'isShiftKeyDown': {
             get: function () {
-                return this.__isShiftKeyDown;
+                return this.isKeyDown('shift');
             }
         },
         'isCtrlKeyDown': {
             get: function () {
-                return this.__isCtrlKeyDown;
+                return this.isKeyDown('ctrl');
             }
         }
     });
-    KeyboardHandle.prototype.keyCodes = {
-        enter: 13,
-        shift: 16,
-        ctrl: 17,
-        escape: 27
-    };
     // private methods
     KeyboardHandle.prototype.isKeyDown = function (keyChar) {
         return this.__keysDown.indexOf(keyChar) > -1 ? true : false;
     };
     KeyboardHandle.prototype.keydown = function (keyCode) {
-        if (!String.fromCharCode(keyCode)) {
+        var stringFromKeyCode = String.fromCharCode(keyCode);
+        if (!stringFromKeyCode) {
             return;
         }
-        if (this.keyCodes.shift === keyCode) {
-            this.__isShiftKeyDown = true;
+        var keyString = this.__keyMapper.get(keyCode);
+        if (keyString) {
+            this.__keysDown.push(keyString);
+            return keyString;
+        } else {
+            this.__keysDown.push(stringFromKeyCode);
+            return stringFromKeyCode;
         }
-        if (this.keyCodes.ctrl === keyCode) {
-            this.__isCtrlKeyDown = true;
-        }
-        this.__keysDown.push(String.fromCharCode(keyCode));
     };
     KeyboardHandle.prototype.keyup = function (keyCode) {
         if (!String.fromCharCode(keyCode)) {
             return;
         }
         var idx = this.__keysDown.indexOf(String.fromCharCode(keyCode));
-        this.__keysDown.splice(idx);
-        if (this.keyCodes.enter === keyCode) {
-            this.enter();
-        }
-        if (this.keyCodes.shift === keyCode) {
-            this.__isShiftKeyDown = false;
-        }
-        if (this.keyCodes.ctrl === keyCode) {
-            this.__isCtrlKeyDown = false;
-        }
-        if (this.keyCodes.escape === keyCode) {
-            this.escape();
-        }
+        return this.__keysDown.splice(idx);
     };
-    KeyboardHandle.prototype.keypress = function () { };
-    KeyboardHandle.prototype.enter = function () { };
-    KeyboardHandle.prototype.escape = function () { };
 
     return KeyboardHandle;
 });

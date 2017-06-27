@@ -15,7 +15,7 @@
         width: 1300px;
         height: 700px;
         transform: translate(-50%,0);
-        background-color: white;
+        background-color: black;
     }
 </style>
 
@@ -27,20 +27,17 @@
                 baseUrl: 'js/',
                 path: {},
                 deps: [
-                    'data/require.config',
-                    'assets/require.config',
-                    'utils/require.config',
-                    'engine/require.config',
-                    'circuits/require.config',
-                    'ui/require.config',
-                    'game/require.config'
+                    'utils/Configuration/require.config',
+                    'core/Configuration/require.config',
+                    'engine/Configuration/require.config',
+                    'game/Configuration/require.config'
                 ],
                 callback: function () {
                     require(['app/main']);
                 }
             };
         </script>
-        <script src="Scripts/require.js"></script>
+        <script src="js/lib/require.js"></script>
 
 	    <title>Game</title>
 

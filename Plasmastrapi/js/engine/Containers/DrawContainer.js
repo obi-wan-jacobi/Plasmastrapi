@@ -25,11 +25,11 @@
         }
     };
     DrawContainer.prototype.add = function (member) {
-        var displayLayer = member.getHandle().getDisplaySettings.displayLayer;
+        var displayLayer = member.getHandle().getDisplaySettings().displayLayer;
         this.__containers[displayLayer].add(member);
     };
     DrawContainer.prototype.remove = function (member) {
-        var displayLayer = member.getHandle().getDisplaySettings.displayLayer;
+        var displayLayer = member.getHandle().getDisplaySettings().displayLayer;
         this.__containers[displayLayer].remove(member);
     };
 

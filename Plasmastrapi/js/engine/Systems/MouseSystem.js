@@ -1,5 +1,5 @@
-define(['system', 'event-queue', 'position'],
-function (System, EventQueue, Position) {
+define(['system', 'linked-list', 'position'],
+function (System, LinkedList, Position) {
 
 	// CLASS MouseSystem
 	MouseSystem.prototype = Object.create(System.prototype);

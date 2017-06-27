@@ -1,5 +1,5 @@
-﻿define(['circuit-element', 'circuit-constants'],
-function (CircuitElement, CIRCUITS) {
+﻿define(['circuit-element', 'input-terminal', 'circuit-constants', 'validator'],
+function (CircuitElement, InputTerminal, CIRCUITS, validator) {
 
     // CLASS LogicElement
     LogicElement.prototype = Object.create(CircuitElement.prototype);
@@ -12,6 +12,7 @@ function (CircuitElement, CIRCUITS) {
     };
     // public methods
     LogicElement.prototype.attachInput = function (inputTerminal) {
+        validator.validateType(this, inputTerminal, InputTerminal);
         this.__inputs = this.__inputs.concat(input.getConnections());
     };
     LogicElement.prototype.updateState = function (inputState) {

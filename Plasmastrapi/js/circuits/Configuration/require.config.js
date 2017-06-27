@@ -17,7 +17,8 @@
         'terminal-wire': './circuits/Wires/TerminalWire',
         'tool-wire': './circuits/Wires/ToolWire',
         'wire': './circuits/Wires/Wire',
-        // Configs
-        'circuits-config': './circuits/config'
+        // Configuration
+        'circuits-config': './circuits/Configuration/config',
+        'circuits-constants': './Configuration/constants'
     }
 });

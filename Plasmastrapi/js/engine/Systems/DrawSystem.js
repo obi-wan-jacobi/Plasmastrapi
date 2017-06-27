@@ -4,9 +4,9 @@ function (System, CORE) {
 	// CLASS DrawSystem
 	DrawSystem.prototype = Object.create(System.prototype);
 	DrawSystem.prototype.constructor = DrawSystem;
-	function DrawSystem(canvas) {
+	function DrawSystem(engine) {
         System.call(this);
-        this.__canvas = canvas;
+        this.__canvas = engine.getViewport();
 	};
 	DrawSystem.prototype.loopOnce = function() {
 		var ctx = this.__canvas.getContext("2d");

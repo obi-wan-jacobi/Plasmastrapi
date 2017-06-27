@@ -1,5 +1,5 @@
-﻿define(['logic-element', 'input-terminal', 'output-terminal'],
-function (LogicElement, InputTerminal, OutputTerminal) {
+﻿define(['logic-element'],
+function (LogicElement) {
 
     // CLASS Gate
     Gate.prototype = Object.create(LogicElement.prototype);

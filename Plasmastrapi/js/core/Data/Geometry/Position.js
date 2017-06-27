@@ -1,4 +1,4 @@
-﻿define(['Primitive'], function (Primitive) {
+﻿define(['primitive'], function (Primitive) {
 
     Position.prototype = Object.create(Primitive.prototype);
     Position.prototype.constructor = Position;

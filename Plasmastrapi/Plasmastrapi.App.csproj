@@ -108,7 +108,7 @@
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
-    <Content Include="js\utils\Validation\Validator.js" />
+    <Content Include="js\utils\Validation\validator.js" />
     <Content Include="js\core\Data\Physics\Velocity.js" />
     <Content Include="js\core\Data\require.config.js" />
     <Content Include="js\core\Components\Graphics\CurveComponent.js" />
@@ -121,7 +121,7 @@
     <Content Include="js\core\Events\Mixins\Pausable.js" />
     <Content Include="js\engine\Configuration\require.config.js" />
     <Content Include="js\engine\Systems\PickSystem.js" />
-    <Content Include="js\game\Assets\images.js" />
+    <Content Include="js\game\Assets\assetUrls.js" />
     <Content Include="js\game\Assets\sprites.js" />
     <Content Include="js\circuits\Base\CircuitElement.js" />
     <Content Include="js\circuits\Wires\Base\WireElement.js" />
@@ -234,7 +234,7 @@
     <Content Include="js\engine\Controllers\Base\Controller.js" />
     <Content Include="js\core\Entity\Entity.js" />
     <Content Include="js\core\Events\Emitter.js" />
-    <Content Include="js\utils\Loaders\ImageLoader.js" />
+    <Content Include="js\utils\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Containers\Base\Container.js" />
     <Content Include="js\engine\Scenes\Base\Scene.js" />
     <Content Include="js\engine\Systems\Base\System.js" />

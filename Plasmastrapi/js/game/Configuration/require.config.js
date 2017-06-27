@@ -1,5 +1,7 @@
 ﻿require.config({
     paths: {
+        // Assets
+        'asset-urls': './game/Assets/assetUrls',
         // Containers
         'logic-element-container': './game/Containers/LogicElementContainer',
         'wire-container': './game/Containers/WireContainer',

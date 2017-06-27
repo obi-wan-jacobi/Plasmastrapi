@@ -1,58 +1,30 @@
-define([
-    'engine',
-    'scene-controller',
-    'tool-controller',
-    'logic-element-container',
-    'wire-container'
-],
-function (Engine, SceneController, ToolController, LogicElementContainer, WireContainer) {
+define(['engine', 'asset-urls', 'asset-loader'],
+function (Engine, assetUrls, Loader) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
     function Game(canvas) {
         Engine.call(this, canvas);
         // pre-init configuration
-        this.__registerAll();
+        this.__registerSystems();
+        this.__registerFactories();
     };
     // private methods
-    Game.prototype.__registerAll = function () {
-        this.register('LogicElementContainer', new LogicElementContainer());
-        this.register('wireContainer', new WireContainer());
-        this.register('toolController', new ToolController());
-        this.register('sceneController', new SceneController());
+    Game.prototype.__registerSystems = function () {
+        Engine.prototype.__registerSystems.call(this);
     };
-    Game.prototype.__beginMainLoop = function () {
-        var self = this;
-        var running = true, lastFrame = +new Date;
-        var raf = requestAnimationFrame ||
-			window.mozRequestAnimationFrame ||
-			window.webkitRequestAnimationFrame ||
-			window.msRequestAnimationFrame ||
-			window.oRequestAnimationFrame ||
-			function (callback) {
-			    return window.setTimeout(callback, 1000 / 60);
-			};
-        function loop(now) {
-            // stop the loop if loopOnce returned false
-            if (running) {
-                try {
-                    var deltaMs = now - lastFrame;
-                    if (deltaMs < 2000) {
-                        running = self.loopOnce(deltaMs);
-                    }
-                    lastFrame = now;
-                    raf(loop);
-                } catch (e) {
-                    throw e;
-                }
-            }
-        };
-        loop(lastFrame);
+    Game.prototype.__registerFactories = function () {
+        Engine.prototype.__registerFactories.call(this);
     };
     // public methods
     Game.prototype.start = function () {
-        this.load();
-        this.__beginMainLoop();
+        var assetLoader = new AssetLoader();
+
+        // load assets
+        assetLoader.download(assetUrls).done(function () {
+            //Engine.prototype.start.call(this);
+            console.log("Asset loading completed");
+        });
     };
 
 	return Game;

@@ -1,62 +1,81 @@
 
-define([
-    // Base
-    'system',
-    // Containers
-    'entity-container',
-    'emitter-container',
-    'pick-component-container',
-    // Systems
-    'collision-system',
-    'draw-system',
-    'mouse-system',
-    'motion-system',
-    'pick-system'
-],
-function (System, EntityContainer, EmitterContainer, PickComponentContainer, CollissionSystem, DrawSystem, MouseSystem, MotionSystem, PickSystem) {
+define(['system', 'container', 'dictionary', 'keyboard-system', 'mouse-system', 'draw-system'],
+function (System, Dictionary, KeyboardSystem, MouseSystem, DrawSystem) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
     Engine.prototype.constructor = Engine;
-    function Engine(canvas) {
+    function Engine(viewport) {
 	    System.call(this);
-	    // engine instance is its own reference
-	    delete this.injectEngine;
-	    delete this.__engine;
-        // public variables
-	    this.canvas = canvas;
+        // private variables
+        this.__viewport = viewport;
+        this.__systems = new Dictionary(System);
+        this.__containers = new Dictionary(Container);
 	    // pre-init configuration
-		this.__registerContainers();
-		this.__registerSystems();
+        this.__registerSystems();
+        this.__registerFactories();
 	};
     // private methods
-	Engine.prototype.__registerContainers = function () {
-	    this.register('EmitterContainer', new EmitterContainer());
-	    this.register('entityContainer', new EntityContainer());
-	    this.register('pickablesContainer', new PickComponentContainer());
-	};
 	Engine.prototype.__registerSystems = function () {
-	    this.register('MouseSystem', new MouseSystem());
-	    this.register('drawSystem', new DrawSystem());
-	    this.register('pickSystem', new PickSystem());
-	};
-    // public prototypal variables
-	Object.defineProperties(Engine.prototype, {
-	    'isEngineInjected': {
-	        get: function () {
-	            // engine is implicitly its own reference
-	            return true;
-	        }
-	    }
-	});
-	// public methods
-	Engine.prototype.register = function (objectName, objectHandle) {
-	    if (!objectHandle.injectEngine) {
-	        validator.throw(this, 'register', 'The supplied object must implement an \'injectEngine\' post-bind method');
-	    }
-	    this[objectName] = objectHandle;
-	    objectHandle.injectEngine(this);
-	};
+        // order matters:
+        this.__addSystem(KeyboardSystem);
+        this.__addSystem(MouseSystem);
+	    this.__addSystem(DrawSystem);
+    };
+    Engine.prototype.__registerFactories = function () {
+
+    };
+    Engine.prototype.__addSystem = function (SystemType) {
+        this.__systems.add(SystemType.name, new SystemType(this));
+    };
+    Engine.prototype.__beginMainLoop = function () {
+        var self = this;
+        var isRunning = true;
+        var tPrevious = +new Date;
+        var raf = requestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            function (callback) {
+                return window.setTimeout(callback, 1000 / 60);
+            };
+        function loop(tNow) {
+            // stop the loop if loopOnce returned false
+            if (isRunning) {
+                try {
+                    var deltaMs = tNow - tPrevious;
+                    if (deltaMs < 2000) {
+                        isRunning = self.loopOnce(deltaMs);
+                    }
+                    tPrevious = tNow;
+                    raf(loop);
+                } catch (e) {
+                    throw e;
+                }
+            }
+        };
+        loop(tPrevious);
+    };
+    // public methods
+    Engine.prototype.getViewport = function () {
+        return this.__viewport;
+    };
+    Engine.prototype.getSystem = function (SystemType) {
+        return this.__systems.get(SystemType.name);
+    };
+    Engine.prototype.getContainer = function (ContainerType) {
+        return this.__containers.get(ContainerType.name);
+    };
+    Engine.prototype.loopOnce = function (deltaMs) {
+        this.__systems.forEach(function (key, system) {
+            system.loopOnce(deltaMs);
+        }, this);
+    };
+    Engine.prototype.start = function () {
+        this.load();
+        this.__beginMainLoop();
+    };
 
 	return Engine;
 });

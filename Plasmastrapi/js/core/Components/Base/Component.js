@@ -1,5 +1,5 @@
-define(['emitter', 'enableable', 'destructible', 'loadable', 'drawable'],
-function (Emitter, Enableable, Destructible, Loadable, Drawable) {
+define(['emitter', 'enableable', 'destructible', 'loadable', 'drawable', 'validator'],
+function (Emitter, Enableable, Destructible, Loadable, Drawable, validator) {
 
     // CLASS Component
     Component.prototype = Object.create(Emitter.prototype);

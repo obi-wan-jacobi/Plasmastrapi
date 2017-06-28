@@ -1,0 +1,22 @@
+﻿define(['factory', 'emitter-container', 'emitter', 'validator'],
+    function (Factory, EmitterContainer, Emitter, validator) {
+
+        EmitterFactory.prototype = Object.create(Factory.prototype);
+        EmitterFactory.prototype.constructor = EmitterFactory;
+        function EmitterFactory(engine) {
+            Factory.call(this, engine);
+            this.__container = new EmitterContainer();
+        };
+        // public methods
+        EmitterFactory.prototype.create = function (EmitterType) {
+            var emitter = new EmitterType();
+            validator.validateType(emitter, Emitter);
+            this.__container.add(emitter);
+            return emitter;
+        };
+        EmitterFactory.prototype.getContainer = function () {
+            return this.___container;
+        };
+
+        return EmitterFactory;
+    });

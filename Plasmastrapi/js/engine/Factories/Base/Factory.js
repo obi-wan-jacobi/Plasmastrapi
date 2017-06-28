@@ -1,7 +1,12 @@
-﻿define(function () {
+﻿define(['validator'], function (validator) {
 
-    function Factory() {
-
+    function Factory(engine) { };
+    // public methods
+    EmitterFactory.prototype.create = function (Type) {
+        validator.throwMethodMustBeOverridden(this, 'create');
+    };
+    Factory.prototype.getContainer = function () {
+        validator.throwMethodMustBeOverridden(this, 'getContainer');
     };
 
     return Factory;

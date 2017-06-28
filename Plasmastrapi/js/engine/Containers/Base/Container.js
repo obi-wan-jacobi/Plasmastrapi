@@ -1,9 +1,10 @@
-define(['dictionary'],
-function (Dictionary) {
+define(['linked-list', 'validator'],
+function (LinkedList, validator) {
 
     // CLASS Container
-    function Container(memberClass) {
-        this.__members = new Dictionary(memberClass);
+    function Container(Type) {
+        validator.validateFunction(Type);
+        this.__members = new LinkedList(Type);
     };
     // public methods
     Container.prototype.forEach = function(fn, caller) {

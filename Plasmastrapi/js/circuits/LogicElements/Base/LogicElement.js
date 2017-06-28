@@ -1,5 +1,5 @@
-﻿define(['circuit-element', 'input-terminal', 'circuit-constants', 'validator'],
-function (CircuitElement, InputTerminal, CIRCUITS, validator) {
+﻿define(['circuit-element', 'input-terminal', 'output-terminal', 'circuit-constants', 'validator'],
+function (CircuitElement, InputTerminal, OutputTerminal, CIRCUITS, validator) {
 
     // CLASS LogicElement
     LogicElement.prototype = Object.create(CircuitElement.prototype);
@@ -13,7 +13,12 @@ function (CircuitElement, InputTerminal, CIRCUITS, validator) {
     // public methods
     LogicElement.prototype.attachInput = function (inputTerminal) {
         validator.validateType(this, inputTerminal, InputTerminal);
+        inputTerminal.addParent(this);
         this.__inputs = this.__inputs.concat(input.getConnections());
+    };
+    LogicElement.prototype.attachOutput = function (outputTerminal) {
+        validator.validateType(this, outputTerminal, OutputTerminal);
+        outputTerminal.addParent(this);
     };
     LogicElement.prototype.updateState = function (inputState) {
         validator.throwMethodMustBeOverridden(this, 'updateState');

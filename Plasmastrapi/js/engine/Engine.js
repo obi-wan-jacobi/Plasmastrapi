@@ -1,6 +1,6 @@
 
-define(['system', 'factory', 'container', 'dictionary', 'keyboard-system', 'mouse-system', 'draw-system'],
-function (System, Factory, Container, Dictionary, KeyboardSystem, MouseSystem, DrawSystem) {
+define(['system', 'dictionary', 'factory', 'emitter-factory', 'entity-factory', 'component-factory', 'keyboard-system', 'mouse-system', 'draw-system'],
+function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentFactory, KeyboardSystem, MouseSystem, DrawSystem) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -10,7 +10,6 @@ function (System, Factory, Container, Dictionary, KeyboardSystem, MouseSystem, D
         // private variables
 	    this.__viewport = viewport;
 	    this.__factories = new Dictionary(Factory);
-	    this.__containers = new Dictionary(Container);
         this.__systems = new Dictionary(System);
         // pre-init configuration
         // order matters:
@@ -29,7 +28,9 @@ function (System, Factory, Container, Dictionary, KeyboardSystem, MouseSystem, D
         }, this);
     };
     Engine.prototype.__registerFactories = function () {
-
+        this.__addFactory(EmitterFactory);
+        this.__addFactory(ComponentFactory);
+        this.__addFactory(EntityFactory);
     };
     Engine.prototype.__addFactory = function (FactoryType) {
         this.__factories.add(FactoryType.name, new FactoryType(this));
@@ -81,13 +82,6 @@ function (System, Factory, Container, Dictionary, KeyboardSystem, MouseSystem, D
             return this.__factories.get(FactoryType.name);
         } else {
             return this.__factories.get(FactoryType);
-        }
-    };
-    Engine.prototype.getContainer = function (ContainerType) {
-        if (typeof ContainerType === 'function') {
-            return this.__containers.get(ContainerType.name);
-        } else {
-            return this.__containers.get(ContainerType);
         }
     };
     Engine.prototype.getSystem = function (SystemType) {

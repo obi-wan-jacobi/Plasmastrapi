@@ -4,7 +4,7 @@
         'core-constants': './core/Configuration/constants',
         // Components
         'component': './core/Components/Base/Component',
-        'curve-component': './core/Components/Components/Graphics/CurveComponent',
+        'curve-component': './core/Components/Components/Geometry/CurveComponent',
         'image-component': './core/Components/Components/Graphics/ImageComponent',
         'mouse-component': './core/Components/Components/Inputs/MouseComponent',
         'keyboard-component': './core/Components/Components/Inputs/KeyboardComponent',

@@ -4,12 +4,10 @@ function (Terminal, OutputTerminal) {
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
     InputTerminal.prototype.constructor = InputTerminal;
-    function InputTerminal(LogicElement) {
+    function InputTerminal() {
         // inherits from
-        Terminal.call(LogicElement);
-        // initialize connections array before attaching input
+        Terminal.call();
         this.__connections = [];
-        LogicElement.attachInput(this);
     };
     // public methods
     InputTerminal.prototype.getConnections = function () {

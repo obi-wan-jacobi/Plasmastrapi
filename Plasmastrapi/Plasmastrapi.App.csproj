@@ -73,6 +73,7 @@
     <Content Include="js\circuits\Configuration\require.config.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
     <Content Include="js\core\Configuration\constants.js" />
+    <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\KeyboardHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\PickHandle.js" />
     <Content Include="js\core\Events\Mixins\Enableable.js" />
@@ -97,12 +98,14 @@
     <Content Include="js\core\DataHandles\Graphics\ImageHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\LineDisplaySettings.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\MeshDisplaySettings.js" />
-    <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Graphics\SpriteHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\TextDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\TextHandle.js" />
     <Content Include="js\core\Data\Physics\Acceleration.js" />
     <Content Include="js\engine\Containers\DrawContainer.js" />
+    <Content Include="js\engine\Factories\ComponentFactory.js" />
+    <Content Include="js\engine\Factories\EmitterFactory.js" />
+    <Content Include="js\engine\Factories\EntityFactory.js" />
     <Content Include="js\engine\Systems\KeyboardSystem.js" />
     <Content Include="js\engine\Factories\Base\Factory.js" />
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
@@ -111,7 +114,7 @@
     <Content Include="js\utils\Validation\validator.js" />
     <Content Include="js\core\Data\Physics\Velocity.js" />
     <Content Include="js\core\Data\require.config.js" />
-    <Content Include="js\core\Components\Graphics\CurveComponent.js" />
+    <Content Include="js\core\Components\Geometry\CurveComponent.js" />
     <Content Include="js\core\Components\Graphics\TextComponent.js" />
     <Content Include="js\engine\Configuration\config.js" />
     <Content Include="js\engine\Configuration\debug.js" />

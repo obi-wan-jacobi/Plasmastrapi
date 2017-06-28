@@ -18,6 +18,16 @@ function (System, Factory, Container, Dictionary, KeyboardSystem, MouseSystem, D
         this.__registerSystems();
 	};
     // private methods
+    Engine.prototype.__onload = function () {
+        this.__systems.forEach(function (key, system) {
+            system.load();
+        }, this);
+    };
+    Engine.prototype.__onunload = function () {
+        this.__systems.forEach(function (key, system) {
+            system.unload();
+        }, this);
+    };
     Engine.prototype.__registerFactories = function () {
 
     };
@@ -84,16 +94,15 @@ function (System, Factory, Container, Dictionary, KeyboardSystem, MouseSystem, D
         return this.__systems.get(SystemType.name);
     };
     Engine.prototype.loopOnce = function (deltaMs) {
+        var isLoopStable = true;
         this.__systems.forEach(function (key, system) {
-            system.loopOnce(deltaMs);
+            isLoopStable = system.loopOnce(deltaMs);
+            return isLoopStable;
         }, this);
-        return true;
+        return isLoopStable === null || isLoopStable ? isLoopStable : false;
     };
     Engine.prototype.start = function () {
         this.load();
-        this.__systems.forEach(function (key, system) {
-            system.load();
-        }, this);
         this.__beginMainLoop();
     };
 

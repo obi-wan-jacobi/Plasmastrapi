@@ -1,9 +1,4 @@
-define([
-    // Base
-    'container',
-    // Circuits
-    'wire'
-],
+define(['container', 'wire'],
 function (Container, Wire) {
 
     // CLASS WireContainer

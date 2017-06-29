@@ -1,5 +1,5 @@
-﻿define(['factory', 'emitter-factory', 'dictionary', 'linked-list', 'primitive', 'validator'],
-function (Factory, EmitterFactory, Dictionary, LinkedList, Primitive, validator) {
+﻿define(['factory', 'emitter-factory', 'dictionary', 'linked-list', 'primitive', 'data-handle', 'validator'],
+function (Factory, EmitterFactory, Dictionary, LinkedList, Primitive, DataHandle, validator) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
@@ -18,18 +18,28 @@ function (Factory, EmitterFactory, Dictionary, LinkedList, Primitive, validator)
         }
         return container;
     };
+    ComponentFactory.prototype.__onComponentDestroy = function (component) {
+        this.__containers.get(component.constructor).remove(component);
+    };
     // public methods
     ComponentFactory.prototype.create = function (ComponentType, args) {
         var container = this.__getOrInitContainer(ComponentType);
-        var component = this.__emitterFactory.create(Function.prototype.bind.apply(ComponentType, [null].concat(args || [])));
+        var component = this.__emitterFactory.create(ComponentType.bind(null, args || []));
         container.add(component);
+        container.addEventListener('ondestroy', this, this.__onComponentDestroy.bind(this, component));
+        return component;
+    };
+    ComponentFactory.prototype.createFromDataHandle = function (dataHandle) {
+        validator.validateType(dataHandle, DataHandle);
+        var component = this.create(ComponentType, [dataHandle]);
         return component;
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
         validator.validateType(primitive, Primitive);
         var self = this;
         var component = null;
-        var modulePrefix = primitive.constructor.name.toLowerCase();
+        // Below: Ex. PrimitiveConstructorName --> primitive-constructor-name
+        var modulePrefix = primitive.constructor.name.split(/(?=[A-Z])/).join('-').toLowerCase();
         require(
             [
                 modulePrefix + '-display-settings',

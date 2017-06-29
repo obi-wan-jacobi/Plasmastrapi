@@ -9,33 +9,30 @@ needs testing:
 - destroy->purge
 
 overhaul:
-- systems
 - engine
+	- pick system
+	- draw container
 - game
-- factories
-	- handle/component dependencies
-	- containers
-	- logging
-	- refactor compatibility decorations
+	- factories
+		- handle/component dependencies
+		- containers
+		- refactor compatibility decorations
 - Refactor UI such that panel content/child positions are relative to parent (percent-based or position-based)
 	- ViewportSystem to listen for screen resize events?
 - Modal panels (move, stretch, close)
-- Set background to black
+
+tech debt:
+- require dependencies for type-checking in Component and DataHandle
+- meshhandle point-collision checking is disgusting
+- run memory analysis/profiler diagnostics
+- JSDocs/automated documentation
+- unit tests
 
 optimization
 - tool compatibility filtering --> sort pickable components using a tree?
 - MeshComponent --> combine translate + rotate into one function (leverage a single for-loop)?
 - Dictionary --> store this.__end to avoid O(n) for this.add
 - entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
-
-tech debt:
-- require dependencies for type-checking in Component and DataHandle
-- main.js --> game.start() before initializing controllers?
-- meshhandle point-collision checking is disgusting
-- blue background image is needlessly large
-- run memory analysis/profiler diagnostics
-- JSDocs/automated documentation
-- unit tests
 
 scalability concerns:
 - single-canvas viewport

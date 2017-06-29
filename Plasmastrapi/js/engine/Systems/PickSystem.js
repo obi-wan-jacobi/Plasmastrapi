@@ -6,7 +6,7 @@ function (System, PickComponent) {
         return meshComponent.getHandle().checkPointCollision(cursor);
     };
 
-    // CLASS MouseSystem
+    // CLASS PickSystem
     PickSystem.prototype = Object.create(System.prototype);
     PickSystem.prototype.constructor = PickSystem;
     function PickSystem() {

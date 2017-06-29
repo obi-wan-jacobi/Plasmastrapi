@@ -2,7 +2,7 @@
 
     function Factory(engine) { };
     // public methods
-    EmitterFactory.prototype.create = function (Type) {
+    Factory.prototype.create = function (Type) {
         validator.throwMethodMustBeOverridden(this, 'create');
     };
     Factory.prototype.getContainer = function () {

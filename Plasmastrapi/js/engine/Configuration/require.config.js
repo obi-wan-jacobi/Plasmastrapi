@@ -3,9 +3,13 @@
         'base': './engine/Base/Base',
         // Containers
         'container': './engine/Containers/Base/Container',
+        'emitter-container': './engine/Containers/EmitterContainer',
         // Controllers
         // Factories
         'factory': './engine/Factories/Base/Factory',
+        'emitter-factory': './engine/Factories/EmitterFactory',
+        'component-factory': './engine/Factories/ComponentFactory',
+        'entity-factory': './engine/Factories/EntityFactory',
         // Scenes
         // Systems
         'system': './engine/Systems/Base/System',

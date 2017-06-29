@@ -1,4 +1,4 @@
-define(['pose-component'], function (PoseComponent) {
+define(function () {
 
     function Drawable() {
         var target = this;
@@ -52,7 +52,7 @@ define(['pose-component'], function (PoseComponent) {
         this.emit('onhide');
     };
     Drawable.prototype.draw = function (ctx) {
-        var poseHandle = this.__entity.getComponent(PoseComponent).getHandle();
+        var poseHandle = this.__entity.getComponentByName('PoseComponent').getHandle();
         var position = poseHandle.getPosition();
         var orientation = poseHandle.getOrientation();
         this.__handle.draw(ctx, position, orientation);

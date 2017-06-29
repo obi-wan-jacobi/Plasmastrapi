@@ -2,20 +2,23 @@
     paths: {
         // Constants
         'core-constants': './core/Configuration/constants',
-        // Components
-        'component': './core/Components/Base/Component',
-        'curve-component': './core/Components/Components/Geometry/CurveComponent',
-        'image-component': './core/Components/Components/Graphics/ImageComponent',
-        'mouse-component': './core/Components/Components/Inputs/MouseComponent',
-        'keyboard-component': './core/Components/Components/Inputs/KeyboardComponent',
-        'line-component': './core/Components/Components/Geometry/LineComponent',
-        'mesh-component': './core/Components/Components/Geometry/MeshComponent',
-        'pick-component': './core/Components/Components/Inputs/PickComponent',
-        'pose-component': './core/Components/Components/Geometry/PoseComponent',
-        'sprite-component': './core/Components/Components/Graphics/SpriteComponent',
-        'text-label-component': './core/Components/Components/Graphics/TextComponent',
         // Component Mixins
         'drawable': './core/Components/Mixins/Drawable',
+        // Components
+        'component': './core/Components/Base/Component',
+
+        'curve-component': './core/Components/Geometry/CurveComponent',
+        'line-component': './core/Components/Geometry/LineComponent',
+        'mesh-component': './core/Components/Geometry/MeshComponent',
+        'pose-component': './core/Components/Geometry/PoseComponent',
+
+        'image-component': './core/Components/Graphics/ImageComponent',
+        'sprite-component': './core/Components/Graphics/SpriteComponent',
+        'text-label-component': './core/Components/Graphics/TextComponent',
+
+        'keyboard-component': './core/Components/Inputs/KeyboardComponent',
+        'mouse-component': './core/Components/Inputs/MouseComponent',
+        'pick-component': './core/Components/Inputs/PickComponent',
         // Data
         'display-settings': './core/Data/Base/DisplaySettings',
         'primitive': './core/Data/Base/Primitive',
@@ -39,11 +42,12 @@
         'dictionary': './core/DataStructures/Dictionary',
         'linked-list': './core/DataStructures/LinkedList',
         // Entity
+        'entity': './core/Entity/Entity',
         // Events
-
+        'emitter': './core/Events/Emitter',
         //Event Mixins
-        'destructible': './core/Events/Mixins/Mixins/Destructible',
-        'enableable': './core/Events/Mixins/Mixins/Enableable',
-        'loadable': './core/Events/Mixins/Mixins/Loadable',
+        'destructible': './core/Events/Mixins/Destructible',
+        'enableable': './core/Events/Mixins/Enableable',
+        'loadable': './core/Events/Mixins/Loadable',
     }
 });

@@ -3,8 +3,8 @@ function (Handle) {
 
     MouseHandle.prototype = Object.create(Handle.prototype);
     MouseHandle.prototype.constructor = MouseHandle;
-    function MouseHandle(position) {
-        Handle.call(this, position, null, Position, null);
+    function MouseHandle() {
+        Handle.call(this, new Position(), null, Position, null);
         // private variables
         this.__isMouseDown = false;
     };

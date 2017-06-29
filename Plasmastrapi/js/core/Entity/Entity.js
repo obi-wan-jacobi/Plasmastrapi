@@ -38,6 +38,9 @@ function (Emitter, Component, Dictionary) {
     Entity.prototype.getComponent = function (ComponentType) {
         return this.__components.get(ComponentType.name);
     };
+    Entity.prototype.getComponentByName = function (componentName) {
+        return this.__components.get(componentName);
+    };
     Entity.prototype.hasComponent = function (ComponentType) {
         return this.getComponent(ComponentType) ? true : false;
     };

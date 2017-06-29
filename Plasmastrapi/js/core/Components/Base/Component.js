@@ -22,10 +22,10 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, validator) {
         }
     };
     // private methods
-    PickComponent.prototype.__onload = function () {
+    Component.prototype.__onload = function () {
         this.enable();
     };
-    PickComponent.prototype.__onunload = function () {
+    Component.prototype.__onunload = function () {
         this.disable();
     };
     Component.prototype.__registerDependencyOnLoad = function (subject, event, observer, callback) {

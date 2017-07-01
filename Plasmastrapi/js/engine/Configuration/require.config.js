@@ -1,5 +1,5 @@
-﻿require.config({
-    paths: {
+﻿require(['configurator'], function (configurator) {
+    var paths = {
         'base': './engine/Base/Base',
         // Containers
         'container': './engine/Containers/Base/Container',
@@ -17,8 +17,11 @@
         'draw-system': './engine/Systems/DrawSystem',
         'mouse-system': './engine/Systems/MouseSystem',
         'keyboard-system': './engine/Systems/KeyboardSystem',
-        'pick-system': './engine/Systems/PickSystem',
+        //'pick-system': './engine/Systems/PickSystem',
         // Engine
         'engine': './engine/Engine'
-    }
+    };
+    configurator.require(paths, function () {
+        console.log('Engine modules have been loaded.');
+    });
 });

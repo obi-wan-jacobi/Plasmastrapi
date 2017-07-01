@@ -1,5 +1,5 @@
-﻿require.config({
-    paths: {
+﻿require(['configurator'], function (configurator) {
+    var paths = {
         // Circuit Element
         'circuit-element': './circuits/Base/CircuitElement',
         // Logic Element
@@ -22,5 +22,8 @@
         // Configuration
         'circuits-config': './circuits/Configuration/config',
         'circuits-constants': './circuits/Configuration/constants'
-    }
+    };
+    configurator.require(paths, function () {
+        console.log('Circuit modules have been loaded.');
+    });
 });

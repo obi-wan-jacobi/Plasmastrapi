@@ -1,5 +1,5 @@
-define(['engine', 'asset-urls', 'asset-loader', 'module-loader', 'core-paths', 'circuit-element-factory', 'logic-element-factory', 'and-gate'],
-function (Engine, assetUrls, AssetLoader, ModuleLoader, corePaths, CircuitElementFactory, LogicElementFactory, AndGate) {
+define(['engine', 'asset-urls', 'asset-loader', 'circuit-element-factory', 'logic-element-factory', 'and-gate'],
+function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFactory, AndGate) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -25,18 +25,15 @@ function (Engine, assetUrls, AssetLoader, ModuleLoader, corePaths, CircuitElemen
         var self = this;
         // load assets
         this.__assetLoader.download(assetUrls).done(function () {
-            console.log("Asset loading completed");
-            new ModuleLoader(corePaths).download().done(function () {
-                console.log("Module loading completed");
-                // *** testing ***
+            console.log("Assets have been loaded.");
+            // *** testing ***
 
-                var logicElementFactory = self.getFactory(LogicElementFactory);
+            var logicElementFactory = self.getFactory(LogicElementFactory);
 
-                logicElementFactory.create(AndGate);
+            logicElementFactory.create(AndGate);
 
-                // *** /testing ***
-                Engine.prototype.start.call(self);
-            });
+            // *** /testing ***
+            Engine.prototype.start.call(self);
         });
     };
 

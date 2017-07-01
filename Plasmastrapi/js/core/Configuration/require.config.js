@@ -1,6 +1,5 @@
-﻿define(function () {
+﻿require(['configurator'], function (configurator) {
     var paths = {
-        'core-paths': './core/Configuration/require.config',
         // Constants
         'core-constants': './core/Configuration/constants',
         // Component Mixins
@@ -67,18 +66,7 @@
         'enableable': './core/Events/Mixins/Enableable',
         'loadable-mixin': './core/Events/Mixins/Loadable'
     }; 
-    require.config({
-        paths: paths
+    configurator.require(paths, function () {
+        console.log('Core modules have been loaded.');
     });
-    var modulePaths = [];
-    for (var property in paths) {
-        if (paths.hasOwnProperty(property)) {
-            modulePaths.push(property);
-        }
-    }
-    var self = this;
-    require(modulePaths, function () {
-        console.log('Modules have been loaded!');
-    });
-    return paths;
 });

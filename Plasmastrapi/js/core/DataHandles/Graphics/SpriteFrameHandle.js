@@ -1,4 +1,4 @@
-﻿define(['handle', 'image-display-settings'],
+﻿define(['data-handle', 'image-display-settings'],
 function (DataHandle, ImageDisplaySettings) {
 
     SpriteFrameHandle.prototype = Object.create(DataHandle.prototype);

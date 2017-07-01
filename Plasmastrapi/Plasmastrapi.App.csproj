@@ -76,6 +76,7 @@
     <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\KeyboardHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\PickHandle.js" />
+    <Content Include="js\core\Data\Graphics\DisplaySettings\PoseDisplaySettings.js" />
     <Content Include="js\core\Events\Mixins\Enableable.js" />
     <Content Include="js\core\Configuration\require.config.js" />
     <Content Include="js\core\Data\Base\DisplaySettings.js" />
@@ -102,7 +103,7 @@
     <Content Include="js\core\Data\Graphics\DisplaySettings\TextDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\TextHandle.js" />
     <Content Include="js\core\Data\Physics\Acceleration.js" />
-    <Content Include="js\engine\Containers\DrawContainer.js" />
+    <Content Include="js\engine\Containers\DrawableComponentContainer.js" />
     <Content Include="js\engine\Factories\ComponentFactory.js" />
     <Content Include="js\engine\Factories\EmitterFactory.js" />
     <Content Include="js\engine\Factories\EntityFactory.js" />
@@ -115,7 +116,7 @@
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
-    <Content Include="js\utils\Validation\validator.js" />
+    <Content Include="js\utils\Validation\Validator.js" />
     <Content Include="js\core\Data\Physics\Velocity.js" />
     <Content Include="js\core\Data\require.config.js" />
     <Content Include="js\core\Components\Geometry\CurveComponent.js" />
@@ -200,7 +201,7 @@
     <Content Include="img\LogicElements\Gates\and-gate.png" />
     <Content Include="img\Tools\WireCutter\wire-cutter-closed.png" />
     <Content Include="img\Tools\WireCutter\wire-cutter-open.png" />
-    <Content Include="img\LogicElements\Hoverswitch\hover-switch.png" />
+    <Content Include="img\LogicElements\Hoverswitch\hoverswitch.png" />
     <Content Include="img\LogicElements\Lightbulb\lightbulb-closed.png" />
     <Content Include="img\LogicElements\Lightbulb\lightbulb-open.png" />
     <Content Include="img\LogicElements\Lightscreen\lightscreen-closed.png" />

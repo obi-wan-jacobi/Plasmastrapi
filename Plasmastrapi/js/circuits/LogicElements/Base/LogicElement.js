@@ -1,4 +1,4 @@
-﻿define(['circuit-element', 'input-terminal', 'output-terminal', 'circuit-constants', 'validator'],
+﻿define(['circuit-element', 'input-terminal', 'output-terminal', 'circuits-constants', 'validator'],
 function (CircuitElement, InputTerminal, OutputTerminal, CIRCUITS, validator) {
 
     // CLASS LogicElement

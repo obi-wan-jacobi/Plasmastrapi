@@ -1,4 +1,4 @@
-﻿define([], function () {
+﻿define(['emitter', 'validator'], function (Emitter, validator) {
 
     function Loadable() {
         var target = this;

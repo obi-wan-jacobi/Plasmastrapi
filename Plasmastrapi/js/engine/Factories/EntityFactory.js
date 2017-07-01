@@ -15,13 +15,13 @@ function (Factory, Container, EmitterFactory, Entity, validator) {
     // public methods
     EntityFactory.prototype.create = function (EntityType) {
         var entity = this.__emitterFactory.create(EntityType);
-        validator.validateType(entity, Entity);
+        validator.validateType(this, entity, Entity);
         this.__container.add(entity);
         entity.addEventListener('ondestroy', this, this.__onEntityDestroy.bind(this, entity));
         return entity;
     };
     EntityFactory.prototype.getContainer = function () {
-        return this.___container;
+        return this.__container;
     };
 
     return EntityFactory;

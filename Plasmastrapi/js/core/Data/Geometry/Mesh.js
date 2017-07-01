@@ -1,5 +1,5 @@
-﻿define(['primitive', 'vertex'],
-function (Primitive, Vertex) {
+﻿define(['primitive', 'vertex', 'validator'],
+function (Primitive, Vertex, validator) {
 
     Mesh.prototype = Object.create(Primitive.prototype);
     Mesh.prototype.constructor = Mesh;

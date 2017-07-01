@@ -1,5 +1,5 @@
-define(['dictionary'],
-function(Dictionary) {
+define(['dictionary', 'validator'],
+function(Dictionary, validator) {
 
     // CLASS Emitter
     function Emitter() {
@@ -13,7 +13,7 @@ function(Dictionary) {
         // call owner's event callback first
         this["__" + event].apply(this, args);
         // buffer new subscriptions on this event to avoid callstack overflow
-        this.__eventsBuffer[event] = new Dictionary();
+        this.__eventsBuffer[event] = new Dictionary(Object);
         this.__events[event].forEach(function (subscriber, callback) {
             callback.apply(subscriber, args);
         });
@@ -41,7 +41,7 @@ function(Dictionary) {
                     this.emit.apply(this, arguments);
                 };
             }(event);
-            this.__events[event] = new Dictionary();
+            this.__events[event] = new Dictionary(Object);
         }
     };
     Emitter.prototype.addEventListener = function(event, subscriber, callback) {

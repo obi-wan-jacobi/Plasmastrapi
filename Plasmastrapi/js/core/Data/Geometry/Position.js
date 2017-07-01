@@ -4,10 +4,10 @@
     Position.prototype.constructor = Position;
     function Position(x, y) {
         Primitive.call(this);
-        this.x = x || 0;
-        this.y = y || 0;
-        validator.validateType(this, x, 'number');
-        validator.validateType(this, y, 'number');
+        this.x = x === undefined || x === null ? 0 : x;
+        this.y = y === undefined || y === null ? 0 : y;
+        validator.validateType(this, this.x, 'number');
+        validator.validateType(this, this.y, 'number');
     };
 
     return Position;

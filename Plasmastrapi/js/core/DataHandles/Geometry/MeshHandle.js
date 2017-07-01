@@ -1,4 +1,4 @@
-﻿define(['handle', 'mesh', 'mesh-display-settings', 'position'],
+﻿define(['data-handle', 'mesh', 'mesh-display-settings', 'position'],
 function (DataHandle, Mesh, MeshDisplaySettings, Position) {
 
     MeshHandle.prototype = Object.create(DataHandle.prototype);

@@ -1,4 +1,4 @@
-﻿define(['handle', 'curve', 'line-display-settings'],
+﻿define(['data-handle', 'curve', 'line-display-settings'],
 function (DataHandle, Curve, LineDisplaySettings) {
 
     CurveHandle.prototype = Object.create(DataHandle.prototype);

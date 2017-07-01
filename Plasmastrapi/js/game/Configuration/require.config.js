@@ -8,6 +8,9 @@
         // Controllers
         'scene-controller': './game/Controllers/SceneController',
         'tool-controller': './game/Controllers/ToolController',
+        // Factories
+        'circuit-element-factory': './game/Factories/CircuitElementFactory',
+        'logic-element-factory': './game/Factories/LogicElementFactory',
         // Scenes
         'circuit-design-scene': './game/Scenes/CircuitDesignScene',
         'main-menu-scene': './game/Scenes/MainMenuScene',
@@ -36,7 +39,7 @@
         // Configs
         'game-debug': './game/debug',
         'game-config': './game/config',
-        // Base
+        // Game
         'game': './game/Game'
     }
 });

@@ -1,5 +1,5 @@
-﻿define(['primitive'],
-    function (Primitive) {
+﻿define(['primitive', 'validator'],
+    function (Primitive, validator) {
 
         Text.prototype = Object.create(Primitive.prototype);
         Text.prototype.constructor = Text;

@@ -1,4 +1,4 @@
-﻿define(['handle', 'sprite-frame-handle'],
+﻿define(['data-handle', 'sprite-frame-handle'],
 function (DataHandle, SpriteFrameHandle) {
 
     SpriteHandle.prototype = Object.create(DataHandle.prototype);

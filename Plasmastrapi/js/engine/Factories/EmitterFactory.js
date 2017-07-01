@@ -14,13 +14,13 @@
         // public methods
         EmitterFactory.prototype.create = function (EmitterType) {
             var emitter = new EmitterType();
-            validator.validateType(emitter, Emitter);
+            validator.validateType(this, emitter, Emitter);
             this.__container.add(emitter);
             emitter.addEventListener('ondestroy', this, this.__onEmitterDestroy.bind(this, emitter));
             return emitter;
         };
         EmitterFactory.prototype.getContainer = function () {
-            return this.___container;
+            return this.__container;
         };
 
         return EmitterFactory;

@@ -1,4 +1,4 @@
-﻿define(['handle', 'Pose', 'pose-display-settings'],
+﻿define(['data-handle', 'pose', 'pose-display-settings'],
 function (DataHandle, Pose, PoseDisplaySettings) {
 
     PoseHandle.prototype = Object.create(DataHandle.prototype);
@@ -20,19 +20,6 @@ function (DataHandle, Pose, PoseDisplaySettings) {
     };
     PoseHandle.prototype.setOrientation = function (newOrientation) {
         this.__data = new Pose(this.__data.x, this.__data.y, newOrientation);
-    };
-
-    Terminal.prototype.__setPoseRelativeToParentElement = function () {
-        var parentElementPose = this.__parent.getComponent(PoseComponent)
-        var position = parentElementPose.position;
-        var orientation = parentElementPose.orientation;
-        var templateX = this.__offset.x;
-        var templateY = this.__offset.y;
-        var x = templateX * Math.cos(orientation) - templateY * Math.sin(orientation) + position.x;
-        var y = templateX * Math.sin(orientation) + templateY * Math.cos(orientation) + position.y;
-        var poseComponent = this.getComponent(PoseComponent);
-        poseComponent.position = new Position(x, y);
-        poseComponent.orientation = orientation;
     };
 
     return PoseHandle;

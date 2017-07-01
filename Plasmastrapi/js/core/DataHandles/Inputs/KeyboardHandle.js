@@ -1,4 +1,4 @@
-﻿define(['handle'],
+﻿define(['data-handle'],
 function (Handle) {
 
     KeyboardHandle.prototype = Object.create(Handle.prototype);

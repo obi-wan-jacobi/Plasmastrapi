@@ -1,4 +1,4 @@
-define(['emitter', 'enableable', 'destructible', 'loadable', 'drawable', 'validator'],
+define(['emitter', 'enableable', 'destructible-mixin', 'loadable-mixin', 'drawable', 'validator'],
 function (Emitter, Enableable, Destructible, Loadable, Drawable, validator) {
 
     // CLASS Component

@@ -39,7 +39,7 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
         // order matters:
         this.__addSystem(KeyboardSystem);
         this.__addSystem(MouseSystem);
-        //this.__addSystem(DrawSystem);
+        this.__addSystem(DrawSystem);
     };
     Engine.prototype.__addSystem = function (SystemType) {
         this.__systems.add(SystemType.name, new SystemType(this));
@@ -78,11 +78,7 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
         return this.__viewport;
     };
     Engine.prototype.getFactory = function (FactoryType) {
-        if (typeof FactoryType === 'function') {
-            return this.__factories.get(FactoryType.name);
-        } else {
-            return this.__factories.get(FactoryType);
-        }
+        return this.__factories.get(FactoryType.name);
     };
     Engine.prototype.getSystem = function (SystemType) {
         return this.__systems.get(SystemType.name);
@@ -93,7 +89,7 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
             isLoopStable = system.loopOnce(deltaMs);
             return isLoopStable;
         }, this);
-        return isLoopStable === null || isLoopStable ? isLoopStable : false;
+        return isLoopStable === undefined || isLoopStable ? true : false;
     };
     Engine.prototype.start = function () {
         this.load();

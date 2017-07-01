@@ -1,5 +1,5 @@
-define(['emitter', 'component', 'dictionary'],
-function (Emitter, Component, Dictionary) {
+define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin'],
+function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
@@ -11,8 +11,8 @@ function (Emitter, Component, Dictionary) {
         this.__parent = null;
         this.__components = new Dictionary(Component);
         // apply mixins
-        Emitter.Mixins.Loadable.call(this);
-        Emitter.Mixins.Destructible.call(this);
+        LoadableMixin.call(this);
+        DestructibleMixin.call(this);
     };
     // public methods
     Entity.prototype.addDependency = function (dependency) {

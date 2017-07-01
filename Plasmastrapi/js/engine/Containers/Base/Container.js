@@ -14,10 +14,10 @@ function (LinkedList, validator) {
         this.__members.get(member);
     };
     Container.prototype.add = function(member) {
-        this.__members.add(member);
+        this.__members.push(member);
     };
     Container.prototype.remove = function(member) {
-        this.__members.remove(member);
+        this.__members.splice(member);
     };
 
     return Container;

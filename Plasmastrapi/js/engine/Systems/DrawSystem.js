@@ -1,17 +1,18 @@
-define(['system', 'core-constants'],
-function (System, CORE) {
+define(['system', 'component-factory', 'core-constants'],
+function (System, ComponentFactory, CORE) {
 
 	// CLASS DrawSystem
 	DrawSystem.prototype = Object.create(System.prototype);
 	DrawSystem.prototype.constructor = DrawSystem;
 	function DrawSystem(engine) {
         System.call(this);
-        this.__canvas = engine.getViewport();
+        this.__viewport = engine.getViewport();
+        this.__container = engine.getFactory(ComponentFactory).getDrawableComponentContainer();
 	};
 	DrawSystem.prototype.loopOnce = function() {
-		var ctx = this.__canvas.getContext("2d");
-		ctx.width = this.__canvas.width = this.__canvas.clientWidth;
-		ctx.height = this.__canvas.height = this.__canvas.clientHeight;
+		var ctx = this.__viewport.getContext("2d");
+		ctx.width = this.__viewport.width = this.__viewport.clientWidth;
+		ctx.height = this.__viewport.height = this.__viewport.clientHeight;
         ctx.clearRect(0, 0, ctx.width, ctx.height);
         this.__container.forEach(function (component) {
             component.getHandle().draw(ctx);

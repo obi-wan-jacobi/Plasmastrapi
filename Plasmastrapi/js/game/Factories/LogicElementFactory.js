@@ -3,25 +3,26 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, Entity
 
     LogicElementFactory.prototype = Object.create(Factory.prototype);
     LogicElementFactory.prototype.constructor = LogicElementFactory;
-    function LogicElementFactory(engine) {
-        Factory.call(this, engine);
-        this.__componentFactory = engine.getFactory(ComponentFactory);
-        this.__circuitElementFactory = engine.getFactory(CircuitElementFactory);
+    function LogicElementFactory(game) {
+        Factory.call(this, game);
+        this.__componentFactory = game.getFactory(ComponentFactory);
+        this.__circuitElementFactory = game.getFactory(CircuitElementFactory);
+        this.__assetMap = game.getAssetMap();
     };
     // public methods
     LogicElementFactory.prototype.create = function (Type) {
         var logicElement = this.__circuitElementFactory.create(Type);
-        validator.validateType(logicElement, LogicElement);
+        validator.validateType(this, logicElement, LogicElement);
         // add components
         var self = this;
         // Below: Ex. PowerSource --> power-source
         var modulePrefix = Type.name.split(/(?=[A-Z])/).join('-').toLowerCase();
         require(
             [
-                modulePrefix + '-image',
                 modulePrefix + '-display-settings'
             ],
-            function (image, displaySettings) {
+            function (displaySettings) {
+                var image = this.__assetMap[0];
                 var component = self.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)); // image
                 logicElement.addComponent(component);
             }

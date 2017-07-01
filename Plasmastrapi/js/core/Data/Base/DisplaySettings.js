@@ -1,4 +1,4 @@
-﻿define(['core', 'validator'], function (CORE, validator) {
+﻿define(['core-constants', 'validator'], function (CORE, validator) {
 
     function DisplaySettings(displayLayer) {
         if (!(CORE.DISPLAYLAYERS.indexOf(displayLayer) > -1)) {

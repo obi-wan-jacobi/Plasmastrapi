@@ -32,11 +32,27 @@
         'image-display-settings': './core/Data/Graphics/DisplaySettings/ImageDisplaySettings',
         'line-display-settings': './core/Data/Graphics/DisplaySettings/LineDisplaySettings',
         'mesh-display-settings': './core/Data/Graphics/DisplaySettings/MeshDisplaySettings',
+        'pose-display-settings': './core/Data/Graphics/DisplaySettings/PoseDisplaySettings',
         'text-display-settings': './core/Data/Graphics/DisplaySettings/TextDisplaySettings',
         'text': './core/Data/Graphics/Text',
         'acceleration': './core/Data/Physics/Acceleration',
         'velocity': './core/Data/Physics/Velocity',
         // Data Handles
+        'data-handle': './core/DataHandles/Base/DataHandle',
+
+        'curve-handle': './core/DataHandles/Geometry/CurveHandle',
+        'line-handle': './core/DataHandles/Geometry/LineHandle',
+        'mesh-handle': './core/DataHandles/Geometry/MeshHandle',
+        'pose-handle': './core/DataHandles/Geometry/PoseHandle',
+
+        'image-handle': './core/DataHandles/Graphics/ImageHandle',
+        'sprite-frame-handle': './core/DataHandles/Graphics/SpriteFrameHandle',
+        'sprite-handle': './core/DataHandles/Graphics/SpriteHandle',
+        'text-handle': './core/DataHandles/Graphics/TextHandle',
+
+        'keyboard-handle': './core/DataHandles/Inputs/KeyboardHandle',
+        'mouse-handle': './core/DataHandles/Inputs/MouseHandle',
+        'pick-handle': './core/DataHandles/Inputs/PickHandle',
         // Data Structures
         'link': './core/DataStructures/Base/Link',
         'dictionary': './core/DataStructures/Dictionary',
@@ -46,8 +62,8 @@
         // Events
         'emitter': './core/Events/Emitter',
         //Event Mixins
-        'destructible': './core/Events/Mixins/Destructible',
+        'destructible-mixin': './core/Events/Mixins/Destructible',
         'enableable': './core/Events/Mixins/Enableable',
-        'loadable': './core/Events/Mixins/Loadable',
+        'loadable-mixin': './core/Events/Mixins/Loadable',
     }
 });

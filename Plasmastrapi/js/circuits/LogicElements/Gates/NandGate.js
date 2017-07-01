@@ -1,4 +1,4 @@
-﻿define(['gate', 'circuit-constants'],
+﻿define(['gate', 'circuits-constants'],
 function (Gate, CIRCUITS) {
 
     // CLASS NandGate

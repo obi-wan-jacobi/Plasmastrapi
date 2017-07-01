@@ -14,18 +14,18 @@
     // validations
     Validator.prototype.validateNotNull = function (object) {
         if (!object) {
-            validator.throw(this, 'validateObject', 'Argument cannot be null');
+            this.throw(this, 'validateObject', 'Argument cannot be null');
         }
     };
     Validator.prototype.validateObject = function (object) {
         this.validateNotNull(object);
         if (Object.getOwnPropertyNames(object).length === 0) {
-            validator.throw(this, 'validateObject', 'Argument must be a valid object');
+            this.throw(this, 'validateObject', 'Argument must be a valid object');
         }
     };
     Validator.prototype.validateFunction = function (fn) {
         if (typeof fn !== 'function') {
-            validator.throw(this, 'validateMethod', 'Argument must be a function');
+            this.throw(this, 'validateMethod', 'Argument must be a function');
         }
     };
     Validator.prototype.validateType = function (ref, instance, Type) {
@@ -47,7 +47,7 @@
     Validator.prototype.validateEntityHasComponent = function (ref, entity, Component) {
         var component = entity.getComponent(Component);
         if (!component) {
-            validator.throw(ref, 'validateEntityHasComponent', 'Target\'s entity (' + entity.constructor.name + ') must possess a ' + Component.name);
+            this.throw(ref, 'validateEntityHasComponent', 'Target\'s entity (' + entity.constructor.name + ') must possess a ' + Component.name);
         }
         return component;
     };

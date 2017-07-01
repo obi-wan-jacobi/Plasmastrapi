@@ -1,4 +1,4 @@
-﻿define(['handle'],
+﻿define(['data-handle'],
 function (Handle) {
 
     PickHandle.prototype = Object.create(Handle.prototype);

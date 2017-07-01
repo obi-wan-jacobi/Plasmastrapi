@@ -1,4 +1,4 @@
-﻿define([], function () {
+﻿define(['emitter'], function (Emitter) {
 
     function Enableable() {
         var target = this;

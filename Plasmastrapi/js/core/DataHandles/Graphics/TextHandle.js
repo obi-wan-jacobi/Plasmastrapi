@@ -1,4 +1,4 @@
-﻿define(['handle', 'text', 'text-display-settings'], function (DataHandle, Text, TextDisplaySettings) {
+﻿define(['data-handle', 'text', 'text-display-settings'], function (DataHandle, Text, TextDisplaySettings) {
     
     TextHandle.prototype = Object.create(DataHandle.prototype);
     TextHandle.prototype.constructor = TextHandle;

@@ -1,4 +1,4 @@
-﻿define(['handle', 'line', 'line-display-settings', 'position', 'rectangle', 'core-constants', 'validator'],
+﻿define(['data-handle', 'line', 'line-display-settings', 'position', 'rectangle', 'core-constants', 'validator'],
 function (DataHandle, Line, LineDisplaySettings, Position, Rectangle, CORE, validator) {
 
     LineHandle.prototype = Object.create(DataHandle.prototype);

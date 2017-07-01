@@ -1,14 +1,15 @@
 ﻿define(['container', 'component', 'core-constants'], function (Container, Component, CORE) {
 
-    DrawContainer.prototype = Object.create(Container.prototype);
-    DrawContainer.prototype.constructor = DrawContainer;
-    function DrawContainer() {
+    DrawableComponentContainer.prototype = Object.create(Container.prototype);
+    DrawableComponentContainer.prototype.constructor = DrawableComponentContainer;
+    function DrawableComponentContainer() {
+        this.__containers = {};
         for (var i = 0, L = CORE.DISPLAYLAYERS.length; i < L; i++) {
             this.__containers[CORE.DISPLAYLAYERS[i]] = new Container(Component);
         }
     };
     // private methods
-    DrawContainer.prototype.forEach = function (fn, caller) {
+    DrawableComponentContainer.prototype.forEach = function (fn, caller) {
         for (var i = 0, L = CORE.DISPLAYLAYERS.length; i < L; i++) {
             var result = this.__containers[CORE.DISPLAYLAYERS[i]].forEach(fn, caller);
             if (result) {
@@ -16,7 +17,7 @@
             }
         }
     };
-    DrawContainer.prototype.find = function (member) {
+    DrawableComponentContainer.prototype.find = function (member) {
         for (var i = 0, L = CORE.DISPLAYLAYERS.length; i < L; i++) {
             var result = this.__containers[CORE.DISPLAYLAYERS[i]].get(member);
             if (result) {
@@ -24,14 +25,14 @@
             }
         }
     };
-    DrawContainer.prototype.add = function (member) {
+    DrawableComponentContainer.prototype.add = function (member) {
         var displayLayer = member.getHandle().getDisplaySettings().displayLayer;
         this.__containers[displayLayer].add(member);
     };
-    DrawContainer.prototype.remove = function (member) {
+    DrawableComponentContainer.prototype.remove = function (member) {
         var displayLayer = member.getHandle().getDisplaySettings().displayLayer;
         this.__containers[displayLayer].remove(member);
     };
 
-    return DrawContainer;
+    return DrawableComponentContainer;
 });

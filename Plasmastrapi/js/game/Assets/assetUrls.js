@@ -2,29 +2,35 @@
 function () {
 
     var imageUrls = [
-        'Cutter_closed.png',
-        'Cutter_open.png',
-        'Trashcan.png',
-        'Terminal_out.png',
-        'Terminal_in.png',
-        'Terminal_hovered.png',
-        'AndGate.png',
-        'NandGate.png',
-        'OrGate.png',
-        'XorGate.png',
-        'PowerSource.png',
-        'PushSwitch_open.png',
-        'PushSwitch_closed.png',
-        'HoverSwitch.png',
-        'LightBulb_open.png',
-        'LightBulb_closed.png',
-        'LightScreen_open.png',
-        'LightScreen_closed.png'
-    ];
+        'img/LogicElements/Gates/and-gate.png',
+        'img/LogicElements/Gates/nand-gate.png',
+        'img/LogicElements/Gates/or-gate.png',
+        'img/LogicElements/Gates/xor-gate.png',
 
-    for (var idx in imageUrls) {
-        imageUrls[idx] = 'img/' + imageUrls[idx];
-    }
+        'img/LogicElements/Hoverswitch/hoverswitch.png',
+
+        'img/LogicElements/Lightbulb/lightbulb-closed.png',
+        'img/LogicElements/Lightbulb/lightbulb-open.png',
+
+        'img/LogicElements/Lightscreen/lightscreen-closed.png',
+        'img/LogicElements/Lightscreen/lightscreen-open.png',
+
+        'img/LogicElements/PowerSource/power-source.png',
+
+        'img/LogicElements/Pushswitch/pushswitch-closed.png',
+        'img/LogicElements/Pushswitch/pushswitch-open.png',
+
+        'img/LogicElements/SOCs/soc-14.png',
+
+        'img/Terminals/active.png',
+        'img/Terminals/input-terminal.png',
+        'img/Terminals/output-terminal.png',
+
+        'img/Tools/Trashcan/trashcan.png',
+
+        'img/Tools/WireCutter/wire-cutter-closed.png',
+        'img/Tools/WireCutter/wire-cutter-open.png',
+    ];
 
     return imageUrls;
 });

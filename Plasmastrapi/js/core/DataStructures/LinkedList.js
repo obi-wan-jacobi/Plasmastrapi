@@ -13,7 +13,7 @@ function (Link, validator) {
         var link = this.__start;
         while (link) {
             var result = fn.call(this, link);
-            if (result !== null) {
+            if (result !== null && result !== undefined) {
                 return result;
             }
             link = link.next();
@@ -26,7 +26,7 @@ function (Link, validator) {
         while(link) {
             var value = link.get();
             var result = fn.call(caller, value);
-            if (result !== null) {
+            if (result !== null && result !== undefined) {
                 return result;
             }
             link = link.next();

@@ -1,4 +1,4 @@
-define(['handle'],
+define(['data-handle'],
 function (Handle) {
 
     MouseHandle.prototype = Object.create(Handle.prototype);
@@ -23,7 +23,7 @@ function (Handle) {
     MouseHandle.prototype.mouseup = function () {
         this.__isMouseDown = false;
     };
-    MouseComponent.prototype.click = function () { };
+    MouseHandle.prototype.click = function () { };
 
     return MouseHandle;
 });

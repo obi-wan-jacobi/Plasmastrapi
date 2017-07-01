@@ -1,5 +1,5 @@
-﻿define(['factory', 'circuit-element', 'component-factory', 'entity-factory'],
-function (Factory, CircuitElement, ComponentFactory, EntityFactory) {
+﻿define(['factory', 'circuit-element', 'component-factory', 'entity-factory', 'pose', 'mesh', 'keyboard-handle', 'mouse-handle', 'pick-handle', 'validator'],
+function (Factory, CircuitElement, ComponentFactory, EntityFactory, Pose, Mesh, KeyboardHandle, MouseHandle, PickHandle, validator) {
 
     CircuitElementFactory.prototype = Object.create(Factory.prototype);
     CircuitElementFactory.prototype.constructor = CircuitElementFactory;
@@ -10,8 +10,8 @@ function (Factory, CircuitElement, ComponentFactory, EntityFactory) {
     };
     // public methods
     CircuitElementFactory.prototype.create = function (Type) {
-        var circuitElement = this.___entityFactory.create(Type);
-        validator.validateType(circuitElement, CircuitElement);
+        var circuitElement = this.__entityFactory.create(Type);
+        validator.validateType(this, circuitElement, CircuitElement);
         // add components
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Pose())); // pose
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Mesh())); // mesh

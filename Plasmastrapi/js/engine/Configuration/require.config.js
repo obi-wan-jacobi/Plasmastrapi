@@ -3,6 +3,7 @@
         'base': './engine/Base/Base',
         // Containers
         'container': './engine/Containers/Base/Container',
+        'drawable-component-container': './engine/Containers/DrawableComponentContainer',
         'emitter-container': './engine/Containers/EmitterContainer',
         // Controllers
         // Factories

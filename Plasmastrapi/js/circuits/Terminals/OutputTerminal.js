@@ -1,4 +1,4 @@
-﻿define(['terminal', 'circuit-constants'],
+﻿define(['terminal', 'circuits-constants'],
 function (Terminal, CIRCUITS) {
 
     // CLASS OutputTerminal

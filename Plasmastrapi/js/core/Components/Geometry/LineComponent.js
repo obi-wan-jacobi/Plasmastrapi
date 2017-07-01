@@ -13,7 +13,7 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
         // inherits from
         Component.call(this, new LineHandle(this.__tailPose.Position, this.__headPose.Position), LineHandle);
         // events
-		this.__registerEvents(
+		this.registerEvents(
             'onpositionchange',
             'onorientationchange'
         );

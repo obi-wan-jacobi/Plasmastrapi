@@ -1,5 +1,5 @@
-define(['component', 'pose-component', 'engine-config'],
-function (Component, PoseComponent, config) {
+define(['component', 'pose-component'],
+function (Component, PoseComponent) {
 
 	// CLASS MeshComponent
 	MeshComponent.prototype = Object.create(Component.prototype);

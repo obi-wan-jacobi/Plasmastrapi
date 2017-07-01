@@ -17,16 +17,16 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, Entity
         var self = this;
         // Below: Ex. PowerSource --> power-source
         var modulePrefix = Type.name.split(/(?=[A-Z])/).join('-').toLowerCase();
-        require(
-            [
-                modulePrefix + '-display-settings'
-            ],
-            function (displaySettings) {
-                var image = this.__assetMap[0];
-                var component = self.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)); // image
-                logicElement.addComponent(component);
-            }
-        );
+        //require(
+        //    [
+        //        modulePrefix + '-display-settings'
+        //    ],
+        //    function (displaySettings) {
+        //        var image = this.__assetMap[0];
+        //        var component = self.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)); // image
+        //        logicElement.addComponent(component);
+        //    }
+        //);
         return logicElement;
     };
     LogicElementFactory.prototype.getContainer = function () { };

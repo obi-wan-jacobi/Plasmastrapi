@@ -6,23 +6,6 @@ function(Dictionary, validator) {
         this.__events = {};
         this.__eventsBuffer = {};
     };
-    // private methods
-    Emitter.prototype.emit = function (event /*, argument1, argument2, etc... */) {
-        validator.validateEventIsImplemented(this, event);
-        var args = arguments.length > 1 ? [].slice.call(arguments, 1, arguments.length) : null;
-        // call owner's event callback first
-        this["__" + event].apply(this, args);
-        // buffer new subscriptions on this event to avoid callstack overflow
-        this.__eventsBuffer[event] = new Dictionary(Object);
-        this.__events[event].forEach(function (subscriber, callback) {
-            callback.apply(subscriber, args);
-        });
-        // process new subscriptions in buffer
-        this.__eventsBuffer[event].forEach(function (subscriber, callback) {
-            this.__events[event].add(subscriber, callback);
-        }, this)
-        delete this.__eventsBuffer[event];
-    };
     // public methods
     Emitter.prototype.registerEvents = function (/* event1, event2, etc... */) {
         for (var i = 0, L = arguments.length; i < L; i++) {
@@ -43,6 +26,22 @@ function(Dictionary, validator) {
             }(event);
             this.__events[event] = new Dictionary(Object);
         }
+    };
+    Emitter.prototype.emit = function (event /*, argument1, argument2, etc... */) {
+        validator.validateEventIsImplemented(this, event);
+        var args = arguments.length > 1 ? [].slice.call(arguments, 1, arguments.length) : null;
+        // call owner's event callback first
+        this["__" + event].apply(this, args);
+        // buffer new subscriptions on this event to avoid callstack overflow
+        this.__eventsBuffer[event] = new Dictionary(Object);
+        this.__events[event].forEach(function (subscriber, callback) {
+            callback.apply(subscriber, args);
+        });
+        // process new subscriptions in buffer
+        this.__eventsBuffer[event].forEach(function (subscriber, callback) {
+            this.__events[event].add(subscriber, callback);
+        }, this)
+        delete this.__eventsBuffer[event];
     };
     Emitter.prototype.addEventListener = function(event, subscriber, callback) {
         validator.validateEventIsImplemented(this, event);

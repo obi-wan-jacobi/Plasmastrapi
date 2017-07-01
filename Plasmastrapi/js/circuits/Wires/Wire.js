@@ -13,7 +13,7 @@ function (WireElement, InputTerminal, OutputTerminal, LineComponent) {
         // inherits from
         WireElement.call(this, outputTerminal, inputTerminal);
         // events
-        this.__registerEvents(
+        this.registerEvents(
             'onstatechange'
         );
         // initialize dependencies

@@ -8,7 +8,7 @@ function (Component) {
         // inherits from
         Component.call(this, mouseHandle, null, MouseHandle, null);
         // events
-        this.__registerEvents(
+        this.registerEvents(
             'onmousemove',
             'onmousedown',
             'onmouseup',

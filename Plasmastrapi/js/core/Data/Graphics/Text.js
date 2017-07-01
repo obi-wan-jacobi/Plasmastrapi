@@ -1,12 +1,12 @@
 ﻿define(['primitive', 'validator'],
-    function (Primitive, validator) {
+function (Primitive, validator) {
 
-        Text.prototype = Object.create(Primitive.prototype);
-        Text.prototype.constructor = Text;
-        function Text(string) {
-            Primitive.call(this);
-            validator.validateType(this, string, 'string');
-        };
+    Text.prototype = Object.create(Primitive.prototype);
+    Text.prototype.constructor = Text;
+    function Text(string) {
+        Primitive.call(this);
+        validator.validateType(this, string, 'string');
+    };
 
-        return Line;
-    });
+    return Text;
+});

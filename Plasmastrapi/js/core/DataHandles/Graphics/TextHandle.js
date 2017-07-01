@@ -15,5 +15,5 @@
         ctx.restore();
     };
 
-    return ImageHandle;
+    return TextHandle;
 });

@@ -5,9 +5,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, validator) {
     Component.prototype = Object.create(Emitter.prototype);
     Component.prototype.constructor = Component;
     function Component(handle, HandleType) {
-        if (this.handle) {
-            validator.validateType(this, handle, HandleType);
-        }
+        validator.validateType(this, handle, HandleType);
         // private variables
         this.__entity = null;
         this.__handle = handle;

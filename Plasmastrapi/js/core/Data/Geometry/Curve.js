@@ -9,5 +9,5 @@ function (Primitive, Vertex, validator) {
         this.vertices = vertices
     };
 
-    return Line;
+    return Curve;
 });

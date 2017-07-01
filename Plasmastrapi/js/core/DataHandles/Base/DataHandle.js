@@ -1,4 +1,4 @@
-﻿define([], function () {
+﻿define(['validator'], function (validator) {
 
     function DataHandle(data, displaySettings, DataType, DisplaySettingsType) {
         this.__data = null;

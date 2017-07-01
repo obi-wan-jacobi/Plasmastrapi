@@ -19,7 +19,7 @@ define(function () {
         target.show = Drawable.prototype.show;
         target.hide = Drawable.prototype.hide;
         target.draw = Drawable.prototype.draw;
-        this.__registerEvents(
+        target.registerEvents(
             'onshow',
             'onhide'
         );

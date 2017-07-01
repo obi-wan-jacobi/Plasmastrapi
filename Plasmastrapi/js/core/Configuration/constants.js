@@ -1,6 +1,7 @@
 ﻿define(function () {
     return {
         DISPLAYLAYERS: [
+            'none',
             'game-background',
             'game-entity-background',
             'game-entity-midground',

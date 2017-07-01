@@ -8,7 +8,7 @@ function (Terminal, CIRCUITS) {
         // inherits from
         Terminal.call(this);
         // events
-        this.__registerEvents(
+        this.registerEvents(
             'onstatechange'
         );
     };

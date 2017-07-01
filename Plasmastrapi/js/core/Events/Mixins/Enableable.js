@@ -1,4 +1,4 @@
-﻿define(['emitter'], function (Emitter) {
+﻿define(['emitter', 'validator'], function (Emitter, validator) {
 
     function Enableable() {
         var target = this;

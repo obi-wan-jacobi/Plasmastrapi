@@ -3,7 +3,7 @@
     PoseDisplaySettings.prototype = Object.create(DisplaySettings.prototype);
     PoseDisplaySettings.prototype.constructor = PoseDisplaySettings;
     function PoseDisplaySettings(displayLayer) {
-        DisplaySettings.call(this, displayLayer);
+        DisplaySettings.call(this, displayLayer || 'none');
     };
 
     return PoseDisplaySettings;

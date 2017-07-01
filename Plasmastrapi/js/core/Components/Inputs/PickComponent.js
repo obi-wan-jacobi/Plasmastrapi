@@ -8,7 +8,7 @@ define(['component', 'mouse-component'],
 		// inherits from
         Component.call(this, pickHandle, PickHandle);
         // events
-		this.__registerEvents(
+		this.registerEvents(
             'onpick',
             'onselect',
             'ondeselect',

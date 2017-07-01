@@ -116,6 +116,7 @@
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
+    <Content Include="js\utils\Loaders\ModuleLoader.js" />
     <Content Include="js\utils\Validation\Validator.js" />
     <Content Include="js\core\Data\Physics\Velocity.js" />
     <Content Include="js\core\Data\require.config.js" />

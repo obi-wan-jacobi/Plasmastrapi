@@ -28,7 +28,7 @@ function (Factory, EmitterFactory, Dictionary, LinkedList, DrawableComponentCont
     // public methods
     ComponentFactory.prototype.create = function (ComponentType, args) {
         var container = this.__getOrInitContainer(ComponentType);
-        var component = this.__emitterFactory.create(ComponentType.bind(null, args || []));
+        var component = this.__emitterFactory.create(ComponentType.bind.apply(ComponentType, [null].concat(args)));
         container.add(component);
         component.addEventListener('ondestroy', this, this.__onComponentDestroy.bind(this, component));
         if (component.isDrawable) {
@@ -43,20 +43,13 @@ function (Factory, EmitterFactory, Dictionary, LinkedList, DrawableComponentCont
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
         validator.validateType(this, primitive, Primitive);
-        var self = this;
-        var component = null;
         // Below: Ex. PrimitiveConstructorName --> primitive-constructor-name
         var modulePrefix = primitive.constructor.name.split(/(?=[A-Z])/).join('-').toLowerCase();
-        require(
-            [
-                //modulePrefix + '-display-settings',
-                //modulePrefix + '-handle',
-                //modulePrefix + '-component'
-            ],
-            function (DisplaySettings, HandleType, ComponentType) {
-                component = self.create(ComponentType, [new HandleType(primitive, new DisplaySettings())]);
-            }
-        );
+        // Modules can be required 'dynamically' only because they've been pre-loaded by the ModuleLoader
+        var ComponentType = require(modulePrefix + '-component');
+        var HandleType = require(modulePrefix + '-handle');
+        var DisplaySettings = require(modulePrefix + '-display-settings');
+        var component = this.create(ComponentType, [new HandleType(primitive, new DisplaySettings())]);
         return component;
     };
     ComponentFactory.prototype.getContainer = function (ComponentType) {

@@ -1,5 +1,6 @@
-﻿require.config({
-    paths: {
+﻿define(function () {
+    var paths = {
+        'core-paths': './core/Configuration/require.config',
         // Constants
         'core-constants': './core/Configuration/constants',
         // Component Mixins
@@ -64,6 +65,20 @@
         //Event Mixins
         'destructible-mixin': './core/Events/Mixins/Destructible',
         'enableable': './core/Events/Mixins/Enableable',
-        'loadable-mixin': './core/Events/Mixins/Loadable',
+        'loadable-mixin': './core/Events/Mixins/Loadable'
+    }; 
+    require.config({
+        paths: paths
+    });
+    var modulePaths = [];
+    for (var property in paths) {
+        if (paths.hasOwnProperty(property)) {
+            modulePaths.push(property);
+        }
     }
+    var self = this;
+    require(modulePaths, function () {
+        console.log('Modules have been loaded!');
+    });
+    return paths;
 });

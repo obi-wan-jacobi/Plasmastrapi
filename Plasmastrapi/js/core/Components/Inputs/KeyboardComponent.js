@@ -10,7 +10,7 @@ function (Component) {
         // private variables
         this.__isHovered = false;
         // events
-        this.__registerEvents(
+        this.registerEvents(
             'onkeydown',
             'onkeyup',
             'onkeypress',

@@ -31,6 +31,7 @@ function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin) {
     };
     Entity.prototype.addComponent = function (component) {
         this.__components.add(component.constructor.name, component);
+        component.setEntity(this);
         if (this.isLoaded) {
             this.reload();
         }

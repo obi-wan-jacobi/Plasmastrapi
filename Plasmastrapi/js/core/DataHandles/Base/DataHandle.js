@@ -1,18 +1,20 @@
-﻿define(['validator'], function (validator) {
+﻿define(['utils'], function (utils) {
 
-    function DataHandle(data, displaySettings, DataType, DisplaySettingsType) {
+    function DataHandle(data, displaySettings) {
         this.__data = null;
         this.__displaySettings = null;
-        this.__dataType = DataType;
-        this.__displaySettingsType = DisplaySettingsType;
         this.setData(data);
         this.setDisplaySettings(displaySettings);
     };
+    // public methods
     DataHandle.prototype.getData = function () {
         return this.__data;
     };
     DataHandle.prototype.setData = function (data) {
-        validator.validateType(this, data, this.__dataType);
+        // validate data for this handle
+        var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
+        var DataType = utils.modules.require(modulePrefix);
+        utils.validator.validateType(this, data, DataType);
         this.__data = data;
     };
     DataHandle.prototype.getDisplaySettings = function () {
@@ -22,7 +24,10 @@
         if (!displaySettings) {
             return;
         }
-        validator.validateType(this, displaySettings, this.__displaySettingsType);
+        // validate display settings for this handle
+        var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
+        var DisplaySettingsType = utils.modules.require(modulePrefix + '-display-settings');
+        utils.validator.validateType(this, displaySettings, DisplaySettingsType);
         this.__displaySettings = displaySettings;
     };
 

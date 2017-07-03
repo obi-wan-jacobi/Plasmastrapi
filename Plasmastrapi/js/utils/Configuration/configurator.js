@@ -2,8 +2,9 @@
 
     // Used to pre-load modules into the requirejs context since requirejs doesn't support dynamic/synchronous module loading :(
     // Reference: https://stackoverflow.com/questions/17446844/dynamic-require-in-requirejs-getting-module-name-has-not-been-loaded-yet-for-c
-    function Configurator() { };
-    Configurator.prototype.require = function (paths, callback) {
+    var configurator = {};
+
+    configurator.config = function (paths, callback) {
         // Configure named modules
         require.config({
             paths: paths
@@ -20,5 +21,5 @@
         });
     };
 
-    return new Configurator();
+    return configurator;
 });

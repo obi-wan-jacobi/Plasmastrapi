@@ -1,8 +1,7 @@
 define(function () {
 
     function Drawable() {
-        var target = this;
-        validator.validateType(target, target, Component); 
+        var target = this; 
         target.__isVisible = false;
         Object.defineProperties(target, {
             'isDrawable': {

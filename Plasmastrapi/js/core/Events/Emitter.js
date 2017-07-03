@@ -28,7 +28,7 @@ function(Dictionary, validator) {
         }
     };
     Emitter.prototype.emit = function (event /*, argument1, argument2, etc... */) {
-        validator.validateEventIsImplemented(this, event);
+        validator.validateEventIsRegistered(this, event);
         var args = arguments.length > 1 ? [].slice.call(arguments, 1, arguments.length) : null;
         // call owner's event callback first
         this["__" + event].apply(this, args);
@@ -44,7 +44,7 @@ function(Dictionary, validator) {
         delete this.__eventsBuffer[event];
     };
     Emitter.prototype.addEventListener = function(event, subscriber, callback) {
-        validator.validateEventIsImplemented(this, event);
+        validator.validateEventIsRegistered(this, event);
         validator.validateObject(subscriber);
         validator.validateFunction(callback); 
         if (this.__eventsBuffer[event]) {
@@ -55,7 +55,7 @@ function(Dictionary, validator) {
         }
     };
     Emitter.prototype.removeEventListener = function(event, subscriber, callback) {
-        validator.validateEventIsImplemented(this, event);
+        validator.validateEventIsRegistered(this, event);
         validator.validateObject(subscriber);
         validator.validateFunction(callback); 
         var removedEventListener = null;

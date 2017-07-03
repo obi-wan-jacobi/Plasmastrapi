@@ -23,6 +23,8 @@ overhaul:
 
 tech debt:
 - require dependencies for type-checking in Component and DataHandle
+- dictionaries validate type for key as well as value
+- mixin superclass
 - meshhandle point-collision checking is disgusting
 - run memory analysis/profiler diagnostics
 - JSDocs/automated documentation

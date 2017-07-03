@@ -15,7 +15,7 @@ function (System, ComponentFactory, CORE) {
 		ctx.height = this.__viewport.height = this.__viewport.clientHeight;
         ctx.clearRect(0, 0, ctx.width, ctx.height);
         this.__container.forEach(function (component) {
-            component.getHandle().draw(ctx);
+            component.draw(ctx);
         }, this);
 	};
 

@@ -22,7 +22,7 @@ function (DataHandle, Mesh, MeshDisplaySettings, Position) {
         }
     };
     MeshHandle.prototype.setData = function (data) {
-        DataHandle.setData.call(this, data);
+        DataHandle.prototype.setData.call(this, data);
         this.__minX = null;
         this.__minY = null;
         this.__maxX = null;

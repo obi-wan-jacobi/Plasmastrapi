@@ -1,12 +1,12 @@
-﻿define(['factory', 'emitter-factory', 'dictionary', 'linked-list', 'drawable-component-container', 'primitive', 'data-handle', 'validator'],
-function (Factory, EmitterFactory, Dictionary, LinkedList, DrawableComponentContainer, Primitive, DataHandle, validator) {
+﻿define(['factory', 'emitter-factory', 'dictionary', 'container', 'drawable-component-container', 'primitive', 'data-handle', 'utils'],
+function (Factory, EmitterFactory, Dictionary, Container, DrawableComponentContainer, Primitive, DataHandle, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
         Factory.call(this, engine);
         this.__emitterFactory = engine.getFactory(EmitterFactory);
-        this.__containers = new Dictionary(LinkedList);
+        this.__containers = new Dictionary(Container);
         this.__drawableComponentContainer = new DrawableComponentContainer();
     };
     // private methods
@@ -14,7 +14,7 @@ function (Factory, EmitterFactory, Dictionary, LinkedList, DrawableComponentCont
         // if container doesn't exist for this component type, create one
         var container = this.__containers.get(ComponentType);
         if (!container) {
-            container = new LinkedList(ComponentType);
+            container = new Container(ComponentType);
             this.__containers.add(ComponentType, container);
         }
         return container;
@@ -37,18 +37,18 @@ function (Factory, EmitterFactory, Dictionary, LinkedList, DrawableComponentCont
         return component;
     };
     ComponentFactory.prototype.createFromDataHandle = function (dataHandle) {
-        validator.validateType(this, dataHandle, DataHandle);
+        utils.validator.validateType(this, dataHandle, DataHandle);
+        var modulePrefix = utils.modules.getModulePrefix(dataHandle, 'Handle');
+        var ComponentType = utils.modules.require(modulePrefix + '-component'); 
         var component = this.create(ComponentType, [dataHandle]);
         return component;
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
-        validator.validateType(this, primitive, Primitive);
-        // Below: Ex. PrimitiveConstructorName --> primitive-constructor-name
-        var modulePrefix = primitive.constructor.name.split(/(?=[A-Z])/).join('-').toLowerCase();
-        // Modules can be required 'dynamically' only because they've been pre-loaded by the ModuleLoader
-        var ComponentType = require(modulePrefix + '-component');
-        var HandleType = require(modulePrefix + '-handle');
-        var DisplaySettings = require(modulePrefix + '-display-settings');
+        utils.validator.validateType(this, primitive, Primitive);
+        var modulePrefix = utils.modules.getModulePrefix(primitive, null);
+        var ComponentType = utils.modules.require(modulePrefix + '-component');
+        var HandleType = utils.modules.require(modulePrefix + '-handle');
+        var DisplaySettings = utils.modules.require(modulePrefix + '-display-settings');
         var component = this.create(ComponentType, [new HandleType(primitive, new DisplaySettings())]);
         return component;
     };

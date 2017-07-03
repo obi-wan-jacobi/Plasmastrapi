@@ -1,5 +1,5 @@
-define(['component', 'mesh', 'position', 'rectangle', 'pose-component'],
-function (Component, Mesh, Position, Rectangle, PoseComponent) {
+define(['component'],
+function (Component) {
     
 	// CLASS SpriteComponent
 	SpriteComponent.prototype = Object.create(Component.prototype);

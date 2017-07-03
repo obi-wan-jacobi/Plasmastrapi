@@ -1,14 +1,19 @@
-﻿define(['data-handle'],
-function (Handle) {
+﻿define(['data-handle', 'validator'],
+function (DataHandle, validator) {
 
-    PickHandle.prototype = Object.create(Handle.prototype);
+    PickHandle.prototype = Object.create(DataHandle.prototype);
     PickHandle.prototype.constructor = PickHandle;
-    function PickHandle(callback) {
-        Handle.call(this, callback, null, 'function', null);
+    function PickHandle(pickAction) {
+        DataHandle.call(this);
         // private variables
+        this.__pickAction = pickAction;
         this.__isHovered = false;
         this.__isSelected = false;
+        // initialize
+        this.setPickAction(pickAction);
     };
+    PickHandle.prototype.setData = function (pickAction) { };
+    PickHandle.prototype.setDisplaySettings = function () { };
     // public prototypal variables
     Object.defineProperties(PickHandle.prototype, {
         'isHovered': {
@@ -23,8 +28,12 @@ function (Handle) {
         }
     });
     // public methods
+    PickHandle.prototype.setPickAction = function (pickAction) {
+        validator.validateFunction(pickAction);
+        this.__pickAction = pickAction;
+    };
     PickHandle.prototype.pick = function () {
-        return this.__data();
+        return this.__pickAction();
     };
     PickHandle.prototype.select = function () {
         if (this.__isSelected) {
@@ -42,16 +51,18 @@ function (Handle) {
         if (!this.__isHovered) {
             this.mouseenter();
         }
-        this.__isHovered = true;
     };
     PickHandle.prototype.unhover = function () {
         if (this.__isHovered) {
             this.mouseleave();
         }
+    };
+    PickHandle.prototype.mouseenter = function () {
+        this.__isHovered = true;
+    };
+    PickHandle.prototype.mouseleave = function () {
         this.__isHovered = false;
     };
-    PickHandle.prototype.mouseenter = function () { };
-    PickHandle.prototype.mouseleave = function () { };
 
     return PickHandle;
 });

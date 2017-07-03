@@ -1,4 +1,4 @@
-define(['component', 'mesh-component', 'pose-component', 'line-handle', 'pose'],
+define(['component', 'mesh-component', 'pose-component', 'line-handle'],
 function (Component, MeshComponent, PoseComponent, LineHandle) {
 
 	// CLASS LineComponent
@@ -11,7 +11,7 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
         this.__tailPose = tailPoseComponent;
         this.__headPose = headPoseComponent;
         // inherits from
-        Component.call(this, new LineHandle(this.__tailPose.Position, this.__headPose.Position), LineHandle);
+        Component.call(this, new LineHandle(this.__tailPose.Position, this.__headPose.Position));
         // events
 		this.registerEvents(
             'onpositionchange',

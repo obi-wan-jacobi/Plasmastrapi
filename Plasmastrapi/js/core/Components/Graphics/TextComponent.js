@@ -1,5 +1,5 @@
-﻿define(['component', 'position', 'pose-component'],
-function (Component, Position, PoseComponent) {
+﻿define(['component'],
+function (Component) {
 
         // CLASS TextComponent
         TextComponent.prototype = Object.create(Component.prototype);

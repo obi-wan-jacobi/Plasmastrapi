@@ -66,7 +66,7 @@
         'enableable': './core/Events/Mixins/Enableable',
         'loadable-mixin': './core/Events/Mixins/Loadable'
     }; 
-    configurator.require(paths, function () {
+    configurator.config(paths, function () {
         console.log('Core modules have been loaded.');
     });
 });

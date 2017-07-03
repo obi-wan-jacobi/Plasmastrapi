@@ -1,18 +1,20 @@
-﻿define(['data-handle'],
-function (Handle) {
+﻿define(['data-handle', 'dictionary'],
+function (DataHandle, Dictionary) {
 
-    KeyboardHandle.prototype = Object.create(Handle.prototype);
+    KeyboardHandle.prototype = Object.create(DataHandle.prototype);
     KeyboardHandle.prototype.constructor = KeyboardHandle;
     function KeyboardHandle() {
-        Handle.call(this);
+        DataHandle.call(this);
         // private variables
         this.__keysDown = [];
-        this.__keyMapper = new Dictionary('number');
+        this.__keyMapper = new Dictionary('string');
         this.__keyMapper.add(13, 'enter');
         this.__keyMapper.add(16, 'shift');
         this.__keyMapper.add(17, 'ctrl');
         this.__keyMapper.add(27, 'escape');
     };
+    KeyboardHandle.prototype.setData = function () { };
+    KeyboardHandle.prototype.setDisplaySettings = function () { };
     // public prototypal variables
     Object.defineProperties(KeyboardHandle.prototype, {
         'isShiftKeyDown': {
@@ -26,7 +28,7 @@ function (Handle) {
             }
         }
     });
-    // private methods
+    // public methods
     KeyboardHandle.prototype.isKeyDown = function (keyChar) {
         return this.__keysDown.indexOf(keyChar) > -1 ? true : false;
     };

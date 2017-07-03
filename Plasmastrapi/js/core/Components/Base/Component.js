@@ -1,14 +1,17 @@
-define(['emitter', 'enableable', 'destructible-mixin', 'loadable-mixin', 'drawable', 'validator'],
-function (Emitter, Enableable, Destructible, Loadable, Drawable, validator) {
+define(['emitter', 'enableable', 'destructible-mixin', 'loadable-mixin', 'drawable', 'utils'],
+function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
 
     // CLASS Component
     Component.prototype = Object.create(Emitter.prototype);
     Component.prototype.constructor = Component;
-    function Component(handle, HandleType) {
-        validator.validateType(this, handle, HandleType);
+    function Component(dataHandle) {
+        // validate data handle for this component
+        var modulePrefix = utils.modules.getModulePrefix(this, 'Component');
+        var HandleType = utils.modules.require(modulePrefix + '-handle');
+        utils.validator.validateType(this, dataHandle, HandleType);
         // private variables
         this.__entity = null;
-        this.__handle = handle;
+        this.__handle = dataHandle;
         // inherits from
         Emitter.call(this);
         // apply mixins
@@ -55,8 +58,8 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, validator) {
         };
     };
     Component.prototype.__attachEventTriggerToHandleMethod = function (handleMethodName, event) {
-        validator.validateEventIsImplemented(this, event);
-        validator.validateFunction(this.__handle[handleMethodName]);
+        utils.validator.validateEventIsRegistered(this, event);
+        utils.validator.validateFunction(this.__handle[handleMethodName]);
         var self = this;
         var fnProxy = this.__handle[handleMethodName];
         this.__handle[handleMethodName] = function () {
@@ -67,7 +70,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, validator) {
     // public methods
     Component.prototype.setEntity = function(entity) {
         if (this.__entity) {
-            validator.throw(this, 'setEntity', 'An entity has already been set for this component');
+            utils.validator.throw(this, 'setEntity', 'An entity has already been set for this component');
         }
         this.__entity = entity;
         this.__entity.addEventListener('onload', this, this.load);

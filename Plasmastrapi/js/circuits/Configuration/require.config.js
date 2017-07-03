@@ -23,7 +23,7 @@
         'circuits-config': './circuits/Configuration/config',
         'circuits-constants': './circuits/Configuration/constants'
     };
-    configurator.require(paths, function () {
+    configurator.config(paths, function () {
         console.log('Circuit modules have been loaded.');
     });
 });

@@ -6,7 +6,7 @@ define(['component', 'mouse-component'],
 	PickComponent.prototype.constructor = PickComponent;
     function PickComponent(pickHandle) {
 		// inherits from
-        Component.call(this, pickHandle, PickHandle);
+        Component.call(this, pickHandle);
         // events
 		this.registerEvents(
             'onpick',
@@ -21,7 +21,7 @@ define(['component', 'mouse-component'],
         this.__attachEventTriggerToHandleMethod('select', 'onselect');
         this.__attachEventTriggerToHandleMethod('deselect', 'ondeselect');
         this.__attachEventTriggerToHandleMethod('mouseenter', 'onmouseenter');
-        this.__attachEventTriggerToHandleMethod('hover', 'onhover');
+        //this.__attachEventTriggerToHandleMethod('hover', 'onhover');
         this.__attachEventTriggerToHandleMethod('mouseleave', 'onmouseleave');
     };
     // private methods

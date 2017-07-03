@@ -117,7 +117,9 @@
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
     <Content Include="js\utils\Configuration\configurator.js" />
-    <Content Include="js\utils\Validation\Validator.js" />
+    <Content Include="js\utils\Helpers\modules.js" />
+    <Content Include="js\utils\utils.js" />
+    <Content Include="js\utils\Validation\validator.js" />
     <Content Include="js\core\Data\Physics\Velocity.js" />
     <Content Include="js\core\Data\require.config.js" />
     <Content Include="js\core\Components\Geometry\CurveComponent.js" />
@@ -234,7 +236,7 @@
     <Content Include="js\engine\Controllers\Base\Controller.js" />
     <Content Include="js\core\Entity\Entity.js" />
     <Content Include="js\core\Events\Emitter.js" />
-    <Content Include="js\utils\Loaders\AssetLoader.js" />
+    <Content Include="js\game\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Containers\Base\Container.js" />
     <Content Include="js\engine\Scenes\Base\Scene.js" />
     <Content Include="js\engine\Systems\Base\System.js" />

@@ -21,7 +21,7 @@
         // Engine
         'engine': './engine/Engine'
     };
-    configurator.require(paths, function () {
+    configurator.config(paths, function () {
         console.log('Engine modules have been loaded.');
     });
 });

@@ -1,5 +1,5 @@
-define(['component', 'position'],
-function (Component, Position) {
+define(['component'],
+function (Component) {
 
 	// CLASS PoseComponent
 	PoseComponent.prototype = Object.create(Component.prototype);

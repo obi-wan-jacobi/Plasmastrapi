@@ -3,7 +3,7 @@
     MeshDisplaySettings.prototype = Object.create(DisplaySettings.prototype);
     MeshDisplaySettings.prototype.constructor = MeshDisplaySettings;
     function MeshDisplaySettings(displayLayer, strokeStyle, fillStyle, lineWidth) {
-        DisplaySettings.call(this, displayLayer);
+        DisplaySettings.call(this, displayLayer || 'none');
         this.strokeStyle = strokeStyle || 'white';
         this.fillStyle = fillStyle;
         this.lineWidth = lineWidth || 1;

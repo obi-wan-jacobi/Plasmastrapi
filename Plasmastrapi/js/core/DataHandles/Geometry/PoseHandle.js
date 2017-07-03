@@ -1,5 +1,5 @@
-﻿define(['data-handle', 'pose', 'pose-display-settings'],
-function (DataHandle, Pose, PoseDisplaySettings) {
+﻿define(['data-handle', 'pose', 'position', 'pose-display-settings'],
+function (DataHandle, Pose, Position, PoseDisplaySettings) {
 
     PoseHandle.prototype = Object.create(DataHandle.prototype);
     PoseHandle.prototype.constructor = PoseHandle;

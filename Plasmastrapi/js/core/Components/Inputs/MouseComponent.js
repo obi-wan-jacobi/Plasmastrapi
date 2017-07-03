@@ -6,7 +6,7 @@ function (Component) {
 	MouseComponent.prototype.constructor = MouseComponent;
 	function MouseComponent(mouseHandle) {
         // inherits from
-        Component.call(this, mouseHandle, null, MouseHandle, null);
+        Component.call(this, mouseHandle);
         // events
         this.registerEvents(
             'onmousemove',

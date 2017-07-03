@@ -109,6 +109,7 @@
     <Content Include="js\engine\Factories\EntityFactory.js" />
     <Content Include="js\engine\Systems\KeyboardSystem.js" />
     <Content Include="js\engine\Factories\Base\Factory.js" />
+    <Content Include="js\game\Controllers\PickController.js" />
     <Content Include="js\game\Factories\CircuitElementFactory.js" />
     <Content Include="js\game\Factories\LogicElementFactory.js" />
     <Content Include="js\game\Factories\TerminalFactory.js" />
@@ -233,7 +234,7 @@
     <Content Include="js\game\Controllers\SceneController.js" />
     <Content Include="js\engine\Engine.js" />
     <Content Include="js\core\Components\Base\Component.js" />
-    <Content Include="js\engine\Controllers\Base\Controller.js" />
+    <Content Include="js\game\Controllers\Base\Controller.js" />
     <Content Include="js\core\Entity\Entity.js" />
     <Content Include="js\core\Events\Emitter.js" />
     <Content Include="js\game\Loaders\AssetLoader.js" />

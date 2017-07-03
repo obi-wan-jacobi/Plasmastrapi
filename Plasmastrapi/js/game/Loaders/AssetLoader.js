@@ -2,7 +2,7 @@ define(['dictionary', 'validator'],
 function (Dictionary, validator) {
 
     // CLASS AssetLoader
-    function AssetLoader() { // TODO:
+    function AssetLoader() {
         // private variables
         this.__isExecuting = false;
         this.__isFinishedLoading = false;
@@ -19,7 +19,7 @@ function (Dictionary, validator) {
             while(this.__callbacks.length > 0) {
                 this.__callbacks.shift()();
             }
-            this.__isexecuting = false;
+            this.__isExecuting = false;
         }
     };
     AssetLoader.prototype.__itemFinishedLoadingWithError = function(){
@@ -27,10 +27,9 @@ function (Dictionary, validator) {
     };
     AssetLoader.prototype.__initDownload = function (assetUrls) {
         if (this.__isExecuting || this.__isFinishedLoading) {
-            validator.throw(this, 'beginDownload', 'Download has already been called');
+            validator.throw(this, 'initDownload', 'Download has already been called');
         }
-        this.__isFinishedLoading = false;
-        this.__loadCounter = 0;
+        this.__isExecuting = true;
         this.__loadTotal = assetUrls.length;
     };
     // public prototypal variables

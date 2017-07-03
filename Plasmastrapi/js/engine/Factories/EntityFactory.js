@@ -4,7 +4,7 @@ function (Factory, Container, EmitterFactory, Entity, validator) {
     EntityFactory.prototype = Object.create(Factory.prototype);
     EntityFactory.prototype.constructor = EntityFactory;
     function EntityFactory(engine) {
-        Factory.call(this, engine);
+        Factory.call(this, Entity);
         this.__emitterFactory = engine.getFactory(EmitterFactory);
         this.__container = new Container(Entity);
     };

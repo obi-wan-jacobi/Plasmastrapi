@@ -9,8 +9,8 @@ function (Container, Emitter) {
     };
     EmitterContainer.prototype.purge = function (subscriber) {
         this.remove(subscriber);
-        this.forEach(function(Emitter) {
-            Emitter.purgeEventListener(subscriber);
+        this.forEach(function(emitter) {
+            emitter.purgeEventListener(subscriber);
         });
     };
 

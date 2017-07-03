@@ -27,6 +27,9 @@ function (CircuitElement, InputTerminal, OutputTerminal, CIRCUITS, validator) {
         return this.__state;
     };
     LogicElement.prototype.setState = function (state) {
+        if (!(state >= 0 && state <= 1)) {
+            validator.throw(this, 'setState', 'State cannot be set to value ' + state);
+        }
         this.__state = state;
         this.emit('onupdatestate');
     };

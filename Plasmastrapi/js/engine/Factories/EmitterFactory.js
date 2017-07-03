@@ -3,8 +3,8 @@
 
         EmitterFactory.prototype = Object.create(Factory.prototype);
         EmitterFactory.prototype.constructor = EmitterFactory;
-        function EmitterFactory(engine) {
-            Factory.call(this, engine);
+        function EmitterFactory() {
+            Factory.call(this, Emitter);
             this.__container = new EmitterContainer();
         };
         // private methods

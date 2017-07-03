@@ -50,5 +50,18 @@
         this.add(new ToolButton(1250, 40, "[q]", TrashToolCursor.prototype.sprite.frames[0], this.__engine.toolController, this.__engine.toolController.equipTrashTool));
     };
 
+    ToolController.prototype.__init = function () {
+        var self = this;
+        this.__hotkeys = {
+            '1': function () { self.__engine.sceneController.circuitDesignScene.andGateButton.getComponent(PickComponent).pick(); },
+            '2': function () { self.__engine.sceneController.circuitDesignScene.nandGateButton.getComponent(PickComponent).pick(); },
+            '3': function () { self.__engine.sceneController.circuitDesignScene.orGateButton.getComponent(PickComponent).pick(); },
+            '4': function () { self.__engine.sceneController.circuitDesignScene.xorGateButton.getComponent(PickComponent).pick(); },
+            '5': function () { self.__engine.sceneController.circuitDesignScene.powerSourceButton.getComponent(PickComponent).pick(); },
+            'w': function () { self.equipCuttingTool(); },
+            'q': function () { self.equipTrashTool(); },
+        }
+    };
+
     return CircuitDesignScene;
 });

@@ -16,9 +16,7 @@
                 modulePaths.push(property);
             }
         }
-        require(modulePaths, function () {
-            callback();
-        });
+        require(modulePaths, callback);
     };
 
     return configurator;

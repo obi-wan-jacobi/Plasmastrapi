@@ -11,6 +11,7 @@
         // Factories
         'circuit-element-factory': './game/Factories/CircuitElementFactory',
         'logic-element-factory': './game/Factories/LogicElementFactory',
+        'terminal-factory': './game/Factories/TerminalFactory',
         // Loaders
         'asset-loader': './game/Loaders/AssetLoader',
         // Scenes

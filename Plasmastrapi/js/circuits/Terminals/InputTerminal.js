@@ -6,7 +6,7 @@ function (Terminal, OutputTerminal) {
     InputTerminal.prototype.constructor = InputTerminal;
     function InputTerminal() {
         // inherits from
-        Terminal.call();
+        Terminal.call(this);
         this.__connections = [];
     };
     // public methods

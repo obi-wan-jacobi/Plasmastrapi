@@ -1,10 +1,10 @@
-﻿define(['factory', 'emitter-factory', 'dictionary', 'container', 'drawable-component-container', 'primitive', 'data-handle', 'utils'],
-function (Factory, EmitterFactory, Dictionary, Container, DrawableComponentContainer, Primitive, DataHandle, utils) {
+﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'container', 'drawable-component-container', 'primitive', 'data-handle', 'utils'],
+function (Factory, Component, EmitterFactory, Dictionary, Container, DrawableComponentContainer, Primitive, DataHandle, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
-        Factory.call(this, engine);
+        Factory.call(this, Component);
         this.__emitterFactory = engine.getFactory(EmitterFactory);
         this.__containers = new Dictionary(Container);
         this.__drawableComponentContainer = new DrawableComponentContainer();

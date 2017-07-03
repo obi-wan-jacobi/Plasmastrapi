@@ -15,8 +15,6 @@ function (Factory, CircuitElement, ComponentFactory, EntityFactory, Pose, Mesh, 
         // add components
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Pose())); // pose
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Mesh([new Vertex()]))); // mesh
-        circuitElement.addComponent(this.__componentFactory.createFromDataHandle(new KeyboardHandle())); // keyboard
-        circuitElement.addComponent(this.__componentFactory.createFromDataHandle(new MouseHandle())); // mouse
         circuitElement.addComponent(this.__componentFactory.createFromDataHandle(new PickHandle(function () { }))); // pick
         return circuitElement;
     };

@@ -8,7 +8,7 @@
             this.__containers[CORE.DISPLAYLAYERS[i]] = new Container(Component);
         }
     };
-    // private methods
+    // public methods
     DrawableComponentContainer.prototype.forEach = function (fn, caller) {
         for (var i = 0, L = CORE.DISPLAYLAYERS.length; i < L; i++) {
             var result = this.__containers[CORE.DISPLAYLAYERS[i]].forEach(fn, caller);
@@ -17,21 +17,21 @@
             }
         }
     };
-    DrawableComponentContainer.prototype.find = function (member) {
+    DrawableComponentContainer.prototype.get = function (component) {
         for (var i = 0, L = CORE.DISPLAYLAYERS.length; i < L; i++) {
-            var result = this.__containers[CORE.DISPLAYLAYERS[i]].get(member);
+            var result = this.__containers[CORE.DISPLAYLAYERS[i]].get(component);
             if (result) {
                 return result;
             }
         }
     };
-    DrawableComponentContainer.prototype.add = function (member) {
-        var displayLayer = member.getHandle().getDisplaySettings().displayLayer;
-        this.__containers[displayLayer].add(member);
+    DrawableComponentContainer.prototype.add = function (component) {
+        var displayLayer = component.getHandle().getDisplaySettings().displayLayer;
+        this.__containers[displayLayer].add(component);
     };
-    DrawableComponentContainer.prototype.remove = function (member) {
-        var displayLayer = member.getHandle().getDisplaySettings().displayLayer;
-        this.__containers[displayLayer].remove(member);
+    DrawableComponentContainer.prototype.remove = function (component) {
+        var displayLayer = component.getHandle().getDisplaySettings().displayLayer;
+        this.__containers[displayLayer].remove(component);
     };
 
     return DrawableComponentContainer;

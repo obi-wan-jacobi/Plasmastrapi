@@ -67,10 +67,10 @@ function (Link, validator) {
             previousLink = link;
         });
     };
-    Dictionary.prototype.get = function (keyToFind) {
-        return this.forEach(function (key, value) {
-            if (keyToFind === key) {
-                return value;
+    Dictionary.prototype.get = function (key) {
+        return this.__forEachLink(function (link) {
+            if (link.get().key === key) {
+                return link.get().value;
             }
         }, this);
     };

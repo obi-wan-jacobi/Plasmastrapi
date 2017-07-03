@@ -1,5 +1,5 @@
-define(['engine', 'asset-urls', 'asset-loader', 'circuit-element-factory', 'logic-element-factory', 'and-gate'],
-function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFactory, AndGate) {
+define(['engine', 'asset-urls', 'asset-loader', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory'],
+function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFactory, TerminalFactory) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -11,8 +11,9 @@ function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFac
     // private methods
     Game.prototype.__registerFactories = function () {
         Engine.prototype.__registerFactories.call(this);
-        this.__addFactory(CircuitElementFactory)
-        this.__addFactory(LogicElementFactory)
+        this.__addFactory(CircuitElementFactory);
+        this.__addFactory(LogicElementFactory);
+        this.__addFactory(TerminalFactory);
     };
     Game.prototype.__registerSystems = function () {
         Engine.prototype.__registerSystems.call(this);
@@ -26,14 +27,8 @@ function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFac
         // load assets
         this.__assetLoader.download(assetUrls).done(function () {
             console.log("Assets have been loaded.");
-            // *** testing ***
-
-            var logicElementFactory = self.getFactory(LogicElementFactory);
-
-            logicElementFactory.create(AndGate);
-
-            // *** /testing ***
             Engine.prototype.start.call(self);
+            console.log("We have ignition!");
         });
     };
 

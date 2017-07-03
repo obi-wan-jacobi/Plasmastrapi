@@ -60,13 +60,13 @@ function(Dictionary, validator) {
         validator.validateFunction(callback); 
         var removedEventListener = null;
         if (this.__eventsBuffer[event]) {
-            removedEventListener = this.__eventsBuffer[event].splice(subscriber, callback);
+            removedEventListener = this.__eventsBuffer[event].remove(subscriber);
         }
         if (!removedEventListener) {
-            removedEventListener = this.__events[event].splice(subscriber, callback);
+            removedEventListener = this.__events[event].remove(subscriber);
         }
         if (!removedEventListener) {
-            validator.throw(this, 'removeEventListener', 'Event ' + event + ' could not be removed');
+            validator.throw(this, 'removeEventListener', 'Subscriber ' + subscriber.constructor.name + ' was not found listening to event ' + event + ' on ' + this.constructor.name);
         }
     };
     Emitter.prototype.purgeEventListener = function(subscriber) {

@@ -9,7 +9,10 @@ function (System, ComponentFactory, CORE) {
         this.__viewport = engine.getViewport();
         this.__container = engine.getFactory(ComponentFactory).getDrawableComponentContainer();
 	};
-	DrawSystem.prototype.loopOnce = function() {
+	DrawSystem.prototype.loopOnce = function () {
+	    if (!this.__isLoaded) {
+	        return;
+	    }
 		var ctx = this.__viewport.getContext("2d");
 		ctx.width = this.__viewport.width = this.__viewport.clientWidth;
 		ctx.height = this.__viewport.height = this.__viewport.clientHeight;

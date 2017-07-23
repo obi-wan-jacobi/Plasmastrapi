@@ -1,11 +1,11 @@
-﻿define(['container', 'component', 'core-constants'], function (Container, Component, CORE) {
+﻿define(['container', 'component-component', 'component', 'core-constants'], function (Container, ComponentContainer, Component, CORE) {
 
     DrawableComponentContainer.prototype = Object.create(Container.prototype);
     DrawableComponentContainer.prototype.constructor = DrawableComponentContainer;
     function DrawableComponentContainer() {
         this.__containers = {};
         for (var i = 0, L = CORE.DISPLAYLAYERS.length; i < L; i++) {
-            this.__containers[CORE.DISPLAYLAYERS[i]] = new Container(Component);
+            this.__containers[CORE.DISPLAYLAYERS[i]] = new ComponentContainer(Component);
         }
     };
     // public methods

@@ -1,12 +1,12 @@
-﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'container', 'drawable-component-container', 'primitive', 'data-handle', 'utils'],
-function (Factory, Component, EmitterFactory, Dictionary, Container, DrawableComponentContainer, Primitive, DataHandle, utils) {
+﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'utils'],
+function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
         Factory.call(this, Component);
         this.__emitterFactory = engine.getFactory(EmitterFactory);
-        this.__containers = new Dictionary(Container);
+        this.__containers = new Dictionary(ComponentContainer);
         this.__drawableComponentContainer = new DrawableComponentContainer();
     };
     // private methods
@@ -14,23 +14,22 @@ function (Factory, Component, EmitterFactory, Dictionary, Container, DrawableCom
         // if container doesn't exist for this component type, create one
         var container = this.__containers.get(ComponentType);
         if (!container) {
-            container = new Container(ComponentType);
+            try {
+                var modulePrefix = utils.modules.getModulePrefix(ComponentType);
+                var ContainerType = utils.modules.require(modulePrefix + '-container');
+                container = new ContainerType(ComponentType);
+            } catch(e) {
+                container = new ComponentContainer(ComponentType);
+            }
             this.__containers.add(ComponentType, container);
         }
         return container;
-    };
-    ComponentFactory.prototype.__onComponentDestroy = function (component) {
-        this.__containers.get(component.constructor).remove(component);
-        if (component.isDrawable) {
-            this.__drawableComponentContainer.remove(component);
-        }
     };
     // public methods
     ComponentFactory.prototype.create = function (ComponentType, args) {
         var container = this.__getOrInitContainer(ComponentType);
         var component = this.__emitterFactory.create(ComponentType.bind.apply(ComponentType, [null].concat(args)));
         container.add(component);
-        component.addEventListener('ondestroy', this, this.__onComponentDestroy.bind(this, component));
         if (component.isDrawable) {
             this.__drawableComponentContainer.add(component);
         }

@@ -30,6 +30,9 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
     };
     // public methods
     KeyboardSystem.prototype.loopOnce = function () {
+        if (!this.__isLoaded) {
+            return;
+        }
         this.__inputBuffer['keydown'].forEach(function (keyCode) {
             this.__container.forEach(function (component) {
                 component.getHandle().keydown(keyCode);

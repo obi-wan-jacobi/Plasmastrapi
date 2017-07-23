@@ -103,7 +103,9 @@
     <Content Include="js\core\Data\Graphics\DisplaySettings\TextDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\TextHandle.js" />
     <Content Include="js\core\Data\Physics\Acceleration.js" />
+    <Content Include="js\engine\Containers\ComponentContainer.js" />
     <Content Include="js\engine\Containers\DrawableComponentContainer.js" />
+    <Content Include="js\engine\Containers\PickComponentContainer.js" />
     <Content Include="js\engine\Factories\ComponentFactory.js" />
     <Content Include="js\engine\Factories\EmitterFactory.js" />
     <Content Include="js\engine\Factories\EntityFactory.js" />
@@ -138,7 +140,7 @@
     <Content Include="js\circuits\Wires\Base\WireElement.js" />
     <Content Include="js\game\Tools\Helpers\ToolWire.js" />
     <Content Include="js\game\Configuration\config.js" />
-    <Content Include="js\game\Controllers\ToolController.js" />
+    <Content Include="js\game\Controllers\InputController.js" />
     <Content Include="js\circuits\LogicElements\Base\LogicElement.js" />
     <Content Include="js\circuits\LogicElements\Gates\AndGate.js" />
     <Content Include="js\circuits\LogicElements\Gates\Base\Gate.js" />

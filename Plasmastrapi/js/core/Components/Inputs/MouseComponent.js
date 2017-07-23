@@ -18,7 +18,7 @@ function (Component) {
         this.__attachEventTriggerToHandleMethod('setData', 'onmousemove');
         this.__attachEventTriggerToHandleMethod('mousedown', 'onmousedown');
         this.__attachEventTriggerToHandleMethod('mouseup', 'onmouseup');
-        this.__attachEventTriggerToHandleMethod('click', 'onclick');
+        //this.__attachEventTriggerToHandleMethod('click', 'onclick');
     };
 
     return MouseComponent;

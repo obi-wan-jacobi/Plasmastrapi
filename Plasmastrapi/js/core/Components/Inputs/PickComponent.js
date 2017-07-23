@@ -14,7 +14,7 @@ define(['component', 'mouse-component'],
             'ondeselect',
             'onmouseenter',
             'onmousehover',
-            'onmouseleave',
+            'onmouseleave'
         );
         // inject event callbacks into handle
         this.__attachEventTriggerToHandleMethod('pick', 'onpick');
@@ -31,4 +31,11 @@ define(['component', 'mouse-component'],
     };
 
 	return PickComponent;
-});
+    });
+
+/* 
+MouseComponent.prototype.__isCursorWithinMeshBoundary = function (cursor) {
+    var meshComponent = this.__entity.getComponent(MeshComponent);
+    return meshComponent.getHandle().checkPointCollision(cursor);
+};
+*/

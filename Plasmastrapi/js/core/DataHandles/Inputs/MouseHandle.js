@@ -30,7 +30,6 @@ function (DataHandle, Position, validator) {
     MouseHandle.prototype.mouseup = function () {
         this.__isMouseDown = false;
     };
-    MouseHandle.prototype.click = function () { };
 
     return MouseHandle;
 });

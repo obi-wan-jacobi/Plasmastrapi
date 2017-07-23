@@ -11,6 +11,7 @@ needs testing:
 overhaul:
 - engine
 	- pick system
+
 - game
 	- factories
 		- handle/component dependencies
@@ -21,7 +22,6 @@ overhaul:
 - Modal panels (move, stretch, close)
 
 tech debt:
-- require dependencies for type-checking in Component and DataHandle
 - dictionaries validate type for key as well as value
 - mixin superclass
 - meshhandle point-collision checking is disgusting

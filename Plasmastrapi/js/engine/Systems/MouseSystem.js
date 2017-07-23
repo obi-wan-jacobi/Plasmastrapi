@@ -52,7 +52,10 @@ function (System, LinkedList, ComponentFactory, MouseComponent, Position) {
         return new Position(mouseX, mouseY);
     };
     // public methods
-	MouseSystem.prototype.loopOnce = function() {
+    MouseSystem.prototype.loopOnce = function () {
+        if (!this.__isLoaded) {
+            return;
+        }
         this.__inputBuffer['mousemove'].forEach(function (position) {
             this.__container.forEach(function (component) {
                 component.getHandle().mousemove(position);

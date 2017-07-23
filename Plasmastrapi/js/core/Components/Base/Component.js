@@ -68,6 +68,9 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         };
     };
     // public methods
+    Component.prototype.getEntity = function (entity) {
+        return this.__entity;
+    };
     Component.prototype.setEntity = function(entity) {
         if (this.__entity) {
             utils.validator.throw(this, 'setEntity', 'An entity has already been set for this component');

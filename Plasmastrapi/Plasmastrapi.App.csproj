@@ -70,6 +70,7 @@
     <Content Include="favicon.ico" />
     <Content Include="js\circuits\Configuration\config.js" />
     <Content Include="js\circuits\Configuration\constants.js" />
+    <Content Include="js\circuits\Configuration\debug.js" />
     <Content Include="js\circuits\Configuration\require.config.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
     <Content Include="js\core\Configuration\constants.js" />
@@ -112,13 +113,18 @@
     <Content Include="js\engine\Systems\KeyboardSystem.js" />
     <Content Include="js\engine\Factories\Base\Factory.js" />
     <Content Include="js\game\Controllers\PickController.js" />
-    <Content Include="js\game\Factories\CircuitElementFactory.js" />
-    <Content Include="js\game\Factories\LogicElementFactory.js" />
-    <Content Include="js\game\Factories\TerminalFactory.js" />
-    <Content Include="js\game\Factories\WireFactory.js" />
+    <Content Include="js\circuits\Factories\CircuitElementFactory.js" />
+    <Content Include="js\circuits\Factories\LogicElementFactory.js" />
+    <Content Include="js\circuits\Factories\TerminalFactory.js" />
+    <Content Include="js\circuits\Factories\WireFactory.js" />
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
+    <Content Include="js\ui\Base\UIElement.js" />
+    <Content Include="js\ui\Configuration\config.js" />
+    <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
+    <Content Include="js\ui\Factories\ButtonFactory.js" />
+    <Content Include="js\ui\Factories\UIElementFactory.js" />
     <Content Include="js\utils\Configuration\configurator.js" />
     <Content Include="js\utils\Logging\logging.js" />
     <Content Include="js\utils\Modules\modules.js" />
@@ -173,9 +179,7 @@
     <Content Include="js\game\Tools\Cursors\TrashToolCursor.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Tools\Base\Tool.js" />
-    <Content Include="js\ui\Base\Panel.js" />
-    <Content Include="js\ui\Base\TextLabel.js" />
-    <Content Include="js\ui\Buttons\MenuButton.js" />
+    <Content Include="js\ui\Panels\Base\Panel.js" />
     <Content Include="js\game\Tools\Base\Compatible.js" />
     <Content Include="js\game\Tools\Compatibility\DesignZone.js" />
     <Content Include="js\game\Tools\Compatibility\DestructionZone.js" />
@@ -183,17 +187,13 @@
     <Content Include="js\game\Tools\PickingTool.js" />
     <Content Include="js\game\Tools\PlacingTool.js" />
     <Content Include="js\game\Tools\WireTool.js" />
-    <Content Include="js\ui\Buttons\ToolButton.js" />
     <Content Include="js\ui\Decorators\LabelDecorator.js" />
     <Content Include="js\ui\Panels\CircuitDesignBlueprintPanel.js" />
-    <Content Include="js\ui\Base\UIElement.js" />
-    <Content Include="js\ui\Base\Button.js" />
-    <Content Include="js\ui\Buttons\SpawnerButton.js" />
+    <Content Include="js\ui\Buttons\Base\Button.js" />
     <Content Include="js\ui\Panels\CircuitDesignToolbar.js" />
     <Content Include="js\game\Tools\Compatibility\Filter.js" />
     <Content Include="js\ui\Panels\MainMenuBackgroundPanel.js" />
     <Content Include="js\ui\Panels\MainMenuNavigationPanel.js" />
-    <Content Include="js\ui\Lines\Curve.js" />
     <Content Include="js\utils\Configuration\require.config.js" />
     <Content Include="packages.config" />
     <Content Include="README.md" />
@@ -242,7 +242,7 @@
     <Content Include="js\core\Events\Emitter.js" />
     <Content Include="js\game\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Containers\Base\Container.js" />
-    <Content Include="js\engine\Scenes\Base\Scene.js" />
+    <Content Include="js\game\Scenes\Base\Scene.js" />
     <Content Include="js\engine\Systems\Base\System.js" />
     <Content Include="js\core\DataHandles\Inputs\MouseHandle.js" />
     <Content Include="js\core\DataStructures\LinkedList.js" />
@@ -252,7 +252,7 @@
     <Content Include="js\engine\Systems\DrawSystem.js" />
     <Content Include="js\engine\Systems\MouseSystem.js" />
     <Content Include="js\game\Game.js" />
-    <Content Include="js\game\Containers\WireContainer.js" />
+    <Content Include="js\circuits\Containers\WireContainer.js" />
     <Content Include="js\game\Services\RevisionService.js" />
     <Content Include="js\lib\r.js" />
     <Content Include="js\lib\require.js" />
@@ -266,7 +266,6 @@
     <Folder Include="js\circuits\LogicElements\FlipFlops\" />
     <Folder Include="js\circuits\LogicElements\Switches\" />
     <Folder Include="js\core\DataHandles\Physics\" />
-    <Folder Include="js\ui\Shapes\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

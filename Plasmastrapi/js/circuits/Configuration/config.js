@@ -1,15 +1,18 @@
 ﻿define([
+    'circuits-debug'
 ],
-function () {
+    function (debug) {
+
+        $ = { debug };
 
     $ = {};
 
-    $.CircuitElement = {
-        spriteHandleDisplayLayer: 'ondrawgameentities'
-    };
+    $.LogicElement = {
+        displayLayer: 'game-entity-midground'
+    }
 
     $.WireElement = {
-        displayLayer: 'ondrawgameentities',
+        displayLayer: 'game-entity-midground',
         wireColour: '#FFFFFF',
         lineThickness: 2
     };
@@ -17,7 +20,7 @@ function () {
     $.Wire = {
         collisionWidth: 25,
         collisionLengthModifier: 0.95,
-        displayLayer: 'ondrawgameentities',
+        displayLayer: 'game-entity-midground',
         poweredLineWidth: 2,
         noPowerLineColour: 'white',
         lowLineColour: '#FF5AC8',
@@ -26,6 +29,7 @@ function () {
     };
 
     $.Terminal = {
+        displayLayer: 'game-entity-midground',
         collisionBounds: { width: 20, height: 20 },
         frameOnMouseEnter: 2
     };

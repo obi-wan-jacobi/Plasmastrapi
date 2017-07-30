@@ -1,19 +1,11 @@
-﻿require.config({
-    paths: {
-        // UI
-        'button': './ui/Base/Button',
-        'panel': './ui/Base/Panel',
-        'text-label': './ui/Base/TextLabel',
-        'ui-element': './ui/Base/UIElement',
-        'menu-button': './ui/Buttons/MenuButton',
-        'spawner-button': './ui/Buttons/SpawnerButton',
-        'tool-button': './ui/Buttons/ToolButton',
-        'curve': './ui/Lines/Curve',
-        'circuit-design-blueprint-panel': './ui/Panels/CircuitDesignBlueprintPanel',
-        'circuit-design-toolbar': './ui/Panels/CircuitDesignToolbar',
-        'main-menu-background-panel': './ui/Panels/MainMenuBackgroundPanel',
-        'main-menu-navigation-panel': './ui/Panels/MainMenuNavigationPanel',
-        // Decorators
-        'labelled-decorator': './ui/Decorators/LabelDecorator'
-    }
+﻿require(['configurator', 'logging'], function (configurator, logging) {
+    var paths = {
+        
+        // Configuration
+        'ui-debug': './ui/Configuration/debug',
+        'ui-config': './ui/Configuration/config'
+    };
+    configurator.config(paths, function () {
+        logging.console('UI modules have been loaded.');
+    });
 });

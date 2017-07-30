@@ -19,7 +19,15 @@
         // Wires
         'wire-element': './circuits/Wires/Base/WireElement',
         'wire': './circuits/Wires/Wire',
+        // Containers
+        'logic-element-container': './circuits/Containers/LogicElementContainer',
+        'wire-container': './game/circuits/WireContainer',
+        // Factories
+        'circuit-element-factory': './circuits/Factories/CircuitElementFactory',
+        'logic-element-factory': './circuits/Factories/LogicElementFactory',
+        'terminal-factory': './circuits/Factories/TerminalFactory',
         // Configuration
+        'circuits-debug': './circuits/Configuration/debug',
         'circuits-config': './circuits/Configuration/config',
         'circuits-constants': './circuits/Configuration/constants'
     };

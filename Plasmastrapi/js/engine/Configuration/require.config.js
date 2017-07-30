@@ -12,7 +12,6 @@
         'emitter-factory': './engine/Factories/EmitterFactory',
         'component-factory': './engine/Factories/ComponentFactory',
         'entity-factory': './engine/Factories/EntityFactory',
-        // Scenes
         // Systems
         'system': './engine/Systems/Base/System',
         'draw-system': './engine/Systems/DrawSystem',

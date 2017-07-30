@@ -1,10 +1,10 @@
-﻿define(['factory', 'circuit-element-factory', 'terminal', 'component-factory', 'entity-factory', 'image-handle', 'image-display-settings', 'utils'],
-function (Factory, CircuitElementFactory, Terminal, ComponentFactory, EntityFactory, ImageHandle, ImageDisplaySettings, utils) {
+﻿define(['factory', 'circuit-element-factory', 'terminal', 'component-factory', 'image-handle', 'image-display-settings', 'utils', 'game-config'],
+function (Factory, CircuitElementFactory, Terminal, ComponentFactory, ImageHandle, ImageDisplaySettings, utils, config) {
 
     TerminalFactory.prototype = Object.create(Factory.prototype);
     TerminalFactory.prototype.constructor = TerminalFactory;
     function TerminalFactory(game) {
-        Factory.call(this, game);
+        Factory.call(this, Terminal);
         this.__componentFactory = game.getFactory(ComponentFactory);
         this.__circuitElementFactory = game.getFactory(CircuitElementFactory);
         this.__assetMap = game.getAssetMap();
@@ -15,7 +15,7 @@ function (Factory, CircuitElementFactory, Terminal, ComponentFactory, EntityFact
         utils.validator.validateType(this, terminal, Terminal);
         // add components
         var image = this.__assetMap.get(utils.modules.getModulePrefix(TerminalType, null));
-        var displaySettings = new ImageDisplaySettings('game-entity-midground', null, null, image.width, image.height, image.width, image.height);
+        var displaySettings = new ImageDisplaySettings(config.Terminal.displayLayer, null, null, image.width, image.height, image.width, image.height);
         var component = this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)); // image
         terminal.addComponent(component);
         return terminal;

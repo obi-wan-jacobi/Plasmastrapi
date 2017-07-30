@@ -7,18 +7,12 @@
 ],
 function (Scene, MainMenuBackgroundPanel, MainMenuNavigationPanel) {
 
-    MainMenuScene.prototype = Object.create(Scene.prototype);
-    MainMenuScene.prototype.constructor = MainMenuScene;
-    function MainMenuScene(canvas) {
-        Scene.call(this);
-    };
-    MainMenuScene.prototype.__oninit = function () {
-        // background
-        this.add(new MainMenuBackgroundPanel());
+    var mainMenuScene = new Scene();
 
-        // menu panel
-        this.add(new MainMenuNavigationPanel());
-    };
+    mainMenuScene.add(new MainMenuBackgroundPanel());
 
-    return MainMenuScene;
+    mainMenuScene.add(new MainMenuNavigationPanel());
+
+    // singleton
+    return mainMenuScene;
 });

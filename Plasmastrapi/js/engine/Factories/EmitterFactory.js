@@ -7,16 +7,12 @@
             Factory.call(this, Emitter);
             this.__container = new EmitterContainer();
         };
-        // private methods
-        EmitterFactory.prototype.__onEmitterDestroy = function (emitter) {
-            this.__container.remove(emitter);
-        };
         // public methods
-        EmitterFactory.prototype.create = function (EmitterType) {
-            var emitter = new EmitterType();
+        EmitterFactory.prototype.create = function (EmitterType, args) {
+            var emitter = new EmitterType.apply(null, args instanceof Array ? args : [args]);
             validator.validateType(this, emitter, Emitter);
             this.__container.add(emitter);
-            emitter.addEventListener('ondestroy', this, this.__onEmitterDestroy.bind(this, emitter));
+            emitter.addEventListener('ondestroy', this, this.__container.remove.bind(this, emitter));
             return emitter;
         };
         EmitterFactory.prototype.getContainer = function () {

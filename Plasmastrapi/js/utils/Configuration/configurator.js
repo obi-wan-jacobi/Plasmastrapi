@@ -23,5 +23,6 @@
         require(modulePaths, callback);
     };
 
+    // singleton
     return configurator;
 });

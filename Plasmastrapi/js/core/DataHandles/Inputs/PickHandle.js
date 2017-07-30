@@ -3,14 +3,14 @@ function (DataHandle, validator) {
 
     PickHandle.prototype = Object.create(DataHandle.prototype);
     PickHandle.prototype.constructor = PickHandle;
-    function PickHandle(pickAction) {
+    function PickHandle(fnPickAction) {
         DataHandle.call(this);
         // private variables
-        this.__pickAction = pickAction;
+        this.__fnPickAction = fnPickAction;
         this.__isHovered = false;
         this.__isSelected = false;
         // initialize
-        this.setPickAction(pickAction);
+        this.setPickAction(fnPickAction);
     };
     PickHandle.prototype.setData = function (pickAction) { };
     PickHandle.prototype.setDisplaySettings = function () { };
@@ -28,12 +28,12 @@ function (DataHandle, validator) {
         }
     });
     // public methods
-    PickHandle.prototype.setPickAction = function (pickAction) {
-        validator.validateFunction(pickAction);
-        this.__pickAction = pickAction;
+    PickHandle.prototype.setPickAction = function (fnPickAction) {
+        validator.validateFunction(fnPickAction);
+        this.__fnPickAction = fnPickAction;
     };
     PickHandle.prototype.pick = function () {
-        return this.__pickAction();
+        return this.__fnPickAction();
     };
     PickHandle.prototype.hover = function () {
         if (!this.__isHovered) {

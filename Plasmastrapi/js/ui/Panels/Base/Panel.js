@@ -1,14 +1,11 @@
-﻿define([
-    // Base
-    'ui-element'
-],
+﻿define(['ui-element'],
 function (UIElement) {
 
     Panel.prototype = Object.create(UIElement.prototype);
     Panel.prototype.constructor = Panel;
-    function Panel(x, y, mesh, MeshDisplaySettings) {
+    function Panel() {
         // inherits from
-        UIElement.call(this, x, y, mesh, MeshDisplaySettings);
+        UIElement.call();
     };
 
     return Panel;

@@ -7,5 +7,6 @@
         validator
     };
 
+    // singleton
     return utils;
 });

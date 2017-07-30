@@ -11,9 +11,7 @@ function (Base, Dictionary, Entity, validator) {
         this.__entities = new Dictionary(Entity);
     };
     // private methods
-    System.prototype.__oninit = function () {
-        validator.throwMethodMustBeOverridden(this, 'oninit');
-    };
+    System.prototype.__oninit = function () { };
     System.prototype.__onload = function () {
         this.__entities.forEach(function (entity) {
             entity.load();
@@ -26,7 +24,8 @@ function (Base, Dictionary, Entity, validator) {
     };
     // public methods
     Scene.prototype.add = function (entity) {
-	    this.__entities.add(entity);
+        this.__entities.add(entity);
+        entity.addEventListener('ondestroy', this.remove.bind(this));
 	    if (this.__isLoaded) {
 	        entity.load();
 	    }

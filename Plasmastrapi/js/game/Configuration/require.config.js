@@ -1,20 +1,14 @@
-﻿require.config({
-    paths: {
+﻿require(['configurator', 'logging'], function (configurator, logging) {
+    var paths = {
         // Assets
         'asset-urls': './game/Assets/assetUrls',
-        // Containers
-        'logic-element-container': './game/Containers/LogicElementContainer',
-        'wire-container': './game/Containers/WireContainer',
         // Controllers
         'scene-controller': './game/Controllers/SceneController',
         'tool-controller': './game/Controllers/ToolController',
-        // Factories
-        'circuit-element-factory': './game/Factories/CircuitElementFactory',
-        'logic-element-factory': './game/Factories/LogicElementFactory',
-        'terminal-factory': './game/Factories/TerminalFactory',
         // Loaders
         'asset-loader': './game/Loaders/AssetLoader',
         // Scenes
+        'scene': './game/Scenes/Base/Scene',
         'circuit-design-scene': './game/Scenes/CircuitDesignScene',
         'main-menu-scene': './game/Scenes/MainMenuScene',
         // Tools
@@ -39,10 +33,13 @@
         'placing-tool': './game/Tools/PlacingTool',
         'trash-tool': './game/Tools/TrashTool',
         'wire-tool': './game/Tools/WireTool',
-        // Configs
-        'game-debug': './game/debug',
-        'game-config': './game/config',
+        // Configuration
+        'game-debug': './game/Configuration/debug',
+        'game-config': './game/Configuration/config',
         // Game
         'game': './game/Game'
-    }
+    };
+    configurator.config(paths, function () {
+        logging.console('Game modules have been loaded.');
+    });
 });

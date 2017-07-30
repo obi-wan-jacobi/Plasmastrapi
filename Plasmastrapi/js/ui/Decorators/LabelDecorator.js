@@ -1,7 +1,4 @@
-﻿define([
-    // UI
-    'text-label'
-],
+﻿define(['text-label'],
 function (TextLabel) {
 
     function LabelDecorator(TextDisplaySettings) {

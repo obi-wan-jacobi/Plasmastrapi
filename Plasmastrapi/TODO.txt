@@ -1,12 +1,15 @@
 
 known issues:
-- 
+- TBD
 
 user experience:
-- terminals are selectable when the circuit element is inside a selection-box
+- (legacy) terminals are selectable when the circuit element is inside a selection-box
 
 needs testing:
-- destroy->purge
+- TBD
+
+in progress:
+- overhaul
 
 overhaul:
 - game
@@ -16,27 +19,26 @@ overhaul:
 		- refactor compatibility decorations
 - Refactor UI such that panel content/child positions are relative to parent (percent-based or position-based)
 	- ViewportSystem to listen for screen resize events?
-- Modal panels (move, stretch, close)
+- Modal panels (move, stretch/resize, close)
 
 tech debt:
-- dictionaries validate type for key as well as value
-- mixin superclass
-- meshhandle point-collision checking is disgusting
-- run memory analysis/profiler diagnostics
-- JSDocs/automated documentation
-- unit tests
-
-optimization
-- tool compatibility filtering --> sort pickable components using a tree?
-- MeshComponent --> combine translate + rotate into one function (leverage a single for-loop)?
-- Dictionary --> store this.__end to avoid O(n) for this.add
-- entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
+-general
+	- refactor main engine loop into load/unload blocks
+	- dictionaries should validate type for key as well as value
+	- mixin superclass
+	- run memory analysis/profiler diagnostics
+	- JSDocs/automated documentation
+	- unit tests
+- optimization:
+	- meshhandle point-collision checking is disgusting
+	- tool compatibility filtering --> sort pickable components using a tree?
+	- MeshComponent --> combine translate + rotate into one function (leverage a single for-loop)?
+	- Dictionary --> store this.__end to avoid O(n) for this.add
+	- Mouse/Keyboard/Pick system 'inputBuffer' consolidation into a single LoopOnce-->forEach
+	- entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
 
 scalability concerns:
 - single-canvas viewport
-
-in progress:
-- 
 
 backlog:
 - general
@@ -70,7 +72,7 @@ backlog:
 - config
 	- scenes
 
-technology:
+technology/resources:
 - linting
 	- ESlint (http://eslint.org/)
 	- intellisense typings (vscode)

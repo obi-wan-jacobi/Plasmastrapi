@@ -35,18 +35,6 @@ function (DataHandle, validator) {
     PickHandle.prototype.pick = function () {
         return this.__pickAction();
     };
-    PickHandle.prototype.select = function () {
-        if (this.__isSelected) {
-            return;
-        }
-        this.__isSelected = true;
-    };
-    PickHandle.prototype.deselect = function () {
-        if (!this.__isSelected) {
-            return;
-        }
-        this.__isSelected = false;
-    };
     PickHandle.prototype.hover = function () {
         if (!this.__isHovered) {
             this.mouseenter();
@@ -62,6 +50,18 @@ function (DataHandle, validator) {
     };
     PickHandle.prototype.mouseleave = function () {
         this.__isHovered = false;
+    };
+    PickHandle.prototype.select = function () {
+        if (this.__isSelected) {
+            return;
+        }
+        this.__isSelected = true;
+    };
+    PickHandle.prototype.deselect = function () {
+        if (!this.__isSelected) {
+            return;
+        }
+        this.__isSelected = false;
     };
 
     return PickHandle;

@@ -15,18 +15,17 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
     };
     // private methods
     KeyboardSystem.prototype.__onload = function () {
-        this.__viewport.onkeydown = this.__onkeydown.bind(this);
-        this.__viewport.onkeyup = this.__onkeyup.bind(this);
+        this.__viewport.onkeydown = this.__buildInputEventCallback('keydown');
+        this.__viewport.onkeyup = this.__buildInputEventCallback('keyup');
     };
     KeyboardSystem.prototype.__onunload = function () {
         this.__viewport.onkeydown = null;
         this.__viewport.onkeyup = null;
     };
-    KeyboardSystem.prototype.__onkeydown = function (e) {
-        this.__inputBuffer['keydown'].push(e.keyCode);
-    };
-    KeyboardSystem.prototype.__onkeyup = function (e) {
-        this.__inputBuffer['keyup'].push(e.keyCode);
+    KeyboardSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
+        return (function (e) {
+            this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(e));
+        }).bind(this);
     };
     // public methods
     KeyboardSystem.prototype.loopOnce = function () {
@@ -40,7 +39,7 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
         }, this);
         this.__inputBuffer['keyup'].forEach(function (keyCode) {
             this.__container.forEach(function (component) {
-                component.getHandle().keydown(keyCode);
+                component.getHandle().keyup(keyCode);
             }, this);
         }, this);
     };

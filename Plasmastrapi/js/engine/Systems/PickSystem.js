@@ -1,5 +1,5 @@
-﻿define(['system', 'component-factory', 'pick-component', 'mouse-handle'],
-function (System, ComponentFactory, PickComponent, MouseHandle) {
+﻿define(['system', 'component-factory', 'pick-component', 'mouse-handle', 'linked-list', 'mesh-component'],
+function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, MeshComponent) {
 
     // CLASS PickSystem
     PickSystem.prototype = Object.create(System.prototype);
@@ -9,15 +9,17 @@ function (System, ComponentFactory, PickComponent, MouseHandle) {
         var componentFactory = engine.getFactory(ComponentFactory);
         this.__container = componentFactory.getContainer(PickComponent);
         this.__mouseComponent = componentFactory.createFromDataHandle(new MouseHandle());
-        this.__onmousemovePicks = [];
-        this.__onmousedownPicks = [];
-        this.__onmouseupPicks = [];
+        this.__inputBuffer = {
+            'mousemove': new LinkedList(PickComponent),
+            'mousedown': new LinkedList(PickComponent),
+            'mouseup': new LinkedList(PickComponent),
+        };
     };
     // private methods
     PickSystem.prototype.__oninit = function () {
-        this.__mouseComponent.addEventListener('onmousemove', this, this.__getMousemovePicks.bind(this));
-        this.__mouseComponent.addEventListener('onmousedown', this, this.__getMousedownPicks.bind(this));
-        this.__mouseComponent.addEventListener('onmouseup', this, this.__getMouseupPicks.bind(this));
+        this.__mouseComponent.addEventListener('onmousemove', this, this.__buildInputEventCallback('mousemove'));
+        this.__mouseComponent.addEventListener('onmousedown', this, this.__buildInputEventCallback('mousedown'));
+        this.__mouseComponent.addEventListener('onmouseup', this, this.__buildInputEventCallback('mouseup'));
     };
     PickSystem.prototype.__onload = function () {
         this.__mouseComponent.load();
@@ -25,33 +27,43 @@ function (System, ComponentFactory, PickComponent, MouseHandle) {
     PickSystem.prototype.__onunload = function () {
         this.__mouseComponent.unload();
     };
-    PickSystem.prototype.__getMousemovePicks = function (cursorPosition) {
-        this.__container.forEach(function (pickComponent) {
-            this.__pickIfCursorPointCollisionOnEntityMesh(cursorPosition, this.__onmousemovePicks);
-        }, this);
-    };
-    PickSystem.prototype.__getMousedownPicks = function (cursorPosition) {
-
-    };
-    PickSystem.prototype.__getMouseupPicks = function (cursorPosition) {
-
-    };
-    PickSystem.prototype.__pickIfCursorPointCollisionOnEntityMesh = function (pickComponent, picksArray) {
-        if () {
-            picksArray.push(pickComponent);
-        }
+    PickSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
+        return (function (cursor) {
+            this.__container.forEach(function (pickComponent) {
+                this.__inputBuffer[inputBufferKey].push(pickComponent);
+            }, this);
+        }).bind(this);
     };
     // public methods
     PickSystem.prototype.loopOnce = function () {
-
+        if (!this.__isLoaded) {
+            return;
+        }
+        this.__inputBuffer['mousemove'].forEach(function (pickComponent) {
+            var entity = pickComponent.getEntity();
+            var meshComponent = entity.getComponent(MeshComponent);
+            if (meshCompoent.getHandle().checkPointCollision(cursor)) {
+                pickComponent.getHandle().hover();
+            }
+            else {
+                pickComponent.getHandle().unhover();
+            }
+        });
+        this.__inputBuffer['mousedown'].forEach(function (pickComponent) {
+            var entity = pickComponent.getEntity();
+            var meshComponent = entity.getComponent(MeshComponent);
+            if (meshCompoent.getHandle().checkPointCollision(cursor)) {
+                pickComponent.getHandle().pick();
+            }
+        });
+        this.__inputBuffer['mouseup'].forEach(function (pickComponent) {
+            var entity = pickComponent.getEntity();
+            var meshComponent = entity.getComponent(MeshComponent);
+            if (meshCompoent.getHandle().checkPointCollision(cursor)) {
+                pickComponent.getHandle().pick();
+            }
+        });
     };
 
     return PickSystem;
 });
-
-/*
-MouseComponent.prototype.__isCursorWithinMeshBoundary = function (cursor) {
-    var meshComponent = this.__entity.getComponent(MeshComponent);
-    return meshComponent.getHandle().checkPointCollision(cursor);
-};
-*/

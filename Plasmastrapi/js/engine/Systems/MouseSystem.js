@@ -16,11 +16,11 @@ function (System, LinkedList, ComponentFactory, MouseComponent, Position) {
         this.__container = engine.getFactory(ComponentFactory).getContainer(MouseComponent);
     };
     // private methods
-	MouseSystem.prototype.__onload = function() {
-		this.__viewport.onmousemove = this.__onmousemove.bind(this);
-		this.__viewport.onmousedown = this.__onmousedown.bind(this);
-		this.__viewport.onmouseup = this.__onmouseup.bind(this);
-		this.__viewport.onclick = this.__onclick.bind(this);
+    MouseSystem.prototype.__onload = function () {
+        this.__viewport.onmousemove = this.__buildInputEventCallback('mousemove');
+        this.__viewport.onmousedown = this.__buildInputEventCallback('mousedown');
+        this.__viewport.onmouseup = this.__buildInputEventCallback('mouseup');
+        this.__viewport.onclick = this.__buildInputEventCallback('click');
 	};
 	MouseSystem.prototype.__onunload = function() {
 		this.__viewport.onmousemove = null;
@@ -28,17 +28,10 @@ function (System, LinkedList, ComponentFactory, MouseComponent, Position) {
 		this.__viewport.onmouseup = null;
 		this.__viewport.onclick = null;
     };
-    MouseSystem.prototype.__onmousemove = function (e) {
-        this.__inputBuffer['mousemove'].push(this.__getMousePosition(e));
-    };
-    MouseSystem.prototype.__onmousedown = function (e) {
-        this.__inputBuffer['mousedown'].push(this.__getMousePosition(e));
-    };
-    MouseSystem.prototype.__onmouseup = function (e) {
-        this.__inputBuffer['mouseup'].push(this.__getMousePosition(e));
-    };
-    MouseSystem.prototype.__onclick = function (e) {
-        this.__inputBuffer['click'].push(this.__getMousePosition(e));
+    MouseSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
+        return (function (e) {
+            this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(e));
+        }).bind(this);
     };
     MouseSystem.prototype.__getMousePosition = function (e) {
         var mouseX, mouseY;

@@ -1,5 +1,5 @@
-define(['engine', 'asset-urls', 'asset-loader', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory'],
-function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFactory, TerminalFactory) {
+define(['engine', 'asset-urls', 'asset-loader', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'logging'],
+function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFactory, TerminalFactory, logging) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -26,9 +26,9 @@ function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFac
         var self = this;
         // load assets
         this.__assetLoader.download(assetUrls).done(function () {
-            console.log("Assets have been loaded.");
+            logging.console("Assets have been loaded.");
             Engine.prototype.start.call(self);
-            console.log("We have ignition!");
+            logging.console("We have ignition!");
         });
     };
 

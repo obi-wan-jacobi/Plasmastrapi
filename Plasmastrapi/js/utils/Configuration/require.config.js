@@ -2,8 +2,10 @@
     paths: {
         // Configurator
         'configurator': './utils/Configuration/configurator',
-        // Helpers
-        'modules': './utils/Helpers/modules',
+        // Logging
+        'logging': './utils/Logging/logging',
+        // Modules
+        'modules': './utils/Modules/modules',
         // Validation
         'validator': './utils/Validation/validator',
         // Utils

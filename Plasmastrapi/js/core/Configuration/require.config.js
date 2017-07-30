@@ -1,4 +1,4 @@
-﻿require(['configurator'], function (configurator) {
+﻿require(['configurator', 'logging'], function (configurator, logging) {
     var paths = {
         // Constants
         'core-constants': './core/Configuration/constants',
@@ -67,6 +67,6 @@
         'loadable-mixin': './core/Events/Mixins/Loadable'
     }; 
     configurator.config(paths, function () {
-        console.log('Core modules have been loaded.');
+        logging.console('Core modules have been loaded.');
     });
 });

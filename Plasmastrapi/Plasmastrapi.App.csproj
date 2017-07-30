@@ -120,7 +120,8 @@
     <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
     <Content Include="js\utils\Configuration\configurator.js" />
-    <Content Include="js\utils\Helpers\modules.js" />
+    <Content Include="js\utils\Logging\logging.js" />
+    <Content Include="js\utils\Modules\modules.js" />
     <Content Include="js\utils\utils.js" />
     <Content Include="js\utils\Validation\validator.js" />
     <Content Include="js\core\Data\Physics\Velocity.js" />

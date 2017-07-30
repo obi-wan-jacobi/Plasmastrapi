@@ -1,6 +1,5 @@
-
-define(['system', 'dictionary', 'factory', 'emitter-factory', 'entity-factory', 'component-factory', 'keyboard-system', 'mouse-system', 'draw-system'],
-function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentFactory, KeyboardSystem, MouseSystem, DrawSystem) {
+define(['system', 'dictionary', 'factory', 'emitter-factory', 'entity-factory', 'component-factory', 'keyboard-system', 'mouse-system', 'draw-system', 'pick-system'],
+function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentFactory, KeyboardSystem, MouseSystem, DrawSystem, PickSystem) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -39,6 +38,7 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
         // order matters:
         this.__addSystem(KeyboardSystem);
         this.__addSystem(MouseSystem);
+        this.__addSystem(PickSystem);
         this.__addSystem(DrawSystem);
     };
     Engine.prototype.__addSystem = function (SystemType) {

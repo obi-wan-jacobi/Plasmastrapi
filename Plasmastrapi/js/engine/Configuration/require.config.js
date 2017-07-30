@@ -1,4 +1,4 @@
-﻿require(['configurator'], function (configurator) {
+﻿require(['configurator', 'logging'], function (configurator, logging) {
     var paths = {
         'base': './engine/Base/Base',
         // Containers
@@ -22,6 +22,6 @@
         'engine': './engine/Engine'
     };
     configurator.config(paths, function () {
-        console.log('Engine modules have been loaded.');
+        logging.console('Engine modules have been loaded.');
     });
 });

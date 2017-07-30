@@ -1,6 +1,10 @@
 ﻿define(function () {
 
-    var logging = {};
+    var logging = {
+        constructor: {
+            name: 'logging'
+        }
+    };
 
     logging.console = function (text) {
         console.log(text);

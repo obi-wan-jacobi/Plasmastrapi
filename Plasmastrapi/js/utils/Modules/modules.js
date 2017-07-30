@@ -1,6 +1,10 @@
 ﻿define(['validator'], function (validator) {
 
-    var modules = {};
+    var modules = {
+        constructor: {
+            name: 'modules'
+        }
+    };
 
     modules.getModulePrefix = function (instanceOrType, typeSuffix) {
         var moduleName = null;

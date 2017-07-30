@@ -1,4 +1,4 @@
-﻿define('component-container', function (ComponentContainer) {
+﻿define(['component-container'], function (ComponentContainer) {
 
     PickComponentContainer.prototype = Object.create(ComponentContainer.prototype);
     PickComponentContainer.prototype.constructor = PickComponentContainer;

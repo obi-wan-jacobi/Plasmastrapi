@@ -1,9 +1,9 @@
-﻿define('container', 'component', 'validator', function (Container, Component, validator) {
+﻿define(['container', 'component', 'validator'], function (Container, Component, validator) {
 
     ComponentContainer.prototype = Object.create(Container.prototype);
     ComponentContainer.prototype.constructor = ComponentContainer;
     function ComponentContainer(ComponentType) {
-        validator.validateType(this, ComponentType, Component);
+        validator.validateClassType(this, ComponentType, Component);
         Container.call(this, ComponentType);
         this.__unloadBuffer = new Container(ComponentType);
     };

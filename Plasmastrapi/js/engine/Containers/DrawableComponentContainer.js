@@ -1,4 +1,4 @@
-﻿define(['container', 'component-component', 'component', 'core-constants'], function (Container, ComponentContainer, Component, CORE) {
+﻿define(['container', 'component-container', 'component', 'core-constants'], function (Container, ComponentContainer, Component, CORE) {
 
     DrawableComponentContainer.prototype = Object.create(Container.prototype);
     DrawableComponentContainer.prototype.constructor = DrawableComponentContainer;

@@ -18,6 +18,8 @@
         'output-terminal': './circuits/Terminals/OutputTerminal',
         // Wires
         'wire-element': './circuits/Wires/Base/WireElement',
+        'terminal-wire': './circuits/Wires/TerminalWire',
+        'wire-anchor': './circuits/Wires/WireAnchor',
         'wire': './circuits/Wires/Wire',
         // Containers
         'logic-element-container': './circuits/Containers/LogicElementContainer',

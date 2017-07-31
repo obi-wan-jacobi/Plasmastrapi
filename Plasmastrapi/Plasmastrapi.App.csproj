@@ -159,8 +159,8 @@
     <Content Include="js\circuits\Terminals\InputTerminal.js" />
     <Content Include="js\circuits\Terminals\OutputTerminal.js" />
     <Content Include="js\circuits\Terminals\Base\Terminal.js" />
-    <Content Include="js\TerminalWire.js" />
-    <Content Include="js\TerminalWireAnchor.js" />
+    <Content Include="js\circuits\Wires\TerminalWire.js" />
+    <Content Include="js\circuits\Wires\WireAnchor.js" />
     <Content Include="js\circuits\Wires\Wire.js" />
     <Content Include="js\game\Configuration\debug.js" />
     <Content Include="js\game\Configuration\require.config.js" />

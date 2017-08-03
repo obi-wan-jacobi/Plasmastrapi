@@ -1,12 +1,12 @@
 ﻿define(['entity'],
-    function (Entity) {
+function (Entity) {
 
-        // CLASS UIElement
-        UIElement.prototype = Object.create(Entity.prototype);
-        UIElement.prototype.constructor = UIElement;
-        function UIElement() {
-            Entity.call(this);
-        };
+    // CLASS UIElement
+    UIElement.prototype = Object.create(Entity.prototype);
+    UIElement.prototype.constructor = UIElement;
+    function UIElement() {
+        Entity.call(this);
+    };
 
-        return UIElement;
-    });
+    return UIElement;
+});

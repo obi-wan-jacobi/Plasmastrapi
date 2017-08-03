@@ -11,13 +11,13 @@ function (Base, Dictionary, Entity, validator) {
         this.__entities = new Dictionary(Entity);
     };
     // private methods
-    System.prototype.__oninit = function () { };
-    System.prototype.__onload = function () {
+    Scene.prototype.__oninit = function () { };
+    Scene.prototype.__onload = function () {
         this.__entities.forEach(function (entity) {
             entity.load();
         });
     };
-    System.prototype.__onunload = function () {
+    Scene.prototype.__onunload = function () {
         this.__entities.forEach(function (entity) {
             entity.unload();
         });

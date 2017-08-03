@@ -9,9 +9,15 @@ function (UIElement, validator) {
         // inherits from
         UIElement.call(this);
         this.__activate = fnActivate.bind(callee);
+        this.registerEvents(
+            'onbeforeactivate',
+            'onactivate'
+        );
     };
     Button.prototype.activate = function () {
+        this.emit('onbeforeactivate');
         this.__activate();
+        this.emit('onactivate');
     };
     
     return Button;

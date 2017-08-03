@@ -188,12 +188,8 @@
     <Content Include="js\game\Tools\PlacingTool.js" />
     <Content Include="js\game\Tools\WireTool.js" />
     <Content Include="js\ui\Decorators\LabelDecorator.js" />
-    <Content Include="js\ui\Panels\CircuitDesignBlueprintPanel.js" />
     <Content Include="js\ui\Buttons\Base\Button.js" />
-    <Content Include="js\ui\Panels\CircuitDesignToolbar.js" />
     <Content Include="js\game\Tools\Compatibility\Filter.js" />
-    <Content Include="js\ui\Panels\MainMenuBackgroundPanel.js" />
-    <Content Include="js\ui\Panels\MainMenuNavigationPanel.js" />
     <Content Include="js\utils\Configuration\require.config.js" />
     <Content Include="packages.config" />
     <Content Include="README.md" />

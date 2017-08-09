@@ -1,5 +1,5 @@
-define(['engine', 'asset-urls', 'asset-loader', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'logging'],
-function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFactory, TerminalFactory, logging) {
+define(['engine', 'game-instance', 'asset-urls', 'asset-loader', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'logging'],
+function (Engine, singleton, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFactory, TerminalFactory, logging) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -7,6 +7,7 @@ function (Engine, assetUrls, AssetLoader, CircuitElementFactory, LogicElementFac
         // initialize asset loader first!
         this.__assetLoader = new AssetLoader();
         Engine.call(this, canvas);
+        singleton.instance = this;
     };
     // private methods
     Game.prototype.__registerFactories = function () {

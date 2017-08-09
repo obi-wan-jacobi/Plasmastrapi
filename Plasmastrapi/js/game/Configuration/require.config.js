@@ -5,8 +5,6 @@
         // Controllers
         'controller': './game/Controllers/Base/Controller',
         'scene-controller': './game/Controllers/SceneController',
-        // Loaders
-        'asset-loader': './game/Loaders/AssetLoader',
         // Scenes
         'scene': './game/Scenes/Base/Scene',
         'circuit-design-scene': './game/Scenes/CircuitDesignScene',
@@ -16,7 +14,8 @@
         'game-debug': './game/Configuration/debug',
         'game-config': './game/Configuration/config',
         // Game
-        'game': './game/Game'
+        'game': './game/Game',
+        'game-instance': './game/game-instance'
     };
     configurator.config(paths, function () {
         logging.console('Game modules have been loaded.');

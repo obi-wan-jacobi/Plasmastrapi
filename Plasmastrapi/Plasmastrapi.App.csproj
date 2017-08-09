@@ -117,13 +117,13 @@
     <Content Include="js\circuits\Factories\LogicElementFactory.js" />
     <Content Include="js\circuits\Factories\TerminalFactory.js" />
     <Content Include="js\circuits\Factories\WireFactory.js" />
+    <Content Include="js\game\game-instance.js" />
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
+    <Content Include="js\scenes\MainMenu\MainMenu.js" />
     <Content Include="js\ui\Base\UIElement.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
-    <Content Include="js\ui\Decorators\ImageDecorator.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
-    <Content Include="js\ui\Factories\ButtonFactory.js" />
     <Content Include="js\ui\Factories\UIElementFactory.js" />
     <Content Include="js\utils\Configuration\configurator.js" />
     <Content Include="js\utils\Logging\logging.js" />
@@ -179,7 +179,6 @@
     <Content Include="js\game\Tools\Cursors\TrashToolCursor.js" />
     <Content Include="js\game\Tools\CuttingTool.js" />
     <Content Include="js\game\Tools\Base\Tool.js" />
-    <Content Include="js\ui\Panels\Base\Panel.js" />
     <Content Include="js\game\Tools\Base\Compatible.js" />
     <Content Include="js\game\Tools\Compatibility\DesignZone.js" />
     <Content Include="js\game\Tools\Compatibility\DestructionZone.js" />
@@ -187,8 +186,6 @@
     <Content Include="js\game\Tools\PickingTool.js" />
     <Content Include="js\game\Tools\PlacingTool.js" />
     <Content Include="js\game\Tools\WireTool.js" />
-    <Content Include="js\ui\Decorators\LabelDecorator.js" />
-    <Content Include="js\ui\Buttons\Base\Button.js" />
     <Content Include="js\game\Tools\Compatibility\Filter.js" />
     <Content Include="js\utils\Configuration\require.config.js" />
     <Content Include="packages.config" />
@@ -236,7 +233,7 @@
     <Content Include="js\game\Controllers\Base\Controller.js" />
     <Content Include="js\core\Entity\Entity.js" />
     <Content Include="js\core\Events\Emitter.js" />
-    <Content Include="js\game\Loaders\AssetLoader.js" />
+    <Content Include="js\engine\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Containers\Base\Container.js" />
     <Content Include="js\game\Scenes\Base\Scene.js" />
     <Content Include="js\engine\Systems\Base\System.js" />
@@ -262,6 +259,9 @@
     <Folder Include="js\circuits\LogicElements\FlipFlops\" />
     <Folder Include="js\circuits\LogicElements\Switches\" />
     <Folder Include="js\core\DataHandles\Physics\" />
+    <Folder Include="js\scenes\Configuration\" />
+    <Folder Include="js\scenes\MainMenu\Buttons\" />
+    <Folder Include="js\scenes\MainMenu\Panels\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

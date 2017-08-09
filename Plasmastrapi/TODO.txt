@@ -1,6 +1,6 @@
 
 known issues:
-- TBD
+- sometimes require does not load all dependencies properly
 
 user experience:
 - (legacy) terminals are selectable when the circuit element is inside a selection-box

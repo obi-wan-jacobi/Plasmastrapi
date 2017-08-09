@@ -18,6 +18,8 @@
         'mouse-system': './engine/Systems/MouseSystem',
         'keyboard-system': './engine/Systems/KeyboardSystem',
         'pick-system': './engine/Systems/PickSystem',
+        // Loaders
+        'asset-loader': './engine/Loaders/AssetLoader',
         // Engine
         'engine': './engine/Engine'
     };

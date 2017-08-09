@@ -1,4 +1,5 @@
-﻿define(['configurator', 'logging', 'modules', 'validator'], function (configurator, logging, modules, validator) {
+﻿define(['configurator', 'logging', 'modules', 'validator'],
+function (configurator, logging, modules, validator) {
 
     var utils = {
         configurator,

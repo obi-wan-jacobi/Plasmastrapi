@@ -117,8 +117,9 @@
     <Content Include="js\circuits\Factories\LogicElementFactory.js" />
     <Content Include="js\circuits\Factories\TerminalFactory.js" />
     <Content Include="js\circuits\Factories\WireFactory.js" />
-    <Content Include="js\game\game-instance.js" />
     <Content Include="js\game\Tools\Compatibility\Compatibility.js" />
+    <Content Include="js\scenes\Configuration\config.js" />
+    <Content Include="js\scenes\Configuration\debug.js" />
     <Content Include="js\scenes\MainMenu\MainMenu.js" />
     <Content Include="js\ui\Base\UIElement.js" />
     <Content Include="js\ui\Configuration\config.js" />
@@ -164,8 +165,6 @@
     <Content Include="js\circuits\Wires\Wire.js" />
     <Content Include="js\game\Configuration\debug.js" />
     <Content Include="js\game\Configuration\require.config.js" />
-    <Content Include="js\game\Scenes\CircuitDesignScene.js" />
-    <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\game\Tools\Helpers\SelectionBox.js" />
     <Content Include="js\game\Tools\Compatibility\Cuttable.js" />
     <Content Include="js\game\Tools\Compatibility\Draggable.js" />
@@ -190,6 +189,7 @@
     <Content Include="js\utils\Configuration\require.config.js" />
     <Content Include="packages.config" />
     <Content Include="README.md" />
+    <Content Include="js\scenes\Configuration\require.config.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -235,7 +235,7 @@
     <Content Include="js\core\Events\Emitter.js" />
     <Content Include="js\engine\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Containers\Base\Container.js" />
-    <Content Include="js\game\Scenes\Base\Scene.js" />
+    <Content Include="js\scenes\Base\Scene.js" />
     <Content Include="js\engine\Systems\Base\System.js" />
     <Content Include="js\core\DataHandles\Inputs\MouseHandle.js" />
     <Content Include="js\core\DataStructures\LinkedList.js" />
@@ -259,7 +259,6 @@
     <Folder Include="js\circuits\LogicElements\FlipFlops\" />
     <Folder Include="js\circuits\LogicElements\Switches\" />
     <Folder Include="js\core\DataHandles\Physics\" />
-    <Folder Include="js\scenes\Configuration\" />
     <Folder Include="js\scenes\MainMenu\Buttons\" />
     <Folder Include="js\scenes\MainMenu\Panels\" />
   </ItemGroup>

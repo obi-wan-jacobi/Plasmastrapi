@@ -1,4 +1,4 @@
-﻿define(['factory', 'circuit-element-factory', 'terminal', 'component-factory', 'image-handle', 'image-display-settings', 'utils', 'game-config'],
+﻿define(['factory', 'circuit-element-factory', 'terminal', 'component-factory', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
 function (Factory, CircuitElementFactory, Terminal, ComponentFactory, ImageHandle, ImageDisplaySettings, utils, config) {
 
     TerminalFactory.prototype = Object.create(Factory.prototype);

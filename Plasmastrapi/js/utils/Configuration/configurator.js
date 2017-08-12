@@ -8,6 +8,16 @@
         }
     };
 
+    var doNext;
+
+    var isExecuting = false;
+
+    function process(callback) {
+        isExecuting = true;
+        doNext();
+        isExecuting = false;
+    }
+
     configurator.config = function (paths, callback) {
         // Configure named modules
         require.config({

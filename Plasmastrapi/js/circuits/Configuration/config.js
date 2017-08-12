@@ -1,11 +1,7 @@
-﻿define([
-    'circuits-debug'
-],
-    function (debug) {
+﻿define(['circuits-debug'],
+function (debug) {
 
-        $ = { debug };
-
-    $ = {};
+    $ = { debug };
 
     $.LogicElement = {
         displayLayer: 'game-entity-midground'

@@ -1,7 +1,5 @@
-﻿require.config({
-    paths: {
-        // Configurator
-        'configurator': './utils/Configuration/configurator',
+﻿define(function () {
+    var paths = {
         // Logging
         'logging': './utils/Logging/logging',
         // Modules
@@ -10,5 +8,7 @@
         'validator': './utils/Validation/validator',
         // Utils
         'utils': './utils/utils'
-    }
+    };
+    require.config({ paths: paths });
+    return paths;
 });

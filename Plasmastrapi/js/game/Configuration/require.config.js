@@ -1,4 +1,4 @@
-﻿require(['configurator', 'logging'], function (configurator, logging) {
+﻿define(function () {
     var paths = {
         // Assets
         'asset-urls': './game/Assets/assetUrls',
@@ -12,7 +12,6 @@
         // Game
         'game': './game/Game'
     };
-    configurator.config(paths, function () {
-        logging.console('Game modules have been loaded.');
-    });
+    require.config({ paths: paths });
+    return paths;
 });

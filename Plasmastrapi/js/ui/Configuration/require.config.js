@@ -1,4 +1,4 @@
-﻿require(['configurator', 'logging'], function (configurator, logging) {
+﻿define(function () {
     var paths = {
         'ui-element': './ui/Base/UIElement',
         'ui-element-factory': './ui/Factories/UIElementFactory',
@@ -6,7 +6,6 @@
         'ui-debug': './ui/Configuration/debug',
         'ui-config': './ui/Configuration/config'
     };
-    configurator.config(paths, function () {
-        logging.console('UI modules have been loaded.');
-    });
+    require.config({ paths: paths });
+    return paths;
 });

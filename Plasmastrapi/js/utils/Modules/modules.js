@@ -6,6 +6,19 @@
         }
     };
 
+    modules.load = function (pathsObject, callback) {
+        // Pre-loads named modules
+        var modulePaths = [];
+        for (var property in pathsObject) {
+            if (pathsObject.hasOwnProperty(property)) {
+                modulePaths.push(property);
+            }
+        }
+        require(modulePaths, function () {
+            callback();
+        });
+    }
+
     modules.getModulePrefix = function (instanceOrType, typeSuffix) {
         var moduleName = null;
         if (typeof instanceOrType === 'function') {

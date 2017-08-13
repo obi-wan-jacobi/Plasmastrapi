@@ -1,10 +1,9 @@
-﻿require(['configurator', 'logging'], function (configurator, logging) {
+﻿define(function () {
     var paths = {
         // Configuration
         'scenes-debug': './scenes/Configuration/debug',
         'scenes-config': './scenes/Configuration/config'
     };
-    configurator.config(paths, function () {
-        logging.console('Scenes have been loaded.');
-    });
+    require.config({ paths: paths });
+    return paths;
 });

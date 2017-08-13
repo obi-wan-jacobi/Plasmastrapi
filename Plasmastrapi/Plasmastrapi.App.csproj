@@ -126,7 +126,6 @@
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
     <Content Include="js\ui\Factories\UIElementFactory.js" />
-    <Content Include="js\utils\Configuration\configurator.js" />
     <Content Include="js\utils\Logging\logging.js" />
     <Content Include="js\utils\Modules\modules.js" />
     <Content Include="js\utils\utils.js" />

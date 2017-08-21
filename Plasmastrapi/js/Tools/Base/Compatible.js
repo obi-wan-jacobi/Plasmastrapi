@@ -1,7 +1,4 @@
-﻿define([
-    // Base
-    'entity'
-],
+﻿define(['entity'],
 function (Entity) {
 
     function Compatible(PickableTraitType) {

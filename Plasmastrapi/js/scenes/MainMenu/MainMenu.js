@@ -1,6 +1,8 @@
-﻿define(['ui-element-factory', 'component-factory'],
-function (UIElementFactory, ComponentFactory) {
+﻿define(['scene'],
+function (Scene) {
 
+    MainMenu.prototype = Object.create(Scene.prototype);
+    MainMenu.prototype.constructor = MainMenu;
     function MainMenu() {
 
     };

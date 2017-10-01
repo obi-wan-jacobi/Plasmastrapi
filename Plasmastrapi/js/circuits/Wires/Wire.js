@@ -6,8 +6,8 @@ function (WireElement, InputTerminal, OutputTerminal, LineComponent) {
     Wire.prototype.constructor = Wire;
     function Wire(outputTerminal, inputTerminal) {
         // validate terminal arguments
-        validator.validateType(this, outputTerminal, OutputTerminal);
-        validator.validateType(this, inputTerminal, InputTerminal);
+        validator.validateInstanceType(this, outputTerminal, OutputTerminal);
+        validator.validateInstanceType(this, inputTerminal, InputTerminal);
         this.outputTerminal = outputTerminal;
         this.inputTerminal = inputTerminal;
         // inherits from

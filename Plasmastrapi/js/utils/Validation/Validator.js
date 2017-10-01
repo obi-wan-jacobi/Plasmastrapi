@@ -38,19 +38,19 @@
         }
     };
 
-    validator.validateType = function (ref, instance, Type) {
+    validator.validateInstanceType = function (ref, instance, Type) {
         if (instance instanceof Array) {
             for (var i = 0, L = instance.length; i < L; i++) {
-                this.validateType(ref, instance[i], Type);
+                this.validateInstanceType(ref, instance[i], Type);
             }
         } else if (typeof instance !== Type && !(instance instanceof Type)) {
-            this.throw(ref, 'validateType', instance + ' must be an instance of ' + Type.name);
+            this.throw(ref, 'validateInstanceType', instance + ' must be an instance of ' + Type.name);
         }
     };
 
     validator.validateClassType = function (ref, ClassToValidate, Class) {
         if (!(ClassToValidate.prototype instanceof Class) && ClassToValidate.prototype.constructor.name !== Class.name) {
-            this.throw(ref, 'validateType', ClassToValidate.name + ' must inherit from ' + Class.name);
+            this.throw(ref, 'validateInstanceType', ClassToValidate.name + ' must inherit from ' + Class.name);
         }
     };
 

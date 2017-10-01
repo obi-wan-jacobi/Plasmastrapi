@@ -7,7 +7,7 @@ function (debug) {
 
     // Tools
 
-    $.Tool = {
+    $.InputHandler = {
         cursorOffsetX: 35,
         cursorOffsetY: 35
     };

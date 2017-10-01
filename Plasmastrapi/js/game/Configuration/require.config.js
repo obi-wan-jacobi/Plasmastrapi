@@ -1,11 +1,11 @@
 ﻿define(function () {
     var paths = {
         // Assets
-        'asset-urls': './game/Assets/assetUrls',
+        'assets': './game/Assets/assets',
         // Controllers
         'controller': './game/Controllers/Base/Controller',
+        'input-handler-controller': './game/Controllers/InputHandlerController',
         'scene-controller': './game/Controllers/SceneController',
-        // Tools
         // Configuration
         'game-debug': './game/Configuration/debug',
         'game-config': './game/Configuration/config',

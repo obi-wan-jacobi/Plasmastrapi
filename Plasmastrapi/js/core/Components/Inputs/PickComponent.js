@@ -1,5 +1,5 @@
 define(['component', 'mouse-component'],
-    function (Component, MouseComponent) {
+function (Component, MouseComponent) {
 
 	// CLASS PickComponent
 	PickComponent.prototype = Object.create(Component.prototype);
@@ -31,7 +31,7 @@ define(['component', 'mouse-component'],
     };
 
 	return PickComponent;
-    });
+});
 
 /* 
 MouseComponent.prototype.__isCursorWithinMeshBoundary = function (cursor) {

@@ -13,12 +13,12 @@
     'design-zone',
     'game-config'
 ],
-function (Tool, CuttingToolCursor, Curve, Position, Rectangle, LineDisplaySettings, Cuttable, DesignZone, config) {
+function (InputHandler, CuttingToolCursor, Curve, Position, Rectangle, LineDisplaySettings, Cuttable, DesignZone, config) {
 
-    CuttingTool.prototype = Object.create(Tool.prototype);
+    CuttingTool.prototype = Object.create(InputHandler.prototype);
     CuttingTool.prototype.constructor = CuttingTool;
     function CuttingTool() {
-        Tool.call(this, CuttingToolCursor);
+        InputHandler.call(this, CuttingToolCursor);
         this.__beforeCuttingBounds = new Rectangle(
             config.CuttingTool.beforeCuttingBounds.width,
             config.CuttingTool.beforeCuttingBounds.height
@@ -52,7 +52,7 @@ function (Tool, CuttingToolCursor, Curve, Position, Rectangle, LineDisplaySettin
         }
     };
     CuttingTool.prototype.__onmousedown = function (cursor) {
-        Tool.prototype.__onmousedown.call(this, cursor);
+        InputHandler.prototype.__onmousedown.call(this, cursor);
         if (!this.__anchor) {
             this.__anchor = new Position(cursor.x, cursor.y);
             for (var i = 0, L = this.__beforeCuttingBounds.vertices.length; i < L; i++) {
@@ -81,7 +81,7 @@ function (Tool, CuttingToolCursor, Curve, Position, Rectangle, LineDisplaySettin
          
     };
     CuttingTool.prototype.__onkeyup = function (keyCode) {
-        Tool.prototype.__onkeyup.call(this, keyCode);
+        InputHandler.prototype.__onkeyup.call(this, keyCode);
         if (this.keyCodes.shift === keyCode) {
             this.__engine.toolController.equipPickingTool();
         }

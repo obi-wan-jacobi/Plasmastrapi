@@ -14,7 +14,7 @@
         // validate data for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
         var DataType = utils.modules.require(modulePrefix);
-        utils.validator.validateType(this, data, DataType);
+        utils.validator.validateInstanceType(this, data, DataType);
         this.__data = data;
     };
     DataHandle.prototype.getDisplaySettings = function () {
@@ -27,7 +27,7 @@
         // validate display settings for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
         var DisplaySettingsType = utils.modules.require(modulePrefix + '-display-settings');
-        utils.validator.validateType(this, displaySettings, DisplaySettingsType);
+        utils.validator.validateInstanceType(this, displaySettings, DisplaySettingsType);
         this.__displaySettings = displaySettings;
     };
 

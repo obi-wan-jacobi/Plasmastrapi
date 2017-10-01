@@ -18,7 +18,7 @@ function (DataHandle, Position, validator) {
     });
     // public methods
     MouseHandle.prototype.setData = function (data) {
-        validator.validateType(this, data, Position);
+        validator.validateInstanceType(this, data, Position);
         this.__data = data;
     };
     MouseHandle.prototype.mousemove = function (position) {

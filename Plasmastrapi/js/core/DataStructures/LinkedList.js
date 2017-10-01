@@ -33,7 +33,7 @@ function (Link, validator) {
         }
     };
     LinkedList.prototype.push = function(value) {
-        validator.validateType(this, value, this.__ValueType);
+        validator.validateInstanceType(this, value, this.__ValueType);
         var newLink = new Link(value);
         if (!this.__start) {
             this.__start = newLink;

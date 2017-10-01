@@ -13,12 +13,12 @@
     'trashable',
     'game-config'
 ],
-function (Tool, SelectionBox, TrashToolCursor, Position, Rectangle, DesignZone, Trashable, config) {
+function (InputHandler, SelectionBox, TrashToolCursor, Position, Rectangle, DesignZone, Trashable, config) {
 
-    TrashTool.prototype = Object.create(Tool.prototype);
+    TrashTool.prototype = Object.create(InputHandler.prototype);
     TrashTool.prototype.constructor = TrashTool;
     function TrashTool() {
-        Tool.call(this, TrashToolCursor);
+        InputHandler.call(this, TrashToolCursor);
         this.__selectionBox = null;
         this.__beforeSelectionBounds = null;
         this.__anchor = null;
@@ -43,7 +43,7 @@ function (Tool, SelectionBox, TrashToolCursor, Position, Rectangle, DesignZone, 
         }
     };
     TrashTool.prototype.__onmousedown = function (cursor) {
-        Tool.prototype.__onmousedown.call(this, cursor);
+        InputHandler.prototype.__onmousedown.call(this, cursor);
         this.__beforeSelectionBounds = new Rectangle(
             config.TrashTool.beforeSelectionBounds.width,
             config.TrashTool.beforeSelectionBounds.height
@@ -79,7 +79,7 @@ function (Tool, SelectionBox, TrashToolCursor, Position, Rectangle, DesignZone, 
         }
     };
     TrashTool.prototype.__onkeyup = function (keyCode) {
-        Tool.prototype.__onkeyup.call(this, keyCode);
+        InputHandler.prototype.__onkeyup.call(this, keyCode);
         if (this.keyCodes.shift === keyCode) {
             this.__engine.toolController.equipPickingTool();
         }

@@ -2,7 +2,7 @@
 
     function Loadable() {
         var target = this;
-        validator.validateType(target, target, Emitter);
+        validator.validateInstanceType(target, target, Emitter);
         target.__isLoaded = false;
         target.__isInitialized = false;
         Object.defineProperties(target, {

@@ -5,8 +5,8 @@ function (Primitive, Vertex, validator) {
     Line.prototype.constructor = Line;
     function Line(tailVertex, headVertex) {
         Primitive.call(this);
-        validator.validateType(this, tailVertex, Vertex);
-        validator.validateType(this, headVertex, Vertex);
+        validator.validateInstanceType(this, tailVertex, Vertex);
+        validator.validateInstanceType(this, headVertex, Vertex);
         this.tailVertex = tailVertex;
         this.headVertex = headVertex;
     };

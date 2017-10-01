@@ -1,4 +1,4 @@
-define(['engine', 'asset-urls', 'asset-loader', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'logging'],
+define(['engine', 'assets', 'asset-loader', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'logging'],
 function (Engine, assetUrls, AssetLoader, UIElementFactory, CircuitElementFactory, LogicElementFactory, TerminalFactory, logging) {
 
     Game.prototype = Object.create(Engine.prototype);

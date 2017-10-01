@@ -1,27 +1,10 @@
-﻿define([
-    // Base
-    'tool',
-    // Helpers
-    'selection-box',
-    // Components
-    'pick-component',
-    // Data
-    'position',
-    'rectangle',
-    // Configs
-    'design-zone',
-    'draggable',
-    'filter',
-    'pickable',
-    'placeable',
-    'game-config'
-],
-    function (Tool, SelectionBox, PickComponent, Position, Rectangle, DesignZone, Draggable, Filter, Pickable, Placeable, config) {
+﻿define(['tool', 'selection-box', 'pick-component', 'position', 'rectangle', 'design-zone', 'draggable', 'filter', 'pickable', 'placeable', 'game-config'],
+function (InputHandler, SelectionBox, PickComponent, Position, Rectangle, DesignZone, Draggable, Filter, Pickable, Placeable, config) {
 
-    PickingTool.prototype = Object.create(Tool.prototype);
+    PickingTool.prototype = Object.create(InputHandler.prototype);
     PickingTool.prototype.constructor = PickingTool;
     function PickingTool() {
-        Tool.call(this);
+        InputHandler.call(this);
         // drag bounds before pick on drag
         this.__pickableOnDrag = null;
         this.__beforeDragBounds = null;
@@ -31,13 +14,13 @@
         this.__beforeSelectionBounds = null;
         this.__selectionAnchor = null;
     };
-    PickingTool.prototype.__onequip = function () {
+    PickingTool.prototype.onload = function () {
         this.__pickableOnDrag = null;
         // hack
         this.__isMouseDown = false;
         this.setCompatibilityFilter(DesignZone, Pickable);
     };
-    PickingTool.prototype.__onmousemove = function (cursor) {
+    PickingTool.prototype.onmousemove = function (cursor) {
         if (this.__pickableOnDrag) {
             if (!(
                 cursor.x > this.__beforeDragBounds.vertices[1].x &&
@@ -65,8 +48,8 @@
             this.__selectionBox.stretchTo(cursor);
         }
     };
-    PickingTool.prototype.__onmousedown = function (cursor) {
-        Tool.prototype.__onmousedown.call(this, cursor);
+    PickingTool.prototype.onmousedown = function (cursor) {
+        InputHandler.prototype.onmousedown.call(this, cursor);
         this.__beforeDragBounds = new Rectangle(
             config.PickingTool.beforeDragBounds.width,
             config.PickingTool.beforeDragBounds.height
@@ -85,7 +68,7 @@
             this.__beforeSelectionBounds.vertices[i].y += cursor.y;
         }
     };
-    PickingTool.prototype.__pick_onmousedown = function (entities) {
+    PickingTool.prototype.onmousedown = function (entities) {
         var entity = null;
         for (var i = 0, L = entities.length; i < L; i++) {
             if (Draggable.resolve(entities[i])) {
@@ -99,7 +82,7 @@
             this.__pickableSelectionBox = null;
         }
     };
-    PickingTool.prototype.__pick_onmouseup = function (entities) {
+    PickingTool.prototype.onmouseup = function (entities) {
         if (this.__selectionBox) {
             this.__selectionBox.fillContents();
             if (this.__selectionBox.contents.length == 0) {

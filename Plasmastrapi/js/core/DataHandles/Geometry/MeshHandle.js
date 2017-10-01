@@ -32,7 +32,7 @@ function (DataHandle, Mesh, MeshDisplaySettings, Position) {
         this.__lastCollisionPoint = null;
     };
     MeshHandle.prototype.translate = function (newPosition) {
-        validator.validateType(this, newPosition, Position);
+        validator.validateInstanceType(this, newPosition, Position);
         var mesh = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;

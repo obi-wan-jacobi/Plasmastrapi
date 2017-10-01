@@ -9,7 +9,7 @@ function (validator) {
         return (this.next()) ? true : false;
     };
     Link.prototype.setNext = function(link) {
-        validator.validateType(this, link, Link);
+        validator.validateInstanceType(this, link, Link);
         this.__next = link;
     };
     Link.prototype.next = function() {

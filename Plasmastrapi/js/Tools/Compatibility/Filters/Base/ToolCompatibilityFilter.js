@@ -1,9 +1,10 @@
-﻿define(function () {
+﻿define([],
+function () {
 
-    function ToolCompatibilityFilter(compatiblesArray) {
-        this.__compatibles = compatiblesArray;
+    function ToolCompatibilityFilter() {
+        this.__dictionary = new Dictionary(Compatible);
     };
-    ToolCompatibilityFilter.prototype.resolve = function (pickComponent) {
+    ToolCompatibilityFilter.prototype.evaluate = function (pickComponent) {
         for (var i = 0, L = this.__compatibles.length; i < L; i++) {
             if (this.__compatibles[i].resolve(pickComponent.__entity)) {
                 return true;

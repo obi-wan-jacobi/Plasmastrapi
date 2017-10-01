@@ -16,12 +16,12 @@
     'wireable-as-input',
     'wireable-as-output',
 ],
-function (Tool, TerminalHandle, ToolWire, Wire, PickComponent, PoseComponent, Position, DesignZone, DestructionZone, WireableAsInput, WireableAsOutput) {
+function (InputHandler, TerminalHandle, ToolWire, Wire, PickComponent, PoseComponent, Position, DesignZone, DestructionZone, WireableAsInput, WireableAsOutput) {
 
-    WireTool.prototype = Object.create(Tool.prototype);
+    WireTool.prototype = Object.create(InputHandler.prototype);
     WireTool.prototype.constructor = WireTool;
     function WireTool() {
-        Tool.call(this);
+        InputHandler.call(this);
         this.__selectedTerminal = null;
         this.__toolWire = null;
         this.__terminalHandle = null;
@@ -104,7 +104,7 @@ function (Tool, TerminalHandle, ToolWire, Wire, PickComponent, PoseComponent, Po
         }
     };
     WireTool.prototype.__onkeyup = function (keyCode) {
-        Tool.prototype.__onkeyup.call(this, keyCode);
+        InputHandler.prototype.__onkeyup.call(this, keyCode);
         if (this.keyCodes.shift === keyCode) {
             this.__engine.toolController.equipPickingTool();
         }

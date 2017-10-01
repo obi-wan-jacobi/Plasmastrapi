@@ -6,8 +6,8 @@
         Primitive.call(this);
         this.x = x === undefined || x === null ? 0 : x;
         this.y = y === undefined || y === null ? 0 : y;
-        validator.validateType(this, this.x, 'number');
-        validator.validateType(this, this.y, 'number');
+        validator.validateInstanceType(this, this.x, 'number');
+        validator.validateInstanceType(this, this.y, 'number');
     };
 
     return Position;

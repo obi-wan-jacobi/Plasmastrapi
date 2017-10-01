@@ -12,7 +12,7 @@ function (Factory, CircuitElementFactory, Terminal, ComponentFactory, ImageHandl
     // public methods
     TerminalFactory.prototype.create = function (TerminalType) {
         var terminal = this.__circuitElementFactory.create(TerminalType);
-        utils.validator.validateType(this, terminal, Terminal);
+        utils.validator.validateInstanceType(this, terminal, Terminal);
         // add components
         var image = this.__assetMap.get(utils.modules.getModulePrefix(TerminalType, null));
         var displaySettings = new ImageDisplaySettings(config.Terminal.displayLayer, null, null, image.width, image.height, image.width, image.height);

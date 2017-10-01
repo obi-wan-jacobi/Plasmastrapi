@@ -16,7 +16,7 @@ function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin) {
     };
     // public methods
     Entity.prototype.addDependency = function (dependency) {
-        validator.validateType(this, dependency, Entity);
+        validator.validateInstanceType(this, dependency, Entity);
         // wire-up event subscriptions
         dependency.addEventListener('onload', this, this.load);
         dependency.addEventListener('onunload', this, this.unload);

@@ -11,7 +11,7 @@
         // public methods
         UIElementFactory.prototype.create = function (Type) {
             var uiElement = this.__entityFactory.create(Type);
-            validator.validateType(this, uiElement, UIElement);
+            validator.validateInstanceType(this, uiElement, UIElement);
             return uiElement;
         };
         UIElementFactory.prototype.getContainer = function () { };

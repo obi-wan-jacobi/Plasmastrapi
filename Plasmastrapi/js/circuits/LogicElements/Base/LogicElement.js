@@ -12,12 +12,12 @@ function (CircuitElement, InputTerminal, OutputTerminal, CIRCUITS, validator) {
     };
     // public methods
     LogicElement.prototype.attachInput = function (inputTerminal) {
-        validator.validateType(this, inputTerminal, InputTerminal);
+        validator.validateInstanceType(this, inputTerminal, InputTerminal);
         inputTerminal.addParent(this);
         this.__inputs = this.__inputs.concat(input.getConnections());
     };
     LogicElement.prototype.attachOutput = function (outputTerminal) {
-        validator.validateType(this, outputTerminal, OutputTerminal);
+        validator.validateInstanceType(this, outputTerminal, OutputTerminal);
         outputTerminal.addParent(this);
     };
     LogicElement.prototype.updateState = function (inputState) {

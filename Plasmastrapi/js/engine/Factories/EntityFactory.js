@@ -11,7 +11,7 @@ function (Factory, Container, EmitterFactory, Entity, validator) {
     // public methods
     EntityFactory.prototype.create = function (EntityType, args) {
         var entity = this.__emitterFactory.create(EntityType, args);
-        validator.validateType(this, entity, Entity);
+        validator.validateInstanceType(this, entity, Entity);
         this.__container.add(entity);
         entity.addEventListener('ondestroy', this, this.__container.remove.bind(this, entity));
         return entity;

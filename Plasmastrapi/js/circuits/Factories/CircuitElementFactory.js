@@ -11,7 +11,7 @@ function (Factory, CircuitElement, ComponentFactory, EntityFactory, Pose, Mesh, 
     // public methods
     CircuitElementFactory.prototype.create = function (Type) {
         var circuitElement = this.__entityFactory.create(Type);
-        validator.validateType(this, circuitElement, CircuitElement);
+        validator.validateInstanceType(this, circuitElement, CircuitElement);
         // add components
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Pose())); // pose
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Mesh([new Vertex()]))); // mesh

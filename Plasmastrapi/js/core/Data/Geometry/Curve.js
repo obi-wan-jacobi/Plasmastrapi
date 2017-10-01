@@ -5,7 +5,7 @@ function (Primitive, Vertex, validator) {
     Curve.prototype.constructor = Curve;
     function Curve(vertices) {
         Primitive.call(this);
-        validator.validateType(this, vertices, Vertex);
+        validator.validateInstanceType(this, vertices, Vertex);
         this.vertices = vertices
     };
 

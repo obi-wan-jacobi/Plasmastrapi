@@ -2,7 +2,7 @@
 
     function Pausable() {
         var target = this;
-        validator.validateType(target, target, Emitter);
+        validator.validateInstanceType(target, target, Emitter);
         target.__isPaused = false;
         Object.defineProperties(target, {
             'isPausable': {

@@ -5,8 +5,8 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
 	function LineComponent(tailPoseComponent, headPoseComponent) {
-        validator.validateType(this, tailPoseComponent, PoseComponent);
-        validator.validateType(this, headPoseComponent, PoseComponent);
+        validator.validateInstanceType(this, tailPoseComponent, PoseComponent);
+        validator.validateInstanceType(this, headPoseComponent, PoseComponent);
         // private variables
         this.__tailPose = tailPoseComponent;
         this.__headPose = headPoseComponent;

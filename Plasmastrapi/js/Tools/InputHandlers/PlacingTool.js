@@ -10,12 +10,12 @@
     'design-zone',
     'destruction-zone'
 ],
-function (Tool, PickComponent, PoseComponent, Position, DesignZone, DestructionZone) {
+function (InputHandler, PickComponent, PoseComponent, Position, DesignZone, DestructionZone) {
 
-    PlacingTool.prototype = Object.create(Tool.prototype);
+    PlacingTool.prototype = Object.create(InputHandler.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool() {
-        Tool.call(this);
+        InputHandler.call(this);
         this.__equippedEntity = null;
         this.__fnShiftKeyMouseUp = null;
         this.__previousCursorPosition = null;
@@ -36,7 +36,7 @@ function (Tool, PickComponent, PoseComponent, Position, DesignZone, DestructionZ
         this.__previousCursorPosition = cursor;
     };
     PlacingTool.prototype.__onmouseup = function (cursor) {
-        Tool.prototype.__onmouseup(cursor);
+        InputHandler.prototype.__onmouseup(cursor);
         this.__equippedEntity.getComponent(PickComponent).deselect();
         if (this.isShiftKeyDown && this.__fnShiftKeyMouseUp) {
             this.__fnShiftKeyMouseUp(cursor.x, cursor.y);
@@ -45,7 +45,7 @@ function (Tool, PickComponent, PoseComponent, Position, DesignZone, DestructionZ
         }
     };
     PlacingTool.prototype.__onkeyup = function (keyCode) {
-        Tool.prototype.__onkeyup.call(this, keyCode);
+        InputHandler.prototype.__onkeyup.call(this, keyCode);
         if (this.keyCodes.shift === keyCode && this.__fnShiftKeyMouseUp) {
             this.__equippedEntity.destroy();
             this.__engine.toolController.equipPickingTool();

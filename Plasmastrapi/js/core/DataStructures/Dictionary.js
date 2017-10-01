@@ -40,7 +40,7 @@ function (Link, validator) {
     };
     Dictionary.prototype.add = function (key, value) {
         this.__validateNoDuplicateKeys(key);
-        validator.validateType(this, value, this.__ValueType);
+        validator.validateInstanceType(this, value, this.__ValueType);
         var newLink = new Link({ key, value });
         if (!this.__start) {
             this.__start = newLink;

@@ -36,14 +36,14 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
         return component;
     };
     ComponentFactory.prototype.createFromDataHandle = function (dataHandle) {
-        utils.validator.validateType(this, dataHandle, DataHandle);
+        utils.validator.validateInstanceType(this, dataHandle, DataHandle);
         var modulePrefix = utils.modules.getModulePrefix(dataHandle, 'Handle');
         var ComponentType = utils.modules.require(modulePrefix + '-component'); 
         var component = this.create(ComponentType, [dataHandle]);
         return component;
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
-        utils.validator.validateType(this, primitive, Primitive);
+        utils.validator.validateInstanceType(this, primitive, Primitive);
         var modulePrefix = utils.modules.getModulePrefix(primitive, null);
         var ComponentType = utils.modules.require(modulePrefix + '-component');
         var HandleType = utils.modules.require(modulePrefix + '-handle');

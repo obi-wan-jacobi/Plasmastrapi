@@ -5,7 +5,7 @@ function (Primitive, validator) {
     Text.prototype.constructor = Text;
     function Text(string) {
         Primitive.call(this);
-        validator.validateType(this, string, 'string');
+        validator.validateInstanceType(this, string, 'string');
     };
 
     return Text;

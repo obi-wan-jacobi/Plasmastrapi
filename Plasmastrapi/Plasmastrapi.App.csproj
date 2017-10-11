@@ -104,7 +104,7 @@
     <Content Include="js\core\Data\Graphics\DisplaySettings\TextDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\TextHandle.js" />
     <Content Include="js\core\Data\Physics\Acceleration.js" />
-    <Content Include="js\engine\Containers\ComponentContainer.js" />
+    <Content Include="js\engine\Containers\Base\ComponentContainer.js" />
     <Content Include="js\engine\Containers\DrawableComponentContainer.js" />
     <Content Include="js\engine\Containers\PickComponentContainer.js" />
     <Content Include="js\engine\Factories\ComponentFactory.js" />
@@ -112,6 +112,7 @@
     <Content Include="js\engine\Factories\EntityFactory.js" />
     <Content Include="js\engine\Systems\KeyboardSystem.js" />
     <Content Include="js\engine\Factories\Base\Factory.js" />
+    <Content Include="js\game\Controllers\InputController.js" />
     <Content Include="js\game\Controllers\PickController.js" />
     <Content Include="js\circuits\Factories\CircuitElementFactory.js" />
     <Content Include="js\circuits\Factories\LogicElementFactory.js" />
@@ -121,6 +122,7 @@
     <Content Include="js\scenes\Configuration\config.js" />
     <Content Include="js\scenes\Configuration\debug.js" />
     <Content Include="js\scenes\MainMenu\MainMenu.js" />
+    <Content Include="js\tools\Configuration\require.config.js" />
     <Content Include="js\ui\Base\UIElement.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
@@ -147,7 +149,6 @@
     <Content Include="js\circuits\Wires\Base\WireElement.js" />
     <Content Include="js\tools\Helpers\ToolWire.js" />
     <Content Include="js\game\Configuration\config.js" />
-    <Content Include="js\game\Controllers\InputController.js" />
     <Content Include="js\circuits\LogicElements\Base\LogicElement.js" />
     <Content Include="js\circuits\LogicElements\Gates\AndGate.js" />
     <Content Include="js\circuits\LogicElements\Gates\Base\Gate.js" />
@@ -184,7 +185,7 @@
     <Content Include="js\tools\InputHandlers\PickingTool.js" />
     <Content Include="js\tools\InputHandlers\PlacingTool.js" />
     <Content Include="js\tools\InputHandlers\WireTool.js" />
-    <Content Include="js\tools\Compatibility\Filters\Base\ToolCompatibilityFilter.js" />
+    <Content Include="js\tools\Compatibility\Filters\Base\CompatibilityFilter.js" />
     <Content Include="js\utils\Configuration\require.config.js" />
     <Content Include="packages.config" />
     <Content Include="README.md" />

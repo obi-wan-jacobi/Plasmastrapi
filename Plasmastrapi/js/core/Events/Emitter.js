@@ -11,7 +11,7 @@ function(Dictionary, validator) {
         for (var i = 0, L = arguments.length; i < L; i++) {
             var event = arguments[i];
             if (this.hasEvent(event)) {
-                validator.throw(this, 'registerEvents', event + ' has already been implemented');
+                validator.throw(this, 'registerEvents', `${event} has already been implemented`);
             }
             // initialize this.__onevent method
             if (!this["__" + event]) {
@@ -66,7 +66,7 @@ function(Dictionary, validator) {
             removedEventListener = this.__events[event].remove(subscriber);
         }
         if (!removedEventListener) {
-            validator.throw(this, 'removeEventListener', 'Subscriber ' + subscriber.constructor.name + ' was not found listening to event ' + event + ' on ' + this.constructor.name);
+            validator.throw(this, 'removeEventListener', `Subscriber ${subscriber.constructor.name} was not found listening to event ${event} on ${this.constructor.name}`);
         }
     };
     Emitter.prototype.purgeEventListener = function(subscriber) {

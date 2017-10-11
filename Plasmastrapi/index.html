@@ -23,11 +23,12 @@
     <head>
 
         <script>
-            var deps = [
+            var dependencies = [
                 'utils/Configuration/require.config',
                 'core/Configuration/require.config',
                 'engine/Configuration/require.config',
                 'ui/Configuration/require.config',
+                'tools/Configuration/require.config',
                 'circuits/Configuration/require.config',
                 'scenes/Configuration/require.config',
                 'game/Configuration/require.config'
@@ -36,20 +37,20 @@
             var require = {
                 baseUrl: 'js/',
                 path: {},
-                deps: deps,
+                deps: dependencies,
                 callback: function () {
                     preloadModulesSynchronously();
                 }
             };
 
             var moduleIndex = 0;
-            var moduleTotal = deps.length;
+            var moduleTotal = dependencies.length;
 
             function preloadModulesSynchronously() {
-                require([deps[moduleIndex]], function (paths) {
+                require([dependencies[moduleIndex]], function (paths) {
                     require(['modules', 'logging'], function (modules, logging) {
                         modules.load(paths, function () {
-                            logging.console(deps[moduleIndex]);
+                            logging.console(dependencies[moduleIndex]);
                             moduleIndex++;
                             if (moduleIndex < moduleTotal) {
                                 preloadModulesSynchronously()

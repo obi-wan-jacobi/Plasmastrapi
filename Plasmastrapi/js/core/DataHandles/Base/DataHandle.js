@@ -26,7 +26,7 @@
         }
         // validate display settings for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
-        var DisplaySettingsType = utils.modules.require(modulePrefix + '-display-settings');
+        var DisplaySettingsType = utils.modules.require(`${modulePrefix}-display-settings`);
         utils.validator.validateInstanceType(this, displaySettings, DisplaySettingsType);
         this.__displaySettings = displaySettings;
     };

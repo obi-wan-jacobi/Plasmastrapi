@@ -16,7 +16,7 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
         if (!container) {
             try {
                 var modulePrefix = utils.modules.getModulePrefix(ComponentType);
-                var ContainerType = utils.modules.require(modulePrefix + '-container');
+                var ContainerType = utils.modules.require(`${modulePrefix}-container`);
                 container = new ContainerType(ComponentType);
             } catch(e) {
                 container = new ComponentContainer(ComponentType);
@@ -38,16 +38,16 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
     ComponentFactory.prototype.createFromDataHandle = function (dataHandle) {
         utils.validator.validateInstanceType(this, dataHandle, DataHandle);
         var modulePrefix = utils.modules.getModulePrefix(dataHandle, 'Handle');
-        var ComponentType = utils.modules.require(modulePrefix + '-component'); 
+        var ComponentType = utils.modules.require(`${modulePrefix}-component`); 
         var component = this.create(ComponentType, [dataHandle]);
         return component;
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
         utils.validator.validateInstanceType(this, primitive, Primitive);
         var modulePrefix = utils.modules.getModulePrefix(primitive, null);
-        var ComponentType = utils.modules.require(modulePrefix + '-component');
-        var HandleType = utils.modules.require(modulePrefix + '-handle');
-        var DisplaySettings = utils.modules.require(modulePrefix + '-display-settings');
+        var ComponentType = utils.modules.require(`${modulePrefix}-component`);
+        var HandleType = utils.modules.require(`${modulePrefix}-handle`);
+        var DisplaySettings = utils.modules.require(`${modulePrefix}-display-settings`);
         var component = this.create(ComponentType, [new HandleType(primitive, new DisplaySettings())]);
         return component;
     };

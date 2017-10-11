@@ -1,4 +1,4 @@
-define(['controller', 'Scene', 'validator'],
+define(['controller', 'scene', 'validator'],
 function (Controller, Scene, validator) {
 
 	// CLASS SceneController

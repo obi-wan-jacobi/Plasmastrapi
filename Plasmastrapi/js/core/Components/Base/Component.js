@@ -8,7 +8,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         if (dataHandle) {
             // validate data handle for this component
             var modulePrefix = utils.modules.getModulePrefix(this, 'Component');
-            var HandleType = utils.modules.require(modulePrefix + '-handle');
+            var HandleType = utils.modules.require(`${modulePrefix}-handle`);
             utils.validator.validateInstanceType(this, dataHandle, HandleType);
         }
         // private variables

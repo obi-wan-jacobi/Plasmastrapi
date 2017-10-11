@@ -22,7 +22,7 @@ function (Terminal, OutputTerminal) {
     InputTerminal.prototype.removeConnection = function (outputTerminal) {
         var connectionIndex = this.__connections.indexOf(outputTerminal);
         if (!(connectionIndex >= 0)) {
-            validator.throw(this, 'removeConnection', outputTerminal.constructor.name + ' is not connected to this input terminal');
+            validator.throw(this, 'removeConnection', `${outputTerminal.constructor.name} is not connected to this input terminal`);
         }
         var terminalToDisconnect = this.__connections[connectionIndex];
         this.__connections.splice(connectionIndex, 1);

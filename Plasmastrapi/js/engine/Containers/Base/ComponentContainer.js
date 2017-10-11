@@ -13,7 +13,7 @@
         this.__unloadBuffer.remove(component);
     };
     ComponentContainer.prototype.__onComponentLoad = function (component) {
-        this.add(component);
+        Container.prototype.add.call(this, component);
         this.__unloadBuffer.remove(component);
     };
     ComponentContainer.prototype.__onComponentUnload = function (component) {

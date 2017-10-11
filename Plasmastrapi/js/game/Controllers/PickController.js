@@ -1,5 +1,5 @@
-﻿define(['controller', 'component-factory', 'pick-component', 'tool-compatibility-filter', 'validator'],
-function (Controller, ComponentFactory, PickComponent, ToolCompatibilityFilter, validator) {
+﻿define(['controller', 'component-factory', 'pick-component', 'compatibility-filter', 'validator'],
+function (Controller, ComponentFactory, PickComponent, CompatibilityFilter, validator) {
 
     PickController.prototype = Object.create(Controller.prototype);
     PickController.prototype.constructor = PickController;
@@ -9,9 +9,9 @@ function (Controller, ComponentFactory, PickComponent, ToolCompatibilityFilter, 
     };
     // public methods
     PickController.prototype.setFilter = function (filter) {
-        validator.validateInstanceType(this, filter, ToolCompatibilityFilter);
+        validator.validateInstanceType(this, filter, CompatibilityFilter);
         this.__pickComponentContainer.forEach(function (pickComponent) {
-            if (filter.resolve(pickComponent)) {
+            if (filter.evaluate(pickComponent)) {
                 pickComponent.enable();
             } else {
                 pickComponent.disable();

@@ -8,7 +8,7 @@ function (DataHandle, Curve, LineDisplaySettings) {
     };
     CurveHandle.prototype.lineTo = function (position) {
         if (!(position instanceof Position)) {
-            validator.throw(this, 'lineTo', position.constructor.name + ' must be an instance of Position');
+            validator.throw(this, 'lineTo', `${position.constructor.name} must be an instance of ${Position.name}`);
         }
         this.curve.vertices.push(position);
     };

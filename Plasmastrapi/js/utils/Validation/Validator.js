@@ -11,11 +11,11 @@
         if (errorString[errorString.length - 1] !== '.') {
             errorString += '.';
         }
-        throw new Error(ref.constructor.name + '::' + methodName + ' -- ' + errorString);
+        throw new Error(`${ref.constructor.name}::${methodName} -- ${errorString}`);
     };
 
     validator.throwMethodMustBeOverridden = function (ref, methodName) {
-        this.throw(ref, methodName, ref.constructor.name + ' must override inherited method ' + methodName);
+        this.throw(ref, methodName, `${ref.constructor.name} must override inherited method ${methodName}`);
     };
 
     // validations
@@ -44,20 +44,20 @@
                 this.validateInstanceType(ref, instance[i], Type);
             }
         } else if (typeof instance !== Type && !(instance instanceof Type)) {
-            this.throw(ref, 'validateInstanceType', instance + ' must be an instance of ' + Type.name);
+            this.throw(ref, 'validateInstanceType', `${instance} must be an instance of ${Type.name}`);
         }
     };
 
     validator.validateClassType = function (ref, ClassToValidate, Class) {
         if (!(ClassToValidate.prototype instanceof Class) && ClassToValidate.prototype.constructor.name !== Class.name) {
-            this.throw(ref, 'validateInstanceType', ClassToValidate.name + ' must inherit from ' + Class.name);
+            this.throw(ref, 'validateInstanceType', `${ClassToValidate.name} must inherit from ${Class.name}`);
         }
     };
 
     // emitter validations
     validator.validateEventIsRegistered = function (emitter, event) {
         if (!emitter.hasEvent(event)) {
-            this.throw(emitter, 'validateEventIsRegistered', emitter.constructor.name + ' has no registered \'' + event + '\' event');
+            this.throw(emitter, 'validateEventIsRegistered', `${emitter.constructor.name} has no registered \'${event}\' event`);
         }
     };
 
@@ -65,7 +65,7 @@
     validator.validateEntityHasComponent = function (ref, entity, Component) {
         var component = entity.getComponent(Component);
         if (!component) {
-            this.throw(ref, 'validateEntityHasComponent', 'Target entity (' + entity.constructor.name + ') must possess a ' + Component.name);
+            this.throw(ref, 'validateEntityHasComponent', `Target entity (${entity.constructor.name}) must possess a ${Component.name}`);
         }
         return component;
     };

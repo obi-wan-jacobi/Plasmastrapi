@@ -12,16 +12,16 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
     };
     InputController.prototype.__updateHandlerEventSubscriptions = function (actionString) {
         // keyboard events
-        this.__keyboardComponent[actionString + 'EventListener']('onkeydown', this.__handler, this.__handler.onkeydown);
-        this.__keyboardComponent[actionString + 'EventListener']('onkeyup', this.__handler, this.__handler.onkeyup);
-        this.__keyboardComponent[actionString + 'EventListener']('onkeypress', this.__handler, this.__handler.onkeypress);
-        this.__keyboardComponent[actionString + 'EventListener']('onenter', this.__handler, this.__handler.onenter);
-        this.__keyboardComponent[actionString + 'EventListener']('onescape', this.__handler, this.__handler.onescape);
+        this.__keyboardComponent[`${actionString}EventListener`]('onkeydown', this.__handler, this.__handler.onkeydown);
+        this.__keyboardComponent[`${actionString}EventListener`]('onkeyup', this.__handler, this.__handler.onkeyup);
+        this.__keyboardComponent[`${actionString}EventListener`]('onkeypress', this.__handler, this.__handler.onkeypress);
+        this.__keyboardComponent[`${actionString}EventListener`]('onenter', this.__handler, this.__handler.onenter);
+        this.__keyboardComponent[`${actionString}EventListener`]('onescape', this.__handler, this.__handler.onescape);
         // mouse events
-        this.__mouseComponent[actionString + 'EventListener']('onmousemove', this.__handler, this.__handler.onmousemove);
-        this.__mouseComponent[actionString + 'EventListener']('onmousedown', this.__handler, this.__handler.onmousedown);
-        this.__mouseComponent[actionString + 'EventListener']('onmouseup', this.__handler, this.__handler.onmouseup);
-        this.__mouseComponent[actionString + 'EventListener']('onclick', this.__handler, this.__handler.onclick);
+        this.__mouseComponent[`${actionString}EventListener`]('onmousemove', this.__handler, this.__handler.onmousemove);
+        this.__mouseComponent[`${actionString}EventListener`]('onmousedown', this.__handler, this.__handler.onmousedown);
+        this.__mouseComponent[`${actionString}EventListener`]('onmouseup', this.__handler, this.__handler.onmouseup);
+        this.__mouseComponent[`${actionString}EventListener`]('onclick', this.__handler, this.__handler.onclick);
     };
     // public methods
     InputController.prototype.load = function () {

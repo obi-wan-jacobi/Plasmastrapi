@@ -27,7 +27,7 @@ function (InputHandler, TerminalHandle, ToolWire, Wire, PickComponent, PoseCompo
         this.__terminalHandle = null;
         this.__isSelectedTerminalAnInput = null;
     };
-    WireTool.prototype.__setCompatibilityFilterRelativeTo = function (terminal) {
+    WireTool.prototype.__setFilterRelativeTo = function (terminal) {
         this.__isSelectedTerminalAnInput = null;
         // filter pickable entities according to whether we're selecting an input or output terminal
         var terminalCompatibility;
@@ -40,11 +40,11 @@ function (InputHandler, TerminalHandle, ToolWire, Wire, PickComponent, PoseCompo
         } else {
             validator.throw(this, 'onequip', this.__selectedTerminal.constructor.name + ' is not compatible with this tool');
         }
-        this.setCompatibilityFilter(terminalCompatibility, DestructionZone, DesignZone);
+        this.setFilter(terminalCompatibility, DestructionZone, DesignZone);
     };
     WireTool.prototype.__onequip = function (terminal) {
         this.__selectedTerminal = terminal;
-        this.__setCompatibilityFilterRelativeTo(this.__selectedTerminal);
+        this.__setFilterRelativeTo(this.__selectedTerminal);
         // select terminal
         var pickComponent = this.__selectedTerminal.getComponent(PickComponent);
         pickComponent.select();
@@ -97,7 +97,7 @@ function (InputHandler, TerminalHandle, ToolWire, Wire, PickComponent, PoseCompo
             }
         }
         if (this.isShiftKeyDown) {
-            this.__setCompatibilityFilterRelativeTo(this.__selectedTerminal);
+            this.__setFilterRelativeTo(this.__selectedTerminal);
             return;
         } else {
             this.__engine.toolController.equipPickingTool();

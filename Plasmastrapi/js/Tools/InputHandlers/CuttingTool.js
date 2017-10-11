@@ -27,7 +27,7 @@ function (InputHandler, CuttingToolCursor, Curve, Position, Rectangle, LineDispl
         this.__cuttingCurve = null;
     };
     CuttingTool.prototype.__onequip = function () {
-        this.setCompatibilityFilter(DesignZone, Cuttable);
+        this.setFilter(DesignZone, Cuttable);
     };
     CuttingTool.prototype.__onmousemove = function (cursor) {
         if (!this.__cuttingCurve && this.isMouseDown) {

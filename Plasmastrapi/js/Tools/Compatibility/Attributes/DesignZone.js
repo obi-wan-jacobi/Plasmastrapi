@@ -1,12 +1,11 @@
-﻿define([
-    'compatible'
-],
-function (Compatible) {
+﻿define(['compatibility-attribute'],
+function (CompatibilityAttribute) {
 
+    DesignZone.prototype = Object.create(CompatibilityAttribute.prototype);
+    DesignZone.prototype.constructor = DesignZone;
     function DesignZone() {
-        Compatible.call(this, DesignZone);
+        CompatibilityAttribute.call(this);
     };
-    DesignZone.resolve = Compatible.prototype.resolve;
 
     return DesignZone;
 });

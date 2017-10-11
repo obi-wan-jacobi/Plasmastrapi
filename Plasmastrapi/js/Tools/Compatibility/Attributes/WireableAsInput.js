@@ -1,12 +1,11 @@
-﻿define([
-    'compatible'
-],
-function (Compatible) {
+﻿define(['compatibility-attribute'],
+function (CompatibilityAttribute) {
 
+    WireableAsInput.prototype = Object.create(CompatibilityAttribute.prototype);
+    WireableAsInput.prototype.constructor = WireableAsInput;
     function WireableAsInput() {
-        Compatible.call(this, WireableAsInput);
+        CompatibilityAttribute.call(this);
     };
-    WireableAsInput.resolve = Compatible.prototype.resolve;
 
     return WireableAsInput;
 });

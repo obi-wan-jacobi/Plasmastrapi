@@ -1,12 +1,11 @@
-﻿define([
-    'compatible'
-],
-function (Compatible) {
+﻿define(['compatibility-attribute'],
+function (CompatibilityAttribute) {
 
+    Trashable.prototype = Object.create(CompatibilityAttribute.prototype);
+    Trashable.prototype.constructor = Trashable;
     function Trashable() {
-        Compatible.call(this, Trashable);
+        CompatibilityAttribute.call(this);
     };
-    Trashable.resolve = Compatible.prototype.resolve;
 
     return Trashable;
 });

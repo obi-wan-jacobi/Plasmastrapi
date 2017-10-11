@@ -1,16 +1,16 @@
 ﻿define(['controller', 'component-factory', 'keyboard-handle', 'mouse-handle', 'input-handler','validator'],
 function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandler, validator) {
 
-    // CLASS InputHandlerController
-    InputHandlerController.prototype = Object.create(Controller.prototype);
-    InputHandlerController.prototype.constructor = InputHandlerController;
-    function InputHandlerController(engine) {
+    // CLASS InputController
+    InputController.prototype = Object.create(Controller.prototype);
+    InputController.prototype.constructor = InputController;
+    function InputController(engine) {
         Controller.call(this);
         this.__keyboardComponent = engine.getFactory(ComponentFactory).createFromDataHandle(new KeyboardHandle());
         this.__mouseComponent = engine.getFactory(ComponentFactory).createFromDataHandle(new MouseHandle());
         this.__handler = null;
     };
-    InputHandlerController.prototype.__updateHandlerEventSubscriptions = function (actionString) {
+    InputController.prototype.__updateHandlerEventSubscriptions = function (actionString) {
         // keyboard events
         this.__keyboardComponent[actionString + 'EventListener']('onkeydown', this.__handler, this.__handler.onkeydown);
         this.__keyboardComponent[actionString + 'EventListener']('onkeyup', this.__handler, this.__handler.onkeyup);
@@ -24,21 +24,21 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
         this.__mouseComponent[actionString + 'EventListener']('onclick', this.__handler, this.__handler.onclick);
     };
     // public methods
-    InputHandlerController.prototype.load = function () {
+    InputController.prototype.load = function () {
         this.__keyboardComponent.load();
         this.__mouseComponent.load();
         if (this.__handler) {
             this.__handler.load();
         }
     };
-    InputHandlerController.prototype.unload = function () {
+    InputController.prototype.unload = function () {
         this.__keyboardComponent.unload()
         this.__mouseComponent.unload();
         if (this.__handler) {
             this.__handler.unload();
         }
     };
-    InputHandlerController.prototype.setHandler = function (handler) {
+    InputController.prototype.setHandler = function (handler) {
         validator.validateInstanceType(this, handler, InputHandler);
         if (this.__handler) {
             this.__updateHandlerEventSubscriptions('remove');
@@ -49,5 +49,5 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
         this.__handler.load();
     };
 
-    return InputHandlerController;
+    return InputController;
 });

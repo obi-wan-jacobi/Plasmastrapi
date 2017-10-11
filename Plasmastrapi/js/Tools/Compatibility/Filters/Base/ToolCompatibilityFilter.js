@@ -1,12 +1,12 @@
-﻿define([],
-function () {
+﻿define(['dictionary'],
+function (Dictionary) {
 
     function ToolCompatibilityFilter() {
         this.__dictionary = new Dictionary(Compatible);
     };
     ToolCompatibilityFilter.prototype.evaluate = function (pickComponent) {
-        for (var i = 0, L = this.__compatibles.length; i < L; i++) {
-            if (this.__compatibles[i].resolve(pickComponent.__entity)) {
+        for (var i = 0, L = this.__dictionary.length; i < L; i++) {
+            if (this.__dictionary[i].resolve(pickComponent)) {
                 return true;
             }
         }

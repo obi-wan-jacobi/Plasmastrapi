@@ -1,12 +1,11 @@
-﻿define([
-    'compatible'
-],
-function (Compatible) {
+﻿define(['compatibility-attribute'],
+function (CompatibilityAttribute) {
 
+    Placeable.prototype = Object.create(CompatibilityAttribute.prototype);
+    Placeable.prototype.constructor = Placeable;
     function Placeable() {
-        Compatible.call(this, Placeable);
+        CompatibilityAttribute.call(this);
     };
-    Placeable.resolve = Compatible.prototype.resolve;
 
     return Placeable;
 });

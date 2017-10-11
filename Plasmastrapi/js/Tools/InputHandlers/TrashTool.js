@@ -24,7 +24,7 @@ function (InputHandler, SelectionBox, TrashToolCursor, Position, Rectangle, Desi
         this.__anchor = null;
     };
     TrashTool.prototype.__onequip = function () {
-        this.setCompatibilityFilter(DesignZone, Trashable);
+        this.setFilter(DesignZone, Trashable);
     };
     TrashTool.prototype.__onmousemove = function (cursor) {
         if (!this.__selectionBox && this.isMouseDown) {

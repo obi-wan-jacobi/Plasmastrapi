@@ -18,7 +18,7 @@ function (InputHandler, SelectionBox, PickComponent, Position, Rectangle, Design
         this.__pickableOnDrag = null;
         // hack
         this.__isMouseDown = false;
-        this.setCompatibilityFilter(DesignZone, Pickable);
+        this.setFilter(DesignZone, Pickable);
     };
     PickingTool.prototype.onmousemove = function (cursor) {
         if (this.__pickableOnDrag) {
@@ -37,7 +37,7 @@ function (InputHandler, SelectionBox, PickComponent, Position, Rectangle, Design
                 cursor.x < this.__beforeSelectionBounds.vertices[3].x &&
                 cursor.y < this.__beforeSelectionBounds.vertices[3].y
             )) {
-                this.setCompatibilityFilter(
+                this.setFilter(
                     new Filter(DesignZone, Placeable)
                 );
                 this.__selectionBox = new SelectionBox();
@@ -91,7 +91,7 @@ function (InputHandler, SelectionBox, PickComponent, Position, Rectangle, Design
                 this.__pickableSelectionBox = this.__selectionBox;
             }
             this.__selectionBox = null;
-            this.setCompatibilityFilter(
+            this.setFilter(
                 new Filter(DesignZone, Pickable)
             );
             return;

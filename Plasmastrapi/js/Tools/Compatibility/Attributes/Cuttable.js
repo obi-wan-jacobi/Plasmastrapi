@@ -1,12 +1,11 @@
-﻿define([
-    'compatible'
-],
-function (Compatible) {
+﻿define(['compatibility-attribute'],
+function (CompatibilityAttribute) {
 
+    Cuttable.prototype = Object.create(CompatibilityAttribute.prototype);
+    Cuttable.prototype.constructor = Cuttable;
     function Cuttable() {
-        Compatible.call(this, Cuttable);
+        CompatibilityAttribute.call(this);
     };
-    Cuttable.resolve = Compatible.prototype.resolve;
 
     return Cuttable;
 });

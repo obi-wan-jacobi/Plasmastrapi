@@ -24,7 +24,7 @@ function (InputHandler, PickComponent, PoseComponent, Position, DesignZone, Dest
         this.__previousCursorPosition = new Position(x, y);
         this.__equippedEntity = entity;
         this.__fnShiftKeyMouseUp = fnShiftKeyMouseUp;
-        this.setCompatibilityFilter(DestructionZone, DesignZone);
+        this.setFilter(DestructionZone, DesignZone);
     };
     PlacingTool.prototype.__onmousemove = function (cursor) {
         var poseComponent = this.__equippedEntity.getComponent(PoseComponent)

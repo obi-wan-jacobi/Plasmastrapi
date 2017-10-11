@@ -73,12 +73,10 @@
     <Content Include="js\circuits\Configuration\debug.js" />
     <Content Include="js\circuits\Configuration\require.config.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
-    <Content Include="js\core\Components\Inputs\ToolCompatibilityComponent.js" />
     <Content Include="js\core\Configuration\constants.js" />
     <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\KeyboardHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\PickHandle.js" />
-    <Content Include="js\core\DataHandles\Inputs\ToolCompatibilityHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\PoseDisplaySettings.js" />
     <Content Include="js\core\Events\Mixins\Enableable.js" />
     <Content Include="js\core\Configuration\require.config.js" />
@@ -149,7 +147,7 @@
     <Content Include="js\circuits\Wires\Base\WireElement.js" />
     <Content Include="js\tools\Helpers\ToolWire.js" />
     <Content Include="js\game\Configuration\config.js" />
-    <Content Include="js\game\Controllers\InputHandlerController.js" />
+    <Content Include="js\game\Controllers\InputController.js" />
     <Content Include="js\circuits\LogicElements\Base\LogicElement.js" />
     <Content Include="js\circuits\LogicElements\Gates\AndGate.js" />
     <Content Include="js\circuits\LogicElements\Gates\Base\Gate.js" />

@@ -4,7 +4,7 @@
         'assets': './game/Assets/assets',
         // Controllers
         'controller': './game/Controllers/Base/Controller',
-        'input-handler-controller': './game/Controllers/InputHandlerController',
+        'input-handler-controller': './game/Controllers/InputController',
         'scene-controller': './game/Controllers/SceneController',
         // Configuration
         'game-debug': './game/Configuration/debug',

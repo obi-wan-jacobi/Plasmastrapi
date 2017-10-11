@@ -18,7 +18,7 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
                 var modulePrefix = utils.modules.getModulePrefix(ComponentType);
                 var ContainerType = utils.modules.require(`${modulePrefix}-container`);
                 container = new ContainerType(ComponentType);
-            } catch(e) {
+            } catch(ex) {
                 container = new ComponentContainer(ComponentType);
             }
             this.__containers.add(ComponentType, container);

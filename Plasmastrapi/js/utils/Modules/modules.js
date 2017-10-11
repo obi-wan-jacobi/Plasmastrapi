@@ -1,4 +1,4 @@
-﻿define(['validator'], function (validator) {
+﻿define(['validator', 'logging'], function (validator, logging) {
 
     var modules = {
         constructor: {
@@ -17,7 +17,7 @@
         require(modulePaths, function () {
             callback();
         });
-    }
+    };
 
     modules.getModulePrefix = function (instanceOrType, typeSuffix) {
         var moduleName = null;
@@ -34,8 +34,8 @@
         var module = null;
         try {
             module = require(moduleName);
-        } catch (e) {
-            validator.throw(modules, 'require', e);
+        } catch (ex) {
+            logging.warn(modules, 'require', ex);
         }
         return module;
     };

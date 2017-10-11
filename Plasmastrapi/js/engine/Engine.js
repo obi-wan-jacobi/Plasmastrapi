@@ -5,10 +5,10 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
     Engine.prototype = Object.create(System.prototype);
     Engine.prototype.constructor = Engine;
     function Engine(viewport) {
-	    System.call(this);
+        System.call(this);
         // private variables
-	    this.__viewport = viewport;
-	    this.__factories = new Dictionary(Factory);
+        this.__viewport = viewport;
+        this.__factories = new Dictionary(Factory);
         this.__systems = new Dictionary(System);
         // pre-init configuration
         // order matters:
@@ -66,8 +66,8 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
                     }
                     tPrevious = tNow;
                     raf(loop);
-                } catch (e) {
-                    throw e;
+                } catch (ex) {
+                    throw ex;
                 }
             }
         };

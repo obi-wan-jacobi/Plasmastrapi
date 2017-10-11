@@ -23,8 +23,8 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
         this.__viewport.onkeyup = null;
     };
     KeyboardSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
-        return (function (e) {
-            this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(e));
+        return (function (ex) {
+            this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(ex));
         }).bind(this);
     };
     // public methods

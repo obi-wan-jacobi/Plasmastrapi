@@ -32,7 +32,7 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
         }
     };
     InputController.prototype.unload = function () {
-        this.__keyboardComponent.unload()
+        this.__keyboardComponent.unload();
         this.__mouseComponent.unload();
         if (this.__handler) {
             this.__handler.unload();

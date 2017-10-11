@@ -6,6 +6,10 @@
         }
     };
 
+    logging.warn = function (ref, method, errorString) {
+        `${ref.constructor.name}::${methodName} -- ${errorString}`;
+    };
+
     logging.console = function (text) {
         console.log(text);
     };

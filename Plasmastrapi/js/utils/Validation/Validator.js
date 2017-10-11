@@ -11,7 +11,7 @@
         if (errorString[errorString.length - 1] !== '.') {
             errorString += '.';
         }
-        throw new Error(`${ref.constructor.name}::${methodName} -- ${errorString}`);
+        throw new Error(`[ERROR] >> ${ref.constructor.name}::${methodName} -- ${errorString}!`);
     };
 
     validator.throwMethodMustBeOverridden = function (ref, methodName) {

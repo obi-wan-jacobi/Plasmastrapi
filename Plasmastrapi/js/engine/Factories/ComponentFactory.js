@@ -14,11 +14,11 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
         // if container doesn't exist for this component type, create one
         var container = this.__containers.get(ComponentType);
         if (!container) {
-            try {
-                var modulePrefix = utils.modules.getModulePrefix(ComponentType);
-                var ContainerType = utils.modules.require(`${modulePrefix}-container`);
+            var modulePrefix = utils.modules.getModulePrefix(ComponentType);
+            var ContainerType = utils.modules.require(`${modulePrefix}-container`);
+            if (ContainerType !== null) {
                 container = new ContainerType(ComponentType);
-            } catch(ex) {
+            } else {
                 container = new ComponentContainer(ComponentType);
             }
             this.__containers.add(ComponentType, container);

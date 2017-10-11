@@ -35,7 +35,7 @@
         try {
             module = require(moduleName);
         } catch (ex) {
-            logging.warn(modules, 'require', ex);
+            logging.warn(modules, 'require', `No module named \'${moduleName}\' could be found`);
         }
         return module;
     };

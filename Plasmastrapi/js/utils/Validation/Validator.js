@@ -1,10 +1,6 @@
 ﻿define(function () {
 
-    var validator = {
-        constructor: {
-            name: 'validator'
-        }
-    };
+    var validator = new (function validator() { });
 
     // throws
     validator.throw = function (ref, methodName, errorString) {

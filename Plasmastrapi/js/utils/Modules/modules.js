@@ -1,10 +1,6 @@
 ﻿define(['validator', 'logging'], function (validator, logging) {
 
-    var modules = {
-        constructor: {
-            name: 'modules'
-        }
-    };
+    var modules = new (function modules() { });
 
     modules.load = function (pathsObject, callback) {
         // Pre-loads named modules

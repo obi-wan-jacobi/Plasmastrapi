@@ -1,6 +1,6 @@
 ﻿define([
     // Base
-    'tool',
+    'input-handle',
     // Helpers
     'selection-box',
     // Objects

@@ -1,4 +1,4 @@
-﻿define(['tool', 'selection-box', 'pick-component', 'position', 'rectangle', 'design-zone', 'draggable', 'filter', 'pickable', 'placeable', 'game-config'],
+﻿define(['input-handle', 'selection-box', 'pick-component', 'position', 'rectangle', 'design-zone', 'draggable', 'filter', 'pickable', 'placeable', 'game-config'],
 function (InputHandler, SelectionBox, PickComponent, Position, Rectangle, DesignZone, Draggable, Filter, Pickable, Placeable, config) {
 
     PickingTool.prototype = Object.create(InputHandler.prototype);

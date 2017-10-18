@@ -1,6 +1,6 @@
 ﻿define([
     // Base
-    'tool',
+    'input-handle',
     // Components
     'pick-component',
     'pose-component',

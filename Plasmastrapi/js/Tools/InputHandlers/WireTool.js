@@ -1,6 +1,6 @@
 ﻿define([
     // Base
-    'tool',
+    'input-handle',
     // Circuits
     'terminal-handle',
     'tool-wire',

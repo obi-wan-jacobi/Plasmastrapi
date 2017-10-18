@@ -1,6 +1,6 @@
 ﻿define([
     // Base
-    'tool',
+    'input-handle',
     // Objects
     'cutting-tool-cursor',
     'curve',

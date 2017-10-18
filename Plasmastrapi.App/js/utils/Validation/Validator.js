@@ -4,9 +4,6 @@
 
     // throws
     validator.throw = function (ref, methodName, errorString) {
-        if (errorString[errorString.length - 1] !== '.') {
-            errorString += '.';
-        }
         throw new Error(`[ERROR] >> ${ref.constructor.name}::${methodName} -- ${errorString}!`);
     };
 

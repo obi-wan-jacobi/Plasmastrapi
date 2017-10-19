@@ -11,6 +11,7 @@
             'image-display-settings': './data/Graphics/DisplaySettings/ImageDisplaySettings',
             'line-display-settings': './data/Graphics/DisplaySettings/LineDisplaySettings',
             'mesh-display-settings': './data/Graphics/DisplaySettings/MeshDisplaySettings',
+            'rectangle-display-settings': './data/Graphics/DisplaySettings/RectangleDisplaySettings',
             'text-display-settings': './data/Graphics/DisplaySettings/TextDisplaySettings',
             // Physics
             'acceleration': './data/Physics/Acceleration',

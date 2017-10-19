@@ -17,6 +17,14 @@ function (validator) {
     Base.prototype.__onunload = function () {
         validator.throwMethodMustBeOverridden(this, 'onunload');
     };
+    // public prototypal variables
+    Object.defineProperties(Base.prototype, {
+        'isLoaded': {
+            get: function () {
+                return this.__isLoaded;
+            }
+        }
+    });
     // public methods
     Base.prototype.load = function () {
         if (this.__isLoaded) {

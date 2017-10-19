@@ -1,5 +1,5 @@
-﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'utils'],
-function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, utils) {
+﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'mesh', 'utils'],
+function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Mesh, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
@@ -45,9 +45,16 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
         utils.validator.validateInstanceType(this, primitive, Primitive);
         var modulePrefix = utils.modules.getModulePrefix(primitive, null);
-        var ComponentType = utils.modules.require(`${modulePrefix}-component`);
-        var HandleType = utils.modules.require(`${modulePrefix}-handle`);
-        var DisplaySettings = utils.modules.require(`${modulePrefix}-display-settings`);
+        var ComponentType, HandleType, DisplaySettings;
+        if (primitive instanceof Mesh) {
+            ComponentType = utils.modules.require('mesh-component');
+            HandleType = utils.modules.require('mesh-handle');
+            DisplaySettings = utils.modules.require('mesh-display-settings');
+        } else {
+            ComponentType = utils.modules.require(`${modulePrefix}-component`);
+            HandleType = utils.modules.require(`${modulePrefix}-handle`);
+            DisplaySettings = utils.modules.require(`${modulePrefix}-display-settings`);
+        }
         var component = this.create(ComponentType, [new HandleType(primitive, new DisplaySettings())]);
         return component;
     };

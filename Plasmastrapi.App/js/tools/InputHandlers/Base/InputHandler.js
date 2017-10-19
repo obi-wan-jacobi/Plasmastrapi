@@ -3,18 +3,14 @@ function (Base, HelperFactory, HitBox, Position, validator) {
 
     InputHandler.prototype = Object.create(Base.prototype);
     InputHandler.prototype.constructor = InputHandler;
-    function InputHandler() {
+    function InputHandler(engine) {
         Base.call(this);
+        this.__helperFactory = engine.getFactory(HelperFactory);
         // drag bounds before action on drag
         this.__beforeActionBoundary = null;
         // selection bounds before selection box on drag
         this.__beforeSelectionBoundary = null;
         this.__selectionBox = null;
-        this.__selectionBoxAnchor = null;
-        // mouse tracking
-        this.__isMouseDown = false;
-        this.__mousePosition = new Position();
-        this.__previousMousePosition = new Position();
     };
     // private methods
     InputHandler.prototype.__oninit = function () { };
@@ -23,16 +19,7 @@ function (Base, HelperFactory, HitBox, Position, validator) {
         this.__beforeSelectionBoundary = new HitBox();
     };
     InputHandler.prototype.__onunload = function () {
-        this.__isMouseDown = false;
-        this.__mousePosition = new Position();
-        this.__previousMousePosition = new Position();
-    };
-    InputHandler.prototype.__updateMousePosition = function (position) {
-        validator.validateInstanceType(this, position, Position);
-        this.__previousMousePosition.x = this.__mousePosition.x;
-        this.__previousMousePosition.y = this.__mousePosition.y;
-        this.__mousePosition.x = position.x;
-        this.__mousePosition.y = position.y;
+
     };
     InputHandler.prototype.__actionOnDrag = function () {
         validator.throwMethodMustBeOverridden(this, 'actionOnDrag');
@@ -57,8 +44,7 @@ function (Base, HelperFactory, HitBox, Position, validator) {
         validator.throwMethodMustBeOverridden(this, 'onescape');
     };
     InputHandler.prototype.onmousemove = function (mouseHandle) {
-        this.__updateMousePosition(mouseHandle.getData());
-        if (this.__isMouseDown) {
+        if (mouseHandle.isMouseDown) {
             if (!this.__beforeActionBoundary.contains(mouseHandle.getData())) {
                 this.__actionOnDrag();
                 if (!this.isLoaded) {
@@ -66,8 +52,9 @@ function (Base, HelperFactory, HitBox, Position, validator) {
                 }
             }
             if (!this.__selectionBox && !this.__beforeSelectionBoundary.contains(mouseHandle.getData())) {
-                this.__selectionBox = HelperFactory.createSelectionBox();
-                this.__selectionBox.startAt(this.__selectionBoxAnchor);
+                this.__selectionBox = this.__helperFactory.createSelectionBox();
+                this.__selectionBox.load();
+                this.__selectionBox.startAt(mouseHandle.getData());
             }
             if (this.__selectionBox) {
                 this.__selectionBox.stretchTo(mouseHandle.getData());
@@ -75,13 +62,10 @@ function (Base, HelperFactory, HitBox, Position, validator) {
         }
     };
     InputHandler.prototype.onmousedown = function (mouseHandle) {
-        this.__isMouseDown = true;
-        this.__selectionBoxAnchor = new Position(mouseHandle.getData().x, mouseHandle.getData().y);
         this.__beforeActionBoundary.moveTo(mouseHandle.getData());
         this.__beforeSelectionBoundary.moveTo(mouseHandle.getData());
     };
     InputHandler.prototype.onmouseup = function () {
-        this.__isMouseDown = false;
         this.__actionOnMouseUp();
     };
     InputHandler.prototype.onclick = function () {

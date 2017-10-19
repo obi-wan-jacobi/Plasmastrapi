@@ -1,5 +1,5 @@
-define(['engine', 'dictionary', 'controller', 'input-controller', 'pick-controller', 'scene-controller', 'assets', 'asset-loader', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'picking-tool', 'logging'],
-function (Engine, Dictionary, Controller, InputController, PickController, SceneController, assetUrls, AssetLoader, UIElementFactory, CircuitElementFactory, LogicElementFactory, TerminalFactory, PickingTool, logging) {
+define(['engine', 'dictionary', 'controller', 'input-controller', 'pick-controller', 'scene-controller', 'assets', 'asset-loader', 'helper-factory', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'picking-tool', 'logging'],
+function (Engine, Dictionary, Controller, InputController, PickController, SceneController, assetUrls, AssetLoader, HelperFactory, UIElementFactory, CircuitElementFactory, LogicElementFactory, TerminalFactory, PickingTool, logging) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -27,6 +27,7 @@ function (Engine, Dictionary, Controller, InputController, PickController, Scene
     };
     Game.prototype.__registerFactories = function () {
         Engine.prototype.__registerFactories.call(this);
+        this.__addFactory(HelperFactory);
         this.__addFactory(CircuitElementFactory);
         this.__addFactory(LogicElementFactory);
         this.__addFactory(TerminalFactory);

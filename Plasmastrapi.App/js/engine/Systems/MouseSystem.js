@@ -69,6 +69,12 @@ function (System, LinkedList, ComponentFactory, MouseComponent, Position) {
                 component.getHandle().click(position);
             }, this);
         }, this);
+        this.__inputBuffer = {
+            'mousemove': new LinkedList(Position),
+            'mousedown': new LinkedList(Position),
+            'mouseup': new LinkedList(Position),
+            'click': new LinkedList(Position)
+        };
 	};
 
 	return MouseSystem;

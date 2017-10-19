@@ -1,9 +1,10 @@
-﻿define(['data-handle', 'mesh', 'mesh-display-settings', 'position'],
-function (DataHandle, Mesh, MeshDisplaySettings, Position) {
+﻿define(['data-handle', 'mesh', 'mesh-display-settings', 'pose-handle', 'position', 'validator'],
+function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator) {
 
     MeshHandle.prototype = Object.create(DataHandle.prototype);
     MeshHandle.prototype.constructor = MeshHandle;
     function MeshHandle(mesh, displaySettings) {
+        this.__position = new Position();
         DataHandle.call(this, mesh, displaySettings, Mesh, MeshDisplaySettings);
     };
     MeshHandle.prototype.__updateMinMaxValues = function (mesh, i) {
@@ -27,18 +28,23 @@ function (DataHandle, Mesh, MeshDisplaySettings, Position) {
         this.__minY = null;
         this.__maxX = null;
         this.__maxY = null;
-        this.__position = new Position();
         this.__template = this.__data.clone();
         this.__lastCollisionPoint = null;
+        this.translate(this.__position);
     };
     MeshHandle.prototype.translate = function (newPosition) {
+        if (newPosition instanceof PoseHandle) {
+            newPosition = newPosition.getPosition();
+        }
         validator.validateInstanceType(this, newPosition, Position);
         var mesh = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
         for (var i = 0, L = mesh.vertices.length; i < L; i++) {
-            mesh.vertices[i].x += (newPosition.x - this.__position.x);
-            mesh.vertices[i].y += (newPosition.y - this.__position.y);
+            var templateX = this.__template.vertices[i].x;
+            var templateY = this.__template.vertices[i].y;
+            mesh.vertices[i].x = (newPosition.x + templateX);
+            mesh.vertices[i].y = (newPosition.y + templateY);
             this.__updateMinMaxValues(mesh, i);
         };
         this.__position = newPosition;

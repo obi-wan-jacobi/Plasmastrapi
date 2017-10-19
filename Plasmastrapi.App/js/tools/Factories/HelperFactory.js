@@ -1,5 +1,5 @@
-﻿define(['factory', 'component-factory', 'entity-factory', 'selection-box', 'pose', 'mesh', 'vertex', 'pick-handle', 'validator'],
-    function (Factory, ComponentFactory, EntityFactory, SelectionBox, Pose, Mesh, Vertex, PickHandle, validator) {
+﻿define(['factory', 'component-factory', 'entity-factory', 'selection-box', 'pose', 'rectangle', 'pick-handle', 'validator'],
+    function (Factory, ComponentFactory, EntityFactory, SelectionBox, Pose, Rectangle, PickHandle, validator) {
 
         HelperFactory.prototype = Object.create(Factory.prototype);
         HelperFactory.prototype.constructor = HelperFactory;

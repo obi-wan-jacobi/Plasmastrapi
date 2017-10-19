@@ -39,10 +39,11 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Mesh
         if (!this.__isLoaded) {
             return;
         }
+        var cursor = this.__mouseComponent.getHandle().getData();
         this.__inputBuffer['mousemove'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
             var meshComponent = entity.getComponent(MeshComponent);
-            if (meshCompoent.getHandle().checkPointCollision(cursor)) {
+            if (meshComponent.getHandle().checkPointCollision(cursor)) {
                 pickComponent.getHandle().hover();
             }
             else {
@@ -52,14 +53,14 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Mesh
         this.__inputBuffer['mousedown'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
             var meshComponent = entity.getComponent(MeshComponent);
-            if (meshCompoent.getHandle().checkPointCollision(cursor)) {
+            if (meshComponent.getHandle().checkPointCollision(cursor)) {
                 pickComponent.getHandle().pick();
             }
         });
         this.__inputBuffer['mouseup'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
             var meshComponent = entity.getComponent(MeshComponent);
-            if (meshCompoent.getHandle().checkPointCollision(cursor)) {
+            if (meshComponent.getHandle().checkPointCollision(cursor)) {
                 pickComponent.getHandle().pick();
             }
         });

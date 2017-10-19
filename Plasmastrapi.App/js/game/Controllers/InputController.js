@@ -6,6 +6,7 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
     InputController.prototype.constructor = InputController;
     function InputController(engine) {
         Controller.call(this);
+        this.__engine = engine;
         this.__keyboardComponent = engine.getFactory(ComponentFactory).createFromDataHandle(new KeyboardHandle());
         this.__mouseComponent = engine.getFactory(ComponentFactory).createFromDataHandle(new MouseHandle());
         this.__handler = null;
@@ -45,7 +46,7 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
             this.__updateHandlerEventSubscriptions('remove');
             this.__handler.unload();
         }
-        this.__handler = new HandlerType();
+        this.__handler = new HandlerType(this.__engine);
         this.__updateHandlerEventSubscriptions('add');
         this.__handler.load();
     };

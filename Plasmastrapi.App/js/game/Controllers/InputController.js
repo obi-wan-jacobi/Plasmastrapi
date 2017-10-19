@@ -10,6 +10,21 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
         this.__mouseComponent = engine.getFactory(ComponentFactory).createFromDataHandle(new MouseHandle());
         this.__handler = null;
     };
+    // private methods
+    InputController.prototype.__onload = function () {
+        this.__keyboardComponent.load();
+        this.__mouseComponent.load();
+        if (this.__handler) {
+            this.__handler.load();
+        }
+    };
+    InputController.prototype.__onunload = function () {
+        this.__keyboardComponent.unload();
+        this.__mouseComponent.unload();
+        if (this.__handler) {
+            this.__handler.unload();
+        }
+    };
     InputController.prototype.__updateHandlerEventSubscriptions = function (actionString) {
         // keyboard events
         this.__keyboardComponent[`${actionString}EventListener`]('onkeydown', this.__handler, this.__handler.onkeydown);
@@ -24,27 +39,13 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
         this.__mouseComponent[`${actionString}EventListener`]('onclick', this.__handler, this.__handler.onclick);
     };
     // public methods
-    InputController.prototype.load = function () {
-        this.__keyboardComponent.load();
-        this.__mouseComponent.load();
-        if (this.__handler) {
-            this.__handler.load();
-        }
-    };
-    InputController.prototype.unload = function () {
-        this.__keyboardComponent.unload();
-        this.__mouseComponent.unload();
-        if (this.__handler) {
-            this.__handler.unload();
-        }
-    };
-    InputController.prototype.setHandler = function (handler) {
-        validator.validateInstanceType(this, handler, InputHandler);
+    InputController.prototype.setHandler = function (HandlerType) {
+        //validator.validateClassType(this, HandlerType, InputHandler);
         if (this.__handler) {
             this.__updateHandlerEventSubscriptions('remove');
             this.__handler.unload();
         }
-        this.__handler = handler;
+        this.__handler = new HandlerType();
         this.__updateHandlerEventSubscriptions('add');
         this.__handler.load();
     };

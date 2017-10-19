@@ -1,8 +1,8 @@
-﻿define(['base', 'pose-component', 'position', 'validator'],
-function (Base, PoseComponent, Position, validator) {
+﻿define(['base', 'helper-factory', 'hit-box', 'position', 'validator'],
+function (Base, HelperFactory, HitBox, Position, validator) {
 
     InputHandler.prototype = Object.create(Base.prototype);
-    InputHandler.prototype.constructor = InputHandler.constructor;
+    InputHandler.prototype.constructor = InputHandler;
     function InputHandler() {
         Base.call(this);
         // drag bounds before action on drag
@@ -10,15 +10,17 @@ function (Base, PoseComponent, Position, validator) {
         // selection bounds before selection box on drag
         this.__beforeSelectionBoundary = null;
         this.__selectionBox = null;
-        this.__selectionAnchor = null;
+        this.__selectionBoxAnchor = null;
         // mouse tracking
         this.__isMouseDown = false;
         this.__mousePosition = new Position();
         this.__previousMousePosition = new Position();
     };
     // private methods
+    InputHandler.prototype.__oninit = function () { };
     InputHandler.prototype.__onload = function () {
-
+        this.__beforeActionBoundary = new HitBox();
+        this.__beforeSelectionBoundary = new HitBox();
     };
     InputHandler.prototype.__onunload = function () {
         this.__isMouseDown = false;
@@ -34,6 +36,9 @@ function (Base, PoseComponent, Position, validator) {
     };
     InputHandler.prototype.__actionOnDrag = function () {
         validator.throwMethodMustBeOverridden(this, 'actionOnDrag');
+    };
+    InputHandler.prototype.__actionOnMouseUp = function () {
+        validator.throwMethodMustBeOverridden(this, 'actionOnMouseUp');
     };
     // public methods
     InputHandler.prototype.onkeydown = function () {
@@ -51,92 +56,37 @@ function (Base, PoseComponent, Position, validator) {
     InputHandler.prototype.onescape = function () {
         validator.throwMethodMustBeOverridden(this, 'onescape');
     };
-    InputHandler.prototype.onmousemove = function (cursor) {
-        this.__updateMousePosition(cursor);
+    InputHandler.prototype.onmousemove = function (mouseHandle) {
+        this.__updateMousePosition(mouseHandle.getData());
         if (this.__isMouseDown) {
-            if (!this.__beforeActionBoundary.contains(cursor)) {
+            if (!this.__beforeActionBoundary.contains(mouseHandle.getData())) {
                 this.__actionOnDrag();
                 if (!this.isLoaded) {
                     return;
                 }
             }
-            if (!this.__selectionBox && !this.__beforeSelectionBoundary.contains(cursor)) {
-                this.__selectionBox = new SelectionBox();
-                this.__selectionBox.startAt(this.__selectionAnchor);
+            if (!this.__selectionBox && !this.__beforeSelectionBoundary.contains(mouseHandle.getData())) {
+                this.__selectionBox = HelperFactory.createSelectionBox();
+                this.__selectionBox.startAt(this.__selectionBoxAnchor);
             }
             if (this.__selectionBox) {
-                this.__selectionBox.stretchTo(cursor);
+                this.__selectionBox.stretchTo(mouseHandle.getData());
             }
         }
     };
-    InputHandler.prototype.onmousedown = function () {
-        validator.throwMethodMustBeOverridden(this, 'onmousedown');
+    InputHandler.prototype.onmousedown = function (mouseHandle) {
+        this.__isMouseDown = true;
+        this.__selectionBoxAnchor = new Position(mouseHandle.getData().x, mouseHandle.getData().y);
+        this.__beforeActionBoundary.moveTo(mouseHandle.getData());
+        this.__beforeSelectionBoundary.moveTo(mouseHandle.getData());
     };
     InputHandler.prototype.onmouseup = function () {
-        validator.throwMethodMustBeOverridden(this, 'onmouseup');
+        this.__isMouseDown = false;
+        this.__actionOnMouseUp();
     };
     InputHandler.prototype.onclick = function () {
-        validator.throwMethodMustBeOverridden(this, 'onclick');
+
     };
 
     return InputHandler;
 });
-
-PickingTool.prototype.onmousedown = function (cursor) {
-    InputHandler.prototype.onmousedown.call(this, cursor);
-    this.__beforeActionBoundary = new Rectangle(
-        config.PickingTool.beforeDragBounds.width,
-        config.PickingTool.beforeDragBounds.height
-    );
-    for (var i = 0, L = this.__beforeActionBoundary.vertices.length; i < L; i++) {
-        this.__beforeActionBoundary.vertices[i].x += cursor.x;
-        this.__beforeActionBoundary.vertices[i].y += cursor.y;
-    }
-    this.__beforeSelectionBoundary = new Rectangle(
-        config.PickingTool.beforeSelectionBounds.width,
-        config.PickingTool.beforeSelectionBounds.height
-    );
-    this.__selectionAnchor = new Position(cursor.x, cursor.y);
-    for (var i = 0, L = this.__beforeSelectionBoundary.vertices.length; i < L; i++) {
-        this.__beforeSelectionBoundary.vertices[i].x += cursor.x;
-        this.__beforeSelectionBoundary.vertices[i].y += cursor.y;
-    }
-};
-PickingTool.prototype.onmousedown = function (entities) {
-    var entity = null;
-    for (var i = 0, L = entities.length; i < L; i++) {
-        if (Draggable.resolve(entities[i])) {
-            this.__pickableOnDrag = entities[i].getComponent(PickComponent);
-            entity = entities[i];
-            break;
-        }
-    }
-    if (this.__pickableSelectionBox && this.__pickableSelectionBox !== entity) {
-        this.__pickableSelectionBox.destroy();
-        this.__pickableSelectionBox = null;
-    }
-};
-PickingTool.prototype.onmouseup = function (entities) {
-    if (this.__selectionBox) {
-        this.__selectionBox.fillContents();
-        if (this.__selectionBox.contents.length == 0) {
-            this.__selectionBox.destroy();
-        } else {
-            this.__pickableSelectionBox = this.__selectionBox;
-        }
-        this.__selectionBox = null;
-        this.setFilter(
-            new Filter(DesignZone, Pickable)
-        );
-        return;
-    }
-    for (var i = 0, L = entities.length; i < L; i++) {
-        var entity = entities[i];
-        if (Pickable.resolve(entity) && !(entity === this.__selectionBox)) {
-            var pickComponent = entity.getComponent(PickComponent);
-            pickComponent.pick();
-            return;
-        }
-    }
-    return;
-};

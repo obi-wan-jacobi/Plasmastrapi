@@ -53,7 +53,6 @@ function (Base, HelperFactory, HitBox, Position, validator) {
             }
             if (!this.__selectionBox && !this.__beforeSelectionBoundary.contains(mouseHandle.getData())) {
                 this.__selectionBox = this.__helperFactory.createSelectionBox();
-                this.__selectionBox.load();
                 this.__selectionBox.startAt(mouseHandle.getData());
             }
             if (this.__selectionBox) {

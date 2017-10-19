@@ -25,8 +25,8 @@ function (Base, Container, Entity, validator) {
     // public methods
     Scene.prototype.add = function (entity) {
         this.__entities.add(entity);
-        entity.addEventListener('ondestroy', this.remove.bind(this));
-	    if (this.__isLoaded) {
+        entity.addEventListener('ondestroy', this, this.remove);
+	    if (this.isLoaded) {
 	        entity.load();
 	    }
 	};

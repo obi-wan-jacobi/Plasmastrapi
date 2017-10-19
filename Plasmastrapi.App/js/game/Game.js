@@ -1,5 +1,5 @@
-define(['engine', 'dictionary', 'controller', 'input-controller', 'pick-controller', 'scene-controller', 'assets', 'asset-loader', 'helper-factory', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'picking-tool', 'logging'],
-function (Engine, Dictionary, Controller, InputController, PickController, SceneController, assetUrls, AssetLoader, HelperFactory, UIElementFactory, CircuitElementFactory, LogicElementFactory, TerminalFactory, PickingTool, logging) {
+define(['engine', 'dictionary', 'controller', 'input-controller', 'pick-controller', 'scene-controller', 'assets', 'asset-loader', 'helper-factory', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'picking-tool', 'main-menu', 'logging'],
+function (Engine, Dictionary, Controller, InputController, PickController, SceneController, assetUrls, AssetLoader, HelperFactory, UIElementFactory, CircuitElementFactory, LogicElementFactory, TerminalFactory, PickingTool, MainMenu, logging) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -56,6 +56,7 @@ function (Engine, Dictionary, Controller, InputController, PickController, Scene
         // load assets
         self.__assetLoader.download(assetUrls).done(function () {
             logging.console("Assets have been loaded.");
+            self.getController(SceneController).setScene(MainMenu);
             self.getController(InputController).setHandler(PickingTool);
             Engine.prototype.start.call(self);
             logging.console("We have ignition!");

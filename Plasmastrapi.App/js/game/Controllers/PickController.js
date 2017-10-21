@@ -8,7 +8,10 @@ function (Controller, ComponentFactory, PickComponent, CompatibilityFilter, vali
         this.__pickComponentContainer = engine.getFactory(ComponentFactory).getContainer(PickComponent);
     };
     // public methods
-    PickController.prototype.setFilter = function (filter) {
+    PickController.prototype.setFilterByType = function () {
+
+    };
+    PickController.prototype.setFilterByCompatibility = function (filter) {
         validator.validateInstanceType(this, filter, CompatibilityFilter);
         this.__pickComponentContainer.forEach(function (pickComponent) {
             if (filter.evaluate(pickComponent)) {

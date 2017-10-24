@@ -2,6 +2,8 @@
     var paths = {
         // Attributes
         'compatibility-attribute': './tools/Compatibility/Attributes/Base/CompatibilityAttribute',
+        'pickable': './tools/Compatibility/Attributes/Pickable',
+        'placeable': './tools/Compatibility/Attributes/Placeable',
         // Compatibility Filters
         'compatibility-filter': './tools/Compatibility/Filters/Base/CompatibilityFilter',
         // Input Handlers

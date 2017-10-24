@@ -64,6 +64,11 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Mesh
                 pickComponent.getHandle().pick();
             }
         });
+        this.__inputBuffer = {
+            'mousemove': new LinkedList(PickComponent),
+            'mousedown': new LinkedList(PickComponent),
+            'mouseup': new LinkedList(PickComponent),
+        };
     };
 
     return PickSystem;

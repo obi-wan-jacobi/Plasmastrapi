@@ -13,9 +13,9 @@ function (Factory, CircuitElement, ComponentFactory, EntityFactory, Pose, Mesh, 
         var circuitElement = this.__entityFactory.create(Type);
         validator.validateInstanceType(this, circuitElement, CircuitElement);
         // add components
-        circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Pose())); // pose
-        circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Mesh([new Vertex()]))); // mesh
-        circuitElement.addComponent(this.__componentFactory.createFromDataHandle(new PickHandle(function () { }))); // pick
+        circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Pose()));
+        circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Mesh([new Vertex()])));
+        circuitElement.addComponent(this.__componentFactory.createFromDataHandle(new PickHandle(function () { })));
         return circuitElement;
     };
     CircuitElementFactory.prototype.getContainer = function () { };

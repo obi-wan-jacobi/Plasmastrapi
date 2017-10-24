@@ -1,14 +1,15 @@
-define(['base', 'container', 'entity', 'validator'],
-function (Base, Container, Entity, validator) {
+define(['base', 'container', 'entity', 'ui-element-factory', 'validator'],
+function (Base, Container, Entity, UIElementFactory, validator) {
 
     // CLASS Scene
     Scene.prototype = Object.create(Base.prototype);
     Scene.prototype.constructor = Scene;
-    function Scene() {
+    function Scene(engine) {
         // inherits from
         Base.call(this);
 		// private variables
         this.__entities = new Container(Entity);
+        this.__uiElementFactory = engine.getFactory(UIElementFactory);
     };
     // private methods
     Scene.prototype.__oninit = function () { };

@@ -5,7 +5,7 @@ function (Controller, Scene, EntityFactory, validator) {
 	SceneController.prototype = Object.create(Controller.prototype);
 	SceneController.prototype.constructor = SceneController;
 	function SceneController(engine) {
-	    Controller.call(this);
+	    Controller.call(this, engine);
 	    this.__entityFactory = engine.getFactory(EntityFactory);
 	    this.__scene = null;
 	};
@@ -28,7 +28,7 @@ function (Controller, Scene, EntityFactory, validator) {
 	};
 	SceneController.prototype.setScene = function (SceneType) {
 	    validator.validateClassType(this, SceneType, Scene);
-	    var scene = new SceneType();
+	    var scene = new SceneType(this.__engine);
 	    if (this.__scene) {
 	        this.__updateEntityContainerSubscriptions('remove');
 	        this.__scene.unload();

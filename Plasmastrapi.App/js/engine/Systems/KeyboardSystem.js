@@ -8,8 +8,8 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
         System.call(this);
         this.__viewport = engine.getViewport();
         this.__inputBuffer = {
-            'keydown': new LinkedList('number'),
-            'keyup': new LinkedList('number')
+            'keydown': new LinkedList(KeyboardEvent),
+            'keyup': new LinkedList(KeyboardEvent)
         };
         this.__container = engine.getFactory(ComponentFactory).getContainer(KeyboardComponent);
     };
@@ -23,8 +23,8 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
         this.__viewport.onkeyup = null;
     };
     KeyboardSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
-        return (function (ex) {
-            this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(ex));
+        return (function (e) {
+            this.__inputBuffer[inputBufferKey].push(e);
         }).bind(this);
     };
     // public methods
@@ -43,8 +43,8 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
             }, this);
         }, this);
         this.__inputBuffer = {
-            'keydown': new LinkedList('number'),
-            'keyup': new LinkedList('number')
+            'keydown': new LinkedList(KeyboardEvent),
+            'keyup': new LinkedList(KeyboardEvent)
         };
     };
 

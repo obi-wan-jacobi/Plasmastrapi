@@ -1,5 +1,5 @@
-﻿define(['ui-element', 'ui-element-factory', 'pose-component', 'position', 'mesh-component', 'rectangle', 'pick-component'],
-function (UIElement, UIElementFactory, PoseComponent, Position, MeshComponent, Rectangle, PickComponent) {
+﻿define(['ui-element', 'ui-element-factory', 'pose-component', 'position', 'mesh-component', 'rectangle', 'pick-component', 'scene-controller'],
+    function (UIElement, UIElementFactory, PoseComponent, Position, MeshComponent, Rectangle, PickComponent, SceneController) {
 
     function BackNavigationButton(engine) {
         var self = engine.getFactory(UIElementFactory).create(UIElement);
@@ -11,7 +11,8 @@ function (UIElement, UIElementFactory, PoseComponent, Position, MeshComponent, R
         poseComponenet.getHandle().setPosition(new Position(400, 200));
         meshComponent.getHandle().setData(new Rectangle(200, 50));
         pickComponent.getHandle().setPickAction(function () {
-            console.log('Hi!');
+            var MainMenu = require('main-menu');
+            engine.getController(SceneController).setScene(MainMenu);
         });
     };
 

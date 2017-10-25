@@ -8,8 +8,10 @@ function (validator) {
     Link.prototype.hasNext = function() {
         return (this.next()) ? true : false;
     };
-    Link.prototype.setNext = function(link) {
-        validator.validateInstanceType(this, link, Link);
+    Link.prototype.setNext = function (link) {
+        if (link) {
+            validator.validateInstanceType(this, link, Link);
+        }
         this.__next = link;
     };
     Link.prototype.next = function() {

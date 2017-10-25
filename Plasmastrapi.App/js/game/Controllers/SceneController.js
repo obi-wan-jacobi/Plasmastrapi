@@ -28,12 +28,11 @@ function (Controller, Scene, EntityFactory, validator) {
 	};
 	SceneController.prototype.setScene = function (SceneType) {
 	    validator.validateClassType(this, SceneType, Scene);
-	    var scene = new SceneType(this.__engine);
 	    if (this.__scene) {
 	        this.__updateEntityContainerSubscriptions('remove');
 	        this.__scene.unload();
 	    }
-	    this.__scene = scene;
+	    this.__scene = new SceneType(this.__engine);
 	    if (this.isLoaded) {
 	        this.__updateEntityContainerSubscriptions('add');
 	        this.__scene.load();

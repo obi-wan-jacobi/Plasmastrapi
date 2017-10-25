@@ -17,8 +17,8 @@ function (InputHandler, CuttingToolCursor, Curve, Position, Rectangle, LineDispl
 
     CuttingTool.prototype = Object.create(InputHandler.prototype);
     CuttingTool.prototype.constructor = CuttingTool;
-    function CuttingTool() {
-        InputHandler.call(this, CuttingToolCursor);
+    function CuttingTool(engine) {
+        InputHandler.call(this, engine);
         this.__beforeCuttingBounds = new Rectangle(
             config.CuttingTool.beforeCuttingBounds.width,
             config.CuttingTool.beforeCuttingBounds.height

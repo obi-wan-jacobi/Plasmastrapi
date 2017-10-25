@@ -2,14 +2,10 @@
 
     MenuTool.prototype = Object.create(InputHandler.prototype);
     MenuTool.prototype.constructor = MenuTool;
-    function MenuTool() {
-        InputHandler.call(this);
+    function MenuTool(engine) {
+        InputHandler.call(this, engine);
     };
-    MenuTool.prototype.__oninit = function () {
-        this.__pickController.setFilterByCompatibility();
-    };
-    MenuTool.prototype.onmouseup = function () {
-        this.__pickController.pick();
+    MenuTool.prototype.__onload = function () {
     };
 
     return MenuTool;

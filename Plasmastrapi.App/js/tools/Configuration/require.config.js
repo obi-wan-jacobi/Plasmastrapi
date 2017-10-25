@@ -2,13 +2,11 @@
     var paths = {
         // Attributes
         'compatibility-attribute': './tools/Compatibility/Attributes/Base/CompatibilityAttribute',
-        'pickable': './tools/Compatibility/Attributes/Pickable',
-        'placeable': './tools/Compatibility/Attributes/Placeable',
         // Compatibility Filters
         'compatibility-filter': './tools/Compatibility/Filters/Base/CompatibilityFilter',
         // Input Handlers
         'input-handler': './tools/InputHandlers/Base/InputHandler',
-        'picking-tool': './tools/InputHandlers/PickingTool',
+        'menu-tool': './tools/InputHandlers/MenuTool',
         // Factories
         'helper-factory': './tools/Factories/HelperFactory',
         // Helpers

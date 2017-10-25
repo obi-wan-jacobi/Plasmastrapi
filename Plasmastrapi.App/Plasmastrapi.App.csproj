@@ -170,9 +170,6 @@
     <Content Include="js\game\Configuration\require.config.js" />
     <Content Include="js\tools\Helpers\SelectionBox.js" />
     <Content Include="js\tools\Compatibility\Attributes\Cuttable.js" />
-    <Content Include="js\tools\Compatibility\Attributes\Draggable.js" />
-    <Content Include="js\tools\Compatibility\Attributes\Placeable.js" />
-    <Content Include="js\tools\Compatibility\Attributes\Pickable.js" />
     <Content Include="js\tools\Compatibility\Attributes\Trashable.js" />
     <Content Include="js\tools\Compatibility\Attributes\WireableAsInput.js" />
     <Content Include="js\tools\Compatibility\Attributes\WireableAsOutput.js" />
@@ -185,7 +182,6 @@
     <Content Include="js\tools\Compatibility\Attributes\DesignZone.js" />
     <Content Include="js\tools\Compatibility\Attributes\DestructionZone.js" />
     <Content Include="js\tools\InputHandlers\TrashTool.js" />
-    <Content Include="js\tools\InputHandlers\PickingTool.js" />
     <Content Include="js\tools\InputHandlers\PlacingTool.js" />
     <Content Include="js\tools\InputHandlers\WireTool.js" />
     <Content Include="js\tools\Compatibility\Filters\Base\CompatibilityFilter.js" />

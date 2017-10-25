@@ -42,7 +42,12 @@ function (System, LinkedList, ComponentFactory, KeyboardComponent, Position) {
                 component.getHandle().keyup(keyCode);
             }, this);
         }, this);
+        this.__inputBuffer = {
+            'keydown': new LinkedList('number'),
+            'keyup': new LinkedList('number')
+        };
     };
+
     return KeyboardSystem;
 });
 

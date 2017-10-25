@@ -50,13 +50,13 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Mesh
                 pickComponent.getHandle().unhover();
             }
         });
-        this.__inputBuffer['mousedown'].forEach(function (pickComponent) {
-            var entity = pickComponent.getEntity();
-            var meshComponent = entity.getComponent(MeshComponent);
-            if (meshComponent.getHandle().checkPointCollision(cursor)) {
-                pickComponent.getHandle().pick();
-            }
-        });
+        //this.__inputBuffer['mousedown'].forEach(function (pickComponent) {
+        //    var entity = pickComponent.getEntity();
+        //    var meshComponent = entity.getComponent(MeshComponent);
+        //    if (meshComponent.getHandle().checkPointCollision(cursor)) {
+        //        pickComponent.getHandle().pick();
+        //    }
+        //});
         this.__inputBuffer['mouseup'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
             var meshComponent = entity.getComponent(MeshComponent);

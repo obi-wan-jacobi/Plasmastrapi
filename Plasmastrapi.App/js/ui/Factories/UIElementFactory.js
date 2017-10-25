@@ -1,5 +1,5 @@
-﻿define(['factory', 'ui-element', 'component-factory', 'entity-factory', 'pose', 'rectangle', 'pick-handle', 'placeable', 'validator'],
-    function (Factory, UIElement, ComponentFactory, EntityFactory, Pose, Rectangle, PickHandle, Pickable, validator) {
+﻿define(['factory', 'ui-element', 'component-factory', 'entity-factory', 'pose', 'rectangle', 'pick-handle', 'validator'],
+    function (Factory, UIElement, ComponentFactory, EntityFactory, Pose, Rectangle, PickHandle, validator) {
 
         UIElementFactory.prototype = Object.create(Factory.prototype);
         UIElementFactory.prototype.constructor = UIElementFactory;
@@ -16,8 +16,6 @@
             uiElement.addComponent(this.__componentFactory.createFromPrimitive(new Pose()));
             uiElement.addComponent(this.__componentFactory.createFromPrimitive(new Rectangle()));
             var pickComponent = this.__componentFactory.createFromDataHandle(new PickHandle(function () { }));
-            var pickable = new Pickable();
-            pickable.decorate(pickComponent);
             uiElement.addComponent(pickComponent);
 
             return uiElement;

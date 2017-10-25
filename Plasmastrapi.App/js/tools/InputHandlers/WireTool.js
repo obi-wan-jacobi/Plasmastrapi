@@ -20,8 +20,8 @@ function (InputHandler, TerminalHandle, ToolWire, Wire, PickComponent, PoseCompo
 
     WireTool.prototype = Object.create(InputHandler.prototype);
     WireTool.prototype.constructor = WireTool;
-    function WireTool() {
-        InputHandler.call(this);
+    function WireTool(engine) {
+        InputHandler.call(this, engine);
         this.__selectedTerminal = null;
         this.__toolWire = null;
         this.__terminalHandle = null;

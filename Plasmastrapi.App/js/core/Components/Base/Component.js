@@ -26,10 +26,10 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
     };
     // private methods
     Component.prototype.__onload = function () {
-        this.enable();
+
     };
     Component.prototype.__onunload = function () {
-        this.disable();
+
     };
     Component.prototype.__registerDependencyOnLoad = function (subject, event, observer, callback) {
         var self = this;

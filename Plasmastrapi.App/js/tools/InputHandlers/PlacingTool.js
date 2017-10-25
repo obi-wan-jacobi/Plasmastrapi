@@ -14,8 +14,8 @@ function (InputHandler, PickComponent, PoseComponent, Position, DesignZone, Dest
 
     PlacingTool.prototype = Object.create(InputHandler.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
-    function PlacingTool() {
-        InputHandler.call(this);
+    function PlacingTool(engine) {
+        InputHandler.call(this, engine);
         this.__equippedEntity = null;
         this.__fnShiftKeyMouseUp = null;
         this.__previousCursorPosition = null;

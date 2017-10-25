@@ -17,8 +17,8 @@ function (InputHandler, SelectionBox, TrashToolCursor, Position, Rectangle, Desi
 
     TrashTool.prototype = Object.create(InputHandler.prototype);
     TrashTool.prototype.constructor = TrashTool;
-    function TrashTool() {
-        InputHandler.call(this, TrashToolCursor);
+    function TrashTool(engine) {
+        InputHandler.call(this, engine);
         this.__selectionBox = null;
         this.__beforeSelectionBounds = null;
         this.__anchor = null;

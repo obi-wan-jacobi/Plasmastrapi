@@ -1,10 +1,12 @@
-﻿define(['dictionary', 'compatibility-attribute'],
-function (Dictionary, CompatibilityAttribute) {
+﻿define(['dictionary', 'compatibility-attribute', 'validator'],
+function (Dictionary, CompatibilityAttribute, validator) {
 
-    function CompatibilityFilter(/* attribute1, attribute2, etc. */) {
+    function CompatibilityFilter(/* Attribute1, Attribute2, etc. */) {
         this.__dictionary = new Dictionary(CompatibilityAttribute);
         for (var i = 0, L = arguments.length; i < L; i++) {
-            this.__dictionary.add(arguments[i].constructor.name, arguments[i]);
+            var ClassType = arguments[i];
+            validator.validateClassType(this, ClassType, CompatibilityAttribute)
+            this.__dictionary.add(ClassType.name, new ClassType());
         }
     };
     CompatibilityFilter.prototype.evaluate = function (pickComponent) {

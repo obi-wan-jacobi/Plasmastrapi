@@ -16,7 +16,7 @@ function (Scene, UIElement, PoseComponent, Position, MeshComponent, Rectangle, P
         poseComponenet.getHandle().setPosition(new Position(400, 100));
         meshComponent.getHandle().setData(new Rectangle(200, 50));
         pickComponent.getHandle().setPickAction(function () {
-            window.alert('Hi!');
+            console.log('Hi!');
         });
     };
 

@@ -15,9 +15,9 @@ function (Controller, ComponentFactory, PickComponent, CompatibilityFilter, vali
         validator.validateInstanceType(this, filter, CompatibilityFilter);
         this.__pickComponentContainer.forEach(function (pickComponent) {
             if (filter.evaluate(pickComponent)) {
-                pickComponent.enable();
+                pickComponent.load();
             } else {
-                pickComponent.disable();
+                pickComponent.unload();
             }
         });
     };

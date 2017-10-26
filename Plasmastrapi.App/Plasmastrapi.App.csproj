@@ -121,10 +121,8 @@
     <Content Include="js\Compatibility.js" />
     <Content Include="js\scenes\Configuration\config.js" />
     <Content Include="js\scenes\Configuration\debug.js" />
-    <Content Include="js\scenes\Lab\Buttons\BackNavigationButton.js" />
-    <Content Include="js\scenes\Lab\Lab.js" />
-    <Content Include="js\scenes\MainMenu\Buttons\LabNavigationButton.js" />
-    <Content Include="js\scenes\MainMenu\MainMenu.js" />
+    <Content Include="js\scenes\LabScene.js" />
+    <Content Include="js\scenes\MainMenuScene.js" />
     <Content Include="js\tools\Configuration\require.config.js" />
     <Content Include="js\tools\Factories\HelperFactory.js" />
     <Content Include="js\tools\Helpers\HitBox.js" />
@@ -261,7 +259,6 @@
     <Folder Include="js\circuits\LogicElements\FlipFlops\" />
     <Folder Include="js\circuits\LogicElements\Switches\" />
     <Folder Include="js\core\DataHandles\Physics\" />
-    <Folder Include="js\scenes\MainMenu\Panels\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

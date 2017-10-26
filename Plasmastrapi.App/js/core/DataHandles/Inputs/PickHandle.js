@@ -4,15 +4,15 @@ function (DataHandle, validator) {
     PickHandle.prototype = Object.create(DataHandle.prototype);
     PickHandle.prototype.constructor = PickHandle;
     function PickHandle(fnPickAction) {
-        DataHandle.call(this);
+        fnPickAction = fnPickAction || function () { };
+        DataHandle.call(this, fnPickAction);
         // private variables
-        this.__fnPickAction = fnPickAction;
         this.__isHovered = false;
         this.__isSelected = false;
-        // initialize
-        this.setPickAction(fnPickAction);
     };
-    PickHandle.prototype.setData = function (pickAction) { };
+    PickHandle.prototype.setData = function (pickAction) {
+        this.setPickAction(pickAction);
+    };
     PickHandle.prototype.setDisplaySettings = function () { };
     // public prototypal variables
     Object.defineProperties(PickHandle.prototype, {

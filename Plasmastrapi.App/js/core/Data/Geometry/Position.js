@@ -1,13 +1,9 @@
-﻿define(['primitive', 'validator'], function (Primitive, validator) {
+﻿define(['pose', 'validator'], function (Pose, validator) {
 
-    Position.prototype = Object.create(Primitive.prototype);
+    Position.prototype = Object.create(Pose.prototype);
     Position.prototype.constructor = Position;
     function Position(x, y) {
-        Primitive.call(this);
-        this.x = x === undefined || x === null ? 0 : x;
-        this.y = y === undefined || y === null ? 0 : y;
-        validator.validateInstanceType(this, this.x, 'number');
-        validator.validateInstanceType(this, this.y, 'number');
+        Pose.call(this, x, y);
     };
 
     return Position;

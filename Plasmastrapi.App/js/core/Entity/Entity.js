@@ -1,5 +1,5 @@
-define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin'],
-function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin) {
+define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin', 'primitive', 'display-settings', 'utils'],
+    function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, utils) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
@@ -44,6 +44,26 @@ function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin) {
     };
     Entity.prototype.hasComponent = function (ComponentType) {
         return this.getComponent(ComponentType) ? true : false;
+    };
+    Entity.prototype.set = function (data) {
+        var baseClass = data;
+        if (Object.getPrototypeOf(data).constructor.name === (function () { }).constructor.name) {
+            baseClass = function pick() { };
+        }
+        if (data instanceof Primitive) {
+            while (Object.getPrototypeOf(baseClass).constructor.name !== 'Object' && Object.getPrototypeOf(baseClass).constructor.name !== Primitive.name) {
+                baseClass = Object.getPrototypeOf(baseClass);
+            }
+        }
+        var modulePrefix = utils.modules.getModulePrefix(baseClass);
+        var ComponentType = utils.modules.require(`${modulePrefix}-component`);
+        var component = this.getComponent(ComponentType);
+        if (data instanceof DisplaySettings) {
+            var DisplaySettingsType = utils.modules.require(`${modulePrefix}-display-settings`);
+            component.getHandle().setDisplaySettings(data);
+        } else {
+            component.getHandle().setData(data);
+        }
     };
 
     return Entity;

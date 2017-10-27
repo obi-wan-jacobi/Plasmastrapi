@@ -59,12 +59,12 @@
         'linked-list': './core/DataStructures/LinkedList',
         // Entity
         'entity': './core/Entity/Entity',
-        // Events
-        'emitter': './core/Events/Emitter',
+        // Emitter
+        'emitter': './core/Emitter/Emitter',
         //Event Mixins
-        'destructible-mixin': './core/Events/Mixins/Destructible',
-        'enableable': './core/Events/Mixins/Enableable',
-        'loadable-mixin': './core/Events/Mixins/Loadable'
+        'destructible-mixin': './core/Emitter/Mixins/Destructible',
+        'enableable': './core/Emitter/Mixins/Enableable',
+        'loadable-mixin': './core/Emitter/Mixins/Loadable'
     };
     require.config({ paths: paths });
     return paths;

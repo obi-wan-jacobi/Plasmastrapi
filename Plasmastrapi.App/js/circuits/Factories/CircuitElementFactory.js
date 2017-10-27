@@ -10,12 +10,8 @@ function (Factory, CircuitElement, ComponentFactory, EntityFactory, Pose, Mesh, 
     };
     // public methods
     CircuitElementFactory.prototype.create = function (Type) {
+        validator.validateClassType(this, Type, CircuitElement);
         var circuitElement = this.__entityFactory.create(Type);
-        validator.validateInstanceType(this, circuitElement, CircuitElement);
-        // add components
-        circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Pose()));
-        circuitElement.addComponent(this.__componentFactory.createFromPrimitive(new Mesh([new Vertex()])));
-        circuitElement.addComponent(this.__componentFactory.createFromDataHandle(new PickHandle(function () { })));
         return circuitElement;
     };
     CircuitElementFactory.prototype.getContainer = function () { };

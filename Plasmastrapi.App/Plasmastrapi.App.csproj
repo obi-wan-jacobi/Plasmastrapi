@@ -74,11 +74,12 @@
     <Content Include="js\circuits\Configuration\require.config.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
     <Content Include="js\core\Configuration\constants.js" />
+    <Content Include="js\core\Configuration\Lab.html" />
     <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\KeyboardHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\PickHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\PoseDisplaySettings.js" />
-    <Content Include="js\core\Events\Mixins\Enableable.js" />
+    <Content Include="js\core\Emitter\Mixins\Enableable.js" />
     <Content Include="js\core\Configuration\require.config.js" />
     <Content Include="js\core\Data\Base\DisplaySettings.js" />
     <Content Include="js\core\Data\Base\Primitive.js" />
@@ -142,9 +143,9 @@
     <Content Include="js\core\Components\Graphics\TextComponent.js" />
     <Content Include="js\engine\Configuration\config.js" />
     <Content Include="js\engine\Configuration\debug.js" />
-    <Content Include="js\core\Events\Mixins\Destructible.js" />
-    <Content Include="js\core\Events\Mixins\Loadable.js" />
-    <Content Include="js\core\Events\Mixins\Pausable.js" />
+    <Content Include="js\core\Emitter\Mixins\Destructible.js" />
+    <Content Include="js\core\Emitter\Mixins\Loadable.js" />
+    <Content Include="js\core\Emitter\Mixins\Pausable.js" />
     <Content Include="js\engine\Configuration\require.config.js" />
     <Content Include="js\engine\Systems\PickSystem.js" />
     <Content Include="js\game\Assets\assets.js" />
@@ -232,7 +233,7 @@
     <Content Include="js\core\Components\Base\Component.js" />
     <Content Include="js\game\Controllers\Base\Controller.js" />
     <Content Include="js\core\Entity\Entity.js" />
-    <Content Include="js\core\Events\Emitter.js" />
+    <Content Include="js\core\Emitter\Emitter.js" />
     <Content Include="js\engine\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Containers\Base\Container.js" />
     <Content Include="js\scenes\Base\Scene.js" />

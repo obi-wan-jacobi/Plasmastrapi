@@ -11,8 +11,8 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, ImageH
     };
     // public methods
     LogicElementFactory.prototype.create = function (LogicElementType) {
+        utils.validator.validateClassType(this, LogicElementType, LogicElement);
         var logicElement = this.__circuitElementFactory.create(LogicElementType);
-        utils.validator.validateInstanceType(this, logicElement, LogicElement);
         // add components
         var image = this.__assetMap.get(utils.modules.getModulePrefix(LogicElementType, null));
         var displaySettings = new ImageDisplaySettings(config.LogicElement.displayLayer, null, null, image.width, image.height, image.width, image.height);

@@ -1,5 +1,5 @@
-﻿define(['factory', 'ui-element', 'component-factory', 'entity-factory', 'validator'],
-    function (Factory, UIElement, ComponentFactory, EntityFactory, validator) {
+﻿define(['factory', 'ui-element', 'component-factory', 'entity-factory', 'text-handle', 'text', 'validator'],
+    function (Factory, UIElement, ComponentFactory, EntityFactory, TextHandle, Text, validator) {
 
         UIElementFactory.prototype = Object.create(Factory.prototype);
         UIElementFactory.prototype.constructor = UIElementFactory;
@@ -12,6 +12,7 @@
         UIElementFactory.prototype.create = function (Type) {
             validator.validateClassType(this, Type, UIElement);
             var uiElement = this.__entityFactory.create(Type);
+            uiElement.addComponent(this.__componentFactory.createFromPrimitive(new Text('')));
             return uiElement;
         };
         UIElementFactory.prototype.getContainer = function () { };

@@ -74,7 +74,7 @@
     <Content Include="js\circuits\Configuration\require.config.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
     <Content Include="js\core\Configuration\constants.js" />
-    <Content Include="js\core\Configuration\Lab.html" />
+    <Content Include="Lab.html" />
     <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\KeyboardHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\PickHandle.js" />
@@ -127,7 +127,6 @@
     <Content Include="js\tools\Configuration\require.config.js" />
     <Content Include="js\tools\Factories\HelperFactory.js" />
     <Content Include="js\tools\Helpers\HitBox.js" />
-    <Content Include="js\tools\InputHandlers\MenuTool.js" />
     <Content Include="js\ui\Base\UIElement.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />

@@ -14,7 +14,7 @@
 
         'image-component': './core/Components/Graphics/ImageComponent',
         'sprite-component': './core/Components/Graphics/SpriteComponent',
-        'text-label-component': './core/Components/Graphics/TextComponent',
+        'text-component': './core/Components/Graphics/TextComponent',
 
         'keyboard-component': './core/Components/Inputs/KeyboardComponent',
         'mouse-component': './core/Components/Inputs/MouseComponent',

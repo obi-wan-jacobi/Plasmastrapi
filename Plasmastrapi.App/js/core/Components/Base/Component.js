@@ -5,12 +5,13 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
     Component.prototype = Object.create(Emitter.prototype);
     Component.prototype.constructor = Component;
     function Component(dataHandle) {
-        if (dataHandle) {
-            // validate data handle for this component
-            var modulePrefix = utils.modules.getModulePrefix(this, 'Component');
-            var HandleType = utils.modules.require(`${modulePrefix}-handle`);
-            utils.validator.validateInstanceType(this, dataHandle, HandleType);
+        // validate data handle for this component
+        var modulePrefix = utils.modules.getModulePrefix(this, 'Component');
+        var HandleType = utils.modules.require(`${modulePrefix}-handle`);
+        if (!dataHandle) {
+            dataHandle = new HandleType();
         }
+        utils.validator.validateInstanceType(this, dataHandle, HandleType);
         // private variables
         this.__entity = null;
         this.__handle = dataHandle;

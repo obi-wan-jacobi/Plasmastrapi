@@ -6,6 +6,7 @@ function (Primitive, validator) {
     function Text(string) {
         Primitive.call(this);
         validator.validateInstanceType(this, string, 'string');
+        this.string = string;
     };
 
     return Text;

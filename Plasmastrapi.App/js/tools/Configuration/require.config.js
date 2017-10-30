@@ -6,7 +6,6 @@
         'compatibility-filter': './tools/Compatibility/Filters/Base/CompatibilityFilter',
         // Input Handlers
         'input-handler': './tools/InputHandlers/Base/InputHandler',
-        'menu-tool': './tools/InputHandlers/MenuTool',
         // Factories
         'helper-factory': './tools/Factories/HelperFactory',
         // Helpers

@@ -1,5 +1,5 @@
-define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin', 'primitive', 'display-settings', 'utils'],
-    function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, utils) {
+define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin', 'primitive', 'display-settings', 'pose-component', 'position', 'utils'],
+    function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, PoseComponent, Position, utils) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
@@ -16,7 +16,7 @@ define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mi
     };
     // public methods
     Entity.prototype.addDependency = function (dependency) {
-        validator.validateInstanceType(this, dependency, Entity);
+        utils.validator.validateInstanceType(this, dependency, Entity);
         // wire-up event subscriptions
         dependency.addEventListener('onload', this, this.load);
         dependency.addEventListener('onunload', this, this.unload);
@@ -24,7 +24,7 @@ define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mi
     };
     Entity.prototype.addParent = function (parent) {
         if (this.__parent) {
-            validator.throw(this, 'addParent', 'This entity already has a parent');
+            utils.validator.throw(this, 'addParent', 'This entity already has a parent');
         }
         this.addDependency(parent);
         this.__parent = parent;
@@ -64,6 +64,22 @@ define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mi
         } else {
             component.getHandle().setData(data);
         }
+    };
+    Entity.prototype.follow = function (entityToFollow, positionOffset) {
+        var poseComponentToFollow = entityToFollow.getComponent(PoseComponent)
+        var poseComponent = this.getComponent(PoseComponent);
+        poseComponentToFollow.addEventListener('onpositionchange', this, function (newPosition) {
+            var position = poseComponentToFollow.getHandle().getPosition();
+            var orientation = poseComponentToFollow.getHandle().getOrientation();
+            var templateX = positionOffset.x;
+            var templateY = positionOffset.y;
+            var x = templateX * Math.cos(orientation) - templateY * Math.sin(orientation) + position.x;
+            var y = templateX * Math.sin(orientation) + templateY * Math.cos(orientation) + position.y;
+            poseComponent.getHandle().setPosition(new Position(x, y));
+        });
+        poseComponentToFollow.addEventListener('onorientationchange', poseComponent.getHandle(), function (newOrientation) {
+            poseComponent.getHandle().setOrientation(newOrientation);
+        });
     };
 
     return Entity;

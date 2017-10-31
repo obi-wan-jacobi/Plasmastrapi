@@ -1,5 +1,5 @@
-﻿define(['terminal', 'output-terminal'],
-function (Terminal, OutputTerminal) {
+﻿define(['terminal', 'output-terminal', 'validator'],
+function (Terminal, OutputTerminal, validator) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);

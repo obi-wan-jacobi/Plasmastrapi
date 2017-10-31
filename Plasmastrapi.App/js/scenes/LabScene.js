@@ -47,6 +47,10 @@
         andgate.set(new Position(25, 25));
         andgate.set(new Rectangle(30, 30));
 
+        var andgate2 = logicElementFactory.create(modules.require('and-gate'));
+        andgate2.set(new Position(450, 350));
+        andgate2.set(new Rectangle(30, 30));
+
         var nandgate = logicElementFactory.create(modules.require('nand-gate'));
         nandgate.set(new Position(65, 25));
         nandgate.set(new Rectangle(30, 30));

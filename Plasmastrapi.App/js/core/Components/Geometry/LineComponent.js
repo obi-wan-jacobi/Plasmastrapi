@@ -11,7 +11,7 @@ function (Component, MeshComponent, PoseComponent, LineHandle) {
         this.__tailPose = tailPoseComponent;
         this.__headPose = headPoseComponent;
         // inherits from
-        Component.call(this, new LineHandle(this.__tailPose.Position, this.__headPose.Position));
+        Component.call(this, new LineHandle(this.__tailPose.getHandle().getPosition, this.__headPose.getHandle().getPosition()));
         // events
 		this.registerEvents(
             'onpositionchange',

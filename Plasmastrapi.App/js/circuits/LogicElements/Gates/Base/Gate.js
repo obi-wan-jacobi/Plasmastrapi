@@ -6,6 +6,7 @@ function (LogicElement) {
     Gate.prototype.constructor = Gate;
     function Gate() {
         LogicElement.call(this);
+        this.registerEvents('onstatechange');
     };
     
     return Gate;

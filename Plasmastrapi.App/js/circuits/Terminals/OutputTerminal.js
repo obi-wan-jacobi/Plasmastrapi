@@ -13,7 +13,8 @@ function (Terminal, CIRCUITS) {
         );
     };
     // private methods
-    OutputTerminal.prototype.__oninit = function () {
+    OutputTerminal.prototype.addParent = function (parent) {
+        Terminal.prototype.addParent.call(this, parent);
         // initialize pass-through event handling
         this.__parent.addEventListener('onstatechange', this, this.__$onstatechange);
     };

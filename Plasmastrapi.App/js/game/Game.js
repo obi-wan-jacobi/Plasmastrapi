@@ -27,10 +27,11 @@ function (Engine, Dictionary, Controller, InputController, PickController, Scene
     };
     Game.prototype.__registerFactories = function () {
         Engine.prototype.__registerFactories.call(this);
+        // order matters
         this.__addFactory(HelperFactory);
         this.__addFactory(CircuitElementFactory);
-        this.__addFactory(LogicElementFactory);
         this.__addFactory(TerminalFactory);
+        this.__addFactory(LogicElementFactory);
         this.__addFactory(UIElementFactory);
     };
     Game.prototype.__registerSystems = function () {

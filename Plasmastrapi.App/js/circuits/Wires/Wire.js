@@ -12,10 +12,6 @@ function (WireElement, InputTerminal, OutputTerminal, LineComponent) {
         this.inputTerminal = inputTerminal;
         // inherits from
         WireElement.call(this, outputTerminal, inputTerminal);
-        // events
-        this.registerEvents(
-            'onstatechange'
-        );
         // initialize dependencies
         this.addDependency(this.inputTerminal);
         this.addDependency(this.outputTerminal);

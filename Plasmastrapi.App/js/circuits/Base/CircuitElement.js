@@ -6,6 +6,7 @@ function (Entity) {
     CircuitElement.prototype.constructor = CircuitElement;
     function CircuitElement() {
         Entity.call(this);
+        this.registerEvents('onstatechange');
     };
 
     return CircuitElement;

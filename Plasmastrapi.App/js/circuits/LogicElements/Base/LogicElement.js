@@ -31,7 +31,7 @@ function (CircuitElement, InputTerminal, OutputTerminal, CIRCUITS, validator) {
             validator.throw(this, 'setState', `State cannot be set to value ${state}`);
         }
         this.__state = state;
-        this.emit('onupdatestate');
+        this.emit('onstatechange');
     };
     
     return LogicElement;

@@ -1,11 +1,11 @@
-﻿define(['entity', 'line-component', 'pose-component'],
-function (Entity, LineComponent, PoseComponent) {
+﻿define(['circuit-element', 'line-component', 'pose-component'],
+function (CircuitElement, LineComponent, PoseComponent) {
 
     // CLASS WireElement
-    WireElement.prototype = Object.create(Entity.prototype);
+    WireElement.prototype = Object.create(CircuitElement.prototype);
     WireElement.prototype.constructor = WireElement;
     function WireElement(tailObject, headObject) {
-        Entity.call(this);
+        CircuitElement.call(this);
         var lineComponent = new LineComponent(
             tailObject.getComponent(PoseComponent),
             headObject.getComponent(PoseComponent)

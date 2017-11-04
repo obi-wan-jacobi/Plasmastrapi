@@ -68,7 +68,7 @@ define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mi
     Entity.prototype.follow = function (entityToFollow, positionOffset) {
         var poseComponentToFollow = entityToFollow.getComponent(PoseComponent)
         var poseComponent = this.getComponent(PoseComponent);
-        poseComponentToFollow.addEventListener('onpositionchange', this, function (newPosition) {
+        poseComponentToFollow.addEventListener('onpositionchange', this, function () {
             var position = poseComponentToFollow.getHandle().getPosition();
             var orientation = poseComponentToFollow.getHandle().getOrientation();
             var templateX = positionOffset.x;

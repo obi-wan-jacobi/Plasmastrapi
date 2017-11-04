@@ -1,5 +1,5 @@
-﻿define(['data-handle', 'line', 'line-display-settings', 'position', 'rectangle', 'core-constants', 'validator'],
-function (DataHandle, Line, LineDisplaySettings, Position, Rectangle, CORE, validator) {
+﻿define(['data-handle', 'line', 'line-display-settings', 'position', 'vertex', 'rectangle', 'core-constants', 'validator'],
+function (DataHandle, Line, LineDisplaySettings, Position, Vertex, Rectangle, CORE, validator) {
 
     LineHandle.prototype = Object.create(DataHandle.prototype);
     LineHandle.prototype.constructor = LineHandle;
@@ -35,6 +35,12 @@ function (DataHandle, Line, LineDisplaySettings, Position, Rectangle, CORE, vali
             this.getLength() * CORE.LineHandle.lengthModifier,
             CORE.LineHandle.collisionWidth
         );
+    };
+    LineHandle.prototype.setTailPosition = function (position) {
+        this.__data.tailVertex = new Vertex(position.x, position.y);
+    };
+    LineHandle.prototype.setHeadPosition = function (position) {
+        this.__data.headVertex = new Vertex(position.x, position.y);
     };
     LineHandle.prototype.draw = function (ctx) {
         // draw line and apply options

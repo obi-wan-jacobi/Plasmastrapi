@@ -16,8 +16,7 @@ function (Factory, CircuitElementFactory, Terminal, ComponentFactory, ImageHandl
         // add components
         var image = this.__assetMap.get(utils.modules.getModulePrefix(TerminalType, null));
         var displaySettings = new ImageDisplaySettings(config.Terminal.displayLayer, null, null, image.width, image.height, image.width, image.height);
-        var component = this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)); // image
-        terminal.addComponent(component);
+        terminal.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
         return terminal;
     };
     TerminalFactory.prototype.getContainer = function () { };

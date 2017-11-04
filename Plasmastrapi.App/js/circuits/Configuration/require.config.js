@@ -26,6 +26,7 @@
         'circuit-element-factory': './circuits/Factories/CircuitElementFactory',
         'logic-element-factory': './circuits/Factories/LogicElementFactory',
         'terminal-factory': './circuits/Factories/TerminalFactory',
+        'wire-factory': './circuits/Factories/WireFactory',
         // Configuration
         'circuits-debug': './circuits/Configuration/debug',
         'circuits-config': './circuits/Configuration/config',

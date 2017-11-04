@@ -7,10 +7,6 @@ function (Terminal, CIRCUITS) {
     function OutputTerminal() {
         // inherits from
         Terminal.call(this);
-        // events
-        this.registerEvents(
-            'onstatechange'
-        );
     };
     // private methods
     OutputTerminal.prototype.addParent = function (parent) {

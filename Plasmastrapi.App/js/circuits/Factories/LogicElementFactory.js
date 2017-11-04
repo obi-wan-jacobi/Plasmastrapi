@@ -1,5 +1,5 @@
-﻿define(['factory', 'circuit-element-factory', 'logic-element', 'component-factory', 'terminal-factory', 'input-terminal', 'output-terminal', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
-function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, TerminalFactory, InputTerminal, OutputTerminal, Position, ImageHandle, ImageDisplaySettings, utils, config) {
+﻿define(['factory', 'circuit-element-factory', 'logic-element', 'component-factory', 'terminal-factory', 'wire-factory', 'input-terminal', 'output-terminal', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
+function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, TerminalFactory, WireFactory, InputTerminal, OutputTerminal, Position, ImageHandle, ImageDisplaySettings, utils, config) {
 
     LogicElementFactory.prototype = Object.create(Factory.prototype);
     LogicElementFactory.prototype.constructor = LogicElementFactory;
@@ -8,7 +8,15 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, Termin
         this.__componentFactory = game.getFactory(ComponentFactory);
         this.__circuitElementFactory = game.getFactory(CircuitElementFactory);
         this.__terminalFactory = game.getFactory(TerminalFactory);
+        this.__wireFactory = game.getFactory(WireFactory);
         this.__assetMap = game.getAssetMap();
+    };
+    // private methods
+    LogicElementFactory.prototype.__addTerminal = function (logicElement, TerminalType, terminalPositionOffset, wireAnchorPositionOffset) {
+        var terminal = this.__terminalFactory.create(TerminalType)
+        terminal.addParent(logicElement);
+        terminal.follow(logicElement, terminalPositionOffset);
+        this.__wireFactory.createTerminalWire(terminal, wireAnchorPositionOffset);
     };
     // public methods
     LogicElementFactory.prototype.create = function (LogicElementType) {
@@ -17,15 +25,10 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, Termin
         // add components
         var image = this.__assetMap.get(utils.modules.getModulePrefix(LogicElementType, null));
         var displaySettings = new ImageDisplaySettings(config.LogicElement.displayLayer, null, null, image.width, image.height, image.width, image.height);
-        var component = this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)); // image
-        logicElement.addComponent(component);
+        logicElement.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
         // add terminals
-        var inputTerminal = this.__terminalFactory.create(InputTerminal);
-        var outputTerminal = this.__terminalFactory.create(OutputTerminal);
-        inputTerminal.addParent(logicElement);
-        outputTerminal.addParent(logicElement);
-        inputTerminal.follow(logicElement, new Position(0, 35));
-        outputTerminal.follow(logicElement, new Position(0, -35));
+        this.__addTerminal(logicElement, InputTerminal, new Position(0, 35), new Position(0, -20));
+        this.__addTerminal(logicElement, OutputTerminal, new Position(0, -35), new Position(0, 20));
         return logicElement;
     };
     LogicElementFactory.prototype.getContainer = function () { };

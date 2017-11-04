@@ -1,5 +1,5 @@
-﻿define(['data-handle', 'pose', 'position', 'pose-display-settings', 'utils'],
-function (DataHandle, Pose, Position, PoseDisplaySettings, utils) {
+﻿define(['data-handle', 'pose', 'position', 'vertex', 'pose-display-settings', 'utils'],
+function (DataHandle, Pose, Position, Vertex, PoseDisplaySettings, utils) {
 
     PoseHandle.prototype = Object.create(DataHandle.prototype);
     PoseHandle.prototype.constructor = PoseHandle;
@@ -25,6 +25,9 @@ function (DataHandle, Pose, Position, PoseDisplaySettings, utils) {
     };
     PoseHandle.prototype.getPosition = function () {
         return new Position(this.__data.x, this.__data.y);
+    };
+    PoseHandle.prototype.getPositionAsVertex = function () {
+        return new Vertex(this.__data.x, this.__data.y);
     };
     PoseHandle.prototype.setPosition = function (newPosition) {
         if (!(newPosition instanceof Position)) {

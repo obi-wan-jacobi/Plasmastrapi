@@ -6,7 +6,7 @@ function (WireElement) {
     TerminalWire.prototype = Object.create(WireElement.prototype);
     TerminalWire.prototype.constructor = TerminalWire;
     function TerminalWire(terminalWireAnchor, terminal) {
-        WireElement.call(this, terminalWireAnchor, terminal);
+        WireElement.call(this);
     };
     
     return TerminalWire;

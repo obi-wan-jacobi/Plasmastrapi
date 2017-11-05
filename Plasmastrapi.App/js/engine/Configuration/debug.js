@@ -4,7 +4,7 @@
 
     $.DEBUG = false;
 
-    $.MeshComponent = {
+    $.PolygonComponent = {
         vertexStrokeStyle: '#00FFFF',
         minVertextStrokeStyle: 'yellow',
         innerCollisionStrokeStyle: 'red',

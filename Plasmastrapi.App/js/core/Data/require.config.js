@@ -2,7 +2,7 @@
     require.config({
         paths: {
             // Geometry
-            'mesh': './data/Geometry/Mesh',
+            'polygon': './data/Geometry/Polygon',
             'pose': './data/Geometry/Pose',
             'position': './data/Geometry/Position',
             'rectangle': './data/Geometry/Rectangle',
@@ -10,7 +10,7 @@
             // Graphics
             'image-display-settings': './data/Graphics/DisplaySettings/ImageDisplaySettings',
             'line-display-settings': './data/Graphics/DisplaySettings/LineDisplaySettings',
-            'mesh-display-settings': './data/Graphics/DisplaySettings/MeshDisplaySettings',
+            'polygon-display-settings': './data/Graphics/DisplaySettings/PolygonDisplaySettings',
             'rectangle-display-settings': './data/Graphics/DisplaySettings/RectangleDisplaySettings',
             'text-display-settings': './data/Graphics/DisplaySettings/TextDisplaySettings',
             // Physics

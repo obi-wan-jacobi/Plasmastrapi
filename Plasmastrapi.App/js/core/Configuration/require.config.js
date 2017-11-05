@@ -9,7 +9,7 @@
 
         'curve-component': './core/Components/Geometry/CurveComponent',
         'line-component': './core/Components/Geometry/LineComponent',
-        'mesh-component': './core/Components/Geometry/MeshComponent',
+        'polygon-component': './core/Components/Geometry/PolygonComponent',
         'pose-component': './core/Components/Geometry/PoseComponent',
 
         'image-component': './core/Components/Graphics/ImageComponent',
@@ -24,14 +24,14 @@
         'primitive': './core/Data/Base/Primitive',
         'curve': './core/Data/Geometry/Curve',
         'line': './core/Data/Geometry/Line',
-        'mesh': './core/Data/Geometry/Mesh',
+        'polygon': './core/Data/Geometry/Polygon',
         'pose': './core/Data/Geometry/Pose',
         'position': './core/Data/Geometry/Position',
         'rectangle': './core/Data/Geometry/Rectangle',
         'vertex': './core/Data/Geometry/Vertex',
         'image-display-settings': './core/Data/Graphics/DisplaySettings/ImageDisplaySettings',
         'line-display-settings': './core/Data/Graphics/DisplaySettings/LineDisplaySettings',
-        'mesh-display-settings': './core/Data/Graphics/DisplaySettings/MeshDisplaySettings',
+        'polygon-display-settings': './core/Data/Graphics/DisplaySettings/PolygonDisplaySettings',
         'pose-display-settings': './core/Data/Graphics/DisplaySettings/PoseDisplaySettings',
         'text-display-settings': './core/Data/Graphics/DisplaySettings/TextDisplaySettings',
         'text': './core/Data/Graphics/Text',
@@ -42,7 +42,7 @@
 
         'curve-handle': './core/DataHandles/Geometry/CurveHandle',
         'line-handle': './core/DataHandles/Geometry/LineHandle',
-        'mesh-handle': './core/DataHandles/Geometry/MeshHandle',
+        'polygon-handle': './core/DataHandles/Geometry/PolygonHandle',
         'pose-handle': './core/DataHandles/Geometry/PoseHandle',
 
         'image-handle': './core/DataHandles/Graphics/ImageHandle',

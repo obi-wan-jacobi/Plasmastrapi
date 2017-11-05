@@ -33,9 +33,9 @@ tech debt:
 	- JSDocs/automated documentation
 	- unit tests
 - optimization
-	- meshhandle point-collision checking is disgusting
+	- polygonhandle point-collision checking is disgusting
 	- tool compatibility filtering --> sort pickable components using a tree?
-	- MeshComponent --> combine translate + rotate into one function (leverage a single for-loop)?
+	- PolygonComponent --> combine translate + rotate into one function (leverage a single for-loop)?
 	- Dictionary --> store this.__end to avoid O(n) for this.add
 	- Mouse/Keyboard/Pick system 'inputBuffer' consolidation into a single LoopOnce-->forEach
 	- entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)

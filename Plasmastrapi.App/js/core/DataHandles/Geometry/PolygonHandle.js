@@ -1,28 +1,28 @@
-﻿define(['data-handle', 'mesh', 'mesh-display-settings', 'pose-handle', 'position', 'validator'],
-function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator) {
+﻿define(['data-handle', 'polygon', 'polygon-display-settings', 'pose-handle', 'position', 'validator'],
+function (DataHandle, Polygon, PolygonDisplaySettings, PoseHandle, Position, validator) {
 
-    MeshHandle.prototype = Object.create(DataHandle.prototype);
-    MeshHandle.prototype.constructor = MeshHandle;
-    function MeshHandle(mesh, displaySettings) {
+    PolygonHandle.prototype = Object.create(DataHandle.prototype);
+    PolygonHandle.prototype.constructor = PolygonHandle;
+    function PolygonHandle(polygon, displaySettings) {
         this.__position = new Position();
-        DataHandle.call(this, mesh, displaySettings, Mesh, MeshDisplaySettings);
+        DataHandle.call(this, polygon, displaySettings, Polygon, PolygonDisplaySettings);
     };
-    MeshHandle.prototype.__updateMinMaxValues = function (mesh, i) {
+    PolygonHandle.prototype.__updateMinMaxValues = function (polygon, i) {
         // get min/max X and min/max Y for collision checking purposes
-        if (this.__maxX < mesh.vertices[i].x) {
-            this.__maxX = mesh.vertices[i].x;
+        if (this.__maxX < polygon.vertices[i].x) {
+            this.__maxX = polygon.vertices[i].x;
         }
-        if (this.__minX > mesh.vertices[i].x) {
-            this.__minX = mesh.vertices[i].x;
+        if (this.__minX > polygon.vertices[i].x) {
+            this.__minX = polygon.vertices[i].x;
         }
-        if (this.__maxY < mesh.vertices[i].y) {
-            this.__maxY = mesh.vertices[i].y;
+        if (this.__maxY < polygon.vertices[i].y) {
+            this.__maxY = polygon.vertices[i].y;
         }
-        if (this.__minY > mesh.vertices[i].y) {
-            this.__minY = mesh.vertices[i].y;
+        if (this.__minY > polygon.vertices[i].y) {
+            this.__minY = polygon.vertices[i].y;
         }
     };
-    MeshHandle.prototype.setData = function (data) {
+    PolygonHandle.prototype.setData = function (data) {
         DataHandle.prototype.setData.call(this, data);
         this.__minX = null;
         this.__minY = null;
@@ -32,29 +32,29 @@ function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator
         this.__lastCollisionPoint = null;
         this.translate(this.__position);
     };
-    MeshHandle.prototype.translate = function (newPosition) {
+    PolygonHandle.prototype.translate = function (newPosition) {
         if (newPosition instanceof PoseHandle) {
             newPosition = newPosition.getPosition();
         }
         validator.validateInstanceType(this, newPosition, Position);
-        var mesh = this.__data;
+        var polygon = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
-        for (var i = 0, L = mesh.vertices.length; i < L; i++) {
+        for (var i = 0, L = polygon.vertices.length; i < L; i++) {
             var templateX = this.__template.vertices[i].x;
             var templateY = this.__template.vertices[i].y;
-            mesh.vertices[i].x = (newPosition.x + templateX);
-            mesh.vertices[i].y = (newPosition.y + templateY);
-            this.__updateMinMaxValues(mesh, i);
+            polygon.vertices[i].x = (newPosition.x + templateX);
+            polygon.vertices[i].y = (newPosition.y + templateY);
+            this.__updateMinMaxValues(polygon, i);
         };
         this.__position = newPosition;
     };
-    MeshHandle.prototype.rotate = function (newAngle) {
+    PolygonHandle.prototype.rotate = function (newAngle) {
         var position = this.__position;
-        var mesh = this.__data;
+        var polygon = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
-        for (var i = 0, L = mesh.vertices.length; i < L; i++) {
+        for (var i = 0, L = polygon.vertices.length; i < L; i++) {
             // find 'natural' vertex position relative to origin
             var templateX = this.__template.vertices[i].x;
             var templateY = this.__template.vertices[i].y;
@@ -62,26 +62,26 @@ function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator
             var x = templateX * Math.cos(newAngle) - templateY * Math.sin(newAngle);
             var y = templateX * Math.sin(newAngle) + templateY * Math.cos(newAngle);
             // re-translate vertex back to current relative position
-            mesh.vertices[i].x = position.x + x;
-            mesh.vertices[i].y = position.y + y;
-            this.__updateMinMaxValues(mesh, i);
+            polygon.vertices[i].x = position.x + x;
+            polygon.vertices[i].y = position.y + y;
+            this.__updateMinMaxValues(polygon, i);
         };
     };
     // public methods
-    MeshHandle.prototype.checkMeshCollision = function (mesh) {
+    PolygonHandle.prototype.checkPolygonCollision = function (polygon) {
 
     };
-    MeshHandle.prototype.checkPointCollision = function (point) {
+    PolygonHandle.prototype.checkPointCollision = function (point) {
         this.__lastCollisionPoint = point;
-        // find max/min x and y coordinates for a rectangle that bounds the entire mesh
-        var mesh = this.__data;
+        // find max/min x and y coordinates for a rectangle that bounds the entire polygon
+        var polygon = this.__data;
         var minX = this.__minX, maxX = this.__maxX, minY = this.__minY, maxY = this.__maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
             // trace ray from point to (minX, minY)
-            // if the number of intersections between a ray and the mesh's sides is odd --> collision detected		
+            // if the number of intersections between a ray and the polygon's sides is odd --> collision detected		
             var numberOfIntersections = 0;
-            var vertices = [].concat(mesh.vertices, mesh.vertices[0]);
+            var vertices = [].concat(polygon.vertices, polygon.vertices[0]);
             var m_ray = (point.y - minY) / (point.x - minX);
             var b_ray = point.y - m_ray * point.x;
             for (var i = 0, L = vertices.length - 1; i < L; i++) {
@@ -113,7 +113,7 @@ function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator
         }
         return false;
     };
-    MeshHandle.prototype.draw = function (ctx) {
+    PolygonHandle.prototype.draw = function (ctx) {
         var vertices = this.__data.vertices;
         var displaySettings = this.__displaySettings;
         ctx.save();
@@ -134,8 +134,8 @@ function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator
         ctx.restore();
     };
     // debugging
-    MeshHandle.prototype.drawDebug = function (ctx) {
-        var debug = config.debug.MeshHandle;
+    PolygonHandle.prototype.drawDebug = function (ctx) {
+        var debug = config.debug.PolygonHandle;
         var vertices = this.__data.vertices;
         ctx.save();
         for (var i = 0, L = vertices.length; i < L; i++) {
@@ -158,18 +158,18 @@ function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator
             ctx.restore();
         }
     };
-    MeshHandle.prototype.drawPointCollision = function (ctx) {
-        var debug = config.debug.MeshHandle;
+    PolygonHandle.prototype.drawPointCollision = function (ctx) {
+        var debug = config.debug.PolygonHandle;
         var point = this.__lastCollisionPoint;
-        // find max/min x and y coordinates for a rectangle that bounds the entire mesh
-        var mesh = this.__data;
+        // find max/min x and y coordinates for a rectangle that bounds the entire polygon
+        var polygon = this.__data;
         var minX = this.__minX, maxX = this.__maxX, minY = this.__minY, maxY = this.__maxY;
         // check if we're inside bounding rectangle
         if (point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY) {
             // trace ray from point to (minX, minY)
-            // if the number of intersections between a ray and the mesh's sides is odd --> collision detected		
+            // if the number of intersections between a ray and the polygon's sides is odd --> collision detected		
             var numberOfIntersections = 0;
-            var vertices = [].concat(mesh.vertices, mesh.vertices[0]);
+            var vertices = [].concat(polygon.vertices, polygon.vertices[0]);
             var m_ray = (point.y - minY) / (point.x - minX);
             var b_ray = point.y - m_ray * point.x;
             for (var i = 0, L = vertices.length - 1; i < L; i++) {
@@ -213,5 +213,5 @@ function (DataHandle, Mesh, MeshDisplaySettings, PoseHandle, Position, validator
         return false;
     };
 
-    return MeshHandle;
+    return PolygonHandle;
 });

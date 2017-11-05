@@ -14,7 +14,7 @@
             validator.validateInstanceType(this, selectionBox, SelectionBox);
             // add components
             selectionBox.addComponent(this.__componentFactory.createFromPrimitive(new Pose())); // pose
-            selectionBox.addComponent(this.__componentFactory.createFromPrimitive(new Rectangle())); // mesh
+            selectionBox.addComponent(this.__componentFactory.createFromPrimitive(new Rectangle())); // polygon
             selectionBox.addComponent(this.__componentFactory.createFromDataHandle(new PickHandle(function () { }))); // pick
             return selectionBox;
         };

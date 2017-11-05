@@ -1,5 +1,5 @@
-﻿define(['entity', 'mesh-component', 'pick-component', 'pose-component', 'mesh', 'position', 'pose', 'rectangle', 'mesh-display-settings'],
-function (Entity, MeshComponent, PickComponent, PoseComponent, Mesh, Position, Pose, Rectangle, MeshDisplaySettings) {
+﻿define(['entity', 'polygon-component', 'pick-component', 'pose-component', 'polygon', 'position', 'pose', 'rectangle', 'polygon-display-settings'],
+function (Entity, PolygonComponent, PickComponent, PoseComponent, Polygon, Position, Pose, Rectangle, PolygonDisplaySettings) {
 
     SelectionBox.prototype = Object.create(Entity.prototype);
     SelectionBox.prototype.constructor = SelectionBox;
@@ -29,8 +29,8 @@ function (Entity, MeshComponent, PickComponent, PoseComponent, Mesh, Position, P
             Math.abs(this.__startPosition.x - this.__endPosition.x),
             Math.abs(this.__startPosition.y - this.__endPosition.y)
         );
-        var mesh = new Mesh(rectangle.vertices);
-        this.getComponent(MeshComponent).getHandle().setData(mesh);
+        var polygon = new Polygon(rectangle.vertices);
+        this.getComponent(PolygonComponent).getHandle().setData(polygon);
     };
     SelectionBox.prototype.fillContents = function () {
         // pass selection box boundary to pick controller

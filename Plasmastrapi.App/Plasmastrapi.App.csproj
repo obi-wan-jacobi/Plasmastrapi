@@ -88,7 +88,7 @@
     <Content Include="js\core\Data\Base\Primitive.js" />
     <Content Include="js\core\Data\Geometry\Curve.js" />
     <Content Include="js\core\Data\Geometry\Line.js" />
-    <Content Include="js\core\Data\Geometry\Mesh.js" />
+    <Content Include="js\core\Data\Geometry\Polygon.js" />
     <Content Include="js\core\Data\Geometry\Pose.js" />
     <Content Include="js\core\Data\Geometry\Position.js" />
     <Content Include="js\core\Data\Geometry\Rectangle.js" />
@@ -98,7 +98,7 @@
     <Content Include="js\core\DataHandles\Base\DataHandle.js" />
     <Content Include="js\core\DataHandles\Geometry\CurveHandle.js" />
     <Content Include="js\core\DataHandles\Geometry\LineHandle.js" />
-    <Content Include="js\core\DataHandles\Geometry\MeshHandle.js" />
+    <Content Include="js\core\DataHandles\Geometry\PolygonHandle.js" />
     <Content Include="js\core\DataHandles\Geometry\PoseHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\ImageDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\ImageHandle.js" />
@@ -223,7 +223,7 @@
     <Content Include="js\core\Components\Graphics\ImageComponent.js" />
     <Content Include="js\core\Components\Inputs\MouseComponent.js" />
     <Content Include="js\core\Components\Geometry\LineComponent.js" />
-    <Content Include="js\core\Components\Geometry\MeshComponent.js" />
+    <Content Include="js\core\Components\Geometry\PolygonComponent.js" />
     <Content Include="js\core\Components\Inputs\PickComponent.js" />
     <Content Include="js\core\Components\Geometry\PoseComponent.js" />
     <Content Include="js\core\Components\Graphics\SpriteComponent.js" />

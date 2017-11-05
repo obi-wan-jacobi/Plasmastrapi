@@ -1,5 +1,5 @@
-﻿define(['factory', 'circuit-element', 'component-factory', 'entity-factory', 'pose', 'mesh', 'vertex', 'pick-handle', 'validator'],
-function (Factory, CircuitElement, ComponentFactory, EntityFactory, Pose, Mesh, Vertex, PickHandle, validator) {
+﻿define(['factory', 'circuit-element', 'component-factory', 'entity-factory', 'pose', 'polygon', 'vertex', 'pick-handle', 'validator'],
+function (Factory, CircuitElement, ComponentFactory, EntityFactory, Pose, Polygon, Vertex, PickHandle, validator) {
 
     CircuitElementFactory.prototype = Object.create(Factory.prototype);
     CircuitElementFactory.prototype.constructor = CircuitElementFactory;

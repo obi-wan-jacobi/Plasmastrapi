@@ -1,5 +1,5 @@
-﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'mesh', 'utils'],
-function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Mesh, utils) {
+﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'polygon', 'utils'],
+function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Polygon, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
@@ -46,10 +46,10 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
         utils.validator.validateInstanceType(this, primitive, Primitive);
         var modulePrefix = utils.modules.getModulePrefix(primitive, null);
         var ComponentType, HandleType, DisplaySettings;
-        if (primitive instanceof Mesh) {
-            ComponentType = utils.modules.require('mesh-component');
-            HandleType = utils.modules.require('mesh-handle');
-            DisplaySettings = utils.modules.require('mesh-display-settings');
+        if (primitive instanceof Polygon) {
+            ComponentType = utils.modules.require('polygon-component');
+            HandleType = utils.modules.require('polygon-handle');
+            DisplaySettings = utils.modules.require('polygon-display-settings');
         } else {
             ComponentType = utils.modules.require(`${modulePrefix}-component`);
             HandleType = utils.modules.require(`${modulePrefix}-handle`);

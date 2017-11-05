@@ -34,8 +34,8 @@ function (Component, MouseComponent) {
 });
 
 /* 
-MouseComponent.prototype.__isCursorWithinMeshBoundary = function (cursor) {
-    var meshComponent = this.__entity.getComponent(MeshComponent);
-    return meshComponent.getHandle().checkPointCollision(cursor);
+MouseComponent.prototype.__isCursorWithinPolygonBoundary = function (cursor) {
+    var polygonComponent = this.__entity.getComponent(PolygonComponent);
+    return polygonComponent.getHandle().checkPointCollision(cursor);
 };
 */

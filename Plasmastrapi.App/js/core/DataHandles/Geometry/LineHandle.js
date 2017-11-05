@@ -29,8 +29,8 @@ function (DataHandle, Line, LineDisplaySettings, Position, Vertex, Rectangle, CO
         // euclidean distance from tail to head
         return euclideanDistance(this.__data.headVertex, this.__data.tailVertex);
     };
-    LineHandle.prototype.getMesh = function () {
-        // line converted into static rectangular mesh
+    LineHandle.prototype.getPolygon = function () {
+        // line converted into static rectangular polygon
         return new Rectangle(
             this.getLength() * CORE.LineHandle.lengthModifier,
             CORE.LineHandle.collisionWidth

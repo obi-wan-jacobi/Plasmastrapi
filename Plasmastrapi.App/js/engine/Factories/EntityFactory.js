@@ -1,5 +1,5 @@
-﻿define(['factory', 'container', 'emitter-factory', 'entity', 'component-factory', 'pose', 'mesh', 'vertex', 'pick-handle',  'validator'],
-    function (Factory, Container, EmitterFactory, Entity, ComponentFactory, Pose, Mesh, Vertex, PickHandle, validator) {
+﻿define(['factory', 'container', 'emitter-factory', 'entity', 'component-factory', 'pose', 'polygon', 'vertex', 'pick-handle',  'validator'],
+    function (Factory, Container, EmitterFactory, Entity, ComponentFactory, Pose, Polygon, Vertex, PickHandle, validator) {
 
     EntityFactory.prototype = Object.create(Factory.prototype);
     EntityFactory.prototype.constructor = EntityFactory;
@@ -17,7 +17,7 @@
         entity.addEventListener('ondestroy', this, this.__container.remove.bind(this, entity));
         // add components
         entity.addComponent(this.__componentFactory.createFromPrimitive(new Pose()));
-        entity.addComponent(this.__componentFactory.createFromPrimitive(new Mesh([new Vertex()])));
+        entity.addComponent(this.__componentFactory.createFromPrimitive(new Polygon([new Vertex()])));
         entity.addComponent(this.__componentFactory.createFromDataHandle(new PickHandle(function () { })));
         return entity;
     };

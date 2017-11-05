@@ -1,5 +1,5 @@
-﻿define(['system', 'component-factory', 'pick-component', 'mouse-handle', 'linked-list', 'mesh-component'],
-function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, MeshComponent) {
+﻿define(['system', 'component-factory', 'pick-component', 'mouse-handle', 'linked-list', 'polygon-component'],
+function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, PolygonComponent) {
 
     // CLASS PickSystem
     PickSystem.prototype = Object.create(System.prototype);
@@ -42,8 +42,8 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Mesh
         var cursor = this.__mouseComponent.getHandle().getData();
         this.__inputBuffer['mousemove'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
-            var meshComponent = entity.getComponent(MeshComponent);
-            if (meshComponent.getHandle().checkPointCollision(cursor)) {
+            var polygonComponent = entity.getComponent(PolygonComponent);
+            if (polygonComponent.getHandle().checkPointCollision(cursor)) {
                 pickComponent.getHandle().hover();
             }
             else {
@@ -52,15 +52,15 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Mesh
         });
         //this.__inputBuffer['mousedown'].forEach(function (pickComponent) {
         //    var entity = pickComponent.getEntity();
-        //    var meshComponent = entity.getComponent(MeshComponent);
-        //    if (meshComponent.getHandle().checkPointCollision(cursor)) {
+        //    var polygonComponent = entity.getComponent(PolygonComponent);
+        //    if (polygonComponent.getHandle().checkPointCollision(cursor)) {
         //        pickComponent.getHandle().pick();
         //    }
         //});
         this.__inputBuffer['mouseup'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
-            var meshComponent = entity.getComponent(MeshComponent);
-            if (meshComponent.getHandle().checkPointCollision(cursor)) {
+            var polygonComponent = entity.getComponent(PolygonComponent);
+            if (polygonComponent.getHandle().checkPointCollision(cursor)) {
                 pickComponent.getHandle().pick();
             }
         });

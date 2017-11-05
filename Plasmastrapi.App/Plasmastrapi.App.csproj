@@ -103,7 +103,7 @@
     <Content Include="js\core\Data\Graphics\DisplaySettings\ImageDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\ImageHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\LineDisplaySettings.js" />
-    <Content Include="js\core\Data\Graphics\DisplaySettings\MeshDisplaySettings.js" />
+    <Content Include="js\core\Data\Graphics\DisplaySettings\PolygonDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\SpriteHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\TextDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\TextHandle.js" />

@@ -1,5 +1,5 @@
-define(['system', 'component-factory', 'core-constants'],
-function (System, ComponentFactory, CORE) {
+define(['system', 'component-factory'],
+function (System, ComponentFactory) {
 
 	// CLASS DrawSystem
 	DrawSystem.prototype = Object.create(System.prototype);

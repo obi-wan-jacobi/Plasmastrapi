@@ -45,6 +45,9 @@ define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mi
     Entity.prototype.hasComponent = function (ComponentType) {
         return this.getComponent(ComponentType) ? true : false;
     };
+    Entity.prototype.forEachComponent = function (fn, /* optional */ caller) {
+        return this.__components.forEach(fn, caller);
+    };
     Entity.prototype.set = function (data) {
         var baseClass = data;
         if (Object.getPrototypeOf(data).constructor.name === (function () { }).constructor.name) {

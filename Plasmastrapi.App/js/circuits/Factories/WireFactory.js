@@ -19,12 +19,13 @@
         var lineComponentArgs = [tailElement.getComponent(PoseComponent), headElement.getComponent(PoseComponent), lineDisplaySettings];
         var lineComponent = this.__componentFactory.create(LineComponent, lineComponentArgs);
         wireElement.addComponent(lineComponent);
+        wireElement.addDependency(tailElement);
+        wireElement.addDependency(headElement);
         return wireElement;
     };
     WireFactory.prototype.createTerminalWire = function (terminal, wireAnchorPositionOffset) {
         utils.validator.validateInstanceType(this, terminal, Terminal);
         var wireAnchor = this.__circuitElementFactory.create(WireAnchor);
-        wireAnchor.addParent(terminal);
         wireAnchor.follow(terminal, wireAnchorPositionOffset);
         return this.create(TerminalWire, wireAnchor, terminal);
     };

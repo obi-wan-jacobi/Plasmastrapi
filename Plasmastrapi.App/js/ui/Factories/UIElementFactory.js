@@ -18,9 +18,9 @@ function (Factory, UIElement, ComponentFactory, EntityFactory, ImageHandle, Imag
         return image;
     };
     // public methods
-    UIElementFactory.prototype.create = function (Type, imageName) {
-        validator.validateClassType(this, Type, UIElement);
-        var uiElement = this.__entityFactory.create(Type);
+    UIElementFactory.prototype.create = function (UIElementType, imageName) {
+        validator.validateClassType(this, UIElementType, UIElement);
+        var uiElement = this.__entityFactory.create(UIElementType);
         uiElement.addComponent(this.__componentFactory.createFromPrimitive(new Text('')));
         // configure element image
         if (imageName) {

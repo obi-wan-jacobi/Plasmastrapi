@@ -1,5 +1,5 @@
-﻿define(['scene', 'ui-element-factory', 'logic-element-factory', 'panel', 'button', 'scene-controller', 'position', 'rectangle', 'text', 'modules'],
-function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneController, Position, Rectangle, Text, modules) {
+﻿define(['scene', 'ui-element-factory', 'logic-element-factory', 'panel', 'button', 'scene-controller', 'lab-controller', 'position', 'rectangle', 'text', 'modules'],
+function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneController, LabController, Position, Rectangle, Text, modules) {
 
     LabScene.prototype = Object.create(Scene.prototype);
     LabScene.prototype.constructor = LabScene;
@@ -10,6 +10,7 @@ function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneCont
         var engine = this.__engine;
         var uiElementFactory = engine.getFactory(UIElementFactory);
         var logicElementFactory = engine.getFactory(LogicElementFactory);
+        var labController = engine.getController(LabController);
 
         var stage = uiElementFactory.create(Panel);
         stage.set(new Position(1200, 350));
@@ -71,9 +72,14 @@ function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneCont
         var designArea = uiElementFactory.create(Panel);
         designArea.set(new Position(450, 375));
         designArea.set(new Rectangle(900, 650));
+        designArea.set(function () {
+            andgate2.__$onplace();
+        });
+
+        labController.setDesignArea(designArea);
 
         var andgate2 = logicElementFactory.create(modules.require('and-gate'));
-        andgate2.set(new Position(450, 350));
+        andgate2.set(new Position(1450, 350));
         andgate2.set(new Rectangle(30, 30));
     };
 

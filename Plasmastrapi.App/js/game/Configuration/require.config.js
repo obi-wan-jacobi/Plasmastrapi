@@ -5,6 +5,7 @@
         // Controllers
         'controller': './game/Controllers/Base/Controller',
         'input-controller': './game/Controllers/InputController',
+        'lab-controller': './game/Controllers/LabController',
         'pick-controller': './game/Controllers/PickController',
         'scene-controller': './game/Controllers/SceneController',
         // Configuration

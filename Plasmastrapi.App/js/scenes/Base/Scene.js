@@ -32,9 +32,9 @@ function (Base, Container, Entity, validator) {
 	    }
 	};
 	Scene.prototype.remove = function (entity) {
-	    var removedEntity = this.__entities.remove(entity);
-	    if (removedEntity.isLoaded) {
-	        removedEntity.unload();
+	    this.__entities.remove(entity);
+        if (entity.isLoaded) {
+            entity.unload();
 	    }
 	};
 

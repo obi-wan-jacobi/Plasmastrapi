@@ -1,5 +1,5 @@
-﻿define(['factory', 'circuit-element-factory', 'logic-element', 'component-factory', 'terminal-factory', 'wire-factory', 'input-terminal', 'output-terminal', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
-function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, TerminalFactory, WireFactory, InputTerminal, OutputTerminal, Position, ImageHandle, ImageDisplaySettings, utils, config) {
+﻿define(['factory', 'circuit-element-factory', 'logic-element-container', 'logic-element', 'component-factory', 'terminal-factory', 'wire-factory', 'input-terminal', 'output-terminal', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
+function (Factory, CircuitElementFactory, LogicElementContainer, LogicElement, ComponentFactory, TerminalFactory, WireFactory, InputTerminal, OutputTerminal, Position, ImageHandle, ImageDisplaySettings, utils, config) {
 
     LogicElementFactory.prototype = Object.create(Factory.prototype);
     LogicElementFactory.prototype.constructor = LogicElementFactory;
@@ -10,6 +10,7 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, Termin
         this.__terminalFactory = game.getFactory(TerminalFactory);
         this.__wireFactory = game.getFactory(WireFactory);
         this.__assetMap = game.getAssetMap();
+        this.__container = new LogicElementContainer();
     };
     // private methods
     LogicElementFactory.prototype.__addTerminal = function (logicElement, TerminalType, terminalPositionOffset, wireAnchorPositionOffset) {
@@ -20,7 +21,6 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, Termin
     };
     // public methods
     LogicElementFactory.prototype.create = function (LogicElementType) {
-        utils.validator.validateClassType(this, LogicElementType, LogicElement);
         var logicElement = this.__circuitElementFactory.create(LogicElementType);
         // add components
         var image = this.__assetMap.get(utils.modules.getModulePrefix(LogicElementType, null));
@@ -29,9 +29,12 @@ function (Factory, CircuitElementFactory, LogicElement, ComponentFactory, Termin
         // add terminals
         this.__addTerminal(logicElement, InputTerminal, new Position(0, 35), new Position(0, -20));
         this.__addTerminal(logicElement, OutputTerminal, new Position(0, -35), new Position(0, 20));
+        this.__container.add(logicElement);
         return logicElement;
     };
-    LogicElementFactory.prototype.getContainer = function () { };
+    LogicElementFactory.prototype.getContainer = function () {
+        return this.__container;
+    };
 
     return LogicElementFactory;
 });

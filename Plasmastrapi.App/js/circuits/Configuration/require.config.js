@@ -22,6 +22,7 @@
         'wire-anchor': './circuits/Wires/WireAnchor',
         'wire': './circuits/Wires/Wire',
         // Containers
+        'logic-element-container': './circuits/Containers/LogicElementContainer',
         // Factories
         'circuit-element-factory': './circuits/Factories/CircuitElementFactory',
         'logic-element-factory': './circuits/Factories/LogicElementFactory',

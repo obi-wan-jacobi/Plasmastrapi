@@ -72,8 +72,11 @@
     <Content Include="js\circuits\Configuration\constants.js" />
     <Content Include="js\circuits\Configuration\debug.js" />
     <Content Include="js\circuits\Configuration\require.config.js" />
+    <Content Include="js\circuits\Containers\LogicElementContainer.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
     <Content Include="js\core\Configuration\constants.js" />
+    <Content Include="js\engine\Containers\EntityContainer.js" />
+    <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />

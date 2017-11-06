@@ -1,5 +1,5 @@
 define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin', 'primitive', 'display-settings', 'pose-component', 'position', 'utils'],
-    function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, PoseComponent, Position, utils) {
+function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, PoseComponent, Position, utils) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);

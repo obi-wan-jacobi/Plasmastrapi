@@ -7,6 +7,10 @@ function (Container, Emitter) {
     function EmitterContainer() {
         Container.call(this, Emitter);
     };
+    EmitterContainer.prototype.add = function (emitter) {
+        Container.prototype.add.call(this, emitter);
+        emitter.addEventListener('ondestroy', this, this.purge.bind(this, emitter));
+    };
     EmitterContainer.prototype.purge = function (subscriber) {
         this.remove(subscriber);
         this.forEach(function(emitter) {
@@ -15,5 +19,4 @@ function (Container, Emitter) {
     };
 
     return EmitterContainer;
-
 });

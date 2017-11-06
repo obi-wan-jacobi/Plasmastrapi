@@ -1,37 +1,30 @@
 
 known issues:
-- sometimes require does not load all dependencies properly
+- 
 
 user experience:
 - (legacy) terminals are selectable when the circuit element is inside a selection-box
 
 needs testing:
-- TBD
+- 
 
 in progress:
 - overhaul
 
 overhaul:
 - circuits
-	- WireElement to inherit from CircuitElement
-	- factories
+	- 
 - game
-	- refactor compatibility decorations
+	- 
 - ui
-	- factories
-		- builder/decorators
 	- Refactor such that panel content/child positions are relative to parent (percent-based or position-based)
 		- ViewportSystem to listen for screen resize events?
 	- Modal panels (move, stretch/resize, close)
 
 tech debt:
 -general
-	- refactor main engine loop into load/unload blocks
 	- dictionaries should validate type for key as well as value
-	- mixin superclass
 	- run memory analysis/profiler diagnostics
-	- JSDocs/automated documentation
-	- unit tests
 - optimization
 	- polygonhandle point-collision checking is disgusting
 	- tool compatibility filtering --> sort pickable components using a tree?
@@ -46,8 +39,7 @@ backlog:
 - general
 	- resize with window
 - game menu
-	- UI panels
-	- menu buttons with text labels 
+	- 
 - lab scene
 	- scenario window
 		- zoom in/out
@@ -81,12 +73,12 @@ technology/resources:
 - unit tests
 	- jasmine
 	- travis CI (https://docs.travis-ci.com/user/languages/javascript-with-nodejs)
-- grunt
-- bower
+- gulp
 - npm
 - node
 - mongo
 - projectz for readme files (https://github.com/bevry/projectz)
+- jsdocs
 
 resources:
 - traits and mixins (https://howtonode.org/traitsjs)

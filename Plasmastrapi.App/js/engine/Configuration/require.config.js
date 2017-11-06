@@ -7,6 +7,7 @@
         'drawable-component-container': './engine/Containers/DrawableComponentContainer',
         'pick-component-container': './engine/Containers/PickComponentContainer',
         'emitter-container': './engine/Containers/EmitterContainer',
+        'entity-container': './engine/Containers/EntityContainer',
         // Controllers
         // Factories
         'factory': './engine/Factories/Base/Factory',

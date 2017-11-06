@@ -10,9 +10,7 @@
         // public methods
         EmitterFactory.prototype.create = function (EmitterType, args) {
             var emitter = new (EmitterType.bind(null, args instanceof Array ? args : [args]))();
-            validator.validateInstanceType(this, emitter, Emitter);
             this.__container.add(emitter);
-            emitter.addEventListener('ondestroy', this, this.__container.remove.bind(this, emitter));
             return emitter;
         };
         EmitterFactory.prototype.getContainer = function () {

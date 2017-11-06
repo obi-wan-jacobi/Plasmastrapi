@@ -1,5 +1,5 @@
-define(['engine', 'dictionary', 'controller', 'input-controller', 'pick-controller', 'scene-controller', 'assets', 'asset-loader', 'helper-factory', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'wire-factory', 'main-menu-scene', 'logging'],
-function (Engine, Dictionary, Controller, InputController, PickController, SceneController, assetUrls, AssetLoader, HelperFactory, UIElementFactory, CircuitElementFactory, LogicElementFactory, TerminalFactory, WireFactory, MainMenuScene, logging) {
+define(['engine', 'dictionary', 'controller', 'input-controller', 'lab-controller', 'pick-controller', 'scene-controller', 'assets', 'asset-loader', 'helper-factory', 'ui-element-factory', 'circuit-element-factory', 'logic-element-factory', 'terminal-factory', 'wire-factory', 'main-menu-scene', 'logging'],
+function (Engine, Dictionary, Controller, InputController, LabController, PickController, SceneController, assetUrls, AssetLoader, HelperFactory, UIElementFactory, CircuitElementFactory, LogicElementFactory, TerminalFactory, WireFactory, MainMenuScene, logging) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
@@ -40,6 +40,7 @@ function (Engine, Dictionary, Controller, InputController, PickController, Scene
     };
     Game.prototype.__registerControllers = function () {
         this.__addController(InputController);
+        this.__addController(LabController);
         this.__addController(PickController);
         this.__addController(SceneController);
     };

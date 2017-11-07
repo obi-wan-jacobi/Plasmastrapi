@@ -44,43 +44,32 @@ function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneCont
         toolbar.set(new Position(450, 25));
         toolbar.set(new Rectangle(900, 50));
 
-        var andgate = uiElementFactory.create(Button, 'and-gate');
-        andgate.set(new Position(25, 25));
-        andgate.set(new Rectangle(30, 30));
+        var andGateButton = uiElementFactory.create(Button, 'and-gate');
+        andGateButton.set(new Position(25, 25));
+        andGateButton.set(new Rectangle(30, 30));
 
-        var nandgate = uiElementFactory.create(Button, 'nand-gate');
-        nandgate.set(new Position(65, 25));
-        nandgate.set(new Rectangle(30, 30));
+        var nandGateButton = uiElementFactory.create(Button, 'nand-gate');
+        nandGateButton.set(new Position(65, 25));
+        nandGateButton.set(new Rectangle(30, 30));
 
-        var orgate = uiElementFactory.create(Button, 'or-gate');
-        orgate.set(new Position(105, 25));
-        orgate.set(new Rectangle(30, 30));
+        var orGateButton = uiElementFactory.create(Button, 'or-gate');
+        orGateButton.set(new Position(105, 25));
+        orGateButton.set(new Rectangle(30, 30));
 
-        var xorgate = uiElementFactory.create(Button, 'xor-gate');
-        xorgate.set(new Position(145, 25));
-        xorgate.set(new Rectangle(30, 30));
+        var xorGateButton = uiElementFactory.create(Button, 'xor-gate');
+        xorGateButton.set(new Position(145, 25));
+        xorGateButton.set(new Rectangle(30, 30));
 
         var backNavigationButton = uiElementFactory.create(Button);
         backNavigationButton.set(new Position(840, 25));
         backNavigationButton.set(new Rectangle(100, 30));
         backNavigationButton.set(new Text('Menu'));
-        backNavigationButton.set(function () {
-            var MainMenu = modules.require('main-menu-scene');
-            engine.getController(SceneController).setScene(MainMenu);
-        });
 
         var designArea = uiElementFactory.create(Panel);
         designArea.set(new Position(450, 375));
         designArea.set(new Rectangle(900, 650));
-        designArea.set(function () {
-            andgate2.__$onplace();
-        });
 
         labController.setDesignArea(designArea);
-
-        var andgate2 = logicElementFactory.create(modules.require('and-gate'));
-        andgate2.set(new Position(1450, 350));
-        andgate2.set(new Rectangle(30, 30));
     };
 
     return LabScene;

@@ -35,6 +35,7 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
         logicElement.set(new Rectangle(30, 30));
         var labController = this.__engine.getController('lab-controller');
         var pickComponent = logicElement.getComponent('pick-component');
+        // *** closures ***
         pickComponent.addEventListener('onpick', logicElement, function () {
             labController.setTarget(logicElement);
         });

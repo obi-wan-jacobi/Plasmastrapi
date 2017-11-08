@@ -3,30 +3,25 @@ known issues:
 - 
 
 user experience:
-- (legacy) terminals are selectable when the circuit element is inside a selection-box
+- 
 
 needs testing:
 - 
 
 in progress:
-- overhaul
-
-overhaul:
-- circuits
-	- 
-- game
-	- 
-- ui
-	- Refactor such that panel content/child positions are relative to parent (percent-based or position-based)
-		- ViewportSystem to listen for screen resize events?
-	- Modal panels (move, stretch/resize, close)
+- 
 
 tech debt:
--general
+- general
 	- dictionaries should validate type for key as well as value
 	- run memory analysis/profiler diagnostics
+- circuits
+	- config
+- scenes
+	- config
 - optimization
-	- polygonhandle point-collision checking is disgusting
+	- refactor all *** closures *** to be prototypal
+	- PolygonHandle point-collision checking is disgusting
 	- tool compatibility filtering --> sort pickable components using a tree?
 	- PolygonComponent --> combine translate + rotate into one function (leverage a single for-loop)?
 	- Dictionary --> store this.__end to avoid O(n) for this.add
@@ -38,8 +33,10 @@ tech debt:
 backlog:
 - general
 	- resize with window
-- game menu
-	- 
+- ui
+	- Refactor such that panel content/child positions are relative to parent (percent-based or position-based)
+		- ViewportSystem to listen for screen resize events?
+	- Modal panels (move, stretch/resize, close)
 - lab scene
 	- scenario window
 		- zoom in/out
@@ -63,10 +60,8 @@ backlog:
 		- flip flops (x3)
 		- timers
 		- SOCs + design contexts (tabs? overlay? panels?)
-- config
-	- scenes
 
-technology/resources:
+technology/resources (current + future):
 - linting
 	- ESlint (http://eslint.org/)
 	- intellisense typings (vscode)

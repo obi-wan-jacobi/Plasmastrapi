@@ -33,6 +33,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
 
     };
     Component.prototype.__registerDependencyOnLoad = function (subject, event, observer, callback) {
+        // *** closures ***
         var self = this;
         var fnOnLoadProxy = this.__onload || function () { };
         this.__onload = function () {
@@ -46,6 +47,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         };
     };
     Component.prototype.__registerComponentDependencyOnLoad = function (componentString, event, observer, callback) {
+        // *** closures ***
         var self = this;
         var fnOnLoadProxy = this.__onload || function () { };
         this.__onload = function () {

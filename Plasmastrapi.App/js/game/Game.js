@@ -56,14 +56,13 @@ function (Engine, Dictionary, Controller, assetUrls, AssetLoader, MainMenuScene,
         return this.__assetLoader.get();
     };
     Game.prototype.start = function () {
-        var self = this;
         // load assets
-        self.__assetLoader.download(assetUrls).done(function () {
-            utils.logging.console("Assets have been loaded.");
-            self.getController('scene-controller').setScene(MainMenuScene);
-            Engine.prototype.start.call(self);
-           utils. logging.console("We have ignition!");
-        });
+        this.__assetLoader.download(assetUrls).done((function () {
+            utils.logging.write(this, 'start', 'Assets have been loaded.');
+            this.getController('scene-controller').setScene(MainMenuScene);
+            Engine.prototype.start.call(this);
+            utils.logging.write(this, 'start', 'We have ignition!');
+        }).bind(this));
     };
 
 	return Game;

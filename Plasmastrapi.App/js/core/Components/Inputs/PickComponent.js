@@ -13,7 +13,7 @@ function (Component) {
             'onselect',
             'ondeselect',
             'onmouseenter',
-            'onmousehover',
+            'onhover',
             'onmouseleave'
         );
         // inject event callbacks into handle
@@ -21,7 +21,7 @@ function (Component) {
         this.__attachEventTriggerToHandleMethod('select', 'onselect');
         this.__attachEventTriggerToHandleMethod('deselect', 'ondeselect');
         this.__attachEventTriggerToHandleMethod('mouseenter', 'onmouseenter');
-        //this.__attachEventTriggerToHandleMethod('hover', 'onhover');
+        this.__attachEventTriggerToHandleMethod('hover', 'onhover');
         this.__attachEventTriggerToHandleMethod('mouseleave', 'onmouseleave');
     };
     // private methods

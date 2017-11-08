@@ -1,14 +1,15 @@
-﻿define(function () {
+﻿define(['logging'], function (logging) {
 
     var validator = new (function validator() { });
 
     // throws
-    validator.throw = function (ref, methodName, errorString) {
-        throw new Error(`[ERROR] >> ${ref.constructor.name}::${methodName} -- ${errorString}!`);
+    validator.throw = function (referer, methodName, errorString) {
+        errorString = logging.error(referer, methodName, errorString);
+        throw new Error(errorString);
     };
 
-    validator.throwMethodMustBeOverridden = function (ref, methodName) {
-        this.throw(ref, methodName, `${ref.constructor.name} must override inherited method ${methodName}`);
+    validator.throwMethodMustBeOverridden = function (referer, methodName) {
+        this.throw(referer, methodName, `${referer.constructor.name} must override inherited method ${methodName}`);
     };
 
     // validations
@@ -35,16 +36,16 @@
         return typeof instance !== Type && !(instance instanceof Type);
     };
 
-    validator.validateInstanceType = function (ref, instance, Type) {
+    validator.validateInstanceType = function (referer, instance, Type) {
         if (instance instanceof Array) {
             if (Type === Array) {
                 return;
             }
             for (var i = 0, L = instance.length; i < L; i++) {
-                this.validateInstanceType(ref, instance[i], Type);
+                this.validateInstanceType(referer, instance[i], Type);
             }
         } else if (this.isInstanceOfType(instance, Type)) {
-            this.throw(ref, 'validateInstanceType', `${instance} must be an instance of ${Type.name}`);
+            this.throw(referer, 'validateInstanceType', `${instance} must be an instance of ${Type.name}`);
         }
     };
 
@@ -52,9 +53,9 @@
         return !(ClassToValidate.prototype instanceof Class) && ClassToValidate.prototype.constructor.name !== Class.name;
     };
 
-    validator.validateClassType = function (ref, ClassToValidate, Class) {
+    validator.validateClassType = function (referer, ClassToValidate, Class) {
         if (this.isClassOfType(ClassToValidate, Class)) {
-            this.throw(ref, 'validateInstanceType', `${ClassToValidate.name} must inherit from ${Class.name}`);
+            this.throw(referer, 'validateInstanceType', `${ClassToValidate.name} must inherit from ${Class.name}`);
         }
     };
 
@@ -66,10 +67,10 @@
     };
 
     // entity validations
-    validator.validateEntityHasComponent = function (ref, entity, componentString) {
+    validator.validateEntityHasComponent = function (referer, entity, componentString) {
         var component = entity.getComponent(componentString);
         if (!component) {
-            this.throw(ref, 'validateEntityHasComponent', `Target entity (${entity.constructor.name}) must possess a ${componentString}`);
+            this.throw(referer, 'validateEntityHasComponent', `Target entity (${entity.constructor.name}) must possess a ${componentString}`);
         }
         return component;
     };

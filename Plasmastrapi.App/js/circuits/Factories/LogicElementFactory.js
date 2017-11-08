@@ -10,7 +10,6 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
         this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
         this.__terminalFactory = this.__engine.getFactory('terminal-factory');
         this.__wireFactory = this.__engine.getFactory('wire-factory');
-        //this.__labController = this.__engine.getController(utils.modules.require('lab-controller'));
         this.__assetMap = this.__engine.getAssetMap();
         this.__container = new LogicElementContainer();
     };
@@ -33,10 +32,14 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
         this.__addTerminal(logicElement, OutputTerminal, new Position(0, -35), new Position(0, 20));
         this.__container.add(logicElement);
         // configure pick action
-        var labController = this.__engine.getController('lab-controller');
         logicElement.set(new Rectangle(30, 30));
-        logicElement.set(function () {
+        var labController = this.__engine.getController('lab-controller');
+        var pickComponent = logicElement.getComponent('pick-component');
+        pickComponent.addEventListener('onpick', logicElement, function () {
             labController.setTarget(logicElement);
+        });
+        pickComponent.addEventListener('onhover', logicElement, function () {
+            console.log('hovering');
         });
         return logicElement;
     };

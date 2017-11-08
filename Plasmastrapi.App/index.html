@@ -25,6 +25,7 @@
     <head>
 
         <script>
+            // Order matters
             var dependencies = [
                 'utils/Configuration/require.config',
                 'core/Configuration/require.config',
@@ -52,7 +53,7 @@
                 require([dependencies[moduleIndex]], function (paths) {
                     require(['modules', 'logging'], function (modules, logging) {
                         modules.load(paths, function () {
-                            logging.console(dependencies[moduleIndex]);
+                            logging.write('index.html', 'preloadModulesSynchronously', dependencies[moduleIndex]);
                             moduleIndex++;
                             if (moduleIndex < moduleTotal) {
                                 preloadModulesSynchronously()

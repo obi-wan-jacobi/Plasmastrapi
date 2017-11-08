@@ -47,23 +47,39 @@ function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneCont
         var andGateButton = uiElementFactory.create(Button, 'and-gate');
         andGateButton.set(new Position(25, 25));
         andGateButton.set(new Rectangle(30, 30));
+        andGateButton.set(function () {
+            labController.spawn(modules.require('and-gate'));
+        });
 
         var nandGateButton = uiElementFactory.create(Button, 'nand-gate');
         nandGateButton.set(new Position(65, 25));
         nandGateButton.set(new Rectangle(30, 30));
+        nandGateButton.set(function () {
+            labController.spawn(modules.require('nand-gate'));
+        });
 
         var orGateButton = uiElementFactory.create(Button, 'or-gate');
         orGateButton.set(new Position(105, 25));
         orGateButton.set(new Rectangle(30, 30));
+        orGateButton.set(function () {
+            labController.spawn(modules.require('or-gate'));
+        });
 
         var xorGateButton = uiElementFactory.create(Button, 'xor-gate');
         xorGateButton.set(new Position(145, 25));
         xorGateButton.set(new Rectangle(30, 30));
+        xorGateButton.set(function () {
+            labController.spawn(modules.require('xor-gate'));
+        });
 
         var backNavigationButton = uiElementFactory.create(Button);
         backNavigationButton.set(new Position(840, 25));
         backNavigationButton.set(new Rectangle(100, 30));
         backNavigationButton.set(new Text('Menu'));
+        backNavigationButton.set(function () {
+            var MainMenuScene = modules.require('main-menu-scene');
+            engine.getController(SceneController).setScene(MainMenuScene);
+        });
 
         var designArea = uiElementFactory.create(Panel);
         designArea.set(new Position(450, 375));

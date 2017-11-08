@@ -4,7 +4,7 @@
     LineDisplaySettings.prototype.constructor = LineDisplaySettings;
     function LineDisplaySettings(displayLayer, strokeStyle, lineWidth) {
         DisplaySettings.call(this, displayLayer);
-        this.strokeStyle = strokeStyle || 'white';
+        this.strokeStyle = strokeStyle || 'grey';
         this.lineWidth = lineWidth || 1;
     };
 

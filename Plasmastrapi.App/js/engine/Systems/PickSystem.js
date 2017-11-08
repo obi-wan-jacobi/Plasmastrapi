@@ -12,14 +12,14 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Poly
         this.__inputBuffer = {
             'mousemove': new LinkedList(PickComponent),
             'mousedown': new LinkedList(PickComponent),
-            'mouseup': new LinkedList(PickComponent),
+            'click': new LinkedList(PickComponent),
         };
     };
     // private methods
     PickSystem.prototype.__oninit = function () {
         this.__mouseComponent.addEventListener('onmousemove', this, this.__buildInputEventCallback('mousemove'));
         this.__mouseComponent.addEventListener('onmousedown', this, this.__buildInputEventCallback('mousedown'));
-        this.__mouseComponent.addEventListener('onmouseup', this, this.__buildInputEventCallback('mouseup'));
+        this.__mouseComponent.addEventListener('onclick', this, this.__buildInputEventCallback('click'));
     };
     PickSystem.prototype.__onload = function () {
         this.__mouseComponent.load();
@@ -57,7 +57,7 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Poly
         //        pickComponent.getHandle().pick();
         //    }
         //});
-        this.__inputBuffer['mouseup'].forEach(function (pickComponent) {
+        this.__inputBuffer['click'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
             var polygonComponent = entity.getComponent(PolygonComponent);
             if (polygonComponent.getHandle().checkPointCollision(cursor)) {
@@ -67,7 +67,7 @@ function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, Poly
         this.__inputBuffer = {
             'mousemove': new LinkedList(PickComponent),
             'mousedown': new LinkedList(PickComponent),
-            'mouseup': new LinkedList(PickComponent),
+            'click': new LinkedList(PickComponent),
         };
     };
 

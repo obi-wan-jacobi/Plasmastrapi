@@ -7,7 +7,7 @@
     PolygonDisplaySettings.prototype.constructor = PolygonDisplaySettings;
     function PolygonDisplaySettings(displayLayer, strokeStyle, fillStyle, lineWidth) {
         DisplaySettings.call(this, displayLayer || 'none');
-        this.strokeStyle = strokeStyle || 'white';
+        this.strokeStyle = strokeStyle || 'grey';
         this.fillStyle = fillStyle;
         this.lineWidth = lineWidth || 1;
     };

@@ -1,15 +1,17 @@
-﻿define(['factory', 'circuit-element-factory', 'logic-element-container', 'logic-element', 'component-factory', 'terminal-factory', 'wire-factory', 'input-terminal', 'output-terminal', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
-function (Factory, CircuitElementFactory, LogicElementContainer, LogicElement, ComponentFactory, TerminalFactory, WireFactory, InputTerminal, OutputTerminal, Position, ImageHandle, ImageDisplaySettings, utils, config) {
+﻿define(['factory', 'logic-element-container', 'logic-element', 'input-terminal', 'output-terminal', 'rectangle', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
+function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTerminal, Rectangle, Position, ImageHandle, ImageDisplaySettings, utils, config) {
 
     LogicElementFactory.prototype = Object.create(Factory.prototype);
     LogicElementFactory.prototype.constructor = LogicElementFactory;
     function LogicElementFactory(game) {
         Factory.call(this, LogicElement);
-        this.__componentFactory = game.getFactory(ComponentFactory);
-        this.__circuitElementFactory = game.getFactory(CircuitElementFactory);
-        this.__terminalFactory = game.getFactory(TerminalFactory);
-        this.__wireFactory = game.getFactory(WireFactory);
-        this.__assetMap = game.getAssetMap();
+        this.__engine = game;
+        this.__componentFactory = this.__engine.getFactory(utils.modules.require('component-factory'));
+        this.__circuitElementFactory = this.__engine.getFactory(utils.modules.require('circuit-element-factory'));
+        this.__terminalFactory = this.__engine.getFactory(utils.modules.require('terminal-factory'));
+        this.__wireFactory = this.__engine.getFactory(utils.modules.require('wire-factory'));
+        //this.__labController = this.__engine.getController(utils.modules.require('lab-controller'));
+        this.__assetMap = this.__engine.getAssetMap();
         this.__container = new LogicElementContainer();
     };
     // private methods
@@ -30,6 +32,12 @@ function (Factory, CircuitElementFactory, LogicElementContainer, LogicElement, C
         this.__addTerminal(logicElement, InputTerminal, new Position(0, 35), new Position(0, -20));
         this.__addTerminal(logicElement, OutputTerminal, new Position(0, -35), new Position(0, 20));
         this.__container.add(logicElement);
+        // configure pick action
+        var labController = this.__engine.getController(utils.modules.require('lab-controller'));
+        logicElement.set(new Rectangle(30, 30));
+        logicElement.set(function () {
+            labController.setTarget(logicElement);
+        });
         return logicElement;
     };
     LogicElementFactory.prototype.getContainer = function () {

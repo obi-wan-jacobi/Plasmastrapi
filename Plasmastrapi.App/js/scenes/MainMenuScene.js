@@ -9,12 +9,12 @@ function (Scene, UIElementFactory, Button, SceneController, Position, Rectangle,
     MainMenuScene.prototype.__oninit = function () {
         var engine = this.__engine;
         var labNavigationButton = engine.getFactory(UIElementFactory).create(Button);
-        labNavigationButton.set(new Position(750, 350));
+        labNavigationButton.set(new Position(750, 200));
         labNavigationButton.set(new Rectangle(100, 30));
         labNavigationButton.set(new Text('Play'));
         labNavigationButton.set(function () {
-            var Lab = modules.require('lab-scene');
-            engine.getController(SceneController).setScene(Lab);
+            var LabScene = modules.require('lab-scene');
+            engine.getController(SceneController).setScene(LabScene);
         });
     };
 

@@ -1,54 +1,66 @@
-﻿define([
-    // Base
-    'input-handle',
-    // Components
-    'pick-component',
-    'pose-component',
-    // Data
-    'position',
-    // Configs
-    'design-zone',
-    'destruction-zone'
-],
-function (InputHandler, PickComponent, PoseComponent, Position, DesignZone, DestructionZone) {
+﻿define(['input-handler', 'pick-component', 'pose-component', 'position'],
+function (InputHandler, PickComponent, PoseComponent, Position) {
 
     PlacingTool.prototype = Object.create(InputHandler.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
-    function PlacingTool(engine) {
+    function PlacingTool(engine, target) {
         InputHandler.call(this, engine);
-        this.__equippedEntity = null;
-        this.__fnShiftKeyMouseUp = null;
-        this.__previousCursorPosition = null;
+        this.__target = target;
+        this.__poseComponent = this.__target.getComponent(PoseComponent);
     };
-    PlacingTool.prototype.__onequip = function (entity, fnShiftKeyMouseUp, x, y) {
-        this.__previousCursorPosition = new Position(x, y);
-        this.__equippedEntity = entity;
-        this.__fnShiftKeyMouseUp = fnShiftKeyMouseUp;
-        this.setFilter(DestructionZone, DesignZone);
-    };
-    PlacingTool.prototype.__onmousemove = function (cursor) {
-        var poseComponent = this.__equippedEntity.getComponent(PoseComponent)
-        var position = poseComponent.position;
-        poseComponent.position = new Position(
-			position.x + (cursor.x - this.__previousCursorPosition.x),
-			position.y + (cursor.y - this.__previousCursorPosition.y)
-		);
-        this.__previousCursorPosition = cursor;
-    };
-    PlacingTool.prototype.__onmouseup = function (cursor) {
-        InputHandler.prototype.__onmouseup(cursor);
-        this.__equippedEntity.getComponent(PickComponent).deselect();
-        if (this.isShiftKeyDown && this.__fnShiftKeyMouseUp) {
-            this.__fnShiftKeyMouseUp(cursor.x, cursor.y);
-        } else {
-            this.__engine.toolController.equipPickingTool();
+    // private methods
+    PlacingTool.prototype.__oninit = function () {
+        this.__target.unload();
+        // draw the target off-screen rather than at point (0, 0) if its position has not been initialized
+        var position = this.__poseComponent.getHandle().getPosition();
+        if (position.x === 0 && position.y === 0) {
+            this.__poseComponent.getHandle().setPosition(new Position(-9999, -9999));
         }
     };
-    PlacingTool.prototype.__onkeyup = function (keyCode) {
-        InputHandler.prototype.__onkeyup.call(this, keyCode);
-        if (this.keyCodes.shift === keyCode && this.__fnShiftKeyMouseUp) {
-            this.__equippedEntity.destroy();
-            this.__engine.toolController.equipPickingTool();
+    PlacingTool.prototype.__onload = function () {
+        if (this.__target) {
+            this.__target.load();
+            this.__target.getComponent(PickComponent).disable();
+        }
+    };
+    PlacingTool.prototype.__onunload = function () {
+        if (this.__target) {
+            this.__target.unload();
+        }
+    };
+    // public methods
+    PlacingTool.prototype.onkeydown = function () {
+    };
+    PlacingTool.prototype.onkeyup = function () {
+    };
+    PlacingTool.prototype.onkeypress = function () {
+    };
+    PlacingTool.prototype.onenter = function () {
+    };
+    PlacingTool.prototype.onescape = function () {
+    };
+    PlacingTool.prototype.onmousemove = function (mouseHandle) {
+        if (this.__poseComponent) {
+            this.__poseComponent.getHandle().setPosition(mouseHandle.getData());
+        }
+    };
+    PlacingTool.prototype.onmousedown = function () {
+    };
+    PlacingTool.prototype.onmouseup = function () {
+    };
+    PlacingTool.prototype.onclick = function () {
+        this.__target.getComponent(PickComponent).enable();
+        this.__target = null;
+        this.__poseComponent = null;
+        this.__labController.idle();
+    };
+    PlacingTool.prototype.dispose = function () {
+        this.unload();
+        if (this.__target) {
+            var target = this.__target;
+            this.__target = null;
+            this.__poseComponent = null;
+            target.destroy();
         }
     };
 

@@ -31,18 +31,29 @@
         }
     };
 
+    validator.isInstanceOfType = function (instance, Type) {
+        return typeof instance !== Type && !(instance instanceof Type);
+    };
+
     validator.validateInstanceType = function (ref, instance, Type) {
         if (instance instanceof Array) {
+            if (Type === Array) {
+                return;
+            }
             for (var i = 0, L = instance.length; i < L; i++) {
                 this.validateInstanceType(ref, instance[i], Type);
             }
-        } else if (typeof instance !== Type && !(instance instanceof Type)) {
+        } else if (this.isInstanceOfType(instance, Type)) {
             this.throw(ref, 'validateInstanceType', `${instance} must be an instance of ${Type.name}`);
         }
     };
 
+    validator.isClassOfType = function (ClassToValidate, Class) {
+        return !(ClassToValidate.prototype instanceof Class) && ClassToValidate.prototype.constructor.name !== Class.name;
+    };
+
     validator.validateClassType = function (ref, ClassToValidate, Class) {
-        if (!(ClassToValidate.prototype instanceof Class) && ClassToValidate.prototype.constructor.name !== Class.name) {
+        if (this.isClassOfType(ClassToValidate, Class)) {
             this.throw(ref, 'validateInstanceType', `${ClassToValidate.name} must inherit from ${Class.name}`);
         }
     };

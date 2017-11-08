@@ -7,7 +7,6 @@ function (Entity) {
     function CircuitElement() {
         Entity.call(this);
         this.registerEvents(
-            'onplace',
             'onstatechange'
         );
     };

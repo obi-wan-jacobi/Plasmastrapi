@@ -9,7 +9,7 @@ function (debug) {
 
     $.WireElement = {
         displayLayer: 'game-entity-midground',
-        wireColour: '#FFFFFF',
+        wireColour: 'grey',
         lineThickness: 2
     };
 

@@ -3,7 +3,7 @@
     function Enableable() {
         var target = this;
         validator.validateInstanceType(target, target, Emitter);
-        target.__isEnabled = false;
+        target.__isEnabled = true;
         Object.defineProperties(target, {
             'isEnableable': {
                 get: function () {

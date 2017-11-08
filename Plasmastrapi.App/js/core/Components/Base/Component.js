@@ -39,7 +39,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
             fnOnLoadProxy.apply(self, arguments);
             subject.addEventListener(event, observer, callback);
         };
-        var fnOnUnloadProxy = function () { };
+        var fnOnUnloadProxy = this.__onunload || function () { };
         this.__onunload = function () {
             fnOnUnloadProxy.apply(self, arguments);
             subject.removeEventListener(event, observer, callback);

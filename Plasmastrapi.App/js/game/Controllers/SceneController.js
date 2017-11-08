@@ -1,5 +1,5 @@
-define(['controller', 'scene', 'entity-factory', 'validator'],
-function (Controller, Scene, EntityFactory, validator) {
+define(['controller', 'scene', 'dictionary', 'entity-factory', 'validator'],
+function (Controller, Scene, Dictionary, EntityFactory, validator) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
@@ -8,6 +8,7 @@ function (Controller, Scene, EntityFactory, validator) {
 	    Controller.call(this, engine);
 	    this.__entityFactory = engine.getFactory(EntityFactory);
 	    this.__scene = null;
+	    this.__scenes = new Dictionary(Scene);
 	};
 	SceneController.prototype.__updateEntityContainerSubscriptions = function (actionString) {
 	    // keyboard events
@@ -32,7 +33,11 @@ function (Controller, Scene, EntityFactory, validator) {
 	        this.__updateEntityContainerSubscriptions('remove');
 	        this.__scene.unload();
 	    }
-	    this.__scene = new SceneType(this.__engine);
+	    this.__scene = this.__scenes.get(SceneType);
+	    if (!this.__scene) {
+	        this.__scene = new SceneType(this.__engine);
+	        this.__scenes.add(SceneType, this.__scene);
+	    }
 	    if (this.isLoaded) {
 	        this.__updateEntityContainerSubscriptions('add');
 	        this.__scene.load();

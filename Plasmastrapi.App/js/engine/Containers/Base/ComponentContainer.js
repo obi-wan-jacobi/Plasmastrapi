@@ -5,45 +5,49 @@
     function ComponentContainer(ComponentType) {
         validator.validateClassType(this, ComponentType, Component);
         Container.call(this, ComponentType);
-        this.__unloadBuffer = new Container(ComponentType);
-        //this.__disableBuffer = new Container(ComponentType);
     };
     // private methods
     ComponentContainer.prototype.__initEventCallbacks = function (component) {
-        component.addEventListener('ondestroy', this, this.__onComponentDestroy.bind(this, component));
-        component.addEventListener('onload', this, this.__onComponentLoad.bind(this, component));
-        component.addEventListener('onunload', this, this.__onComponentUnload.bind(this, component));
-        //component.addEventListener('onenable', this, this.__onComponentEnable.bind(this, component));
-        //component.addEventListener('ondisable', this, this.__onComponentDisable.bind(this, component));
-    };
-    ComponentContainer.prototype.__onComponentDestroy = function (component) {
-        this.remove(component);
-        this.__unloadBuffer.remove(component);
-        //this.__disableBuffer.remove(component);
+        if (component.isLoaded) {
+            component.addEventListener('onunload', this, this.__onComponentUnload.bind(this, component));
+        } else {
+            component.addEventListener('onload', this, this.__onComponentLoad.bind(this, component));
+        }
+        if (component.isEnabled) {
+            component.addEventListener('ondisable', this, this.__onComponentDisable.bind(this, component));
+        } else {
+            component.addEventListener('onenable', this, this.__onComponentEnable.bind(this, component));
+        }
     };
     ComponentContainer.prototype.__onComponentLoad = function (component) {
-        Container.prototype.add.call(this, component);
-        this.__unloadBuffer.remove(component);
+        if (component.isEnabled) {
+            Container.prototype.add.call(this, component);
+        }
+        component.removeEventListener('onload', this, this.__onComponentLoad.bind(this, component));
+        component.addEventListener('onunload', this, this.__onComponentUnload.bind(this, component));
     };
     ComponentContainer.prototype.__onComponentUnload = function (component) {
-        this.remove(component);
-        this.__unloadBuffer.add(component);
+        Container.prototype.remove.call(this, component);
+        component.removeEventListener('onunload', this, this.__onComponentUnload.bind(this, component));
+        component.addEventListener('onload', this, this.__onComponentLoad.bind(this, component));
     };
-    //ComponentContainer.prototype.__onComponentEnable = function (component) {
-    //    if (component.isLoaded) {
-    //        this.add(component);
-    //    }
-    //    this.__unloadBuffer.remove(component);
-    //};
-    //ComponentContainer.prototype.__onComponentDisable = function (component) {
-    //    this.remove(component);
-    //    this.__unloadBuffer.add(component);
-    //};
+    ComponentContainer.prototype.__onComponentEnable = function (component) {
+        if (component.isLoaded) {
+            Container.prototype.add.call(this, component);
+        }
+        component.removeEventListener('onenable', this, this.__onComponentEnable.bind(this, component));
+        component.addEventListener('ondisable', this, this.__onComponentDisable.bind(this, component));
+    };
+    ComponentContainer.prototype.__onComponentDisable = function (component) {
+        Container.prototype.remove.call(this, component);
+        component.removeEventListener('ondisable', this, this.__onComponentDisable.bind(this, component));
+        component.addEventListener('onenable', this, this.__onComponentEnable.bind(this, component));
+    };
     // public methods
     ComponentContainer.prototype.add = function (component) {
         this.__initEventCallbacks(component);
-        if (component.isLoaded) {
-            this.__onComponentLoad(component);
+        if (component.isLoaded && component.isEnabled) {
+            Container.prototype.add.call(this, component);
         }
     };
 

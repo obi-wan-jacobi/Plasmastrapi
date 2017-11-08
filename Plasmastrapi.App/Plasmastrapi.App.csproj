@@ -77,6 +77,7 @@
     <Content Include="js\core\Configuration\constants.js" />
     <Content Include="js\engine\Containers\EntityContainer.js" />
     <Content Include="js\game\Controllers\LabController.js" />
+    <Content Include="js\game\InputHandlers\EmptyHandler.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
@@ -182,7 +183,7 @@
     <Content Include="js\tools\Cursors\CuttingToolCursor.js" />
     <Content Include="js\tools\Cursors\TrashToolCursor.js" />
     <Content Include="js\tools\InputHandlers\CuttingTool.js" />
-    <Content Include="js\tools\InputHandlers\Base\InputHandler.js" />
+    <Content Include="js\game\InputHandlers\Base\InputHandler.js" />
     <Content Include="js\tools\Compatibility\Attributes\Base\CompatibilityAttribute.js" />
     <Content Include="js\tools\Compatibility\Attributes\DesignZone.js" />
     <Content Include="js\tools\Compatibility\Attributes\DestructionZone.js" />

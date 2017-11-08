@@ -1,5 +1,5 @@
-﻿define(['controller', 'component-factory', 'keyboard-handle', 'mouse-handle', 'input-handler','validator'],
-function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandler, validator) {
+﻿define(['controller', 'component-factory', 'keyboard-handle', 'mouse-handle', 'input-handler', 'empty-handler', 'validator'],
+function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, validator) {
 
     // CLASS InputController
     InputController.prototype = Object.create(Controller.prototype);
@@ -26,7 +26,7 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
             this.__handler.unload();
         }
     };
-    InputController.prototype.__updateHandlerEventSubscriptions = function (actionString) {
+    InputController.prototype.__configureHandlerEventSubscriptions = function (actionString) {
         // keyboard events
         this.__keyboardComponent[`${actionString}EventListener`]('onkeydown', this.__handler, this.__handler.onkeydown);
         this.__keyboardComponent[`${actionString}EventListener`]('onkeyup', this.__handler, this.__handler.onkeyup);
@@ -40,14 +40,19 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
         this.__mouseComponent[`${actionString}EventListener`]('onclick', this.__handler, this.__handler.onclick);
     };
     // public methods
-    InputController.prototype.setHandler = function (HandlerType) {
-        //validator.validateClassType(this, HandlerType, InputHandler);
+    InputController.prototype.setHandler = function (HandlerType, args) {
+        HandlerType = HandlerType || EmptyHandler;
+        args = args || [];
+        validator.validateClassType(this, HandlerType, InputHandler);
+        validator.validateInstanceType(this, args, Array);
+        validator.validateClassType(this, HandlerType, InputHandler);
         if (this.__handler) {
-            this.__updateHandlerEventSubscriptions('remove');
-            this.__handler.unload();
+            this.__configureHandlerEventSubscriptions('remove');
+            this.__handler.dispose();
         }
-        this.__handler = new HandlerType(this.__engine);
-        this.__updateHandlerEventSubscriptions('add');
+        var args = [this.__engine].concat(args);
+        this.__handler = new (HandlerType.bind.apply(HandlerType, [null].concat(args)))();
+        this.__configureHandlerEventSubscriptions('add');
         this.__handler.load();
     };
 

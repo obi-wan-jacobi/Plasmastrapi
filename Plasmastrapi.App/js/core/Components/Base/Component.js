@@ -45,17 +45,17 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
             subject.removeEventListener(event, observer, callback);
         };
     };
-    Component.prototype.__registerComponentDependencyOnLoad = function (ComponentType, event, observer, callback) {
+    Component.prototype.__registerComponentDependencyOnLoad = function (componentString, event, observer, callback) {
         var self = this;
         var fnOnLoadProxy = this.__onload || function () { };
         this.__onload = function () {
-            var component = this.__entity.getComponent(ComponentType);
+            var component = this.__entity.getComponent(componentString);
             fnOnLoadProxy.apply(self, arguments);
             component.addEventListener(event, observer, callback);
         };
         var fnOnUnloadProxy = this.__onunload || function () { };
         this.__onunload = function () {
-            var component = this.__entity.getComponent(ComponentType);
+            var component = this.__entity.getComponent(componentString);
             fnOnUnloadProxy.apply(self, arguments);
             component.removeEventListener(event, observer, callback);
         };

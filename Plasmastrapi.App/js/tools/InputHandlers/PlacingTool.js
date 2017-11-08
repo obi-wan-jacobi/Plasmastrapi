@@ -1,12 +1,12 @@
-﻿define(['input-handler', 'pick-component', 'pose-component', 'position'],
-function (InputHandler, PickComponent, PoseComponent, Position) {
+﻿define(['input-handler', 'position'],
+function (InputHandler, Position) {
 
     PlacingTool.prototype = Object.create(InputHandler.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool(engine, target) {
         InputHandler.call(this, engine);
         this.__target = target;
-        this.__poseComponent = this.__target.getComponent(PoseComponent);
+        this.__poseComponent = this.__target.getComponent('pose-component');
     };
     // private methods
     PlacingTool.prototype.__oninit = function () {
@@ -20,7 +20,7 @@ function (InputHandler, PickComponent, PoseComponent, Position) {
     PlacingTool.prototype.__onload = function () {
         if (this.__target) {
             this.__target.load();
-            this.__target.getComponent(PickComponent).disable();
+            this.__target.getComponent('pick-component').disable();
         }
     };
     PlacingTool.prototype.__onunload = function () {
@@ -49,7 +49,7 @@ function (InputHandler, PickComponent, PoseComponent, Position) {
     PlacingTool.prototype.onmouseup = function () {
     };
     PlacingTool.prototype.onclick = function () {
-        this.__target.getComponent(PickComponent).enable();
+        this.__target.getComponent('pick-component').enable();
         this.__target = null;
         this.__poseComponent = null;
         this.__labController.idle();

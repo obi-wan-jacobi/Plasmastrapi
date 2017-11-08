@@ -1,5 +1,5 @@
-﻿define(['system', 'pick-component', 'mouse-handle', 'linked-list', 'polygon-component'],
-function (System, PickComponent, MouseHandle, LinkedList, PolygonComponent) {
+﻿define(['system', 'pick-component', 'mouse-handle', 'linked-list'],
+function (System, PickComponent, MouseHandle, LinkedList) {
 
     // CLASS PickSystem
     PickSystem.prototype = Object.create(System.prototype);
@@ -7,7 +7,7 @@ function (System, PickComponent, MouseHandle, LinkedList, PolygonComponent) {
     function PickSystem(engine) {
         System.call(this);
         var componentFactory = engine.getFactory('component-factory');
-        this.__container = componentFactory.getContainer(PickComponent);
+        this.__container = componentFactory.getContainer('pick-component');
         this.__mouseComponent = componentFactory.createFromDataHandle(new MouseHandle());
         this.__inputBuffer = {
             'mousemove': new LinkedList(PickComponent),
@@ -42,7 +42,7 @@ function (System, PickComponent, MouseHandle, LinkedList, PolygonComponent) {
         var cursor = this.__mouseComponent.getHandle().getData();
         this.__inputBuffer['mousemove'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
-            var polygonComponent = entity.getComponent(PolygonComponent);
+            var polygonComponent = entity.getComponent('polygon-component');
             if (polygonComponent.getHandle().checkPointCollision(cursor)) {
                 pickComponent.getHandle().hover();
             }
@@ -59,7 +59,7 @@ function (System, PickComponent, MouseHandle, LinkedList, PolygonComponent) {
         //});
         this.__inputBuffer['click'].forEach(function (pickComponent) {
             var entity = pickComponent.getEntity();
-            var polygonComponent = entity.getComponent(PolygonComponent);
+            var polygonComponent = entity.getComponent('polygon-component');
             if (polygonComponent.getHandle().checkPointCollision(cursor)) {
                 pickComponent.getHandle().pick();
             }

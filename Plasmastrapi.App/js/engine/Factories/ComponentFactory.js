@@ -10,24 +10,26 @@ function (Factory, Component, Dictionary, ComponentContainer, DrawableComponentC
         this.__drawableComponentContainer = new DrawableComponentContainer();
     };
     // private methods
-    ComponentFactory.prototype.__getOrInitContainer = function (ComponentType) {
+    ComponentFactory.prototype.__getOrInitContainer = function (componentString) {
         // if container doesn't exist for this component type, create one
-        var container = this.__containers.get(ComponentType);
+        var container = this.__containers.get(componentString);
         if (!container) {
-            var modulePrefix = utils.modules.getModulePrefix(ComponentType);
+            var ComponentType = utils.modules.require(componentString);
+            var modulePrefix = componentString.split('-').slice(0, -1).join('-');
             var ContainerType = utils.modules.requireIfExists(`${modulePrefix}-container`);
             if (ContainerType !== null) {
                 container = new ContainerType(ComponentType);
             } else {
                 container = new ComponentContainer(ComponentType);
             }
-            this.__containers.add(ComponentType, container);
+            this.__containers.add(componentString, container);
         }
         return container;
     };
     // public methods
-    ComponentFactory.prototype.create = function (ComponentType, args) {
-        var container = this.__getOrInitContainer(ComponentType);
+    ComponentFactory.prototype.create = function (componentString, args) {
+        var ComponentType = utils.modules.require(componentString);
+        var container = this.__getOrInitContainer(componentString);
         var component = this.__emitterFactory.create(ComponentType.bind.apply(ComponentType, [null].concat(args)));
         container.add(component);
         if (component.isDrawable) {
@@ -38,28 +40,27 @@ function (Factory, Component, Dictionary, ComponentContainer, DrawableComponentC
     ComponentFactory.prototype.createFromDataHandle = function (dataHandle) {
         utils.validator.validateInstanceType(this, dataHandle, DataHandle);
         var modulePrefix = utils.modules.getModulePrefix(dataHandle, 'Handle');
-        var ComponentType = utils.modules.require(`${modulePrefix}-component`); 
-        var component = this.create(ComponentType, [dataHandle]);
+        var component = this.create(`${modulePrefix}-component`, [dataHandle]);
         return component;
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
         utils.validator.validateInstanceType(this, primitive, Primitive);
         var modulePrefix = utils.modules.getModulePrefix(primitive, null);
-        var ComponentType, HandleType, DisplaySettings;
+        var componentString, HandleType, DisplaySettings;
         if (primitive instanceof Polygon) {
-            ComponentType = utils.modules.require('polygon-component');
+            componentString = 'polygon-component';
             HandleType = utils.modules.require('polygon-handle');
             DisplaySettings = utils.modules.require('polygon-display-settings');
         } else {
-            ComponentType = utils.modules.require(`${modulePrefix}-component`);
+            componentString = `${modulePrefix}-component`;
             HandleType = utils.modules.require(`${modulePrefix}-handle`);
             DisplaySettings = utils.modules.require(`${modulePrefix}-display-settings`);
         }
-        var component = this.create(ComponentType, [new HandleType(primitive, new DisplaySettings())]);
+        var component = this.create(componentString, [new HandleType(primitive, new DisplaySettings())]);
         return component;
     };
-    ComponentFactory.prototype.getContainer = function (ComponentType) {
-        return this.__getOrInitContainer(ComponentType);
+    ComponentFactory.prototype.getContainer = function (componentString) {
+        return this.__getOrInitContainer(componentString);
     };
     ComponentFactory.prototype.getDrawableComponentContainer = function () {
         return this.__drawableComponentContainer;

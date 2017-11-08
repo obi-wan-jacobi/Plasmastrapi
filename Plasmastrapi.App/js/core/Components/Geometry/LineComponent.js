@@ -1,5 +1,5 @@
-define(['component', 'polygon-component', 'pose-component', 'pose', 'line-handle', 'line', 'validator'],
-function (Component, PolygonComponent, PoseComponent, Pose, LineHandle, Line, validator) {
+define(['component', 'pose-component', 'pose', 'line-handle', 'line', 'validator'],
+function (Component, PoseComponent, Pose, LineHandle, Line, validator) {
 
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
@@ -44,7 +44,7 @@ function (Component, PolygonComponent, PoseComponent, Pose, LineHandle, Line, va
         this.__updatePolygonComponent();
     };
     LineComponent.prototype.__updatePoseComponent = function () {
-        var poseComponent = this.__entity.getComponent(PoseComponent);
+        var poseComponent = this.__entity.getComponent('pose-component');
         if (poseComponent) {
             var position = this.__handle.getPosition();
             var orientation = this.__handle.getOrientation();
@@ -52,7 +52,7 @@ function (Component, PolygonComponent, PoseComponent, Pose, LineHandle, Line, va
         }
     };
     LineComponent.prototype.__updatePolygonComponent = function () {
-        var polygonComponent = this.__entity.getComponent(PolygonComponent);
+        var polygonComponent = this.__entity.getComponent('polygon-component');
         if (polygonComponent) {
             var polygon = this.__handle.getPolygon();
             polygonComponent.getHandle().setData(polygon);

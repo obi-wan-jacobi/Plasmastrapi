@@ -1,5 +1,5 @@
-define(['component', 'mouse-component'],
-function (Component, MouseComponent) {
+define(['component'],
+function (Component) {
 
 	// CLASS PickComponent
 	PickComponent.prototype = Object.create(Component.prototype);
@@ -32,10 +32,3 @@ function (Component, MouseComponent) {
 
 	return PickComponent;
 });
-
-/* 
-MouseComponent.prototype.__isCursorWithinPolygonBoundary = function (cursor) {
-    var polygonComponent = this.__entity.getComponent(PolygonComponent);
-    return polygonComponent.getHandle().checkPointCollision(cursor);
-};
-*/

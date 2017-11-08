@@ -51,7 +51,7 @@ define(function () {
         this.emit('onhide');
     };
     Drawable.prototype.draw = function (ctx) {
-        var poseHandle = this.__entity.getComponentByName('PoseComponent').getHandle();
+        var poseHandle = this.__entity.getComponent('pose-component').getHandle();
         var position = poseHandle.getPosition();
         var orientation = poseHandle.getOrientation();
         this.__handle.draw(ctx, position, orientation);

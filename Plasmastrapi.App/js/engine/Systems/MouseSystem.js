@@ -1,5 +1,5 @@
-define(['system', 'linked-list', 'mouse-component', 'position'],
-function (System, LinkedList, MouseComponent, Position) {
+define(['system', 'linked-list', 'position'],
+function (System, LinkedList, Position) {
 
 	// CLASS MouseSystem
 	MouseSystem.prototype = Object.create(System.prototype);
@@ -13,7 +13,7 @@ function (System, LinkedList, MouseComponent, Position) {
             'mouseup': new LinkedList(Position),
             'click': new LinkedList(Position)
         };
-        this.__container = engine.getFactory('component-factory').getContainer(MouseComponent);
+        this.__container = engine.getFactory('component-factory').getContainer('mouse-component');
     };
     // private methods
     MouseSystem.prototype.__onload = function () {

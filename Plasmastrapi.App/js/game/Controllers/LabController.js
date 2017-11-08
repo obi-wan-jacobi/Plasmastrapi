@@ -1,5 +1,5 @@
-﻿define(['controller', 'pick-component', 'placing-tool', 'panel', 'validator'],
-function (Controller, PickComponent, PlacingTool, Panel, validator) {
+﻿define(['controller', 'placing-tool', 'panel', 'validator'],
+function (Controller, PlacingTool, Panel, validator) {
 
     LabController.prototype = Object.create(Controller.prototype);
     LabController.prototype.constructor = LabController;
@@ -14,7 +14,7 @@ function (Controller, PickComponent, PlacingTool, Panel, validator) {
     // private methods
     LabController.prototype.__initDesignArea = function (panel) {
         this.__designArea = panel;
-        var pickComponent = this.__designArea.getComponent(PickComponent);
+        var pickComponent = this.__designArea.getComponent('pick-component');
         pickComponent.addEventListener('onmouseenter', this, function () {
             this.__activate();
         });
@@ -26,7 +26,7 @@ function (Controller, PickComponent, PlacingTool, Panel, validator) {
     LabController.prototype.__set = function (state, target) {
         this.__state = state;
         this.__target = target;
-        if (this.__designArea.getComponent(PickComponent).getHandle().isHovered) {
+        if (this.__designArea.getComponent('pick-component').getHandle().isHovered) {
             this.__activate();
         }
     };

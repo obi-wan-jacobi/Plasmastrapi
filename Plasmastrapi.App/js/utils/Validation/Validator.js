@@ -66,10 +66,10 @@
     };
 
     // entity validations
-    validator.validateEntityHasComponent = function (ref, entity, Component) {
-        var component = entity.getComponent(Component);
+    validator.validateEntityHasComponent = function (ref, entity, componentString) {
+        var component = entity.getComponent(componentString);
         if (!component) {
-            this.throw(ref, 'validateEntityHasComponent', `Target entity (${entity.constructor.name}) must possess a ${Component.name}`);
+            this.throw(ref, 'validateEntityHasComponent', `Target entity (${entity.constructor.name}) must possess a ${componentString}`);
         }
         return component;
     };

@@ -1,5 +1,5 @@
-define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin', 'primitive', 'display-settings', 'pose-component', 'position', 'utils'],
-function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, PoseComponent, Position, utils) {
+define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin', 'primitive', 'display-settings', 'position', 'utils'],
+function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, Position, utils) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
@@ -30,20 +30,17 @@ function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Prim
         this.__parent = parent;
     };
     Entity.prototype.addComponent = function (component) {
-        this.__components.add(component.constructor.name, component);
+        this.__components.add(utils.modules.getModulePrefix(component), component);
         component.setEntity(this);
         if (this.isLoaded) {
             this.reload();
         }
     };
-    Entity.prototype.getComponent = function (ComponentType) {
-        return this.__components.get(ComponentType.name);
+    Entity.prototype.getComponent = function (componentString) {
+        return this.__components.get(componentString);
     };
-    Entity.prototype.getComponentByName = function (componentName) {
-        return this.__components.get(componentName);
-    };
-    Entity.prototype.hasComponent = function (ComponentType) {
-        return this.getComponent(ComponentType) ? true : false;
+    Entity.prototype.hasComponent = function (componentString) {
+        return this.getComponent(componentString) ? true : false;
     };
     Entity.prototype.forEachComponent = function (fn, /* optional */ caller) {
         return this.__components.forEach(fn, caller);
@@ -59,8 +56,7 @@ function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Prim
             }
         }
         var modulePrefix = utils.modules.getModulePrefix(baseClass);
-        var ComponentType = utils.modules.require(`${modulePrefix}-component`);
-        var component = this.getComponent(ComponentType);
+        var component = this.getComponent(`${modulePrefix}-component`);
         if (data instanceof DisplaySettings) {
             var DisplaySettingsType = utils.modules.require(`${modulePrefix}-display-settings`);
             component.getHandle().setDisplaySettings(data);
@@ -69,8 +65,8 @@ function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Prim
         }
     };
     Entity.prototype.follow = function (entityToFollow, positionOffset) {
-        var poseComponentToFollow = entityToFollow.getComponent(PoseComponent)
-        var poseComponent = this.getComponent(PoseComponent);
+        var poseComponentToFollow = entityToFollow.getComponent('pose-component')
+        var poseComponent = this.getComponent('pose-component');
         poseComponentToFollow.addEventListener('onpositionchange', this, function () {
             var position = poseComponentToFollow.getHandle().getPosition();
             var orientation = poseComponentToFollow.getHandle().getOrientation();

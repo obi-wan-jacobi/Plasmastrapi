@@ -1,5 +1,5 @@
-﻿define(['system', 'linked-list', 'keyboard-component', 'position'],
-function (System, LinkedList, KeyboardComponent, Position) {
+﻿define(['system', 'linked-list', 'position'],
+function (System, LinkedList, Position) {
 
     // CLASS KeyboardSystem
     KeyboardSystem.prototype = Object.create(System.prototype);
@@ -11,7 +11,7 @@ function (System, LinkedList, KeyboardComponent, Position) {
             'keydown': new LinkedList(KeyboardEvent),
             'keyup': new LinkedList(KeyboardEvent)
         };
-        this.__container = engine.getFactory('component-factory').getContainer(KeyboardComponent);
+        this.__container = engine.getFactory('component-factory').getContainer('keyboard-component');
     };
     // private methods
     KeyboardSystem.prototype.__onload = function () {

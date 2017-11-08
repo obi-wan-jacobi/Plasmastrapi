@@ -1,5 +1,5 @@
-﻿define(['entity', 'pose-component', 'polygon-component', 'validator'],
-function (Entity, PoseComponent, PolygonComponent, validator) {
+﻿define(['entity', 'validator'],
+function (Entity, validator) {
 
     // CLASS UIElement
     UIElement.prototype = Object.create(Entity.prototype);
@@ -10,10 +10,10 @@ function (Entity, PoseComponent, PolygonComponent, validator) {
     // public methods
     UIElement.prototype.contains = function (entity) {
         validator.validateInstanceType(this, entity, Entity);
-        var position = entity.getComponent(PoseComponent)
+        var position = entity.getComponent('pose-component')
             .getHandle()
             .getPosition();
-        return this.getComponent(PolygonComponent)
+        return this.getComponent('polygon-component')
             .getHandle()
             .checkPointCollision(position);
     };

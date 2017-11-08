@@ -1,5 +1,5 @@
-﻿define(['factory', 'wire-element', 'wire-anchor', 'terminal-wire', 'terminal', 'line-component', 'pose-component', 'line-display-settings', 'utils', 'circuits-config'],
-    function (Factory, WireElement, WireAnchor, TerminalWire, Terminal, LineComponent, PoseComponent, LineDisplaySettings, utils, config) {
+﻿define(['factory', 'wire-element', 'wire-anchor', 'terminal-wire', 'terminal', 'line-display-settings', 'utils', 'circuits-config'],
+    function (Factory, WireElement, WireAnchor, TerminalWire, Terminal, LineDisplaySettings, utils, config) {
 
     WireFactory.prototype = Object.create(Factory.prototype);
     WireFactory.prototype.constructor = WireFactory;
@@ -16,8 +16,8 @@
         var displayLayer = config.Wire.displayLayer;
         var lineWidth = config.Wire.poweredLineWidth;
         var lineDisplaySettings = new LineDisplaySettings(displayLayer, config.Wire.noPowerLineColour, lineWidth);
-        var lineComponentArgs = [tailElement.getComponent(PoseComponent), headElement.getComponent(PoseComponent), lineDisplaySettings];
-        var lineComponent = this.__componentFactory.create(LineComponent, lineComponentArgs);
+        var lineComponentArgs = [tailElement.getComponent('pose-component'), headElement.getComponent('pose-component'), lineDisplaySettings];
+        var lineComponent = this.__componentFactory.create('line-component', lineComponentArgs);
         wireElement.addComponent(lineComponent);
         wireElement.addDependency(tailElement);
         wireElement.addDependency(headElement);
@@ -35,7 +35,7 @@
 
 /*
 Wire.prototype.__updateState = function () {
-    var lineComponent = this.getComponent(LineComponent);
+    var lineComponent = this.getComponent('line-component');
     var displayLayer = config.Wire.displayLayer;
     var lineWidth = config.Wire.poweredLineWidth;
     if (!this.outputTerminal.isPowered) {

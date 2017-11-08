@@ -1,12 +1,12 @@
-define(['controller', 'scene', 'dictionary', 'entity-factory', 'validator'],
-function (Controller, Scene, Dictionary, EntityFactory, validator) {
+define(['controller', 'scene', 'dictionary', 'validator'],
+function (Controller, Scene, Dictionary, validator) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
 	SceneController.prototype.constructor = SceneController;
 	function SceneController(engine) {
 	    Controller.call(this, engine);
-	    this.__entityFactory = engine.getFactory(EntityFactory);
+	    this.__entityFactory = engine.getFactory('entity-factory');
 	    this.__scene = null;
 	    this.__scenes = new Dictionary(Scene);
 	};

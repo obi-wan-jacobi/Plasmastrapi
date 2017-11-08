@@ -1,12 +1,12 @@
-﻿define(['factory', 'circuit-element-factory', 'wire-element', 'component-factory', 'wire-anchor', 'terminal-wire', 'terminal', 'line-component', 'pose-component', 'line-display-settings', 'utils', 'circuits-config'],
-    function (Factory, CircuitElementFactory, WireElement, ComponentFactory, WireAnchor, TerminalWire, Terminal, LineComponent, PoseComponent, LineDisplaySettings, utils, config) {
+﻿define(['factory', 'wire-element', 'wire-anchor', 'terminal-wire', 'terminal', 'line-component', 'pose-component', 'line-display-settings', 'utils', 'circuits-config'],
+    function (Factory, WireElement, WireAnchor, TerminalWire, Terminal, LineComponent, PoseComponent, LineDisplaySettings, utils, config) {
 
     WireFactory.prototype = Object.create(Factory.prototype);
     WireFactory.prototype.constructor = WireFactory;
     function WireFactory(game) {
         Factory.call(this, WireElement);
-        this.__componentFactory = game.getFactory(ComponentFactory);
-        this.__circuitElementFactory = game.getFactory(CircuitElementFactory);
+        this.__componentFactory = game.getFactory('component-factory');
+        this.__circuitElementFactory = game.getFactory('circuit-element-factory');
     };
     // public methods
     WireFactory.prototype.create = function (WireElementType, tailElement, headElement) {

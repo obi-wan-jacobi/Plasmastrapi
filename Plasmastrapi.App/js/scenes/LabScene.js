@@ -1,5 +1,5 @@
-﻿define(['scene', 'ui-element-factory', 'logic-element-factory', 'panel', 'button', 'scene-controller', 'lab-controller', 'position', 'rectangle', 'text', 'modules'],
-function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneController, LabController, Position, Rectangle, Text, modules) {
+﻿define(['scene', 'panel', 'button', 'position', 'rectangle', 'text', 'modules'],
+function (Scene, Panel, Button, Position, Rectangle, Text, modules) {
 
     LabScene.prototype = Object.create(Scene.prototype);
     LabScene.prototype.constructor = LabScene;
@@ -8,9 +8,9 @@ function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneCont
     };
     LabScene.prototype.__oninit = function () {
         var engine = this.__engine;
-        var uiElementFactory = engine.getFactory(UIElementFactory);
-        var logicElementFactory = engine.getFactory(LogicElementFactory);
-        var labController = engine.getController(LabController);
+        var uiElementFactory = engine.getFactory('ui-element-factory');
+        var logicElementFactory = engine.getFactory('logic-element-factory');
+        var labController = engine.getController('lab-controller');
 
         var stage = uiElementFactory.create(Panel);
         stage.set(new Position(1200, 350));
@@ -78,7 +78,7 @@ function (Scene, UIElementFactory, LogicElementFactory, Panel, Button, SceneCont
         backNavigationButton.set(new Text('Menu'));
         backNavigationButton.set(function () {
             var MainMenuScene = modules.require('main-menu-scene');
-            engine.getController(SceneController).setScene(MainMenuScene);
+            engine.getController('scene-controller').setScene(MainMenuScene);
         });
 
         var designArea = uiElementFactory.create(Panel);

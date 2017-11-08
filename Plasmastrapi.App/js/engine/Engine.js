@@ -1,5 +1,5 @@
-define(['system', 'dictionary', 'factory', 'emitter-factory', 'entity-factory', 'component-factory', 'keyboard-system', 'mouse-system', 'draw-system', 'pick-system'],
-function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentFactory, KeyboardSystem, MouseSystem, DrawSystem, PickSystem) {
+define(['system', 'dictionary', 'factory', 'modules'],
+function (System, Dictionary, Factory, modules) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -27,22 +27,24 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
         }, this);
     };
     Engine.prototype.__registerFactories = function () {
-        this.__addFactory(EmitterFactory);
-        this.__addFactory(ComponentFactory);
-        this.__addFactory(EntityFactory);
+        this.__addFactory('emitter-factory');
+        this.__addFactory('component-factory');
+        this.__addFactory('entity-factory');
     };
-    Engine.prototype.__addFactory = function (FactoryType) {
-        this.__factories.add(FactoryType.name, new FactoryType(this));
+    Engine.prototype.__addFactory = function (factoryString) {
+        var FactoryType = modules.require(factoryString);
+        this.__factories.add(factoryString, new FactoryType(this));
     };
     Engine.prototype.__registerSystems = function () {
         // order matters:
-        this.__addSystem(KeyboardSystem);
-        this.__addSystem(MouseSystem);
-        this.__addSystem(PickSystem);
-        this.__addSystem(DrawSystem);
+        this.__addSystem('keyboard-system');
+        this.__addSystem('mouse-system');
+        this.__addSystem('pick-system');
+        this.__addSystem('draw-system');
     };
-    Engine.prototype.__addSystem = function (SystemType) {
-        this.__systems.add(SystemType.name, new SystemType(this));
+    Engine.prototype.__addSystem = function (systemString) {
+        var SystemType = modules.require(systemString);
+        this.__systems.add(systemString, new SystemType(this));
     };
     Engine.prototype.__beginMainLoop = function () {
         var self = this;
@@ -77,11 +79,11 @@ function (System, Dictionary, Factory, EmitterFactory, EntityFactory, ComponentF
     Engine.prototype.getViewport = function () {
         return this.__viewport;
     };
-    Engine.prototype.getFactory = function (FactoryType) {
-        return this.__factories.get(FactoryType.name);
+    Engine.prototype.getFactory = function (factoryString) {
+        return this.__factories.get(factoryString);
     };
-    Engine.prototype.getSystem = function (SystemType) {
-        return this.__systems.get(SystemType.name);
+    Engine.prototype.getSystem = function (systemString) {
+        return this.__systems.get(systemString);
     };
     Engine.prototype.loopOnce = function (deltaMs) {
         var isLoopStable = true;

@@ -1,12 +1,12 @@
-﻿define(['factory', 'circuit-element-factory', 'terminal', 'component-factory', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
-function (Factory, CircuitElementFactory, Terminal, ComponentFactory, ImageHandle, ImageDisplaySettings, utils, config) {
+﻿define(['factory', 'terminal', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
+function (Factory, Terminal, ImageHandle, ImageDisplaySettings, utils, config) {
 
     TerminalFactory.prototype = Object.create(Factory.prototype);
     TerminalFactory.prototype.constructor = TerminalFactory;
     function TerminalFactory(game) {
         Factory.call(this, Terminal);
-        this.__componentFactory = game.getFactory(ComponentFactory);
-        this.__circuitElementFactory = game.getFactory(CircuitElementFactory);
+        this.__componentFactory = game.getFactory('component-factory');
+        this.__circuitElementFactory = game.getFactory('circuit-element-factory');
         this.__assetMap = game.getAssetMap();
     };
     // public methods

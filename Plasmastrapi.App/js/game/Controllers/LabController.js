@@ -1,12 +1,12 @@
-﻿define(['controller', 'logic-element-factory', 'input-controller', 'pick-component', 'placing-tool', 'panel', 'validator'],
-function (Controller, LogicElementFactory, InputController, PickComponent, PlacingTool, Panel, validator) {
+﻿define(['controller', 'pick-component', 'placing-tool', 'panel', 'validator'],
+function (Controller, PickComponent, PlacingTool, Panel, validator) {
 
     LabController.prototype = Object.create(Controller.prototype);
     LabController.prototype.constructor = LabController;
     function LabController(engine) {
         Controller.call(this, engine);
-        this.__logicElementFactory = this.__engine.getFactory(LogicElementFactory);
-        this.__inputController = this.__engine.getController(InputController);
+        this.__logicElementFactory = this.__engine.getFactory('logic-element-factory');
+        this.__inputController = this.__engine.getController('input-controller');
         this.__designArea = null;
         this.__state = null;
         this.__target = null;

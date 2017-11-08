@@ -1,12 +1,12 @@
-﻿define(['factory', 'ui-element', 'component-factory', 'entity-factory', 'image-handle', 'image-display-settings', 'text-handle', 'text', 'validator', 'ui-config'],
-function (Factory, UIElement, ComponentFactory, EntityFactory, ImageHandle, ImageDisplaySettings, TextHandle, Text, validator, config) {
+﻿define(['factory', 'ui-element', 'entity-factory', 'image-handle', 'image-display-settings', 'text-handle', 'text', 'validator', 'ui-config'],
+function (Factory, UIElement, EntityFactory, ImageHandle, ImageDisplaySettings, TextHandle, Text, validator, config) {
 
     UIElementFactory.prototype = Object.create(Factory.prototype);
     UIElementFactory.prototype.constructor = UIElementFactory;
     function UIElementFactory(game) {
         Factory.call(this, UIElement);
-        this.__componentFactory = game.getFactory(ComponentFactory);
-        this.__entityFactory = game.getFactory(EntityFactory);
+        this.__componentFactory = game.getFactory('component-factory');
+        this.__entityFactory = game.getFactory('entity-factory');
         this.__assetMap = game.getAssetMap();
     };
     // private methods

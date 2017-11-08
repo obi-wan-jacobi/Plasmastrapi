@@ -1,5 +1,5 @@
-﻿define(['controller', 'component-factory', 'keyboard-handle', 'mouse-handle', 'input-handler', 'empty-handler', 'validator'],
-function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, validator) {
+﻿define(['controller', 'keyboard-handle', 'mouse-handle', 'input-handler', 'empty-handler', 'validator'],
+function (Controller, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, validator) {
 
     // CLASS InputController
     InputController.prototype = Object.create(Controller.prototype);
@@ -7,8 +7,8 @@ function (Controller, ComponentFactory, KeyboardHandle, MouseHandle, InputHandle
     function InputController(engine) {
         Controller.call(this);
         this.__engine = engine;
-        this.__keyboardComponent = engine.getFactory(ComponentFactory).createFromDataHandle(new KeyboardHandle());
-        this.__mouseComponent = engine.getFactory(ComponentFactory).createFromDataHandle(new MouseHandle());
+        this.__keyboardComponent = engine.getFactory('component-factory').createFromDataHandle(new KeyboardHandle());
+        this.__mouseComponent = engine.getFactory('component-factory').createFromDataHandle(new MouseHandle());
         this.__handler = null;
     };
     // private methods

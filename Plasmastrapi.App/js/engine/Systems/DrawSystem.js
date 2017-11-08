@@ -1,5 +1,5 @@
-define(['system', 'component-factory'],
-function (System, ComponentFactory) {
+define(['system'],
+function (System) {
 
 	// CLASS DrawSystem
 	DrawSystem.prototype = Object.create(System.prototype);
@@ -7,7 +7,7 @@ function (System, ComponentFactory) {
 	function DrawSystem(engine) {
         System.call(this);
         this.__viewport = engine.getViewport();
-        this.__container = engine.getFactory(ComponentFactory).getDrawableComponentContainer();
+        this.__container = engine.getFactory('component-factory').getDrawableComponentContainer();
 	};
 	DrawSystem.prototype.loopOnce = function () {
 	    if (!this.__isLoaded) {

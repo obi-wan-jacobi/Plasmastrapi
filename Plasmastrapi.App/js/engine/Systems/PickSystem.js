@@ -1,12 +1,12 @@
-﻿define(['system', 'component-factory', 'pick-component', 'mouse-handle', 'linked-list', 'polygon-component'],
-function (System, ComponentFactory, PickComponent, MouseHandle, LinkedList, PolygonComponent) {
+﻿define(['system', 'pick-component', 'mouse-handle', 'linked-list', 'polygon-component'],
+function (System, PickComponent, MouseHandle, LinkedList, PolygonComponent) {
 
     // CLASS PickSystem
     PickSystem.prototype = Object.create(System.prototype);
     PickSystem.prototype.constructor = PickSystem;
     function PickSystem(engine) {
         System.call(this);
-        var componentFactory = engine.getFactory(ComponentFactory);
+        var componentFactory = engine.getFactory('component-factory');
         this.__container = componentFactory.getContainer(PickComponent);
         this.__mouseComponent = componentFactory.createFromDataHandle(new MouseHandle());
         this.__inputBuffer = {

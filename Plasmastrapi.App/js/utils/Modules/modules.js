@@ -31,7 +31,17 @@
         try {
             module = require(moduleName);
         } catch (ex) {
-            logging.warn(modules, 'require', `No module named \'${moduleName}\' could be found`);
+            validator.throw(modules, 'require', `No module named \'${moduleName}\' could be found`);
+        }
+        return module;
+    };
+
+    modules.requireIfExists = function (moduleName) {
+        var module = null;
+        try {
+            module = require(moduleName);
+        } catch (ex) {
+            logging.warn(modules, 'requireIfExists', `No module named \'${moduleName}\' could be found`);
         }
         return module;
     };

@@ -5,9 +5,9 @@ function (Base, utils) {
     InputHandler.prototype.constructor = InputHandler;
     function InputHandler(engine) {
         Base.call(this);
-        this.__inputController = engine.getController(utils.modules.require('input-controller'));
-        this.__pickController = engine.getController(utils.modules.require('pick-controller'));
-        this.__labController = engine.getController(utils.modules.require('lab-controller'));
+        this.__inputController = engine.getController('input-controller');
+        this.__pickController = engine.getController('pick-controller');
+        this.__labController = engine.getController('lab-controller');
     };
     // private methods
     InputHandler.prototype.__oninit = function () {

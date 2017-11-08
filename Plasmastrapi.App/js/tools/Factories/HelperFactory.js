@@ -1,12 +1,12 @@
-﻿define(['factory', 'component-factory', 'entity-factory', 'selection-box', 'pose', 'rectangle', 'pick-handle', 'validator'],
-    function (Factory, ComponentFactory, EntityFactory, SelectionBox, Pose, Rectangle, PickHandle, validator) {
+﻿define(['factory', 'selection-box', 'pose', 'rectangle', 'pick-handle', 'validator'],
+    function (Factory, SelectionBox, Pose, Rectangle, PickHandle, validator) {
 
         HelperFactory.prototype = Object.create(Factory.prototype);
         HelperFactory.prototype.constructor = HelperFactory;
         function HelperFactory(engine) {
             Factory.call(this);
-            this.__componentFactory = engine.getFactory(ComponentFactory);
-            this.__entityFactory = engine.getFactory(EntityFactory);
+            this.__componentFactory = engine.getFactory('component-factory');
+            this.__entityFactory = engine.getFactory('entity-factory');
         };
         // public methods
         HelperFactory.prototype.createSelectionBox = function () {

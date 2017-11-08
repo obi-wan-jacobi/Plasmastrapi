@@ -1,11 +1,11 @@
-﻿define(['factory', 'component', 'emitter-factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'polygon', 'utils'],
-function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Polygon, utils) {
+﻿define(['factory', 'component', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'polygon', 'utils'],
+function (Factory, Component, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Polygon, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
         Factory.call(this, Component);
-        this.__emitterFactory = engine.getFactory(EmitterFactory);
+        this.__emitterFactory = engine.getFactory('emitter-factory');
         this.__containers = new Dictionary(ComponentContainer);
         this.__drawableComponentContainer = new DrawableComponentContainer();
     };
@@ -15,7 +15,7 @@ function (Factory, Component, EmitterFactory, Dictionary, ComponentContainer, Dr
         var container = this.__containers.get(ComponentType);
         if (!container) {
             var modulePrefix = utils.modules.getModulePrefix(ComponentType);
-            var ContainerType = utils.modules.require(`${modulePrefix}-container`);
+            var ContainerType = utils.modules.requireIfExists(`${modulePrefix}-container`);
             if (ContainerType !== null) {
                 container = new ContainerType(ComponentType);
             } else {

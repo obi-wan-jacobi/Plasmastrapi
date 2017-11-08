@@ -6,10 +6,10 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
     function LogicElementFactory(game) {
         Factory.call(this, LogicElement);
         this.__engine = game;
-        this.__componentFactory = this.__engine.getFactory(utils.modules.require('component-factory'));
-        this.__circuitElementFactory = this.__engine.getFactory(utils.modules.require('circuit-element-factory'));
-        this.__terminalFactory = this.__engine.getFactory(utils.modules.require('terminal-factory'));
-        this.__wireFactory = this.__engine.getFactory(utils.modules.require('wire-factory'));
+        this.__componentFactory = this.__engine.getFactory('component-factory');
+        this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
+        this.__terminalFactory = this.__engine.getFactory('terminal-factory');
+        this.__wireFactory = this.__engine.getFactory('wire-factory');
         //this.__labController = this.__engine.getController(utils.modules.require('lab-controller'));
         this.__assetMap = this.__engine.getAssetMap();
         this.__container = new LogicElementContainer();
@@ -33,7 +33,7 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
         this.__addTerminal(logicElement, OutputTerminal, new Position(0, -35), new Position(0, 20));
         this.__container.add(logicElement);
         // configure pick action
-        var labController = this.__engine.getController(utils.modules.require('lab-controller'));
+        var labController = this.__engine.getController('lab-controller');
         logicElement.set(new Rectangle(30, 30));
         logicElement.set(function () {
             labController.setTarget(logicElement);

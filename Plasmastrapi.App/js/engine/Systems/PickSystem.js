@@ -1,5 +1,10 @@
-﻿define(['system', 'pick-component', 'mouse-handle', 'linked-list'],
-function (System, PickComponent, MouseHandle, LinkedList) {
+﻿define(['system', 'mouse-handle', 'linked-list'],
+function (System, MouseHandle, LinkedList) {
+
+    function InputUpdateItem(pickComponent, mousePosition) {
+        this.pickComponent = pickComponent;
+        this.mousePosition = mousePosition;
+    };
 
     // CLASS PickSystem
     PickSystem.prototype = Object.create(System.prototype);
@@ -10,9 +15,9 @@ function (System, PickComponent, MouseHandle, LinkedList) {
         this.__container = componentFactory.getContainer('pick-component');
         this.__mouseComponent = componentFactory.createFromDataHandle(new MouseHandle());
         this.__inputBuffer = {
-            'mousemove': new LinkedList(PickComponent),
-            'mousedown': new LinkedList(PickComponent),
-            'click': new LinkedList(PickComponent),
+            'mousemove': new LinkedList(InputUpdateItem),
+            'mousedown': new LinkedList(InputUpdateItem),
+            'click': new LinkedList(InputUpdateItem)
         };
     };
     // private methods
@@ -28,9 +33,9 @@ function (System, PickComponent, MouseHandle, LinkedList) {
         this.__mouseComponent.unload();
     };
     PickSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
-        return (function (cursor) {
+        return (function (mouseHandle) {
             this.__container.forEach(function (pickComponent) {
-                this.__inputBuffer[inputBufferKey].push(pickComponent);
+                this.__inputBuffer[inputBufferKey].push(new InputUpdateItem(pickComponent, mouseHandle.getData()));
             }, this);
         }).bind(this);
     };
@@ -39,35 +44,40 @@ function (System, PickComponent, MouseHandle, LinkedList) {
         if (!this.__isLoaded) {
             return;
         }
-        var cursor = this.__mouseComponent.getHandle().getData();
-        this.__inputBuffer['mousemove'].forEach(function (pickComponent) {
+        this.__inputBuffer['mousemove'].forEach(function (updateItem) {
+            var pickComponent = updateItem.pickComponent;
+            var mousePosition = updateItem.mousePosition;
             var entity = pickComponent.getEntity();
             var polygonComponent = entity.getComponent('polygon-component');
-            if (polygonComponent.getHandle().checkPointCollision(cursor)) {
-                pickComponent.getHandle().hover();
+            if (polygonComponent.getHandle().checkPointCollision(mousePosition)) {
+                pickComponent.getHandle().hover(mousePosition);
             }
             else {
                 pickComponent.getHandle().unhover();
             }
         });
-        //this.__inputBuffer['mousedown'].forEach(function (pickComponent) {
-        //    var entity = pickComponent.getEntity();
-        //    var polygonComponent = entity.getComponent(PolygonComponent);
-        //    if (polygonComponent.getHandle().checkPointCollision(cursor)) {
-        //        pickComponent.getHandle().pick();
-        //    }
-        //});
-        this.__inputBuffer['click'].forEach(function (pickComponent) {
+        this.__inputBuffer['mousedown'].forEach(function (updateItem) {
+            var pickComponent = updateItem.pickComponent;
+            var mousePosition = updateItem.mousePosition;
             var entity = pickComponent.getEntity();
             var polygonComponent = entity.getComponent('polygon-component');
-            if (polygonComponent.getHandle().checkPointCollision(cursor)) {
-                pickComponent.getHandle().pick();
+            if (polygonComponent.getHandle().checkPointCollision(mousePosition)) {
+                pickComponent.getHandle().poke(mousePosition);
+            }
+        });
+        this.__inputBuffer['click'].forEach(function (updateItem) {
+            var pickComponent = updateItem.pickComponent;
+            var mousePosition = updateItem.mousePosition;
+            var entity = pickComponent.getEntity();
+            var polygonComponent = entity.getComponent('polygon-component');
+            if (polygonComponent.getHandle().checkPointCollision(mousePosition)) {
+                pickComponent.getHandle().pick(mousePosition);
             }
         });
         this.__inputBuffer = {
-            'mousemove': new LinkedList(PickComponent),
-            'mousedown': new LinkedList(PickComponent),
-            'click': new LinkedList(PickComponent),
+            'mousemove': new LinkedList(InputUpdateItem),
+            'mousedown': new LinkedList(InputUpdateItem),
+            'click': new LinkedList(InputUpdateItem),
         };
     };
 

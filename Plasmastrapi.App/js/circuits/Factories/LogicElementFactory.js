@@ -36,12 +36,11 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
         var labController = this.__engine.getController('lab-controller');
         var pickComponent = logicElement.getComponent('pick-component');
         // *** closures ***
-        pickComponent.addEventListener('onpick', logicElement, function () {
+        function setTarget() {
             labController.setTarget(logicElement);
-        });
-        pickComponent.addEventListener('onhover', logicElement, function () {
-            console.log('hovering');
-        });
+        };
+        pickComponent.addEventListener('onpick', logicElement, setTarget);
+        pickComponent.addEventListener('ondrag', logicElement, setTarget);
         return logicElement;
     };
     LogicElementFactory.prototype.getContainer = function () {

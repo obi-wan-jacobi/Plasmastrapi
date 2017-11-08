@@ -14,7 +14,8 @@ function (Component) {
             'ondeselect',
             'onmouseenter',
             'onhover',
-            'onmouseleave'
+            'onmouseleave',
+            'ondrag'
         );
         // inject event callbacks into handle
         this.__attachEventTriggerToHandleMethod('pick', 'onpick');
@@ -23,11 +24,11 @@ function (Component) {
         this.__attachEventTriggerToHandleMethod('mouseenter', 'onmouseenter');
         this.__attachEventTriggerToHandleMethod('hover', 'onhover');
         this.__attachEventTriggerToHandleMethod('mouseleave', 'onmouseleave');
+        this.__attachEventTriggerToHandleMethod('drag', 'ondrag');
     };
     // private methods
-    PickComponent.prototype.__ondisable = function () {
-        this.__handle.deselect();
-        this.__handle.unhover();
+    PickComponent.prototype.__onunload = function () {
+        this.__handle.reset();
     };
 
 	return PickComponent;

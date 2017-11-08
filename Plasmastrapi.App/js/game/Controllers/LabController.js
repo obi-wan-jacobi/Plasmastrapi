@@ -8,17 +8,18 @@ function (Controller, PlacingTool, Panel, validator) {
         this.__logicElementFactory = this.__engine.getFactory('logic-element-factory');
         this.__inputController = this.__engine.getController('input-controller');
         this.__designArea = null;
+        this.__designAreaPickComponent = null;
         this.__state = null;
         this.__target = null;
     };
     // private methods
     LabController.prototype.__initDesignArea = function (panel) {
         this.__designArea = panel;
-        var pickComponent = this.__designArea.getComponent('pick-component');
-        pickComponent.addEventListener('onmouseenter', this, function () {
+        this.__designAreaPickComponent = this.__designArea.getComponent('pick-component');
+        this.__designAreaPickComponent.addEventListener('onmouseenter', this, function () {
             this.__activate();
         });
-        pickComponent.addEventListener('onmouseleave', this, function () {
+        this.__designAreaPickComponent.addEventListener('onmouseleave', this, function () {
             this.idle();
             this.__activate();
         });
@@ -26,7 +27,7 @@ function (Controller, PlacingTool, Panel, validator) {
     LabController.prototype.__set = function (state, target) {
         this.__state = state;
         this.__target = target;
-        if (this.__designArea.getComponent('pick-component').getHandle().isHovered) {
+        if (this.__designAreaPickComponent.getHandle().isHovered) {
             this.__activate();
         }
     };
@@ -57,6 +58,11 @@ function (Controller, PlacingTool, Panel, validator) {
     LabController.prototype.getDesignArea = function () {
         return this.__designArea;
     };
+    LabController.prototype.setTarget = function (target) {
+        if (this.__state === 'idle') {
+            this.place(target);
+        }
+    };
     LabController.prototype.idle = function () {
         this.__set('idle', null);
     };
@@ -65,11 +71,6 @@ function (Controller, PlacingTool, Panel, validator) {
     };
     LabController.prototype.spawn = function (LogicElementType) {
         this.__set('spawn', LogicElementType);
-    };
-    LabController.prototype.setTarget = function (target) {
-        if (this.__state === 'idle') {
-            this.place(target);
-        }
     };
 
     return LabController;

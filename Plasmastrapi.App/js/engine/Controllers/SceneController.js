@@ -1,5 +1,5 @@
-define(['controller', 'scene', 'dictionary', 'validator'],
-function (Controller, Scene, Dictionary, validator) {
+define(['controller', 'scene', 'dictionary', 'utils'],
+function (Controller, Scene, Dictionary, utils) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
@@ -27,8 +27,9 @@ function (Controller, Scene, Dictionary, validator) {
 	        this.__scene.unload();
 	    }
 	};
-	SceneController.prototype.setScene = function (SceneType) {
-	    validator.validateClassType(this, SceneType, Scene);
+	SceneController.prototype.setScene = function (sceneString) {
+	    var SceneType = utils.modules.require(sceneString);
+	    utils.validator.validateClassType(this, SceneType, Scene);
 	    if (this.__scene) {
 	        this.__updateEntityContainerSubscriptions('remove');
 	        this.__scene.unload();

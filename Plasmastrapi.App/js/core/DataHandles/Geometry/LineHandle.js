@@ -1,5 +1,5 @@
-﻿define(['data-handle', 'line', 'line-display-settings', 'position', 'vertex', 'rectangle', 'core-constants', 'validator'],
-function (DataHandle, Line, LineDisplaySettings, Position, Vertex, Rectangle, CORE, validator) {
+﻿define(['data-handle', 'line', 'line-display-settings', 'position', 'vertex', 'rectangle', 'core-config', 'validator'],
+function (DataHandle, Line, LineDisplaySettings, Position, Vertex, Rectangle, config, validator) {
 
     LineHandle.prototype = Object.create(DataHandle.prototype);
     LineHandle.prototype.constructor = LineHandle;
@@ -32,8 +32,8 @@ function (DataHandle, Line, LineDisplaySettings, Position, Vertex, Rectangle, CO
     LineHandle.prototype.getPolygon = function () {
         // line converted into static rectangular polygon
         return new Rectangle(
-            this.getLength() * CORE.LineHandle.lengthModifier,
-            CORE.LineHandle.collisionWidth
+            this.getLength() * config.LineHandle.lengthModifier,
+            config.LineHandle.collisionWidth
         );
     };
     LineHandle.prototype.setTailPosition = function (position) {

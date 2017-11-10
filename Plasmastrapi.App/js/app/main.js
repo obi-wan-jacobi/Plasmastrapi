@@ -1,4 +1,6 @@
 define(['game'],
 function (Game) {
-    new Game(document.getElementById("game-canvas")).start();
+    var canvas = document.getElementById("game-canvas");
+    var game = new Game(canvas);
+    game.start();
 });

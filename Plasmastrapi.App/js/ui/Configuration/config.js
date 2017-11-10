@@ -1,9 +1,9 @@
-﻿define([
-    'ui-debug'
-],
+﻿define(['ui-debug'],
 function (debug) {
 
     $ = { debug };
+
+    $.DEBUG = false;
 
     $.Button = {
         displayLayer: 'ui-entity-midground'

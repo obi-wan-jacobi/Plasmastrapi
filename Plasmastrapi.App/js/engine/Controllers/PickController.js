@@ -1,5 +1,5 @@
 ﻿define(['controller', 'validator'],
-function (Controller, CompatibilityFilter, validator) {
+function (Controller, validator) {
 
     PickController.prototype = Object.create(Controller.prototype);
     PickController.prototype.constructor = PickController;
@@ -8,7 +8,10 @@ function (Controller, CompatibilityFilter, validator) {
         this.__pickComponentContainer = engine.getFactory('component-factory').getContainer('pick-component');
     };
     // public methods
-    PickController.prototype.setFilterByType = function () {
+    PickController.prototype.filter = function (fn, /* optional */ caller) {
+        this.__pickComponentContainer.forEach(fn, caller);
+    };
+    PickController.prototype.filterByType = function () {
 
     };
 

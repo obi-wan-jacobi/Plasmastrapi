@@ -1,7 +1,9 @@
-﻿define(['circuits-debug'],
-function (debug) {
+﻿define(['circuits-constants', 'circuits-debug'],
+function (constants, debug) {
 
-    $ = { debug };
+    $ = { constants, debug };
+
+    $.DEBUG = false;
 
     $.LogicElement = {
         displayLayer: 'game-entity-midground'

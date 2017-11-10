@@ -1,13 +1,14 @@
 ﻿define(function () {
     var paths = {
-        'ui-element': './ui/Base/UIElement',
-        'ui-element-factory': './ui/Factories/UIElementFactory',
+        // Configuration
+        'ui-config': './ui/Configuration/config',
+        'ui-debug': './ui/Configuration/debug',
         // Elements
+        'ui-element': './ui/Elements/Base/UIElement',
         'button': './ui/Elements/Button',
         'panel': './ui/Elements/Panel',
-        // Configuration
-        'ui-debug': './ui/Configuration/debug',
-        'ui-config': './ui/Configuration/config'
+        // Factories
+        'ui-element-factory': './ui/Factories/UIElementFactory'
     };
     require.config({ paths: paths });
     return paths;

@@ -90,8 +90,7 @@ function (Scene, Panel, Button, Position, Rectangle, Text, modules) {
         backNavigationButton.set(new Text('Menu'));
         backNavigationButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 7;
         backNavigationButton.set(function () {
-            var MainMenuScene = modules.require('main-menu-scene');
-            engine.getController('scene-controller').setScene(MainMenuScene);
+            engine.getController('scene-controller').setScene('main-menu-scene');
         });
 
         var designArea = uiElementFactory.create(Panel);

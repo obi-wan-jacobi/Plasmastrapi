@@ -3,5 +3,7 @@ function (debug) {
 
     $ = { debug };
 
+    $.DEBUG = false;
+
     return $;
 });

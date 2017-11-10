@@ -1,17 +1,28 @@
 ﻿define(function () {
     var paths = {
-        // Circuit Element
+        // Configuration
+        'circuits-config': './circuits/Configuration/config',
+        'circuits-constants': './circuits/Configuration/constants',
+        'circuits-debug': './circuits/Configuration/debug',
+        // Base
         'circuit-element': './circuits/Base/CircuitElement',
-        // Logic Element
+        // Containers
+        'logic-element-container': './circuits/Containers/LogicElementContainer',
+        // Factories
+        'circuit-element-factory': './circuits/Factories/CircuitElementFactory',
+        'logic-element-factory': './circuits/Factories/LogicElementFactory',
+        'terminal-factory': './circuits/Factories/TerminalFactory',
+        'wire-factory': './circuits/Factories/WireFactory',
+        // Logic Elements
         'logic-element': './circuits/LogicElements/Base/LogicElement',
-        // Gates
-        'gate': './circuits/LogicElements/Gates/Base/Gate',
-        'and-gate': './circuits/LogicElements/Gates/AndGate',
-        'nand-gate': './circuits/LogicElements/Gates/NandGate',
-        'or-gate': './circuits/LogicElements/Gates/OrGate',
-        'xor-gate': './circuits/LogicElements/Gates/XorGate',
-        // Power
-        'power-source': './circuits/LogicElements/Power/PowerSource',
+            // --- Gates ---
+            'gate': './circuits/LogicElements/Gates/Base/Gate',
+            'and-gate': './circuits/LogicElements/Gates/AndGate',
+            'nand-gate': './circuits/LogicElements/Gates/NandGate',
+            'or-gate': './circuits/LogicElements/Gates/OrGate',
+            'xor-gate': './circuits/LogicElements/Gates/XorGate',
+            // --- Power ---
+            'power-source': './circuits/LogicElements/Power/PowerSource',
         // Terminals
         'terminal': './circuits/Terminals/Base/Terminal',
         'input-terminal': './circuits/Terminals/InputTerminal',
@@ -20,18 +31,7 @@
         'wire-element': './circuits/Wires/Base/WireElement',
         'terminal-wire': './circuits/Wires/TerminalWire',
         'wire-anchor': './circuits/Wires/WireAnchor',
-        'wire': './circuits/Wires/Wire',
-        // Containers
-        'logic-element-container': './circuits/Containers/LogicElementContainer',
-        // Factories
-        'circuit-element-factory': './circuits/Factories/CircuitElementFactory',
-        'logic-element-factory': './circuits/Factories/LogicElementFactory',
-        'terminal-factory': './circuits/Factories/TerminalFactory',
-        'wire-factory': './circuits/Factories/WireFactory',
-        // Configuration
-        'circuits-debug': './circuits/Configuration/debug',
-        'circuits-config': './circuits/Configuration/config',
-        'circuits-constants': './circuits/Configuration/constants'
+        'wire': './circuits/Wires/Wire'
     };
     require.config({ paths: paths });
     return paths;

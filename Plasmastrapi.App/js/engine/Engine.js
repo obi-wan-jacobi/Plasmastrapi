@@ -1,5 +1,5 @@
-define(['system', 'dictionary', 'factory', 'modules'],
-function (System, Dictionary, Factory, modules) {
+define(['system', 'dictionary', 'factory', 'controller', 'utils'],
+function (System, Dictionary, Factory, Controller, utils) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -10,20 +10,28 @@ function (System, Dictionary, Factory, modules) {
         this.__viewport = viewport;
         this.__factories = new Dictionary(Factory);
         this.__systems = new Dictionary(System);
+        this.__controllers = new Dictionary(Controller);
         // pre-init configuration
         // order matters:
         this.__registerFactories();
         this.__registerSystems();
+        this.__registerControllers();
 	};
     // private methods
     Engine.prototype.__onload = function () {
         this.__systems.forEach(function (key, system) {
             system.load();
         }, this);
+        this.__controllers.forEach(function (key, controller) {
+            controller.load();
+        }, this);
     };
     Engine.prototype.__onunload = function () {
         this.__systems.forEach(function (key, system) {
             system.unload();
+        }, this);
+        this.__controllers.forEach(function (key, controller) {
+            controller.unload();
         }, this);
     };
     Engine.prototype.__registerFactories = function () {
@@ -32,8 +40,17 @@ function (System, Dictionary, Factory, modules) {
         this.__addFactory('entity-factory');
     };
     Engine.prototype.__addFactory = function (factoryString) {
-        var FactoryType = modules.require(factoryString);
+        var FactoryType = utils.modules.require(factoryString);
         this.__factories.add(factoryString, new FactoryType(this));
+    };
+    Engine.prototype.__registerControllers = function () {
+        this.__addController('input-controller');
+        this.__addController('pick-controller');
+        this.__addController('scene-controller');
+    };
+    Engine.prototype.__addController = function (controllerString) {
+        var ControllerType = utils.modules.require(controllerString);
+        this.__controllers.add(controllerString, new ControllerType(this));
     };
     Engine.prototype.__registerSystems = function () {
         // order matters:
@@ -43,16 +60,16 @@ function (System, Dictionary, Factory, modules) {
         this.__addSystem('draw-system');
     };
     Engine.prototype.__addSystem = function (systemString) {
-        var SystemType = modules.require(systemString);
+        var SystemType = utils.modules.require(systemString);
         this.__systems.add(systemString, new SystemType(this));
     };
     Engine.prototype.__beginMainLoop = function () {
         var self = this;
         var isRunning = true;
         var tPrevious = +new Date;
-        var raf = requestAnimationFrame ||
+        var requestAnimationFrame = requestAnimationFrame ||
             window.mozRequestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
+            window.webkitRequestAnimationFrame || // deprecated?
             window.msRequestAnimationFrame ||
             window.oRequestAnimationFrame ||
             function (callback) {
@@ -67,7 +84,7 @@ function (System, Dictionary, Factory, modules) {
                         isRunning = self.loopOnce(deltaMs);
                     }
                     tPrevious = tNow;
-                    raf(loop);
+                    requestAnimationFrame(loop);
                 } catch (ex) {
                     throw ex;
                 }
@@ -84,6 +101,9 @@ function (System, Dictionary, Factory, modules) {
     };
     Engine.prototype.getSystem = function (systemString) {
         return this.__systems.get(systemString);
+    };
+    Engine.prototype.getController = function (controllerString) {
+        return this.__controllers.get(controllerString);
     };
     Engine.prototype.loopOnce = function (deltaMs) {
         var isLoopStable = true;

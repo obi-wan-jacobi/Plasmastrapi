@@ -1,5 +1,5 @@
-define(['emitter', 'component', 'dictionary', 'loadable-mixin', 'destructible-mixin', 'primitive', 'display-settings', 'position', 'utils'],
-function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Primitive, DisplaySettings, Position, utils) {
+define(['emitter', 'component', 'dictionary', 'loadable', 'destructible', 'primitive', 'display-settings', 'position', 'utils'],
+function (Emitter, Component, Dictionary, Loadable, Destructible, Primitive, DisplaySettings, Position, utils) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
@@ -11,8 +11,8 @@ function (Emitter, Component, Dictionary, LoadableMixin, DestructibleMixin, Prim
         this.__parent = null;
         this.__components = new Dictionary(Component);
         // apply mixins
-        LoadableMixin.call(this);
-        DestructibleMixin.call(this);
+        Loadable.call(this);
+        Destructible.call(this);
     };
     // public methods
     Entity.prototype.addDependency = function (dependency) {

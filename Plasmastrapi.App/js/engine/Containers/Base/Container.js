@@ -20,7 +20,7 @@ function (Emitter, Dictionary, validator) {
         }
         Emitter.prototype.addEventListener.call(this, event, subscriber, callback);
     };
-    Container.prototype.forEach = function(fn, caller) {
+    Container.prototype.forEach = function (fn, /* optional */ caller) {
         return this.__contents.forEach(fn, caller);
     };
     Container.prototype.get = function (item) {

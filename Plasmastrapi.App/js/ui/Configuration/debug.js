@@ -2,7 +2,5 @@
 
     $ = {};
 
-    $.DEBUG = false;
-
     return $;
 });

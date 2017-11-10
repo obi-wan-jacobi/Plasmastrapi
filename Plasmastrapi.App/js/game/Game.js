@@ -7,8 +7,6 @@ function (Engine, Dictionary, Controller, assetUrls, AssetLoader, MainMenuScene,
         // initialize asset loader first!
         this.__assetLoader = new AssetLoader();
         Engine.call(this, canvas);
-        //// assign a singleton value that can be easily require'd
-        //Game.instance = this;
         this.__controllers = new Dictionary(Controller);
         this.__registerControllers();
     };

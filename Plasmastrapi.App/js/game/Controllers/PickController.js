@@ -1,4 +1,4 @@
-﻿define(['controller', 'compatibility-filter', 'validator'],
+﻿define(['controller', 'validator'],
 function (Controller, CompatibilityFilter, validator) {
 
     PickController.prototype = Object.create(Controller.prototype);
@@ -10,16 +10,6 @@ function (Controller, CompatibilityFilter, validator) {
     // public methods
     PickController.prototype.setFilterByType = function () {
 
-    };
-    PickController.prototype.setFilterByCompatibility = function (filter) {
-        validator.validateInstanceType(this, filter, CompatibilityFilter);
-        this.__pickComponentContainer.forEach(function (pickComponent) {
-            if (filter.evaluate(pickComponent)) {
-                pickComponent.load();
-            } else {
-                pickComponent.unload();
-            }
-        });
     };
 
     return PickController;

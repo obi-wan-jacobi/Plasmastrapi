@@ -1,5 +1,5 @@
-﻿define(['scene', 'button', 'position', 'rectangle', 'text', 'modules'],
-function (Scene, Button, Position, Rectangle, Text, modules) {
+﻿define(['scene', 'button', 'position', 'rectangle', 'text', 'text-display-settings', 'modules'],
+function (Scene, Button, Position, Rectangle, Text, TextDisplaySettings, modules) {
 
     MainMenuScene.prototype = Object.create(Scene.prototype);
     MainMenuScene.prototype.constructor = MainMenuScene;
@@ -12,6 +12,7 @@ function (Scene, Button, Position, Rectangle, Text, modules) {
         labNavigationButton.set(new Position(750, 200));
         labNavigationButton.set(new Rectangle(100, 30));
         labNavigationButton.set(new Text('Play'));
+        labNavigationButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 7;
         labNavigationButton.set(function () {
             var LabScene = modules.require('lab-scene');
             engine.getController('scene-controller').setScene(LabScene);

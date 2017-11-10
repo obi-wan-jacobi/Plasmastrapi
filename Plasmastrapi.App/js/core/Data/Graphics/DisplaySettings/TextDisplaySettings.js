@@ -7,7 +7,7 @@
         this.offset = offset || { x: 0, y: 0 };
         this.fontSize = fontSize || 22;
         this.font = font || "Times New Roman";
-        this.fillStyle = colour || '#FFFFFF';
+        this.fillStyle = colour || 'grey';
         this.textAlign = alignment || 'center';
     };
 

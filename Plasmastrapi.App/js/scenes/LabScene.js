@@ -47,6 +47,9 @@ function (Scene, Panel, Button, Position, Rectangle, Text, modules) {
         var andGateButton = uiElementFactory.create(Button, 'and-gate');
         andGateButton.set(new Position(25, 25));
         andGateButton.set(new Rectangle(30, 30));
+        andGateButton.set(new Text('[Q]'));
+        andGateButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 35;
+        andGateButton.getComponent('text-component').getHandle().getDisplaySettings().fontSize = 20;
         andGateButton.set(function () {
             labController.spawn(modules.require('and-gate'));
         });
@@ -54,6 +57,9 @@ function (Scene, Panel, Button, Position, Rectangle, Text, modules) {
         var nandGateButton = uiElementFactory.create(Button, 'nand-gate');
         nandGateButton.set(new Position(65, 25));
         nandGateButton.set(new Rectangle(30, 30));
+        nandGateButton.set(new Text('[W]'));
+        nandGateButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 35;
+        nandGateButton.getComponent('text-component').getHandle().getDisplaySettings().fontSize = 20;
         nandGateButton.set(function () {
             labController.spawn(modules.require('nand-gate'));
         });
@@ -61,6 +67,9 @@ function (Scene, Panel, Button, Position, Rectangle, Text, modules) {
         var orGateButton = uiElementFactory.create(Button, 'or-gate');
         orGateButton.set(new Position(105, 25));
         orGateButton.set(new Rectangle(30, 30));
+        orGateButton.set(new Text('[E]'));
+        orGateButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 35;
+        orGateButton.getComponent('text-component').getHandle().getDisplaySettings().fontSize = 20;
         orGateButton.set(function () {
             labController.spawn(modules.require('or-gate'));
         });
@@ -68,6 +77,9 @@ function (Scene, Panel, Button, Position, Rectangle, Text, modules) {
         var xorGateButton = uiElementFactory.create(Button, 'xor-gate');
         xorGateButton.set(new Position(145, 25));
         xorGateButton.set(new Rectangle(30, 30));
+        xorGateButton.set(new Text('[R]'));
+        xorGateButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 35;
+        xorGateButton.getComponent('text-component').getHandle().getDisplaySettings().fontSize = 20;
         xorGateButton.set(function () {
             labController.spawn(modules.require('xor-gate'));
         });
@@ -76,6 +88,7 @@ function (Scene, Panel, Button, Position, Rectangle, Text, modules) {
         backNavigationButton.set(new Position(840, 25));
         backNavigationButton.set(new Rectangle(100, 30));
         backNavigationButton.set(new Text('Menu'));
+        backNavigationButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 7;
         backNavigationButton.set(function () {
             var MainMenuScene = modules.require('main-menu-scene');
             engine.getController('scene-controller').setScene(MainMenuScene);

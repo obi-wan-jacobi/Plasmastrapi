@@ -4,8 +4,9 @@ function (Entity, validator) {
     // CLASS UIElement
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;
-    function UIElement(game) {
+    function UIElement(engine) {
         Entity.call(this);
+        this.__engine = engine;
     };
     // public methods
     UIElement.prototype.contains = function (entity) {

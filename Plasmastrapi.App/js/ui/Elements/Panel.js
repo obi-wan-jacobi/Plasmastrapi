@@ -3,8 +3,8 @@ function (UIElement) {
 
     Panel.prototype = Object.create(UIElement.prototype);
     Panel.prototype.constructor = Panel;
-    function Panel() {
-        UIElement.call(this);
+    function Panel(engine) {
+        UIElement.call(this, engine);
     };
 
     return Panel;

@@ -1,24 +1,27 @@
-﻿define(['factory', 'component', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'polygon', 'utils'],
-function (Factory, Component, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Polygon, utils) {
+﻿define(['factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'polygon', 'utils'],
+function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Polygon, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
-        Factory.call(this, Component);
-        this.__emitterFactory = engine.getFactory('emitter-factory');
+        Factory.call(this, engine);
+        this.__emitterFactory = null;
         this.__containers = new Dictionary(ComponentContainer);
         this.__drawableComponentContainer = new DrawableComponentContainer();
     };
     // private methods
+    ComponentFactory.prototype.__oninit = function () {
+        Factory.prototype.__oninit.call(this);
+        this.__emitterFactory = this.__engine.getFactory('emitter-factory');
+    };
     ComponentFactory.prototype.__getOrInitContainer = function (componentString) {
         // if container doesn't exist for this component type, create one
         var container = this.__containers.get(componentString);
         if (!container) {
             var ComponentType = utils.modules.require(componentString);
-            var modulePrefix = componentString.split('-').slice(0, -1).join('-');
-            var ContainerType = utils.modules.requireIfExists(`${modulePrefix}-container`);
+            var ContainerType = utils.modules.requireIfExists(`${componentString}-container`);
             if (ContainerType !== null) {
-                container = new ContainerType(ComponentType);
+                container = new ContainerType();
             } else {
                 container = new ComponentContainer(ComponentType);
             }
@@ -30,7 +33,7 @@ function (Factory, Component, Dictionary, ComponentContainer, DrawableComponentC
     ComponentFactory.prototype.create = function (componentString, args) {
         var ComponentType = utils.modules.require(componentString);
         var container = this.__getOrInitContainer(componentString);
-        var component = this.__emitterFactory.create(ComponentType.bind.apply(ComponentType, [null].concat(args)));
+        var component = this.__emitterFactory.create(ComponentType, args);
         container.add(component);
         if (component.isDrawable) {
             this.__drawableComponentContainer.add(component);

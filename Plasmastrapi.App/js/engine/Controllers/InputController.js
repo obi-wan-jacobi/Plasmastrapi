@@ -6,12 +6,18 @@ function (Controller, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, v
     InputController.prototype.constructor = InputController;
     function InputController(engine) {
         Controller.call(this, engine);
-        this.__keyboardComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new KeyboardHandle());
-        this.__mouseComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new MouseHandle());
+        this.__keyboardComponent = null;
+        this.__mouseComponent = null;
         this.__handler = null;
     };
     // private methods
+    InputController.prototype.__oninit = function () {
+        Controller.prototype.__oninit.call(this);
+        this.__keyboardComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new KeyboardHandle());
+        this.__mouseComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new MouseHandle());
+    };
     InputController.prototype.__onload = function () {
+        Controller.prototype.__onload.call(this);
         this.__keyboardComponent.load();
         this.__mouseComponent.load();
         if (this.__handler) {
@@ -19,6 +25,7 @@ function (Controller, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, v
         }
     };
     InputController.prototype.__onunload = function () {
+        Controller.prototype.__onunload.call(this);
         this.__keyboardComponent.unload();
         this.__mouseComponent.unload();
         if (this.__handler) {
@@ -44,7 +51,6 @@ function (Controller, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, v
         args = args || [];
         validator.validateClassType(this, HandlerType, InputHandler);
         validator.validateInstanceType(this, args, Array);
-        validator.validateClassType(this, HandlerType, InputHandler);
         if (this.__handler) {
             this.__configureHandlerEventSubscriptions('remove');
             this.__handler.dispose();

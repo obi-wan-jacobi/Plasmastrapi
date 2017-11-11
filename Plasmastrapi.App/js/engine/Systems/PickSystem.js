@@ -10,10 +10,9 @@ function (System, MouseHandle, LinkedList) {
     PickSystem.prototype = Object.create(System.prototype);
     PickSystem.prototype.constructor = PickSystem;
     function PickSystem(engine) {
-        System.call(this);
-        var componentFactory = engine.getFactory('component-factory');
-        this.__container = componentFactory.getContainer('pick-component');
-        this.__mouseComponent = componentFactory.createFromDataHandle(new MouseHandle());
+        System.call(this, engine);
+        this.__container = null;
+        this.__mouseComponent = null;
         this.__inputBuffer = {
             'mousemove': new LinkedList(InputUpdateItem),
             'mousedown': new LinkedList(InputUpdateItem),
@@ -22,14 +21,20 @@ function (System, MouseHandle, LinkedList) {
     };
     // private methods
     PickSystem.prototype.__oninit = function () {
+        System.prototype.__oninit.call(this);
+        var componentFactory = this.__engine.getFactory('component-factory');
+        this.__container = componentFactory.getContainer('pick-component');
+        this.__mouseComponent = componentFactory.createFromDataHandle(new MouseHandle());
         this.__mouseComponent.addEventListener('onmousemove', this, this.__buildInputEventCallback('mousemove'));
         this.__mouseComponent.addEventListener('onmousedown', this, this.__buildInputEventCallback('mousedown'));
         this.__mouseComponent.addEventListener('onclick', this, this.__buildInputEventCallback('click'));
     };
     PickSystem.prototype.__onload = function () {
+        System.prototype.__onload.call(this);
         this.__mouseComponent.load();
     };
     PickSystem.prototype.__onunload = function () {
+        System.prototype.__onunload.call(this);
         this.__mouseComponent.unload();
     };
     PickSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
@@ -74,6 +79,10 @@ function (System, MouseHandle, LinkedList) {
                 pickComponent.getHandle().pick(mousePosition);
             }
         });
+        // Items that have been re-enabled are buffered to prevent their pick actions from overridding/undoing other items'
+        // pick actions.
+        // Flush the buffer here so that they are iterated over in the 'next' cycle.
+        this.__container.flushContentsBuffer();
         this.__inputBuffer = {
             'mousemove': new LinkedList(InputUpdateItem),
             'mousedown': new LinkedList(InputUpdateItem),

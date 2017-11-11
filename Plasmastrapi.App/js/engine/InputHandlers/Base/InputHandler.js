@@ -4,10 +4,7 @@ function (Base, validator) {
     InputHandler.prototype = Object.create(Base.prototype);
     InputHandler.prototype.constructor = InputHandler;
     function InputHandler(engine) {
-        Base.call(this);
-        this.__inputController = engine.getController('input-controller');
-        this.__pickController = engine.getController('pick-controller');
-        this.__labController = engine.getController('lab-controller');
+        Base.call(this, engine);
     };
     // private methods
     InputHandler.prototype.__oninit = function () {

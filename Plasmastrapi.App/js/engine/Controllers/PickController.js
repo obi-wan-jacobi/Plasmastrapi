@@ -5,6 +5,11 @@ function (Controller, validator) {
     PickController.prototype.constructor = PickController;
     function PickController(engine) {
         Controller.call(this, engine);
+        this.__pickComponentContainer = null;
+    };
+    // private methods
+    PickController.prototype.__oninit = function () {
+        Controller.prototype.__oninit.call(this);
         this.__pickComponentContainer = this.__engine.getFactory('component-factory').getContainer('pick-component');
     };
     // public methods

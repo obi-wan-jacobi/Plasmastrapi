@@ -5,6 +5,9 @@ function (InputHandler, Position) {
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool(engine, target) {
         InputHandler.call(this, engine);
+        this.__inputController = this.__engine.getController('input-controller');
+        this.__pickController = this.__engine.getController('pick-controller');
+        this.__labController = this.__engine.getController('lab-controller');
         this.__target = target;
         this.__poseComponent = this.__target.getComponent('pose-component');
         this.__previousMousePosition = null;

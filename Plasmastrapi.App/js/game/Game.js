@@ -11,7 +11,6 @@ function (Engine, assetUrls, AssetLoader, utils) {
     // private methods
     Game.prototype.__registerFactories = function () {
         Engine.prototype.__registerFactories.call(this);
-        // order matters
         this.__addFactory('circuit-element-factory');
         this.__addFactory('wire-factory');
         this.__addFactory('terminal-factory');
@@ -21,6 +20,7 @@ function (Engine, assetUrls, AssetLoader, utils) {
     Game.prototype.__registerControllers = function () {
         Engine.prototype.__registerControllers.call(this);
         this.__addController('lab-controller');
+        this.__addController('cursor-controller');
     };
     // public methods
     Game.prototype.getAssetMap = function () {

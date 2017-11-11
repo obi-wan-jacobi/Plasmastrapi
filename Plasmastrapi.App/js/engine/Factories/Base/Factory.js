@@ -1,8 +1,14 @@
-﻿define(['validator'], function (validator) {
+﻿define(['base', 'validator'], function (Base, validator) {
 
-    function Factory(Type) {
-        this.__Type = Type
+    Factory.prototype = Object.create(Base.prototype);
+    Factory.prototype.constructor = Factory;
+    function Factory(engine) {
+        Base.call(this, engine);
     };
+    // private methods
+    Factory.prototype.__oninit = function () { };
+    Factory.prototype.__onload = function () { };
+    Factory.prototype.__onunload = function () { };
     // public methods
     Factory.prototype.create = function (Type) {
         validator.throwMethodMustBeOverridden(this, 'create');

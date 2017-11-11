@@ -3,11 +3,18 @@ function (Factory, Terminal, ImageHandle, ImageDisplaySettings, utils, config) {
 
     TerminalFactory.prototype = Object.create(Factory.prototype);
     TerminalFactory.prototype.constructor = TerminalFactory;
-    function TerminalFactory(game) {
-        Factory.call(this, Terminal);
-        this.__componentFactory = game.getFactory('component-factory');
-        this.__circuitElementFactory = game.getFactory('circuit-element-factory');
-        this.__assetMap = game.getAssetMap();
+    function TerminalFactory(engine) {
+        Factory.call(this, engine, Terminal);
+        this.__componentFactory = null;
+        this.__circuitElementFactory = null;
+        this.__assetMap = null;
+    };
+    // private methods
+    TerminalFactory.prototype.__oninit = function () {
+        Factory.prototype.__oninit.call(this);
+        this.__componentFactory = this.__engine.getFactory('component-factory');
+        this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
+        this.__assetMap = this.__engine.getAssetMap();
     };
     // public methods
     TerminalFactory.prototype.create = function (TerminalType) {

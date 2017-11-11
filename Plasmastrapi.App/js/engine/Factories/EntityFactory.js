@@ -1,13 +1,19 @@
-﻿define(['factory', 'entity-container', 'entity', 'pose', 'polygon', 'vertex', 'pick-handle',  'validator'],
-    function (Factory, EntityContainer, Entity, Pose, Polygon, Vertex, PickHandle, validator) {
+﻿define(['factory', 'entity-container', 'pose', 'polygon', 'vertex', 'pick-handle',  'validator'],
+    function (Factory, EntityContainer, Pose, Polygon, Vertex, PickHandle, validator) {
 
     EntityFactory.prototype = Object.create(Factory.prototype);
     EntityFactory.prototype.constructor = EntityFactory;
     function EntityFactory(engine) {
-        Factory.call(this, Entity);
-        this.__emitterFactory = engine.getFactory('emitter-factory');
-        this.__componentFactory = engine.getFactory('component-factory');
+        Factory.call(this, engine);
+        this.__emitterFactory = null;
+        this.__componentFactory = null;
         this.__container = new EntityContainer();
+    };
+    // private methods
+    EntityFactory.prototype.__oninit = function () {
+        Factory.prototype.__oninit.call(this);
+        this.__emitterFactory = this.__engine.getFactory('emitter-factory');
+        this.__componentFactory = this.__engine.getFactory('component-factory');
     };
     // public methods
     EntityFactory.prototype.create = function (EntityType, args) {

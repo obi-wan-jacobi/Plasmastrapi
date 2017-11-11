@@ -5,20 +5,27 @@ function (System, LinkedList, Position) {
     KeyboardSystem.prototype = Object.create(System.prototype);
     KeyboardSystem.prototype.constructor = KeyboardSystem;
     function KeyboardSystem(engine) {
-        System.call(this);
-        this.__viewport = engine.getViewport();
+        System.call(this, engine);
+        this.__viewport = null;
+        this.__container = null;
         this.__inputBuffer = {
             'keydown': new LinkedList(KeyboardEvent),
             'keyup': new LinkedList(KeyboardEvent)
         };
-        this.__container = engine.getFactory('component-factory').getContainer('keyboard-component');
     };
     // private methods
+    KeyboardSystem.prototype.__oninit = function () {
+        System.prototype.__oninit.call(this);
+        this.__viewport = this.__engine.getController('viewport-controller').getViewport();
+        this.__container = this.__engine.getFactory('component-factory').getContainer('keyboard-component');
+    };
     KeyboardSystem.prototype.__onload = function () {
+        System.prototype.__onload.call(this);
         this.__viewport.onkeydown = this.__buildInputEventCallback('keydown');
         this.__viewport.onkeyup = this.__buildInputEventCallback('keyup');
     };
     KeyboardSystem.prototype.__onunload = function () {
+        System.prototype.__onunload.call(this);
         this.__viewport.onkeydown = null;
         this.__viewport.onkeyup = null;
     };

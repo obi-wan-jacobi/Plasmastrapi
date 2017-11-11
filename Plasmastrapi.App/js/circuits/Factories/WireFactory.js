@@ -3,10 +3,16 @@
 
     WireFactory.prototype = Object.create(Factory.prototype);
     WireFactory.prototype.constructor = WireFactory;
-    function WireFactory(game) {
-        Factory.call(this, WireElement);
-        this.__componentFactory = game.getFactory('component-factory');
-        this.__circuitElementFactory = game.getFactory('circuit-element-factory');
+    function WireFactory(engine) {
+        Factory.call(this, engine, WireElement);
+        this.__componentFactory = null;
+        this.__circuitElementFactory = null;
+    };
+    // private methods
+    WireFactory.prototype.__oninit = function () {
+        Factory.prototype.__oninit.call(this);
+        this.__componentFactory = this.__engine.getFactory('component-factory');
+        this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
     };
     // public methods
     WireFactory.prototype.create = function (WireElementType, tailElement, headElement) {

@@ -3,13 +3,19 @@ function (Factory, UIElement, EntityFactory, ImageHandle, ImageDisplaySettings, 
 
     UIElementFactory.prototype = Object.create(Factory.prototype);
     UIElementFactory.prototype.constructor = UIElementFactory;
-    function UIElementFactory(game) {
-        Factory.call(this, UIElement);
-        this.__componentFactory = game.getFactory('component-factory');
-        this.__entityFactory = game.getFactory('entity-factory');
-        this.__assetMap = game.getAssetMap();
+    function UIElementFactory(engine) {
+        Factory.call(this, engine, UIElement);
+        this.__componentFactory = null;
+        this.__entityFactory = null;
+        this.__assetMap = null;
     };
     // private methods
+    UIElementFactory.prototype.__oninit = function () {
+        Factory.prototype.__oninit.call(this);
+        this.__componentFactory = this.__engine.getFactory('component-factory');
+        this.__entityFactory = this.__engine.getFactory('entity-factory');
+        this.__assetMap = this.__engine.getAssetMap();
+    };
     UIElementFactory.prototype.__validateImageExists = function (imageName) {
         var image = this.__assetMap.get(imageName);
         if (!image) {
@@ -20,7 +26,7 @@ function (Factory, UIElement, EntityFactory, ImageHandle, ImageDisplaySettings, 
     // public methods
     UIElementFactory.prototype.create = function (UIElementType, imageName) {
         validator.validateClassType(this, UIElementType, UIElement);
-        var uiElement = this.__entityFactory.create(UIElementType);
+        var uiElement = this.__entityFactory.create(UIElementType, [this.__engine]);
         uiElement.addComponent(this.__componentFactory.createFromPrimitive(new Text('')));
         // configure element image
         if (imageName) {

@@ -2,8 +2,9 @@
 function (validator) {
 
     // CLASS Base
-    function Base() {
+    function Base(engine) {
         // private variables
+        this.__engine = engine;
         this.__isInitialized = false;
         this.__isLoaded = false;
     };

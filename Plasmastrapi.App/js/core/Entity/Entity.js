@@ -14,6 +14,11 @@ function (Emitter, Component, Dictionary, Loadable, Destructible, Primitive, Dis
         Loadable.call(this);
         Destructible.call(this);
     };
+    // private methods
+    Entity.prototype.__oninit = function () { };
+    Entity.prototype.__onload = function () { };
+    Entity.prototype.__onunload = function () { };
+    Entity.prototype.__ondestroy = function () { };
     // public methods
     Entity.prototype.addDependency = function (dependency) {
         utils.validator.validateInstanceType(this, dependency, Entity);

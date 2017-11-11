@@ -4,9 +4,9 @@ function (Base, validator) {
     // CLASS System
     System.prototype = Object.create(Base.prototype);
     System.prototype.constructor = System;
-    function System() {
+    function System(engine) {
         // inherits from
-        Base.call(this);
+        Base.call(this, engine);
     };
     // private methods
     System.prototype.__oninit = function () { };

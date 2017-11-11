@@ -5,24 +5,31 @@ function (System, LinkedList, Position) {
 	MouseSystem.prototype = Object.create(System.prototype);
 	MouseSystem.prototype.constructor = MouseSystem;
 	function MouseSystem(engine) {
-        System.call(this);
-        this.__viewport = engine.getViewport();
+        System.call(this, engine);
+        this.__viewport = null;
+        this.__container = null;
         this.__inputBuffer = {
             'mousemove': new LinkedList(Position),
             'mousedown': new LinkedList(Position),
             'mouseup': new LinkedList(Position),
             'click': new LinkedList(Position)
         };
-        this.__container = engine.getFactory('component-factory').getContainer('mouse-component');
     };
     // private methods
-    MouseSystem.prototype.__onload = function () {
+	MouseSystem.prototype.__oninit = function () {
+	    System.prototype.__oninit.call(this);
+	    this.__viewport = this.__engine.getController('viewport-controller').getViewport();
+	    this.__container = this.__engine.getFactory('component-factory').getContainer('mouse-component');
+	};
+	MouseSystem.prototype.__onload = function () {
+	    System.prototype.__onload.call(this);
         this.__viewport.onmousemove = this.__buildInputEventCallback('mousemove');
         this.__viewport.onmousedown = this.__buildInputEventCallback('mousedown');
         this.__viewport.onmouseup = this.__buildInputEventCallback('mouseup');
         this.__viewport.onclick = this.__buildInputEventCallback('click');
 	};
-	MouseSystem.prototype.__onunload = function() {
+	MouseSystem.prototype.__onunload = function () {
+	    System.prototype.__onunload.call(this);
 		this.__viewport.onmousemove = null;
 		this.__viewport.onmousedown = null;
 		this.__viewport.onmouseup = null;

@@ -3,17 +3,24 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
 
     LogicElementFactory.prototype = Object.create(Factory.prototype);
     LogicElementFactory.prototype.constructor = LogicElementFactory;
-    function LogicElementFactory(game) {
-        Factory.call(this, LogicElement);
-        this.__engine = game;
+    function LogicElementFactory(engine) {
+        Factory.call(this, engine);
+        this.__componentFactory = null;
+        this.__circuitElementFactory = null;
+        this.__terminalFactory = null;
+        this.__wireFactory = null;
+        this.__assetMap = null;
+        this.__container = new LogicElementContainer();
+    };
+    // private methods
+    LogicElementFactory.prototype.__oninit = function () {
+        Factory.prototype.__oninit.call(this);
         this.__componentFactory = this.__engine.getFactory('component-factory');
         this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
         this.__terminalFactory = this.__engine.getFactory('terminal-factory');
         this.__wireFactory = this.__engine.getFactory('wire-factory');
         this.__assetMap = this.__engine.getAssetMap();
-        this.__container = new LogicElementContainer();
     };
-    // private methods
     LogicElementFactory.prototype.__addTerminal = function (logicElement, TerminalType, terminalPositionOffset, wireAnchorPositionOffset) {
         var terminal = this.__terminalFactory.create(TerminalType)
         terminal.addParent(logicElement);

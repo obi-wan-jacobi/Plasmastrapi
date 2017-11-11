@@ -14,25 +14,30 @@ function (System, Dictionary, Factory, Controller, utils) {
 	};
     // private methods
     Engine.prototype.__oninit = function () {
-        // order matters:
         this.__registerFactories();
         this.__registerControllers();
         this.__registerSystems();
     }
     Engine.prototype.__onload = function () {
-        this.__systems.forEach(function (key, system) {
-            system.load();
+        this.__factories.forEach(function (key, factory) {
+            factory.load();
         }, this);
         this.__controllers.forEach(function (key, controller) {
             controller.load();
         }, this);
+        this.__systems.forEach(function (key, system) {
+            system.load();
+        }, this);
     };
     Engine.prototype.__onunload = function () {
-        this.__systems.forEach(function (key, system) {
-            system.unload();
+        this.__factories.forEach(function (key, factory) {
+            factory.unload();
         }, this);
         this.__controllers.forEach(function (key, controller) {
             controller.unload();
+        }, this);
+        this.__systems.forEach(function (key, system) {
+            system.unload();
         }, this);
     };
     Engine.prototype.__registerFactories = function () {
@@ -55,7 +60,6 @@ function (System, Dictionary, Factory, Controller, utils) {
         this.__controllers.add(controllerString, new ControllerType(this));
     };
     Engine.prototype.__registerSystems = function () {
-        // order matters:
         this.__addSystem('keyboard-system');
         this.__addSystem('mouse-system');
         this.__addSystem('pick-system');

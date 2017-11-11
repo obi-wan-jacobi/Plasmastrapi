@@ -5,10 +5,17 @@ function (System) {
     DrawSystem.prototype = Object.create(System.prototype);
     DrawSystem.prototype.constructor = DrawSystem;
     function DrawSystem(engine) {
-        System.call(this);
-        this.__viewportController = engine.getController('viewport-controller');
-        this.__container = engine.getFactory('component-factory').getDrawableComponentContainer();
+        System.call(this, engine);
+        this.__viewportController = null;
+        this.__container = null;
     };
+    // private methods
+    DrawSystem.prototype.__oninit = function () {
+        System.prototype.__oninit.call(this);
+        this.__viewportController = this.__engine.getController('viewport-controller');
+        this.__container = this.__engine.getFactory('component-factory').getDrawableComponentContainer();
+    };
+    // public methods
     DrawSystem.prototype.loopOnce = function () {
         if (!this.__isLoaded) {
             return;

@@ -3,6 +3,8 @@
         // Configuration
         'ui-config': './ui/Configuration/config',
         'ui-debug': './ui/Configuration/debug',
+        // Controllers
+        'cursor-controller': './ui/Controllers/CursorController',
         // Elements
         'ui-element': './ui/Elements/Base/UIElement',
         'button': './ui/Elements/Button',

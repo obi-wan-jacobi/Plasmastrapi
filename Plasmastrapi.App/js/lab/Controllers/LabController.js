@@ -5,14 +5,19 @@ function (Controller, PlacingTool, Panel, LogicElement, utils) {
     LabController.prototype.constructor = LabController;
     function LabController(engine) {
         Controller.call(this, engine);
-        this.__logicElementFactory = this.__engine.getFactory('logic-element-factory');
-        this.__inputController = this.__engine.getController('input-controller');
+        this.__logicElementFactory = null;
+        this.__inputController = null;
         this.__designArea = null;
         this.__designAreaPickComponent = null;
         this.__state = null;
         this.__target = null;
     };
     // private methods
+    LabController.prototype.__oninit = function () {
+        Controller.prototype.__oninit.call(this);
+        this.__logicElementFactory = this.__engine.getFactory('logic-element-factory');
+        this.__inputController = this.__engine.getController('input-controller');
+    };
     LabController.prototype.__initDesignArea = function (panel) {
         this.__designArea = panel;
         this.__designAreaPickComponent = this.__designArea.getComponent('pick-component');

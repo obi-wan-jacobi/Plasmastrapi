@@ -5,10 +5,10 @@ function (Controller, validator) {
     ViewportController.prototype.constructor = ViewportController;
     function ViewportController(engine) {
         Controller.call(this, engine);
-        this.__viewport = this.__engine.getViewport();
     };
+    // public methods
     ViewportController.prototype.getViewport = function () {
-        return this.__viewport;
+        return this.__engine.getViewport();
     };
 
     return ViewportController;

@@ -133,7 +133,6 @@
     <Content Include="js\circuits\Factories\LogicElementFactory.js" />
     <Content Include="js\circuits\Factories\TerminalFactory.js" />
     <Content Include="js\circuits\Factories\WireFactory.js" />
-    <Content Include="js\Compatibility.js" />
     <Content Include="js\game\Scenes\LabScene.js" />
     <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\ui\Elements\Base\UIElement.js" />

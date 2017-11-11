@@ -79,9 +79,9 @@
     <Content Include="js\core\Configuration\debug.js" />
     <Content Include="js\engine\Containers\EntityContainer.js" />
     <Content Include="js\engine\Controllers\ViewportController.js" />
-    <Content Include="js\lab\Controllers\LabController.js" />
+    <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
-    <Content Include="js\lab\InputHandlers\HotkeyHandler.js" />
+    <Content Include="js\game\InputHandlers\LabHotkeyHandler.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
@@ -134,11 +134,8 @@
     <Content Include="js\circuits\Factories\TerminalFactory.js" />
     <Content Include="js\circuits\Factories\WireFactory.js" />
     <Content Include="js\Compatibility.js" />
-    <Content Include="js\scenes\Configuration\config.js" />
-    <Content Include="js\scenes\Configuration\debug.js" />
-    <Content Include="js\scenes\LabScene.js" />
-    <Content Include="js\scenes\MainMenuScene.js" />
-    <Content Include="js\lab\Configuration\require.config.js" />
+    <Content Include="js\game\Scenes\LabScene.js" />
+    <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\ui\Elements\Base\UIElement.js" />
     <Content Include="js\ui\Factories\UIElementFactory.js" />
     <Content Include="js\utils\Logging\logging.js" />
@@ -175,16 +172,15 @@
     <Content Include="js\circuits\Wires\Wire.js" />
     <Content Include="js\game\Configuration\debug.js" />
     <Content Include="js\game\Configuration\require.config.js" />
-    <Content Include="js\lab\InputHandlers\CuttingTool.js" />
+    <Content Include="js\game\InputHandlers\CuttingTool.js" />
     <Content Include="js\engine\InputHandlers\Base\InputHandler.js" />
-    <Content Include="js\lab\InputHandlers\TrashTool.js" />
-    <Content Include="js\lab\InputHandlers\PlacingTool.js" />
-    <Content Include="js\lab\InputHandlers\WireTool.js" />
+    <Content Include="js\game\InputHandlers\TrashTool.js" />
+    <Content Include="js\game\InputHandlers\PlacingTool.js" />
+    <Content Include="js\game\InputHandlers\WireTool.js" />
     <Content Include="js\utils\Configuration\require.config.js" />
     <Content Include="Lab.png" />
     <Content Include="packages.config" />
     <Content Include="README.md" />
-    <Content Include="js\scenes\Configuration\require.config.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

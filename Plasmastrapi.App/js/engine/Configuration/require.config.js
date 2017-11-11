@@ -17,6 +17,7 @@
         'input-controller': './engine/Controllers/InputController',
         'pick-controller': './engine/Controllers/PickController',
         'scene-controller': './engine/Controllers/SceneController',
+        'viewport-controller': './engine/Controllers/ViewportController',
         // Factories
         'factory': './engine/Factories/Base/Factory',
         'component-factory': './engine/Factories/ComponentFactory',

@@ -6,16 +6,17 @@ function (System) {
     DrawSystem.prototype.constructor = DrawSystem;
     function DrawSystem(engine) {
         System.call(this);
-        this.__viewport = engine.getViewport();
+        this.__viewportController = engine.getController('viewport-controller');
         this.__container = engine.getFactory('component-factory').getDrawableComponentContainer();
     };
     DrawSystem.prototype.loopOnce = function () {
         if (!this.__isLoaded) {
             return;
-	    }
-	    var ctx = this.__viewport.getContext("2d");
-	    ctx.width = this.__viewport.width = this.__viewport.clientWidth;
-	    ctx.height = this.__viewport.height = this.__viewport.clientHeight;
+        }
+        var viewport = this.__viewportController.getViewport();
+	    var ctx = viewport.getContext("2d");
+	    ctx.width = viewport.width = viewport.clientWidth;
+	    ctx.height = viewport.height = viewport.clientHeight;
         ctx.clearRect(0, 0, ctx.width, ctx.height);
         this.__container.forEach(function (component) {
             component.draw(ctx);

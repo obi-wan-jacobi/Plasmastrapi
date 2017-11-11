@@ -78,6 +78,7 @@
     <Content Include="js\core\Configuration\constants.js" />
     <Content Include="js\core\Configuration\debug.js" />
     <Content Include="js\engine\Containers\EntityContainer.js" />
+    <Content Include="js\engine\Controllers\ViewportController.js" />
     <Content Include="js\lab\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
     <Content Include="js\lab\InputHandlers\HotkeyHandler.js" />

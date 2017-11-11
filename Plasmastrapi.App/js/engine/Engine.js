@@ -11,13 +11,14 @@ function (System, Dictionary, Factory, Controller, utils) {
         this.__factories = new Dictionary(Factory);
         this.__systems = new Dictionary(System);
         this.__controllers = new Dictionary(Controller);
-        // pre-init configuration
-        // order matters:
-        this.__registerFactories();
-        this.__registerSystems();
-        this.__registerControllers();
 	};
     // private methods
+    Engine.prototype.__oninit = function () {
+        // order matters:
+        this.__registerFactories();
+        this.__registerControllers();
+        this.__registerSystems();
+    }
     Engine.prototype.__onload = function () {
         this.__systems.forEach(function (key, system) {
             system.load();
@@ -47,6 +48,7 @@ function (System, Dictionary, Factory, Controller, utils) {
         this.__addController('input-controller');
         this.__addController('pick-controller');
         this.__addController('scene-controller');
+        this.__addController('viewport-controller');
     };
     Engine.prototype.__addController = function (controllerString) {
         var ControllerType = utils.modules.require(controllerString);
@@ -67,9 +69,9 @@ function (System, Dictionary, Factory, Controller, utils) {
         var self = this;
         var isRunning = true;
         var tPrevious = +new Date;
-        var requestAnimationFrame = requestAnimationFrame ||
+        var raf = requestAnimationFrame ||
             window.mozRequestAnimationFrame ||
-            window.webkitRequestAnimationFrame || // deprecated?
+            window.webkitRequestAnimationFrame ||
             window.msRequestAnimationFrame ||
             window.oRequestAnimationFrame ||
             function (callback) {
@@ -84,7 +86,7 @@ function (System, Dictionary, Factory, Controller, utils) {
                         isRunning = self.loopOnce(deltaMs);
                     }
                     tPrevious = tNow;
-                    requestAnimationFrame(loop);
+                    raf(loop);
                 } catch (ex) {
                     throw ex;
                 }

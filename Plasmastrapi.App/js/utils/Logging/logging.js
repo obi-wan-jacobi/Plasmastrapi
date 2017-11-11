@@ -4,7 +4,7 @@
 
     logging.__console = function (level, referer, methodName, messageString, punc) {
         var refererString = typeof referer === 'string' ? referer : referer.constructor.name;
-        messageString = `[${level}] >> ${refererString}::${methodName} -- ${messageString}${punc || ''}`;
+        messageString = `[${level}] >> ${refererString}::${methodName} >> ${messageString}${punc || ''}`;
         console.log(messageString);
         return messageString;
     };

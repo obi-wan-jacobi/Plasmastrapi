@@ -56,7 +56,7 @@
                             if (moduleIndex < moduleTotal) {
                                 preloadModulesSynchronously()
                             } else {
-                                // All modules loaded -- start the app!
+                                logging.write('index.html', 'preloadModulesSynchronously', 'All modules loaded -- start the app!');
                                 require(['app/main']);
                             }
                         });

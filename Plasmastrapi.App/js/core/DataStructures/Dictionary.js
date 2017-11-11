@@ -7,6 +7,7 @@ function (Link, validator) {
         validator.validateObject(ValueType);
         this.__ValueType = ValueType;
         this.__start = null;
+        this.__end = null;
     };
     // private methods
     Dictionary.prototype.__validateNoDuplicateKeys = function(key) {
@@ -44,19 +45,19 @@ function (Link, validator) {
         var newLink = new Link({ key, value });
         if (!this.__start) {
             this.__start = newLink;
+            this.__end = newLink;
             return;
         }
-        return this.__forEachLink(function (link) {
-            if (!link.hasNext()) {
-                link.setNext(newLink);
-                return true;
-            }
-        });
+        this.__end.setNext(newLink);
+        this.__end = newLink;
     };
     Dictionary.prototype.remove = function(key) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
             if (link.get().key === key) {
+                if (link === this.__end) {
+                    this.__end = previousLink;
+                }
                 if (link === this.__start) {
                     this.__start = link.next();
                 } else {

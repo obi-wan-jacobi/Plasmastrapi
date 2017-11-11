@@ -23,7 +23,6 @@ tech debt:
 	- refactor all *** closures *** to be prototypal
 	- PolygonHandle point-collision checking is disgusting
 	- PolygonComponent --> combine translate + rotate into one function (leverage a single for-loop)?
-	- Dictionary --> store this.__end to avoid O(n) for this.add
 	- entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
 - potential scalability concerns
 	- single-canvas viewport

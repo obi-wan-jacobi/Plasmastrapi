@@ -7,6 +7,7 @@ function (Link, validator) {
         validator.validateObject(ValueType);
         this.__ValueType = ValueType;
         this.__start = null;
+        this.__end = null;
     };
     // private methods
     LinkedList.prototype.__forEachLink = function (fn) {
@@ -37,20 +38,20 @@ function (Link, validator) {
         var newLink = new Link(value);
         if (!this.__start) {
             this.__start = newLink;
+            this.__end = newLink;
             return true;
         }
-        this.__forEachLink(function (link) {
-            if (!link.hasNext()) {
-                link.setNext(newLink);
-                return true;
-            }
-        });
+        this.__end.setNext(newLink);
+        this.__end = newLink;
     };
     LinkedList.prototype.splice = function(value) {
         var previousLink = this.__start;
         return this.__forEachLink(function (link) {
             var ownedvalue = link.get();
             if (ownedvalue === value) {
+                if (link === this.__end) {
+                    this.__end = previousLink;
+                }
                 if (link === this.__start) {
                     this.__start = link.next();
                 } else {

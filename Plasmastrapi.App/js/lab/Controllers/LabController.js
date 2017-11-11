@@ -49,7 +49,6 @@ function (Controller, PlacingTool, Panel, LogicElement, utils) {
     };
     LabController.prototype.__spawn = function (LogicElementType) {
         var logicElement = this.__logicElementFactory.create(LogicElementType);
-        logicElement.unload();
         this.__place(logicElement);
     };
     // public methods

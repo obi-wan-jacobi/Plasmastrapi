@@ -26,12 +26,9 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         }
     };
     // private methods
-    Component.prototype.__onload = function () {
-
-    };
-    Component.prototype.__onunload = function () {
-
-    };
+    Component.prototype.__oninit = function () { };
+    Component.prototype.__onload = function () { };
+    Component.prototype.__onunload = function () { };
     Component.prototype.__registerDependencyOnLoad = function (subject, event, observer, callback) {
         // *** closures ***
         var self = this;

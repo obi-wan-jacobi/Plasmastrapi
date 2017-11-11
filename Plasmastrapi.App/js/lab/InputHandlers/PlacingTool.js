@@ -15,7 +15,6 @@ function (InputHandler, Position) {
     };
     // private methods
     PlacingTool.prototype.__oninit = function () {
-        this.__target.unload();
         // Draw the target off-screen if its position has not been initialized (0, 0)
         var position = this.__poseComponent.getHandle().getPosition();
         if (position.x === 0 && position.y === 0) {
@@ -26,8 +25,8 @@ function (InputHandler, Position) {
     };
     PlacingTool.prototype.__onload = function () {
         if (this.__target) {
-            this.__target.load();
             this.__target.getComponent('pick-component').disable();
+            this.__target.load();
         }
     };
     PlacingTool.prototype.__onunload = function () {

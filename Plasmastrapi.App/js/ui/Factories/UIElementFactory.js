@@ -1,10 +1,10 @@
-﻿define(['factory', 'ui-element', 'entity-factory', 'image-handle', 'image-display-settings', 'text-handle', 'text', 'validator', 'ui-config'],
-function (Factory, UIElement, EntityFactory, ImageHandle, ImageDisplaySettings, TextHandle, Text, validator, config) {
+﻿define(['factory', 'entity-factory', 'image-handle', 'image-display-settings', 'text-handle', 'text', 'validator', 'ui-config'],
+function (Factory, EntityFactory, ImageHandle, ImageDisplaySettings, TextHandle, Text, validator, config) {
 
     UIElementFactory.prototype = Object.create(Factory.prototype);
     UIElementFactory.prototype.constructor = UIElementFactory;
     function UIElementFactory(engine) {
-        Factory.call(this, engine, UIElement);
+        Factory.call(this, engine);
         this.__componentFactory = null;
         this.__entityFactory = null;
         this.__assetMap = null;
@@ -24,9 +24,9 @@ function (Factory, UIElement, EntityFactory, ImageHandle, ImageDisplaySettings, 
         return image;
     };
     // public methods
-    UIElementFactory.prototype.create = function (UIElementType, imageName) {
-        validator.validateClassType(this, UIElementType, UIElement);
-        var uiElement = this.__entityFactory.create(UIElementType, [this.__engine]);
+    UIElementFactory.prototype.create = function (elementString, imageName) {
+        var uiElement = this.__entityFactory.create(elementString, [this.__engine]);
+        validator.validateInstanceType(this, uiElement, 'ui-element');
         uiElement.addComponent(this.__componentFactory.createFromPrimitive(new Text('')));
         // configure element image
         if (imageName) {

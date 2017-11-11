@@ -1,5 +1,5 @@
-define(['emitter', 'component', 'dictionary', 'loadable', 'destructible', 'primitive', 'display-settings', 'position', 'utils'],
-function (Emitter, Component, Dictionary, Loadable, Destructible, Primitive, DisplaySettings, Position, utils) {
+define(['emitter', 'dictionary', 'loadable', 'destructible', 'primitive', 'display-settings', 'position', 'utils'],
+function (Emitter, Dictionary, Loadable, Destructible, Primitive, DisplaySettings, Position, utils) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
@@ -9,7 +9,7 @@ function (Emitter, Component, Dictionary, Loadable, Destructible, Primitive, Dis
         Emitter.call(this);
         // private variables
         this.__parent = null;
-        this.__components = new Dictionary(Component);
+        this.__components = new Dictionary('component');
         // apply mixins
         Loadable.call(this);
         Destructible.call(this);
@@ -21,7 +21,7 @@ function (Emitter, Component, Dictionary, Loadable, Destructible, Primitive, Dis
     Entity.prototype.__ondestroy = function () { };
     // public methods
     Entity.prototype.addDependency = function (dependency) {
-        utils.validator.validateInstanceType(this, dependency, Entity);
+        utils.validator.validateInstanceType(this, dependency, 'entity');
         // wire-up event subscriptions
         dependency.addEventListener('onload', this, this.load);
         dependency.addEventListener('onunload', this, this.unload);

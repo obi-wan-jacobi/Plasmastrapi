@@ -1,25 +1,26 @@
-﻿define(['container', 'component-container', 'component', 'core-constants'], function (Container, ComponentContainer, Component, CORE) {
+﻿define(['container', 'component-container', 'core-config'],
+function (Container, ComponentContainer, config) {
 
     DrawableComponentContainer.prototype = Object.create(Container.prototype);
     DrawableComponentContainer.prototype.constructor = DrawableComponentContainer;
     function DrawableComponentContainer() {
         this.__containers = {};
-        for (var i = 0, L = CORE.DISPLAY_LAYERS.length; i < L; i++) {
-            this.__containers[CORE.DISPLAY_LAYERS[i]] = new ComponentContainer(Component);
+        for (var i = 0, L = config.constants.DISPLAY_LAYERS.length; i < L; i++) {
+            this.__containers[config.constants.DISPLAY_LAYERS[i]] = new ComponentContainer('component');
         }
     };
     // public methods
     DrawableComponentContainer.prototype.forEach = function (fn, caller) {
-        for (var i = 0, L = CORE.DISPLAY_LAYERS.length; i < L; i++) {
-            var result = this.__containers[CORE.DISPLAY_LAYERS[i]].forEach(fn, caller);
+        for (var i = 0, L = config.constants.DISPLAY_LAYERS.length; i < L; i++) {
+            var result = this.__containers[config.constants.DISPLAY_LAYERS[i]].forEach(fn, caller);
             if (result) {
                 return result;
             }
         }
     };
     DrawableComponentContainer.prototype.get = function (component) {
-        for (var i = 0, L = CORE.DISPLAY_LAYERS.length; i < L; i++) {
-            var result = this.__containers[CORE.DISPLAY_LAYERS[i]].get(component);
+        for (var i = 0, L = config.constants.DISPLAY_LAYERS.length; i < L; i++) {
+            var result = this.__containers[config.constants.DISPLAY_LAYERS[i]].get(component);
             if (result) {
                 return result;
             }

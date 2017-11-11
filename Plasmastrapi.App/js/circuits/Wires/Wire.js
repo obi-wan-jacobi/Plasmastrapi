@@ -1,13 +1,13 @@
-﻿define(['wire-element', 'input-terminal', 'output-terminal', 'line-component'],
-function (WireElement, InputTerminal, OutputTerminal, LineComponent) {
+﻿define(['wire-element', 'line-component'],
+function (WireElement, LineComponent) {
 
     // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
     Wire.prototype.constructor = Wire;
     function Wire(outputTerminal, inputTerminal) {
         // validate terminal arguments
-        validator.validateInstanceType(this, outputTerminal, OutputTerminal);
-        validator.validateInstanceType(this, inputTerminal, InputTerminal);
+        validator.validateInstanceType(this, outputTerminal, 'output-terminal');
+        validator.validateInstanceType(this, inputTerminal, 'input-terminal');
         this.outputTerminal = outputTerminal;
         this.inputTerminal = inputTerminal;
         // inherits from

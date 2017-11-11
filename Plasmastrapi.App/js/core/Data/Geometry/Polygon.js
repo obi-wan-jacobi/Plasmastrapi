@@ -5,7 +5,7 @@ function (Primitive, Vertex, validator) {
     Polygon.prototype.constructor = Polygon;
     function Polygon(vertices) {
         Primitive.call(this);
-        validator.validateInstanceType(this, vertices, Vertex);
+        validator.validateInstanceType(this, vertices, 'vertex');
         this.vertices = vertices;
     };
     Polygon.prototype.clone = function () {

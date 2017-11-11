@@ -1,11 +1,11 @@
-define(['container', 'wire'],
-function (Container, Wire) {
+define(['container'],
+function (Container) {
 
     // CLASS WireContainer
     WireContainer.prototype = Object.create(Container.prototype);
     WireContainer.prototype.constructor = WireContainer;
     function WireContainer() {
-        Container.call(this, Wire);
+        Container.call(this, 'wire');
     };
     WireContainer.prototype.add = function (member) {
         var isMemberAlreadyAdded = this.forEach(function (wire) {

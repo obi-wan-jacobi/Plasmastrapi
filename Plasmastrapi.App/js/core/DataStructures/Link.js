@@ -10,7 +10,7 @@ function (validator) {
     };
     Link.prototype.setNext = function (link) {
         if (link) {
-            validator.validateInstanceType(this, link, Link);
+            validator.validateInstanceType(this, link, 'link');
         }
         this.__next = link;
     };

@@ -88,7 +88,6 @@
     <Content Include="js\ui\Controllers\CursorController.js" />
     <Content Include="js\ui\Elements\Button.js" />
     <Content Include="js\ui\Elements\Panel.js" />
-    <Content Include="Lab.html" />
     <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\KeyboardHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\PickHandle.js" />
@@ -137,6 +136,7 @@
     <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\ui\Elements\Base\UIElement.js" />
     <Content Include="js\ui\Factories\UIElementFactory.js" />
+    <Content Include="js\utils\Configuration\config.js" />
     <Content Include="js\utils\Logging\logging.js" />
     <Content Include="js\utils\Modules\modules.js" />
     <Content Include="js\utils\utils.js" />
@@ -174,7 +174,6 @@
     <Content Include="js\engine\InputHandlers\Base\InputHandler.js" />
     <Content Include="js\game\InputHandlers\PlacingTool.js" />
     <Content Include="js\utils\Configuration\require.config.js" />
-    <Content Include="Lab.png" />
     <Content Include="packages.config" />
     <Content Include="README.md" />
     <None Include="Web.Debug.config">

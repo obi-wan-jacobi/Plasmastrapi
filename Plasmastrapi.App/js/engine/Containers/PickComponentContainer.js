@@ -1,9 +1,10 @@
-﻿define(['component-container', 'container', 'pick-component'], function (ComponentContainer, Container, PickComponent) {
+﻿define(['component-container', 'container'],
+function (ComponentContainer, Container) {
 
     PickComponentContainer.prototype = Object.create(ComponentContainer.prototype);
     PickComponentContainer.prototype.constructor = PickComponentContainer;
     function PickComponentContainer() {
-        ComponentContainer.call(this, PickComponent);
+        ComponentContainer.call(this, 'pick-component');
         this.__contentsBuffer = [];
     };
     // private methods

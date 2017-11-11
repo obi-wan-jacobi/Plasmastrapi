@@ -1,5 +1,5 @@
-﻿define(['factory', 'logic-element-container', 'logic-element', 'input-terminal', 'output-terminal', 'rectangle', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
-function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTerminal, Rectangle, Position, ImageHandle, ImageDisplaySettings, utils, config) {
+﻿define(['factory', 'logic-element-container', 'rectangle', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
+function (Factory, LogicElementContainer, Rectangle, Position, ImageHandle, ImageDisplaySettings, utils, config) {
 
     LogicElementFactory.prototype = Object.create(Factory.prototype);
     LogicElementFactory.prototype.constructor = LogicElementFactory;
@@ -21,22 +21,22 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
         this.__wireFactory = this.__engine.getFactory('wire-factory');
         this.__assetMap = this.__engine.getAssetMap();
     };
-    LogicElementFactory.prototype.__addTerminal = function (logicElement, TerminalType, terminalPositionOffset, wireAnchorPositionOffset) {
-        var terminal = this.__terminalFactory.create(TerminalType)
+    LogicElementFactory.prototype.__addTerminal = function (logicElement, terminalString, terminalPositionOffset, wireAnchorPositionOffset) {
+        var terminal = this.__terminalFactory.create(terminalString)
         terminal.addParent(logicElement);
         terminal.follow(logicElement, terminalPositionOffset);
         this.__wireFactory.createTerminalWire(terminal, wireAnchorPositionOffset);
     };
     // public methods
-    LogicElementFactory.prototype.create = function (LogicElementType) {
-        var logicElement = this.__circuitElementFactory.create(LogicElementType);
+    LogicElementFactory.prototype.create = function (logicElementString) {
+        var logicElement = this.__circuitElementFactory.create(logicElementString);
         // add components
-        var image = this.__assetMap.get(utils.modules.getModuleName(LogicElementType));
+        var image = this.__assetMap.get(logicElementString);
         var displaySettings = new ImageDisplaySettings(config.LogicElement.displayLayer, null, null, image.width, image.height, image.width, image.height);
         logicElement.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
         // add terminals
-        this.__addTerminal(logicElement, InputTerminal, new Position(0, 35), new Position(0, -20));
-        this.__addTerminal(logicElement, OutputTerminal, new Position(0, -35), new Position(0, 20));
+        this.__addTerminal(logicElement, 'input-terminal', new Position(0, 35), new Position(0, -20));
+        this.__addTerminal(logicElement, 'output-terminal', new Position(0, -35), new Position(0, 20));
         this.__container.add(logicElement);
         // configure pick action
         logicElement.set(new Rectangle(30, 30));

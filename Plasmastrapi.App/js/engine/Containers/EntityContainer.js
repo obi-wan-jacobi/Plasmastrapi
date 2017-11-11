@@ -1,11 +1,11 @@
-﻿define(['container', 'entity'],
-function (Container, Entity) {
+﻿define(['container'],
+function (Container) {
 
     // CLASS EntityContainer
     EntityContainer.prototype = Object.create(Container.prototype);
     EntityContainer.prototype.constructor = EntityContainer;
     function EntityContainer() {
-        Container.call(this, Entity);
+        Container.call(this, 'entity');
     };
     EntityContainer.prototype.add = function (entity) {
         Container.prototype.add.call(this, entity);

@@ -1,5 +1,5 @@
-﻿define(['scene', 'panel', 'button', 'position', 'rectangle', 'text'],
-function (Scene, Panel, Button, Position, Rectangle, Text) {
+﻿define(['scene', 'position', 'rectangle', 'text'],
+function (Scene, Position, Rectangle, Text) {
 
     LabScene.prototype = Object.create(Scene.prototype);
     LabScene.prototype.constructor = LabScene;
@@ -8,43 +8,43 @@ function (Scene, Panel, Button, Position, Rectangle, Text) {
     };
     LabScene.prototype.__oninit = function () {
         var engine = this.__engine;
-        var uiElementFactory = engine.getFactory('ui-element-factory');
-        var logicElementFactory = engine.getFactory('logic-element-factory');
-        var labController = engine.getController('lab-controller');
+        var uiElementFactory = this.__engine.getFactory('ui-element-factory');
+        var logicElementFactory = this.__engine.getFactory('logic-element-factory');
+        var labController = this.__engine.getController('lab-controller');
 
-        var stage = uiElementFactory.create(Panel);
+        var stage = uiElementFactory.create('panel');
         stage.set(new Position(1200, 350));
         stage.set(new Rectangle(600, 700));
 
-        var stageHeader = uiElementFactory.create(Panel);
+        var stageHeader = uiElementFactory.create('panel');
         stageHeader.set(new Position(1200, 30));
         stageHeader.set(new Rectangle(600, 60));
 
-        var stageArea = uiElementFactory.create(Panel);
+        var stageArea = uiElementFactory.create('panel');
         stageArea.set(new Position(1200, 355));
         stageArea.set(new Rectangle(592, 582));
 
-        var stageFooter = uiElementFactory.create(Panel);
+        var stageFooter = uiElementFactory.create('panel');
         stageFooter.set(new Position(1200, 675));
         stageFooter.set(new Rectangle(600, 50));
 
-        var stepback = uiElementFactory.create(Button);
+        var stepback = uiElementFactory.create('button');
         stepback.set(new Position(925, 675));
         stepback.set(new Rectangle(30, 30));
 
-        var playpause = uiElementFactory.create(Button);
+        var playpause = uiElementFactory.create('button');
         playpause.set(new Position(965, 675));
         playpause.set(new Rectangle(30, 30));
 
-        var stepforward = uiElementFactory.create(Button);
+        var stepforward = uiElementFactory.create('button');
         stepforward.set(new Position(1005, 675));
         stepforward.set(new Rectangle(30, 30));
 
-        var toolbar = uiElementFactory.create(Panel);
+        var toolbar = uiElementFactory.create('panel');
         toolbar.set(new Position(450, 30));
         toolbar.set(new Rectangle(900, 60));
 
-        var andGateButton = uiElementFactory.create(Button, 'and-gate');
+        var andGateButton = uiElementFactory.create('button', 'and-gate');
         andGateButton.set(new Position(30, 25));
         andGateButton.set(new Rectangle(30, 30));
         andGateButton.set(new Text('[1]'));
@@ -54,7 +54,7 @@ function (Scene, Panel, Button, Position, Rectangle, Text) {
             labController.spawn('and-gate');
         });
 
-        var nandGateButton = uiElementFactory.create(Button, 'nand-gate');
+        var nandGateButton = uiElementFactory.create('button', 'nand-gate');
         nandGateButton.set(new Position(75, 25));
         nandGateButton.set(new Rectangle(30, 30));
         nandGateButton.set(new Text('[2]'));
@@ -64,7 +64,7 @@ function (Scene, Panel, Button, Position, Rectangle, Text) {
             labController.spawn('nand-gate');
         });
 
-        var orGateButton = uiElementFactory.create(Button, 'or-gate');
+        var orGateButton = uiElementFactory.create('button', 'or-gate');
         orGateButton.set(new Position(120, 25));
         orGateButton.set(new Rectangle(30, 30));
         orGateButton.set(new Text('[3]'));
@@ -74,7 +74,7 @@ function (Scene, Panel, Button, Position, Rectangle, Text) {
             labController.spawn('or-gate');
         });
 
-        var xorGateButton = uiElementFactory.create(Button, 'xor-gate');
+        var xorGateButton = uiElementFactory.create('button', 'xor-gate');
         xorGateButton.set(new Position(165, 25));
         xorGateButton.set(new Rectangle(30, 30));
         xorGateButton.set(new Text('[4]'));
@@ -84,7 +84,7 @@ function (Scene, Panel, Button, Position, Rectangle, Text) {
             labController.spawn('xor-gate');
         });
 
-        var backNavigationButton = uiElementFactory.create(Button);
+        var backNavigationButton = uiElementFactory.create('button');
         backNavigationButton.set(new Position(846, 30));
         backNavigationButton.set(new Rectangle(100, 52));
         backNavigationButton.set(new Text('Menu'));
@@ -93,7 +93,7 @@ function (Scene, Panel, Button, Position, Rectangle, Text) {
             engine.getController('scene-controller').setScene('main-menu-scene');
         });
 
-        var designArea = uiElementFactory.create(Panel);
+        var designArea = uiElementFactory.create('panel');
         designArea.set(new Position(450, 380));
         designArea.set(new Rectangle(900, 640));
 

@@ -13,8 +13,7 @@
     DataHandle.prototype.setData = function (data) {
         // validate data for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
-        var DataType = utils.modules.require(modulePrefix);
-        utils.validator.validateInstanceType(this, data, DataType);
+        utils.validator.validateInstanceType(this, data, modulePrefix);
         this.__data = data;
     };
     DataHandle.prototype.getDisplaySettings = function () {
@@ -26,8 +25,7 @@
         }
         // validate display settings for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
-        var DisplaySettingsType = utils.modules.require(`${modulePrefix}-display-settings`);
-        utils.validator.validateInstanceType(this, displaySettings, DisplaySettingsType);
+        utils.validator.validateInstanceType(this, displaySettings, `${modulePrefix}-display-settings`);
         this.__displaySettings = displaySettings;
     };
 

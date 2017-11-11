@@ -9,8 +9,7 @@ function (DataHandle, Pose, Position, Vertex, PoseDisplaySettings, utils) {
     PoseHandle.prototype.setData = function (data) {
         // validate data for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
-        var DataType = utils.modules.require(modulePrefix);
-        utils.validator.validateInstanceType(this, data, DataType);
+        utils.validator.validateInstanceType(this, data, modulePrefix);
         if (this.__data) {
             if (!(this.__data.x == data.x) || !(this.__data.y == data.y)) {
                 this.setPosition(new Position(data.x, data.y));

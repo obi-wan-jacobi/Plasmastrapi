@@ -1,5 +1,5 @@
-﻿define(['controller', 'placing-tool', 'panel', 'logic-element', 'utils'],
-function (Controller, PlacingTool, Panel, LogicElement, utils) {
+﻿define(['controller', 'utils'],
+function (Controller, utils) {
 
     LabController.prototype = Object.create(Controller.prototype);
     LabController.prototype.constructor = LabController;
@@ -45,10 +45,10 @@ function (Controller, PlacingTool, Panel, LogicElement, utils) {
         this.__inputController.setHandler();
     };
     LabController.prototype.__place = function (logicElement) {
-        this.__inputController.setHandler(PlacingTool, [logicElement]);
+        this.__inputController.setHandler('placing-tool', [logicElement]);
     };
-    LabController.prototype.__spawn = function (LogicElementType) {
-        var logicElement = this.__logicElementFactory.create(LogicElementType);
+    LabController.prototype.__spawn = function (logicElementString) {
+        var logicElement = this.__logicElementFactory.create(logicElementString);
         this.__place(logicElement);
     };
     // public methods
@@ -56,7 +56,7 @@ function (Controller, PlacingTool, Panel, LogicElement, utils) {
         if (this.__designArea) {
             utils.validator.throw(this, 'setDesignArea', 'A design area element has already been set');
         }
-        utils.validator.validateInstanceType(this, panel, Panel);
+        utils.validator.validateInstanceType(this, panel, 'panel');
         this.__initDesignArea(panel);
     };
     LabController.prototype.getDesignArea = function () {
@@ -74,9 +74,7 @@ function (Controller, PlacingTool, Panel, LogicElement, utils) {
         this.__set('place', logicElement);
     };
     LabController.prototype.spawn = function (logicElementString) {
-        var LogicElementType = utils.modules.require(logicElementString);
-        utils.validator.validateClassType(this, LogicElementType, LogicElement);
-        this.__set('spawn', LogicElementType);
+        this.__set('spawn', logicElementString);
     };
 
     return LabController;

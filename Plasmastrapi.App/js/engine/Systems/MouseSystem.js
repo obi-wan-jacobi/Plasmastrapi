@@ -9,10 +9,10 @@ function (System, LinkedList, Position) {
         this.__viewport = null;
         this.__container = null;
         this.__inputBuffer = {
-            'mousemove': new LinkedList(Position),
-            'mousedown': new LinkedList(Position),
-            'mouseup': new LinkedList(Position),
-            'click': new LinkedList(Position)
+            'mousemove': new LinkedList('position'),
+            'mousedown': new LinkedList('position'),
+            'mouseup': new LinkedList('position'),
+            'click': new LinkedList('position')
         };
     };
     // private methods
@@ -77,10 +77,10 @@ function (System, LinkedList, Position) {
             }, this);
         }, this);
         this.__inputBuffer = {
-            'mousemove': new LinkedList(Position),
-            'mousedown': new LinkedList(Position),
-            'mouseup': new LinkedList(Position),
-            'click': new LinkedList(Position)
+            'mousemove': new LinkedList('position'),
+            'mousedown': new LinkedList('position'),
+            'mouseup': new LinkedList('position'),
+            'click': new LinkedList('position')
         };
 	};
 

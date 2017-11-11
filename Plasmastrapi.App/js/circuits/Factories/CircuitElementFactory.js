@@ -1,5 +1,5 @@
-﻿define(['factory', 'circuit-element', 'pose', 'polygon', 'vertex', 'pick-handle', 'validator'],
-function (Factory, CircuitElement, Pose, Polygon, Vertex, PickHandle, validator) {
+﻿define(['factory', 'validator'],
+function (Factory, validator) {
 
     CircuitElementFactory.prototype = Object.create(Factory.prototype);
     CircuitElementFactory.prototype.constructor = CircuitElementFactory;
@@ -15,9 +15,9 @@ function (Factory, CircuitElement, Pose, Polygon, Vertex, PickHandle, validator)
         this.__entityFactory = this.__engine.getFactory('entity-factory');
     };
     // public methods
-    CircuitElementFactory.prototype.create = function (Type) {
-        validator.validateClassType(this, Type, CircuitElement);
-        var circuitElement = this.__entityFactory.create(Type);
+    CircuitElementFactory.prototype.create = function (elementString) {
+        var circuitElement = this.__entityFactory.create(elementString);
+        validator.validateInstanceType(this, circuitElement, 'circuit-element');
         return circuitElement;
     };
     CircuitElementFactory.prototype.getContainer = function () { };

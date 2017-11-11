@@ -4,10 +4,9 @@ function (Emitter, Dictionary, validator) {
     // CLASS Container
     Container.prototype = Object.create(Emitter.prototype);
     Container.prototype.constructor = Container;
-    function Container(Type) {
-        validator.validateFunction(Type);
+    function Container(typeString) {
         Emitter.call(this);
-        this.__contents = new Dictionary(Type);
+        this.__contents = new Dictionary(typeString);
         this.registerEvents(
             'onadd',
             'onremove'

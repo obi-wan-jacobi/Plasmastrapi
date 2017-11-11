@@ -9,7 +9,7 @@ function (Dictionary, validator) {
         this.__callbacks = [];
         this.__loadTotal = 0;
         this.__loadCounter = 0;
-        this.__assetMap = new Dictionary(Image);
+        this.__assetMap = new Dictionary('image');
     };
     // private methods
     AssetLoader.prototype.__itemFinishedLoading = function () {

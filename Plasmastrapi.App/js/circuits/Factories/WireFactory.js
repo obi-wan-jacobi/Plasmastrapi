@@ -1,10 +1,10 @@
-﻿define(['factory', 'wire-element', 'wire-anchor', 'terminal-wire', 'terminal', 'line-display-settings', 'utils', 'circuits-config'],
-    function (Factory, WireElement, WireAnchor, TerminalWire, Terminal, LineDisplaySettings, utils, config) {
+﻿define(['factory', 'line-display-settings', 'utils', 'circuits-config'],
+    function (Factory, LineDisplaySettings, utils, config) {
 
     WireFactory.prototype = Object.create(Factory.prototype);
     WireFactory.prototype.constructor = WireFactory;
     function WireFactory(engine) {
-        Factory.call(this, engine, WireElement);
+        Factory.call(this, engine);
         this.__componentFactory = null;
         this.__circuitElementFactory = null;
     };
@@ -15,9 +15,9 @@
         this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
     };
     // public methods
-    WireFactory.prototype.create = function (WireElementType, tailElement, headElement) {
-        utils.validator.validateClassType(this, WireElementType, WireElement);
-        var wireElement = this.__circuitElementFactory.create(WireElementType);
+    WireFactory.prototype.create = function (wireElementString, tailElement, headElement) {
+        var wireElement = this.__circuitElementFactory.create(wireElementString);
+        utils.validator.validateInstanceType(this, wireElement, 'wire-element');
         // add components
         var displayLayer = config.Wire.displayLayer;
         var lineWidth = config.Wire.poweredLineWidth;
@@ -30,10 +30,10 @@
         return wireElement;
     };
     WireFactory.prototype.createTerminalWire = function (terminal, wireAnchorPositionOffset) {
-        utils.validator.validateInstanceType(this, terminal, Terminal);
-        var wireAnchor = this.__circuitElementFactory.create(WireAnchor);
+        utils.validator.validateInstanceType(this, terminal, 'terminal');
+        var wireAnchor = this.__circuitElementFactory.create('wire-anchor');
         wireAnchor.follow(terminal, wireAnchorPositionOffset);
-        return this.create(TerminalWire, wireAnchor, terminal);
+        return this.create('terminal-wire', wireAnchor, terminal);
     };
 
     return WireFactory;

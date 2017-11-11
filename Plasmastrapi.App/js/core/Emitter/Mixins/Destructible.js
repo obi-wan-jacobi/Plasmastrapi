@@ -1,8 +1,8 @@
-﻿define(['emitter', 'validator'], function (Emitter, validator) {
+﻿define(['validator'], function (validator) {
 
     function Destructible() {
         var target = this;
-        validator.validateInstanceType(target, target, Emitter);
+        validator.validateInstanceType(target, target, 'emitter');
         target.__isDestroyed = false;
         Object.defineProperties(target, {
             'isDestructible': {

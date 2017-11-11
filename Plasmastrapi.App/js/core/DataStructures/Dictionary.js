@@ -3,9 +3,9 @@ function (Link, validator) {
     
     // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle.
     // Provides index-free iteration.
-    function Dictionary(ValueType) {
-        validator.validateObject(ValueType);
-        this.__ValueType = ValueType;
+    function Dictionary(typeString) {
+        validator.validateString(typeString);
+        this.__typeString = typeString;
         this.__start = null;
         this.__end = null;
     };
@@ -41,7 +41,7 @@ function (Link, validator) {
     };
     Dictionary.prototype.add = function (key, value) {
         this.__validateNoDuplicateKeys(key);
-        validator.validateInstanceType(this, value, this.__ValueType);
+        validator.validateInstanceType(this, value, this.__typeString);
         var newLink = new Link({ key, value });
         if (!this.__start) {
             this.__start = newLink;

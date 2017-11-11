@@ -1,11 +1,11 @@
-define(['container', 'emitter'],
-function (Container, Emitter) {
+define(['container'],
+function (Container) {
 
     // CLASS EmitterContainer
     EmitterContainer.prototype = Object.create(Container.prototype);
     EmitterContainer.prototype.constructor = EmitterContainer;
     function EmitterContainer() {
-        Container.call(this, Emitter);
+        Container.call(this, 'emitter');
     };
     EmitterContainer.prototype.add = function (emitter) {
         Container.prototype.add.call(this, emitter);

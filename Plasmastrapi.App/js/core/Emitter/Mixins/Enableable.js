@@ -1,8 +1,8 @@
-﻿define(['emitter', 'validator'], function (Emitter, validator) {
+﻿define(['validator'], function (validator) {
 
     function Enableable() {
         var target = this;
-        validator.validateInstanceType(target, target, Emitter);
+        validator.validateInstanceType(target, target, 'emitter');
         target.__isEnabled = true;
         Object.defineProperties(target, {
             'isEnableable': {

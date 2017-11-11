@@ -1,5 +1,5 @@
-﻿define(['controller', 'keyboard-handle', 'mouse-handle', 'input-handler', 'empty-handler', 'validator'],
-function (Controller, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, validator) {
+﻿define(['controller', 'keyboard-handle', 'mouse-handle', 'utils'],
+function (Controller, KeyboardHandle, MouseHandle, utils) {
 
     // CLASS InputController
     InputController.prototype = Object.create(Controller.prototype);
@@ -46,16 +46,17 @@ function (Controller, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, v
         this.__mouseComponent[`${actionString}EventListener`]('onclick', this.__handler, this.__handler.onclick);
     };
     // public methods
-    InputController.prototype.setHandler = function (HandlerType, args) {
-        HandlerType = HandlerType || EmptyHandler;
+    InputController.prototype.setHandler = function (handlerString, args) {
+        handlerString = handlerString || 'empty-handler';
         args = args || [];
-        validator.validateClassType(this, HandlerType, InputHandler);
-        validator.validateInstanceType(this, args, Array);
+        utils.validator.validateClassType(this, handlerString, 'input-handler');
+        utils.validator.validateInstanceType(this, args, 'array');
         if (this.__handler) {
             this.__configureHandlerEventSubscriptions('remove');
             this.__handler.dispose();
         }
         var args = [this.__engine].concat(args);
+        var HandlerType = utils.modules.require(handlerString);
         this.__handler = new (HandlerType.bind.apply(HandlerType, [null].concat(args)))();
         this.__configureHandlerEventSubscriptions('add');
         this.__handler.load();

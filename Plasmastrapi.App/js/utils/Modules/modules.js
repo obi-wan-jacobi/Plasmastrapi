@@ -30,17 +30,10 @@
         return this.getModulePrefix(instanceOrType, null);
     };
 
-    modules.require = function (moduleName) {
-        var module = null;
-        try {
-            module = require(moduleName);
-        } catch (ex) {
-            validator.throw(modules, 'require', `No module named \'${moduleName}\' could be found`);
-        }
-        return module;
-    };
+    modules.require = validator.__require;
 
     modules.requireIfExists = function (moduleName) {
+        validator.validateString(moduleName);
         var module = null;
         try {
             module = require(moduleName);

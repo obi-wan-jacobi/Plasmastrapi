@@ -10,8 +10,9 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         var HandleType = utils.modules.require(`${modulePrefix}-handle`);
         if (!dataHandle) {
             dataHandle = new HandleType();
+        } else {
+            utils.validator.validateInstanceType(this, dataHandle, `${modulePrefix}-handle`);
         }
-        utils.validator.validateInstanceType(this, dataHandle, HandleType);
         // private variables
         this.__entity = null;
         this.__handle = dataHandle;

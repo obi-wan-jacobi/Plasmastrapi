@@ -1,5 +1,5 @@
-﻿define(['factory', 'entity-container', 'pose', 'polygon', 'vertex', 'pick-handle',  'validator'],
-    function (Factory, EntityContainer, Pose, Polygon, Vertex, PickHandle, validator) {
+﻿define(['factory', 'entity-container', 'pose', 'polygon', 'vertex', 'pick-handle', 'utils'],
+function (Factory, EntityContainer, Pose, Polygon, Vertex, PickHandle, utils) {
 
     EntityFactory.prototype = Object.create(Factory.prototype);
     EntityFactory.prototype.constructor = EntityFactory;
@@ -16,8 +16,8 @@
         this.__componentFactory = this.__engine.getFactory('component-factory');
     };
     // public methods
-    EntityFactory.prototype.create = function (EntityType, args) {
-        var entity = this.__emitterFactory.create(EntityType, args);
+    EntityFactory.prototype.create = function (entityString, args) {
+        var entity = this.__emitterFactory.create(entityString, args);
         // add components
         entity.addComponent(this.__componentFactory.createFromPrimitive(new Pose()));
         entity.addComponent(this.__componentFactory.createFromPrimitive(new Polygon([new Vertex()])));

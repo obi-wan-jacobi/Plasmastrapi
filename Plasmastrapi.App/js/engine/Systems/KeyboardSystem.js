@@ -9,8 +9,8 @@ function (System, LinkedList, Position) {
         this.__viewport = null;
         this.__container = null;
         this.__inputBuffer = {
-            'keydown': new LinkedList(KeyboardEvent),
-            'keyup': new LinkedList(KeyboardEvent)
+            'keydown': new LinkedList('keyboard-event'),
+            'keyup': new LinkedList('keyboard-event')
         };
     };
     // private methods
@@ -50,8 +50,8 @@ function (System, LinkedList, Position) {
             }, this);
         }, this);
         this.__inputBuffer = {
-            'keydown': new LinkedList(KeyboardEvent),
-            'keyup': new LinkedList(KeyboardEvent)
+            'keydown': new LinkedList('keyboard-event'),
+            'keyup': new LinkedList('keyboard-event')
         };
     };
 

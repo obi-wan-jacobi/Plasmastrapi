@@ -1,5 +1,5 @@
-define(['base', 'container', 'entity', 'validator'],
-function (Base, Container, Entity, validator) {
+define(['base', 'container', 'validator'],
+function (Base, Container, validator) {
 
     // CLASS Scene
     Scene.prototype = Object.create(Base.prototype);
@@ -8,7 +8,7 @@ function (Base, Container, Entity, validator) {
         // inherits from
         Base.call(this);
 		// private variables
-        this.__entities = new Container(Entity);
+        this.__entities = new Container('entity');
         this.__engine = engine;
     };
     // private methods

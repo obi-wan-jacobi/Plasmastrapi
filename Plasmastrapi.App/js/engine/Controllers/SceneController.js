@@ -1,5 +1,5 @@
-define(['controller', 'scene', 'dictionary', 'utils'],
-function (Controller, Scene, Dictionary, utils) {
+define(['controller', 'dictionary', 'utils'],
+function (Controller, Dictionary, utils) {
 
 	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
@@ -8,7 +8,7 @@ function (Controller, Scene, Dictionary, utils) {
 	    Controller.call(this, engine);
 	    this.__entityFactory = null;
 	    this.__scene = null;
-	    this.__scenes = new Dictionary(Scene);
+	    this.__scenes = new Dictionary('scene');
 	};
     // private methods
 	SceneController.prototype.__oninit = function () {
@@ -36,16 +36,16 @@ function (Controller, Scene, Dictionary, utils) {
 	};
     // public methods
 	SceneController.prototype.setScene = function (sceneString) {
-	    var SceneType = utils.modules.require(sceneString);
-	    utils.validator.validateClassType(this, SceneType, Scene);
+	    utils.validator.validateClassType(this, sceneString, 'scene');
 	    if (this.__scene) {
 	        this.__updateEntityContainerSubscriptions('remove');
 	        this.__scene.unload();
 	    }
-	    this.__scene = this.__scenes.get(SceneType);
+	    this.__scene = this.__scenes.get(sceneString);
 	    if (!this.__scene) {
+	        var SceneType = utils.modules.require(sceneString);
 	        this.__scene = new SceneType(this.__engine);
-	        this.__scenes.add(SceneType, this.__scene);
+	        this.__scenes.add(sceneString, this.__scene);
 	    }
 	    if (this.isLoaded) {
 	        this.__updateEntityContainerSubscriptions('add');

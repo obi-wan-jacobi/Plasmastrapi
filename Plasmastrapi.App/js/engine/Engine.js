@@ -1,5 +1,5 @@
-define(['system', 'dictionary', 'factory', 'controller', 'utils'],
-function (System, Dictionary, Factory, Controller, utils) {
+define(['system', 'dictionary', 'utils'],
+function (System, Dictionary, utils) {
 
 	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
@@ -8,9 +8,9 @@ function (System, Dictionary, Factory, Controller, utils) {
         System.call(this);
         // private variables
         this.__viewport = viewport;
-        this.__factories = new Dictionary(Factory);
-        this.__systems = new Dictionary(System);
-        this.__controllers = new Dictionary(Controller);
+        this.__factories = new Dictionary('factory');
+        this.__controllers = new Dictionary('controller');
+        this.__systems = new Dictionary('system');
 	};
     // private methods
     Engine.prototype.__oninit = function () {

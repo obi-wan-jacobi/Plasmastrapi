@@ -1,12 +1,12 @@
-﻿define(['factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'data-handle', 'polygon', 'utils'],
-function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, DataHandle, Polygon, utils) {
+﻿define(['factory', 'dictionary', 'component-container', 'drawable-component-container', 'polygon', 'utils'],
+function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, Polygon, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
         Factory.call(this, engine);
         this.__emitterFactory = null;
-        this.__containers = new Dictionary(ComponentContainer);
+        this.__containers = new Dictionary('component-container');
         this.__drawableComponentContainer = new DrawableComponentContainer();
     };
     // private methods
@@ -18,12 +18,11 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
         // if container doesn't exist for this component type, create one
         var container = this.__containers.get(componentString);
         if (!container) {
-            var ComponentType = utils.modules.require(componentString);
             var ContainerType = utils.modules.requireIfExists(`${componentString}-container`);
             if (ContainerType !== null) {
                 container = new ContainerType();
             } else {
-                container = new ComponentContainer(ComponentType);
+                container = new ComponentContainer(componentString);
             }
             this.__containers.add(componentString, container);
         }
@@ -31,9 +30,8 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
     };
     // public methods
     ComponentFactory.prototype.create = function (componentString, args) {
-        var ComponentType = utils.modules.require(componentString);
         var container = this.__getOrInitContainer(componentString);
-        var component = this.__emitterFactory.create(ComponentType, args);
+        var component = this.__emitterFactory.create(componentString, args);
         container.add(component);
         if (component.isDrawable) {
             this.__drawableComponentContainer.add(component);
@@ -41,13 +39,13 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
         return component;
     };
     ComponentFactory.prototype.createFromDataHandle = function (dataHandle) {
-        utils.validator.validateInstanceType(this, dataHandle, DataHandle);
+        utils.validator.validateInstanceType(this, dataHandle, 'data-handle');
         var modulePrefix = utils.modules.getModulePrefix(dataHandle, 'Handle');
         var component = this.create(`${modulePrefix}-component`, [dataHandle]);
         return component;
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
-        utils.validator.validateInstanceType(this, primitive, Primitive);
+        utils.validator.validateInstanceType(this, primitive, 'primitive');
         var modulePrefix = utils.modules.getModuleName(primitive);
         var componentString, HandleType, DisplaySettings;
         if (primitive instanceof Polygon) {

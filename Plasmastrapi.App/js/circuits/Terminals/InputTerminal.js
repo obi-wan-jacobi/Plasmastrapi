@@ -1,5 +1,5 @@
-﻿define(['terminal', 'output-terminal', 'validator'],
-function (Terminal, OutputTerminal, validator) {
+﻿define(['terminal', 'validator'],
+function (Terminal, validator) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
@@ -14,7 +14,7 @@ function (Terminal, OutputTerminal, validator) {
         return this.__connections;
     };
     InputTerminal.prototype.addConnection = function (outputTerminal) {
-        validator.validateInstanceType(this, outputTerminal, OutputTerminal);
+        validator.validateInstanceType(this, outputTerminal, 'output-terminal');
         this.__connections.push(outputTerminal);
         outputTerminal.addEventListener('onstatechange', this.__parent, this.__parent.updateState);
         this.__parent.updateState(outputTerminal.getState());

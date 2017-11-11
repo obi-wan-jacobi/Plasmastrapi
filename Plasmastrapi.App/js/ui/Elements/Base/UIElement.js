@@ -10,7 +10,7 @@ function (Entity, validator) {
     };
     // public methods
     UIElement.prototype.contains = function (entity) {
-        validator.validateInstanceType(this, entity, Entity);
+        validator.validateInstanceType(this, entity, 'entity');
         var position = entity.getComponent('pose-component')
             .getHandle()
             .getPosition();

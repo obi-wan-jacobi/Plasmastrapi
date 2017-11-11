@@ -1,12 +1,12 @@
-define(['component', 'pose-component', 'pose', 'line-handle', 'line', 'validator'],
-function (Component, PoseComponent, Pose, LineHandle, Line, validator) {
+define(['component', 'pose', 'line-handle', 'line', 'validator'],
+function (Component, Pose, LineHandle, Line, validator) {
 
 	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
 	function LineComponent(tailPoseComponent, headPoseComponent, lineDisplaySettings) {
-        validator.validateInstanceType(this, tailPoseComponent, PoseComponent);
-        validator.validateInstanceType(this, headPoseComponent, PoseComponent);
+        validator.validateInstanceType(this, tailPoseComponent, 'pose-component');
+        validator.validateInstanceType(this, headPoseComponent, 'pose-component');
         // private variables
         this.__tailPose = tailPoseComponent;
         this.__headPose = headPoseComponent;

@@ -3,9 +3,9 @@ function (Link, validator) {
 
     // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle.
     // Provides index-free iteration.
-    function LinkedList(ValueType) {
-        validator.validateObject(ValueType);
-        this.__ValueType = ValueType;
+    function LinkedList(typeString) {
+        validator.validateString(typeString);
+        this.__typeString = typeString;
         this.__start = null;
         this.__end = null;
     };
@@ -34,7 +34,7 @@ function (Link, validator) {
         }
     };
     LinkedList.prototype.push = function(value) {
-        validator.validateInstanceType(this, value, this.__ValueType);
+        validator.validateInstanceType(this, value, this.__typeString);
         var newLink = new Link(value);
         if (!this.__start) {
             this.__start = newLink;

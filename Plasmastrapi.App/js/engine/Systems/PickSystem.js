@@ -14,9 +14,9 @@ function (System, MouseHandle, LinkedList) {
         this.__container = null;
         this.__mouseComponent = null;
         this.__inputBuffer = {
-            'mousemove': new LinkedList(InputUpdateItem),
-            'mousedown': new LinkedList(InputUpdateItem),
-            'click': new LinkedList(InputUpdateItem)
+            'mousemove': new LinkedList('object'),
+            'mousedown': new LinkedList('object'),
+            'click': new LinkedList('object')
         };
     };
     // private methods
@@ -84,9 +84,9 @@ function (System, MouseHandle, LinkedList) {
         // Flush the buffer here so that they are iterated over in the 'next' cycle.
         this.__container.flushContentsBuffer();
         this.__inputBuffer = {
-            'mousemove': new LinkedList(InputUpdateItem),
-            'mousedown': new LinkedList(InputUpdateItem),
-            'click': new LinkedList(InputUpdateItem),
+            'mousemove': new LinkedList('object'),
+            'mousedown': new LinkedList('object'),
+            'click': new LinkedList('object'),
         };
     };
 

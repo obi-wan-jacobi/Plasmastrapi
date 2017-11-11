@@ -1,6 +1,21 @@
-﻿define(['logging'], function (logging) {
+﻿define(['logging', 'utils-config'], function (logging, config) {
 
     var validator = new (function validator() { });
+
+    // private
+    validator.__require = function(moduleName) {
+        validator.validateString(moduleName);
+        if (config.nativeTypes[moduleName]) {
+            return config.nativeTypes[moduleName];
+        }
+        var module = null;
+        try {
+            module = require(moduleName);
+        } catch (ex) {
+            this.throw(this, 'require', `No module named \'${moduleName}\' could be found`);
+        }
+        return module;
+    };
 
     // throws
     validator.throw = function (referer, methodName, errorString) {
@@ -19,6 +34,12 @@
         }
     };
 
+    validator.validateString = function (argument) {
+        if (!(typeof argument === 'string')) {
+            this.throw(this, 'validateString', `Argument ${argument} is not a string (${typeof argument})`)
+        }
+    };
+
     validator.validateObject = function (argument) {
         this.validateNotNull(argument);
         if (Object.getOwnPropertyNames(argument).length === 0) {
@@ -32,30 +53,38 @@
         }
     };
 
-    validator.isInstanceOfType = function (instance, Type) {
-        return typeof instance !== Type && !(instance instanceof Type);
+    validator.isInstanceOfType = function (instance, typeString) {
+        if (typeString === 'string') {
+            return typeof instance === 'string';
+        } else if (typeString === 'number') {
+            return typeof instance === 'number';
+        }
+        var Type = this.__require(typeString)
+        return instance instanceof Type;
     };
 
-    validator.validateInstanceType = function (referer, instance, Type) {
+    validator.validateInstanceType = function (referer, instance, typeString) {
         if (instance instanceof Array) {
-            if (Type === Array) {
+            if (typeString === 'array') {
                 return;
             }
             for (var i = 0, L = instance.length; i < L; i++) {
-                this.validateInstanceType(referer, instance[i], Type);
+                this.validateInstanceType(referer, instance[i], typeString);
             }
-        } else if (this.isInstanceOfType(instance, Type)) {
-            this.throw(referer, 'validateInstanceType', `${instance} must be an instance of ${Type.name}`);
+        } else if (!this.isInstanceOfType(instance, typeString)) {
+            this.throw(referer, 'validateInstanceType', `${instance} must be an instance of ${typeString}`);
         }
     };
 
-    validator.isClassOfType = function (ClassToValidate, Class) {
-        return !(ClassToValidate.prototype instanceof Class) && ClassToValidate.prototype.constructor.name !== Class.name;
+    validator.isClassOfType = function (classToValidateString, classString) {
+        var ClassToValidate = this.__require(classToValidateString);
+        var Class = this.__require(classString);
+        return (ClassToValidate.prototype instanceof Class);
     };
 
-    validator.validateClassType = function (referer, ClassToValidate, Class) {
-        if (this.isClassOfType(ClassToValidate, Class)) {
-            this.throw(referer, 'validateInstanceType', `${ClassToValidate.name} must inherit from ${Class.name}`);
+    validator.validateClassType = function (referer, classToValidateString, classString) {
+        if (!this.isClassOfType(classToValidateString, classString)) {
+            this.throw(referer, 'validateInstanceType', `${classToValidateString} must inherit from ${classString}`);
         }
     };
 

@@ -9,7 +9,7 @@ function (DataHandle, ImageDisplaySettings, validator) {
     // public methods
     ImageHandle.prototype.setData = function (data) {
         // validate data for this handle
-        validator.validateInstanceType(this, data, Image);
+        validator.validateInstanceType(this, data, 'image');
         this.__data = data;
     };
     ImageHandle.prototype.draw = function (ctx, position, orientation) {

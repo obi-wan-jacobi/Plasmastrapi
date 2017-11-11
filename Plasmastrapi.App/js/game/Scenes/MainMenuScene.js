@@ -1,5 +1,5 @@
-﻿define(['scene', 'button', 'position', 'rectangle', 'text', 'text-display-settings', 'modules'],
-function (Scene, Button, Position, Rectangle, Text, TextDisplaySettings, modules) {
+﻿define(['scene', 'position', 'rectangle', 'text', 'text-display-settings', 'modules'],
+function (Scene, Position, Rectangle, Text, TextDisplaySettings, modules) {
 
     MainMenuScene.prototype = Object.create(Scene.prototype);
     MainMenuScene.prototype.constructor = MainMenuScene;
@@ -8,7 +8,7 @@ function (Scene, Button, Position, Rectangle, Text, TextDisplaySettings, modules
     };
     MainMenuScene.prototype.__oninit = function () {
         var engine = this.__engine;
-        var labNavigationButton = engine.getFactory('ui-element-factory').create(Button);
+        var labNavigationButton = engine.getFactory('ui-element-factory').create('button');
         labNavigationButton.set(new Position(750, 200));
         labNavigationButton.set(new Rectangle(100, 30));
         labNavigationButton.set(new Text('Play'));

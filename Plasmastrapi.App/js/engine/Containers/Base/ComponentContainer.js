@@ -1,10 +1,9 @@
-﻿define(['container', 'component', 'validator'], function (Container, Component, validator) {
+﻿define(['container'], function (Container) {
 
     ComponentContainer.prototype = Object.create(Container.prototype);
     ComponentContainer.prototype.constructor = ComponentContainer;
-    function ComponentContainer(ComponentType) {
-        validator.validateClassType(this, ComponentType, Component);
-        Container.call(this, ComponentType);
+    function ComponentContainer(componentTypeString) {
+        Container.call(this, componentTypeString);
     };
     // private methods
     ComponentContainer.prototype.__initEventCallbacks = function (component) {

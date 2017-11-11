@@ -45,7 +45,7 @@ function (Factory, Component, Dictionary, ComponentContainer, DrawableComponentC
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
         utils.validator.validateInstanceType(this, primitive, Primitive);
-        var modulePrefix = utils.modules.getModulePrefix(primitive, null);
+        var modulePrefix = utils.modules.getModuleName(primitive);
         var componentString, HandleType, DisplaySettings;
         if (primitive instanceof Polygon) {
             componentString = 'polygon-component';

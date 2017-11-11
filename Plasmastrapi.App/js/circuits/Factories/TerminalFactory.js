@@ -14,7 +14,7 @@ function (Factory, Terminal, ImageHandle, ImageDisplaySettings, utils, config) {
         utils.validator.validateClassType(this, TerminalType, Terminal);
         var terminal = this.__circuitElementFactory.create(TerminalType);
         // add components
-        var image = this.__assetMap.get(utils.modules.getModulePrefix(TerminalType, null));
+        var image = this.__assetMap.get(utils.modules.getModuleName(TerminalType));
         var displaySettings = new ImageDisplaySettings(config.Terminal.displayLayer, null, null, image.width, image.height, image.width, image.height);
         terminal.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
         return terminal;

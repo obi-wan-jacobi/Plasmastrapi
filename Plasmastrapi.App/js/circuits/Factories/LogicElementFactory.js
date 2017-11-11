@@ -24,7 +24,7 @@ function (Factory, LogicElementContainer, LogicElement, InputTerminal, OutputTer
     LogicElementFactory.prototype.create = function (LogicElementType) {
         var logicElement = this.__circuitElementFactory.create(LogicElementType);
         // add components
-        var image = this.__assetMap.get(utils.modules.getModulePrefix(LogicElementType, null));
+        var image = this.__assetMap.get(utils.modules.getModuleName(LogicElementType));
         var displaySettings = new ImageDisplaySettings(config.LogicElement.displayLayer, null, null, image.width, image.height, image.width, image.height);
         logicElement.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
         // add terminals

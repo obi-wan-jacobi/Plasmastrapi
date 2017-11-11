@@ -26,11 +26,11 @@
         }
     };
     DrawableComponentContainer.prototype.add = function (component) {
-        var displayLayer = component.getHandle().getDisplaySettings().displayLayer;
+        var displayLayer = component.getDisplaySettings().displayLayer;
         this.__containers[displayLayer].add(component);
     };
     DrawableComponentContainer.prototype.remove = function (component) {
-        var displayLayer = component.getHandle().getDisplaySettings().displayLayer;
+        var displayLayer = component.getDisplaySettings().displayLayer;
         this.__containers[displayLayer].remove(component);
     };
 

@@ -1,5 +1,5 @@
-﻿define(['controller', 'placing-tool', 'panel', 'validator'],
-function (Controller, PlacingTool, Panel, validator) {
+﻿define(['controller', 'placing-tool', 'panel', 'logic-element', 'utils'],
+function (Controller, PlacingTool, Panel, LogicElement, utils) {
 
     LabController.prototype = Object.create(Controller.prototype);
     LabController.prototype.constructor = LabController;
@@ -50,9 +50,9 @@ function (Controller, PlacingTool, Panel, validator) {
     // public methods
     LabController.prototype.setDesignArea = function (panel) {
         if (this.__designArea) {
-            validator.throw(this, 'setDesignArea', 'A design area element has already been set');
+            utils.validator.throw(this, 'setDesignArea', 'A design area element has already been set');
         }
-        validator.validateInstanceType(this, panel, Panel);
+        utils.validator.validateInstanceType(this, panel, Panel);
         this.__initDesignArea(panel);
     };
     LabController.prototype.getDesignArea = function () {
@@ -69,7 +69,9 @@ function (Controller, PlacingTool, Panel, validator) {
     LabController.prototype.place = function (logicElement) {
         this.__set('place', logicElement);
     };
-    LabController.prototype.spawn = function (LogicElementType) {
+    LabController.prototype.spawn = function (logicElementString) {
+        var LogicElementType = utils.modules.require(logicElementString);
+        utils.validator.validateClassType(this, LogicElementType, LogicElement);
         this.__set('spawn', LogicElementType);
     };
 

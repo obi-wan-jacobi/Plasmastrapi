@@ -26,6 +26,10 @@
         return moduleName.split(typeSuffix)[0].split(/(?=[A-Z])/).join('-').toLowerCase();
     };
 
+    modules.getModuleName = function (instanceOrType) {
+        return this.getModulePrefix(instanceOrType, null);
+    };
+
     modules.require = function (moduleName) {
         var module = null;
         try {

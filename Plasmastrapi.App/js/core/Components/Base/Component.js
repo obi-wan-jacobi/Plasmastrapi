@@ -93,6 +93,11 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
             return this.__handle.getData();
         }
     };
+    Component.prototype.getDisplaySettings = function () {
+        if (this.__handle) {
+            return this.__handle.getDisplaySettings();
+        }
+    };
 
     return Component;
 });

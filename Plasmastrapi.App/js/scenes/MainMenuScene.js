@@ -12,7 +12,7 @@ function (Scene, Button, Position, Rectangle, Text, TextDisplaySettings, modules
         labNavigationButton.set(new Position(750, 200));
         labNavigationButton.set(new Rectangle(100, 30));
         labNavigationButton.set(new Text('Play'));
-        labNavigationButton.getComponent('text-component').getHandle().getDisplaySettings().offset.y = 7;
+        labNavigationButton.getComponent('text-component').getDisplaySettings().offset.y = 7;
         labNavigationButton.set(function () {
             engine.getController('scene-controller').setScene('lab-scene');
         });

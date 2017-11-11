@@ -31,7 +31,7 @@ function (Factory, UIElement, EntityFactory, ImageHandle, ImageDisplaySettings, 
         // configure display layers
         uiElement.forEachComponent(function (key, component) {
             if (component.isDrawable) {
-                var displaySettings = component.getHandle().getDisplaySettings();
+                var displaySettings = component.getDisplaySettings();
                 if (displaySettings) {
                     displaySettings.displayLayer = config[uiElement.constructor.name] ?
                         config[uiElement.constructor.name].displayLayer : 'none';

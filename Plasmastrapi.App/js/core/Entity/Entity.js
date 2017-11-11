@@ -30,7 +30,7 @@ function (Emitter, Component, Dictionary, Loadable, Destructible, Primitive, Dis
         this.__parent = parent;
     };
     Entity.prototype.addComponent = function (component) {
-        this.__components.add(utils.modules.getModulePrefix(component), component);
+        this.__components.add(utils.modules.getModuleName(component), component);
         component.setEntity(this);
         if (this.isLoaded) {
             this.reload();
@@ -55,7 +55,7 @@ function (Emitter, Component, Dictionary, Loadable, Destructible, Primitive, Dis
                 baseClass = Object.getPrototypeOf(baseClass);
             }
         }
-        var modulePrefix = utils.modules.getModulePrefix(baseClass);
+        var modulePrefix = utils.modules.getModuleName(baseClass);
         var component = this.getComponent(`${modulePrefix}-component`);
         if (data instanceof DisplaySettings) {
             var DisplaySettingsType = utils.modules.require(`${modulePrefix}-display-settings`);

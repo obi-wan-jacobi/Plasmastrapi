@@ -5,10 +5,9 @@ function (Controller, KeyboardHandle, MouseHandle, InputHandler, EmptyHandler, v
     InputController.prototype = Object.create(Controller.prototype);
     InputController.prototype.constructor = InputController;
     function InputController(engine) {
-        Controller.call(this);
-        this.__engine = engine;
-        this.__keyboardComponent = engine.getFactory('component-factory').createFromDataHandle(new KeyboardHandle());
-        this.__mouseComponent = engine.getFactory('component-factory').createFromDataHandle(new MouseHandle());
+        Controller.call(this, engine);
+        this.__keyboardComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new KeyboardHandle());
+        this.__mouseComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new MouseHandle());
         this.__handler = null;
     };
     // private methods

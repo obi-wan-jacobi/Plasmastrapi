@@ -85,6 +85,7 @@
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
+    <Content Include="js\ui\Controllers\CursorController.js" />
     <Content Include="js\ui\Elements\Button.js" />
     <Content Include="js\ui\Elements\Panel.js" />
     <Content Include="Lab.html" />

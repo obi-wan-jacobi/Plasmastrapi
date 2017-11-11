@@ -6,7 +6,7 @@ function (Controller, Scene, Dictionary, utils) {
 	SceneController.prototype.constructor = SceneController;
 	function SceneController(engine) {
 	    Controller.call(this, engine);
-	    this.__entityFactory = engine.getFactory('entity-factory');
+	    this.__entityFactory = this.__engine.getFactory('entity-factory');
 	    this.__scene = null;
 	    this.__scenes = new Dictionary(Scene);
 	};

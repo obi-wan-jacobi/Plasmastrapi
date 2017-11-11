@@ -46,17 +46,15 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
     };
     ComponentFactory.prototype.createFromPrimitive = function (primitive) {
         utils.validator.validateInstanceType(this, primitive, 'primitive');
-        var modulePrefix = utils.modules.getModuleName(primitive);
-        var componentString, HandleType, DisplaySettings;
+        var modulePrefix, componentString, HandleType, DisplaySettings;
         if (primitive instanceof Polygon) {
-            componentString = 'polygon-component';
-            HandleType = utils.modules.require('polygon-handle');
-            DisplaySettings = utils.modules.require('polygon-display-settings');
+            modulePrefix = 'polygon'
         } else {
-            componentString = `${modulePrefix}-component`;
-            HandleType = utils.modules.require(`${modulePrefix}-handle`);
-            DisplaySettings = utils.modules.require(`${modulePrefix}-display-settings`);
+            modulePrefix = utils.modules.getModuleName(primitive);
         }
+        componentString = `${modulePrefix}-component`;
+        HandleType = utils.modules.require(`${modulePrefix}-handle`);
+        DisplaySettings = utils.modules.require(`${modulePrefix}-display-settings`);
         var component = this.create(componentString, [new HandleType(primitive, new DisplaySettings())]);
         return component;
     };

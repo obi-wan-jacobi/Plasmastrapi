@@ -13,6 +13,9 @@ function (DataHandle, ImageDisplaySettings, validator) {
         this.__data = data;
     };
     ImageHandle.prototype.draw = function (ctx, position, orientation) {
+        if (!this.__data) {
+            return;
+        }
         var settings = this.__displaySettings;
         ctx.save();
         ctx.translate(position.x, position.y);

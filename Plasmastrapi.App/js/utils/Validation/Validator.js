@@ -1,21 +1,6 @@
-﻿define(['logging', 'utils-config'], function (logging, config) {
+﻿define(['logging', 'modules'], function (logging, modules) {
 
     var validator = new (function validator() { });
-
-    // private
-    validator.__require = function(moduleName) {
-        validator.validateString(moduleName);
-        if (config.nativeTypes[moduleName]) {
-            return config.nativeTypes[moduleName];
-        }
-        var module = null;
-        try {
-            module = require(moduleName);
-        } catch (ex) {
-            this.throw(this, 'require', `No module named \'${moduleName}\' could be found`);
-        }
-        return module;
-    };
 
     // throws
     validator.throw = function (referer, methodName, errorString) {
@@ -54,12 +39,10 @@
     };
 
     validator.isInstanceOfType = function (instance, typeString) {
-        if (typeString === 'string') {
-            return typeof instance === 'string';
-        } else if (typeString === 'number') {
-            return typeof instance === 'number';
+        if (typeString === 'string' || typeString === 'number') {
+            return typeof instance === typeString;
         }
-        var Type = this.__require(typeString)
+        var Type = modules.require(typeString)
         return instance instanceof Type;
     };
 
@@ -77,8 +60,8 @@
     };
 
     validator.isClassOfType = function (classToValidateString, classString) {
-        var ClassToValidate = this.__require(classToValidateString);
-        var Class = this.__require(classString);
+        var ClassToValidate = modules.require(classToValidateString);
+        var Class = modules.require(classString);
         return (ClassToValidate.prototype instanceof Class);
     };
 

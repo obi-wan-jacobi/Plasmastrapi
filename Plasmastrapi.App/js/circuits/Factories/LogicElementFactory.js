@@ -39,7 +39,7 @@ function (Factory, LogicElementContainer, Rectangle, Position, ImageHandle, Imag
         this.__addTerminal(logicElement, 'output-terminal', new Position(0, -35), new Position(0, 20));
         this.__container.add(logicElement);
         // configure pick action
-        logicElement.set(new Rectangle(30, 30));
+        logicElement.getComponent('polygon-component').setData(new Rectangle(30, 30));
         var labController = this.__engine.getController('lab-controller');
         var pickComponent = logicElement.getComponent('pick-component');
         // *** closures ***

@@ -91,9 +91,19 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
             return this.__handle.getData();
         }
     };
+    Component.prototype.setData = function (data) {
+        if (this.__handle) {
+            return this.__handle.setData(data);
+        }
+    };
     Component.prototype.getDisplaySettings = function () {
         if (this.__handle) {
             return this.__handle.getDisplaySettings();
+        }
+    };
+    Component.prototype.setDisplaySettings = function (displaySettings) {
+        if (this.__handle) {
+            return this.__handle.setDisplaySettings(displaySettings);
         }
     };
 

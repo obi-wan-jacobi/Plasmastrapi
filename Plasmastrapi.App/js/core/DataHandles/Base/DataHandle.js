@@ -3,8 +3,12 @@
     function DataHandle(data, displaySettings) {
         this.__data = null;
         this.__displaySettings = null;
-        this.setData(data);
-        this.setDisplaySettings(displaySettings);
+        if (data) {
+            this.setData(data);
+        }
+        if (displaySettings) {
+            this.setDisplaySettings(displaySettings);
+        }
     };
     // public methods
     DataHandle.prototype.getData = function () {
@@ -20,9 +24,6 @@
         return this.__displaySettings;
     };
     DataHandle.prototype.setDisplaySettings = function (displaySettings) {
-        if (!displaySettings) {
-            return;
-        }
         // validate display settings for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');
         utils.validator.validateInstanceType(this, displaySettings, `${modulePrefix}-display-settings`);

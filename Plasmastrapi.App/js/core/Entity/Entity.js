@@ -1,5 +1,5 @@
-define(['emitter', 'dictionary', 'loadable', 'destructible', 'primitive', 'display-settings', 'position', 'utils'],
-function (Emitter, Dictionary, Loadable, Destructible, Primitive, DisplaySettings, Position, utils) {
+define(['emitter', 'dictionary', 'loadable', 'destructible', 'position', 'utils'],
+function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
 
     // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
@@ -49,25 +49,6 @@ function (Emitter, Dictionary, Loadable, Destructible, Primitive, DisplaySetting
     };
     Entity.prototype.forEachComponent = function (fn, /* optional */ caller) {
         return this.__components.forEach(fn, caller);
-    };
-    Entity.prototype.set = function (data) {
-        var baseClass = data;
-        if (Object.getPrototypeOf(data).constructor.name === (function () { }).constructor.name) {
-            baseClass = function pick() { };
-        }
-        if (data instanceof Primitive) {
-            while (Object.getPrototypeOf(baseClass).constructor.name !== 'Object' && Object.getPrototypeOf(baseClass).constructor.name !== Primitive.name) {
-                baseClass = Object.getPrototypeOf(baseClass);
-            }
-        }
-        var modulePrefix = utils.modules.getModuleName(baseClass);
-        var component = this.getComponent(`${modulePrefix}-component`);
-        if (data instanceof DisplaySettings) {
-            var DisplaySettingsType = utils.modules.require(`${modulePrefix}-display-settings`);
-            component.getHandle().setDisplaySettings(data);
-        } else {
-            component.getHandle().setData(data);
-        }
     };
     Entity.prototype.follow = function (entityToFollow, positionOffset) {
         var poseComponentToFollow = entityToFollow.getComponent('pose-component')

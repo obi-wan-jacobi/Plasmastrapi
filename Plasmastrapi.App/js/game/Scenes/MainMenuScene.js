@@ -1,5 +1,5 @@
-﻿define(['scene', 'position', 'rectangle', 'text', 'text-display-settings', 'modules'],
-function (Scene, Position, Rectangle, Text, TextDisplaySettings, modules) {
+﻿define(['scene'],
+function (Scene) {
 
     MainMenuScene.prototype = Object.create(Scene.prototype);
     MainMenuScene.prototype.constructor = MainMenuScene;
@@ -9,11 +9,11 @@ function (Scene, Position, Rectangle, Text, TextDisplaySettings, modules) {
     MainMenuScene.prototype.__oninit = function () {
         var engine = this.__engine;
         var labNavigationButton = engine.getFactory('ui-element-factory').create('button');
-        labNavigationButton.set(new Position(750, 200));
-        labNavigationButton.set(new Rectangle(100, 30));
-        labNavigationButton.set(new Text('Play'));
-        labNavigationButton.getComponent('text-component').getDisplaySettings().offset.y = 7;
-        labNavigationButton.set(function () {
+        labNavigationButton.set('position', [750, 200]);
+        labNavigationButton.set('rectangle', [100, 30]);
+        labNavigationButton.set('text', ['Play']);
+        labNavigationButton.set('text-display-settings', { offset: { x: 0, y: 7 } });
+        labNavigationButton.set('pick-action', function () {
             engine.getController('scene-controller').setScene('lab-scene');
         });
     };

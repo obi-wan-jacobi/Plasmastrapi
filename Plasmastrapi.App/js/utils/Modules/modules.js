@@ -1,4 +1,4 @@
-﻿define(['validator', 'logging'], function (validator, logging) {
+﻿define(['logging', 'utils-config'], function (logging, config) {
 
     var modules = new (function modules() { });
 
@@ -30,17 +30,31 @@
         return this.getModulePrefix(instanceOrType, null);
     };
 
-    modules.require = validator.__require;
-
-    modules.requireIfExists = function (moduleName) {
+    modules.__require = function (moduleName, mode) {
+        var validator = require('validator');
         validator.validateString(moduleName);
+        if (config.nativeTypes[moduleName]) {
+            return config.nativeTypes[moduleName];
+        }
         var module = null;
         try {
             module = require(moduleName);
         } catch (ex) {
-            logging.info(modules, 'requireIfExists', `No module named \'${moduleName}\' could be found`);
+            if (mode === 'strict') {
+                validator.throw(this, 'require', `No module named \'${moduleName}\' could be found`);
+            } else {
+                logging.info(this, 'requireIfExists', `No module named \'${moduleName}\' could be found`);
+            }
         }
         return module;
+    };
+
+    modules.requireIfExists = function (moduleName) {
+        return this.__require(moduleName, null);
+    };
+
+    modules.require = function (moduleName) {
+        return this.__require(moduleName, 'strict');
     };
 
     // singleton

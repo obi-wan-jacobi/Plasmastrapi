@@ -16,24 +16,14 @@ function (Factory, EntityFactory, ImageHandle, ImageDisplaySettings, TextHandle,
         this.__entityFactory = this.__engine.getFactory('entity-factory');
         this.__assetMap = this.__engine.getAssetMap();
     };
-    UIElementFactory.prototype.__validateImageExists = function (imageName) {
-        var image = this.__assetMap.get(imageName);
-        if (!image) {
-            validator.throw(this, 'validateImageExists', `No image corresponding to ${imageName} was found`);
-        }
-        return image;
-    };
     // public methods
-    UIElementFactory.prototype.create = function (elementString, imageName) {
+    UIElementFactory.prototype.create = function (elementString) {
         var uiElement = this.__entityFactory.create(elementString, [this.__engine]);
         validator.validateInstanceType(this, uiElement, 'ui-element');
         uiElement.addComponent(this.__componentFactory.createFromPrimitive(new Text('')));
         // configure element image
-        if (imageName) {
-            var image = this.__validateImageExists(imageName);
-            var displaySettings = new ImageDisplaySettings('none', null, null, image.width, image.height, image.width, image.height);
-            uiElement.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
-        }
+        var displaySettings = new ImageDisplaySettings('none');
+        uiElement.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(null, displaySettings)));
         // configure display layers
         uiElement.forEachComponent(function (key, component) {
             if (component.isDrawable) {

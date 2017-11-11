@@ -4,12 +4,12 @@
     ImageDisplaySettings.prototype.constructor = ImageDisplaySettings;
     function ImageDisplaySettings(displayLayer, sourceX, sourceY, sourceWidth, sourceHeight, destWidth, destHeight) {
         DisplaySettings.call(this, displayLayer);
-        this.sourceX = sourceX;
-        this.sourceY = sourceY;
-        this.sourceWidth = sourceWidth;
-        this.sourceHeight = sourceHeight;
-        this.destWidth = destWidth;
-        this.destHeight = destHeight;
+        this.sourceX = sourceX || null;
+        this.sourceY = sourceY || null;
+        this.sourceWidth = sourceWidth || 0;
+        this.sourceHeight = sourceHeight || 0;
+        this.destWidth = destWidth || 0;
+        this.destHeight = destHeight || 0;
     };
 
     return ImageDisplaySettings;

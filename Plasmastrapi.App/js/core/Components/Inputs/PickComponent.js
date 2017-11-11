@@ -30,6 +30,9 @@ function (Component) {
     PickComponent.prototype.__onunload = function () {
         this.__handle.reset();
     };
+    PickComponent.prototype.__ondisable = function () {
+        this.__handle.reset();
+    };
 
 	return PickComponent;
 });

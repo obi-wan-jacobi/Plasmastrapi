@@ -82,18 +82,14 @@ function (System, Dictionary, utils) {
                 return window.setTimeout(callback, 1000 / 60);
             };
         function loop(tNow) {
-            // stop the loop if loopOnce returned false
+            // Stop the loop if loopOnce returns false
             if (isRunning) {
-                //try {
-                    var deltaMs = tNow - tPrevious;
-                    if (deltaMs < 2000) {
-                        isRunning = self.loopOnce(deltaMs);
-                    }
-                    tPrevious = tNow;
-                    raf(loop);
-                //} catch (ex) {
-                //    throw ex;
-                //}
+                var deltaMs = tNow - tPrevious;
+                if (deltaMs < 2000) {
+                    isRunning = self.loopOnce(deltaMs);
+                }
+                tPrevious = tNow;
+                raf(loop);
             }
         };
         loop(tPrevious);
@@ -115,9 +111,11 @@ function (System, Dictionary, utils) {
         var isLoopStable = true;
         this.__systems.forEach(function (key, system) {
             isLoopStable = system.loopOnce(deltaMs);
-            return isLoopStable;
+            if (!isLoopStable) {
+                return 'break';
+            }
         }, this);
-        return isLoopStable === undefined || isLoopStable ? true : false;
+        return isLoopStable;
     };
     Engine.prototype.start = function () {
         this.load();

@@ -53,6 +53,7 @@ function (System, LinkedList, Position) {
             'keydown': new LinkedList('keyboard-event'),
             'keyup': new LinkedList('keyboard-event')
         };
+        return true;
     };
 
     return KeyboardSystem;

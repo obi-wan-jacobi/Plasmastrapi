@@ -7,6 +7,7 @@ function (Scene) {
         Scene.call(this, engine);
     };
     LabScene.prototype.__oninit = function () {
+        Scene.prototype.__oninit.call(this);
         var engine = this.__engine;
         var uiElementFactory = this.__engine.getFactory('ui-element-factory');
         var labController = this.__engine.getController('lab-controller');
@@ -90,6 +91,7 @@ function (Scene) {
         labController.setDesignArea(designArea);
     };
     LabScene.prototype.__onunload = function () {
+        Scene.prototype.__onunload.call(this);
         this.__engine.getController('input-controller').setHandler();
     };
 

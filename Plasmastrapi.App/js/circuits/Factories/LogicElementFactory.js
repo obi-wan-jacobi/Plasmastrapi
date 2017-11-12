@@ -1,5 +1,5 @@
-﻿define(['factory', 'logic-element-container', 'rectangle', 'position', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
-function (Factory, LogicElementContainer, Rectangle, Position, ImageHandle, ImageDisplaySettings, utils, config) {
+﻿define(['factory', 'logic-element-container', 'position', 'image-display-settings', 'utils', 'circuits-config'],
+function (Factory, LogicElementContainer, Position, ImageDisplaySettings, utils, config) {
 
     LogicElementFactory.prototype = Object.create(Factory.prototype);
     LogicElementFactory.prototype.constructor = LogicElementFactory;
@@ -31,23 +31,25 @@ function (Factory, LogicElementContainer, Rectangle, Position, ImageHandle, Imag
     LogicElementFactory.prototype.create = function (logicElementString) {
         var logicElement = this.__circuitElementFactory.create(logicElementString);
         // add components
+        logicElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [30, 30]));
+        // configure image
         var image = this.__assetMap.get(logicElementString);
         var displaySettings = new ImageDisplaySettings(config.LogicElement.displayLayer, null, null, image.width, image.height, image.width, image.height);
-        logicElement.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
-        // add terminals
-        this.__addTerminal(logicElement, 'input-terminal', new Position(0, 35), new Position(0, -20));
-        this.__addTerminal(logicElement, 'output-terminal', new Position(0, -35), new Position(0, 20));
-        this.__container.add(logicElement);
+        logicElement.addComponent(this.__componentFactory.createFromDataHandle('image-handle', [image, displaySettings]));
         // configure pick action
-        logicElement.getComponent('polygon-component').setData(new Rectangle(30, 30));
-        var labController = this.__engine.getController('lab-controller');
-        var pickComponent = logicElement.getComponent('pick-component');
+        var pickComponent = this.__componentFactory.createFromDataHandle('pick-handle', []);
         // *** closures ***
+        var labController = this.__engine.getController('lab-controller');
         function setTarget() {
             labController.setTarget(logicElement);
         };
         pickComponent.addEventListener('onpick', logicElement, setTarget);
         pickComponent.addEventListener('ondrag', logicElement, setTarget);
+        logicElement.addComponent(pickComponent);
+        // add terminals
+        this.__addTerminal(logicElement, 'input-terminal', new Position(0, 35), new Position(0, -20));
+        this.__addTerminal(logicElement, 'output-terminal', new Position(0, -35), new Position(0, 20));
+        this.__container.add(logicElement);
         return logicElement;
     };
     LogicElementFactory.prototype.getContainer = function () {

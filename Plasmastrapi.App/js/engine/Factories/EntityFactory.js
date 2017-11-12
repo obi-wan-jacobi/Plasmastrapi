@@ -1,5 +1,5 @@
-﻿define(['factory', 'entity-container', 'pose', 'polygon', 'vertex', 'pick-handle', 'utils'],
-function (Factory, EntityContainer, Pose, Polygon, Vertex, PickHandle, utils) {
+﻿define(['factory', 'entity-container', 'utils'],
+function (Factory, EntityContainer, utils) {
 
     EntityFactory.prototype = Object.create(Factory.prototype);
     EntityFactory.prototype.constructor = EntityFactory;
@@ -18,10 +18,6 @@ function (Factory, EntityContainer, Pose, Polygon, Vertex, PickHandle, utils) {
     // public methods
     EntityFactory.prototype.create = function (entityString, args) {
         var entity = this.__emitterFactory.create(entityString, args);
-        // add components
-        entity.addComponent(this.__componentFactory.createFromPrimitive(new Pose()));
-        entity.addComponent(this.__componentFactory.createFromPrimitive(new Polygon([new Vertex()])));
-        entity.addComponent(this.__componentFactory.createFromDataHandle(new PickHandle(function () { })));
         this.__container.add(entity);
         return entity;
     };

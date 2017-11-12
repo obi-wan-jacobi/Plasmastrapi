@@ -75,15 +75,15 @@ function (System, LinkedList) {
                 pickComponent.getHandle().pick(mousePosition);
             }
         });
-        // Items that have been re-enabled are buffered to prevent their pick actions from overridding/undoing other items'
-        // pick actions.
-        // Flush the buffer here so that they are iterated over in the 'next' cycle.
-        this.__container.flushContentsBuffer();
+        var mousePosition = this.__engine.getController('input-controller').getMousePosition();
+        // Flush the buffer here so that buffered items are included in the 'next' cycle.
+        this.__container.flushStagingBuffer(mousePosition);
         this.__inputBuffer = {
             'mousemove': new LinkedList('object'),
             'mousedown': new LinkedList('object'),
             'click': new LinkedList('object'),
         };
+        return true;
     };
 
     return PickSystem;

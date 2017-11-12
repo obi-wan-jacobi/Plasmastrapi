@@ -82,6 +82,7 @@ function (System, LinkedList, Position) {
             'mouseup': new LinkedList('position'),
             'click': new LinkedList('position')
         };
+        return true;
 	};
 
 	return MouseSystem;

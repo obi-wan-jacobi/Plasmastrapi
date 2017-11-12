@@ -19,6 +19,7 @@
         var wireElement = this.__circuitElementFactory.create(wireElementString);
         utils.validator.validateInstanceType(this, wireElement, 'wire-element');
         // add components
+        wireElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', []));
         var displayLayer = config.Wire.displayLayer;
         var lineWidth = config.Wire.poweredLineWidth;
         var lineDisplaySettings = new LineDisplaySettings(displayLayer, config.Wire.noPowerLineColour, lineWidth);

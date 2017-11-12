@@ -21,7 +21,7 @@ function (Controller, utils) {
     };
     LabController.prototype.__initDesignArea = function (panel) {
         this.__designArea = panel;
-        this.__designAreaPickComponent = this.__designArea.getComponent('pick-component');
+        this.__designAreaPickComponent = this.__designArea.getOrInitComponent('pick-component');
         this.__designAreaPickComponent.addEventListener('onmouseenter', this, function () {
             this.__activate();
         });

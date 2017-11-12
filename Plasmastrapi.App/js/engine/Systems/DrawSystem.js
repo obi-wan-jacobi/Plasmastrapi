@@ -28,6 +28,8 @@ function (System) {
         this.__container.forEach(function (component) {
             component.draw(ctx);
         }, this);
+
+        return true;
     };
 
 	return DrawSystem;

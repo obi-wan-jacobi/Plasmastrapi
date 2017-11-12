@@ -1,5 +1,5 @@
-﻿define(['factory', 'image-handle', 'image-display-settings', 'utils', 'circuits-config'],
-function (Factory, ImageHandle, ImageDisplaySettings, utils, config) {
+﻿define(['factory', 'image-display-settings', 'utils', 'circuits-config'],
+function (Factory, ImageDisplaySettings, utils, config) {
 
     TerminalFactory.prototype = Object.create(Factory.prototype);
     TerminalFactory.prototype.constructor = TerminalFactory;
@@ -21,9 +21,11 @@ function (Factory, ImageHandle, ImageDisplaySettings, utils, config) {
         var terminal = this.__circuitElementFactory.create(terminalString);
         utils.validator.validateInstanceType(this, terminal, 'terminal');
         // add components
+        //terminal.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [20, 20]));
+        //terminal.addComponent(this.__componentFactory.createFromDataHandle('pick-handle', []));
         var image = this.__assetMap.get(terminalString);
         var displaySettings = new ImageDisplaySettings(config.Terminal.displayLayer, null, null, image.width, image.height, image.width, image.height);
-        terminal.addComponent(this.__componentFactory.createFromDataHandle(new ImageHandle(image, displaySettings)));
+        terminal.addComponent(this.__componentFactory.createFromDataHandle('image-handle', [image, displaySettings]));
         return terminal;
     };
     TerminalFactory.prototype.getContainer = function () { };

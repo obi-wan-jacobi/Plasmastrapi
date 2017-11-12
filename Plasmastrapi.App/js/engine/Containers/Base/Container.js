@@ -33,6 +33,9 @@ function (Emitter, Dictionary, validator) {
         this.__contents.remove(item);
         this.emit('onremove', item);
     };
+    Container.prototype.toArray = function () {
+        return this.__contents.toArray();
+    };
 
     return Container;
 });

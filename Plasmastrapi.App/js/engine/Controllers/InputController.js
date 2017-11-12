@@ -1,5 +1,5 @@
-﻿define(['controller', 'keyboard-handle', 'mouse-handle', 'utils'],
-function (Controller, KeyboardHandle, MouseHandle, utils) {
+﻿define(['controller', 'utils'],
+function (Controller, utils) {
 
     // CLASS InputController
     InputController.prototype = Object.create(Controller.prototype);
@@ -13,8 +13,8 @@ function (Controller, KeyboardHandle, MouseHandle, utils) {
     // private methods
     InputController.prototype.__oninit = function () {
         Controller.prototype.__oninit.call(this);
-        this.__keyboardComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new KeyboardHandle());
-        this.__mouseComponent = this.__engine.getFactory('component-factory').createFromDataHandle(new MouseHandle());
+        this.__keyboardComponent = this.__engine.getFactory('component-factory').createFromDataHandle('keyboard-handle', []);
+        this.__mouseComponent = this.__engine.getFactory('component-factory').createFromDataHandle('mouse-handle', []);
     };
     InputController.prototype.__onload = function () {
         Controller.prototype.__onload.call(this);

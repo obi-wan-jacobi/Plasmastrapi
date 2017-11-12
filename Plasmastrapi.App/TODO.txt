@@ -9,7 +9,10 @@ needs testing:
 - 
 
 in progress:
-- 
+- DataHandle.call(this, polygon, displaySettings, Polygon, PolygonDisplaySettings);
+- DataHandleFactory
+- DisplaySettingsFactory
+- PrimitiveFactory
 
 tech debt:
 - general

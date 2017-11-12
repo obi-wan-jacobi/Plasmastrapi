@@ -1,5 +1,5 @@
-﻿define(['entity', 'primitive', 'display-settings', 'utils'],
-function (Entity, Primitive, DisplaySettings, utils) {
+﻿define(['entity', 'primitive', 'display-settings', 'utils', 'ui-config'],
+function (Entity, Primitive, DisplaySettings, utils, config) {
 
     // CLASS UIElement
     UIElement.prototype = Object.create(Entity.prototype);
@@ -7,8 +7,13 @@ function (Entity, Primitive, DisplaySettings, utils) {
     function UIElement(engine) {
         Entity.call(this);
         this.__engine = engine;
+        this.__componentFactory = null;
     };
     // private methods
+    UIElement.prototype.__oninit = function () {
+        Entity.prototype.__oninit.call(this);
+        this.__componentFactory = this.__engine.getFactory('component-factory');
+    };
     UIElement.prototype.__validateDisplaySettingsProperty = function (displaySettings, propertyName) {
         if (!displaySettings.hasOwnProperty(propertyName)) {
             utils.validator.throw(this, 'validateDisplaySettingsProperty',
@@ -36,13 +41,13 @@ function (Entity, Primitive, DisplaySettings, utils) {
             }
         }
         var modulePrefix = utils.modules.getModuleName(baseClass);
-        var component = this.getComponent(`${modulePrefix}-component`);
+        var component = this.getOrInitComponent(`${modulePrefix}-component`);
         component.getHandle().setData(data);
     };
     UIElement.prototype.__setDisplaySettings = function (Type, argument) {
         utils.validator.validateObject(argument);
         var modulePrefix = utils.modules.getModulePrefix(Type, 'DisplaySettings');
-        var displaySettings = this.getComponent(`${modulePrefix}-component`).getDisplaySettings();
+        var displaySettings = this.getOrInitComponent(`${modulePrefix}-component`).getDisplaySettings();
         for (var propertyName in argument) {
             if (argument.hasOwnProperty(propertyName)) {
                 this.__validateDisplaySettingsProperty(displaySettings, propertyName);
@@ -51,16 +56,16 @@ function (Entity, Primitive, DisplaySettings, utils) {
         }
     };
     UIElement.prototype.__setPickData = function (pickString, fnAction) {
-        this.getComponent('pick-component').setData(fnAction);
+        this.getOrInitComponent('pick-component').setData(fnAction);
     };
     UIElement.prototype.__setImage = function (imageName) {
         var image = this.__validateImageExists(imageName);
-        var displaySettings = this.getComponent('image-component').getDisplaySettings();
+        var displaySettings = this.getOrInitComponent('image-component').getDisplaySettings();
         displaySettings.sourceWidth = image.width;
         displaySettings.sourceHeight = image.height;
         displaySettings.destWidth = image.width;
         displaySettings.destHeight = image.height;
-        this.getComponent('image-component').setData(image);
+        this.getOrInitComponent('image-component').setData(image);
     };
     // public methods
     UIElement.prototype.set = function (typeString, args) {
@@ -77,6 +82,24 @@ function (Entity, Primitive, DisplaySettings, utils) {
             return this.__setDisplaySettings(Type, args);
         }
         utils.validator.throw(this, 'set', `No module named ${typeString} was found`);
+    };
+    UIElement.prototype.getOrInitComponent = function (componentString) {
+        var component = this.getComponent(componentString);
+        if (component) {
+            return component;
+        }
+        component = utils.modules.require(componentString);
+        var modulePrefix = utils.modules.getModulePrefix(component, 'Component');
+        var DisplaySettingsType = utils.modules.requireIfExists(`${modulePrefix}-display-settings`);
+        if (DisplaySettingsType) {
+            var displayLayer = config[this.constructor.name] ? config[this.constructor.name].displayLayer : 'none';
+            var displaySettings = new DisplaySettingsType(displayLayer);
+            component = this.__componentFactory.createFromDataHandle(`${modulePrefix}-handle`, [null, displaySettings]);
+        } else {
+            component = this.__componentFactory.createFromDataHandle(`${modulePrefix}-handle`, []);
+        }
+        this.addComponent(component);
+        return component;
     };
     UIElement.prototype.contains = function (entity) {
         utils.validator.validateInstanceType(this, entity, 'entity');

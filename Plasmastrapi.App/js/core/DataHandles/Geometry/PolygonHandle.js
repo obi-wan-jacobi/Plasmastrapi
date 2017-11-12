@@ -37,6 +37,10 @@ function (DataHandle, Polygon, PolygonDisplaySettings, PoseHandle, Position, val
             newPosition = newPosition.getPosition();
         }
         validator.validateInstanceType(this, newPosition, 'position');
+        this.__position = newPosition;
+        if (!this.__data) {
+            return;
+        }
         var polygon = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
@@ -47,7 +51,6 @@ function (DataHandle, Polygon, PolygonDisplaySettings, PoseHandle, Position, val
             polygon.vertices[i].y = (newPosition.y + templateY);
             this.__updateMinMaxValues(polygon, i);
         };
-        this.__position = newPosition;
     };
     PolygonHandle.prototype.rotate = function (newAngle) {
         var position = this.__position;

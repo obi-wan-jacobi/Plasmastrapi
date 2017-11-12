@@ -9,7 +9,7 @@ function (UIElement) {
     // private methods
     Button.prototype.__oninit = function () {
         UIElement.prototype.__oninit.call(this);
-        var pickComponent = this.getComponent('pick-component');
+        var pickComponent = this.getOrInitComponent('pick-component');
         pickComponent.addEventListener('onmouseenter', this, this.__onmouseenter);
         pickComponent.addEventListener('onmouseleave', this, this.__onmouseleave);
         pickComponent.addEventListener('onpick', this, this.__onpick);

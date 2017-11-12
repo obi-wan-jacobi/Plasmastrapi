@@ -18,6 +18,7 @@ function (Factory, validator) {
     CircuitElementFactory.prototype.create = function (elementString) {
         var circuitElement = this.__entityFactory.create(elementString);
         validator.validateInstanceType(this, circuitElement, 'circuit-element');
+        circuitElement.addComponent(this.__componentFactory.createFromPrimitive('position', []));
         return circuitElement;
     };
     CircuitElementFactory.prototype.getContainer = function () { };

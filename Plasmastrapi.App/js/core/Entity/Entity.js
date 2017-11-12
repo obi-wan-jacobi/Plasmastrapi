@@ -38,7 +38,7 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
         this.__components.add(utils.modules.getModuleName(component), component);
         component.setEntity(this);
         if (this.isLoaded) {
-            this.reload();
+            component.load();
         }
     };
     Entity.prototype.getComponent = function (componentString) {

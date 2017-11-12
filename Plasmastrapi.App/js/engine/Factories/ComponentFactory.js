@@ -1,5 +1,5 @@
-﻿define(['factory', 'dictionary', 'component-container', 'drawable-component-container', 'polygon', 'utils'],
-function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, Polygon, utils) {
+﻿define(['factory', 'dictionary', 'component-container', 'drawable-component-container', 'primitive', 'utils'],
+function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, Primitive, utils) {
 
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
@@ -38,24 +38,29 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
         }
         return component;
     };
-    ComponentFactory.prototype.createFromDataHandle = function (dataHandle) {
+    ComponentFactory.prototype.createFromDataHandle = function (dataHandleString, args) {
+        args = args || [];
+        utils.validator.validateInstanceType(this, args, 'array');
+        var DataHandleType = utils.modules.require(dataHandleString);
+        var dataHandle = new (Function.prototype.bind.apply(DataHandleType, [null].concat(args)))();
         utils.validator.validateInstanceType(this, dataHandle, 'data-handle');
         var modulePrefix = utils.modules.getModulePrefix(dataHandle, 'Handle');
         var component = this.create(`${modulePrefix}-component`, [dataHandle]);
         return component;
     };
-    ComponentFactory.prototype.createFromPrimitive = function (primitive) {
+    ComponentFactory.prototype.createFromPrimitive = function (primitiveString, args) {
+        args = args || [];
+        utils.validator.validateInstanceType(this, args, 'array');
+        var PrimitiveType = utils.modules.require(primitiveString);
+        var primitive = new (Function.prototype.bind.apply(PrimitiveType, [null].concat(args)))();
         utils.validator.validateInstanceType(this, primitive, 'primitive');
-        var modulePrefix, componentString, HandleType, DisplaySettings;
-        if (primitive instanceof Polygon) {
-            modulePrefix = 'polygon'
-        } else {
-            modulePrefix = utils.modules.getModuleName(primitive);
+        var baseClass = primitive;
+        while (Object.getPrototypeOf(baseClass).constructor.name !== Primitive.name) {
+            baseClass = Object.getPrototypeOf(baseClass);
         }
-        componentString = `${modulePrefix}-component`;
-        HandleType = utils.modules.require(`${modulePrefix}-handle`);
-        DisplaySettings = utils.modules.require(`${modulePrefix}-display-settings`);
-        var component = this.create(componentString, [new HandleType(primitive, new DisplaySettings())]);
+        var modulePrefix = utils.modules.getModuleName(baseClass);
+        var displaySettings = new (utils.modules.require(`${modulePrefix}-display-settings`))();
+        var component = this.createFromDataHandle(`${modulePrefix}-handle`, [primitive, displaySettings]);
         return component;
     };
     ComponentFactory.prototype.getContainer = function (componentString) {

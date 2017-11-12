@@ -69,6 +69,13 @@ function (Link, validator) {
             }
         });
     };
+    LinkedList.prototype.toArray = function () {
+        var result = [];
+        this.forEach(function (value) {
+            result.push(value);
+        });
+        return result;
+    };
 
     return LinkedList;
 });

@@ -75,6 +75,13 @@ function (Link, validator) {
             }
         }, this);
     };
+    Dictionary.prototype.toArray = function () {
+        var result = [];
+        this.forEach(function (key, value) {
+            result.push({ key, value });
+        });
+        return result;
+    };
 
     return Dictionary;
 });

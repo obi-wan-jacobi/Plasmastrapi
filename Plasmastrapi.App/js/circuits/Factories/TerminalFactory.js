@@ -7,6 +7,7 @@ function (Factory, ImageDisplaySettings, utils, config) {
         Factory.call(this, engine);
         this.__componentFactory = null;
         this.__circuitElementFactory = null;
+        this.__displaySettingsFactory = null;
         this.__assetMap = null;
     };
     // private methods
@@ -14,6 +15,7 @@ function (Factory, ImageDisplaySettings, utils, config) {
         Factory.prototype.__oninit.call(this);
         this.__componentFactory = this.__engine.getFactory('component-factory');
         this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
+        this.__displaySettingsFactory = this.__engine.getFactory('display-settings-factory');
         this.__assetMap = this.__engine.getAssetMap();
     };
     // public methods
@@ -24,11 +26,11 @@ function (Factory, ImageDisplaySettings, utils, config) {
         //terminal.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [20, 20]));
         //terminal.addComponent(this.__componentFactory.createFromDataHandle('pick-handle', []));
         var image = this.__assetMap.get(terminalString);
-        var displaySettings = new ImageDisplaySettings(config.Terminal.displayLayer, null, null, image.width, image.height, image.width, image.height);
+        var settings = [config.Terminal.displayLayer, null, null, image.width, image.height, image.width, image.height];
+        var displaySettings = this.__displaySettingsFactory.create('image-display-settings', settings);
         terminal.addComponent(this.__componentFactory.createFromDataHandle('image-handle', [image, displaySettings]));
         return terminal;
     };
-    TerminalFactory.prototype.getContainer = function () { };
 
     return TerminalFactory;
 });

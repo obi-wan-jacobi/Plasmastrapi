@@ -52,9 +52,6 @@ function (Factory, LogicElementContainer, Position, ImageDisplaySettings, utils,
         this.__container.add(logicElement);
         return logicElement;
     };
-    LogicElementFactory.prototype.getContainer = function () {
-        return this.__container;
-    };
 
     return LogicElementFactory;
 });

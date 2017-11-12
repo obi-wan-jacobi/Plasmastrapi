@@ -21,7 +21,6 @@ function (Factory, validator) {
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive('position', []));
         return circuitElement;
     };
-    CircuitElementFactory.prototype.getContainer = function () { };
 
     return CircuitElementFactory;
 });

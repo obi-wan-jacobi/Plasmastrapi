@@ -49,8 +49,8 @@
             'pose-handle': './core/DataHandles/Geometry/PoseHandle',
             // -- Graphics --
             'image-handle': './core/DataHandles/Graphics/ImageHandle',
-            'sprite-frame-handle': './core/DataHandles/Graphics/SpriteFrameHandle',
-            'sprite-handle': './core/DataHandles/Graphics/SpriteHandle',
+            //'sprite-frame-handle': './core/DataHandles/Graphics/SpriteFrameHandle',
+            //'sprite-handle': './core/DataHandles/Graphics/SpriteHandle',
             'text-handle': './core/DataHandles/Graphics/TextHandle',
             // -- Inputs --
             'keyboard-handle': './core/DataHandles/Inputs/KeyboardHandle',

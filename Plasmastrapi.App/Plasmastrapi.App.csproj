@@ -79,6 +79,9 @@
     <Content Include="js\core\Configuration\debug.js" />
     <Content Include="js\engine\Containers\EntityContainer.js" />
     <Content Include="js\engine\Controllers\ViewportController.js" />
+    <Content Include="js\engine\Factories\DataHandleFactory.js" />
+    <Content Include="js\engine\Factories\DisplaySettingsFactory.js" />
+    <Content Include="js\engine\Factories\PrimitiveFactory.js" />
     <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
     <Content Include="js\game\InputHandlers\LabHotkeyHandler.js" />

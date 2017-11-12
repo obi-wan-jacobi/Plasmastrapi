@@ -9,14 +9,10 @@ needs testing:
 - 
 
 in progress:
-- DataHandle.call(this, polygon, displaySettings, Polygon, PolygonDisplaySettings);
-- DataHandleFactory
-- DisplaySettingsFactory
-- PrimitiveFactory
+- bug in designer when moving out of design area while placing an element (element is not destroyed properly)
 
 tech debt:
 - general
-	- dictionaries should validate type for key as well as value
 	- run memory analysis/profiler diagnostics
 - circuits
 	- config

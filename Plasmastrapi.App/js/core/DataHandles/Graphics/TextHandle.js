@@ -1,9 +1,10 @@
-﻿define(['data-handle', 'text', 'text-display-settings'], function (DataHandle, Text, TextDisplaySettings) {
+﻿define(['data-handle'],
+function (DataHandle) {
     
     TextHandle.prototype = Object.create(DataHandle.prototype);
     TextHandle.prototype.constructor = TextHandle;
     function TextHandle(text, textDisplaySettings) {
-        DataHandle.call(this, text, textDisplaySettings, Text, TextDisplaySettings);
+        DataHandle.call(this, text, textDisplaySettings);
     };
     TextHandle.prototype.draw = function (ctx, position, orientation) {
         var textDisplaySettings = this.__displaySettings;

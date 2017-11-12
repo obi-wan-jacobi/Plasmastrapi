@@ -1,10 +1,10 @@
-﻿define(['data-handle', 'image-display-settings', 'validator'],
-function (DataHandle, ImageDisplaySettings, validator) {
+﻿define(['data-handle', 'validator'],
+function (DataHandle, validator) {
 
     ImageHandle.prototype = Object.create(DataHandle.prototype);
     ImageHandle.prototype.constructor = ImageHandle;
     function ImageHandle(image, imageDisplaySettings) {
-        DataHandle.call(this, image, imageDisplaySettings, Image, ImageDisplaySettings);
+        DataHandle.call(this, image, imageDisplaySettings);
     };
     // public methods
     ImageHandle.prototype.setData = function (data) {

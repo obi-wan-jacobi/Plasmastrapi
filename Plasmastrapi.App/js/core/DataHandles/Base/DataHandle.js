@@ -1,4 +1,5 @@
-﻿define(['utils'], function (utils) {
+﻿define(['utils'],
+function (utils) {
 
     function DataHandle(data, displaySettings) {
         this.__data = null;

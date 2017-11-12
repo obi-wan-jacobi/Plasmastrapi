@@ -1,10 +1,10 @@
-﻿define(['data-handle', 'line', 'line-display-settings', 'position', 'vertex', 'rectangle', 'core-config', 'validator'],
-function (DataHandle, Line, LineDisplaySettings, Position, Vertex, Rectangle, config, validator) {
+﻿define(['data-handle', 'position', 'vertex', 'rectangle', 'core-config'],
+function (DataHandle, Position, Vertex, Rectangle, config) {
 
     LineHandle.prototype = Object.create(DataHandle.prototype);
     LineHandle.prototype.constructor = LineHandle;
     function LineHandle(line, displaySettings) {
-        DataHandle.call(this, line, displaySettings, Line, LineDisplaySettings);
+        DataHandle.call(this, line, displaySettings);
     };
     // public prototypal variables
     LineHandle.prototype.getPosition = function () {

@@ -21,8 +21,11 @@
         // Factories
         'factory': './engine/Factories/Base/Factory',
         'component-factory': './engine/Factories/ComponentFactory',
+        'data-handle-factory': './engine/Factories/DataHandleFactory',
+        'display-settings-factory': './engine/Factories/DisplaySettingsFactory',
         'emitter-factory': './engine/Factories/EmitterFactory',
         'entity-factory': './engine/Factories/EntityFactory',
+        'primitive-factory': './engine/Factories/PrimitiveFactory',
         // Input Handlers
         'input-handler': './engine/InputHandlers/Base/InputHandler',
         'empty-handler': './engine/InputHandlers/EmptyHandler',

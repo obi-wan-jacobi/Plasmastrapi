@@ -1,10 +1,10 @@
-﻿define(['data-handle', 'pose', 'position', 'vertex', 'pose-display-settings', 'utils'],
-function (DataHandle, Pose, Position, Vertex, PoseDisplaySettings, utils) {
+﻿define(['data-handle', 'pose', 'position', 'vertex', 'utils'],
+function (DataHandle, Pose, Position, Vertex, utils) {
 
     PoseHandle.prototype = Object.create(DataHandle.prototype);
     PoseHandle.prototype.constructor = PoseHandle;
     function PoseHandle(pose, displaySettings) {
-        DataHandle.call(this, pose, displaySettings, Pose, PoseDisplaySettings);
+        DataHandle.call(this, pose, displaySettings);
     };
     PoseHandle.prototype.setData = function (data) {
         // validate data for this handle

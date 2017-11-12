@@ -5,6 +5,9 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
         Factory.call(this, engine);
+        this.__primitiveFactory = null;
+        this.__displaySettingsFactory = null;
+        this.__dataHandleFactory = null;
         this.__emitterFactory = null;
         this.__containers = new Dictionary('component-container');
         this.__drawableComponentContainer = new DrawableComponentContainer();
@@ -12,6 +15,9 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
     // private methods
     ComponentFactory.prototype.__oninit = function () {
         Factory.prototype.__oninit.call(this);
+        this.__primitiveFactory = this.__engine.getFactory('primitive-factory');
+        this.__displaySettingsFactory = this.__engine.getFactory('display-settings-factory');
+        this.__dataHandleFactory = this.__engine.getFactory('data-handle-factory');
         this.__emitterFactory = this.__engine.getFactory('emitter-factory');
     };
     ComponentFactory.prototype.__getOrInitContainer = function (componentString) {
@@ -39,10 +45,7 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
         return component;
     };
     ComponentFactory.prototype.createFromDataHandle = function (dataHandleString, args) {
-        args = args || [];
-        utils.validator.validateInstanceType(this, args, 'array');
-        var DataHandleType = utils.modules.require(dataHandleString);
-        var dataHandle = new (Function.prototype.bind.apply(DataHandleType, [null].concat(args)))();
+        var dataHandle = this.__dataHandleFactory.create(dataHandleString, args);
         utils.validator.validateInstanceType(this, dataHandle, 'data-handle');
         var modulePrefix = utils.modules.getModulePrefix(dataHandle, 'Handle');
         var component = this.create(`${modulePrefix}-component`, [dataHandle]);

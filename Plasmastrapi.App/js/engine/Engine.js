@@ -41,6 +41,9 @@ function (System, Dictionary, utils) {
         }, this);
     };
     Engine.prototype.__registerFactories = function () {
+        this.__addFactory('primitive-factory');
+        this.__addFactory('display-settings-factory');
+        this.__addFactory('data-handle-factory');
         this.__addFactory('emitter-factory');
         this.__addFactory('component-factory');
         this.__addFactory('entity-factory');

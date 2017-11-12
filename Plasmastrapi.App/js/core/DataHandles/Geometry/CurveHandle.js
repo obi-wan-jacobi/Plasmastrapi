@@ -1,10 +1,10 @@
-﻿define(['data-handle', 'curve', 'line-display-settings'],
-function (DataHandle, Curve, LineDisplaySettings) {
+﻿define(['data-handle'],
+function (DataHandle) {
 
     CurveHandle.prototype = Object.create(DataHandle.prototype);
     CurveHandle.prototype.constructor = CurveHandle;
     function CurveHandle(curve, displaySettings) {
-        DataHandle.call(this, curve, displaySettings, Curve, LineDisplaySettings);
+        DataHandle.call(this, curve, displaySettings);
     };
     CurveHandle.prototype.lineTo = function (position) {
         if (!(position instanceof Position)) {

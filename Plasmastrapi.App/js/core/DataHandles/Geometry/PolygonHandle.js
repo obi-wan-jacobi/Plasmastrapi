@@ -1,11 +1,11 @@
-﻿define(['data-handle', 'polygon', 'polygon-display-settings', 'pose-handle', 'position', 'validator'],
-function (DataHandle, Polygon, PolygonDisplaySettings, PoseHandle, Position, validator) {
+﻿define(['data-handle', 'pose-handle', 'position', 'validator'],
+function (DataHandle, PoseHandle, Position, validator) {
 
     PolygonHandle.prototype = Object.create(DataHandle.prototype);
     PolygonHandle.prototype.constructor = PolygonHandle;
     function PolygonHandle(polygon, displaySettings) {
         this.__position = new Position();
-        DataHandle.call(this, polygon, displaySettings, Polygon, PolygonDisplaySettings);
+        DataHandle.call(this, polygon, displaySettings);
     };
     PolygonHandle.prototype.__updateMinMaxValues = function (polygon, i) {
         // get min/max X and min/max Y for collision checking purposes

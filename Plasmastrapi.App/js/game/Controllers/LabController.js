@@ -52,6 +52,11 @@ function (Controller, utils) {
         this.__place(logicElement);
     };
     // public methods
+    LabController.prototype.setSpawnerButton = function (button, typeString, hotkey) {
+        button.set('pick-action', function () {
+            labController.spawn(typeString);
+        });
+    };
     LabController.prototype.setDesignArea = function (panel) {
         if (this.__designArea) {
             utils.validator.throw(this, 'setDesignArea', 'A design area element has already been set');

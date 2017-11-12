@@ -11,6 +11,7 @@ function (Controller, utils) {
         this.__designAreaPickComponent = null;
         this.__state = null;
         this.__target = null;
+        this.__hotkeys = {};
     };
     // private methods
     LabController.prototype.__oninit = function () {
@@ -25,8 +26,7 @@ function (Controller, utils) {
             this.__activate();
         });
         this.__designAreaPickComponent.addEventListener('onmouseleave', this, function () {
-            this.idle();
-            this.__activate();
+            this.__idle();
         });
     };
     LabController.prototype.__set = function (state, target) {
@@ -39,10 +39,12 @@ function (Controller, utils) {
     LabController.prototype.__activate = function () {
         if (this.__state) {
             this[`__${this.__state}`](this.__target);
+        } else {
+            this.__idle();
         }
     }
     LabController.prototype.__idle = function () {
-        this.__inputController.setHandler();
+        this.__inputController.setHandler('lab-hotkey-handler');
     };
     LabController.prototype.__place = function (logicElement) {
         this.__inputController.setHandler('placing-tool', [logicElement]);
@@ -53,9 +55,13 @@ function (Controller, utils) {
     };
     // public methods
     LabController.prototype.setSpawnerButton = function (button, typeString, hotkey) {
-        button.set('pick-action', function () {
-            labController.spawn(typeString);
-        });
+        var self = this;
+        this.__hotkeys[hotkey] = function () {
+            self.spawn(typeString);
+            button.getComponent('pick-component').getHandle().select();
+        };
+        button.set('pick-action', this.__hotkeys[hotkey]);
+
     };
     LabController.prototype.setDesignArea = function (panel) {
         if (this.__designArea) {
@@ -80,6 +86,11 @@ function (Controller, utils) {
     };
     LabController.prototype.spawn = function (logicElementString) {
         this.__set('spawn', logicElementString);
+    };
+    LabController.prototype.hotkey = function (key) {
+        if (this.__hotkeys[key]) {
+            this.__hotkeys[key]();
+        }
     };
 
     return LabController;

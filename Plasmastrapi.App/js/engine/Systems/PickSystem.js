@@ -1,5 +1,5 @@
-﻿define(['system', 'mouse-handle', 'linked-list'],
-function (System, MouseHandle, LinkedList) {
+﻿define(['system', 'linked-list'],
+function (System, LinkedList) {
 
     function InputUpdateItem(pickComponent, mousePosition) {
         this.pickComponent = pickComponent;
@@ -12,7 +12,6 @@ function (System, MouseHandle, LinkedList) {
     function PickSystem(engine) {
         System.call(this, engine);
         this.__container = null;
-        this.__mouseComponent = null;
         this.__inputBuffer = {
             'mousemove': new LinkedList('object'),
             'mousedown': new LinkedList('object'),
@@ -22,20 +21,17 @@ function (System, MouseHandle, LinkedList) {
     // private methods
     PickSystem.prototype.__oninit = function () {
         System.prototype.__oninit.call(this);
-        var componentFactory = this.__engine.getFactory('component-factory');
-        this.__container = componentFactory.getContainer('pick-component');
-        this.__mouseComponent = componentFactory.createFromDataHandle(new MouseHandle());
-        this.__mouseComponent.addEventListener('onmousemove', this, this.__buildInputEventCallback('mousemove'));
-        this.__mouseComponent.addEventListener('onmousedown', this, this.__buildInputEventCallback('mousedown'));
-        this.__mouseComponent.addEventListener('onclick', this, this.__buildInputEventCallback('click'));
+        this.__container = this.__engine.getFactory('component-factory').getContainer('pick-component');
+        var mouseComponent = this.__engine.getController('input-controller').getMouseComponent();
+        mouseComponent.addEventListener('onmousemove', this, this.__buildInputEventCallback('mousemove'));
+        mouseComponent.addEventListener('onmousedown', this, this.__buildInputEventCallback('mousedown'));
+        mouseComponent.addEventListener('onclick', this, this.__buildInputEventCallback('click'));
     };
     PickSystem.prototype.__onload = function () {
         System.prototype.__onload.call(this);
-        this.__mouseComponent.load();
     };
     PickSystem.prototype.__onunload = function () {
         System.prototype.__onunload.call(this);
-        this.__mouseComponent.unload();
     };
     PickSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
         return (function (mouseHandle) {

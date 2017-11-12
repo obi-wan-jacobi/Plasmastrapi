@@ -9,23 +9,22 @@ function (InputHandler, Position) {
         this.__pickController = this.__engine.getController('pick-controller');
         this.__labController = this.__engine.getController('lab-controller');
         this.__target = target;
-        this.__poseComponent = this.__target.getComponent('pose-component');
+        this.__targetPoseComponent = this.__target.getComponent('pose-component');
         this.__previousMousePosition = null;
         this.__targetAnchorPosition = null;
     };
     // private methods
     PlacingTool.prototype.__oninit = function () {
-        // Draw the target off-screen if its position has not been initialized (0, 0)
-        var position = this.__poseComponent.getHandle().getPosition();
-        if (position.x === 0 && position.y === 0) {
-            this.__poseComponent.getHandle().setPosition(new Position(-9999, -9999));
-        } else {
+        var position = this.__targetPoseComponent.getHandle().getPosition();
+        if (position.x !== 0 || position.y !== 0) {
             //this.__targetAnchorPosition = position;
         }
     };
     PlacingTool.prototype.__onload = function () {
         if (this.__target) {
             this.__target.getComponent('pick-component').disable();
+            var currentMousePosition = this.__engine.getController('input-controller').getMousePosition();
+            this.__targetPoseComponent.getHandle().setPosition(currentMousePosition);
             this.__target.load();
         }
     };
@@ -41,14 +40,12 @@ function (InputHandler, Position) {
     };
     PlacingTool.prototype.onkeyup = function () {
     };
-    PlacingTool.prototype.onkeypress = function () {
-    };
     PlacingTool.prototype.onenter = function () {
     };
     PlacingTool.prototype.onescape = function () {
     };
     PlacingTool.prototype.onmousemove = function (mouseHandle) {
-        if (this.__poseComponent) {
+        if (this.__targetPoseComponent) {
             var newPosition = mouseHandle.getData();
             if (this.__targetAnchorPosition && this.__previousMousePosition) {
                 this.__targetAnchorPosition.x += (newPosition.x - this.__previousMousePosition.x);
@@ -56,7 +53,7 @@ function (InputHandler, Position) {
                 newPosition = this.__targetAnchorPosition;
             }
             if (!this.__targetAnchorPosition || (this.__targetAnchorPosition && this.__previousMousePosition)) {
-                this.__poseComponent.getHandle().setPosition(newPosition);
+                this.__targetPoseComponent.getHandle().setPosition(newPosition);
             }
             this.__previousMousePosition = mouseHandle.getData();
         }
@@ -68,7 +65,7 @@ function (InputHandler, Position) {
     PlacingTool.prototype.onclick = function () {
         this.__target.getComponent('pick-component').enable();
         this.__target = null;
-        this.__poseComponent = null;
+        this.__targetPoseComponent = null;
         this.__labController.idle();
     };
     PlacingTool.prototype.dispose = function () {
@@ -76,7 +73,7 @@ function (InputHandler, Position) {
         if (this.__target) {
             this.__target.destroy();
             this.__target = null;
-            this.__poseComponent = null;
+            this.__targetPoseComponent = null;
         }
     };
 

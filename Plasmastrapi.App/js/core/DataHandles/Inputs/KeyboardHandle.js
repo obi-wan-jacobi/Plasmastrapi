@@ -6,6 +6,7 @@ function (DataHandle, Dictionary) {
     function KeyboardHandle() {
         DataHandle.call(this);
         // private variables
+        this.__keyString = null;
         this.__keysDown = [];
         this.__keyMapper = new Dictionary('string');
         this.__keyMapper.add(13, 'enter');
@@ -29,29 +30,25 @@ function (DataHandle, Dictionary) {
         }
     });
     // public methods
+    KeyboardHandle.prototype.getKeyString = function () {
+        return this.__keyString;
+    };
     KeyboardHandle.prototype.isKeyDown = function (keyChar) {
         return this.__keysDown.indexOf(keyChar) > -1 ? true : false;
     };
-    KeyboardHandle.prototype.keydown = function (keyCode) {
-        var stringFromKeyCode = String.fromCharCode(keyCode);
-        if (!stringFromKeyCode) {
-            return;
-        }
-        var keyString = this.__keyMapper.get(keyCode);
+    KeyboardHandle.prototype.keydown = function (keyboardEvent) {
+        var keyString = this.__keyMapper.get(keyboardEvent.keyCode);
         if (keyString) {
             this.__keysDown.push(keyString);
-            return keyString;
+            this.__keyString = keyString;
         } else {
-            this.__keysDown.push(stringFromKeyCode);
-            return stringFromKeyCode;
+            this.__keysDown.push(keyboardEvent.key);
+            this.__keyString = keyboardEvent.key;
         }
     };
-    KeyboardHandle.prototype.keyup = function (keyCode) {
-        if (!String.fromCharCode(keyCode)) {
-            return;
-        }
-        var idx = this.__keysDown.indexOf(String.fromCharCode(keyCode));
-        return this.__keysDown.splice(idx);
+    KeyboardHandle.prototype.keyup = function (keyboardEvent) {
+        var idx = this.__keysDown.indexOf(keyboardEvent.key);
+        this.__keyString = this.__keysDown.splice(idx, 1)[0];
     };
 
     return KeyboardHandle;

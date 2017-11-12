@@ -23,9 +23,6 @@ function (Base, validator) {
     InputHandler.prototype.onkeyup = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onkeypress = function () {
-        validator.throwMethodMustBeOverridden();
-    };
     InputHandler.prototype.onenter = function () {
         validator.throwMethodMustBeOverridden();
     };

@@ -84,16 +84,16 @@ function (System, Dictionary, utils) {
         function loop(tNow) {
             // stop the loop if loopOnce returned false
             if (isRunning) {
-                try {
+                //try {
                     var deltaMs = tNow - tPrevious;
                     if (deltaMs < 2000) {
                         isRunning = self.loopOnce(deltaMs);
                     }
                     tPrevious = tNow;
                     raf(loop);
-                } catch (ex) {
-                    throw ex;
-                }
+                //} catch (ex) {
+                //    throw ex;
+                //}
             }
         };
         loop(tPrevious);

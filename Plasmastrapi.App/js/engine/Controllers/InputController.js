@@ -36,7 +36,6 @@ function (Controller, KeyboardHandle, MouseHandle, utils) {
         // keyboard events
         this.__keyboardComponent[`${actionString}EventListener`]('onkeydown', this.__handler, this.__handler.onkeydown);
         this.__keyboardComponent[`${actionString}EventListener`]('onkeyup', this.__handler, this.__handler.onkeyup);
-        this.__keyboardComponent[`${actionString}EventListener`]('onkeypress', this.__handler, this.__handler.onkeypress);
         this.__keyboardComponent[`${actionString}EventListener`]('onenter', this.__handler, this.__handler.onenter);
         this.__keyboardComponent[`${actionString}EventListener`]('onescape', this.__handler, this.__handler.onescape);
         // mouse events
@@ -60,6 +59,12 @@ function (Controller, KeyboardHandle, MouseHandle, utils) {
         this.__handler = new (HandlerType.bind.apply(HandlerType, [null].concat(args)))();
         this.__configureHandlerEventSubscriptions('add');
         this.__handler.load();
+    };
+    InputController.prototype.getMouseComponent = function () {
+        return this.__mouseComponent;
+    };
+    InputController.prototype.getMousePosition = function () {
+        return this.__mouseComponent.getData();
     };
 
     return InputController;

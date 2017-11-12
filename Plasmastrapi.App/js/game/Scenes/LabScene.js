@@ -9,7 +9,6 @@ function (Scene) {
     LabScene.prototype.__oninit = function () {
         var engine = this.__engine;
         var uiElementFactory = this.__engine.getFactory('ui-element-factory');
-        var logicElementFactory = this.__engine.getFactory('logic-element-factory');
         var labController = this.__engine.getController('lab-controller');
 
         var stage = uiElementFactory.create('panel');
@@ -50,9 +49,7 @@ function (Scene) {
         andGateButton.set('rectangle', [30, 30]);
         andGateButton.set('text', ['[1]']);
         andGateButton.set('text-display-settings', { offset: { x: 0, y: 28 }, fontSize: 12 });
-        andGateButton.set('pick-action', function() {
-            labController.spawn('and-gate');
-        });
+        labController.setSpawnerButton(andGateButton, 'and-gate', '1');
 
         var nandGateButton = uiElementFactory.create('button');
         nandGateButton.set('image', 'nand-gate');
@@ -60,9 +57,7 @@ function (Scene) {
         nandGateButton.set('rectangle', [30, 30]);
         nandGateButton.set('text', ['[2]']);
         nandGateButton.set('text-display-settings', { offset: { x: 0, y: 28 }, fontSize: 12 });
-        nandGateButton.set('pick-action', function() {
-            labController.spawn('nand-gate');
-        });
+        labController.setSpawnerButton(nandGateButton, 'nand-gate', '2');
 
         var orGateButton = uiElementFactory.create('button')
         orGateButton.set('image', 'or-gate');
@@ -70,9 +65,7 @@ function (Scene) {
         orGateButton.set('rectangle', [30, 30]);
         orGateButton.set('text', ['[3]']);
         orGateButton.set('text-display-settings', { offset: { x: 0, y: 28 }, fontSize: 12 });
-        orGateButton.set('pick-action', function() {
-            labController.spawn('or-gate');
-        });
+        labController.setSpawnerButton(orGateButton, 'or-gate', '3');
 
         var xorGateButton = uiElementFactory.create('button');
         xorGateButton.set('image', 'xor-gate');
@@ -80,9 +73,7 @@ function (Scene) {
         xorGateButton.set('rectangle', [30, 30]);
         xorGateButton.set('text', ['[4]']);
         xorGateButton.set('text-display-settings', { offset: { x: 0, y: 28 }, fontSize: 12 });
-        xorGateButton.set('pick-action', function() {
-            labController.spawn('xor-gate');
-        });
+        labController.setSpawnerButton(xorGateButton, 'xor-gate', '4');
 
         var backNavigationButton = uiElementFactory.create('button');
         backNavigationButton.set('position', [846, 30]);
@@ -96,8 +87,10 @@ function (Scene) {
         var designArea = uiElementFactory.create('panel');
         designArea.set('position', [450, 380]);
         designArea.set('rectangle', [900, 640]);
-
         labController.setDesignArea(designArea);
+    };
+    LabScene.prototype.__onunload = function () {
+        this.__engine.getController('input-controller').setHandler();
     };
 
     return LabScene;

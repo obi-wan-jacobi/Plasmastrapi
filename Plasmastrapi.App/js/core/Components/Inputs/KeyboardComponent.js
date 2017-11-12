@@ -11,14 +11,12 @@ function (Component) {
         this.registerEvents(
             'onkeydown',
             'onkeyup',
-            'onkeypress',
             'onenter',
             'onescape'
         );
         // inject event callbacks into handle
         this.__attachEventTriggerToHandleMethod('keydown', 'onkeydown');
         this.__attachEventTriggerToHandleMethod('keyup', 'onkeyup');
-        //this.__attachEventTriggerToHandleMethod('keypress', 'onkeypress');
         //this.__attachEventTriggerToHandleMethod('enter', 'onenter');
         //this.__attachEventTriggerToHandleMethod('escape', 'onescape');
     };

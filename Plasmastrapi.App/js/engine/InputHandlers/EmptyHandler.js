@@ -18,8 +18,6 @@ function (InputHandler) {
     };
     EmptyHandler.prototype.onkeyup = function () {
     };
-    EmptyHandler.prototype.onkeypress = function () {
-    };
     EmptyHandler.prototype.onenter = function () {
     };
     EmptyHandler.prototype.onescape = function () {

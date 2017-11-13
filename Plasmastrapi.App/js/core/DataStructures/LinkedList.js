@@ -63,7 +63,7 @@ function (Link, validator) {
         });
     };
     LinkedList.prototype.contains = function(value) {
-        return this.__forEachLink(function (ownedvalue) {
+        return this.forEach(function (ownedvalue) {
             if (ownedvalue === value) {
                 return true;
             }

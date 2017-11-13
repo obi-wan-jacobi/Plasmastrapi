@@ -22,13 +22,20 @@ function (Controller, utils) {
     LabController.prototype.__initDesignArea = function (panel) {
         this.__designArea = panel;
         this.__designAreaPickComponent = this.__designArea.getOrInitComponent('pick-component');
-        this.__designAreaPickComponent.addEventListener('onmouseenter', this, function () {
-            this.__activate();
-        });
-        this.__designAreaPickComponent.addEventListener('onmouseleave', this, function () {
-            this.__idle();
-        });
+        this.__designAreaPickComponent.addEventListener('onmouseenter', this, this.__activate);
+        this.__designAreaPickComponent.addEventListener('onmouseleave', this, this.__deactivate);
     };
+    LabController.prototype.__activate = function () {
+        if (!this.__state) {
+            return this.__deactivate();
+        }
+        this[`__${this.__state}`](this.__target);
+    }
+    LabController.prototype.__deactivate = function () {
+        this.__state = 'idle';
+        this.__target = null;
+        this.__activate();
+    }
     LabController.prototype.__set = function (state, target) {
         this.__state = state;
         this.__target = target;
@@ -36,13 +43,6 @@ function (Controller, utils) {
             this.__activate();
         }
     };
-    LabController.prototype.__activate = function () {
-        if (this.__state) {
-            this[`__${this.__state}`](this.__target);
-        } else {
-            this.__idle();
-        }
-    }
     LabController.prototype.__idle = function () {
         this.__inputController.setHandler('lab-hotkey-handler');
     };

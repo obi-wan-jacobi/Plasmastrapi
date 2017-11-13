@@ -9,7 +9,7 @@ needs testing:
 - 
 
 in progress:
-- bug in designer when moving out of design area while placing an element (element is not destroyed properly)
+- 
 
 tech debt:
 - general

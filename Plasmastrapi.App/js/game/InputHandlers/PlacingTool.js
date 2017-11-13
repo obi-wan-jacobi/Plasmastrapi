@@ -26,9 +26,8 @@ function (InputHandler, Position) {
         }
     };
     PlacingTool.prototype.__onunload = function () {
-        if (this.__target) {
-            this.__target.unload();
-        }
+        this.__target = null;
+        this.__targetPoseComponent = null;
     };
     // public methods
     PlacingTool.prototype.onkeydown = function () {
@@ -53,12 +52,11 @@ function (InputHandler, Position) {
         this.__labController.idle();
     };
     PlacingTool.prototype.dispose = function () {
-        this.unload();
         if (this.__target) {
-            this.__target.destroy();
-            this.__target = null;
-            this.__targetPoseComponent = null;
+            this.__labController.getDesignArea().confine(this.__target);
+            this.__target.getComponent('pick-component').enable();
         }
+        this.unload();
     };
 
     return PlacingTool;

@@ -76,7 +76,7 @@ function (Scene) {
         buttonHighlighter.set('position', [0, 0]);
         buttonHighlighter.set('rectangle', [0, 0], { strokeStyle: '#33BBFF', lineWidth: 2 })
 
-        function setButtonOnSelectAction(button) {
+        function initButtonOnSelectHighlighting(button) {
             var pickComponent = button.getComponent('pick-component');
             pickComponent.addEventListener('onselect', buttonHighlighter, function () {
                 var buttonPosition = button.getComponent('pose-component').getHandle().getPosition();
@@ -88,10 +88,10 @@ function (Scene) {
             });
         };
 
-        setButtonOnSelectAction(andGateButton);
-        setButtonOnSelectAction(nandGateButton);
-        setButtonOnSelectAction(orGateButton);
-        setButtonOnSelectAction(xorGateButton);
+        initButtonOnSelectHighlighting(andGateButton);
+        initButtonOnSelectHighlighting(nandGateButton);
+        initButtonOnSelectHighlighting(orGateButton);
+        initButtonOnSelectHighlighting(xorGateButton);
 
         var backNavigationButton = uiElementFactory.create('button');
         backNavigationButton.set('position', [846, 30]);

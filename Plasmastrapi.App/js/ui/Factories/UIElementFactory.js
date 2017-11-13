@@ -14,8 +14,8 @@ function (Factory, EntityFactory, validator) {
     };
     // public methods
     UIElementFactory.prototype.create = function (elementString) {
+        validator.validateClassType(this, elementString, 'ui-element');
         var uiElement = this.__entityFactory.create(elementString, [this.__engine]);
-        validator.validateInstanceType(this, uiElement, 'ui-element');
         return uiElement;
     };
     UIElementFactory.prototype.getContainer = function () { };

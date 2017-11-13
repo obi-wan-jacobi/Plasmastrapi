@@ -16,8 +16,8 @@ function (Factory, validator) {
     };
     // public methods
     CircuitElementFactory.prototype.create = function (elementString) {
+        validator.validateClassType(this, elementString, 'circuit-element');
         var circuitElement = this.__entityFactory.create(elementString);
-        validator.validateInstanceType(this, circuitElement, 'circuit-element');
         circuitElement.addComponent(this.__componentFactory.createFromPrimitive('position', []));
         return circuitElement;
     };

@@ -16,8 +16,8 @@
     };
     // public methods
     WireFactory.prototype.create = function (wireElementString, tailElement, headElement) {
+        utils.validator.validateClassType(this, wireElementString, 'wire-element');
         var wireElement = this.__circuitElementFactory.create(wireElementString);
-        utils.validator.validateInstanceType(this, wireElement, 'wire-element');
         // add components
         wireElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', []));
         var displayLayer = config.Wire.displayLayer;
@@ -32,6 +32,7 @@
     };
     WireFactory.prototype.createTerminalWire = function (terminal, wireAnchorPositionOffset) {
         utils.validator.validateInstanceType(this, terminal, 'terminal');
+        utils.validator.validateInstanceType(this, wireAnchorPositionOffset, 'position');
         var wireAnchor = this.__circuitElementFactory.create('wire-anchor');
         wireAnchor.follow(terminal, wireAnchorPositionOffset);
         return this.create('terminal-wire', wireAnchor, terminal);

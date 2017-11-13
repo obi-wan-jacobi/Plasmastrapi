@@ -36,6 +36,7 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
     };
     // public methods
     ComponentFactory.prototype.create = function (componentString, args) {
+        utils.validator.validateClassType(this, componentString, 'component');
         var container = this.__getOrInitContainer(componentString);
         var component = this.__emitterFactory.create(componentString, args);
         container.add(component);

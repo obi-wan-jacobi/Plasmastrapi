@@ -29,6 +29,7 @@ function (Factory, LogicElementContainer, Position, ImageDisplaySettings, utils,
     };
     // public methods
     LogicElementFactory.prototype.create = function (logicElementString) {
+        utils.validator.validateClassType(this, logicElementString, 'logic-element');
         var logicElement = this.__circuitElementFactory.create(logicElementString);
         // add components
         logicElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [30, 30]));

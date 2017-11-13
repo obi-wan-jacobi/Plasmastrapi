@@ -14,6 +14,7 @@ function (Factory, utils) {
     };
     // public methods
     EntityFactory.prototype.create = function (entityString, args) {
+        utils.validator.validateClassType(this, entityString, 'entity');
         var entity = this.__emitterFactory.create(entityString, args);
         this.__container.add(entity);
         return entity;

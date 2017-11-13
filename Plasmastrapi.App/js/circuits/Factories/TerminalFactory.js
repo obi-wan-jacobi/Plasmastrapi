@@ -20,8 +20,8 @@ function (Factory, ImageDisplaySettings, utils, config) {
     };
     // public methods
     TerminalFactory.prototype.create = function (terminalString) {
+        utils.validator.validateClassType(this, terminalString, 'terminal');
         var terminal = this.__circuitElementFactory.create(terminalString);
-        utils.validator.validateInstanceType(this, terminal, 'terminal');
         // add components
         //terminal.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [20, 20]));
         //terminal.addComponent(this.__componentFactory.createFromDataHandle('pick-handle', []));

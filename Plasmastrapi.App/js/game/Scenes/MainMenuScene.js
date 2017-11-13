@@ -11,11 +11,10 @@ function (Scene) {
         var labNavigationButton = engine.getFactory('ui-element-factory').create('button');
         labNavigationButton.set('position', [750, 200]);
         labNavigationButton.set('rectangle', [100, 30]);
-        labNavigationButton.set('text', ['Play']);
-        labNavigationButton.set('text-display-settings', { offset: { x: 0, y: 7 } });
-        labNavigationButton.set('pick-action', function () {
+        labNavigationButton.set('text', ['Play'], { offset: { x: 0, y: 7 } });
+        labNavigationButton.set('pick-action', [function () {
             engine.getController('scene-controller').setScene('lab-scene');
-        });
+        }]);
     };
 
     return MainMenuScene;

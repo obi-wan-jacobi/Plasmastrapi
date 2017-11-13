@@ -8,23 +8,25 @@ function (Component) {
 		// inherits from
         Component.call(this, pickHandle);
         // events
-		this.registerEvents(
+        this.registerEvents(
+            'onpoke',
             'onpick',
+            'ondrag',
             'onselect',
             'ondeselect',
             'onmouseenter',
             'onhover',
-            'onmouseleave',
-            'ondrag'
+            'onmouseleave'
         );
         // inject event callbacks into handle
+        this.__attachEventTriggerToHandleMethod('poke', 'onpoke');
         this.__attachEventTriggerToHandleMethod('pick', 'onpick');
+        this.__attachEventTriggerToHandleMethod('drag', 'ondrag');
         this.__attachEventTriggerToHandleMethod('select', 'onselect');
         this.__attachEventTriggerToHandleMethod('deselect', 'ondeselect');
         this.__attachEventTriggerToHandleMethod('mouseenter', 'onmouseenter');
         this.__attachEventTriggerToHandleMethod('hover', 'onhover');
         this.__attachEventTriggerToHandleMethod('mouseleave', 'onmouseleave');
-        this.__attachEventTriggerToHandleMethod('drag', 'ondrag');
     };
     // private methods
     PickComponent.prototype.__onunload = function () {

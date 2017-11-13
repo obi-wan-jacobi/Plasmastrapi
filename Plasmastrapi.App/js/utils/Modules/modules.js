@@ -43,7 +43,9 @@
             if (mode === 'strict') {
                 validator.throw(this, 'require', `No module named \'${moduleName}\' could be found`);
             } else {
-                logging.info(this, 'requireIfExists', `No module named \'${moduleName}\' could be found`);
+                if (config.isInfoLoggingActiveOnFailedRequires) {
+                    logging.info(this, 'requireIfExists', `No module named \'${moduleName}\' could be found`);
+                }
             }
         }
         return module;

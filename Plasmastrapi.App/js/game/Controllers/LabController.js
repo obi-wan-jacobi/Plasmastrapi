@@ -12,6 +12,7 @@ function (Controller, utils) {
         this.__state = null;
         this.__target = null;
         this.__hotkeys = {};
+        this.__activeSelection = null;
     };
     // private methods
     LabController.prototype.__oninit = function () {
@@ -44,6 +45,10 @@ function (Controller, utils) {
         }
     };
     LabController.prototype.__idle = function () {
+        if (this.__activeSelection) {
+            this.__activeSelection.deselect();
+            this.__activeSelection = null;
+        }
         this.__inputController.setHandler('lab-hotkey-handler');
     };
     LabController.prototype.__place = function (logicElement) {
@@ -58,9 +63,10 @@ function (Controller, utils) {
         var self = this;
         this.__hotkeys[hotkey] = function () {
             self.spawn(typeString);
-            button.getComponent('pick-component').getHandle().select();
+            self.__activeSelection = button.getComponent('pick-component').getHandle();
+            self.__activeSelection.select();
         };
-        button.set('pick-action', this.__hotkeys[hotkey]);
+        button.set('pick-action', [this.__hotkeys[hotkey]]);
 
     };
     LabController.prototype.setDesignArea = function (panel) {

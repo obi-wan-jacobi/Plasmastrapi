@@ -49,23 +49,32 @@ function (DataHandle, validator) {
         this.__isSelected = false;
         this.__hoverPosition = null;
     };
-    PickHandle.prototype.setPickAction = function (fnPickAction) {
-        validator.validateFunction(fnPickAction);
-        this.__fnPickAction = fnPickAction;
+    PickHandle.prototype.poke = function () {
+        this.__isPoked = true;
     };
     PickHandle.prototype.pick = function (position) {
         return this.__fnPickAction(position);
     };
-    PickHandle.prototype.setDragAction = function (fnDragAction) {
-        validator.validateFunction(fnDragAction);
-        this.__fnDragAction = fnDragAction;
+    PickHandle.prototype.setPickAction = function (fnPickAction) {
+        validator.validateFunction(fnPickAction);
+        this.__fnPickAction = fnPickAction;
     };
     PickHandle.prototype.drag = function (position) {
         this.__isPoked = false;
         return this.__fnDragAction(position);
     };
-    PickHandle.prototype.poke = function () {
-        this.__isPoked = true;
+    PickHandle.prototype.setDragAction = function (fnDragAction) {
+        validator.validateFunction(fnDragAction);
+        this.__fnDragAction = fnDragAction;
+    };
+    PickHandle.prototype.select = function () {
+        this.__isSelected = true;
+    };
+    PickHandle.prototype.deselect = function () {
+        this.__isSelected = false;
+    };
+    PickHandle.prototype.mouseenter = function () {
+        this.__isHovered = true;
     };
     PickHandle.prototype.hover = function (position) {
         this.__hoverPosition = position;
@@ -81,19 +90,10 @@ function (DataHandle, validator) {
             this.mouseleave();
         }
     };
-    PickHandle.prototype.mouseenter = function () {
-        this.__isHovered = true;
-    };
     PickHandle.prototype.mouseleave = function () {
         this.__isPoked = false;
         this.__isHovered = false;
         this.__hoverPosition = null;
-    };
-    PickHandle.prototype.select = function () {
-        this.__isSelected = true;
-    };
-    PickHandle.prototype.deselect = function () {
-        this.__isSelected = false;
     };
 
     return PickHandle;

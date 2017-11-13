@@ -27,9 +27,8 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
         }
         return image;
     };
-    UIElement.prototype.__setData = function (DataType, args) {
-        args = args || [];
-        utils.validator.validateInstanceType(this, args, 'array');
+    UIElement.prototype.__setData = function (typeString, args) {
+        var DataType = utils.modules.require(typeString);
         var data = new (DataType.bind.apply(DataType, [null].concat(args)))();
         var baseClass = data;
         if (Object.getPrototypeOf(data).constructor.name === (function () { }).constructor.name) {
@@ -44,10 +43,9 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
         var component = this.getOrInitComponent(`${modulePrefix}-component`);
         component.getHandle().setData(data);
     };
-    UIElement.prototype.__setDisplaySettings = function (Type, argument) {
+    UIElement.prototype.__setDisplaySettings = function (typeString, argument) {
         utils.validator.validateObject(argument);
-        var modulePrefix = utils.modules.getModulePrefix(Type, 'DisplaySettings');
-        var displaySettings = this.getOrInitComponent(`${modulePrefix}-component`).getDisplaySettings();
+        var displaySettings = this.getOrInitComponent(`${typeString}-component`).getDisplaySettings();
         for (var propertyName in argument) {
             if (argument.hasOwnProperty(propertyName)) {
                 this.__validateDisplaySettingsProperty(displaySettings, propertyName);
@@ -68,20 +66,21 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
         this.getOrInitComponent('image-component').setData(image);
     };
     // public methods
-    UIElement.prototype.set = function (typeString, args) {
+    UIElement.prototype.set = function (typeString, args, displaySettingsPartial) {
+        args = args || [];
+        utils.validator.validateInstanceType(this, args, 'array');
         if (typeString.includes('pick')) {
-            return this.__setPickData(typeString, args);
+            return this.__setPickData(typeString, args[0]);
         }
         if (typeString === 'image') {
-            return this.__setImage(args);
+            return this.__setImage(args[0]);
         }
-        var Type = utils.modules.require(typeString);
-        if (Type.prototype instanceof Primitive) {
-            return this.__setData(Type, args);
-        } else if (Type.prototype instanceof DisplaySettings) {
-            return this.__setDisplaySettings(Type, args);
+        if (args) {
+            this.__setData(typeString, args);
         }
-        utils.validator.throw(this, 'set', `No module named ${typeString} was found`);
+        if (displaySettingsPartial) {
+            this.__setDisplaySettings(typeString, displaySettingsPartial);
+        }
     };
     UIElement.prototype.getOrInitComponent = function (componentString) {
         var component = this.getComponent(componentString);

@@ -2,6 +2,7 @@
 
     var $ = {};
 
+    // *** modules ***
     $.nativeTypes = {
         'array': Array,
         'image': Image,
@@ -10,6 +11,9 @@
         'object': Object,
         'string': String
     };
+
+    $.isInfoLoggingActiveOnFailedRequires = false;
+    // *** /modules ***
 
     return $;
 });

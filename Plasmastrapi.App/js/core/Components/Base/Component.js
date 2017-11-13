@@ -9,8 +9,17 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         if (dataHandle) {
             utils.validator.validateInstanceType(this, dataHandle, `${modulePrefix}-handle`);
         } else {
+            var primitive, displaySettings;
             var HandleType = utils.modules.require(`${modulePrefix}-handle`);
-            dataHandle = new HandleType();
+            var PrimitiveType = utils.modules.requireIfExists(`${modulePrefix}`);
+            if (PrimitiveType) {
+                primitive = new PrimitiveType();
+            }
+            var DisplaySettingsType = utils.modules.requireIfExists(`${modulePrefix}-display-settings`);
+            if (DisplaySettingsType) {
+                displaySettings = new DisplaySettingsType();
+            }
+            dataHandle = new HandleType(primitive, displaySettings);
         }
         // private variables
         this.__entity = null;

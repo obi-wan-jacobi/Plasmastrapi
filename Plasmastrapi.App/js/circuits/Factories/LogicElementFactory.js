@@ -38,7 +38,7 @@ function (Factory, LogicElementContainer, Position, ImageDisplaySettings, utils,
         var displaySettings = new ImageDisplaySettings(config.LogicElement.displayLayer, null, null, image.width, image.height, image.width, image.height);
         logicElement.addComponent(this.__componentFactory.createFromDataHandle('image-handle', [image, displaySettings]));
         // configure pick action
-        var pickComponent = this.__componentFactory.createFromDataHandle('pick-handle', []);
+        var pickComponent = this.__componentFactory.create('pick-component');
         // *** closures ***
         var labController = this.__engine.getController('lab-controller');
         function setTarget() {

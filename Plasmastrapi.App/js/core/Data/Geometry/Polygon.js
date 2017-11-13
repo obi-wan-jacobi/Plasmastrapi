@@ -8,7 +8,7 @@ function (Primitive, Vertex, validator) {
         if (vertices) {
             validator.validateInstanceType(this, vertices, 'vertex');
         }
-        this.vertices = vertices;
+        this.vertices = vertices || [];
     };
     Polygon.prototype.clone = function () {
         var clonedVertices = [];

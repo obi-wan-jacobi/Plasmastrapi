@@ -59,15 +59,14 @@
         }
     };
 
-    validator.isClassOfType = function (classToValidateString, classString) {
-        var ClassToValidate = modules.require(classToValidateString);
-        var Class = modules.require(classString);
-        return (ClassToValidate.prototype instanceof Class);
+    validator.isClassOfType = function (classString, typeString) {
+        var ClassToValidate = modules.require(classString);
+        return this.isInstanceOfType(ClassToValidate.prototype, typeString);
     };
 
-    validator.validateClassType = function (referer, classToValidateString, classString) {
-        if (!this.isClassOfType(classToValidateString, classString)) {
-            this.throw(referer, 'validateInstanceType', `${classToValidateString} must inherit from ${classString}`);
+    validator.validateClassType = function (referer, classString, typeString) {
+        if (!this.isClassOfType(classString, typeString)) {
+            this.throw(referer, 'validateInstanceType', `${classString} must inherit from ${typeString}`);
         }
     };
 

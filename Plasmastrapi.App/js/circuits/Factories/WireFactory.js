@@ -19,7 +19,7 @@
         utils.validator.validateClassType(this, wireElementString, 'wire-element');
         var wireElement = this.__circuitElementFactory.create(wireElementString);
         // add components
-        wireElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', []));
+        wireElement.addComponent(this.__componentFactory.create('polygon-component'));
         var displayLayer = config.Wire.displayLayer;
         var lineWidth = config.Wire.poweredLineWidth;
         var lineDisplaySettings = new LineDisplaySettings(displayLayer, config.Wire.noPowerLineColour, lineWidth);

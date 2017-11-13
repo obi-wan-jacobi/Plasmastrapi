@@ -57,12 +57,7 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
         utils.validator.validateInstanceType(this, args, 'array');
         var PrimitiveType = utils.modules.require(primitiveString);
         var primitive = new (Function.prototype.bind.apply(PrimitiveType, [null].concat(args)))();
-        utils.validator.validateInstanceType(this, primitive, 'primitive');
-        var baseClass = primitive;
-        while (Object.getPrototypeOf(baseClass).constructor.name !== Primitive.name) {
-            baseClass = Object.getPrototypeOf(baseClass);
-        }
-        var modulePrefix = utils.modules.getModuleName(baseClass);
+        var modulePrefix = utils.modules.getBasePrimitiveModuleName(primitiveString);
         var displaySettings = new (utils.modules.require(`${modulePrefix}-display-settings`))();
         var component = this.createFromDataHandle(`${modulePrefix}-handle`, [primitive, displaySettings]);
         return component;

@@ -30,6 +30,19 @@
         return this.getModulePrefix(instanceOrType, null);
     };
 
+    modules.getBasePrimitiveModuleName = function (primitiveString) {
+        var validator = require('validator');
+        var Primitive = this.require('primitive');
+        var PrimitiveType = this.require(primitiveString);
+        var primitive = new (Function.prototype.bind.apply(PrimitiveType, [null]))();
+        validator.validateInstanceType(this, primitive, 'primitive');
+        var baseClass = primitive;
+        while (Object.getPrototypeOf(baseClass).constructor.name !== Primitive.name) {
+            baseClass = Object.getPrototypeOf(baseClass);
+        }
+        return this.getModuleName(baseClass);
+    };
+
     modules.__require = function (moduleName, mode) {
         var validator = require('validator');
         validator.validateString(moduleName);

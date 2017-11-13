@@ -44,12 +44,6 @@ function (Scene) {
         toolbar.set('position', [450, 30]);
         toolbar.set('rectangle', [900, 60]);
 
-        var buttonHighlighter = uiElementFactory.create('panel');
-
-        function onButtonSelect(button) {
-
-        };
-
         var andGateButton = uiElementFactory.create('button');
         andGateButton.set('image', ['and-gate']);
         andGateButton.set('position', [30, 25]);
@@ -77,6 +71,27 @@ function (Scene) {
         xorGateButton.set('rectangle', [30, 30]);
         xorGateButton.set('text', ['[4]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(xorGateButton, 'xor-gate', '4');
+
+        var buttonHighlighter = uiElementFactory.create('panel');
+        buttonHighlighter.set('position', [0, 0]);
+        buttonHighlighter.set('rectangle', [0, 0], { strokeStyle: '#33BBFF', lineWidth: 2 })
+
+        function setButtonOnSelectAction(button) {
+            var pickComponent = button.getComponent('pick-component');
+            pickComponent.addEventListener('onselect', buttonHighlighter, function () {
+                var buttonPosition = button.getComponent('pose-component').getHandle().getPosition();
+                buttonHighlighter.set('position', [buttonPosition.x, buttonPosition.y + 5]);
+                buttonHighlighter.set('rectangle', [40, 52]);
+            });
+            pickComponent.addEventListener('ondeselect', buttonHighlighter, function () {
+                buttonHighlighter.set('rectangle', [0, 0]);
+            });
+        };
+
+        setButtonOnSelectAction(andGateButton);
+        setButtonOnSelectAction(nandGateButton);
+        setButtonOnSelectAction(orGateButton);
+        setButtonOnSelectAction(xorGateButton);
 
         var backNavigationButton = uiElementFactory.create('button');
         backNavigationButton.set('position', [846, 30]);

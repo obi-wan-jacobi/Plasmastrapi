@@ -30,22 +30,14 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
     UIElement.prototype.__setData = function (typeString, args) {
         var DataType = utils.modules.require(typeString);
         var data = new (DataType.bind.apply(DataType, [null].concat(args)))();
-        var baseClass = data;
-        if (Object.getPrototypeOf(data).constructor.name === (function () { }).constructor.name) {
-            baseClass = function pick() { };
-        }
-        if (utils.validator.isInstanceOfType(data, 'primitive')) {
-            while (Object.getPrototypeOf(baseClass).constructor.name !== Primitive.name) {
-                baseClass = Object.getPrototypeOf(baseClass);
-            }
-        }
-        var modulePrefix = utils.modules.getModuleName(baseClass);
+        var modulePrefix = utils.modules.getBasePrimitiveModuleName(typeString);
         var component = this.getOrInitComponent(`${modulePrefix}-component`);
         component.getHandle().setData(data);
     };
     UIElement.prototype.__setDisplaySettings = function (typeString, argument) {
         utils.validator.validateObject(argument);
-        var displaySettings = this.getOrInitComponent(`${typeString}-component`).getDisplaySettings();
+        var modulePrefix = utils.modules.getBasePrimitiveModuleName(typeString);
+        var displaySettings = this.getOrInitComponent(`${modulePrefix}-component`).getDisplaySettings();
         for (var propertyName in argument) {
             if (argument.hasOwnProperty(propertyName)) {
                 this.__validateDisplaySettingsProperty(displaySettings, propertyName);

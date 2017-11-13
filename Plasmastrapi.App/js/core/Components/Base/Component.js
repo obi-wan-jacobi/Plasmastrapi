@@ -4,14 +4,13 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
     // CLASS Component
     Component.prototype = Object.create(Emitter.prototype);
     Component.prototype.constructor = Component;
-    function Component(dataHandle) {
-        // validate data handle for this component
+    function Component(/* optional */ dataHandle) {
         var modulePrefix = utils.modules.getModulePrefix(this, 'Component');
-        var HandleType = utils.modules.require(`${modulePrefix}-handle`);
-        if (!dataHandle) {
-            dataHandle = new HandleType();
-        } else {
+        if (dataHandle) {
             utils.validator.validateInstanceType(this, dataHandle, `${modulePrefix}-handle`);
+        } else {
+            var HandleType = utils.modules.require(`${modulePrefix}-handle`);
+            dataHandle = new HandleType();
         }
         // private variables
         this.__entity = null;

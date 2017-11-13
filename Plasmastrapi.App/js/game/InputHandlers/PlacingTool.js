@@ -10,21 +10,18 @@ function (InputHandler, Position) {
         this.__labController = this.__engine.getController('lab-controller');
         this.__target = target;
         this.__targetPoseComponent = this.__target.getComponent('pose-component');
-        this.__previousMousePosition = null;
-        this.__targetAnchorPosition = null;
     };
     // private methods
     PlacingTool.prototype.__oninit = function () {
         var position = this.__targetPoseComponent.getHandle().getPosition();
-        if (position.x !== 0 || position.y !== 0) {
-            //this.__targetAnchorPosition = position;
+        if (position.x === 0 && position.y === 0) {
+            var currentMousePosition = this.__engine.getController('input-controller').getMousePosition();
+            this.__targetPoseComponent.getHandle().setPosition(currentMousePosition);
         }
     };
     PlacingTool.prototype.__onload = function () {
         if (this.__target) {
             this.__target.getComponent('pick-component').disable();
-            var currentMousePosition = this.__engine.getController('input-controller').getMousePosition();
-            this.__targetPoseComponent.getHandle().setPosition(currentMousePosition);
             this.__target.load();
         }
     };
@@ -32,8 +29,6 @@ function (InputHandler, Position) {
         if (this.__target) {
             this.__target.unload();
         }
-        this.__previousMousePosition = null;
-        this.__targetAnchorPosition = null;
     };
     // public methods
     PlacingTool.prototype.onkeydown = function () {
@@ -45,18 +40,7 @@ function (InputHandler, Position) {
     PlacingTool.prototype.onescape = function () {
     };
     PlacingTool.prototype.onmousemove = function (mouseHandle) {
-        if (this.__targetPoseComponent) {
-            var newPosition = mouseHandle.getData();
-            if (this.__targetAnchorPosition && this.__previousMousePosition) {
-                this.__targetAnchorPosition.x += (newPosition.x - this.__previousMousePosition.x);
-                this.__targetAnchorPosition.y += (newPosition.y - this.__previousMousePosition.y);
-                newPosition = this.__targetAnchorPosition;
-            }
-            if (!this.__targetAnchorPosition || (this.__targetAnchorPosition && this.__previousMousePosition)) {
-                this.__targetPoseComponent.getHandle().setPosition(newPosition);
-            }
-            this.__previousMousePosition = mouseHandle.getData();
-        }
+        this.__targetPoseComponent.getHandle().setPosition(mouseHandle.getData());
     };
     PlacingTool.prototype.onmousedown = function () {
     };

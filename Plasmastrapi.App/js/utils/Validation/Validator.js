@@ -12,6 +12,20 @@
         this.throw(referer, methodName, `${referer.constructor.name} must override inherited method ${methodName}`);
     };
 
+    // checks
+    validator.isInstanceOfType = function (instance, typeString) {
+        if (typeString === 'string' || typeString === 'number') {
+            return typeof instance === typeString;
+        }
+        var Type = modules.require(typeString)
+        return instance instanceof Type;
+    };
+
+    validator.isClassOfType = function (classString, typeString) {
+        var ClassToValidate = modules.require(classString);
+        return this.isInstanceOfType(ClassToValidate.prototype, typeString);
+    };
+
     // validations
     validator.validateNotNull = function (argument) {
         if (argument === null || argument === undefined) {
@@ -28,7 +42,7 @@
     validator.validateObject = function (argument) {
         this.validateNotNull(argument);
         if (Object.getOwnPropertyNames(argument).length === 0) {
-            this.throw(this, 'validateObject', 'Argument must be a valid object');
+            this.throw(this, 'validateObject', 'Argument must be a \'non-empty\' object');
         }
     };
 
@@ -36,14 +50,6 @@
         if (typeof argument !== 'function') {
             this.throw(this, 'validateFunction', 'Argument must be a function');
         }
-    };
-
-    validator.isInstanceOfType = function (instance, typeString) {
-        if (typeString === 'string' || typeString === 'number') {
-            return typeof instance === typeString;
-        }
-        var Type = modules.require(typeString)
-        return instance instanceof Type;
     };
 
     validator.validateInstanceType = function (referer, instance, typeString) {
@@ -59,14 +65,9 @@
         }
     };
 
-    validator.isClassOfType = function (classString, typeString) {
-        var ClassToValidate = modules.require(classString);
-        return this.isInstanceOfType(ClassToValidate.prototype, typeString);
-    };
-
     validator.validateClassType = function (referer, classString, typeString) {
         if (!this.isClassOfType(classString, typeString)) {
-            this.throw(referer, 'validateInstanceType', `${classString} must inherit from ${typeString}`);
+            this.throw(referer, 'validateClassType', `${classString} must inherit from ${typeString}`);
         }
     };
 
@@ -75,15 +76,6 @@
         if (!emitter.hasEvent(event)) {
             this.throw(emitter, 'validateEventIsRegistered', `${emitter.constructor.name} has no registered \'${event}\' event`);
         }
-    };
-
-    // entity validations
-    validator.validateEntityHasComponent = function (referer, entity, componentString) {
-        var component = entity.getComponent(componentString);
-        if (!component) {
-            this.throw(referer, 'validateEntityHasComponent', `Target entity (${entity.constructor.name}) must possess a ${componentString}`);
-        }
-        return component;
     };
 
     // singleton

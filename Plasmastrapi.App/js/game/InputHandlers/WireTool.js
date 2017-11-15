@@ -63,7 +63,7 @@ function (InputHandler, validator) {
     WireTool.prototype.mouseup = function () {
     };
     WireTool.prototype.click = function () {
-        var terminal = this.__labController.getWireConnectionCandidate();
+        var terminal = this.__labController.flushTarget();
         if (terminal) {
             if (validator.isInstanceOfType(terminal, 'input-terminal')) {
                 this.__wireFactory.create('wire', this.__target, terminal);

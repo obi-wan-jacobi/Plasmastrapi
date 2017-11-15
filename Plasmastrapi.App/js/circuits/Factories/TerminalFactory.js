@@ -46,8 +46,8 @@ function (Factory, InputTerminalContainer, OutputTerminalContainer, utils, confi
         function setTarget() {
             labController.setTarget(terminal);
         };
-        function setWireConnectionCandidate() {
-            labController.setWireConnectionCandidate(terminal);
+        function storeTarget() {
+            labController.storeTarget(terminal);
         };
         function setHoverImage() {
             terminal.getComponent('image-component').setData(hoverImage);
@@ -61,7 +61,7 @@ function (Factory, InputTerminalContainer, OutputTerminalContainer, utils, confi
         };
         pickComponent.addEventListener('onpull', terminal, setTarget);
         pickComponent.addEventListener('onpick', terminal, setTarget);
-        pickComponent.addEventListener('onpet', terminal, setWireConnectionCandidate);
+        pickComponent.addEventListener('onpet', terminal, storeTarget);
         pickComponent.addEventListener('onmouseenter', terminal, setHoverImage);
         pickComponent.addEventListener('onmouseleave', terminal, revertHoverImage);
         terminal.addComponent(pickComponent);

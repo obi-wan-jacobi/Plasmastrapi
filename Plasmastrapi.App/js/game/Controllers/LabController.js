@@ -12,7 +12,6 @@ function (Controller, utils) {
         this.__state = null;
         this.__previousState = null;
         this.__target = null;
-        this.__wireConnectionCandidate = null;
         this.__hotkeys = {};
         this.__activeSelection = null;
     };
@@ -120,19 +119,15 @@ function (Controller, utils) {
             if (utils.validator.isInstanceOfType(target, 'terminal')) {
                 this.wire(target);
             }
-        } else if (this.__state === 'wire') {
-            this.setWireConnectionCandidate(target);
         }
     };
-    LabController.prototype.setWireConnectionCandidate = function (terminal) {
-        if (this.__state === 'wire') {
-            this.__wireConnectionCandidate = terminal;
-        }
+    LabController.prototype.storeTarget = function (target) {
+        this.__target = target;
     };
-    LabController.prototype.getWireConnectionCandidate = function () {
-        var wireConnectionCandidate = this.__wireConnectionCandidate;
-        this.__wireConnectionCandidate = null;
-        return wireConnectionCandidate;
+    LabController.prototype.flushTarget = function () {
+        var target = this.__target;
+        this.__target = null;
+        return target;
     };
     LabController.prototype.idle = function () {
         this.__set('idle', null);

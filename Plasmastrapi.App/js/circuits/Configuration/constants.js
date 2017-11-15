@@ -3,7 +3,7 @@
     var $ = {};
 
     $.STATES = {
-        NOPOWER: -1,
+        NO_POWER: -1,
         LOW: 0,
         HIGH: 1
     };

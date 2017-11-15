@@ -22,7 +22,7 @@ function () {
 
         'img/LogicElements/SOCs/soc-14.png',
 
-        'img/Terminals/active.png',
+        'img/Terminals/terminal-hover.png',
         'img/Terminals/input-terminal.png',
         'img/Terminals/output-terminal.png',
 

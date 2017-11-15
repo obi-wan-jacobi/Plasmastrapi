@@ -4,7 +4,7 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
     ComponentFactory.prototype = Object.create(Factory.prototype);
     ComponentFactory.prototype.constructor = ComponentFactory;
     function ComponentFactory(engine) {
-        Factory.call(this, engine);
+        Factory.call(this, engine, 'component');
         this.__primitiveFactory = null;
         this.__displaySettingsFactory = null;
         this.__dataHandleFactory = null;
@@ -36,7 +36,7 @@ function (Factory, Dictionary, ComponentContainer, DrawableComponentContainer, P
     };
     // public methods
     ComponentFactory.prototype.create = function (componentString, args) {
-        utils.validator.validateClassType(this, componentString, 'component');
+        utils.validator.validateClassType(this, componentString, this.__typeString);
         var container = this.__getOrInitContainer(componentString);
         var component = this.__emitterFactory.create(componentString, args);
         container.add(component);

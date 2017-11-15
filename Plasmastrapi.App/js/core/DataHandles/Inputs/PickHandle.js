@@ -1,16 +1,15 @@
 ﻿define(['data-handle', 'validator'],
 function (DataHandle, validator) {
 
-    var defaultDragAction = function () { };
-
     PickHandle.prototype = Object.create(DataHandle.prototype);
     PickHandle.prototype.constructor = PickHandle;
     function PickHandle(fnPickAction) {
         fnPickAction = fnPickAction || function () { };
         DataHandle.call(this, fnPickAction);
         // private variables
-        this.__fnDragAction = defaultDragAction;
+        this.__fnPickAction = fnPickAction;
         this.__isPoked = false;
+        this.__isProdded = false;
         this.__isHovered = false;
         this.__isSelected = false;
         this.__hoverPosition = null;
@@ -24,6 +23,11 @@ function (DataHandle, validator) {
         'isPoked': {
             get: function () {
                 return this.__isPoked;
+            }
+        },
+        'isProdded': {
+            get: function () {
+                return this.__isProdded;
             }
         },
         'isHovered': {
@@ -45,27 +49,43 @@ function (DataHandle, validator) {
     // public methods
     PickHandle.prototype.reset = function () {
         this.__isPoked = false;
-        this.__isHovered = false;
-        this.__isSelected = false;
-        this.__hoverPosition = null;
+        this.__isProdded = false;
+        this.unhover();
+        this.deselect();
     };
     PickHandle.prototype.poke = function () {
-        this.__isPoked = true;
+        if (this.__isHovered) {
+            this.__isPoked = true;
+        }
     };
-    PickHandle.prototype.pick = function (position) {
-        return this.__fnPickAction(position);
+    PickHandle.prototype.unpoke = function () {
+        if (!this.__isHovered) {
+            this.__isPoked = false;
+        }
+    };
+    PickHandle.prototype.prod = function () {
+        if (this.__isPoked) {
+            this.__isPoked = false;
+            this.__isProdded = true;
+        }
+    };
+    PickHandle.prototype.pull = function (position) {
+        if (this.__isProdded) {
+            this.__isProdded = false;
+        }
+    };
+    PickHandle.prototype.pet = function () {
+        // TODO
+    };
+    PickHandle.prototype.pick = function () {
+        if (this.__isHovered && this.__isProdded) {
+            this.__isProdded = false;
+            this.__fnPickAction();
+        }
     };
     PickHandle.prototype.setPickAction = function (fnPickAction) {
-        validator.validateFunction(fnPickAction);
+        validator.validateFunction(this, fnPickAction);
         this.__fnPickAction = fnPickAction;
-    };
-    PickHandle.prototype.drag = function (position) {
-        this.__isPoked = false;
-        return this.__fnDragAction(position);
-    };
-    PickHandle.prototype.setDragAction = function (fnDragAction) {
-        validator.validateFunction(fnDragAction);
-        this.__fnDragAction = fnDragAction;
     };
     PickHandle.prototype.select = function () {
         this.__isSelected = true;
@@ -82,16 +102,16 @@ function (DataHandle, validator) {
             this.mouseenter();
         }
         if (this.__isPoked) {
-            this.drag();
+            this.pull();
         }
     };
     PickHandle.prototype.unhover = function () {
         if (this.__isHovered) {
             this.mouseleave();
         }
+        this.__hoverPosition = null;
     };
     PickHandle.prototype.mouseleave = function () {
-        this.__isPoked = false;
         this.__isHovered = false;
         this.__hoverPosition = null;
     };

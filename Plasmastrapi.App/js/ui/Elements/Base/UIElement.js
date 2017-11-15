@@ -32,10 +32,10 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
         var data = new (DataType.bind.apply(DataType, [null].concat(args)))();
         var modulePrefix = utils.modules.getBasePrimitiveModuleName(typeString);
         var component = this.getOrInitComponent(`${modulePrefix}-component`);
-        component.getHandle().setData(data);
+        component.setData(data);
     };
     UIElement.prototype.__setDisplaySettings = function (typeString, argument) {
-        utils.validator.validateObject(argument);
+        utils.validator.validateObject(this, argument);
         var modulePrefix = utils.modules.getBasePrimitiveModuleName(typeString);
         var displaySettings = this.getOrInitComponent(`${modulePrefix}-component`).getDisplaySettings();
         for (var propertyName in argument) {

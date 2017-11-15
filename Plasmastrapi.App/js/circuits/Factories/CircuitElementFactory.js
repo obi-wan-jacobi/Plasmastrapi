@@ -4,7 +4,7 @@ function (Factory, validator) {
     CircuitElementFactory.prototype = Object.create(Factory.prototype);
     CircuitElementFactory.prototype.constructor = CircuitElementFactory;
     function CircuitElementFactory(engine) {
-        Factory.call(this, engine);
+        Factory.call(this, engine, 'circuit-element');
         this.__componentFactory = null;
         this.__entityFactory = null;
     };
@@ -16,7 +16,7 @@ function (Factory, validator) {
     };
     // public methods
     CircuitElementFactory.prototype.create = function (elementString) {
-        validator.validateClassType(this, elementString, 'circuit-element');
+        validator.validateClassType(this, elementString, this.__typeString);
         var circuitElement = this.__entityFactory.create(elementString);
         circuitElement.addComponent(this.__componentFactory.create('pose-component'));
         return circuitElement;

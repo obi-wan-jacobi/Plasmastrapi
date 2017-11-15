@@ -53,6 +53,10 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         };
     };
     Component.prototype.__registerComponentDependencyOnLoad = function (componentString, event, observer, callback) {
+        utils.validator.validateClassType(this, componentString, 'component');
+        utils.validator.validateInstanceType(this, event, 'string');
+        utils.validator.validateObject(this, observer);
+        utils.validator.validateFunction(this, callback);
         // *** closures ***
         var self = this;
         var fnOnLoadProxy = this.__onload || function () { };
@@ -70,7 +74,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
     };
     Component.prototype.__attachEventTriggerToHandleMethod = function (handleMethodName, event) {
         utils.validator.validateEventIsRegistered(this, event);
-        utils.validator.validateFunction(this.__handle[handleMethodName]);
+        utils.validator.validateFunction(this, this.__handle[handleMethodName]);
         var self = this;
         var fnProxy = this.__handle[handleMethodName];
         this.__handle[handleMethodName] = function () {

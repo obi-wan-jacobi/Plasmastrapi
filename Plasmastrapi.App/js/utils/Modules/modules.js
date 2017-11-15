@@ -45,7 +45,7 @@
 
     modules.__require = function (moduleName, mode) {
         var validator = require('validator');
-        validator.validateString(moduleName);
+        validator.validateInstanceType(this, moduleName, 'string');
         if (config.nativeTypes[moduleName]) {
             return config.nativeTypes[moduleName];
         }

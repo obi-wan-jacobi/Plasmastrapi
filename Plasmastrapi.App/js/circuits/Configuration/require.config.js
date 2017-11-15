@@ -8,6 +8,9 @@
         'circuit-element': './circuits/Base/CircuitElement',
         // Containers
         'logic-element-container': './circuits/Containers/LogicElementContainer',
+        'input-terminal-container': './circuits/Containers/InputTerminalContainer',
+        'output-terminal-container': './circuits/Containers/OutputTerminalContainer',
+        'wire-container': './circuits/Containers/WireContainer',
         // Factories
         'circuit-element-factory': './circuits/Factories/CircuitElementFactory',
         'logic-element-factory': './circuits/Factories/LogicElementFactory',

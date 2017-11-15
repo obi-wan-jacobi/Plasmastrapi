@@ -1,23 +1,11 @@
-define(['container'],
-function (Container) {
+define(['entity-container'],
+function (EntityContainer) {
 
     // CLASS WireContainer
-    WireContainer.prototype = Object.create(Container.prototype);
+    WireContainer.prototype = Object.create(EntityContainer.prototype);
     WireContainer.prototype.constructor = WireContainer;
     function WireContainer() {
-        Container.call(this, 'wire');
-    };
-    WireContainer.prototype.add = function (member) {
-        var isMemberAlreadyAdded = this.forEach(function (wire) {
-            if (wire.outputTerminal === member.outputTerminal && wire.inputTerminal === member.inputTerminal) {
-                return true;
-            }
-        }, this);
-        if (!isMemberAlreadyAdded) {
-            Container.prototype.add.call(this, member);
-        } else {
-            member.destroy();
-        }
+        EntityContainer.call(this, 'wire');
     };
 
     return WireContainer;

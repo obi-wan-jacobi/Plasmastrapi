@@ -1,15 +1,11 @@
-﻿define(['container'],
-function (Container) {
+﻿define(['entity-container'],
+function (EntityContainer) {
 
     // CLASS LogicElementContainer
-    LogicElementContainer.prototype = Object.create(Container.prototype);
+    LogicElementContainer.prototype = Object.create(EntityContainer.prototype);
     LogicElementContainer.prototype.constructor = LogicElementContainer;
     function LogicElementContainer() {
-        Container.call(this, 'logic-element');
-    };
-    LogicElementContainer.prototype.add = function (logicElement) {
-        Container.prototype.add.call(this, logicElement);
-        logicElement.addEventListener('ondestroy', this, this.remove.bind(this, logicElement));
+        EntityContainer.call(this, 'logic-element');
     };
 
     return LogicElementContainer;

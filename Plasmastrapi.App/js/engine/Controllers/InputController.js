@@ -7,19 +7,20 @@ function (Controller, utils) {
     function InputController(engine) {
         Controller.call(this, engine);
         this.__keyboardComponent = null;
-        this.__mouseComponent = null;
+        this.__mousePosition = null;
         this.__handler = null;
+        this.__storedHandler = null;
+        this.__isClickCycleActive = false;
     };
     // private methods
     InputController.prototype.__oninit = function () {
         Controller.prototype.__oninit.call(this);
-        this.__keyboardComponent = this.__engine.getFactory('component-factory').createFromDataHandle('keyboard-handle', []);
-        this.__mouseComponent = this.__engine.getFactory('component-factory').createFromDataHandle('mouse-handle', []);
+        this.__keyboardComponent = this.__engine.getFactory('component-factory').create('keyboard-component');
     };
     InputController.prototype.__onload = function () {
         Controller.prototype.__onload.call(this);
         this.__keyboardComponent.load();
-        this.__mouseComponent.load();
+        this.__engine.getSystem('pick-system').registerInputReceiver(this);
         if (this.__handler) {
             this.__handler.load();
         }
@@ -27,22 +28,31 @@ function (Controller, utils) {
     InputController.prototype.__onunload = function () {
         Controller.prototype.__onunload.call(this);
         this.__keyboardComponent.unload();
-        this.__mouseComponent.unload();
+        this.__engine.getSystem('pick-system').unregisterInputReceiver(this);
         if (this.__handler) {
             this.__handler.unload();
         }
     };
+    InputController.prototype.__setHandler = function (handler) {
+        if (this.__handler) {
+            this.__configureHandlerEventSubscriptions('remove');
+            this.__handler.dispose();
+        }
+        this.__handler = handler;
+        this.__configureHandlerEventSubscriptions('add');
+        this.__handler.load();
+    };
     InputController.prototype.__configureHandlerEventSubscriptions = function (actionString) {
         // keyboard events
-        this.__keyboardComponent[`${actionString}EventListener`]('onkeydown', this.__handler, this.__handler.onkeydown);
-        this.__keyboardComponent[`${actionString}EventListener`]('onkeyup', this.__handler, this.__handler.onkeyup);
-        this.__keyboardComponent[`${actionString}EventListener`]('onenter', this.__handler, this.__handler.onenter);
-        this.__keyboardComponent[`${actionString}EventListener`]('onescape', this.__handler, this.__handler.onescape);
-        // mouse events
-        this.__mouseComponent[`${actionString}EventListener`]('onmousemove', this.__handler, this.__handler.onmousemove);
-        this.__mouseComponent[`${actionString}EventListener`]('onmousedown', this.__handler, this.__handler.onmousedown);
-        this.__mouseComponent[`${actionString}EventListener`]('onmouseup', this.__handler, this.__handler.onmouseup);
-        this.__mouseComponent[`${actionString}EventListener`]('onclick', this.__handler, this.__handler.onclick);
+        this.__keyboardComponent[`${actionString}EventListener`]('onkeydown', this.__handler, this.__handler.keydown);
+        this.__keyboardComponent[`${actionString}EventListener`]('onkeyup', this.__handler, this.__handler.keyup);
+        this.__keyboardComponent[`${actionString}EventListener`]('onenter', this.__handler, this.__handler.enter);
+        this.__keyboardComponent[`${actionString}EventListener`]('onescape', this.__handler, this.__handler.escape);
+    };
+    InputController.prototype.__activate = function (actionString, argument) {
+        if (this.__handler) {
+            this.__handler[actionString](argument);
+        }
     };
     // public methods
     InputController.prototype.setHandler = function (handlerString, args) {
@@ -50,21 +60,36 @@ function (Controller, utils) {
         args = args || [];
         utils.validator.validateClassType(this, handlerString, 'input-handler');
         utils.validator.validateInstanceType(this, args, 'array');
-        if (this.__handler) {
-            this.__configureHandlerEventSubscriptions('remove');
-            this.__handler.dispose();
-        }
         var args = [this.__engine].concat(args);
         var HandlerType = utils.modules.require(handlerString);
-        this.__handler = new (HandlerType.bind.apply(HandlerType, [null].concat(args)))();
-        this.__configureHandlerEventSubscriptions('add');
-        this.__handler.load();
+        var handler = new (HandlerType.bind.apply(HandlerType, [null].concat(args)))();
+        if (this.__isClickCycleActive) {
+            this.__storedHandler = handler;
+        } else {
+            this.__setHandler(handler);
+        }
     };
-    InputController.prototype.getMouseComponent = function () {
-        return this.__mouseComponent;
+    InputController.prototype.mousemove = function (position) {
+        this.__mousePosition = position;
+        this.__activate('mousemove', position);
+    };
+    InputController.prototype.mousedown = function (position) {
+        this.__activate('mousedown', position);
+    };
+    InputController.prototype.mouseup = function (position) {
+        this.__isClickCycleActive = true;
+        this.__activate('mouseup', position);
+    };
+    InputController.prototype.click = function (position) {
+        this.__activate('click', position);
+        this.__isClickCycleActive = false;
+        if (this.__storedHandler) {
+            this.__setHandler(this.__storedHandler);
+            this.__storedHandler = null;
+        }
     };
     InputController.prototype.getMousePosition = function () {
-        return this.__mouseComponent.getData();
+        return this.__mousePosition;
     };
 
     return InputController;

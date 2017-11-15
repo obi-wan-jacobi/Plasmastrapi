@@ -5,32 +5,34 @@ function (InputHandler) {
     LabHotkeyHandler.prototype.constructor = LabHotkeyHandler;
     function LabHotkeyHandler(engine) {
         InputHandler.call(this, engine);
+        this.__labController = null;
     };
     // private methods
     LabHotkeyHandler.prototype.__oninit = function () {
+        this.__labController = this.__engine.getController('lab-controller');
     };
     LabHotkeyHandler.prototype.__onload = function () {
     };
     LabHotkeyHandler.prototype.__onunload = function () {
     };
     // public methods
-    LabHotkeyHandler.prototype.onkeydown = function (keyboardHandle) {
-        this.__engine.getController('lab-controller').hotkey(keyboardHandle.getKeyString());
+    LabHotkeyHandler.prototype.keydown = function (keyboardHandle) {
+        this.__labController.hotkey(keyboardHandle.getKeyString());
     };
-    LabHotkeyHandler.prototype.onkeyup = function (keyboardHandle) {
+    LabHotkeyHandler.prototype.keyup = function (keyboardHandle) {
         
     };
-    LabHotkeyHandler.prototype.onenter = function () {
+    LabHotkeyHandler.prototype.enter = function () {
     };
-    LabHotkeyHandler.prototype.onescape = function () {
+    LabHotkeyHandler.prototype.escape = function () {
     };
-    LabHotkeyHandler.prototype.onmousemove = function () {
+    LabHotkeyHandler.prototype.mousemove = function () {
     };
-    LabHotkeyHandler.prototype.onmousedown = function () {
+    LabHotkeyHandler.prototype.mousedown = function () {
     };
-    LabHotkeyHandler.prototype.onmouseup = function () {
+    LabHotkeyHandler.prototype.mouseup = function () {
     };
-    LabHotkeyHandler.prototype.onclick = function () {
+    LabHotkeyHandler.prototype.click = function () {
     };
     LabHotkeyHandler.prototype.dispose = function () {
     };

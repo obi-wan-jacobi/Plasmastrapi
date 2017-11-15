@@ -1,32 +1,31 @@
-﻿define(['terminal', 'validator'],
-function (Terminal, validator) {
+﻿define(['terminal', 'container', 'validator'],
+function (Terminal, Container, validator) {
 
     // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
     InputTerminal.prototype.constructor = InputTerminal;
     function InputTerminal() {
-        // inherits from
         Terminal.call(this);
-        this.__connections = [];
+        this.__connections = new Container('output-terminal');
+    };
+    // private methods
+    InputTerminal.prototype.__toggleOutputTerminalEventListening = function (outputTerminal, actionString) {
+        outputTerminal[`${actionString}EventListener`]('onstatechange', this.__parent, this.__parent.updateState);
     };
     // public methods
     InputTerminal.prototype.getConnections = function () {
         return this.__connections;
     };
     InputTerminal.prototype.addConnection = function (outputTerminal) {
-        validator.validateInstanceType(this, outputTerminal, 'output-terminal');
-        this.__connections.push(outputTerminal);
-        outputTerminal.addEventListener('onstatechange', this.__parent, this.__parent.updateState);
+        this.__connections.add(outputTerminal);
+        this.__toggleOutputTerminalEventListening(outputTerminal, 'add');
         this.__parent.updateState(outputTerminal.getState());
     };
     InputTerminal.prototype.removeConnection = function (outputTerminal) {
-        var connectionIndex = this.__connections.indexOf(outputTerminal);
-        if (!(connectionIndex >= 0)) {
-            validator.throw(this, 'removeConnection', `${outputTerminal.constructor.name} is not connected to this input terminal`);
+        if (!this.__connections.remove(outputTerminal)) {
+            validator.throw(this, 'removeConnection', `${outputTerminal.constructor.name} is not connected to this ${this.constructor.name}`);
         }
-        var terminalToDisconnect = this.__connections[connectionIndex];
-        this.__connections.splice(connectionIndex, 1);
-        terminalToDisconnect.removeEventListener('onstatechange', this.__parent, this.__parent.updateState);
+        this.__toggleOutputTerminalEventListening(outputTerminal, 'remove');
         this.__parent.updateState();
     };
     

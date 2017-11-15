@@ -10,7 +10,9 @@ function (Controller, utils) {
         this.__designArea = null;
         this.__designAreaPickComponent = null;
         this.__state = null;
+        this.__previousState = null;
         this.__target = null;
+        this.__wireConnectionCandidate = null;
         this.__hotkeys = {};
         this.__activeSelection = null;
     };
@@ -30,7 +32,11 @@ function (Controller, utils) {
         if (!this.__state) {
             return this.__deactivate();
         }
+        if (this.__state === this.__previousState) {
+            return;
+        }
         this[`__${this.__state}`](this.__target);
+        this.__previousState = this.__state;
     }
     LabController.prototype.__deactivate = function () {
         this.__state = 'idle';
@@ -58,6 +64,10 @@ function (Controller, utils) {
         var logicElement = this.__logicElementFactory.create(logicElementString);
         this.__place(logicElement);
     };
+    LabController.prototype.__wire = function (terminal) {
+        this.__target = null;
+        this.__inputController.setHandler('wire-tool', [terminal]);
+    };
     // public methods
     LabController.prototype.setSpawnerButton = function (button, typeString, hotkey) {
         var self = this;
@@ -81,17 +91,40 @@ function (Controller, utils) {
     };
     LabController.prototype.setTarget = function (target) {
         if (this.__state === 'idle') {
-            this.place(target);
+            if (utils.validator.isInstanceOfType(target, 'logic-element')) {
+                this.place(target);
+            }
+            if (utils.validator.isInstanceOfType(target, 'terminal')) {
+                this.wire(target);
+            }
+        } else if (this.__state === 'wire') {
+            this.setWireConnectionCandidate(target);
         }
+    };
+    LabController.prototype.setWireConnectionCandidate = function (terminal) {
+        if (this.__state === 'wire') {
+            this.__wireConnectionCandidate = terminal;
+        }
+    };
+    LabController.prototype.getWireConnectionCandidate = function () {
+        var wireConnectionCandidate = this.__wireConnectionCandidate;
+        this.__wireConnectionCandidate = null;
+        return wireConnectionCandidate;
     };
     LabController.prototype.idle = function () {
         this.__set('idle', null);
     };
     LabController.prototype.place = function (logicElement) {
+        utils.validator.validateInstanceType(this, logicElement, 'logic-element')
         this.__set('place', logicElement);
     };
     LabController.prototype.spawn = function (logicElementString) {
+        utils.validator.validateClassType(this, logicElementString, 'logic-element');
         this.__set('spawn', logicElementString);
+    };
+    LabController.prototype.wire = function (terminal) {
+        utils.validator.validateInstanceType(this, terminal, 'terminal');
+        this.__set('wire', terminal);
     };
     LabController.prototype.hotkey = function (key) {
         if (this.__hotkeys[key]) {

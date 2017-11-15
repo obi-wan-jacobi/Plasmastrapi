@@ -72,7 +72,9 @@
     <Content Include="js\circuits\Configuration\constants.js" />
     <Content Include="js\circuits\Configuration\debug.js" />
     <Content Include="js\circuits\Configuration\require.config.js" />
+    <Content Include="js\circuits\Containers\InputTerminalContainer.js" />
     <Content Include="js\circuits\Containers\LogicElementContainer.js" />
+    <Content Include="js\circuits\Containers\OutputTerminalContainer.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
     <Content Include="js\core\Configuration\config.js" />
     <Content Include="js\core\Configuration\constants.js" />
@@ -85,6 +87,7 @@
     <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
     <Content Include="js\game\InputHandlers\LabHotkeyHandler.js" />
+    <Content Include="js\game\InputHandlers\WireTool.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
@@ -201,7 +204,7 @@
     <Content Include="img\LogicElements\Pushswitch\pushswitch-closed.png" />
     <Content Include="img\LogicElements\Pushswitch\pushswitch-open.png" />
     <Content Include="img\LogicElements\SOCs\soc-14.png" />
-    <Content Include="img\Terminals\active.png" />
+    <Content Include="img\Terminals\terminal-hover.png" />
     <Content Include="img\Terminals\input-terminal.png" />
     <Content Include="img\Terminals\output-terminal.png" />
     <Content Include="img\Tools\Trashcan\trashcan.png" />

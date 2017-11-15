@@ -8,7 +8,7 @@ function (Base, utils) {
         this.__typeString = null;
         this.__container = null;
         if (typeString) {
-            utils.validator.validateString(typeString);
+            utils.validator.validateInstanceType(this, typeString, 'string');
             this.__typeString = typeString;
         }
         if (containerString) {

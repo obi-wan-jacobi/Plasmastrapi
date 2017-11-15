@@ -1,13 +1,12 @@
-﻿define(['input-handler', 'position'],
-function (InputHandler, Position) {
+﻿define(['input-handler'],
+function (InputHandler) {
 
     PlacingTool.prototype = Object.create(InputHandler.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool(engine, target) {
         InputHandler.call(this, engine);
-        this.__inputController = this.__engine.getController('input-controller');
-        this.__pickController = this.__engine.getController('pick-controller');
         this.__labController = this.__engine.getController('lab-controller');
+        this.__cursorController = this.__engine.getController('cursor-controller');
         this.__target = target;
         this.__targetPoseComponent = this.__target.getComponent('pose-component');
     };
@@ -20,43 +19,39 @@ function (InputHandler, Position) {
         }
     };
     PlacingTool.prototype.__onload = function () {
-        if (this.__target) {
-            this.__target.getComponent('pick-component').disable();
-            this.__target.load();
-        }
+        this.__target.getComponent('pick-component').disable();
+        this.__cursorController.setMove();
     };
     PlacingTool.prototype.__onunload = function () {
-        this.__target = null;
-        this.__targetPoseComponent = null;
+        this.__target.getComponent('pick-component').enable();
+        this.__cursorController.setDefault();
     };
     // public methods
-    PlacingTool.prototype.onkeydown = function () {
+    PlacingTool.prototype.keydown = function () {
     };
-    PlacingTool.prototype.onkeyup = function () {
+    PlacingTool.prototype.keyup = function () {
     };
-    PlacingTool.prototype.onenter = function () {
+    PlacingTool.prototype.enter = function () {
     };
-    PlacingTool.prototype.onescape = function () {
+    PlacingTool.prototype.escape = function () {
     };
-    PlacingTool.prototype.onmousemove = function (mouseHandle) {
-        this.__targetPoseComponent.getHandle().setPosition(mouseHandle.getData());
+    PlacingTool.prototype.mousemove = function (position) {
+        this.__targetPoseComponent.getHandle().setPosition(position);
     };
-    PlacingTool.prototype.onmousedown = function () {
+    PlacingTool.prototype.mousedown = function () {
     };
-    PlacingTool.prototype.onmouseup = function () {
+    PlacingTool.prototype.mouseup = function () {
     };
-    PlacingTool.prototype.onclick = function () {
-        this.__target.getComponent('pick-component').enable();
-        this.__target = null;
-        this.__targetPoseComponent = null;
+    PlacingTool.prototype.click = function () {
         this.__labController.idle();
     };
     PlacingTool.prototype.dispose = function () {
+        this.unload();
         if (this.__target) {
             this.__labController.getDesignArea().confine(this.__target);
-            this.__target.getComponent('pick-component').enable();
         }
-        this.unload();
+        this.__target = null;
+        this.__targetPoseComponent = null;
     };
 
     return PlacingTool;

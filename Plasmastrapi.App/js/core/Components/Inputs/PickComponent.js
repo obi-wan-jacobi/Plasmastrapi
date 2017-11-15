@@ -10,8 +10,10 @@ function (Component) {
         // events
         this.registerEvents(
             'onpoke',
+            'onpull',
+            'onprod',
+            'onpet',
             'onpick',
-            'ondrag',
             'onselect',
             'ondeselect',
             'onmouseenter',
@@ -20,8 +22,10 @@ function (Component) {
         );
         // inject event callbacks into handle
         this.__attachEventTriggerToHandleMethod('poke', 'onpoke');
+        this.__attachEventTriggerToHandleMethod('pull', 'onpull');
+        this.__attachEventTriggerToHandleMethod('prod', 'onprod');
+        this.__attachEventTriggerToHandleMethod('pet', 'onpet');
         this.__attachEventTriggerToHandleMethod('pick', 'onpick');
-        this.__attachEventTriggerToHandleMethod('drag', 'ondrag');
         this.__attachEventTriggerToHandleMethod('select', 'onselect');
         this.__attachEventTriggerToHandleMethod('deselect', 'ondeselect');
         this.__attachEventTriggerToHandleMethod('mouseenter', 'onmouseenter');

@@ -45,8 +45,8 @@ function(Dictionary, validator) {
     };
     Emitter.prototype.addEventListener = function(event, subscriber, callback) {
         validator.validateEventIsRegistered(this, event);
-        validator.validateObject(subscriber);
-        validator.validateFunction(callback); 
+        validator.validateObject(this, subscriber);
+        validator.validateFunction(this, callback); 
         if (this.__eventsBuffer[event]) {
             this.__eventsBuffer[event].add(subscriber, callback);
         }
@@ -56,8 +56,8 @@ function(Dictionary, validator) {
     };
     Emitter.prototype.removeEventListener = function(event, subscriber, callback) {
         validator.validateEventIsRegistered(this, event);
-        validator.validateObject(subscriber);
-        validator.validateFunction(callback); 
+        validator.validateObject(this, subscriber);
+        validator.validateFunction(this, callback); 
         var removedEventListener = null;
         if (this.__eventsBuffer[event]) {
             removedEventListener = this.__eventsBuffer[event].remove(subscriber);
@@ -70,7 +70,7 @@ function(Dictionary, validator) {
         }
     };
     Emitter.prototype.purgeEventListener = function(subscriber) {
-        validator.validateObject(subscriber);
+        validator.validateObject(this, subscriber);
         for (var event in this.__events) {
             if (this.__events.hasOwnProperty(event)) {
                 this.__events[event].remove(subscriber);

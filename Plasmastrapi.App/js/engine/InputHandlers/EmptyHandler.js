@@ -14,21 +14,21 @@ function (InputHandler) {
     EmptyHandler.prototype.__onunload = function () {
     };
     // public methods
-    EmptyHandler.prototype.onkeydown = function () {
+    EmptyHandler.prototype.keydown = function () {
     };
-    EmptyHandler.prototype.onkeyup = function () {
+    EmptyHandler.prototype.keyup = function () {
     };
-    EmptyHandler.prototype.onenter = function () {
+    EmptyHandler.prototype.enter = function () {
     };
-    EmptyHandler.prototype.onescape = function () {
+    EmptyHandler.prototype.escape = function () {
     };
-    EmptyHandler.prototype.onmousemove = function () {
+    EmptyHandler.prototype.mousemove = function () {
     };
-    EmptyHandler.prototype.onmousedown = function () {
+    EmptyHandler.prototype.mousedown = function () {
     };
-    EmptyHandler.prototype.onmouseup = function () {
+    EmptyHandler.prototype.mouseup = function () {
     };
-    EmptyHandler.prototype.onclick = function () {
+    EmptyHandler.prototype.click = function () {
     };
     EmptyHandler.prototype.dispose = function () {
     };

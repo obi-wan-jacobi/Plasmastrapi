@@ -1,10 +1,10 @@
-﻿define(['data-handle', 'pose-handle', 'position', 'validator'],
-function (DataHandle, PoseHandle, Position, validator) {
+﻿define(['data-handle', 'pose', 'validator'],
+function (DataHandle, Pose, validator) {
 
     PolygonHandle.prototype = Object.create(DataHandle.prototype);
     PolygonHandle.prototype.constructor = PolygonHandle;
     function PolygonHandle(polygon, displaySettings) {
-        this.__position = new Position();
+        this.__pose = new Pose();
         DataHandle.call(this, polygon, displaySettings);
     };
     PolygonHandle.prototype.__updateMinMaxValues = function (polygon, i) {
@@ -30,14 +30,13 @@ function (DataHandle, PoseHandle, Position, validator) {
         this.__maxY = null;
         this.__template = this.__data.clone();
         this.__lastCollisionPoint = null;
-        this.translate(this.__position);
+        this.translate(this.__pose);
+        this.rotate(this.__pose.a);
     };
     PolygonHandle.prototype.translate = function (newPosition) {
-        if (newPosition instanceof PoseHandle) {
-            newPosition = newPosition.getPosition();
-        }
-        validator.validateInstanceType(this, newPosition, 'position');
-        this.__position = newPosition;
+        validator.validateInstanceType(this, newPosition, 'pose');
+        this.__pose.x = newPosition.x;
+        this.__pose.y = newPosition.y;
         if (!this.__data) {
             return;
         }
@@ -53,7 +52,12 @@ function (DataHandle, PoseHandle, Position, validator) {
         };
     };
     PolygonHandle.prototype.rotate = function (newAngle) {
-        var position = this.__position;
+        validator.validateInstanceType(this, newAngle, 'number');
+        this.__pose.a = newAngle;
+        if (!this.__data) {
+            return;
+        }
+        var pose = this.__pose;
         var polygon = this.__data;
         this.__minX = this.__minY = Number.MAX_SAFE_INTEGER;
         this.__maxX = this.__maxY = -Number.MAX_SAFE_INTEGER;
@@ -65,8 +69,8 @@ function (DataHandle, PoseHandle, Position, validator) {
             var x = templateX * Math.cos(newAngle) - templateY * Math.sin(newAngle);
             var y = templateX * Math.sin(newAngle) + templateY * Math.cos(newAngle);
             // re-translate vertex back to current relative position
-            polygon.vertices[i].x = position.x + x;
-            polygon.vertices[i].y = position.y + y;
+            polygon.vertices[i].x = pose.x + x;
+            polygon.vertices[i].y = pose.y + y;
             this.__updateMinMaxValues(polygon, i);
         };
     };
@@ -118,6 +122,9 @@ function (DataHandle, PoseHandle, Position, validator) {
     };
     PolygonHandle.prototype.draw = function (ctx) {
         var vertices = this.__data.vertices;
+        if (vertices.length === 0) {
+            return;
+        }
         var displaySettings = this.__displaySettings;
         ctx.save();
         ctx.beginPath();

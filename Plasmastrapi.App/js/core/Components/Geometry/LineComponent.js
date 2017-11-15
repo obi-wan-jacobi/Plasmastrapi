@@ -18,10 +18,10 @@ function (Component, Pose, LineHandle, Line, validator) {
             'onorientationchange'
         );
         // dependencies
-        this.__registerDependencyOnLoad(this.__tailPose, 'onpositionchange', this, this.__updateTailPosition);
-        this.__registerDependencyOnLoad(this.__tailPose, 'onorientationchange', this, this.__$onorientationchange);
-        this.__registerDependencyOnLoad(this.__headPose, 'onpositionchange', this, this.__updateHeadPosition);
-        this.__registerDependencyOnLoad(this.__headPose, 'onorientationchange', this, this.__$onorientationchange);
+        this.__registerDependencyOnLoad(this.__tailPose, 'onpositionchange', this, this.__updateTail);
+        this.__registerDependencyOnLoad(this.__tailPose, 'onorientationchange', this, this.__updateTail);
+        this.__registerDependencyOnLoad(this.__headPose, 'onpositionchange', this, this.__updateHead);
+        this.__registerDependencyOnLoad(this.__headPose, 'onorientationchange', this, this.__updateHead);
         // inject event callbacks into handle
         this.__attachEventTriggerToHandleMethod('setTailPosition', 'onpositionchange');
         this.__attachEventTriggerToHandleMethod('setTailPosition', 'onorientationchange');
@@ -29,17 +29,13 @@ function (Component, Pose, LineHandle, Line, validator) {
         this.__attachEventTriggerToHandleMethod('setHeadPosition', 'onorientationchange');
 	};
     // private methods
-    LineComponent.prototype.__updateTailPosition = function (poseHandle) {
+    LineComponent.prototype.__updateTail = function (poseHandle) {
         this.__handle.setTailPosition(poseHandle.getPosition());
-    };
-    LineComponent.prototype.__updateHeadPosition = function (poseHandle) {
-        this.__handle.setHeadPosition(poseHandle.getPosition());
-    };
-    LineComponent.prototype.__onpositionchange = function () {
         this.__updatePoseComponent();
         this.__updatePolygonComponent();
     };
-    LineComponent.prototype.__onorientationchange = function () {
+    LineComponent.prototype.__updateHead = function (poseHandle) {
+        this.__handle.setHeadPosition(poseHandle.getPosition());
         this.__updatePoseComponent();
         this.__updatePolygonComponent();
     };
@@ -48,14 +44,14 @@ function (Component, Pose, LineHandle, Line, validator) {
         if (poseComponent) {
             var position = this.__handle.getPosition();
             var orientation = this.__handle.getOrientation();
-            poseComponent.getHandle().setData(new Pose(position.x, position.y, orientation));
+            poseComponent.setData(new Pose(position.x, position.y, orientation));
         }
     };
     LineComponent.prototype.__updatePolygonComponent = function () {
         var polygonComponent = this.__entity.getComponent('polygon-component');
         if (polygonComponent) {
             var polygon = this.__handle.getPolygon();
-            polygonComponent.getHandle().setData(polygon);
+            polygonComponent.setData(polygon);
         }
     };
 

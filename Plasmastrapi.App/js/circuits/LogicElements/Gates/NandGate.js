@@ -13,7 +13,7 @@ function (Gate, CIRCUITS) {
         var nextState = STATES.HIGH;
         var isPowered = false;
         // if this update was initiated by connection removal
-        if (inputState === STATES.NOPOWER) {
+        if (inputState === STATES.NO_POWER) {
             for (var i = 0, L = connections.length; i < L; i++) {
                 if (connections[i].isPowered) {
                     isPowered = true;
@@ -21,7 +21,7 @@ function (Gate, CIRCUITS) {
                 }
             }
             if (!isPowered) {
-                this.outputTerminal.state = STATES.NOPOWER;
+                this.outputTerminal.state = STATES.NO_POWER;
             } else {
                 this.outputTerminal.state = !nextState | 0;
             }

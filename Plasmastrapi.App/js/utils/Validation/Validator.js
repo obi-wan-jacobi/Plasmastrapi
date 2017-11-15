@@ -27,28 +27,22 @@
     };
 
     // validations
-    validator.validateNotNull = function (argument) {
+    validator.validateNotNull = function (referer, argument) {
         if (argument === null || argument === undefined) {
             this.throw(this, 'validateNotNull', 'Argument cannot be null or undefined');
         }
     };
 
-    validator.validateString = function (argument) {
-        if (!(typeof argument === 'string')) {
-            this.throw(this, 'validateString', `Argument ${argument} is not a string (${typeof argument})`)
-        }
-    };
-
-    validator.validateObject = function (argument) {
-        this.validateNotNull(argument);
+    validator.validateObject = function (referer, argument) {
+        this.validateNotNull(referer, argument);
         if (Object.getOwnPropertyNames(argument).length === 0) {
-            this.throw(this, 'validateObject', 'Argument must be a \'non-empty\' object');
+            this.throw(referer, 'validateObject', 'Argument must be a \'non-empty\' object');
         }
     };
 
-    validator.validateFunction = function (argument) {
+    validator.validateFunction = function (referer, argument) {
         if (typeof argument !== 'function') {
-            this.throw(this, 'validateFunction', 'Argument must be a function');
+            this.throw(referer, 'validateFunction', 'Argument must be a function');
         }
     };
 

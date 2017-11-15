@@ -17,6 +17,12 @@ function (Controller, validator) {
     CursorController.prototype.setPointer = function () {
         this.__set('pointer');
     };
+    CursorController.prototype.setMove = function () {
+        this.__set('move');
+    };
+    CursorController.prototype.setNoDrop = function () {
+        this.__set('no-drop');
+    };
 
     return CursorController;
 });

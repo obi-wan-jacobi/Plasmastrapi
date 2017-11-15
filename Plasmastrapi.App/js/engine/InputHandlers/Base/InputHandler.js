@@ -17,28 +17,28 @@ function (Base, validator) {
         validator.throwMethodMustBeOverridden();
     };
     // public methods
-    InputHandler.prototype.onkeydown = function () {
+    InputHandler.prototype.keydown = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onkeyup = function () {
+    InputHandler.prototype.keyup = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onenter = function () {
+    InputHandler.prototype.enter = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onescape = function () {
+    InputHandler.prototype.escape = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onmousemove = function () {
+    InputHandler.prototype.mousemove = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onmousedown = function () {
+    InputHandler.prototype.mousedown = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onmouseup = function () {
+    InputHandler.prototype.mouseup = function () {
         validator.throwMethodMustBeOverridden();
     };
-    InputHandler.prototype.onclick = function () {
+    InputHandler.prototype.click = function () {
         validator.throwMethodMustBeOverridden();
     };
     InputHandler.prototype.dispose = function () {

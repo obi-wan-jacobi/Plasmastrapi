@@ -10,6 +10,7 @@
         // Input Handlers
         'lab-hotkey-handler': './game/InputHandlers/LabHotkeyHandler',
         'placing-tool': './game/InputHandlers/PlacingTool',
+        'wire-tool': './game/InputHandlers/WireTool',
         // Scenes
         'main-menu-scene': './game/Scenes/MainMenuScene',
         'lab-scene': './game/Scenes/LabScene',

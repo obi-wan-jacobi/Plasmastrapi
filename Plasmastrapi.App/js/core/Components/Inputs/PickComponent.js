@@ -14,11 +14,11 @@ function (Component, validator) {
             'onprod',
             'onpet',
             'onpick',
-            'onselect',
-            'ondeselect',
             'onmouseenter',
             'onhover',
-            'onmouseleave'
+            'onmouseleave',
+            'onselect',
+            'ondeselect'
         );
         // private variables
         this.__isPoked = false;
@@ -69,6 +69,7 @@ function (Component, validator) {
         this.unhover();
         this.deselect();
     };
+    // mousedown
     PickComponent.prototype.poke = function () {
         if (this.__isHovered) {
             this.__isPoked = true;
@@ -80,11 +81,13 @@ function (Component, validator) {
             this.__isPoked = false;
         }
     };
+    // mousemove with mousedown
     PickComponent.prototype.pull = function (position) {
         if (this.__isPoked) {
             this.emit('onpull')
         }
     };
+    // mouseup after mousedown
     PickComponent.prototype.prod = function () {
         if (this.__isPoked) {
             this.__isPoked = false;
@@ -92,24 +95,18 @@ function (Component, validator) {
             this.emit('onprod', this);
         }
     };
+    // mouseup without mousedown
     PickComponent.prototype.pet = function () {
         if (this.__isHovered) {
             this.emit('onpet', this);
         }
     };
+    // click after mouseup with mousedown
     PickComponent.prototype.pick = function () {
         if (this.__isHovered && this.__isProdded) {
             this.__isProdded = false;
             this.emit('onpick', this);
         }
-    };
-    PickComponent.prototype.select = function () {
-        this.__isSelected = true;
-        this.emit('onselect', this);
-    };
-    PickComponent.prototype.deselect = function () {
-        this.__isSelected = false;
-        this.emit('ondeselect', this);
     };
     PickComponent.prototype.mouseenter = function () {
         this.__isHovered = true;
@@ -135,6 +132,14 @@ function (Component, validator) {
         this.__isHovered = false;
         this.__hoverPosition = null;
         this.emit('onmouseleave', this);
+    };
+    PickComponent.prototype.select = function () {
+        this.__isSelected = true;
+        this.emit('onselect', this);
+    };
+    PickComponent.prototype.deselect = function () {
+        this.__isSelected = false;
+        this.emit('ondeselect', this);
     };
 
 	return PickComponent;

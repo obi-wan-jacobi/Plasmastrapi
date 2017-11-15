@@ -20,6 +20,8 @@ tech debt:
 	- config
 - ui
 	- config
+- engine
+	- refactor AssetLoader to use a Loader class
 - optimization
 	- refactor all *** closures *** to be prototypal
 	- PolygonHandle point-collision checking is disgusting

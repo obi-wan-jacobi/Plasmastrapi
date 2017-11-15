@@ -95,7 +95,7 @@ function (Scene) {
             pickComponent.addEventListener('onselect', buttonHighlighter, function () {
                 var buttonPosition = button.getComponent('pose-component').getHandle().getPosition();
                 buttonHighlighter.set('position', [buttonPosition.x, buttonPosition.y + 5]);
-                buttonHighlighter.set('rectangle', [40, 52]);
+                buttonHighlighter.set('rectangle', [40, 56]);
             });
             pickComponent.addEventListener('ondeselect', buttonHighlighter, function () {
                 buttonHighlighter.set('rectangle', [0, 0]);

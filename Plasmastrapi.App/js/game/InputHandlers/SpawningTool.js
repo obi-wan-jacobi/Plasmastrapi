@@ -11,7 +11,7 @@ function (InputHandler) {
         this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
-        this.__target = this.__engine.getFactory('logic-element-factory').create(logicElementString);
+        this.__target = this.__engine.getFactory('augmented-logic-element-factory').create(logicElementString);
         this.__targetPoseComponent = this.__target.getComponent('pose-component');
     };
     // private methods

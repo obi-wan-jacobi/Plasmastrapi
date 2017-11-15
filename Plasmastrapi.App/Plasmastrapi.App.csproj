@@ -87,11 +87,15 @@
     <Content Include="js\engine\Factories\PrimitiveFactory.js" />
     <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
-    <Content Include="js\game\InputHandlers\LabHotkeyHandler.js" />
+    <Content Include="js\game\Factories\AugmentedLogicElementFactory.js" />
+    <Content Include="js\game\Factories\AugmentedTerminalFactory.js" />
+    <Content Include="js\game\Factories\AugmentedWireFactory.js" />
+    <Content Include="js\game\InputHandlers\IdleTool.js" />
     <Content Include="js\game\InputHandlers\SpawningTool.js" />
     <Content Include="js\game\InputHandlers\TrashTool.js" />
     <Content Include="js\game\InputHandlers\WireCutterTool.js" />
     <Content Include="js\game\InputHandlers\WireTool.js" />
+    <Content Include="js\game\Elements\SelectionBox.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
@@ -136,7 +140,6 @@
     <Content Include="js\engine\Systems\KeyboardSystem.js" />
     <Content Include="js\engine\Factories\Base\Factory.js" />
     <Content Include="js\engine\Controllers\InputController.js" />
-    <Content Include="js\engine\Controllers\PickController.js" />
     <Content Include="js\circuits\Factories\CircuitElementFactory.js" />
     <Content Include="js\circuits\Factories\LogicElementFactory.js" />
     <Content Include="js\circuits\Factories\TerminalFactory.js" />

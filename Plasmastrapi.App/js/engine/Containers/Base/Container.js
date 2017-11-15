@@ -22,7 +22,7 @@ function (Emitter, Dictionary, validator) {
         return this.__contents.forEach(fn, caller);
     };
     Container.prototype.get = function (item) {
-        this.__contents.get(item);
+        return this.__contents.get(item);
     };
     Container.prototype.add = function(item) {
         this.__contents.add(item, item);

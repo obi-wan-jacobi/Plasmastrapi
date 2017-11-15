@@ -16,6 +16,9 @@ function (Engine, assetUrls, AssetLoader, utils) {
         this.__addFactory('terminal-factory');
         this.__addFactory('logic-element-factory');
         this.__addFactory('ui-element-factory');
+        this.__addFactory('augmented-logic-element-factory');
+        this.__addFactory('augmented-terminal-factory');
+        this.__addFactory('augmented-wire-factory');
     };
     Game.prototype.__registerControllers = function () {
         Engine.prototype.__registerControllers.call(this);
@@ -31,7 +34,7 @@ function (Engine, assetUrls, AssetLoader, utils) {
         // load assets
         this.__assetLoader.download(assetUrls).done((function () {
             utils.logging.write(this, 'start', 'Assets have been loaded.');
-            this.getController('scene-controller').setScene('main-menu-scene');
+            this.getController('scene-controller').setScene('lab-scene');
             utils.logging.write(this, 'start', 'We have ignition!');
         }).bind(this));
     };

@@ -30,9 +30,6 @@ function (Controller, utils) {
         if (!this.__state) {
             return this.__deactivate();
         }
-        if (this.__state === this.__previousState && this.__state === 'idle') {
-            return;
-        }
         this[`__${this.__state}`](this.__target);
         this.__previousState = this.__state;
     }
@@ -53,7 +50,7 @@ function (Controller, utils) {
             this.__activeSelection.deselect();
             this.__activeSelection = null;
         }
-        this.__inputController.setHandler('lab-hotkey-handler');
+        this.__inputController.setHandler('idle-tool');
     };
     LabController.prototype.__place = function (logicElement) {
         this.__inputController.setHandler('placing-tool', [logicElement]);

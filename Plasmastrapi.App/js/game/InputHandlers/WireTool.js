@@ -5,7 +5,7 @@ function (InputHandler, validator) {
     WireTool.prototype.constructor = WireTool;
     function WireTool(engine, target) {
         InputHandler.call(this, engine);
-        this.__wireFactory = this.__engine.getFactory('wire-factory');
+        this.__wireFactory = this.__engine.getFactory('augmented-wire-factory');
         this.__labController = this.__engine.getController('lab-controller');
         this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
         this.__wireContainer = this.__engine.getFactory('wire-factory').getContainer();

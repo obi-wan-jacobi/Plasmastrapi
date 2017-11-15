@@ -90,6 +90,9 @@ function (Controller, utils) {
     InputController.prototype.getMousePosition = function () {
         return this.__mousePosition;
     };
+    InputController.prototype.getKeyboardComponent = function () {
+        return this.__keyboardComponent;
+    };
 
     return InputController;
 });

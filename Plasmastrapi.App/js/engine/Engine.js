@@ -53,7 +53,6 @@ function (System, Dictionary, utils) {
     };
     Engine.prototype.__registerControllers = function () {
         this.__addController('input-controller');
-        this.__addController('pick-controller');
         this.__addController('scene-controller');
         this.__addController('viewport-controller');
     };

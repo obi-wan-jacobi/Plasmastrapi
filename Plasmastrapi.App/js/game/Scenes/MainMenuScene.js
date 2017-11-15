@@ -12,7 +12,7 @@ function (Scene) {
         labNavigationButton.set('position', [750, 200]);
         labNavigationButton.set('rectangle', [100, 30]);
         labNavigationButton.set('text', ['Play'], { offset: { x: 0, y: 7 } });
-        labNavigationButton.set('pick-action', [function () {
+        labNavigationButton.set('pick-component:onpick', [function () {
             engine.getController('scene-controller').setScene('lab-scene');
         }]);
     };

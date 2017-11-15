@@ -18,7 +18,7 @@ function (ComponentContainer, Container) {
         if (component.isEnabled) {
             this.__stagingBuffer.push(component);
         }
-        component.removeEventListener('onload', this, this.__onComponentLoad.bind(this, component));
+        component.removeEventListener('onload', this);
         component.addEventListener('onunload', this, this.__onComponentUnload.bind(this, component));
     };
     PickComponentContainer.prototype.__onComponentUnload = function (component) {
@@ -29,7 +29,7 @@ function (ComponentContainer, Container) {
         if (component.isLoaded) {
             this.__stagingBuffer.push(component);
         }
-        component.removeEventListener('onenable', this, this.__onComponentEnable.bind(this, component));
+        component.removeEventListener('onenable', this);
         component.addEventListener('ondisable', this, this.__onComponentDisable.bind(this, component));
     };
     PickComponentContainer.prototype.__onComponentDisable = function (component) {
@@ -53,7 +53,7 @@ function (ComponentContainer, Container) {
             var entity = pickComponent.getEntity();
             var polygonComponent = entity.getComponent('polygon-component');
             if (polygonComponent.getHandle().checkPointCollision(mousePosition)) {
-                pickComponent.getHandle().hover(mousePosition);
+                pickComponent.hover(mousePosition);
             }
         }
     };

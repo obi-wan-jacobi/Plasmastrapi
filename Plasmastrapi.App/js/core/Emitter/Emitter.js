@@ -54,20 +54,24 @@ function(Dictionary, validator) {
             this.__events[event].add(subscriber, callback);
         }
     };
-    Emitter.prototype.removeEventListener = function(event, subscriber, callback) {
+    // Returns callback if subscriber exists, otherwise returns empty function
+    Emitter.prototype.removeEventListener = function(event, subscriber) {
         validator.validateEventIsRegistered(this, event);
         validator.validateObject(this, subscriber);
-        validator.validateFunction(this, callback); 
-        var removedEventListener = null;
+        var removedKeyPair = null;
         if (this.__eventsBuffer[event]) {
-            removedEventListener = this.__eventsBuffer[event].remove(subscriber);
+            removedKeyPair = this.__eventsBuffer[event].remove(subscriber);
         }
-        if (!removedEventListener) {
-            removedEventListener = this.__events[event].remove(subscriber);
+        if (!removedKeyPair) {
+            removedKeyPair = this.__events[event].remove(subscriber);
         }
-        if (!removedEventListener) {
-            validator.throw(this, 'removeEventListener', `Subscriber ${subscriber.constructor.name} was not found listening to event ${event} on ${this.constructor.name}`);
+        //if (!removedKeyPair) {
+        //    validator.throw(this, 'removeEventListener', `Subscriber ${subscriber.constructor.name} was not found listening to event ${event} on ${this.constructor.name}`);
+        //}
+        if (removedKeyPair) {
+            return removedKeyPair.value;
         }
+        return function () { };
     };
     Emitter.prototype.purgeEventListener = function(subscriber) {
         validator.validateObject(this, subscriber);

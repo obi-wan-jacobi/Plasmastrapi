@@ -25,6 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/2518565f-0c19-4713-9615-fe00d886d297/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/Plasmastrapi.App</ApplicationInsightsResourceId>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -96,7 +97,6 @@
     <Content Include="js\ui\Elements\Panel.js" />
     <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
     <Content Include="js\core\DataHandles\Inputs\KeyboardHandle.js" />
-    <Content Include="js\core\DataHandles\Inputs\PickHandle.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\PoseDisplaySettings.js" />
     <Content Include="js\core\Emitter\Mixins\Enableable.js" />
     <Content Include="js\core\Configuration\require.config.js" />

@@ -97,7 +97,7 @@ function (Scene) {
         backNavigationButton.set('position', [846, 30]);
         backNavigationButton.set('rectangle', [100, 52]);
         backNavigationButton.set('text', ['Menu'], { offset: { x: 0, y: 7 } });
-        backNavigationButton.set('pick-action', [function() {
+        backNavigationButton.set('pick-component:onpick', [function() {
             engine.getController('scene-controller').setScene('main-menu-scene');
         }]);
 

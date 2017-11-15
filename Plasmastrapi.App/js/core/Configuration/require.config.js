@@ -55,7 +55,6 @@
             // -- Inputs --
             'keyboard-handle': './core/DataHandles/Inputs/KeyboardHandle',
             'mouse-handle': './core/DataHandles/Inputs/MouseHandle',
-            'pick-handle': './core/DataHandles/Inputs/PickHandle',
         // Data Structures
         'dictionary': './core/DataStructures/Dictionary',
         'link': './core/DataStructures/Link',

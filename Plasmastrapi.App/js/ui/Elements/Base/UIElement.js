@@ -45,8 +45,15 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
             }
         }
     };
-    UIElement.prototype.__setPickData = function (pickString, fnAction) {
-        this.getOrInitComponent('pick-component').setData(fnAction);
+    UIElement.prototype.__setEventListener = function (componentEventString, callback) {
+        var componentString = componentEventString.split(':')[0];
+        var eventString = componentEventString.split(':')[1];
+        var component = this.getOrInitComponent(componentString);
+        var proxyCallback = component.removeEventListener(eventString, this);
+        component.addEventListener(eventString, this, function () {
+            proxyCallback.call(this);
+            callback.call(this);
+        });
     };
     UIElement.prototype.__setImage = function (imageName) {
         var image = this.__validateImageExists(imageName);
@@ -61,8 +68,8 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
     UIElement.prototype.set = function (typeString, args, displaySettingsPartial) {
         args = args || [];
         utils.validator.validateInstanceType(this, args, 'array');
-        if (typeString.includes('pick')) {
-            return this.__setPickData(typeString, args[0]);
+        if (typeString.includes(':')) {
+            return this.__setEventListener(typeString, args[0]);
         }
         if (typeString === 'image') {
             return this.__setImage(args[0]);
@@ -87,7 +94,11 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
             var displaySettings = new DisplaySettingsType(displayLayer);
             component = this.__componentFactory.createFromDataHandle(`${modulePrefix}-handle`, [null, displaySettings]);
         } else {
-            component = this.__componentFactory.createFromDataHandle(`${modulePrefix}-handle`, []);
+            if (!utils.modules.requireIfExists(`${modulePrefix}-handle`)) {
+                component = this.__componentFactory.create(`${modulePrefix}-component`);
+            } else {
+                component = this.__componentFactory.createFromDataHandle(`${modulePrefix}-handle`);
+            }
         }
         this.addComponent(component);
         return component;

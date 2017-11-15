@@ -6,11 +6,11 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
     Component.prototype.constructor = Component;
     function Component(/* optional */ dataHandle) {
         var modulePrefix = utils.modules.getModulePrefix(this, 'Component');
+        var HandleType = utils.modules.requireIfExists(`${modulePrefix}-handle`);
         if (dataHandle) {
             utils.validator.validateInstanceType(this, dataHandle, `${modulePrefix}-handle`);
-        } else {
+        } else if (HandleType) {
             var primitive, displaySettings;
-            var HandleType = utils.modules.require(`${modulePrefix}-handle`);
             var PrimitiveType = utils.modules.requireIfExists(`${modulePrefix}`);
             if (PrimitiveType) {
                 primitive = new PrimitiveType();
@@ -30,7 +30,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         Enableable.call(this);
         Destructible.call(this);
         Loadable.call(this);
-        if (this.__handle.draw) {
+        if (this.__handle && this.__handle.draw) {
             Drawable.call(this);
         }
     };
@@ -49,7 +49,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         var fnOnUnloadProxy = this.__onunload || function () { };
         this.__onunload = function () {
             fnOnUnloadProxy.apply(self, arguments);
-            subject.removeEventListener(event, observer, callback);
+            subject.removeEventListener(event, observer);
         };
     };
     Component.prototype.__registerComponentDependencyOnLoad = function (componentString, event, observer, callback) {
@@ -69,7 +69,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         this.__onunload = function () {
             var component = this.__entity.getComponent(componentString);
             fnOnUnloadProxy.apply(self, arguments);
-            component.removeEventListener(event, observer, callback);
+            component.removeEventListener(event, observer);
         };
     };
     Component.prototype.__attachEventTriggerToHandleMethod = function (handleMethodName, event) {

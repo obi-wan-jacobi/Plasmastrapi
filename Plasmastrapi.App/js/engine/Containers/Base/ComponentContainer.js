@@ -22,24 +22,24 @@
         if (component.isEnabled) {
             Container.prototype.add.call(this, component);
         }
-        component.removeEventListener('onload', this, this.__onComponentLoad.bind(this, component));
+        component.removeEventListener('onload', this);
         component.addEventListener('onunload', this, this.__onComponentUnload.bind(this, component));
     };
     ComponentContainer.prototype.__onComponentUnload = function (component) {
         Container.prototype.remove.call(this, component);
-        component.removeEventListener('onunload', this, this.__onComponentUnload.bind(this, component));
+        component.removeEventListener('onunload', this);
         component.addEventListener('onload', this, this.__onComponentLoad.bind(this, component));
     };
     ComponentContainer.prototype.__onComponentEnable = function (component) {
         if (component.isLoaded) {
             Container.prototype.add.call(this, component);
         }
-        component.removeEventListener('onenable', this, this.__onComponentEnable.bind(this, component));
+        component.removeEventListener('onenable', this);
         component.addEventListener('ondisable', this, this.__onComponentDisable.bind(this, component));
     };
     ComponentContainer.prototype.__onComponentDisable = function (component) {
         Container.prototype.remove.call(this, component);
-        component.removeEventListener('ondisable', this, this.__onComponentDisable.bind(this, component));
+        component.removeEventListener('ondisable', this);
         component.addEventListener('onenable', this, this.__onComponentEnable.bind(this, component));
     };
     // public methods

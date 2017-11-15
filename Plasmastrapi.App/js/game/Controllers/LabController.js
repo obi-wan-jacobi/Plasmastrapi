@@ -46,7 +46,7 @@ function (Controller, utils) {
     LabController.prototype.__set = function (state, target) {
         this.__state = state;
         this.__target = target;
-        if (this.__designAreaPickComponent.getHandle().isHovered) {
+        if (this.__designAreaPickComponent.isHovered) {
             this.__activate();
         }
     };
@@ -73,10 +73,10 @@ function (Controller, utils) {
         var self = this;
         this.__hotkeys[hotkey] = function () {
             self.spawn(typeString);
-            self.__activeSelection = button.getComponent('pick-component').getHandle();
+            self.__activeSelection = button.getComponent('pick-component');
             self.__activeSelection.select();
         };
-        button.set('pick-action', [this.__hotkeys[hotkey]]);
+        button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
 
     };
     LabController.prototype.setDesignArea = function (panel) {

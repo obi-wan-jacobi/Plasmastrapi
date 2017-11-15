@@ -67,10 +67,10 @@ function (System, Container, LinkedList) {
             var entity = pickComponent.getEntity();
             var polygonComponent = entity.getComponent('polygon-component');
             if (polygonComponent.getHandle().checkPointCollision(mousePosition)) {
-                pickComponent.getHandle().hover(mousePosition);
+                pickComponent.hover(mousePosition);
             }
             else {
-                pickComponent.getHandle().unhover();
+                pickComponent.unhover();
             }
         });
         this.__receiverInputBuffer['mousemove'].forEach(function (updateItem) {
@@ -82,8 +82,8 @@ function (System, Container, LinkedList) {
         // *** mousedown ***
         this.__inputBuffer['mousedown'].forEach(function (updateItem) {
             var pickComponent = updateItem.listener;
-            if (pickComponent.getHandle().isHovered) {
-                pickComponent.getHandle().poke();
+            if (pickComponent.isHovered) {
+                pickComponent.poke();
             }
         });
         this.__receiverInputBuffer['mousedown'].forEach(function (updateItem) {
@@ -95,10 +95,10 @@ function (System, Container, LinkedList) {
         // *** mouseup ***
         this.__inputBuffer['mouseup'].forEach(function (updateItem) {
             var pickComponent = updateItem.listener;
-            if (pickComponent.getHandle().isHovered && pickComponent.getHandle().isPoked) {
-                pickComponent.getHandle().prod();
+            if (pickComponent.isHovered && pickComponent.isPoked) {
+                pickComponent.prod();
             } else {
-                pickComponent.getHandle().unpoke();
+                pickComponent.unpoke();
             }
         });
         this.__receiverInputBuffer['mouseup'].forEach(function (updateItem) {
@@ -110,10 +110,10 @@ function (System, Container, LinkedList) {
         // *** click ***
         this.__inputBuffer['click'].forEach(function (updateItem) {
             var pickComponent = updateItem.listener;
-            if (pickComponent.getHandle().isProdded) {
-                pickComponent.getHandle().pick();
-            } else if (pickComponent.getHandle().isHovered) {
-                pickComponent.getHandle().pet();
+            if (pickComponent.isProdded) {
+                pickComponent.pick();
+            } else if (pickComponent.isHovered) {
+                pickComponent.pet();
             }
         });
         this.__receiverInputBuffer['click'].forEach(function (updateItem) {

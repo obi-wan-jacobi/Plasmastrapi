@@ -1,5 +1,5 @@
 ﻿define(['gate', 'circuits-constants'],
-function (Gate, CIRCUITS) {
+function (Gate, constants) {
 
     // CLASS NandGate
     NandGate.prototype = Object.create(Gate.prototype);
@@ -7,30 +7,15 @@ function (Gate, CIRCUITS) {
     function NandGate() {
         Gate.call(this);
     };
-    NandGate.prototype.updateState = function (inputState) {
-        var STATES = CIRCUITS.STATES;
-        var connections = this.__inputs;
-        var nextState = STATES.HIGH;
-        var isPowered = false;
-        // if this update was initiated by connection removal
-        if (inputState === STATES.NO_POWER) {
-            for (var i = 0, L = connections.length; i < L; i++) {
-                if (connections[i].isPowered) {
-                    isPowered = true;
-                    nextState = nextState && connections[i].state;
-                }
-            }
-            if (!isPowered) {
-                this.outputTerminal.state = STATES.NO_POWER;
-            } else {
-                this.outputTerminal.state = !nextState | 0;
-            }
+    NandGate.prototype.updateState = function (incomingState) {
+        var nextState;
+        if (incomingState > constants.STATES.NO_POWER) {
+            nextState = !(!this.getState() && incomingState) | 0;
         } else {
-            if (!this.outputTerminal.isPowered) {
-                this.outputTerminal.state = !inputState | 0;
-            } else if (this.outputTerminal.isLow && inputState === STATES.LOW) {
-                this.outputTerminal.state = STATES.HIGH;
-            }
+            return;
+        }
+        if (nextState !== this.getState()) {
+            this.setState(nextState);
         }
     };
 

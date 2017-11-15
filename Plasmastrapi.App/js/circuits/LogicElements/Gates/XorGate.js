@@ -1,7 +1,7 @@
 ﻿define(['gate', 'circuits-constants'],
 function (Gate, constants) {
 
-    // CLASS OrGate
+    // CLASS XorGate
     XorGate.prototype = Object.create(Gate.prototype);
     XorGate.prototype.constructor = XorGate;
     function XorGate() {

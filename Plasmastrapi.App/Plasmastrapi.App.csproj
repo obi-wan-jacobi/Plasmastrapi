@@ -88,6 +88,8 @@
     <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
     <Content Include="js\game\InputHandlers\LabHotkeyHandler.js" />
+    <Content Include="js\game\InputHandlers\TrashTool.js" />
+    <Content Include="js\game\InputHandlers\WireCutterTool.js" />
     <Content Include="js\game\InputHandlers\WireTool.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />

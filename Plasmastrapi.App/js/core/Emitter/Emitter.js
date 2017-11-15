@@ -1,5 +1,5 @@
-define(['dictionary', 'validator'],
-function(Dictionary, validator) {
+define(['dictionary', 'utils', 'utils-config'],
+function(Dictionary, utils) {
 
     // CLASS Emitter
     function Emitter() {
@@ -11,7 +11,7 @@ function(Dictionary, validator) {
         for (var i = 0, L = arguments.length; i < L; i++) {
             var event = arguments[i];
             if (this.hasEvent(event)) {
-                validator.throw(this, 'registerEvents', `${event} has already been implemented`);
+                utils.validator.throw(this, 'registerEvents', `${event} has already been implemented`);
             }
             // initialize this.__onevent method
             if (!this["__" + event]) {
@@ -28,7 +28,7 @@ function(Dictionary, validator) {
         }
     };
     Emitter.prototype.emit = function (event /*, argument1, argument2, etc... */) {
-        validator.validateEventIsRegistered(this, event);
+        utils.validator.validateEventIsRegistered(this, event);
         var args = arguments.length > 1 ? [].slice.call(arguments, 1, arguments.length) : null;
         // call owner's event callback first
         this["__" + event].apply(this, args);
@@ -44,9 +44,9 @@ function(Dictionary, validator) {
         delete this.__eventsBuffer[event];
     };
     Emitter.prototype.addEventListener = function(event, subscriber, callback) {
-        validator.validateEventIsRegistered(this, event);
-        validator.validateObject(this, subscriber);
-        validator.validateFunction(this, callback); 
+        utils.validator.validateEventIsRegistered(this, event);
+        utils.validator.validateObject(this, subscriber);
+        utils.validator.validateFunction(this, callback); 
         if (this.__eventsBuffer[event]) {
             this.__eventsBuffer[event].add(subscriber, callback);
         }
@@ -56,8 +56,8 @@ function(Dictionary, validator) {
     };
     // Returns callback if subscriber exists, otherwise returns empty function
     Emitter.prototype.removeEventListener = function(event, subscriber) {
-        validator.validateEventIsRegistered(this, event);
-        validator.validateObject(this, subscriber);
+        utils.validator.validateEventIsRegistered(this, event);
+        utils.validator.validateObject(this, subscriber);
         var removedKeyPair = null;
         if (this.__eventsBuffer[event]) {
             removedKeyPair = this.__eventsBuffer[event].remove(subscriber);
@@ -65,16 +65,16 @@ function(Dictionary, validator) {
         if (!removedKeyPair) {
             removedKeyPair = this.__events[event].remove(subscriber);
         }
-        //if (!removedKeyPair) {
-        //    validator.throw(this, 'removeEventListener', `Subscriber ${subscriber.constructor.name} was not found listening to event ${event} on ${this.constructor.name}`);
-        //}
-        if (removedKeyPair) {
-            return removedKeyPair.value;
+        if (!removedKeyPair) {
+            if (utils.config.isInfoLoggingActiveOnFailedEventListenerRemoval) {
+                utils.logging.info(this, 'removeEventListener', `${subscriber.constructor.name} was not subscribed to ${this.constructor.name} for event ${event}`)
+            }
+            return function () { };
         }
-        return function () { };
+        return removedKeyPair.value;
     };
     Emitter.prototype.purgeEventListener = function(subscriber) {
-        validator.validateObject(this, subscriber);
+        utils.validator.validateObject(this, subscriber);
         for (var event in this.__events) {
             if (this.__events.hasOwnProperty(event)) {
                 this.__events[event].remove(subscriber);

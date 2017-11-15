@@ -68,6 +68,12 @@ function (Controller, utils) {
         this.__target = null;
         this.__inputController.setHandler('wire-tool', [terminal]);
     };
+    LabController.prototype.__trash = function () {
+        this.__inputController.setHandler('trash-tool');
+    };
+    LabController.prototype.__cut = function () {
+        this.__inputController.setHandler('wire-cutter-tool');
+    };
     // public methods
     LabController.prototype.setSpawnerButton = function (button, typeString, hotkey) {
         var self = this;
@@ -77,7 +83,24 @@ function (Controller, utils) {
             self.__activeSelection.select();
         };
         button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
-
+    };
+    LabController.prototype.setWireCutterButton = function (button, hotkey) {
+        var self = this;
+        this.__hotkeys[hotkey] = function () {
+            self.cut();
+            self.__activeSelection = button.getComponent('pick-component');
+            self.__activeSelection.select();
+        };
+        button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
+    };
+    LabController.prototype.setTrashButton = function (button, hotkey) {
+        var self = this;
+        this.__hotkeys[hotkey] = function () {
+            self.trash();
+            self.__activeSelection = button.getComponent('pick-component');
+            self.__activeSelection.select();
+        };
+        button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
     };
     LabController.prototype.setDesignArea = function (panel) {
         if (this.__designArea) {
@@ -125,6 +148,12 @@ function (Controller, utils) {
     LabController.prototype.wire = function (terminal) {
         utils.validator.validateInstanceType(this, terminal, 'terminal');
         this.__set('wire', terminal);
+    };
+    LabController.prototype.trash = function () {
+        this.__set('trash', null);
+    };
+    LabController.prototype.cut = function () {
+        this.__set('cut', null);
     };
     LabController.prototype.hotkey = function (key) {
         if (this.__hotkeys[key]) {

@@ -72,6 +72,20 @@ function (Scene) {
         xorGateButton.set('text', ['[4]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(xorGateButton, 'xor-gate', '4');
 
+        var trashButton = uiElementFactory.create('button');
+        trashButton.set('image', ['trashcan']);
+        trashButton.set('position', [721, 25]);
+        trashButton.set('rectangle', [30, 30]);
+        trashButton.set('text', ['[q]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        labController.setTrashButton(trashButton, 'q');
+
+        var wireCutterButton = uiElementFactory.create('button');
+        wireCutterButton.set('image', ['wire-cutter-closed']);
+        wireCutterButton.set('position', [766, 25]);
+        wireCutterButton.set('rectangle', [30, 30]);
+        wireCutterButton.set('text', ['[w]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        labController.setWireCutterButton(wireCutterButton, 'w');
+
         var buttonHighlighter = uiElementFactory.create('panel');
         buttonHighlighter.set('position', [0, 0]);
         buttonHighlighter.set('rectangle', [0, 0], { strokeStyle: '#33BBFF', lineWidth: 2 })
@@ -92,6 +106,8 @@ function (Scene) {
         initButtonOnSelectHighlighting(nandGateButton);
         initButtonOnSelectHighlighting(orGateButton);
         initButtonOnSelectHighlighting(xorGateButton);
+        initButtonOnSelectHighlighting(trashButton);
+        initButtonOnSelectHighlighting(wireCutterButton);
 
         var backNavigationButton = uiElementFactory.create('button');
         backNavigationButton.set('position', [846, 30]);

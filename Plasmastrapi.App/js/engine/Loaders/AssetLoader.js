@@ -1,7 +1,6 @@
 define(['dictionary', 'validator'],
 function (Dictionary, validator) {
 
-    // CLASS AssetLoader
     function AssetLoader() {
         // private variables
         this.__isExecuting = false;

@@ -1,7 +1,6 @@
 ﻿define(['validator'],
 function (validator) {
 
-    // CLASS Base
     function Base(engine) {
         // private variables
         this.__engine = engine;

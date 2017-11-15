@@ -1,7 +1,6 @@
 define(['component'],
 function (Component) {
 
-	// CLASS PoseComponent
 	PoseComponent.prototype = Object.create(Component.prototype);
 	PoseComponent.prototype.constructor = PoseComponent;
 	function PoseComponent(poseHandle) {

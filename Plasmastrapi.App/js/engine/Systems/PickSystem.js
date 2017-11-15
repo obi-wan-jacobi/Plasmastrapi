@@ -1,12 +1,6 @@
 ﻿define(['system', 'container', 'linked-list'],
 function (System, Container, LinkedList) {
 
-    function InputUpdateItem(listener, mousePosition) {
-        this.listener = listener;
-        this.mousePosition = mousePosition;
-    };
-
-    // CLASS PickSystem
     PickSystem.prototype = Object.create(System.prototype);
     PickSystem.prototype.constructor = PickSystem;
     function PickSystem(engine) {
@@ -46,6 +40,10 @@ function (System, Container, LinkedList) {
         this.__mouseComponent.unload();
     };
     PickSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
+        function InputUpdateItem(listener, mousePosition) {
+            this.listener = listener;
+            this.mousePosition = mousePosition;
+        };
         return (function (mouseHandle) {
             this.__container.forEach(function (pickComponent) {
                 this.__inputBuffer[inputBufferKey].push(new InputUpdateItem(pickComponent, mouseHandle.getData()));

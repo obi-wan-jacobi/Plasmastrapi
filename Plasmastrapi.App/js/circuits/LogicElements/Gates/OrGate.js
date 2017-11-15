@@ -1,7 +1,6 @@
 ﻿define(['gate', 'circuits-constants'],
 function (Gate, constants) {
 
-    // CLASS OrGate
     OrGate.prototype = Object.create(Gate.prototype);
     OrGate.prototype.constructor = OrGate;
     function OrGate() {

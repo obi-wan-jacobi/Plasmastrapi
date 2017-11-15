@@ -1,7 +1,6 @@
 define(['dictionary', 'utils', 'utils-config'],
 function(Dictionary, utils) {
 
-    // CLASS Emitter
     function Emitter() {
         this.__events = {};
         this.__eventsBuffer = {};

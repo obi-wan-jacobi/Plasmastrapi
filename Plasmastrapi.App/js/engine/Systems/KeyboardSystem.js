@@ -1,7 +1,6 @@
 ﻿define(['system', 'linked-list', 'position'],
 function (System, LinkedList, Position) {
 
-    // CLASS KeyboardSystem
     KeyboardSystem.prototype = Object.create(System.prototype);
     KeyboardSystem.prototype.constructor = KeyboardSystem;
     function KeyboardSystem(engine) {

@@ -1,7 +1,6 @@
 define(['component'],
 function (Component) {
     
-	// CLASS SpriteComponent
 	SpriteComponent.prototype = Object.create(Component.prototype);
 	SpriteComponent.prototype.constructor = SpriteComponent;
     function SpriteComponent(spriteHandle) {

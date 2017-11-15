@@ -1,7 +1,6 @@
 ﻿define(['terminal', 'container', 'validator'],
 function (Terminal, Container, validator) {
 
-    // CLASS InputTerminal
     InputTerminal.prototype = Object.create(Terminal.prototype);
     InputTerminal.prototype.constructor = InputTerminal;
     function InputTerminal() {

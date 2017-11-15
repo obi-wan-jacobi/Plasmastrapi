@@ -1,7 +1,6 @@
 define(['controller', 'dictionary', 'utils'],
 function (Controller, Dictionary, utils) {
 
-	// CLASS SceneController
 	SceneController.prototype = Object.create(Controller.prototype);
 	SceneController.prototype.constructor = SceneController;
 	function SceneController(engine) {

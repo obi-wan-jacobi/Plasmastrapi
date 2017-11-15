@@ -1,7 +1,6 @@
 ﻿define(['terminal', 'circuits-constants'],
 function (Terminal, constants) {
 
-    // CLASS OutputTerminal
     OutputTerminal.prototype = Object.create(Terminal.prototype);
     OutputTerminal.prototype.constructor = OutputTerminal;
     function OutputTerminal() {

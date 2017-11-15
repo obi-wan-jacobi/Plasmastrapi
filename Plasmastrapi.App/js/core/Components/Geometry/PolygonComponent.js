@@ -1,7 +1,6 @@
 define(['component'],
 function (Component) {
 
-	// CLASS PolygonComponent
 	PolygonComponent.prototype = Object.create(Component.prototype);
 	PolygonComponent.prototype.constructor = PolygonComponent;
     function PolygonComponent(polygonHandle) {

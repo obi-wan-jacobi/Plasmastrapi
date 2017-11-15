@@ -1,7 +1,6 @@
 define(['emitter', 'dictionary', 'validator'],
 function (Emitter, Dictionary, validator) {
 
-    // CLASS Container
     Container.prototype = Object.create(Emitter.prototype);
     Container.prototype.constructor = Container;
     function Container(typeString) {

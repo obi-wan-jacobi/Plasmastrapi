@@ -1,7 +1,6 @@
 define(['base', 'container', 'validator'],
 function (Base, Container, validator) {
 
-    // CLASS Scene
     Scene.prototype = Object.create(Base.prototype);
     Scene.prototype.constructor = Scene;
     function Scene(engine) {

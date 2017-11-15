@@ -1,7 +1,6 @@
 ﻿define(['wire-element', 'validator'],
 function (WireElement, validator) {
 
-    // CLASS Wire
     Wire.prototype = Object.create(WireElement.prototype);
     Wire.prototype.constructor = Wire;
     function Wire() {

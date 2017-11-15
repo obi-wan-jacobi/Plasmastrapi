@@ -1,7 +1,6 @@
 define(['component', 'pose', 'line-handle', 'line', 'validator'],
 function (Component, Pose, LineHandle, Line, validator) {
 
-	// CLASS LineComponent
 	LineComponent.prototype = Object.create(Component.prototype);
 	LineComponent.prototype.constructor = LineComponent;
 	function LineComponent(tailPoseComponent, headPoseComponent, lineDisplaySettings) {

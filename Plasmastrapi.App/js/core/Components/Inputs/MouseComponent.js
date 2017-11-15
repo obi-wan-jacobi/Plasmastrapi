@@ -1,7 +1,6 @@
 define(['component'],
 function (Component) {
 
-    // CLASS MouseComponent
 	MouseComponent.prototype = Object.create(Component.prototype);
 	MouseComponent.prototype.constructor = MouseComponent;
 	function MouseComponent(mouseHandle) {

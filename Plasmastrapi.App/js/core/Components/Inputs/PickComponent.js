@@ -1,7 +1,6 @@
 define(['component', 'validator'],
 function (Component, validator) {
 
-	// CLASS PickComponent
 	PickComponent.prototype = Object.create(Component.prototype);
 	PickComponent.prototype.constructor = PickComponent;
     function PickComponent() {

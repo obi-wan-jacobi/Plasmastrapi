@@ -1,7 +1,6 @@
 define(['container'],
 function (Container) {
 
-    // CLASS EmitterContainer
     EmitterContainer.prototype = Object.create(Container.prototype);
     EmitterContainer.prototype.constructor = EmitterContainer;
     function EmitterContainer() {

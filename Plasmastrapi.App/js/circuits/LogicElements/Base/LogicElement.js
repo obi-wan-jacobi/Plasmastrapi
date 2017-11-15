@@ -1,7 +1,6 @@
 ﻿define(['circuit-element', 'container', 'circuits-constants', 'validator'],
 function (CircuitElement, Container, constants, validator) {
 
-    // CLASS LogicElement
     LogicElement.prototype = Object.create(CircuitElement.prototype);
     LogicElement.prototype.constructor = LogicElement;
     function LogicElement() {

@@ -1,7 +1,6 @@
 define(['base', 'validator'],
 function (Base, validator) {
 
-    // CLASS System
     System.prototype = Object.create(Base.prototype);
     System.prototype.constructor = System;
     function System(engine) {

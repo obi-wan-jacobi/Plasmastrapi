@@ -1,7 +1,6 @@
 define(['emitter', 'dictionary', 'loadable', 'destructible', 'position', 'utils'],
 function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
 
-    // CLASS Entity
     Entity.prototype = Object.create(Emitter.prototype);
     Entity.prototype.constructor = Entity;
     function Entity() {

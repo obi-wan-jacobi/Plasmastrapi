@@ -1,7 +1,6 @@
 define(['component'],
 function (Component) {
     
-	// CLASS ImageComponent
 	ImageComponent.prototype = Object.create(Component.prototype);
 	ImageComponent.prototype.constructor = ImageComponent;
     function ImageComponent(imageHandle) {

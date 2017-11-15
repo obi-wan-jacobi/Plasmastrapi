@@ -1,7 +1,6 @@
 ﻿define(['gate', 'circuits-constants'],
 function (Gate, constants) {
 
-    // CLASS NandGate
     NandGate.prototype = Object.create(Gate.prototype);
     NandGate.prototype.constructor = NandGate;
     function NandGate() {

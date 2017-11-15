@@ -1,7 +1,6 @@
 ﻿define(['controller', 'utils'],
 function (Controller, utils) {
 
-    // CLASS InputController
     InputController.prototype = Object.create(Controller.prototype);
     InputController.prototype.constructor = InputController;
     function InputController(engine) {

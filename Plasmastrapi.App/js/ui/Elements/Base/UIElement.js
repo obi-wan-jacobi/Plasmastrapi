@@ -1,7 +1,6 @@
 ﻿define(['entity', 'primitive', 'display-settings', 'utils', 'ui-config'],
 function (Entity, Primitive, DisplaySettings, utils, config) {
 
-    // CLASS UIElement
     UIElement.prototype = Object.create(Entity.prototype);
     UIElement.prototype.constructor = UIElement;
     function UIElement(engine) {

@@ -1,7 +1,6 @@
 ﻿define(['container'],
 function (Container) {
 
-    // CLASS EntityContainer
     EntityContainer.prototype = Object.create(Container.prototype);
     EntityContainer.prototype.constructor = EntityContainer;
     function EntityContainer(typeString) {

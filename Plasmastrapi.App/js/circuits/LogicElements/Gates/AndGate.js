@@ -1,7 +1,6 @@
 ﻿define(['gate', 'circuits-constants'],
 function (Gate, constants) {
 
-    // CLASS AndGate
     AndGate.prototype = Object.create(Gate.prototype);
     AndGate.prototype.constructor = AndGate;
     function AndGate() {

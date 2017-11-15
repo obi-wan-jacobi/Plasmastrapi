@@ -1,7 +1,6 @@
 define(['system', 'linked-list', 'position'],
 function (System, LinkedList, Position) {
 
-	// CLASS MouseSystem
 	MouseSystem.prototype = Object.create(System.prototype);
 	MouseSystem.prototype.constructor = MouseSystem;
 	function MouseSystem(engine) {

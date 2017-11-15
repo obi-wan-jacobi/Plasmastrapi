@@ -1,7 +1,6 @@
 define(['system'],
 function (System) {
 
-    // CLASS DrawSystem
     DrawSystem.prototype = Object.create(System.prototype);
     DrawSystem.prototype.constructor = DrawSystem;
     function DrawSystem(engine) {

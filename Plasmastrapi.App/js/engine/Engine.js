@@ -1,7 +1,6 @@
 define(['system', 'dictionary', 'utils'],
 function (System, Dictionary, utils) {
 
-	// CLASS Engine
     Engine.prototype = Object.create(System.prototype);
     Engine.prototype.constructor = Engine;
     function Engine(viewport) {

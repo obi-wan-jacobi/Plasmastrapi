@@ -1,7 +1,6 @@
 ﻿define(['component'],
 function (Component) {
 
-    // CLASS KeyboardComponent
     KeyboardComponent.prototype = Object.create(Component.prototype);
     KeyboardComponent.prototype.constructor = KeyboardComponent;
     function KeyboardComponent(keyboardHandle) {

@@ -1,7 +1,6 @@
 define(['emitter', 'enableable', 'destructible', 'loadable', 'drawable', 'utils'],
 function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
 
-    // CLASS Component
     Component.prototype = Object.create(Emitter.prototype);
     Component.prototype.constructor = Component;
     function Component(/* optional */ dataHandle) {

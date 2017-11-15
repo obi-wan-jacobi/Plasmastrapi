@@ -40,6 +40,7 @@ function (System, Container, LinkedList) {
         this.__mouseComponent.unload();
     };
     PickSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
+        // *** closures ***
         function InputUpdateItem(listener, mousePosition) {
             this.listener = listener;
             this.mousePosition = mousePosition;

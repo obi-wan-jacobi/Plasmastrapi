@@ -5,7 +5,6 @@ function (Controller, utils) {
     LabController.prototype.constructor = LabController;
     function LabController(engine) {
         Controller.call(this, engine);
-        this.__logicElementFactory = null;
         this.__inputController = null;
         this.__designArea = null;
         this.__designAreaPickComponent = null;
@@ -13,12 +12,12 @@ function (Controller, utils) {
         this.__previousState = null;
         this.__target = null;
         this.__hotkeys = {};
+        this.__isRepeatLastActionOn = false;
         this.__activeSelection = null;
     };
     // private methods
     LabController.prototype.__oninit = function () {
         Controller.prototype.__oninit.call(this);
-        this.__logicElementFactory = this.__engine.getFactory('logic-element-factory');
         this.__inputController = this.__engine.getController('input-controller');
     };
     LabController.prototype.__initDesignArea = function (panel) {
@@ -31,7 +30,7 @@ function (Controller, utils) {
         if (!this.__state) {
             return this.__deactivate();
         }
-        if (this.__state === this.__previousState) {
+        if (this.__state === this.__previousState && this.__state === 'idle') {
             return;
         }
         this[`__${this.__state}`](this.__target);
@@ -60,8 +59,7 @@ function (Controller, utils) {
         this.__inputController.setHandler('placing-tool', [logicElement]);
     };
     LabController.prototype.__spawn = function (logicElementString) {
-        var logicElement = this.__logicElementFactory.create(logicElementString);
-        this.__place(logicElement);
+        this.__inputController.setHandler('spawning-tool', [logicElementString]);
     };
     LabController.prototype.__wire = function (terminal) {
         this.__target = null;
@@ -83,19 +81,19 @@ function (Controller, utils) {
         };
         button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
     };
-    LabController.prototype.setWireCutterButton = function (button, hotkey) {
+    LabController.prototype.setTrashButton = function (button, hotkey) {
         var self = this;
         this.__hotkeys[hotkey] = function () {
-            self.cut();
+            self.trash();
             self.__activeSelection = button.getComponent('pick-component');
             self.__activeSelection.select();
         };
         button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
     };
-    LabController.prototype.setTrashButton = function (button, hotkey) {
+    LabController.prototype.setWireCutterButton = function (button, hotkey) {
         var self = this;
         this.__hotkeys[hotkey] = function () {
-            self.trash();
+            self.cut();
             self.__activeSelection = button.getComponent('pick-component');
             self.__activeSelection.select();
         };
@@ -132,6 +130,10 @@ function (Controller, utils) {
         return target;
     };
     LabController.prototype.idle = function () {
+        if (this.__isRepeatLastActionOn) {
+            this.__activate();
+            return;
+        }
         this.__set('idle', null);
     };
     LabController.prototype.place = function (logicElement) {
@@ -152,6 +154,12 @@ function (Controller, utils) {
     LabController.prototype.cut = function () {
         this.__set('cut', null);
     };
+    LabController.prototype.setRepeatLastActionOn = function () {
+        this.__isRepeatLastActionOn = true;
+    }
+    LabController.prototype.setRepeatLastActionOff = function () {
+        this.__isRepeatLastActionOn = false;
+    }
     LabController.prototype.hotkey = function (key) {
         if (this.__hotkeys[key]) {
             this.__hotkeys[key]();

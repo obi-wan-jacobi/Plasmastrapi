@@ -29,8 +29,7 @@ function (InputHandler) {
     LabHotkeyHandler.prototype.keydown = function (keyboardHandle) {
         this.__labController.hotkey(keyboardHandle.getKeyString());
     };
-    LabHotkeyHandler.prototype.keyup = function (keyboardHandle) {
-        
+    LabHotkeyHandler.prototype.keyup = function (keyboardHandle) { 
     };
     LabHotkeyHandler.prototype.enter = function () {
     };

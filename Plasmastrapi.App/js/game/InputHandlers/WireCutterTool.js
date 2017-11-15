@@ -32,9 +32,20 @@ function (InputHandler) {
         this.__outputTerminalContainer.forEach(enableElement);
     };
     // public methods
-    WireCutterTool.prototype.keydown = function () {
+    WireCutterTool.prototype.keydown = function (keyboardHandle) {
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOn();
+        } else {
+            this.__labController.hotkey(keyboardHandle.getKeyString());
+        }
     };
-    WireCutterTool.prototype.keyup = function () {
+    WireCutterTool.prototype.keyup = function (keyboardHandle) {
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOff();
+            this.__labController.idle();
+        }
     };
     WireCutterTool.prototype.enter = function () {
     };
@@ -55,6 +66,7 @@ function (InputHandler) {
     };
     WireCutterTool.prototype.dispose = function () {
         this.unload();
+        this.__labController.setRepeatLastActionOff();
     };
 
     return WireCutterTool;

@@ -10,6 +10,7 @@
         // Input Handlers
         'lab-hotkey-handler': './game/InputHandlers/LabHotkeyHandler',
         'placing-tool': './game/InputHandlers/PlacingTool',
+        'spawning-tool': './game/InputHandlers/SpawningTool',
         'trash-tool': './game/InputHandlers/TrashTool',
         'wire-tool': './game/InputHandlers/WireTool',
         'wire-cutter-tool': './game/InputHandlers/WireCutterTool',

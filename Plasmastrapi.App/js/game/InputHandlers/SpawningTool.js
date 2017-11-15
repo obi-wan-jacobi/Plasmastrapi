@@ -1,9 +1,9 @@
 ﻿define(['input-handler'],
 function (InputHandler) {
 
-    PlacingTool.prototype = Object.create(InputHandler.prototype);
-    PlacingTool.prototype.constructor = PlacingTool;
-    function PlacingTool(engine, target) {
+    SpawningTool.prototype = Object.create(InputHandler.prototype);
+    SpawningTool.prototype.constructor = SpawningTool;
+    function SpawningTool(engine, logicElementString) {
         InputHandler.call(this, engine);
         this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
         this.__wireContainer = this.__engine.getFactory('wire-factory').getContainer();
@@ -11,18 +11,18 @@ function (InputHandler) {
         this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
-        this.__target = target;
+        this.__target = this.__engine.getFactory('logic-element-factory').create(logicElementString);
         this.__targetPoseComponent = this.__target.getComponent('pose-component');
     };
     // private methods
-    PlacingTool.prototype.__oninit = function () {
+    SpawningTool.prototype.__oninit = function () {
         var position = this.__targetPoseComponent.getHandle().getPosition();
         if (position.x === 0 && position.y === 0) {
             var currentMousePosition = this.__engine.getController('input-controller').getMousePosition();
             this.__targetPoseComponent.getHandle().setPosition(currentMousePosition);
         }
     };
-    PlacingTool.prototype.__onload = function () {
+    SpawningTool.prototype.__onload = function () {
         // Disable everything
         function disableElement(element) {
             element.getComponent('pick-component').disable();
@@ -34,7 +34,7 @@ function (InputHandler) {
         // Set cursor
         this.__cursorController.setMove();
     };
-    PlacingTool.prototype.__onunload = function () {
+    SpawningTool.prototype.__onunload = function () {
         // Re-enable everything
         function enableElement(element) {
             element.getComponent('pick-component').enable();
@@ -47,33 +47,46 @@ function (InputHandler) {
         this.__cursorController.setDefault();
     };
     // public methods
-    PlacingTool.prototype.keydown = function (keyboardHandle) {
-        this.__labController.hotkey(keyboardHandle.getKeyString());
+    SpawningTool.prototype.keydown = function (keyboardHandle) {
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOn();
+        } else {
+            this.__labController.hotkey(keyboardHandle.getKeyString());
+        }
     };
-    PlacingTool.prototype.keyup = function (keyboardHandle) {
+    SpawningTool.prototype.keyup = function (keyboardHandle) {
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOff();
+            this.__labController.idle();
+        }
     };
-    PlacingTool.prototype.enter = function () {
+    SpawningTool.prototype.enter = function () {
     };
-    PlacingTool.prototype.escape = function () {
+    SpawningTool.prototype.escape = function () {
     };
-    PlacingTool.prototype.mousemove = function (position) {
+    SpawningTool.prototype.mousemove = function (position) {
         this.__targetPoseComponent.getHandle().setPosition(position);
     };
-    PlacingTool.prototype.mousedown = function () {
+    SpawningTool.prototype.mousedown = function () {
     };
-    PlacingTool.prototype.mouseup = function () {
+    SpawningTool.prototype.mouseup = function () {
     };
-    PlacingTool.prototype.click = function () {
+    SpawningTool.prototype.click = function () {
+        this.__target = null;
+        this.__targetPoseComponent = null;
         this.__labController.idle();
     };
-    PlacingTool.prototype.dispose = function () {
+    SpawningTool.prototype.dispose = function () {
         this.unload();
         if (this.__target) {
-            this.__labController.getDesignArea().confine(this.__target);
+            this.__target.destroy();
         }
         this.__target = null;
         this.__targetPoseComponent = null;
+        this.__labController.setRepeatLastActionOff();
     };
 
-    return PlacingTool;
+    return SpawningTool;
 });

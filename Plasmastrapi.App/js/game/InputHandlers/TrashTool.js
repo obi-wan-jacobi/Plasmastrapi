@@ -32,9 +32,20 @@ function (InputHandler) {
         this.__outputTerminalContainer.forEach(enableElement);
     };
     // public methods
-    TrashTool.prototype.keydown = function () {
+    TrashTool.prototype.keydown = function (keyboardHandle) {
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOn();
+        } else {
+            this.__labController.hotkey(keyboardHandle.getKeyString());
+        }
     };
-    TrashTool.prototype.keyup = function () {
+    TrashTool.prototype.keyup = function (keyboardHandle) {
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOff();
+            this.__labController.idle();
+        }
     };
     TrashTool.prototype.enter = function () {
     };
@@ -56,6 +67,7 @@ function (InputHandler) {
     };
     TrashTool.prototype.dispose = function () {
         this.unload();
+        this.__labController.setRepeatLastActionOff();
     };
 
     return TrashTool;

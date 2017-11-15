@@ -12,7 +12,9 @@ function (ComponentContainer, Container) {
         // Items that become unloaded or disabled while being hosted in the staging buffer must
         // subsequently be removed from the staging buffer.
         var idx = this.__stagingBuffer.indexOf(component);
-        this.__stagingBuffer.splice(idx, 1);
+        if (idx > -1) {
+            this.__stagingBuffer.splice(idx, 1);
+        }
     };
     PickComponentContainer.prototype.__onComponentLoad = function (component) {
         if (component.isEnabled) {

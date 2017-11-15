@@ -8,6 +8,8 @@
         this.__displaySettingsFactory = null;
         this.__componentFactory = null;
         this.__circuitElementFactory = null;
+        this.__labController = null;
+        this.__cursorController = null;
     };
     // private methods
     WireFactory.prototype.__oninit = function () {
@@ -15,6 +17,8 @@
         this.__displaySettingsFactory = this.__engine.getFactory('display-settings-factory');
         this.__componentFactory = this.__engine.getFactory('component-factory');
         this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
+        this.__labController = this.__engine.getController('lab-controller');
+        this.__cursorController = this.__engine.getController('cursor-controller');
     };
     // public methods
     WireFactory.prototype.create = function (wireElementString, tailElement, headElement) {
@@ -38,7 +42,26 @@
         wireElement.connectTail(tailElement);
         wireElement.connectHead(headElement);
         if (utils.validator.isInstanceOfType(wireElement, 'wire')) {
+            // *** closures ***
             var pickComponent = this.__componentFactory.create('pick-component');
+            var labController = this.__labController;
+            var cursorController = this.__cursorController;
+            function setTarget() {
+                labController.setTarget(wireElement);
+            };
+            function setHoverColour() {
+                var displaySettings = wireElement.getComponent('line-component').getDisplaySettings();
+                displaySettings.strokeStyle = 'red';
+                cursorController.setPointer();
+            };
+            function revertHoverColour() {
+                var displaySettings = wireElement.getComponent('line-component').getDisplaySettings();
+                displaySettings.strokeStyle = config.Wire.noPowerLineColour;
+                cursorController.setDefault();
+            };
+            pickComponent.addEventListener('onpick', wireElement, setTarget);
+            pickComponent.addEventListener('onmouseenter', wireElement, setHoverColour);
+            pickComponent.addEventListener('onmouseleave', wireElement, revertHoverColour);
             wireElement.addComponent(pickComponent);
             this.__container.add(wireElement);
         }

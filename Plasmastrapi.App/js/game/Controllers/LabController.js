@@ -119,6 +119,8 @@ function (Controller, utils) {
             if (utils.validator.isInstanceOfType(target, 'terminal')) {
                 this.wire(target);
             }
+        } else {
+            this.storeTarget(target);
         }
     };
     LabController.prototype.storeTarget = function (target) {

@@ -29,6 +29,10 @@ function (Component, Pose, LineHandle, Line, validator) {
         this.__attachEventTriggerToHandleMethod('setHeadPosition', 'onorientationchange');
 	};
     // private methods
+    LineComponent.prototype.__onload = function () {
+        this.__updatePoseComponent();
+        this.__updatePolygonComponent();
+    };
     LineComponent.prototype.__updateTail = function (poseHandle) {
         this.__handle.setTailPosition(poseHandle.getPosition());
         this.__updatePoseComponent();

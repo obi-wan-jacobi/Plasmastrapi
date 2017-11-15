@@ -5,6 +5,10 @@ function (InputHandler) {
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool(engine, target) {
         InputHandler.call(this, engine);
+        this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
+        this.__wireContainer = this.__engine.getFactory('wire-factory').getContainer();
+        this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();
+        this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
         this.__target = target;
@@ -19,11 +23,27 @@ function (InputHandler) {
         }
     };
     PlacingTool.prototype.__onload = function () {
-        this.__target.getComponent('pick-component').disable();
+        // Disable everything
+        function disableElement(element) {
+            element.getComponent('pick-component').disable();
+        };
+        this.__logicElementContainer.forEach(disableElement);
+        this.__wireContainer.forEach(disableElement);
+        this.__inputTerminalContainer.forEach(disableElement);
+        this.__outputTerminalContainer.forEach(disableElement);
+        // Set cursor
         this.__cursorController.setMove();
     };
     PlacingTool.prototype.__onunload = function () {
-        this.__target.getComponent('pick-component').enable();
+        // Re-enable everything
+        function enableElement(element) {
+            element.getComponent('pick-component').enable();
+        };
+        this.__logicElementContainer.forEach(enableElement);
+        this.__wireContainer.forEach(enableElement);
+        this.__inputTerminalContainer.forEach(enableElement);
+        this.__outputTerminalContainer.forEach(enableElement);
+        // Set cursor
         this.__cursorController.setDefault();
     };
     // public methods

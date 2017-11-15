@@ -66,8 +66,8 @@ function (Factory, utils, config) {
         function onmouseleave() {
             cursorController.setDefault();
         };
-        pickComponent.addEventListener('onpick', logicElement, setTarget);
         pickComponent.addEventListener('onpull', logicElement, setTarget);
+        pickComponent.addEventListener('onpick', logicElement, setTarget);
         pickComponent.addEventListener('onmouseenter', logicElement, onmouseenter);
         pickComponent.addEventListener('onmouseleave', logicElement, onmouseleave);
         logicElement.addComponent(pickComponent);

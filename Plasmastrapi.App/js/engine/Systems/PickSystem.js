@@ -97,6 +97,8 @@ function (System, Container, LinkedList) {
             var pickComponent = updateItem.listener;
             if (pickComponent.isHovered && pickComponent.isPoked) {
                 pickComponent.prod();
+            } else if (pickComponent.isHovered) {
+                pickComponent.pet();
             } else {
                 pickComponent.unpoke();
             }
@@ -112,8 +114,6 @@ function (System, Container, LinkedList) {
             var pickComponent = updateItem.listener;
             if (pickComponent.isProdded) {
                 pickComponent.pick();
-            } else if (pickComponent.isHovered) {
-                pickComponent.pet();
             }
         });
         this.__receiverInputBuffer['click'].forEach(function (updateItem) {

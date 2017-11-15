@@ -30,8 +30,11 @@ function (Emitter, Dictionary, validator) {
         this.emit('onadd', item);
     };
     Container.prototype.remove = function(item) {
-        this.__contents.remove(item);
-        this.emit('onremove', item);
+        var removedItem = this.__contents.remove(item);
+        if (removedItem) {
+            this.emit('onremove', removedItem.key);
+            return removedItem.key
+        }
     };
     Container.prototype.toArray = function () {
         return this.__contents.toArray();

@@ -1,30 +1,28 @@
-﻿define(['factory', 'utils', 'game-config'],
-function (Factory, utils, config) {
+﻿define(['extended-factory', 'utils', 'game-config'],
+function (ExtendedFactory, utils, config) {
 
-    AugmentedTerminalFactory.prototype = Object.create(Factory.prototype);
+    AugmentedTerminalFactory.prototype = Object.create(ExtendedFactory.prototype);
     AugmentedTerminalFactory.prototype.constructor = AugmentedTerminalFactory;
     function AugmentedTerminalFactory(engine) {
-        Factory.call(this, engine);
+        ExtendedFactory.call(this, engine, 'terminal-factory', 'terminal');
         this.__displaySettingsFactory = null;
         this.__componentFactory = null;
-        this.__terminalFactory = null;
         this.__labController = null;
         this.__cursorController = null;
         this.__assetMap = null;
     };
     // private methods
     AugmentedTerminalFactory.prototype.__oninit = function () {
-        Factory.prototype.__oninit.call(this);
+        ExtendedFactory.prototype.__oninit.call(this);
         this.__displaySettingsFactory = this.__engine.getFactory('display-settings-factory');
         this.__componentFactory = this.__engine.getFactory('component-factory');
-        this.__terminalFactory = this.__engine.getFactory('terminal-factory');
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
         this.__assetMap = this.__engine.getAssetMap();
     };
     // public methods
     AugmentedTerminalFactory.prototype.create = function (terminalString) {
-        var terminalElement = this.__terminalFactory.create(terminalString);
+        var terminalElement = ExtendedFactory.prototype.create.call(this, terminalString);
         // add components
         terminalElement.addComponent(this.__componentFactory.create('pose-component'));
         terminalElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [24, 24]));
@@ -66,10 +64,10 @@ function (Factory, utils, config) {
         return terminalElement;
     };
     AugmentedTerminalFactory.prototype.getInputTerminalContainer = function () {
-        return this.__terminalFactory.getInputTerminalContainer();
+        return this.__baseFactory.getInputTerminalContainer();
     };
     AugmentedTerminalFactory.prototype.getOutputTerminalContainer = function () {
-        return this.__terminalFactory.getOutputTerminalContainer();
+        return this.__baseFactory.getOutputTerminalContainer();
     };
 
     return AugmentedTerminalFactory;

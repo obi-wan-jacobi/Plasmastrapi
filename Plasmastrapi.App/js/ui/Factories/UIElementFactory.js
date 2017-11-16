@@ -1,22 +1,14 @@
-﻿define(['factory', 'validator'],
-function (Factory, validator) {
+﻿define(['extended-factory', 'validator'],
+function (ExtendedFactory, validator) {
 
-    UIElementFactory.prototype = Object.create(Factory.prototype);
+    UIElementFactory.prototype = Object.create(ExtendedFactory.prototype);
     UIElementFactory.prototype.constructor = UIElementFactory;
     function UIElementFactory(engine) {
-        Factory.call(this, engine, 'ui-element');
-        this.__entityFactory = null;
-    };
-    // private methods
-    UIElementFactory.prototype.__oninit = function () {
-        Factory.prototype.__oninit.call(this);
-        this.__entityFactory = this.__engine.getFactory('entity-factory');
+        ExtendedFactory.call(this, engine, 'entity-factory', 'ui-element');
     };
     // public methods
     UIElementFactory.prototype.create = function (elementString) {
-        validator.validateClassType(this, elementString, this.__typeString);
-        var uiElement = this.__entityFactory.create(elementString, [this.__engine]);
-        return uiElement;
+        return ExtendedFactory.prototype.create.call(this, elementString, [this.__engine]);
     };
 
     return UIElementFactory;

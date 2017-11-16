@@ -1,23 +1,16 @@
-﻿define(['factory', 'input-terminal-container', 'output-terminal-container', 'utils', 'circuits-config'],
-function (Factory, InputTerminalContainer, OutputTerminalContainer, utils, config) {
+﻿define(['extended-factory', 'input-terminal-container', 'output-terminal-container', 'utils'],
+function (ExtendedFactory, InputTerminalContainer, OutputTerminalContainer, utils) {
 
-    TerminalFactory.prototype = Object.create(Factory.prototype);
+    TerminalFactory.prototype = Object.create(ExtendedFactory.prototype);
     TerminalFactory.prototype.constructor = TerminalFactory;
     function TerminalFactory(engine) {
-        Factory.call(this, engine);
-        this.__circuitElementFactory = null;
+        ExtendedFactory.call(this, engine, 'circuit-element-factory', 'terminal');
         this.__inputTerminalContainer = new InputTerminalContainer();
         this.__outputTerminalContainer = new OutputTerminalContainer();
     };
-    // private methods
-    TerminalFactory.prototype.__oninit = function () {
-        Factory.prototype.__oninit.call(this);
-        this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
-    };
     // public methods
     TerminalFactory.prototype.create = function (terminalString) {
-        utils.validator.validateClassType(this, terminalString, 'terminal');
-        var terminal = this.__circuitElementFactory.create(terminalString);
+        var terminal = ExtendedFactory.prototype.create.call(this, terminalString);
         if (utils.validator.isInstanceOfType(terminal, 'input-terminal')) {
             this.__inputTerminalContainer.add(terminal);
         } else if (utils.validator.isInstanceOfType(terminal, 'output-terminal')) {

@@ -1,35 +1,35 @@
-﻿define(['factory', 'utils', 'game-config'],
-function (Factory, utils, config) {
+﻿define(['extended-factory', 'utils', 'game-config'],
+function (ExtendedFactory, utils, config) {
 
-    AugmentedWireFactory.prototype = Object.create(Factory.prototype);
+    AugmentedWireFactory.prototype = Object.create(ExtendedFactory.prototype);
     AugmentedWireFactory.prototype.constructor = AugmentedWireFactory;
     function AugmentedWireFactory(engine) {
-        Factory.call(this, engine);
+        ExtendedFactory.call(this, engine, 'wire-factory', 'wire-element');
         this.__displaySettingsFactory = null;
         this.__componentFactory = null;
         this.__circuitElementFactory = null;
-        this.__wireFactory = null;
         this.__labController = null;
         this.__cursorController = null;
         this.__assetMap = null;
     };
     // private methods
     AugmentedWireFactory.prototype.__oninit = function () {
-        Factory.prototype.__oninit.call(this);
+        ExtendedFactory.prototype.__oninit.call(this);
         this.__displaySettingsFactory = this.__engine.getFactory('display-settings-factory');
         this.__componentFactory = this.__engine.getFactory('component-factory');
         this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
-        this.__wireFactory = this.__engine.getFactory('wire-factory');
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
         this.__assetMap = this.__engine.getAssetMap();
     };
     // public methods
-    AugmentedWireFactory.prototype.create = function (wireElementString, tailElement, headElement) {
-        var wireElement = this.__wireFactory.create(wireElementString, tailElement, headElement);
+    AugmentedWireFactory.prototype.create = function (wireElementString, args) {
+        var wireElement = ExtendedFactory.prototype.create.call(this, wireElementString, args);
         if (!wireElement) {
             return;
         }
+        var tailElement = args[0];
+        var headElement = args[1];
         // add components
         wireElement.addComponent(this.__componentFactory.create('pose-component'));
         wireElement.addComponent(this.__componentFactory.create('polygon-component'));
@@ -73,7 +73,7 @@ function (Factory, utils, config) {
             utils.validator.validateInstanceType(this, wireAnchorPositionOffset, 'position');
             wireAnchor.follow(terminal, wireAnchorPositionOffset);
         }
-        this.create('terminal-wire', wireAnchor, terminal);
+        this.create('terminal-wire', [wireAnchor, terminal]);
         return wireAnchor;
     };
 

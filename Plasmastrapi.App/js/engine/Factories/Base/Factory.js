@@ -6,6 +6,7 @@ function (Base, utils) {
     function Factory(engine, /* optional */ typeString, /* optional */ containerString) {
         Base.call(this, engine);
         this.__typeString = null;
+        this.__containerString = null;
         this.__container = null;
         if (typeString) {
             utils.validator.validateInstanceType(this, typeString, 'string');
@@ -14,6 +15,7 @@ function (Base, utils) {
         if (containerString) {
             utils.validator.validateClassType(this, containerString, 'container');
             this.__container = new (utils.modules.require(containerString))();
+            this.__containerString = containerString;
         }
     };
     // private methods
@@ -29,8 +31,8 @@ function (Base, utils) {
         utils.validator.validateInstanceType(this, args, 'array');
         utils.validator.validateClassType(this, typeString, this.__typeString);
         var ObjectType = utils.modules.require(typeString);
-        var instance = new (Function.prototype.bind.apply(ObjectType, [null].concat(args)))()
-        if (this.__container) {
+        var instance = new (Function.prototype.bind.apply(ObjectType, [null].concat(args)))();
+        if (this.__container && this.__containerString) {
             this.__container.add(instance);
         }
         return instance;

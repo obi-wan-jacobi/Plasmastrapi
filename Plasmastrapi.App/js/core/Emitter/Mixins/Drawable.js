@@ -1,41 +1,23 @@
-define(function () {
+define(['mixin'],
+function (Mixin) {
 
+    Drawable.prototype = Object.create(Mixin.prototype);
+    Drawable.prototype.constructor = Drawable;
     function Drawable() {
-        var target = this; 
-        target.__isVisible = false;
-        Object.defineProperties(target, {
-            'isDrawable': {
-                get: function () {
-                    return true;
-                }
-            },
-            'isVisible': {
-                get: function () {
-                    return this.__isVisible;
-                }
-            }
-        });
-        target.show = Drawable.prototype.show;
-        target.hide = Drawable.prototype.hide;
-        target.draw = Drawable.prototype.draw;
-        target.registerEvents(
+        Mixin.call(this, 'drawable', ['loadable']);
+        Mixin.prototype.defineProperty.call(this, 'isVisible', false);
+        this.registerEvents(
             'onshow',
             'onhide'
         );
-        var fnOnLoadProxy = target.__onload || function () { };
-        target.__onload = function (isVisibleByDefault) {
-            fnOnLoadProxy.call(this);
-            if (isVisibleByDefault || isVisibleByDefault === undefined) {
-                this.show();
-            }
-	    };
-	    var fnOnUnloadProxy = target.__onunload || function () { };
-	    target.__onunload = function () {
-	        fnOnUnloadProxy.call(this);
-	        this.hide();
-	    };
     };
     // public methods
+    Drawable.prototype.__onload = function () {
+        this.show();
+    };
+    Drawable.prototype.__onunload = function () {
+        this.hide();
+    };
 	Drawable.prototype.show = function () {
 	    if (this.__isVisible) {
             return;
@@ -51,6 +33,9 @@ define(function () {
         this.emit('onhide');
     };
     Drawable.prototype.draw = function (ctx) {
+        if (!this.__isVisible) {
+            return;
+        }
         var poseHandle = this.__entity.getComponent('pose-component').getHandle();
         var position = poseHandle.getPosition();
         var orientation = poseHandle.getOrientation();

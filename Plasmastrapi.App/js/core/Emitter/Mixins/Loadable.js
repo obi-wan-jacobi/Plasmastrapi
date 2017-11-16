@@ -1,31 +1,13 @@
-﻿define(['validator'], function (validator) {
+﻿define(['mixin', 'validator'],
+function (Mixin, validator) {
 
+    Loadable.prototype = Object.create(Mixin.prototype);
+    Loadable.prototype.constructor = Loadable;
     function Loadable() {
-        var target = this;
-        validator.validateInstanceType(target, target, 'emitter');
-        target.__isLoaded = false;
-        target.__isInitialized = false;
-        Object.defineProperties(target, {
-            'isLoadable': {
-                get: function () {
-                    return true;
-                }
-            },
-            'isLoaded': {
-                get: function () {
-                    return this.__isLoaded;
-                }
-            },
-            'isInitialized': {
-                get: function () {
-                    return this.__isInitialized;
-                }
-            }
-        });
-        target.load = Loadable.prototype.load;
-        target.unload = Loadable.prototype.unload;
-        target.reload = Loadable.prototype.reload;
-        target.registerEvents(
+        Mixin.call(this, 'loadable');
+        Mixin.prototype.defineProperty.call(this, 'isLoaded', false);
+        Mixin.prototype.defineProperty.call(this, 'isInitialized', false);
+        this.registerEvents(
             'oninit',
             'onload',
             'onunload'

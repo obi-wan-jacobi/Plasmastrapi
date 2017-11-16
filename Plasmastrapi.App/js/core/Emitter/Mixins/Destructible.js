@@ -1,23 +1,12 @@
-﻿define(['validator'], function (validator) {
+﻿define(['mixin', 'validator'],
+function (Mixin, validator) {
 
+    Destructible.prototype = Object.create(Mixin.prototype);
+    Destructible.prototype.constructor = Destructible;
     function Destructible() {
-        var target = this;
-        validator.validateInstanceType(target, target, 'emitter');
-        target.__isDestroyed = false;
-        Object.defineProperties(target, {
-            'isDestructible': {
-                get: function () {
-                    return true;
-                }
-            },
-            'isDestroyed': {
-                get: function () {
-                    return this.__isDestroyed;
-                }
-            }
-        });
-        target.destroy = Destructible.prototype.destroy;
-        target.registerEvents(
+        Mixin.call(this, 'destructible');
+        Mixin.prototype.defineProperty.call(this, 'isDestroyed', false);
+        this.registerEvents(
             'ondestroy'
         );
     };

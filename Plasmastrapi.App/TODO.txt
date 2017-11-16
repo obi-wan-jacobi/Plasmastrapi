@@ -9,7 +9,9 @@ needs testing:
 - 
 
 in progress:
-- 
+- validator --> utils.validator
+- bind.apply --> apply
+- entity.destroy --> emit('mouseleave')
 
 tech debt:
 - general

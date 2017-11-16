@@ -4,19 +4,8 @@ function (Decorator, utils, config) {
     EasyCompositionDecorator.prototype = Object.create(Decorator.prototype);
     EasyCompositionDecorator.prototype.constructor = EasyCompositionDecorator;
     function EasyCompositionDecorator(engine) {
-        Decorator.call(this, engine, EasyCompositionDecorator.prototype);
-        this.__componentFactory = this.__engine.getFactory('component-factory');
-        // add private methods
-        Decorator.prototype.addMethod.call(this, '__validateDisplaySettingsProperty');
-        Decorator.prototype.addMethod.call(this, '__validateImageExists');
-        Decorator.prototype.addMethod.call(this, '__setData');
-        Decorator.prototype.addMethod.call(this, '__setDisplaySettings');
-        Decorator.prototype.addMethod.call(this, '__setComponent');
-        Decorator.prototype.addMethod.call(this, '__setEventListener');
-        Decorator.prototype.addMethod.call(this, '__setImage');
-        // add public methods
-        Decorator.prototype.addMethod.call(this, 'set');
-        Decorator.prototype.addMethod.call(this, 'getOrInitComponent');
+        Decorator.call(this, engine, 'easy-composition-decorator');
+        Decorator.prototype.addProperty.call(this, '__componentFactory', this.__engine.getFactory('component-factory'));
     };
     // private methods
     EasyCompositionDecorator.prototype.__validateDisplaySettingsProperty = function (displaySettings, propertyName) {

@@ -1,24 +1,12 @@
-﻿define(['validator'], function (validator) {
+﻿define(['mixin', 'validator'],
+function (Mixin, validator) {
 
+    Enableable.prototype = Object.create(Mixin.prototype);
+    Enableable.prototype.constructor = Enableable;
     function Enableable() {
-        var target = this;
-        validator.validateInstanceType(target, target, 'emitter');
-        target.__isEnabled = true;
-        Object.defineProperties(target, {
-            'isEnableable': {
-                get: function () {
-                    return true;
-                }
-            },
-            'isEnabled': {
-                get: function () {
-                    return this.__isEnabled;
-                }
-            }
-        });
-        target.enable = Enableable.prototype.enable;
-        target.disable = Enableable.prototype.disable;
-        target.registerEvents(
+        Mixin.call(this, 'enableable');
+        Mixin.prototype.defineProperty.call(this, 'isEnabled', true);
+        this.registerEvents(
             'onenable',
             'ondisable'
         );

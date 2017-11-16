@@ -62,6 +62,7 @@
         // Emitter
         'emitter': './core/Emitter/Emitter',
             // --- Mixins ---
+            'mixin': './core/Emitter/Mixins/Base/Mixin',
             'destructible': './core/Emitter/Mixins/Destructible',
             'drawable': './core/Emitter/Mixins/Drawable',
             'enableable': './core/Emitter/Mixins/Enableable',

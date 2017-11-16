@@ -1,22 +1,11 @@
-﻿define(['factory', 'validator'],
-function (Factory, validator) {
+﻿define(['extended-factory', 'validator'],
+function (ExtendedFactory, validator) {
 
-    CircuitElementFactory.prototype = Object.create(Factory.prototype);
+    CircuitElementFactory.prototype = Object.create(ExtendedFactory.prototype);
     CircuitElementFactory.prototype.constructor = CircuitElementFactory;
     function CircuitElementFactory(engine) {
-        Factory.call(this, engine, 'circuit-element');
+        ExtendedFactory.call(this, engine, 'entity-factory', 'circuit-element');
         this.__entityFactory = null;
-    };
-    // private methods
-    CircuitElementFactory.prototype.__oninit = function () {
-        Factory.prototype.__oninit.call(this);
-        this.__entityFactory = this.__engine.getFactory('entity-factory');
-    };
-    // public methods
-    CircuitElementFactory.prototype.create = function (elementString) {
-        validator.validateClassType(this, elementString, this.__typeString);
-        var circuitElement = this.__entityFactory.create(elementString);
-        return circuitElement;
     };
 
     return CircuitElementFactory;

@@ -1,14 +1,13 @@
-﻿define(['factory', 'utils', 'game-config'],
-function (Factory, utils, config) {
+﻿define(['extended-factory', 'utils', 'game-config'],
+function (ExtendedFactory, utils, config) {
 
-    AugmentedLogicElementFactory.prototype = Object.create(Factory.prototype);
+    AugmentedLogicElementFactory.prototype = Object.create(ExtendedFactory.prototype);
     AugmentedLogicElementFactory.prototype.constructor = AugmentedLogicElementFactory;
     function AugmentedLogicElementFactory(engine) {
-        Factory.call(this, engine);
+        ExtendedFactory.call(this, engine, 'logic-element-factory', 'logic-element');
         this.__primitiveFactory = null;
         this.__displaySettingsFactory = null;
         this.__componentFactory = null;
-        this.__logicElementFactory = null;
         this.__terminalFactory = null;
         this.__wireFactory = null;
         this.__labController = null;
@@ -17,11 +16,10 @@ function (Factory, utils, config) {
     };
     // private methods
     AugmentedLogicElementFactory.prototype.__oninit = function () {
-        Factory.prototype.__oninit.call(this);
+        ExtendedFactory.prototype.__oninit.call(this);
         this.__primitiveFactory = this.__engine.getFactory('primitive-factory');
         this.__displaySettingsFactory = this.__engine.getFactory('display-settings-factory');
         this.__componentFactory = this.__engine.getFactory('component-factory');
-        this.__logicElementFactory = this.__engine.getFactory('logic-element-factory');
         this.__terminalFactory = this.__engine.getFactory('augmented-terminal-factory');
         this.__wireFactory = this.__engine.getFactory('augmented-wire-factory');
         this.__labController = this.__engine.getController('lab-controller');
@@ -30,7 +28,7 @@ function (Factory, utils, config) {
     };
     // public methods
     AugmentedLogicElementFactory.prototype.create = function (logicElementString) {
-        var logicElement = this.__logicElementFactory.create(logicElementString);
+        var logicElement = ExtendedFactory.prototype.create.call(this, logicElementString);
         // add components
         logicElement.addComponent(this.__componentFactory.create('pose-component'));
         logicElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [30, 30]));

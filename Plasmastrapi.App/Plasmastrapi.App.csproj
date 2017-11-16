@@ -82,6 +82,7 @@
     <Content Include="js\core\Configuration\debug.js" />
     <Content Include="js\engine\Containers\EntityContainer.js" />
     <Content Include="js\engine\Controllers\ViewportController.js" />
+    <Content Include="js\engine\Factories\Base\ExtendedFactory.js" />
     <Content Include="js\engine\Factories\DataHandleFactory.js" />
     <Content Include="js\engine\Factories\DisplaySettingsFactory.js" />
     <Content Include="js\engine\Factories\PrimitiveFactory.js" />

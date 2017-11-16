@@ -66,9 +66,9 @@ function (InputHandler, validator) {
         var terminal = this.__labController.flushTarget();
         if (terminal) {
             if (validator.isInstanceOfType(terminal, 'input-terminal')) {
-                this.__wireFactory.create('wire', this.__target, terminal);
+                this.__wireFactory.create('wire', [this.__target, terminal]);
             } else if (validator.isInstanceOfType(terminal, 'output-terminal')) {
-                this.__wireFactory.create('wire', terminal, this.__target);
+                this.__wireFactory.create('wire', [terminal, this.__target]);
             } else {
                 validator.throw(this, 'onclick',
                     `Wiring attempt made on incompatible types: ${this.__target.constructor.name} + ${terminal.constructor.name}`

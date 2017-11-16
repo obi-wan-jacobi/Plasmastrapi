@@ -19,6 +19,7 @@
         'viewport-controller': './engine/Controllers/ViewportController',
         // Factories
         'factory': './engine/Factories/Base/Factory',
+        'extended-factory': './engine/Factories/Base/ExtendedFactory',
         'component-factory': './engine/Factories/ComponentFactory',
         'data-handle-factory': './engine/Factories/DataHandleFactory',
         'display-settings-factory': './engine/Factories/DisplaySettingsFactory',

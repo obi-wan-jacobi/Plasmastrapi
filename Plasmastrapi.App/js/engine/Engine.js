@@ -4,7 +4,8 @@ function (System, Dictionary, utils) {
     Engine.prototype = Object.create(System.prototype);
     Engine.prototype.constructor = Engine;
     function Engine(viewport) {
-        System.call(this);
+        System.call(this, this);
+        delete this.__engine;
         // private variables
         this.__viewport = viewport;
         this.__factories = new Dictionary('factory');

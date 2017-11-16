@@ -15,6 +15,7 @@ function (Engine, assetUrls, AssetLoader, utils) {
         this.__addFactory('wire-factory');
         this.__addFactory('terminal-factory');
         this.__addFactory('logic-element-factory');
+        this.__addFactory('decorator-factory');
         this.__addFactory('ui-element-factory');
         this.__addFactory('augmented-logic-element-factory');
         this.__addFactory('augmented-terminal-factory');

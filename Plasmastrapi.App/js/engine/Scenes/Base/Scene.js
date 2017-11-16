@@ -5,10 +5,9 @@ function (Base, Container, validator) {
     Scene.prototype.constructor = Scene;
     function Scene(engine) {
         // inherits from
-        Base.call(this);
+        Base.call(this, engine);
 		// private variables
         this.__entities = new Container('entity');
-        this.__engine = engine;
     };
     // private methods
     Scene.prototype.__oninit = function () { };

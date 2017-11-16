@@ -101,6 +101,8 @@
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
     <Content Include="js\ui\Controllers\CursorController.js" />
+    <Content Include="js\ui\Decorators\Base\Decorator.js" />
+    <Content Include="js\ui\Decorators\EasyCompositionDecorator.js" />
     <Content Include="js\ui\Elements\Button.js" />
     <Content Include="js\ui\Elements\Panel.js" />
     <Content Include="js\core\DataHandles\Graphics\SpriteFrameHandle.js" />
@@ -148,6 +150,7 @@
     <Content Include="js\game\Scenes\LabScene.js" />
     <Content Include="js\game\Scenes\MainMenuScene.js" />
     <Content Include="js\ui\Elements\Base\UIElement.js" />
+    <Content Include="js\ui\Factories\DecoratorFactory.js" />
     <Content Include="js\ui\Factories\UIElementFactory.js" />
     <Content Include="js\utils\Configuration\config.js" />
     <Content Include="js\utils\Logging\logging.js" />

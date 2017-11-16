@@ -44,6 +44,10 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
             }
         }
     };
+    UIElement.prototype.__setComponent = function (componentString) {
+        var component = this.__componentFactory.create(componentString);
+        this.addComponent(component);
+    };
     UIElement.prototype.__setEventListener = function (componentEventString, callback) {
         var componentString = componentEventString.split(':')[0];
         var eventString = componentEventString.split(':')[1];
@@ -70,6 +74,9 @@ function (Entity, Primitive, DisplaySettings, utils, config) {
         if (typeString.includes(':')) {
             return this.__setEventListener(typeString, args[0]);
         }
+        if (typeString.includes('component')) {
+            return this.__setComponent(typeString);
+        };
         if (typeString === 'image') {
             return this.__setImage(args[0]);
         }

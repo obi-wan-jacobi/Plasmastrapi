@@ -5,16 +5,21 @@ function (UIElement, Container, utils) {
     SelectionBox.prototype.constructor = SelectionBox;
     function SelectionBox(engine) {
         UIElement.call(this, engine);
+        this.__primitiveFactory = null;
         this.__logicElementContainer = null;
         this.__contents = new Container('logic-element');
         this.__polygonComponent = null;
         this.__startPosition = null;
+        this.__pullPosition = null;
     };
+    // private methods
     SelectionBox.prototype.__oninit = function () {
         UIElement.prototype.__oninit.call(this);
+        this.__primitiveFactory = this.__engine.getFactory('primitive-factory');
         this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
         this.set('position', [0, 0]);
         this.set('rectangle', [0, 0]);
+        this.set('pick-component');
         this.__polygonComponent = this.getComponent('polygon-component');
     }
     SelectionBox.prototype.__ondestroy = function () {
@@ -24,6 +29,23 @@ function (UIElement, Container, utils) {
             }, this);
         }
     };
+    SelectionBox.prototype.__addIfContains = function (element) {
+        var elementPosition = element.getComponent('pose-component').getHandle().getPosition();
+        if (this.__polygonComponent.getHandle().checkPointCollision(elementPosition)) {
+            if (!this.__contents.get(element)) {
+                this.__contents.add(element);
+                element.getComponent('pick-component').select();
+            }
+        }
+    };
+    // public prototypal variables
+    Object.defineProperties(SelectionBox.prototype, {
+        'isEmpty': {
+            get: function () {
+                return this.__contents.toArray().length === 0;
+            }
+        }
+    });
     // public methods
     SelectionBox.prototype.startAt = function (position) {
         utils.validator.validateInstanceType(this, position, 'position');
@@ -37,16 +59,33 @@ function (UIElement, Container, utils) {
         var height = Math.abs(position.y - this.__startPosition.y);
         this.set('position', [x, y]);
         this.set('rectangle', [width, height]);
-        this.__logicElementContainer.forEach(this.addIfContains, this);
+        this.__logicElementContainer.forEach(this.__addIfContains, this);
     };
-    SelectionBox.prototype.addIfContains = function (element) {
-        var elementPosition = element.getComponent('pose-component').getHandle().getPosition();
-        if (this.__polygonComponent.getHandle().checkPointCollision(elementPosition)) {
-            if (!this.__contents.get(element)) {
-                this.__contents.add(element);
-                element.getComponent('pick-component').select();
-            }
+    SelectionBox.prototype.pullTo = function (position) {
+        if (!this.__pullPosition) {
+            this.__pullPosition = position;
+            return;
         }
+        var pose = this.getComponent('pose-component').getData();
+        var diffX = (position.x - this.__pullPosition.x);
+        var diffY = (position.y - this.__pullPosition.y);
+        var x = pose.x + diffX;
+        var y = pose.y + diffY;
+        this.__pullPosition = position;
+        this.set('position', [x, y]);
+        this.__contents.forEach(function (element) {
+            var elementPosition = element.getComponent('pose-component').getData();
+            x = elementPosition.x + diffX;
+            y = elementPosition.y + diffY;
+            var newPosition = this.__primitiveFactory.create('position', [x, y]);
+            element.getComponent('pose-component').setData(newPosition);
+        }, this);
+    };
+    SelectionBox.prototype.getWidth = function () {
+        return this.getComponent('polygon-component').getData().getWidth();
+    };
+    SelectionBox.prototype.getHeight = function () {
+        return this.getComponent('polygon-component').getData().getHeight();
     };
     SelectionBox.prototype.flushContents = function () {
         var contents = this.__contents;

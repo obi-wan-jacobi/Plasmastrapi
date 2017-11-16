@@ -9,7 +9,6 @@ function (Controller, utils) {
         this.__designArea = null;
         this.__designAreaPickComponent = null;
         this.__state = null;
-        this.__previousState = null;
         this.__target = null;
         this.__hotkeys = {};
         this.__isRepeatLastActionOn = false;
@@ -31,7 +30,6 @@ function (Controller, utils) {
             return this.__deactivate();
         }
         this[`__${this.__state}`](this.__target);
-        this.__previousState = this.__state;
     }
     LabController.prototype.__deactivate = function () {
         this.__state = 'idle';
@@ -50,7 +48,11 @@ function (Controller, utils) {
             this.__activeSelection.deselect();
             this.__activeSelection = null;
         }
-        this.__inputController.setHandler('idle-tool');
+        if (this.__designAreaPickComponent.isHovered) {
+            this.__inputController.setHandler('select-handler');
+        } else {
+            this.__inputController.setHandler('idle-handler');
+        }
     };
     LabController.prototype.__place = function (logicElement) {
         this.__inputController.setHandler('placing-tool', [logicElement]);

@@ -9,7 +9,6 @@ function (UIElement, Container, utils) {
         this.__contents = new Container('logic-element');
         this.__polygonComponent = null;
         this.__startPosition = null;
-        this.__isStarted = false;
     };
     SelectionBox.prototype.__oninit = function () {
         UIElement.prototype.__oninit.call(this);
@@ -25,19 +24,10 @@ function (UIElement, Container, utils) {
             }, this);
         }
     };
-    // public prototypal variables
-    Object.defineProperties(SelectionBox.prototype, {
-        'isStarted': {
-            get: function () {
-                return this.__isStarted;
-            }
-        }
-    });
     // public methods
     SelectionBox.prototype.startAt = function (position) {
         utils.validator.validateInstanceType(this, position, 'position');
         this.__startPosition = position;
-        this.__isStarted = true;
     };
     SelectionBox.prototype.stretchTo = function (position) {
         utils.validator.validateInstanceType(this, position, 'position');

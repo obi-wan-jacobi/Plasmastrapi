@@ -14,12 +14,13 @@
         'augmented-terminal-factory': './game/Factories/AugmentedTerminalFactory',
         'augmented-wire-factory': './game/Factories/AugmentedWireFactory',
         // Input Handlers
-        'idle-tool': './game/InputHandlers/IdleTool',
+        'idle-handler': './game/InputHandlers/IdleHandler',
         'placing-tool': './game/InputHandlers/PlacingTool',
+        'select-handler': './game/InputHandlers/SelectHandler',
         'spawning-tool': './game/InputHandlers/SpawningTool',
         'trash-tool': './game/InputHandlers/TrashTool',
-        'wire-tool': './game/InputHandlers/WireTool',
         'wire-cutter-tool': './game/InputHandlers/WireCutterTool',
+        'wire-tool': './game/InputHandlers/WireTool',
         // Scenes
         'main-menu-scene': './game/Scenes/MainMenuScene',
         'lab-scene': './game/Scenes/LabScene',

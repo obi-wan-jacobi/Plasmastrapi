@@ -52,7 +52,7 @@ function (InputHandler, utils) {
         };
         this.__selectionBox.getComponent('pick-component').addEventListener('onpull', this, pullSelectionBox);
         this.__selectionBox.getComponent('pick-component').addEventListener('onpick', this, placeSelectionBox);
-        // Disable everything else (except wires)
+        // Disable everything else (in addition to wires)
         function disableElement(element) {
             element.getComponent('pick-component').disable();
         };
@@ -61,14 +61,8 @@ function (InputHandler, utils) {
         this.__outputTerminalContainer.forEach(disableElement);
     };
     SelectHandler.prototype.__destroySelectionBox = function () {
-        var selections = this.__selectionBox.flushContents();
-        selections.forEach(function (element) {
-            element.getComponent('pick-component').deselect();
-        });
-        this.__selectionBox.destroy();
-        this.__selectionBox = null;
         if (this.__isSelectionBoxPrioritized) {
-            // Re-enable everything else (except wires)
+            // Re-enable everything else (except wires; they get re-enabled later already)
             function enableElement(element) {
                 element.getComponent('pick-component').enable();
             };
@@ -76,6 +70,12 @@ function (InputHandler, utils) {
             this.__inputTerminalContainer.forEach(enableElement);
             this.__outputTerminalContainer.forEach(enableElement);
         }
+        var selections = this.__selectionBox.flushContents();
+        selections.forEach(function (element) {
+            element.getComponent('pick-component').deselect();
+        });
+        this.__selectionBox.destroy();
+        this.__selectionBox = null;
         this.__isSelectionBoxPrioritized = false;
         this.__isSelectionBoxPersistent = false;
         this.__isSelectionBoxReadyForPlacing = false;

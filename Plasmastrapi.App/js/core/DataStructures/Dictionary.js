@@ -53,10 +53,14 @@ function (Link, validator) {
     };
     Dictionary.prototype.remove = function(key) {
         var previousLink = this.__start;
-        return this.__forEachLink(function (link) {
+        var result = this.__forEachLink(function (link) {
             if (link.get().key === key) {
                 if (link === this.__end) {
-                    this.__end = previousLink;
+                    if (link === this.__start) {
+                        this.__end = null;
+                    } else {
+                        this.__end = previousLink;
+                    }
                 }
                 if (link === this.__start) {
                     this.__start = link.next();
@@ -67,6 +71,7 @@ function (Link, validator) {
             }
             previousLink = link;
         });
+        return result; 
     };
     Dictionary.prototype.get = function (key) {
         return this.__forEachLink(function (link) {

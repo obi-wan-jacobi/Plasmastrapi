@@ -49,7 +49,9 @@ function (Link, validator) {
         return this.__forEachLink(function (link) {
             var ownedvalue = link.get();
             if (ownedvalue === value) {
-                if (link === this.__end) {
+                if (link === this.__start) {
+                    this.__end = null;
+                } else {
                     this.__end = previousLink;
                 }
                 if (link === this.__start) {

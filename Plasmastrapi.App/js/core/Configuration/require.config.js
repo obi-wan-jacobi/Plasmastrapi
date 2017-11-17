@@ -60,7 +60,7 @@
         'link': './core/DataStructures/Link',
         'linked-list': './core/DataStructures/LinkedList',
         // Emitter
-        'emitter': './core/Emitter/Emitter',
+        'emitter': './core/Emitter/Base/Emitter',
             // --- Mixins ---
             'mixin': './core/Emitter/Mixins/Base/Mixin',
             'destructible': './core/Emitter/Mixins/Destructible',
@@ -69,7 +69,7 @@
             'loadable': './core/Emitter/Mixins/Loadable',
             'pausable': './core/Emitter/Mixins/Pausable',
         // Entity
-        'entity': './core/Entity/Entity'
+        'entity': './core/Entity/Base/Entity'
     };
     require.config({ paths: paths });
     return paths;

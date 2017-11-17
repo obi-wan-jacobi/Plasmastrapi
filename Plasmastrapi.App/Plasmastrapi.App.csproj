@@ -235,8 +235,8 @@
     <Content Include="js\engine\Engine.js" />
     <Content Include="js\core\Components\Base\Component.js" />
     <Content Include="js\engine\Controllers\Base\Controller.js" />
-    <Content Include="js\core\Entity\Entity.js" />
-    <Content Include="js\core\Emitter\Emitter.js" />
+    <Content Include="js\core\Entity\Base\Entity.js" />
+    <Content Include="js\core\Emitter\Base\Emitter.js" />
     <Content Include="js\engine\Loaders\AssetLoader.js" />
     <Content Include="js\engine\Containers\Base\Container.js" />
     <Content Include="js\engine\Scenes\Base\Scene.js" />

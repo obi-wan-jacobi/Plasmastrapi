@@ -19,6 +19,20 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
     Entity.prototype.__onunload = function () { };
     Entity.prototype.__ondestroy = function () { };
     // public methods
+    Entity.prototype.purgeEventListener = function (subscriber) {
+        utils.validator.validateObject(this, subscriber);
+        var moduleName = utils.modules.getModuleName(subscriber);
+        if (moduleName.includes('component')) {
+            if (subscriber === this.getComponent(moduleName)) {
+                return;
+            }
+        }
+        for (var event in this.__events) {
+            if (this.__events.hasOwnProperty(event)) {
+                this.__events[event].remove(subscriber);
+            }
+        }
+    };
     Entity.prototype.addDependency = function (dependency) {
         utils.validator.validateInstanceType(this, dependency, 'entity');
         // wire-up event subscriptions

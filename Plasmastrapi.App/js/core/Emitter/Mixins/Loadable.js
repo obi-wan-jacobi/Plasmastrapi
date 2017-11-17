@@ -13,6 +13,9 @@ function (Mixin, validator) {
             'onunload'
         );
     };
+    Loadable.prototype.__ondestroy = function () {
+        this.unload();
+    };
     Loadable.prototype.load = function () {
         if (this.__isLoaded) {
             return;

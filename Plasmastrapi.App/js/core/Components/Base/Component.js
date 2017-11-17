@@ -26,9 +26,9 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         // inherits from
         Emitter.call(this);
         // apply mixins
+        Loadable.call(this);
         Enableable.call(this);
         Destructible.call(this);
-        Loadable.call(this);
         if (this.__handle && this.__handle.draw) {
             Drawable.call(this);
         }

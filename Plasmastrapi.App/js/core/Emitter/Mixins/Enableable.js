@@ -11,6 +11,9 @@ function (Mixin, validator) {
             'ondisable'
         );
     };
+    Enableable.prototype.__ondestroy = function () {
+        this.disable();
+    };
     Enableable.prototype.enable = function () {
         if (this.__isEnabled) {
             return;

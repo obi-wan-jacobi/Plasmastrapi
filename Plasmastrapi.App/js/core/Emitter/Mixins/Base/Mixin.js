@@ -6,24 +6,24 @@ function (utils) {
         utils.validator.validateInstanceType(this, this, 'emitter');
         utils.validator.validateClassType(this, mixinString, 'mixin');
         utils.validator.validateInstanceType(this, dependencies, 'array');
-        this.__MixinPrototype = utils.modules.require(mixinString).prototype;
+        var MixinPrototype = utils.modules.require(mixinString).prototype;
         for (var i = 0, L = dependencies.length; i < L; i++) {
             var dependency = dependencies[i];
             utils.validator.validateInstanceType(this, dependency, 'string');
             utils.validator.validateClassType(this, dependency, 'mixin');
             var DependencyPrototype = utils.modules.require(dependency).prototype;
             if (!this[`is${DependencyPrototype.constructor.name}`]) {
-                utils.validator.throw(this, this.__MixinPrototype.constructor.name,
-                    `${this.__MixinPrototype.constructor.name} cannot be applied to ${this.constructor.name} because it depends on ${DependencyPrototype.constructor.name}`);
+                utils.validator.throw(this, MixinPrototype.constructor.name,
+                    `${MixinPrototype.constructor.name} cannot be applied to ${this.constructor.name} because it depends on ${DependencyPrototype.constructor.name}`);
             }
         }
-        Mixin.prototype.defineProperty.call(this, `is${this.__MixinPrototype.constructor.name}`, function () { return true; });
-        for (var propertyName in this.__MixinPrototype) {
-            if (this.__MixinPrototype.hasOwnProperty(propertyName) && !(propertyName === 'constructor')) {
+        Mixin.prototype.defineProperty.call(this, `is${MixinPrototype.constructor.name}`, function () { return true; });
+        for (var propertyName in MixinPrototype) {
+            if (MixinPrototype.hasOwnProperty(propertyName) && !(propertyName === 'constructor')) {
                 if (propertyName.slice(0, 2) === '__') {
-                    Mixin.prototype.proxyMethod.call(this, propertyName);
+                    Mixin.prototype.proxyMethod.call(this, MixinPrototype, propertyName);
                 } else {
-                    Mixin.prototype.addMethod.call(this, propertyName);
+                    Mixin.prototype.addMethod.call(this, MixinPrototype, propertyName);
                 }
             }
         }
@@ -55,28 +55,29 @@ function (utils) {
             set: setMethod
         });
     };
-    Mixin.prototype.addMethod = function (methodName) {
+    Mixin.prototype.addMethod = function (MixinPrototype, methodName) {
         utils.validator.validateInstanceType(this, methodName, 'string');
-        if (!this.__MixinPrototype[methodName]) {
-            utils.validator.throw(this, 'addMethod', `${this.__MixinPrototype.constructor.name} does not possess a ${methodName} method`);
+        if (!MixinPrototype[methodName]) {
+            utils.validator.throw(this, 'addMethod', `${MixinPrototype.constructor.name} does not possess a ${methodName} method`);
         }
         if (this[methodName]) {
             utils.validator.throw(this, 'addMethod', `A ${methodName} already exists on ${this.constructor.name}`);
         }
-        this[methodName] = this.__MixinPrototype[methodName];
+        this[methodName] = MixinPrototype[methodName];
     };
-    Mixin.prototype.proxyMethod = function (methodName) {
+    Mixin.prototype.proxyMethod = function (MixinPrototype, methodName) {
         utils.validator.validateInstanceType(this, methodName, 'string');
-        utils.validator.validateFunction(this, this.__MixinPrototype[methodName]);
+        utils.validator.validateFunction(this, MixinPrototype[methodName]);
         if (this[methodName]) {
             utils.validator.validateFunction(this, this[methodName]);
             var proxy = this[methodName];
+            var prototypeMethod = MixinPrototype[methodName];
             this[methodName] = function () {
                 proxy.apply(this, arguments);
-                this.__MixinPrototype[methodName].apply(this, arguments);
+                prototypeMethod.apply(this, arguments);
             };
         } else {
-            this[methodName] = this.__MixinPrototype[methodName];
+            this[methodName] = MixinPrototype[methodName];
         }
     };
 

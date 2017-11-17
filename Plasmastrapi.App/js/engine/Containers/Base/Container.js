@@ -36,7 +36,11 @@ function (Emitter, Dictionary, validator) {
         }
     };
     Container.prototype.toArray = function () {
-        return this.__contents.toArray();
+        var result = [];
+        this.forEach(function (key, value) {
+            result.push(value);
+        });
+        return result;
     };
 
     return Container;

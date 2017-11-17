@@ -8,13 +8,13 @@ function (Mixin, utils) {
         utils.validator.validateInstanceType(this, engine, 'engine');
         utils.validator.validateClassType(this, decoratorString, 'decorator');
         this.__engine = engine;
-        this.__MixinPrototype = utils.modules.require(decoratorString).prototype;
-        for (var propertyName in this.__MixinPrototype) {
-            if (this.__MixinPrototype.hasOwnProperty(propertyName) && !(propertyName === 'constructor')) {
+        var DecoratorPrototype = utils.modules.require(decoratorString).prototype;
+        for (var propertyName in DecoratorPrototype) {
+            if (DecoratorPrototype.hasOwnProperty(propertyName) && !(propertyName === 'constructor')) {
                 if (propertyName.slice(0, 2) === '__') {
-                    Mixin.prototype.proxyMethod.call(this, propertyName);
+                    Mixin.prototype.proxyMethod.call(this, DecoratorPrototype, propertyName);
                 } else {
-                    Mixin.prototype.addMethod.call(this, propertyName);
+                    Mixin.prototype.addMethod.call(this, DecoratorPrototype, propertyName);
                 }
             }
         }

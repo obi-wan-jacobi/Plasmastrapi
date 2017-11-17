@@ -36,9 +36,13 @@ function (Mixin) {
         if (!this.__isVisible) {
             return;
         }
-        var poseHandle = this.__entity.getComponent('pose-component').getHandle();
-        var position = poseHandle.getPosition();
-        var orientation = poseHandle.getOrientation();
+        var poseComponent = this.__entity.getComponent('pose-component');
+        var position, orientation;
+        if (poseComponent) {
+            var poseHandle = poseComponent.getHandle();
+            position = poseHandle.getPosition();
+            orientation = poseHandle.getOrientation();
+        }
         this.__handle.draw(ctx, position, orientation);
     };
 

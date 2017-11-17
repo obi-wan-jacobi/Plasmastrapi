@@ -3,7 +3,7 @@
     LineDisplaySettings.prototype = Object.create(DisplaySettings.prototype);
     LineDisplaySettings.prototype.constructor = LineDisplaySettings;
     function LineDisplaySettings(displayLayer, strokeStyle, lineWidth) {
-        DisplaySettings.call(this, displayLayer);
+        DisplaySettings.call(this, displayLayer || 'none');
         this.strokeStyle = strokeStyle || 'grey';
         this.lineWidth = lineWidth || 1;
     };

@@ -5,8 +5,10 @@ function (Primitive, validator) {
     Curve.prototype.constructor = Curve;
     function Curve(vertices) {
         Primitive.call(this);
-        validator.validateInstanceType(this, vertices, 'vertex');
-        this.vertices = vertices
+        if (vertices) {
+            validator.validateInstanceType(this, vertices, 'vertex');
+        }
+        this.vertices = vertices || [];
     };
 
     return Curve;

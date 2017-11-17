@@ -31,6 +31,7 @@
             'rectangle': './core/Data/Geometry/Rectangle',
             'vertex': './core/Data/Geometry/Vertex',
             // -- Graphics --
+            'curve-display-settings': './core/Data/Graphics/DisplaySettings/CurveDisplaySettings',
             'image-display-settings': './core/Data/Graphics/DisplaySettings/ImageDisplaySettings',
             'line-display-settings': './core/Data/Graphics/DisplaySettings/LineDisplaySettings',
             'polygon-display-settings': './core/Data/Graphics/DisplaySettings/PolygonDisplaySettings',

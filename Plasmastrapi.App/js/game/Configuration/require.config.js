@@ -7,8 +7,6 @@
         'assets': './game/Assets/assets',
         // Controllers
         'lab-controller': './game/Controllers/LabController',
-        // Elements
-        'selection-box': './game/Elements/SelectionBox',
         // Factories
         'augmented-logic-element-factory': './game/Factories/AugmentedLogicElementFactory',
         'augmented-terminal-factory': './game/Factories/AugmentedTerminalFactory',
@@ -24,6 +22,9 @@
         // Scenes
         'main-menu-scene': './game/Scenes/MainMenuScene',
         'lab-scene': './game/Scenes/LabScene',
+        // Tool Helpers
+        'selection-box': './game/ToolHelpers/SelectionBox',
+        'wire-cutter': './game/ToolHelpers/WireCutter',
         // Game
         'game': './game/Game'
     };

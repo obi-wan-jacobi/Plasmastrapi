@@ -16,6 +16,8 @@ function (DataHandle, validator) {
         if (!this.__data) {
             return;
         }
+        validator.validateInstanceType(this, position, 'position');
+        validator.validateInstanceType(this, orientation, 'number');
         var settings = this.__displaySettings;
         ctx.save();
         ctx.translate(position.x, position.y);

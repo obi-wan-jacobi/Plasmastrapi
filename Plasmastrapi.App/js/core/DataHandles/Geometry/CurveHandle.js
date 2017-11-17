@@ -1,5 +1,5 @@
-﻿define(['data-handle'],
-function (DataHandle) {
+﻿define(['data-handle', 'vertex', 'utils'],
+function (DataHandle, Vertex, utils) {
 
     CurveHandle.prototype = Object.create(DataHandle.prototype);
     CurveHandle.prototype.constructor = CurveHandle;
@@ -7,14 +7,15 @@ function (DataHandle) {
         DataHandle.call(this, curve, displaySettings);
     };
     CurveHandle.prototype.lineTo = function (position) {
-        if (!(position instanceof Position)) {
-            validator.throw(this, 'lineTo', `${position.constructor.name} must be an instance of ${Position.name}`);
-        }
-        this.curve.vertices.push(position);
+        utils.validator.validateInstanceType(this, position, 'position');
+        this.__data.vertices.push(new Vertex(position.x, position.y));
     };
     CurveHandle.prototype.draw = function (ctx) {
         var displaySettings = this.__displaySettings;
         var vertices = this.__data.vertices;
+        if (vertices.length < 2) {
+            return;
+        }
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(vertices[0].x, vertices[0].y);

@@ -42,6 +42,7 @@ function (Decorator, utils, config) {
     EasyCompositionDecorator.prototype.__setComponent = function (componentString) {
         var component = this.__componentFactory.create(componentString);
         this.addComponent(component);
+        return component;
     };
     EasyCompositionDecorator.prototype.__setEventListener = function (componentEventString, callback) {
         var componentString = componentEventString.split(':')[0];

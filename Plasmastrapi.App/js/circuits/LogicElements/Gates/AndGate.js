@@ -7,6 +7,9 @@ function (Gate, constants) {
         Gate.call(this);
     };
     AndGate.prototype.updateState = function (incomingState) {
+        // *** FOR TESTING PURPOSES ***
+        incomingState = constants.STATES.NO_POWER;
+        // *** /FOR TESTING PURPOSES ***
         var nextState;
         if (!this.isPowered) {
             nextState = incomingState;

@@ -1,5 +1,5 @@
-﻿define(['data-handle'],
-function (DataHandle) {
+﻿define(['data-handle', 'validator'],
+function (DataHandle, validator) {
     
     TextHandle.prototype = Object.create(DataHandle.prototype);
     TextHandle.prototype.constructor = TextHandle;
@@ -7,6 +7,8 @@ function (DataHandle) {
         DataHandle.call(this, text, textDisplaySettings);
     };
     TextHandle.prototype.draw = function (ctx, position, orientation) {
+        validator.validateInstanceType(this, position, 'position');
+        validator.validateInstanceType(this, orientation, 'number');
         var textDisplaySettings = this.__displaySettings;
         var offset = textDisplaySettings.offset;
         ctx.save();

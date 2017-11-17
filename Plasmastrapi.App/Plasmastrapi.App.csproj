@@ -80,6 +80,7 @@
     <Content Include="js\core\Configuration\config.js" />
     <Content Include="js\core\Configuration\constants.js" />
     <Content Include="js\core\Configuration\debug.js" />
+    <Content Include="js\core\Data\Graphics\DisplaySettings\CurveDisplaySettings.js" />
     <Content Include="js\core\Emitter\Mixins\Base\Mixin.js" />
     <Content Include="js\engine\Containers\EntityContainer.js" />
     <Content Include="js\engine\Controllers\ViewportController.js" />
@@ -98,7 +99,8 @@
     <Content Include="js\game\InputHandlers\TrashTool.js" />
     <Content Include="js\game\InputHandlers\WireCutterTool.js" />
     <Content Include="js\game\InputHandlers\WireTool.js" />
-    <Content Include="js\game\Elements\SelectionBox.js" />
+    <Content Include="js\game\ToolHelpers\SelectionBox.js" />
+    <Content Include="js\game\ToolHelpers\WireCutter.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
@@ -261,7 +263,6 @@
   <ItemGroup>
     <Folder Include="js\circuits\LogicElements\FlipFlops\" />
     <Folder Include="js\circuits\LogicElements\Switches\" />
-    <Folder Include="js\core\DataHandles\Physics\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

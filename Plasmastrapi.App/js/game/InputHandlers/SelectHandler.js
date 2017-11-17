@@ -92,12 +92,9 @@ function (InputHandler, utils) {
     SelectHandler.prototype.escape = function () {
     };
     SelectHandler.prototype.mousemove = function (position) {
-        if (!this.__selectionBox) {
-            return;
-        }
         if (this.__isSelectionBoxBeingPlaced) {
             this.__selectionBox.pullTo(position);
-        } else if (this.__isSelectionBoxPersistent) {
+        } else if (!this.__selectionBox || this.__isSelectionBoxPersistent) {
             return;
         } else {
             this.__selectionBox.stretchTo(position);

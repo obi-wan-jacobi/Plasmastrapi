@@ -33,6 +33,10 @@ function (Component, validator) {
     PickComponent.prototype.__ondisable = function () {
         this.reset();
     };
+    PickComponent.prototype.__ondestroy = function () {
+        this.mouseleave();
+        this.deselect();
+    };
     // public prototypal variables
     Object.defineProperties(PickComponent.prototype, {
         'isPoked': {

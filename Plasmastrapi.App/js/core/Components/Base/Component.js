@@ -37,6 +37,7 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
     Component.prototype.__oninit = function () { };
     Component.prototype.__onload = function () { };
     Component.prototype.__onunload = function () { };
+    Component.prototype.__ondestroy = function () { };
     Component.prototype.__registerDependencyOnLoad = function (subject, event, observer, callback) {
         // *** closures ***
         var self = this;
@@ -93,6 +94,24 @@ function (Emitter, Enableable, Destructible, Loadable, Drawable, utils) {
         this.__entity.addEventListener('onload', this, this.load);
         this.__entity.addEventListener('onunload', this, this.unload);
         this.__entity.addEventListener('ondestroy', this, this.destroy);
+    };
+    Component.prototype.purgeEventListener = function (subscriber) {
+        utils.validator.validateObject(this, subscriber);
+        if (subscriber === this.__entity) {
+            return;
+        }
+        if (utils.validator.isInstanceOfType(subscriber, 'component') && this.__entity) {
+            var componentString = utils.modules.getModuleName(subscriber);
+            var entityComponent = this.__entity.getComponent(componentString);
+            if (subscriber === entityComponent) {
+                return;
+            }
+        }
+        for (var event in this.__events) {
+            if (this.__events.hasOwnProperty(event)) {
+                this.__events[event].remove(subscriber);
+            }
+        }
     };
     Component.prototype.getHandle = function () {
         return this.__handle;

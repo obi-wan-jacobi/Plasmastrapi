@@ -9,7 +9,7 @@ needs testing:
 - 
 
 in progress:
-- entity.destroy --> emit('mouseleave')
+- 
 
 tech debt:
 - general
@@ -26,7 +26,8 @@ tech debt:
 	- refactor all *** closures *** to be prototypal
 	- PolygonHandle point-collision checking is disgusting
 	- PolygonComponent --> combine translate + rotate into one function (leverage a single for-loop)?
-	- entity destruction (EmitterContainer --> destroyed entities unsubscribe from their own components, etc.)
+	- component destruction (EmitterContainer --> destroyed components are unsubscribed from their host entity before post-destruction callbacks resolve)
+	- dependent/child entity destruction (EmitterContainer --> destroyed dependent/child entities are unsubscribed from their host/parent entity before post-destruction callbacks resolve)
 - potential scalability concerns
 	- single-canvas viewport
 

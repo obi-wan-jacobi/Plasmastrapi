@@ -14,7 +14,7 @@
             // -- Graphics --
             'image-component': './core/Components/Graphics/ImageComponent',
             'sprite-component': './core/Components/Graphics/SpriteComponent',
-            'text-component': './core/Components/Graphics/TextComponent',
+            'label-component': './core/Components/Graphics/LabelComponent',
             // -- Inputs --
             'keyboard-component': './core/Components/Inputs/KeyboardComponent',
             'mouse-component': './core/Components/Inputs/MouseComponent',
@@ -36,8 +36,8 @@
             'line-display-settings': './core/Data/Graphics/DisplaySettings/LineDisplaySettings',
             'polygon-display-settings': './core/Data/Graphics/DisplaySettings/PolygonDisplaySettings',
             'pose-display-settings': './core/Data/Graphics/DisplaySettings/PoseDisplaySettings',
-            'text-display-settings': './core/Data/Graphics/DisplaySettings/TextDisplaySettings',
-            'text': './core/Data/Graphics/Text',
+            'label-display-settings': './core/Data/Graphics/DisplaySettings/LabelDisplaySettings',
+            'label': './core/Data/Graphics/Label',
             // -- Physics --
             'acceleration': './core/Data/Physics/Acceleration',
             'velocity': './core/Data/Physics/Velocity',
@@ -52,7 +52,7 @@
             'image-handle': './core/DataHandles/Graphics/ImageHandle',
             //'sprite-frame-handle': './core/DataHandles/Graphics/SpriteFrameHandle',
             //'sprite-handle': './core/DataHandles/Graphics/SpriteHandle',
-            'text-handle': './core/DataHandles/Graphics/TextHandle',
+            'label-handle': './core/DataHandles/Graphics/LabelHandle',
             // -- Inputs --
             'keyboard-handle': './core/DataHandles/Inputs/KeyboardHandle',
             'mouse-handle': './core/DataHandles/Inputs/MouseHandle',

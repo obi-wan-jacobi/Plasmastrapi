@@ -1,28 +1,9 @@
 <!DOCTYPE html>
 
-<style>
-    #stage {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-    }
-
-    #game-canvas {
-        border: solid thin;
-        border-color: white;
-        position: absolute;
-        top: 5%;
-        left: 50%;
-        width: 1500px;
-        height: 700px;
-        transform: translate(-50%,0);
-        background-color: black;
-    }
-</style>
-
 <html>
     <head>
+
+        <link rel="stylesheet" type="text/css" href="css/main.css" /> 
 
         <script>
             // Order matters
@@ -33,12 +14,14 @@
                 'ui/Configuration/require.config',
                 'circuits/Configuration/require.config',
                 'game/Configuration/require.config',
-                'app/Configuration/require.config'
+                'app/config/require.config'
             ];
 
             var require = {
                 baseUrl: 'js/',
-                path: {},
+                paths: {
+                    'text': './lib/text'
+                },
                 deps: dependencies,
                 callback: function () {
                     preloadModulesSynchronously();
@@ -66,15 +49,13 @@
             };
 
         </script>
-        <script src="node_modules/requirejs/require.js"></script>
+        <script src="js/lib/require.js"></script>
 
 	    <title>Plasmastrapi</title>
 
     </head>
 
-    <body bgcolor="black">
-	    <div id="stage">
-		    <canvas id="game-canvas" tabindex="1"></canvas>
-	    </div>
+    <body>
+	    <viewport-container/>
     </body>
 </html>

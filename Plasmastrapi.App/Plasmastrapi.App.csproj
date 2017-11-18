@@ -62,8 +62,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\main.css" />
     <Content Include="favicon.ico" />
-    <Content Include="js\app\Configuration\require.config.js" />
+    <Content Include="js\app\config\components.js" />
+    <Content Include="js\app\ko-components\ko-component\ko-component-model.js" />
+    <Content Include="js\app\ko-components\viewport-container\viewport-container-model.js" />
+    <Content Include="js\app\ko-components\viewport-container\viewport-container-viewmodel.js" />
+    <Content Include="js\app\root.js" />
+    <Content Include="js\app\ko-components\viewport-container\viewport-container-view.html" />
+    <Content Include="js\app\ko-components\ko-component\ko-component-viewmodel.js" />
+    <Content Include="js\app\config\require.config.js" />
     <Content Include="js\circuits\Configuration\config.js" />
     <Content Include="js\circuits\Configuration\constants.js" />
     <Content Include="js\circuits\Configuration\debug.js" />
@@ -101,6 +109,9 @@
     <Content Include="js\game\InputHandlers\WireTool.js" />
     <Content Include="js\game\ToolHelpers\SelectionBox.js" />
     <Content Include="js\game\ToolHelpers\WireCutter.js" />
+    <Content Include="js\lib\knockout-latest.js" />
+    <Content Include="js\lib\require.js" />
+    <Content Include="js\lib\text.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />
@@ -123,7 +134,7 @@
     <Content Include="js\core\Data\Geometry\Position.js" />
     <Content Include="js\core\Data\Geometry\Rectangle.js" />
     <Content Include="js\core\Data\Geometry\Vertex.js" />
-    <Content Include="js\core\Data\Graphics\Text.js" />
+    <Content Include="js\core\Data\Graphics\Label.js" />
     <Content Include="js\engine\Base\Base.js" />
     <Content Include="js\core\DataHandles\Base\DataHandle.js" />
     <Content Include="js\core\DataHandles\Geometry\CurveHandle.js" />
@@ -135,8 +146,8 @@
     <Content Include="js\core\Data\Graphics\DisplaySettings\LineDisplaySettings.js" />
     <Content Include="js\core\Data\Graphics\DisplaySettings\PolygonDisplaySettings.js" />
     <Content Include="js\core\DataHandles\Graphics\SpriteHandle.js" />
-    <Content Include="js\core\Data\Graphics\DisplaySettings\TextDisplaySettings.js" />
-    <Content Include="js\core\DataHandles\Graphics\TextHandle.js" />
+    <Content Include="js\core\Data\Graphics\DisplaySettings\LabelDisplaySettings.js" />
+    <Content Include="js\core\DataHandles\Graphics\LabelHandle.js" />
     <Content Include="js\core\Data\Physics\Acceleration.js" />
     <Content Include="js\engine\Containers\Base\ComponentContainer.js" />
     <Content Include="js\engine\Containers\DrawableComponentContainer.js" />
@@ -163,7 +174,7 @@
     <Content Include="js\utils\Validation\validator.js" />
     <Content Include="js\core\Data\Physics\Velocity.js" />
     <Content Include="js\core\Components\Geometry\CurveComponent.js" />
-    <Content Include="js\core\Components\Graphics\TextComponent.js" />
+    <Content Include="js\core\Components\Graphics\LabelComponent.js" />
     <Content Include="js\engine\Configuration\config.js" />
     <Content Include="js\engine\Configuration\debug.js" />
     <Content Include="js\core\Emitter\Mixins\Destructible.js" />

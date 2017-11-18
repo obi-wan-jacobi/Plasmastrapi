@@ -48,42 +48,42 @@ function (Scene) {
         andGateButton.set('image', ['and-gate']);
         andGateButton.set('position', [30, 25]);
         andGateButton.set('rectangle', [30, 30]);
-        andGateButton.set('text', ['[1]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        andGateButton.set('label', ['[1]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(andGateButton, 'and-gate', '1');
 
         var nandGateButton = uiElementFactory.create('button');
         nandGateButton.set('image', ['nand-gate']);
         nandGateButton.set('position', [75, 25]);
         nandGateButton.set('rectangle', [30, 30]);
-        nandGateButton.set('text', ['[2]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        nandGateButton.set('label', ['[2]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(nandGateButton, 'nand-gate', '2');
 
         var orGateButton = uiElementFactory.create('button')
         orGateButton.set('image', ['or-gate']);
         orGateButton.set('position', [120, 25]);
         orGateButton.set('rectangle', [30, 30]);
-        orGateButton.set('text', ['[3]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        orGateButton.set('label', ['[3]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(orGateButton, 'or-gate', '3');
 
         var xorGateButton = uiElementFactory.create('button');
         xorGateButton.set('image', ['xor-gate']);
         xorGateButton.set('position', [165, 25]);
         xorGateButton.set('rectangle', [30, 30]);
-        xorGateButton.set('text', ['[4]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        xorGateButton.set('label', ['[4]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(xorGateButton, 'xor-gate', '4');
 
         var trashButton = uiElementFactory.create('button');
         trashButton.set('image', ['trashcan']);
         trashButton.set('position', [721, 25]);
         trashButton.set('rectangle', [30, 30]);
-        trashButton.set('text', ['[q]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        trashButton.set('label', ['[q]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setTrashButton(trashButton, 'q');
 
         var wireCutterButton = uiElementFactory.create('button');
         wireCutterButton.set('image', ['wire-cutter-closed']);
         wireCutterButton.set('position', [766, 25]);
         wireCutterButton.set('rectangle', [30, 30]);
-        wireCutterButton.set('text', ['[w]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        wireCutterButton.set('label', ['[w]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setWireCutterButton(wireCutterButton, 'w');
 
         var buttonHighlighter = uiElementFactory.create('panel');
@@ -112,7 +112,7 @@ function (Scene) {
         var backNavigationButton = uiElementFactory.create('button');
         backNavigationButton.set('position', [846, 30]);
         backNavigationButton.set('rectangle', [100, 52]);
-        backNavigationButton.set('text', ['Menu'], { offset: { x: 0, y: 7 } });
+        backNavigationButton.set('label', ['Menu'], { offset: { x: 0, y: 7 } });
         backNavigationButton.set('pick-component:onpick', [function() {
             engine.getController('scene-controller').setScene('main-menu-scene');
         }]);

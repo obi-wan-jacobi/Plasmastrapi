@@ -1,6 +1,20 @@
-define(['game'],
-function (Game) {
-    var canvas = document.getElementById("game-canvas");
-    var game = new Game(canvas);
-    game.start();
+require(['ko'],
+function (ko) {
+    ko.bindingHandlers.afterRender = {
+        init: function (element, valueAccessor, allBindings, viewModel) {
+            var callback = valueAccessor();
+
+            if (typeof callback === 'function') {
+                callback.call(viewModel, element, viewModel);
+            }
+        }
+    };
 });
+
+require(['ko', 'root', 'ko-components', 'logging'],
+function (ko, root, components, logging) {
+    logging.info(root, 'main', 'Register knockout components');
+    components.register();
+    ko.applyBindings(root);
+});
+

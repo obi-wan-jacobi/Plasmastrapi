@@ -3,10 +3,10 @@ function (Engine, assetUrls, AssetLoader, utils) {
 
     Game.prototype = Object.create(Engine.prototype);
     Game.prototype.constructor = Game;
-    function Game(canvas) {
+    function Game(viewport) {
         // initialize asset loader first!
         this.__assetLoader = new AssetLoader();
-        Engine.call(this, canvas);
+        Engine.call(this, viewport);
     };
     // private methods
     Game.prototype.__registerFactories = function () {

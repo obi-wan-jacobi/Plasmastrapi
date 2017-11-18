@@ -1,8 +1,8 @@
 ﻿define(['display-settings'], function (DisplaySettings) {
 
-    TextDisplaySettings.prototype = Object.create(DisplaySettings.prototype);
-    TextDisplaySettings.prototype.constructor = TextDisplaySettings;
-    function TextDisplaySettings(displayLayer, offset, fontSize, font, colour, alignment) {
+    LabelDisplaySettings.prototype = Object.create(DisplaySettings.prototype);
+    LabelDisplaySettings.prototype.constructor = LabelDisplaySettings;
+    function LabelDisplaySettings(displayLayer, offset, fontSize, font, colour, alignment) {
         DisplaySettings.call(this, displayLayer || 'none');
         this.offset = offset || { x: 0, y: 0 };
         this.fontSize = fontSize || 22;
@@ -11,5 +11,5 @@
         this.textAlign = alignment || 'center';
     };
 
-    return TextDisplaySettings;
+    return LabelDisplaySettings;
 });

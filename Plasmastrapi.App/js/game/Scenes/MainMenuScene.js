@@ -11,7 +11,7 @@ function (Scene) {
         var labNavigationButton = engine.getFactory('ui-element-factory').create('button');
         labNavigationButton.set('position', [750, 200]);
         labNavigationButton.set('rectangle', [100, 30]);
-        labNavigationButton.set('text', ['Play'], { offset: { x: 0, y: 7 } });
+        labNavigationButton.set('label', ['Play'], { offset: { x: 0, y: 7 } });
         labNavigationButton.set('pick-component:onpick', [function () {
             engine.getController('scene-controller').setScene('lab-scene');
         }]);

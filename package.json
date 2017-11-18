@@ -18,6 +18,7 @@
   "homepage": "https://github.com/obi-wan-jacobi/Plasmastrapi#readme",
   "dependencies": {
     "knockout": "^3.4.2",
-    "requirejs": "^2.3.5"
+    "requirejs": "^2.3.5",
+    "text": "github:requirejs/text"
   }
 }

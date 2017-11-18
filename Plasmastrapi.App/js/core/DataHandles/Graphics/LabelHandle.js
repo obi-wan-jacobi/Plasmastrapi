@@ -1,12 +1,12 @@
 ﻿define(['data-handle', 'validator'],
 function (DataHandle, validator) {
     
-    TextHandle.prototype = Object.create(DataHandle.prototype);
-    TextHandle.prototype.constructor = TextHandle;
-    function TextHandle(text, textDisplaySettings) {
+    LabelHandle.prototype = Object.create(DataHandle.prototype);
+    LabelHandle.prototype.constructor = LabelHandle;
+    function LabelHandle(text, textDisplaySettings) {
         DataHandle.call(this, text, textDisplaySettings);
     };
-    TextHandle.prototype.draw = function (ctx, position, orientation) {
+    LabelHandle.prototype.draw = function (ctx, position, orientation) {
         validator.validateInstanceType(this, position, 'position');
         validator.validateInstanceType(this, orientation, 'number');
         var textDisplaySettings = this.__displaySettings;
@@ -19,5 +19,5 @@ function (DataHandle, validator) {
         ctx.restore();
     };
 
-    return TextHandle;
+    return LabelHandle;
 });

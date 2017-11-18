@@ -9,6 +9,7 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
         // private variables
         this.__parent = null;
         this.__components = new Dictionary('component');
+        this.__dependencies = new Dictionary('entity');
         // apply mixins
         Loadable.call(this);
         Destructible.call(this);
@@ -21,11 +22,22 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
     // public methods
     Entity.prototype.purgeEventListener = function (subscriber) {
         utils.validator.validateObject(this, subscriber);
+        if (subscriber === this.__parent) {
+            return;
+        }
         var moduleName = utils.modules.getModuleName(subscriber);
         if (moduleName.includes('component')) {
             if (subscriber === this.getComponent(moduleName)) {
                 return;
             }
+        }
+        var isSubscriberADependency = this.__dependencies.forEach(function (dependency) {
+            if (subscriber === dependency) {
+                return true;
+            }
+        }, this);
+        if (isSubscriberADependency) {
+            return;
         }
         for (var event in this.__events) {
             if (this.__events.hasOwnProperty(event)) {
@@ -35,6 +47,7 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
     };
     Entity.prototype.addDependency = function (dependency) {
         utils.validator.validateInstanceType(this, dependency, 'entity');
+        this.__dependencies.add(dependency);
         // wire-up event subscriptions
         dependency.addEventListener('onload', this, this.load);
         dependency.addEventListener('onunload', this, this.unload);

@@ -8,8 +8,18 @@ function (Link, validator) {
         this.__typeString = typeString;
         this.__start = null;
         this.__end = null;
+        this.__length = 0;
     };
     // private methods
+    Dictionary.prototype.__incrementLength = function () {
+        this.__length++;
+    };
+    Dictionary.prototype.__decrementLength = function () {
+        if (this.__length === 0) {
+            return;
+        }
+        this.__length--;
+    };
     Dictionary.prototype.__validateNoDuplicateKeys = function(key) {
         this.forEach(function(linkKey) {
             if (linkKey === key) {
@@ -27,6 +37,14 @@ function (Link, validator) {
             link = link.next();
         }
     };
+    // public prototypal variables
+    Object.defineProperties(Dictionary.prototype, {
+        'length': {
+            get: function () {
+                return this.__length;
+            }
+        }
+    });
     // public methods
     Dictionary.prototype.forEach = function(fn, /* optional */ caller) {
         var link = this.__start;
@@ -39,17 +57,20 @@ function (Link, validator) {
             link = link.next();
         }
     };
-    Dictionary.prototype.add = function (key, value) {
+    Dictionary.prototype.add = function (key, /* optional */ value) {
         this.__validateNoDuplicateKeys(key);
-        validator.validateInstanceType(this, value, this.__typeString);
+        if (value) {
+            validator.validateInstanceType(this, value, this.__typeString);
+        }
         var newLink = new Link({ key, value });
         if (!this.__start) {
             this.__start = newLink;
             this.__end = newLink;
-            return;
+        } else {
+            this.__end.setNext(newLink);
+            this.__end = newLink;
         }
-        this.__end.setNext(newLink);
-        this.__end = newLink;
+        this.__incrementLength();
     };
     Dictionary.prototype.remove = function(key) {
         var previousLink = this.__start;
@@ -67,6 +88,7 @@ function (Link, validator) {
                 } else {
                     previousLink.setNext(link.next());
                 }
+                this.__decrementLength();
                 return link.get();
             }
             previousLink = link;

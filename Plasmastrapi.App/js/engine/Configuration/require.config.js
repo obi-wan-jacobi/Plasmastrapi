@@ -33,6 +33,7 @@
         'asset-loader': './engine/Loaders/AssetLoader',
         // Systems
         'system': './engine/Systems/Base/System',
+        'cache-system': './engine/Systems/CacheSystem',
         'draw-system': './engine/Systems/DrawSystem',
         'keyboard-system': './engine/Systems/KeyboardSystem',
         'mouse-system': './engine/Systems/MouseSystem',

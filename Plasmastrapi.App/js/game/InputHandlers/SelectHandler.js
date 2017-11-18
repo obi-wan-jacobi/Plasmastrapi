@@ -116,8 +116,10 @@ function (InputHandler, utils) {
     SelectHandler.prototype.mouseup = function () {
     };
     SelectHandler.prototype.click = function () {
-        if (this.__selectionBox.isEmpty || this.__isSelectionBoxBeingPlaced) {
-            this.__destroySelectionBox();
+        if (this.__selectionBox) {
+            if (this.__selectionBox.isEmpty || this.__isSelectionBoxBeingPlaced) {
+                this.__destroySelectionBox();
+            }
         } else if (this.__isSelectionBoxReadyForPlacing) {
             this.__isSelectionBoxBeingPlaced = true;
         } else {

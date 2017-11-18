@@ -50,9 +50,11 @@ function (WireElement, validator) {
     // public methods
     Wire.prototype.connectTail = function (terminal) {
         this.connectTerminal(terminal);
+        WireElement.prototype.connectTail.call(this, terminal);
     };
     Wire.prototype.connectHead = function (terminal) {
         this.connectTerminal(terminal);
+        WireElement.prototype.connectHead.call(this, terminal);
     };
     Wire.prototype.connectTerminal = function (terminal) {
         validator.validateInstanceType(this, terminal, 'terminal');

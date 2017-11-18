@@ -62,6 +62,7 @@ function (System, Dictionary, utils) {
         this.__controllers.add(controllerString, new ControllerType(this));
     };
     Engine.prototype.__registerSystems = function () {
+        this.__addSystem('cache-system');
         this.__addSystem('keyboard-system');
         this.__addSystem('mouse-system');
         this.__addSystem('pick-system');

@@ -8,8 +8,18 @@ function (Link, validator) {
         this.__typeString = typeString;
         this.__start = null;
         this.__end = null;
+        this.__length = 0;
     };
     // private methods
+    LinkedList.prototype.__incrementLength = function () {
+        this.__length++;
+    };
+    LinkedList.prototype.__decrementLength = function () {
+        if (this.__length === 0) {
+            return;
+        }
+        this.__length--;
+    };
     LinkedList.prototype.__forEachLink = function (fn) {
         var link = this.__start;
         while (link) {
@@ -21,6 +31,14 @@ function (Link, validator) {
         }
         return result;
     };
+    // public prototypal variables
+    Object.defineProperties(LinkedList.prototype, {
+        'length': {
+            get: function () {
+                return this.__length;
+            }
+        }
+    });
     // public methods
     LinkedList.prototype.forEach = function(fn, /* optional */ caller) {
         var link = this.__start;
@@ -39,10 +57,11 @@ function (Link, validator) {
         if (!this.__start) {
             this.__start = newLink;
             this.__end = newLink;
-            return true;
+        } else {
+            this.__end.setNext(newLink);
+            this.__end = newLink;
         }
-        this.__end.setNext(newLink);
-        this.__end = newLink;
+        this.__incrementLength();
     };
     LinkedList.prototype.splice = function(value) {
         var previousLink = this.__start;
@@ -59,10 +78,24 @@ function (Link, validator) {
                 } else {
                     previousLink.setNext(link.next());
                 }
+                this.__decrementLength();
                 return value;
             }
             previousLink = link;
         });
+    };
+    LinkedList.prototype.shift = function () {
+        var link = this.__start;
+        if (link) {
+            this.__start = link.next();
+            if (link === this.__end) {
+                this.__end = link.next();
+            }
+            link.setNext(null);
+            this.__decrementLength();
+            return link;
+        }
+        return null;
     };
     LinkedList.prototype.contains = function(value) {
         return this.forEach(function (ownedvalue) {

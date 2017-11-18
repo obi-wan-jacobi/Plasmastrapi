@@ -73,6 +73,7 @@ function (ExtendedFactory, utils, config) {
             utils.validator.validateInstanceType(this, wireAnchorPositionOffset, 'position');
             wireAnchor.follow(terminal, wireAnchorPositionOffset);
         }
+        wireAnchor.addDependency(terminal);
         this.create('terminal-wire', [wireAnchor, terminal]);
         return wireAnchor;
     };

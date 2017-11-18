@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,10 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -69,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="js\app\Configuration\require.config.js" />
     <Content Include="js\circuits\Configuration\config.js" />
     <Content Include="js\circuits\Configuration\constants.js" />
     <Content Include="js\circuits\Configuration\debug.js" />
@@ -83,11 +78,16 @@
     <Content Include="js\core\Data\Graphics\DisplaySettings\CurveDisplaySettings.js" />
     <Content Include="js\core\Emitter\Mixins\Base\Mixin.js" />
     <Content Include="js\engine\Containers\EntityContainer.js" />
+    <Content Include="js\engine\Controllers\DiagnosticsController.js" />
     <Content Include="js\engine\Controllers\ViewportController.js" />
     <Content Include="js\engine\Factories\Base\ExtendedFactory.js" />
     <Content Include="js\engine\Factories\DataHandleFactory.js" />
     <Content Include="js\engine\Factories\DisplaySettingsFactory.js" />
     <Content Include="js\engine\Factories\PrimitiveFactory.js" />
+    <Content Include="js\engine\Systems\Base\DiagnosticsSystem.js" />
+    <Content Include="js\engine\Systems\Diagnostics\CacheDiagnosticsSystem.js" />
+    <Content Include="js\engine\Systems\CacheSystem.js" />
+    <Content Include="js\engine\Systems\Diagnostics\ViewportDiagnosticsSystem.js" />
     <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
     <Content Include="js\game\Factories\AugmentedLogicElementFactory.js" />
@@ -194,7 +194,6 @@
     <Content Include="js\engine\InputHandlers\Base\InputHandler.js" />
     <Content Include="js\game\InputHandlers\PlacingTool.js" />
     <Content Include="js\utils\Configuration\require.config.js" />
-    <Content Include="packages.config" />
     <Content Include="README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -252,8 +251,6 @@
     <Content Include="js\engine\Systems\MouseSystem.js" />
     <Content Include="js\game\Game.js" />
     <Content Include="js\circuits\Containers\WireContainer.js" />
-    <Content Include="js\lib\r.js" />
-    <Content Include="js\lib\require.js" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -289,13 +286,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

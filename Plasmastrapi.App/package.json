@@ -1,0 +1,23 @@
+{
+  "name": "plasmastrapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/obi-wan-jacobi/Plasmastrapi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/obi-wan-jacobi/Plasmastrapi/issues"
+  },
+  "homepage": "https://github.com/obi-wan-jacobi/Plasmastrapi#readme",
+  "dependencies": {
+    "knockout": "^3.4.2",
+    "requirejs": "^2.3.5"
+  }
+}

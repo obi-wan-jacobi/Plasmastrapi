@@ -110,6 +110,7 @@
     <Content Include="js\game\InputHandlers\TrashTool.js" />
     <Content Include="js\game\InputHandlers\WireCutterTool.js" />
     <Content Include="js\game\InputHandlers\WireTool.js" />
+    <Content Include="js\game\Systems\Diagnostics\GameCacheDiagnosticsSystem.js" />
     <Content Include="js\game\ToolHelpers\SelectionBox.js" />
     <Content Include="js\game\ToolHelpers\WireCutter.js" />
     <Content Include="js\lib\knockout-latest.js" />

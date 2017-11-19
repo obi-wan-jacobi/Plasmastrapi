@@ -21,7 +21,7 @@
     background-color: black;
 }
 
-#cache-diagnostics-overlay {
+#diagnostics-overlay {
     position: fixed;
     right: 0;
     border: solid thin;
@@ -37,27 +37,10 @@
     z-index: 2;
 }
 
-#cache-diagnostics-overlay u, #cache-diagnostics-overlay div {
-    margin: 10px;
+#diagnostics-overlay td {
+    vertical-align: top;
 }
 
-#viewport-diagnostics-overlay {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    border: solid thin;
-    border-color: white;
-    color: white;
-    float: right;
-    display: inline-block;
-    min-width: 200px;
-    min-height: 100px;
-    margin-right: 21px;
-    margin-bottom: 30px;
-    background-color: rgba(0,0,0,0.2);
-    z-index: 2;
-}
-
-#viewport-diagnostics-overlay u, #viewport-diagnostics-overlay div {
+#diagnostics-overlay u, #diagnostics-overlay div {
     margin: 10px;
 }

@@ -1,22 +1,57 @@
-﻿<div id="cache-diagnostics-overlay" data-bind="{afterRender: afterRender}">
-    <u>Engine Cache Diagnostics</u>
+﻿<div id="diagnostics-overlay" data-bind="{afterRender: afterRender}">
     <table>
         <tbody>
-            <!-- ko foreach: objectCountDiagnostics -->
             <tr>
                 <td>
-                    <div data-bind="text: key + ':'"></div>
+                    <div id="game-cache-diagnostics">
+                        <u>Engine Cache Diagnostics</u>
+                        <table>
+                            <tbody>
+                                <!-- ko foreach: gameObjects -->
+                                <tr>
+                                    <td>
+                                        <div data-bind="text: key + ':'"></div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="text: value.length"></div>
+                                    </td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
                 </td>
                 <td>
-                    <div data-bind="text: value.length"></div>
+                    <div id="engine-cache-diagnostics">
+                        <u>Engine Cache Diagnostics</u>
+                        <table>
+                            <tbody>
+                                <!-- ko foreach: engineObjects -->
+                                <tr>
+                                    <td>
+                                        <div data-bind="text: key + ':'"></div>
+                                    </td>
+                                    <td>
+                                        <div data-bind="text: value.length"></div>
+                                    </td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
                 </td>
             </tr>
-            <!-- /ko -->
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <div id="viewport-diagnostics" data-bind="{afterRender: afterRender}">
+                        <u>Viewport Diagnostics</u>
+                        <div data-bind="text: `FPS: ${viewportDiagnostics()}`"></div>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
-</div>
-
-<div id="viewport-diagnostics-overlay" data-bind="{afterRender: afterRender}">
-    <u>Viewport Diagnostics</u>
-    <div data-bind="text: 'FPS:' + viewportDiagnostics()"></div>
 </div>

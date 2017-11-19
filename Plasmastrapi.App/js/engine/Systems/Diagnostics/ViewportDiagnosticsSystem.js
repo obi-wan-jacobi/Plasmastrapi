@@ -4,9 +4,7 @@ function (DiagnosticsSystem) {
     ViewportDiagnosticsSystem.prototype = Object.create(DiagnosticsSystem.prototype);
     ViewportDiagnosticsSystem.prototype.constructor = ViewportDiagnosticsSystem;
     function ViewportDiagnosticsSystem(engine) {
-        DiagnosticsSystem.call(this, engine);
-        this.__reportingFrequencyDamperMax = 600;
-        this.__reportingFrequencyDamperCount = 0;
+        DiagnosticsSystem.call(this, engine, 600);
     };
     // private methods
     ViewportDiagnosticsSystem.prototype.__oninit = function () {
@@ -14,11 +12,9 @@ function (DiagnosticsSystem) {
     };
     // public methods
     ViewportDiagnosticsSystem.prototype.loopOnce = function (deltaMs) {
-        this.__reportingFrequencyDamperCount++;
-        if (this.__reportingFrequencyDamperCount < this.__reportingFrequencyDamperMax) {
+        var loopOnce = DiagnosticsSystem.prototype.loopOnce.call(this, deltaMs);
+        if (!loopOnce) {
             return true;
-        } else {
-            this.__reportingFrequencyDamperCount = 0;
         }
         this.__diagnosticsController.reportDiagnostics('viewport-diagnostics-system', deltaMs);
         return true;

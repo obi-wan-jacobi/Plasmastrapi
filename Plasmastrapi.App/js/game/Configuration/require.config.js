@@ -22,6 +22,8 @@
         // Scenes
         'main-menu-scene': './game/Scenes/MainMenuScene',
         'lab-scene': './game/Scenes/LabScene',
+        // Systems
+        'game-cache-diagnostics-system': './game/Systems/Diagnostics/GameCacheDiagnosticsSystem',
         // Tool Helpers
         'selection-box': './game/ToolHelpers/SelectionBox',
         'wire-cutter': './game/ToolHelpers/WireCutter',

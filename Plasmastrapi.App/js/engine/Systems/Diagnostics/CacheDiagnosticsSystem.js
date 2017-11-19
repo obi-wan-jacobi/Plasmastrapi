@@ -4,10 +4,8 @@ function (DiagnosticsSystem, Dictionary, utils) {
     CacheDiagnosticsSystem.prototype = Object.create(DiagnosticsSystem.prototype);
     CacheDiagnosticsSystem.prototype.constructor = CacheDiagnosticsSystem;
     function CacheDiagnosticsSystem(engine) {
-        DiagnosticsSystem.call(this, engine);
-        this.__containers = new Dictionary('container');
-        this.__reportingFrequencyDamperMax = 60;
-        this.__reportingFrequencyDamperCount = 0;
+        DiagnosticsSystem.call(this, engine, 60);
+        this.__containers = new Dictionary('object');
     };
     // private methods
     CacheDiagnosticsSystem.prototype.__oninit = function () {
@@ -29,14 +27,13 @@ function (DiagnosticsSystem, Dictionary, utils) {
         for (var i = 0, L = componentNames.length; i < L; i++) {
             this.__containers.add(componentNames[i], componentFactory.getContainer(componentNames[i]))
         }
+        this.__containers.add('destruction-buffer', this.__engine.getFactory('emitter-factory').getContainer().getDestroyedItemsBuffer());
     };
     // public methods
-    CacheDiagnosticsSystem.prototype.loopOnce = function () {
-        this.__reportingFrequencyDamperCount++;
-        if (this.__reportingFrequencyDamperCount < this.__reportingFrequencyDamperMax) {
+    CacheDiagnosticsSystem.prototype.loopOnce = function (deltaMs) {
+        var loopOnce = DiagnosticsSystem.prototype.loopOnce.call(this, deltaMs);
+        if (!loopOnce) {
             return true;
-        } else {
-            this.__reportingFrequencyDamperCount = 0;
         }
         this.__diagnosticsController.reportDiagnostics('cache-diagnostics-system', this.__containers);
         return true;

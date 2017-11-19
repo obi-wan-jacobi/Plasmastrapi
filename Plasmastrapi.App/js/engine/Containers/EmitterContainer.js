@@ -24,6 +24,9 @@ function (Container, LinkedList) {
             emitter.purgeEventListener(destroyedItem);
         });
     };
+    EmitterContainer.prototype.getDestroyedItemsBuffer = function () {
+        return this.__destroyedItemsBuffer;
+    };
 
     return EmitterContainer;
 });

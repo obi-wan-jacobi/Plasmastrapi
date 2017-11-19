@@ -26,6 +26,11 @@ function (Engine, assetUrls, AssetLoader, utils) {
         this.__addController('lab-controller');
         this.__addController('cursor-controller');
     };
+    Game.prototype.__registerSystems = function () {
+        Engine.prototype.__registerSystems.call(this);
+        // diagnostics
+        this.__addSystem('game-cache-diagnostics-system');
+    };
     // public methods
     Game.prototype.getAssetMap = function () {
         return this.__assetLoader.get();

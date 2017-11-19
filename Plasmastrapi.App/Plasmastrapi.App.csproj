@@ -65,6 +65,9 @@
     <Content Include="css\main.css" />
     <Content Include="favicon.ico" />
     <Content Include="js\app\config\components.js" />
+    <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-model.js" />
+    <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-view.html" />
+    <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-viewmodel.js" />
     <Content Include="js\app\ko-components\ko-component\ko-component-model.js" />
     <Content Include="js\app\ko-components\viewport-container\viewport-container-model.js" />
     <Content Include="js\app\ko-components\viewport-container\viewport-container-viewmodel.js" />
@@ -92,7 +95,7 @@
     <Content Include="js\engine\Factories\DataHandleFactory.js" />
     <Content Include="js\engine\Factories\DisplaySettingsFactory.js" />
     <Content Include="js\engine\Factories\PrimitiveFactory.js" />
-    <Content Include="js\engine\Systems\Base\DiagnosticsSystem.js" />
+    <Content Include="js\engine\Systems\Diagnostics\Base\DiagnosticsSystem.js" />
     <Content Include="js\engine\Systems\Diagnostics\CacheDiagnosticsSystem.js" />
     <Content Include="js\engine\Systems\CacheSystem.js" />
     <Content Include="js\engine\Systems\Diagnostics\ViewportDiagnosticsSystem.js" />

@@ -1,0 +1,22 @@
+﻿<div id="cache-diagnostics-overlay" data-bind="{afterRender: afterRender}">
+    <u>Engine Cache Diagnostics</u>
+    <table>
+        <tbody>
+            <!-- ko foreach: objectCountDiagnostics -->
+            <tr>
+                <td>
+                    <div data-bind="text: key + ':'"></div>
+                </td>
+                <td>
+                    <div data-bind="text: value.length"></div>
+                </td>
+            </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+</div>
+
+<div id="viewport-diagnostics-overlay" data-bind="{afterRender: afterRender}">
+    <u>Viewport Diagnostics</u>
+    <div data-bind="text: 'FPS:' + viewportDiagnostics()"></div>
+</div>

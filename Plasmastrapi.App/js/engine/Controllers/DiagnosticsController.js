@@ -1,4 +1,4 @@
-﻿define(['controller', 'Dictionary', 'utils'],
+﻿define(['controller', 'dictionary', 'utils'],
 function (Controller, Dictionary, utils) {
 
     DiagnosticsController.prototype = Object.create(Controller.prototype);

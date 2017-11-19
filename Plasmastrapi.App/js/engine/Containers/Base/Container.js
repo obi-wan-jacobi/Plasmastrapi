@@ -11,6 +11,14 @@ function (Emitter, Dictionary, validator) {
             'onremove'
         );
     };
+    // public prototypal variables
+    Object.defineProperties(Container.prototype, {
+        'length': {
+            get: function () {
+                return this.__contents.length;
+            }
+        }
+    });
     // public methods
     Container.prototype.addEventListener = function (event, subscriber, callback) {
         if (subscriber.isDestructible || subscriber.destroy) {

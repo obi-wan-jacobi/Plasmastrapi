@@ -20,3 +20,44 @@
     transform: translate(-50%,0);
     background-color: black;
 }
+
+#cache-diagnostics-overlay {
+    position: fixed;
+    right: 0;
+    border: solid thin;
+    border-color: white;
+    color: white;
+    float: right;
+    display: inline-block;
+    min-width: 200px;
+    min-height: 100px;
+    margin-top: 4px;
+    margin-right: 21px;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+#cache-diagnostics-overlay u, #cache-diagnostics-overlay div {
+    margin: 10px;
+}
+
+#viewport-diagnostics-overlay {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border: solid thin;
+    border-color: white;
+    color: white;
+    float: right;
+    display: inline-block;
+    min-width: 200px;
+    min-height: 100px;
+    margin-right: 21px;
+    margin-bottom: 30px;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+#viewport-diagnostics-overlay u, #viewport-diagnostics-overlay div {
+    margin: 10px;
+}

@@ -3,8 +3,8 @@ function (KOComponentViewmodel) {
 
     ViewportContainerViewmodel.prototype = Object.create(KOComponentViewmodel.prototype);
     ViewportContainerViewmodel.prototype.constructor = ViewportContainerViewmodel;
-    function ViewportContainerViewmodel() {
-        KOComponentViewmodel.call(this);
+    function ViewportContainerViewmodel(modelModuleString) {
+        KOComponentViewmodel.call(this, modelModuleString);
     };
     Object.defineProperties(ViewportContainerViewmodel.prototype,
     {

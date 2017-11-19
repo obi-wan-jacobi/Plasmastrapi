@@ -1,7 +1,9 @@
 ﻿define([],
 function () {
 
-    var root = {};
+    var root = {
+        game: null
+    };
 
     return root;
 });

@@ -3,7 +3,6 @@ function (ko) {
     ko.bindingHandlers.afterRender = {
         init: function (element, valueAccessor, allBindings, viewModel) {
             var callback = valueAccessor();
-
             if (typeof callback === 'function') {
                 callback.call(viewModel, element, viewModel);
             }
@@ -11,9 +10,8 @@ function (ko) {
     };
 });
 
-require(['ko', 'root', 'ko-components', 'logging'],
-function (ko, root, components, logging) {
-    logging.info(root, 'main', 'Register knockout components');
+require(['ko', 'root', 'ko-components'],
+function (ko, root, components) {
     components.register();
     ko.applyBindings(root);
 });

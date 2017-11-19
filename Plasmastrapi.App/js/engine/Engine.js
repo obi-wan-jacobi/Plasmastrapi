@@ -53,6 +53,7 @@ function (System, Dictionary, utils) {
         this.__factories.add(factoryString, new FactoryType(this));
     };
     Engine.prototype.__registerControllers = function () {
+        this.__addController('diagnostics-controller');
         this.__addController('input-controller');
         this.__addController('scene-controller');
         this.__addController('viewport-controller');
@@ -67,6 +68,9 @@ function (System, Dictionary, utils) {
         this.__addSystem('mouse-system');
         this.__addSystem('pick-system');
         this.__addSystem('draw-system');
+        // diagnostics
+        this.__addSystem('cache-diagnostics-system');
+        this.__addSystem('viewport-diagnostics-system');
     };
     Engine.prototype.__addSystem = function (systemString) {
         var SystemType = utils.modules.require(systemString);
@@ -90,9 +94,13 @@ function (System, Dictionary, utils) {
                 var deltaMs = tNow - tPrevious;
                 if (deltaMs < 2000) {
                     isRunning = self.loopOnce(deltaMs);
+                } else {
+                    isRunning = false;
                 }
                 tPrevious = tNow;
                 raf(loop);
+            } else {
+                utils.validator.throw(this, 'main-loop', 'Critical failure in main loop');
             }
         };
         loop(tPrevious);

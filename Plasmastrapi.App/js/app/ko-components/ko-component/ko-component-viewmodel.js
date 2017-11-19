@@ -15,9 +15,8 @@ function (utils) {
         }
     }
 
-    function KOComponentViewmodel() {
-        var modelModuleName = utils.modules.getModulePrefix(this, 'Viewmodel');
-        var model = utils.modules.require(`ko-${modelModuleName}-model`);
+    function KOComponentViewmodel(modelModuleString) {
+        var model = utils.modules.require(modelModuleString);
         extend(this, model);
     };
     KOComponentViewmodel.prototype.afterRender = function () {

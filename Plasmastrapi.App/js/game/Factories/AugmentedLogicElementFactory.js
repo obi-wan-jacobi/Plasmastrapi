@@ -33,11 +33,13 @@ function (ExtendedFactory, utils, config) {
         logicElement.addComponent(this.__componentFactory.create('pose-component'));
         logicElement.addComponent(this.__componentFactory.createFromPrimitive('rectangle', [30, 30]));
         // add terminals
-        var inputOffset = this.__primitiveFactory.create('position', [0, 35]);
-        var inputAnchorOffset = this.__primitiveFactory.create('position', [0, -20]);
+        if (utils.validator.isInstanceOfType(logicElement, 'gate')) {
+            var inputOffset = this.__primitiveFactory.create('position', [0, 35]);
+            var inputAnchorOffset = this.__primitiveFactory.create('position', [0, -20]);
+            this.addTerminal(logicElement, 'input-terminal', inputOffset, inputAnchorOffset);
+        }
         var outputOffset = this.__primitiveFactory.create('position', [0, -35]);
         var outputAnchorOffset = this.__primitiveFactory.create('position', [0, 20]);
-        this.addTerminal(logicElement, 'input-terminal', inputOffset, inputAnchorOffset);
         this.addTerminal(logicElement, 'output-terminal', outputOffset, outputAnchorOffset);
         // configure image
         var image = this.__assetMap.get(logicElementString);

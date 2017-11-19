@@ -72,6 +72,13 @@ function (Scene) {
         xorGateButton.set('label', ['[4]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(xorGateButton, 'xor-gate', '4');
 
+        var powerSourceButton = uiElementFactory.create('button');
+        powerSourceButton.set('image', ['power-source']);
+        powerSourceButton.set('position', [210, 25]);
+        powerSourceButton.set('rectangle', [30, 30]);
+        powerSourceButton.set('label', ['[5]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        labController.setSpawnerButton(powerSourceButton, 'power-source', '5');
+
         var trashButton = uiElementFactory.create('button');
         trashButton.set('image', ['trashcan']);
         trashButton.set('position', [721, 25]);
@@ -108,6 +115,7 @@ function (Scene) {
         initButtonOnSelectHighlighting(xorGateButton);
         initButtonOnSelectHighlighting(trashButton);
         initButtonOnSelectHighlighting(wireCutterButton);
+        initButtonOnSelectHighlighting(powerSourceButton);
 
         var backNavigationButton = uiElementFactory.create('button');
         backNavigationButton.set('position', [846, 30]);

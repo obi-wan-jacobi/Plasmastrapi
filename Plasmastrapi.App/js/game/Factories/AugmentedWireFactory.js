@@ -38,8 +38,15 @@ function (ExtendedFactory, utils, config) {
         var lineComponentArgs = [tailElement.getComponent('pose-component'), headElement.getComponent('pose-component'), lineDisplaySettings];
         var lineComponent = this.__componentFactory.create('line-component', lineComponentArgs);
         wireElement.addComponent(lineComponent);
-        wireElement.connectTail(tailElement);
-        wireElement.connectHead(headElement);
+        function updateStrokeStyle(incomingState) {
+            if (incomingState === 1) {
+                this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.highLineColour;
+            } else if (incomingState === 0) {
+                this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.lowPowerLineColour;
+            } else {
+                this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.noPowerLineColour;
+            }
+        };
         if (utils.validator.isInstanceOfType(wireElement, 'wire')) {
             // *** closures ***
             var pickComponent = this.__componentFactory.create('pick-component');
@@ -55,14 +62,19 @@ function (ExtendedFactory, utils, config) {
             };
             function revertHoverColour() {
                 var displaySettings = wireElement.getComponent('line-component').getDisplaySettings();
-                displaySettings.strokeStyle = config.Wire.noPowerLineColour;
+                updateStrokeStyle.call(wireElement, wireElement.outputTerminal.getState());
                 cursorController.setDefault();
             };
             pickComponent.addEventListener('onpick', wireElement, setTarget);
             pickComponent.addEventListener('onmouseenter', wireElement, setHoverColour);
             pickComponent.addEventListener('onmouseleave', wireElement, revertHoverColour);
+            wireElement.addEventListener('onstatechange', wireElement, updateStrokeStyle);
             wireElement.addComponent(pickComponent);
+        } else if (utils.validator.isInstanceOfType(tailElement, 'output-terminal')) {
+            updateStrokeStyle.call(wireElement, tailElement.getState());
         }
+        wireElement.connectTail(tailElement);
+        wireElement.connectHead(headElement);
         return wireElement;
     };
     AugmentedWireFactory.prototype.createAnchorWiredToTerminal = function (terminal, /* optional */ wireAnchorPositionOffset) {
@@ -74,7 +86,7 @@ function (ExtendedFactory, utils, config) {
             wireAnchor.follow(terminal, wireAnchorPositionOffset);
         }
         wireAnchor.addDependency(terminal);
-        this.create('terminal-wire', [wireAnchor, terminal]);
+        this.create('terminal-wire', [terminal, wireAnchor]);
         return wireAnchor;
     };
 

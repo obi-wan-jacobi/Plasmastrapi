@@ -1,5 +1,5 @@
-﻿define(['gate', 'circuits-constants'],
-function (Gate, constants) {
+﻿define(['gate', 'circuits-constants', 'utils'],
+function (Gate, constants, utils) {
 
     AndGate.prototype = Object.create(Gate.prototype);
     AndGate.prototype.constructor = AndGate;
@@ -7,11 +7,20 @@ function (Gate, constants) {
         Gate.call(this);
     };
     AndGate.prototype.updateState = function (incomingState) {
-        // *** FOR TESTING PURPOSES ***
-        incomingState = constants.STATES.NO_POWER;
-        // *** /FOR TESTING PURPOSES ***
         var nextState;
-        if (!this.isPowered) {
+        if (this.isPowered && utils.validator.isNullOrUndefined(incomingState)) {
+            nextState = constants.STATES.NO_POWER;
+            this.__inputs.forEach(function (input) {
+                input.getConnections(function (connection) {
+                    var state = connection.getState();
+                    if (nextState === constants.STATES.NO_POWER) {
+                        nextState = state;
+                    } else if (connection.isPowered) {
+                        nextState = nextState && nextState;
+                    }
+                }, this);
+            }, this);
+        } else if (!this.isPowered) {
             nextState = incomingState;
         } else if (this.isLow) {
             return;

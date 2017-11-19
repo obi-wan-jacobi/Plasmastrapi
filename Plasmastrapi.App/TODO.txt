@@ -11,6 +11,9 @@ needs testing:
 in progress:
 - 
 
+next:
+- move select interactions out of factories and into corresponding tools
+
 tech debt:
 - general
 	- run memory analysis/profiler diagnostics
@@ -21,7 +24,7 @@ tech debt:
 - ui
 	- config
 - engine
-	- refactor AssetLoader to use a Loader class
+	- refactor AssetLoader to use a Loader base class
 - optimization
 	- refactor all *** closures *** to be prototypal
 	- PolygonHandle point-collision checking is disgusting

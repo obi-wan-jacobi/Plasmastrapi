@@ -28,9 +28,10 @@ function (WireElement, validator) {
         }
         validator.validateInstanceType(this, outputTerminal, 'output-terminal');
         this.__outputTerminal = outputTerminal;
+        // initialize pass-through event handling
+        this.__outputTerminal.addEventListener('onstatechange', this, this.__$onstatechange);
+        this.emit('onstatechange', this.outputTerminal.getState());
         if (this.__inputTerminal) {
-            // initialize pass-through event handling
-            this.__outputTerminal.addEventListener('onstatechange', this, this.__$onstatechange);
             this.__inputTerminal.addConnection(this.__outputTerminal);
         }
     };

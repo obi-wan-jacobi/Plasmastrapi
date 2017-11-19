@@ -13,6 +13,10 @@
     };
 
     // checks
+    validator.isNullOrUndefined = function (argument) {
+        return argument === null || argument === undefined;
+    };
+
     validator.isInstanceOfType = function (instance, typeString) {
         if (typeString === 'string' || typeString === 'number') {
             return typeof instance === typeString;
@@ -28,7 +32,7 @@
 
     // validations
     validator.validateNotNull = function (referer, argument) {
-        if (argument === null || argument === undefined) {
+        if (this.isNullOrUndefined(argument)) {
             this.throw(this, 'validateNotNull', 'Argument cannot be null or undefined');
         }
     };

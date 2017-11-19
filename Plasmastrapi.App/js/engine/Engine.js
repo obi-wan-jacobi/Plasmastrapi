@@ -95,7 +95,7 @@ function (System, Dictionary, utils) {
                 if (deltaMs < 2000) {
                     isRunning = self.loopOnce(deltaMs);
                 } else {
-                    isRunning = false;
+                    //isRunning = false;
                 }
                 tPrevious = tNow;
                 raf(loop);

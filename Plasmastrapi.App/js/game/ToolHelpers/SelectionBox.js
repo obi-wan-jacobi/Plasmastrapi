@@ -36,6 +36,9 @@ function (UIElement, Container, utils) {
                 this.__contents.add(element);
                 element.getComponent('pick-component').select();
             }
+        } else {
+            this.__contents.remove(element);
+            element.getComponent('pick-component').deselect();
         }
     };
     // public prototypal variables

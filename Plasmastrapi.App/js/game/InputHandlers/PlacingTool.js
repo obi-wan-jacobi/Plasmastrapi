@@ -31,6 +31,8 @@ function (InputHandler) {
         this.__wireContainer.forEach(disableElement);
         this.__inputTerminalContainer.forEach(disableElement);
         this.__outputTerminalContainer.forEach(disableElement);
+        // Select target
+        this.__target.getComponent('pick-component').select();
         // Set cursor
         this.__cursorController.setMove();
     };
@@ -43,6 +45,8 @@ function (InputHandler) {
         this.__wireContainer.forEach(enableElement);
         this.__inputTerminalContainer.forEach(enableElement);
         this.__outputTerminalContainer.forEach(enableElement);
+        // Deselect target
+        this.__target.getComponent('pick-component').deselect();
         // Set cursor
         this.__cursorController.setDefault();
     };

@@ -67,10 +67,18 @@ function (ExtendedFactory, utils, config) {
         function onmouseleave() {
             cursorController.setDefault();
         };
+        function onselect() {
+            this.getComponent('polygon-component').getDisplaySettings().strokeStyle = '#33FFAD';
+        };
+        function ondeselect() {
+            this.getComponent('polygon-component').getDisplaySettings().strokeStyle = 'grey';
+        };
         pickComponent.addEventListener('onpull', logicElement, setTarget);
         pickComponent.addEventListener('onpick', logicElement, setTarget);
         pickComponent.addEventListener('onmouseenter', logicElement, onmouseenter);
         pickComponent.addEventListener('onmouseleave', logicElement, onmouseleave);
+        pickComponent.addEventListener('onselect', logicElement, onselect);
+        pickComponent.addEventListener('ondeselect', logicElement, ondeselect);
         logicElement.addComponent(pickComponent);
         return logicElement;
     };
@@ -84,6 +92,3 @@ function (ExtendedFactory, utils, config) {
 
     return AugmentedLogicElementFactory;
 });
-
-
-//33FFAD

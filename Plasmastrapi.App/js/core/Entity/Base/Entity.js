@@ -18,7 +18,11 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
     Entity.prototype.__oninit = function () { };
     Entity.prototype.__onload = function () { };
     Entity.prototype.__onunload = function () { };
-    Entity.prototype.__ondestroy = function () { };
+    Entity.prototype.__ondestroy = function () {
+        this.__dependencies.forEach(function (dependency) {
+            this.removeDependency(dependency);
+        }, this);
+    };
     // public methods
     Entity.prototype.purgeEventListener = function (subscriber) {
         utils.validator.validateObject(this, subscriber);
@@ -47,11 +51,21 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
     };
     Entity.prototype.addDependency = function (dependency) {
         utils.validator.validateInstanceType(this, dependency, 'entity');
-        this.__dependencies.add(dependency);
+        this.__dependencies.add(dependency, dependency);
         // wire-up event subscriptions
         dependency.addEventListener('onload', this, this.load);
         dependency.addEventListener('onunload', this, this.unload);
         dependency.addEventListener('ondestroy', this, this.destroy);
+    };
+    Entity.prototype.removeDependency = function (dependency) {
+        dependency= this.__dependencies.get(dependency);
+        if (!dependency) {
+            utils.validator.throw(this, 'removeDependency', `${this.constructor.name} does not contain a ${dependency.constructor.name} dependency`);
+        }
+        // unhook event subscriptions
+        dependency.removeEventListener('onload', this, this.load);
+        dependency.removeEventListener('onunload', this, this.unload);
+        dependency.removeEventListener('ondestroy', this, this.destroy);
     };
     Entity.prototype.addParent = function (parent) {
         if (this.__parent) {

@@ -14,7 +14,7 @@ function (Mixin, validator) {
     Destructible.prototype.destroy = function () {
         this.__numberOfDestroyCalls++;
         // In complex cases, the maximum number of necessary/permissible destroy calls for one object is 2
-        if (this.__numberOfDestroyCalls > 2) {
+        if (this.__numberOfDestroyCalls > 1) {
             validator.throw(this, 'destroy', `${this.constructor.name} is being destroyed for a third time; re-evaluate this object\'s dependency chain`);
         }
         if (this.__isDestroyed) {

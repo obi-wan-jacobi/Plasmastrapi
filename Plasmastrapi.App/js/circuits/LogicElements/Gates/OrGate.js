@@ -6,13 +6,18 @@ function (Gate, constants) {
     function OrGate() {
         Gate.call(this);
     };
-    OrGate.prototype.updateState = function (incomingState) {
-        var nextState;
-        if (!this.isPowered) {
-            nextState = incomingState;
-        } else if (incomingState > constants.STATES.NO_POWER) {
-            nextState = this.getState() || incomingState;
-        }
+    OrGate.prototype.updateState = function () {
+        var nextState = constants.STATES.NO_POWER;
+        this.__inputs.forEach(function (input) {
+            return input.getConnections().forEach(function (connection) {
+                if (connection.isHigh) {
+                    nextState = constants.STATES.HIGH;
+                    return 'break';
+                } else if (connection.isLow) {
+                    nextState = constants.STATES.LOW;
+                }
+            }, this);
+        }, this);
         if (nextState !== this.getState()) {
             this.setState(nextState);
         }

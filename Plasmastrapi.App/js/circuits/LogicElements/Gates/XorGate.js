@@ -7,11 +7,23 @@ function (Gate, constants) {
         Gate.call(this);
     };
     XorGate.prototype.updateState = function (incomingState) {
-        var nextState;
-        if (!this.isPowered) {
-            nextState = incomingState;
-        } else if (incomingState > constants.STATES.NO_POWER) {
-            nextState = (this.getState() || incomingState) && !(this.getState() && incomingState);
+        var nextState = constants.STATES.NO_POWER;
+        var numberOfHighInputs = 0;
+        this.__inputs.forEach(function (input) {
+            return input.getConnections().forEach(function (connection) {
+                if (connection.isHigh) {
+                    numberOfHighInputs++;
+                    if (numberOfHighInputs > 1) {
+                        nextState = constants.STATES.LOW;
+                        return 'break';
+                    }
+                } else if (connection.isLow) {
+                    nextState = constants.STATES.LOW;
+                }
+            }, this);
+        }, this);
+        if (numberOfHighInputs === 1) {
+            nextState = constants.STATES.HIGH;
         }
         if (nextState !== this.getState()) {
             this.setState(nextState);

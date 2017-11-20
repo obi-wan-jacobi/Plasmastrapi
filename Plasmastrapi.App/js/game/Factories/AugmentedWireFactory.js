@@ -42,7 +42,7 @@ function (ExtendedFactory, utils, config) {
             if (incomingState === 1) {
                 this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.highLineColour;
             } else if (incomingState === 0) {
-                this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.lowPowerLineColour;
+                this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.lowLineColour;
             } else {
                 this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.noPowerLineColour;
             }

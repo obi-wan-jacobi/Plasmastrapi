@@ -11,12 +11,12 @@ function (Gate, constants, utils) {
         if (this.isPowered && utils.validator.isNullOrUndefined(incomingState)) {
             nextState = constants.STATES.NO_POWER;
             this.__inputs.forEach(function (input) {
-                input.getConnections(function (connection) {
+                input.getConnections().forEach(function (connection) {
                     var state = connection.getState();
                     if (nextState === constants.STATES.NO_POWER) {
                         nextState = state;
                     } else if (connection.isPowered) {
-                        nextState = nextState && nextState;
+                        nextState = nextState && state;
                     }
                 }, this);
             }, this);

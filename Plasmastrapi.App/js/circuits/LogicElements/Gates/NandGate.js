@@ -11,7 +11,7 @@ function (Gate, constants, utils) {
         if (this.isPowered && utils.validator.isNullOrUndefined(incomingState)) {
             nextState = constants.STATES.NO_POWER;
             this.__inputs.forEach(function (input) {
-                return input.getConnections(function (connection) {
+                return input.getConnections().forEach(function (connection) {
                     if (connection.isHigh) {
                         nextState = constants.STATES.LOW;
                     } else if (connection.isLow) {
@@ -22,10 +22,10 @@ function (Gate, constants, utils) {
             }, this);
         } else if (this.isPowered && incomingState > constants.STATES.NO_POWER) {
             nextState = !(!this.getState() && incomingState) | 0;
-        } else if (!utils.validator.isNullOrUndefined(incomingState)) {
-            nextState = incomingState;
+        } else if (incomingState > constants.STATES.NO_POWER) {
+            nextState = !incomingState | 0;
         }
-        if (nextState !== this.getState()) {
+        if (!utils.validator.isNullOrUndefined(nextState) && nextState !== this.getState()) {
             this.setState(nextState);
         }
     };

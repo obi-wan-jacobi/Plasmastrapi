@@ -93,7 +93,7 @@ function (Link, validator) {
             }
             link.setNext(null);
             this.__decrementLength();
-            return link;
+            return link.get();
         }
         return null;
     };

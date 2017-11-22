@@ -14,17 +14,21 @@ function (Game, MockCanvas, Entity) {
 
     //gate.destroy();
 
-    var a = new Entity();
+    //var a = new Entity();
+    //a.name = 'logic-element';
     var b = new Entity();
+    b.name = 'terminal';
     var c = new Entity();
+    c.name = 'terminal-anchor';
     var d = new Entity();
+    d.name = 'wire';
 
-    b.addDependency(a);
+    //b.addDependency(a);
 
     c.addDependency(b);
 
     d.addDependency(b);
     d.addDependency(c);
 
-    a.destroy();
+    b.destroy();
 });

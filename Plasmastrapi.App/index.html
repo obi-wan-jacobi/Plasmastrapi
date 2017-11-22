@@ -14,7 +14,8 @@
                 'ui/Configuration/require.config',
                 'circuits/Configuration/require.config',
                 'game/Configuration/require.config',
-                'app/config/require.config'
+                'app/config/require.config',
+                'tests/Configuration/require.config'
             ];
 
             var require = {
@@ -41,7 +42,9 @@
                                 preloadModulesSynchronously()
                             } else {
                                 logging.write('index.html', 'preloadModulesSynchronously', 'All modules loaded -- start the app!');
-                                require(['app/main']);
+                                //require(['app/main']);
+                                //require(['tests/DataStructures/DictionaryTests']);
+                                require(['tests/test']);
                             }
                         });
                     });

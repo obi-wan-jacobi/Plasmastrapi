@@ -30,7 +30,7 @@
     };
 
     logging.alert = function (text) {
-        windows.alert(text);
+        window.alert(text);
     };
 
     // singleton

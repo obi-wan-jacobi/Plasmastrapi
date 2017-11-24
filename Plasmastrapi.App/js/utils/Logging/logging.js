@@ -14,7 +14,7 @@
     };
 
     logging.debug = function (referer, methodName, messageString) {
-        return this.__console('*** DEBUG ***', referer, methodName, messageString, '.*****');
+        return this.__console('*** DEBUG ***', referer, methodName, messageString, '. *** /DEBUG ***');
     };
 
     logging.info = function (referer, methodName, messageString) {
@@ -30,7 +30,7 @@
     };
 
     logging.alert = function (text) {
-        windows.alert(text);
+        window.alert(text);
     };
 
     // singleton

@@ -16,7 +16,7 @@ next:
 
 tech debt:
 - general
-	- run memory analysis/profiler diagnostics
+	- (ongoing) run memory analysis/profiler diagnostics
 - circuits
 	- config
 - scenes

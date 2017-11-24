@@ -69,6 +69,8 @@ function (ExtendedFactory, utils, config) {
             pickComponent.addEventListener('onmouseenter', wireElement, setHoverColour);
             pickComponent.addEventListener('onmouseleave', wireElement, revertHoverColour);
             wireElement.addEventListener('onstatechange', wireElement, updateStrokeStyle);
+            pickComponent.addEventListener('onselect', wireElement, setHoverColour);
+            pickComponent.addEventListener('ondeselect', wireElement, revertHoverColour);
             wireElement.addComponent(pickComponent);
         } else if (utils.validator.isInstanceOfType(tailElement, 'output-terminal')) {
             updateStrokeStyle.call(wireElement, tailElement.getState());

@@ -1,25 +1,12 @@
-define(['link', 'validator'],
-function (Link, validator) {
-    
-    // Resolves the issue of traditional for-loops breaking from index instability when contents.length fluctuates throughout the iteration cycle.
-    // Provides index-free iteration.
+define(['linked-list', 'link', 'validator'],
+function (LinkedList, Link, validator) {
+
+    Dictionary.prototype = Object.create(LinkedList.prototype);
+    Dictionary.prototype.constructor = Dictionary;
     function Dictionary(typeString) {
-        validator.validateInstanceType(this, typeString, 'string');
-        this.__typeString = typeString;
-        this.__start = null;
-        this.__end = null;
-        this.__length = 0;
+        LinkedList.call(this, typeString);
     };
     // private methods
-    Dictionary.prototype.__incrementLength = function () {
-        this.__length++;
-    };
-    Dictionary.prototype.__decrementLength = function () {
-        if (this.__length === 0) {
-            return;
-        }
-        this.__length--;
-    };
     Dictionary.prototype.__validateNoDuplicateKeys = function(key) {
         this.forEach(function(linkKey) {
             if (linkKey === key) {
@@ -27,35 +14,11 @@ function (Link, validator) {
             }
         }, this);
     };
-    Dictionary.prototype.__forEachLink = function (fn) {
-        var link = this.__start;
-        while (link) {
-            var result = fn.call(this, link);
-            if (result !== null && result !== undefined) {
-                return result;
-            }
-            link = link.next();
-        }
-    };
-    // public prototypal variables
-    Object.defineProperties(Dictionary.prototype, {
-        'length': {
-            get: function () {
-                return this.__length;
-            }
-        }
-    });
     // public methods
-    Dictionary.prototype.forEach = function(fn, /* optional */ caller) {
-        var link = this.__start;
-        while(link) {
-            var item = link.get();
-            var result = fn.call(caller, item.key, item.value);
-            if (result !== null && result !== undefined) {
-                return result;
-            }
-            link = link.next();
-        }
+    Dictionary.prototype.forEach = function (fn, /* optional */ caller) {
+        return this.__forEachLink(function (link) {
+            return fn.call(caller, link.get().key, link.get().value);
+        });
     };
     Dictionary.prototype.add = function (key, /* optional */ value) {
         this.__validateNoDuplicateKeys(key);
@@ -72,16 +35,16 @@ function (Link, validator) {
         }
         this.__incrementLength();
     };
-    Dictionary.prototype.remove = function(key) {
-        var previousLink = this.__start;
-        var result = this.__forEachLink(function (link) {
-            if (link.get().key === key) {
-                if (link === this.__end) {
-                    if (link === this.__start) {
-                        this.__end = null;
-                    } else {
-                        this.__end = previousLink;
-                    }
+    LinkedList.prototype.remove = function (key) {
+        var link = this.__start;
+        var previousLink;
+        while (link) {
+            var ownedvalue = link.get().key;
+            if (ownedvalue === key) {
+                if (link === this.__start) {
+                    this.__end = null;
+                } else {
+                    this.__end = previousLink;
                 }
                 if (link === this.__start) {
                     this.__start = link.next();
@@ -89,11 +52,11 @@ function (Link, validator) {
                     previousLink.setNext(link.next());
                 }
                 this.__decrementLength();
-                return link.get();
+                return link.get().value;
             }
             previousLink = link;
-        });
-        return result; 
+            link = link.next();
+        }
     };
     Dictionary.prototype.get = function (key) {
         return this.__forEachLink(function (link) {

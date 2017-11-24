@@ -36,7 +36,7 @@ function (System, LinkedList, Position) {
     };
     MouseSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
         return (function (e) {
-            this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(e));
+            this.__inputBuffer[inputBufferKey].add(this.__getMousePosition(e));
         }).bind(this);
     };
     MouseSystem.prototype.__getMousePosition = function (e) {

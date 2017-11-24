@@ -41,17 +41,11 @@ function (Link, validator) {
     });
     // public methods
     LinkedList.prototype.forEach = function(fn, /* optional */ caller) {
-        var link = this.__start;
-        while(link) {
-            var value = link.get();
-            var result = fn.call(caller, value);
-            if (result !== null && result !== undefined) {
-                return result;
-            }
-            link = link.next();
-        }
+        return this.__forEachLink(function (link) {
+            return fn.call(caller, link.get());
+        });
     };
-    LinkedList.prototype.push = function(value) {
+    LinkedList.prototype.add = function(value) {
         validator.validateInstanceType(this, value, this.__typeString);
         var newLink = new Link(value);
         if (!this.__start) {
@@ -63,9 +57,10 @@ function (Link, validator) {
         }
         this.__incrementLength();
     };
-    LinkedList.prototype.splice = function(value) {
-        var previousLink = this.__start;
-        return this.__forEachLink(function (link) {
+    LinkedList.prototype.remove = function (value) {
+        var link = this.__start;
+        var previousLink;
+        while (link) {
             var ownedvalue = link.get();
             if (ownedvalue === value) {
                 if (link === this.__start) {
@@ -82,7 +77,8 @@ function (Link, validator) {
                 return value;
             }
             previousLink = link;
-        });
+            link = link.next();
+        }
     };
     LinkedList.prototype.shift = function () {
         var link = this.__start;
@@ -96,13 +92,6 @@ function (Link, validator) {
             return link.get();
         }
         return null;
-    };
-    LinkedList.prototype.contains = function(value) {
-        return this.forEach(function (ownedvalue) {
-            if (ownedvalue === value) {
-                return true;
-            }
-        });
     };
     LinkedList.prototype.toArray = function () {
         var result = [];

@@ -30,7 +30,7 @@ function (System, LinkedList, Position) {
     };
     KeyboardSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
         return (function (e) {
-            this.__inputBuffer[inputBufferKey].push(e);
+            this.__inputBuffer[inputBufferKey].add(e);
         }).bind(this);
     };
     // public methods

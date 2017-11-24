@@ -47,10 +47,10 @@ function (System, Container, LinkedList) {
         };
         return (function (mouseHandle) {
             this.__container.forEach(function (pickComponent) {
-                this.__inputBuffer[inputBufferKey].push(new InputUpdateItem(pickComponent, mouseHandle.getData()));
+                this.__inputBuffer[inputBufferKey].add(new InputUpdateItem(pickComponent, mouseHandle.getData()));
             }, this);
             this.__externalInputReceivers.forEach(function (receiver) {
-                this.__receiverInputBuffer[inputBufferKey].push(new InputUpdateItem(receiver, mouseHandle.getData()));
+                this.__receiverInputBuffer[inputBufferKey].add(new InputUpdateItem(receiver, mouseHandle.getData()));
             }, this);
         }).bind(this);
     };

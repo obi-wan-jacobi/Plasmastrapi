@@ -13,7 +13,7 @@ function (Container, LinkedList) {
     };
     EmitterContainer.prototype.purge = function (subscriber) {
         this.remove(subscriber);
-        this.__destroyedItemsBuffer.push(subscriber);
+        this.__destroyedItemsBuffer.add(subscriber);
     };
     EmitterContainer.prototype.freeNextDestroyedItem = function () {
         var destroyedItem = this.__destroyedItemsBuffer.shift();

@@ -14,11 +14,25 @@ function (LinkedList, Link, validator) {
             }
         }, this);
     };
+    Dictionary.prototype.__removeLockForIteration = function () {
+        var link = this.__lock;
+        this.__lock = null;
+        if (this.__isLockMarkedForRemoval) {
+            this.__isLockMarkedForRemoval = false;
+            this.remove(link.get().key);
+        }
+    };
     // public methods
     Dictionary.prototype.forEach = function (fn, /* optional */ caller) {
-        return this.__forEachLink(function (link) {
+        if (this.__isIteratorActive) {
+            validator.throw(this, 'forEachLink', `${this.constructor.name} does not support recursive iteration`)
+        }
+        this.__isIteratorActive = true;
+        var result = this.__forEachLink(function (link) {
             return fn.call(caller, link.get().key, link.get().value);
         });
+        this.__isIteratorActive = false;
+        return result;
     };
     Dictionary.prototype.add = function (key, /* optional */ value) {
         this.__validateNoDuplicateKeys(key);
@@ -35,12 +49,16 @@ function (LinkedList, Link, validator) {
         }
         this.__incrementLength();
     };
-    LinkedList.prototype.remove = function (key) {
+    Dictionary.prototype.remove = function (key) {
         var link = this.__start;
         var previousLink;
         while (link) {
             var ownedvalue = link.get().key;
             if (ownedvalue === key) {
+                if (link === this.__lock) {
+                    this.__isLockMarkedForRemoval = true;
+                    return;
+                }
                 if (link === this.__start) {
                     this.__end = null;
                 } else {

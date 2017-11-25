@@ -9,6 +9,9 @@ function (Link, validator) {
         this.__start = null;
         this.__end = null;
         this.__length = 0;
+        this.__isIteratorActive = false;
+        this.__lock = null;
+        this.__isLockMarkedForRemoval = false;
     };
     // private methods
     LinkedList.prototype.__incrementLength = function () {
@@ -20,14 +23,28 @@ function (Link, validator) {
         }
         this.__length--;
     };
+    LinkedList.prototype.__lockForIteration = function (link) {
+        this.__lock = link;
+    };
+    LinkedList.prototype.__removeLockForIteration = function () {
+        var link = this.__lock;
+        this.__lock = null;
+        if (this.__isLockMarkedForRemoval) {
+            this.__isLockMarkedForRemoval = false;
+            this.remove(link.get());
+        }
+    };
     LinkedList.prototype.__forEachLink = function (fn) {
         var link = this.__start;
         while (link) {
+            this.__lockForIteration(link);
             var result = fn.call(this, link);
             if (result !== null && result !== undefined) {
-                return result;
+                break;
             }
-            link = link.next();
+            var nextLink = link.next();
+            this.__removeLockForIteration(link);
+            link = nextLink;
         }
         return result;
     };
@@ -40,10 +57,16 @@ function (Link, validator) {
         }
     });
     // public methods
-    LinkedList.prototype.forEach = function(fn, /* optional */ caller) {
-        return this.__forEachLink(function (link) {
+    LinkedList.prototype.forEach = function (fn, /* optional */ caller) {
+        if (this.__isIteratorActive) {
+            validator.throw(this, 'forEachLink', `${this.constructor.name} does not support recursive iteration`)
+        }
+        this.__isIteratorActive = true;
+        var result = this.__forEachLink(function (link) {
             return fn.call(caller, link.get());
         });
+        this.__isIteratorActive = false;
+        return result;
     };
     LinkedList.prototype.add = function(value) {
         validator.validateInstanceType(this, value, this.__typeString);
@@ -63,6 +86,10 @@ function (Link, validator) {
         while (link) {
             var ownedvalue = link.get();
             if (ownedvalue === value) {
+                if (link === this.__lock) {
+                    this.__isLockMarkedForRemoval = true;
+                    return;
+                }
                 if (link === this.__start) {
                     this.__end = null;
                 } else {

@@ -1,5 +1,5 @@
-﻿define(['mixin', 'validator'],
-function (Mixin, validator) {
+﻿define(['mixin', 'utils'],
+function (Mixin, utils) {
 
     Destructible.prototype = Object.create(Mixin.prototype);
     Destructible.prototype.constructor = Destructible;
@@ -13,9 +13,10 @@ function (Mixin, validator) {
     };
     Destructible.prototype.destroy = function () {
         this.__numberOfDestroyCalls++;
-        // In complex cases, the maximum number of necessary/permissible destroy calls for one object is 2
+        // In complex cases, the maximum permissible number of destroy calls for one object is 2
+        // TODO: Reduce destroy() calls to 1 in all cases (may require overhaul of Dictionary and LinkedList)
         if (this.__numberOfDestroyCalls > 1) {
-            validator.throw(this, 'destroy', `${this.constructor.name} is being destroyed for a third time; re-evaluate this object\'s dependency chain`);
+            utils.logging.warn(this, 'destroy', `Destroy call on ${this.constructor.name} ${this.__numberOfDestroyCalls} times; re-evaluate this object\'s dependency chain`);
         }
         if (this.__isDestroyed) {
             return;

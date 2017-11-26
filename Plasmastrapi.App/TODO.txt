@@ -17,6 +17,7 @@ next:
 tech debt:
 - general
 	- (ongoing) run memory analysis/profiler diagnostics
+	- reduce maximum permissible number of destroy() calls to 1 in all cases
 - circuits
 	- config
 - scenes

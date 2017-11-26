@@ -6,11 +6,20 @@ function (Link, validator) {
     function Dictionary(typeString) {
         validator.validateInstanceType(this, typeString, 'string');
         this.__typeString = typeString;
-        this.__start = null;
-        this.__end = null;
+        this.__start = new Link('start');
+        this.__end = new Link('end');
+        this.__start.setNext(this.__end);
+        this.__end.setPrevious(this.__start);
         this.__length = 0;
     };
     // private methods
+    Dictionary.prototype.__validateNoDuplicateKeys = function (key) {
+        this.forEach(function (linkKey) {
+            if (linkKey === key) {
+                validator.throw(this, 'validateNoDuplicateKeys', `Duplicate key: ${key}`);
+            }
+        }, this);
+    };
     Dictionary.prototype.__incrementLength = function () {
         this.__length++;
     };
@@ -20,19 +29,16 @@ function (Link, validator) {
         }
         this.__length--;
     };
-    Dictionary.prototype.__validateNoDuplicateKeys = function(key) {
-        this.forEach(function(linkKey) {
-            if (linkKey === key) {
-                validator.throw(this, 'validateNoDuplicateKeys', `Duplicate key: ${key}`);
-            }
-        }, this);
-    };
     Dictionary.prototype.__forEachLink = function (fn) {
-        var link = this.__start;
-        while (link) {
+        var link = this.__start.next();
+        while (link.next() !== null) {
             var result = fn.call(this, link);
             if (result !== null && result !== undefined) {
                 return result;
+            }
+            // if the current link being held for iteration has been deleted
+            if (link.next() === null) {
+                link = link.previous();
             }
             link = link.next();
         }
@@ -47,15 +53,13 @@ function (Link, validator) {
     });
     // public methods
     Dictionary.prototype.forEach = function(fn, /* optional */ caller) {
-        var link = this.__start;
-        while(link) {
+        return this.__forEachLink(function (link) {
             var item = link.get();
             var result = fn.call(caller, item.key, item.value);
             if (result !== null && result !== undefined) {
                 return result;
             }
-            link = link.next();
-        }
+        });
     };
     Dictionary.prototype.add = function (key, /* optional */ value) {
         this.__validateNoDuplicateKeys(key);
@@ -63,37 +67,33 @@ function (Link, validator) {
             validator.validateInstanceType(this, value, this.__typeString);
         }
         var newLink = new Link({ key, value });
-        if (!this.__start) {
-            this.__start = newLink;
-            this.__end = newLink;
+        if (this.length === 0) {
+            this.__start.setNext(newLink);
+            newLink.setPrevious(this.__start);
+            newLink.setNext(this.__end);
+            this.__end.setPrevious(newLink);
+
         } else {
-            this.__end.setNext(newLink);
-            this.__end = newLink;
+            var oldLinkBeforeEnd = this.__end.previous();
+            oldLinkBeforeEnd.setNext(newLink);
+            newLink.setPrevious(oldLinkBeforeEnd);
+            newLink.setNext(this.__end);
+            this.__end.setPrevious(newLink);
         }
         this.__incrementLength();
     };
     Dictionary.prototype.remove = function(key) {
-        var previousLink = this.__start;
-        var result = this.__forEachLink(function (link) {
+        return this.__forEachLink(function (link) {
             if (link.get().key === key) {
-                if (link === this.__end) {
-                    if (link === this.__start) {
-                        this.__end = null;
-                    } else {
-                        this.__end = previousLink;
-                    }
-                }
-                if (link === this.__start) {
-                    this.__start = link.next();
-                } else {
-                    previousLink.setNext(link.next());
-                }
-                this.__decrementLength();
+                var previous = link.previous();
+                var next = link.next();
+                previous.setNext(next);
+                next.setPrevious(previous);
+                // A freed link can be identified by the fact that it has a null next() value
+                link.setNext(null);
                 return link.get();
             }
-            previousLink = link;
         });
-        return result; 
     };
     Dictionary.prototype.get = function (key) {
         return this.__forEachLink(function (link) {
@@ -104,8 +104,12 @@ function (Link, validator) {
     };
     Dictionary.prototype.toArray = function () {
         var result = [];
-        this.forEach(function (key, value) {
-            result.push({ key, value });
+        this.__forEachLink(function (link) {
+            if (link !== this.__start && link !== this.__end) {
+                var key = link.get().key;
+                var value = link.get().value;
+                result.push({ key, value });
+            }
         });
         return result;
     };

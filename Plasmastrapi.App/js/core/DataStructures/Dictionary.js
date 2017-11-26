@@ -33,13 +33,17 @@ function (Link, validator) {
         var link = this.__start.next();
         while (link.next() !== null) {
             var result = fn.call(this, link);
+            // if fn returns a valid result
             if (result !== null && result !== undefined) {
+                // effectively 'break' out of the loop with the result
                 return result;
             }
-            // if the current link being held for iteration has been deleted
+            // if the current link being held for iteration has been freed
             if (link.next() === null) {
+                // revert to the previous non-freed link
                 link = link.previous();
             }
+            // process the next link
             link = link.next();
         }
     };
@@ -55,10 +59,7 @@ function (Link, validator) {
     Dictionary.prototype.forEach = function(fn, /* optional */ caller) {
         return this.__forEachLink(function (link) {
             var item = link.get();
-            var result = fn.call(caller, item.key, item.value);
-            if (result !== null && result !== undefined) {
-                return result;
-            }
+            return fn.call(caller, item.key, item.value);
         });
     };
     Dictionary.prototype.add = function (key, /* optional */ value) {

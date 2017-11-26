@@ -16,7 +16,7 @@ function (Mixin, utils) {
         // In complex cases, the maximum permissible number of destroy calls for one object is 2
         // TODO: Reduce destroy() calls to 1 in all cases (may require overhaul of Dictionary and LinkedList)
         if (this.__numberOfDestroyCalls > 1) {
-            utils.logging.warn(this, 'destroy', `Destroy call on ${this.constructor.name} ${this.__numberOfDestroyCalls} times; re-evaluate this object\'s dependency chain`);
+            utils.logging.warn(this, 'destroy', `This method was called on the same ${this.constructor.name} object ${this.__numberOfDestroyCalls} times; re-evaluate this object\'s dependency chain`);
         }
         if (this.__isDestroyed) {
             return;

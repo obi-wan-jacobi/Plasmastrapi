@@ -6,8 +6,10 @@ function (Link, validator) {
     function LinkedList(typeString) {
         validator.validateInstanceType(this, typeString, 'string');
         this.__typeString = typeString;
-        this.__start = null;
-        this.__end = null;
+        this.__start = new Link('start');
+        this.__end = new Link('end');
+        this.__start.setNext(this.__end);
+        this.__end.setPrevious(this.__start);
         this.__length = 0;
     };
     // private methods
@@ -21,15 +23,22 @@ function (Link, validator) {
         this.__length--;
     };
     LinkedList.prototype.__forEachLink = function (fn) {
-        var link = this.__start;
-        while (link) {
+        var link = this.__start.next();
+        while (link.next() !== null) {
             var result = fn.call(this, link);
+            // if fn returns a valid result
             if (result !== null && result !== undefined) {
+                // effectively 'break' out of the loop with the result
                 return result;
             }
+            // if the current link being held for iteration has been freed
+            if (link.next() === null) {
+                // revert to the previous non-freed link
+                link = link.previous();
+            }
+            // process the next link
             link = link.next();
         }
-        return result;
     };
     // public prototypal variables
     Object.defineProperties(LinkedList.prototype, {
@@ -41,61 +50,48 @@ function (Link, validator) {
     });
     // public methods
     LinkedList.prototype.forEach = function(fn, /* optional */ caller) {
-        var link = this.__start;
-        while(link) {
-            var value = link.get();
-            var result = fn.call(caller, value);
-            if (result !== null && result !== undefined) {
-                return result;
-            }
-            link = link.next();
-        }
+        return this.__forEachLink(function (link) {
+            return fn.call(caller, link.get());
+        });
     };
     LinkedList.prototype.push = function(value) {
         validator.validateInstanceType(this, value, this.__typeString);
         var newLink = new Link(value);
-        if (!this.__start) {
-            this.__start = newLink;
-            this.__end = newLink;
+        if (this.length === 0) {
+            this.__start.setNext(newLink);
+            newLink.setPrevious(this.__start);
+            newLink.setNext(this.__end);
+            this.__end.setPrevious(newLink);
+
         } else {
-            this.__end.setNext(newLink);
-            this.__end = newLink;
+            var oldLinkBeforeEnd = this.__end.previous();
+            oldLinkBeforeEnd.setNext(newLink);
+            newLink.setPrevious(oldLinkBeforeEnd);
+            newLink.setNext(this.__end);
+            this.__end.setPrevious(newLink);
         }
         this.__incrementLength();
     };
     LinkedList.prototype.splice = function(value) {
-        var previousLink = this.__start;
         return this.__forEachLink(function (link) {
-            var ownedvalue = link.get();
-            if (ownedvalue === value) {
-                if (link === this.__start) {
-                    this.__end = null;
-                } else {
-                    this.__end = previousLink;
-                }
-                if (link === this.__start) {
-                    this.__start = link.next();
-                } else {
-                    previousLink.setNext(link.next());
-                }
+            if (link.get() === value) {
+                var previous = link.previous();
+                var next = link.next();
+                previous.setNext(next);
+                next.setPrevious(previous);
+                // A freed link can be identified by the fact that it has a null next() value
+                link.setNext(null);
                 this.__decrementLength();
-                return value;
+                return link.get();
             }
-            previousLink = link;
         });
     };
     LinkedList.prototype.shift = function () {
-        var link = this.__start;
-        if (link) {
-            this.__start = link.next();
-            if (link === this.__end) {
-                this.__end = link.next();
-            }
-            link.setNext(null);
-            this.__decrementLength();
-            return link.get();
+        if (this.length > 0) {
+            return this.splice(this.__start.next().get());
+        } else {
+            return null;
         }
-        return null;
     };
     LinkedList.prototype.contains = function(value) {
         return this.forEach(function (ownedvalue) {

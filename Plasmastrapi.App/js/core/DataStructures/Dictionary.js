@@ -92,6 +92,7 @@ function (Link, validator) {
                 next.setPrevious(previous);
                 // A freed link can be identified by the fact that it has a null next() value
                 link.setNext(null);
+                this.__decrementLength();
                 return link.get();
             }
         });

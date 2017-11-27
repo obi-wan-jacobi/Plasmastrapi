@@ -102,6 +102,7 @@
     <Content Include="js\engine\Systems\Diagnostics\ViewportDiagnosticsSystem.js" />
     <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
+    <Content Include="js\game\Controllers\RevisionController.js" />
     <Content Include="js\game\Factories\AugmentedLogicElementFactory.js" />
     <Content Include="js\game\Factories\AugmentedTerminalFactory.js" />
     <Content Include="js\game\Factories\AugmentedWireFactory.js" />
@@ -112,6 +113,11 @@
     <Content Include="js\game\InputHandlers\WireCutterTool.js" />
     <Content Include="js\game\InputHandlers\WireTool.js" />
     <Content Include="js\game\Systems\Diagnostics\GameCacheDiagnosticsSystem.js" />
+    <Content Include="js\game\ToolActions\Base\ToolAction.js" />
+    <Content Include="js\game\ToolActions\CutterAction.js" />
+    <Content Include="js\game\ToolActions\PlaceAction.js" />
+    <Content Include="js\game\ToolActions\SpawnAction.js" />
+    <Content Include="js\game\ToolActions\TrashAction.js" />
     <Content Include="js\game\ToolHelpers\SelectionBox.js" />
     <Content Include="js\game\ToolHelpers\WireCutter.js" />
     <Content Include="js\lib\knockout-latest.js" />

@@ -44,10 +44,10 @@ backlog:
 		- zoom in/out
 		- environment
 	- design editor
-		- copy/paste
-		- rotatable components
-		- save/load design
 		- undo/redo
+		- copy/paste
+		- save/load design
+		- rotatable components
 		- wire routing
 	- circuit testing ('debug' mode)
 		- pause/stop/play

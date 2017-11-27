@@ -30,12 +30,12 @@ function (CircuitElement, Container, constants, validator) {
     // public methods
     LogicElement.prototype.attachInput = function (inputTerminal) {
         validator.validateInstanceType(this, inputTerminal, 'input-terminal');
-        inputTerminal.addParent(this);
+        inputTerminal.setParent(this);
         this.__inputs.add(inputTerminal);
     };
     LogicElement.prototype.attachOutput = function (outputTerminal) {
         validator.validateInstanceType(this, outputTerminal, 'output-terminal');
-        outputTerminal.addParent(this);
+        outputTerminal.setParent(this);
     };
     LogicElement.prototype.addTerminal = function (terminal) {
         if (validator.isInstanceOfType(terminal, 'input-terminal')) {

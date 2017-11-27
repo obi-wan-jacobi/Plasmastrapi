@@ -67,9 +67,9 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
         dependency.removeEventListener('onunload', this, this.unload);
         dependency.removeEventListener('ondestroy', this, this.destroy);
     };
-    Entity.prototype.addParent = function (parent) {
+    Entity.prototype.setParent = function (parent) {
         if (this.__parent) {
-            utils.validator.throw(this, 'addParent', 'This entity already has a parent');
+            utils.validator.throw(this, 'setParent', 'This entity already has a parent');
         }
         this.addDependency(parent);
         this.__parent = parent;

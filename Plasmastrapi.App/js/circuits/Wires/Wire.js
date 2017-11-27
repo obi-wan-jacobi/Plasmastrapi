@@ -10,6 +10,7 @@ function (WireElement, validator) {
     };
     // private methods
     Wire.prototype.__ondestroy = function () {
+        WireElement.prototype.__ondestroy.call(this);
         this.__inputTerminal.removeConnection(this.__outputTerminal);
     };
     Wire.prototype.__setInput = function (inputTerminal) {

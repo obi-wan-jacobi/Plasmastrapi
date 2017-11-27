@@ -8,8 +8,8 @@ function (Terminal, constants) {
         Terminal.call(this);
     };
     // private methods
-    OutputTerminal.prototype.addParent = function (parent) {
-        Terminal.prototype.addParent.call(this, parent);
+    OutputTerminal.prototype.setParent = function (parent) {
+        Terminal.prototype.setParent.call(this, parent);
         // initialize pass-through event handling
         this.__parent.addEventListener('onstatechange', this, this.__$onstatechange);
     };

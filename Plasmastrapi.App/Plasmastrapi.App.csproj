@@ -116,6 +116,10 @@
     <Content Include="js\lib\knockout-latest.js" />
     <Content Include="js\lib\require.js" />
     <Content Include="js\lib\text.js" />
+    <Content Include="js\tests\Configuration\require.config.js" />
+    <Content Include="js\tests\main.js" />
+    <Content Include="js\tests\Mocks\Base\Mock.js" />
+    <Content Include="js\tests\Mocks\MockViewport.js" />
     <Content Include="js\ui\Configuration\config.js" />
     <Content Include="js\ui\Configuration\debug.js" />
     <Content Include="js\ui\Configuration\require.config.js" />

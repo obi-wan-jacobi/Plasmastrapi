@@ -12,12 +12,11 @@ in progress:
 - 
 
 next:
-- move select interactions out of factories and into corresponding tools
+-  
 
 tech debt:
 - general
 	- (ongoing) run memory analysis/profiler diagnostics
-	- reduce maximum permissible number of destroy() calls to 1 in all cases
 - circuits
 	- config
 - scenes
@@ -30,8 +29,7 @@ tech debt:
 	- refactor all *** closures *** to be prototypal
 	- PolygonHandle point-collision checking is disgusting
 	- PolygonComponent --> combine translate + rotate into one function (leverage a single for-loop)?
-	- dependent/child entity destruction (EmitterContainer --> destroyed dependent/child entities are unsubscribed from their host/parent entity before post-destruction callbacks resolve)
-- potential scalability concerns
+- scalability concerns
 	- single-canvas viewport
 
 backlog:
@@ -45,11 +43,7 @@ backlog:
 	- scenario window
 		- zoom in/out
 		- environment
-		- events	
 	- design editor
-		- wire 'draw-cutting'
-		- confine circuit elements to design area
-			- highlight/outline selected tool
 		- copy/paste
 		- rotatable components
 		- save/load design

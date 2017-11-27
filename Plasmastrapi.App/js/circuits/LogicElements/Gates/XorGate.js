@@ -6,7 +6,7 @@ function (Gate, constants) {
     function XorGate() {
         Gate.call(this);
     };
-    XorGate.prototype.updateState = function (incomingState) {
+    XorGate.prototype.updateState = function () {
         var nextState = constants.STATES.NO_POWER;
         var numberOfHighInputs = 0;
         this.__inputs.forEach(function (input) {
@@ -25,9 +25,7 @@ function (Gate, constants) {
         if (numberOfHighInputs === 1) {
             nextState = constants.STATES.HIGH;
         }
-        if (nextState !== this.getState()) {
-            this.setState(nextState);
-        }
+        this.setState(nextState);
     };
 
     return XorGate;

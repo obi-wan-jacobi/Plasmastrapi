@@ -8,6 +8,8 @@ function (CircuitElement, Container, constants, validator) {
         CircuitElement.call(this);
         this.__inputs = new Container('input-terminal');
         this.__state = constants.STATES.NO_POWER;
+        this.__isStateTransitionRequired = false;
+        this.__stateTransition = null;
     };
     // public prototypal variables
     Object.defineProperties(LogicElement.prototype, {
@@ -44,7 +46,7 @@ function (CircuitElement, Container, constants, validator) {
             this.attachOutput(terminal);
         }
     };
-    LogicElement.prototype.updateState = function (inputState) {
+    LogicElement.prototype.updateState = function (state) {
         validator.throwMethodMustBeOverridden(this, 'updateState');
     };
     LogicElement.prototype.getState = function (state) {
@@ -55,9 +57,19 @@ function (CircuitElement, Container, constants, validator) {
         if (!(state >= constants.STATES.NO_POWER && state <= constants.STATES.HIGH)) {
             validator.throw(this, 'setState', `State cannot be set to value ${state}`);
         }
-        this.__state = state;
-        this.emit('onstatechange', this.__state);
+        if (this.__state !== state) {
+            this.__isStateTransitionRequired = true;
+            this.__stateTransition = state
+        }
     };
-    
+    LogicElement.prototype.signalStateTransition = function () {
+        if (this.__isStateTransitionRequired) {
+            this.__isStateTransitionRequired = false;
+            this.__state = this.__stateTransition;
+            this.__stateTransition = null;
+            this.emit('onstatechange', this.__state);
+        }
+    };
+
     return LogicElement;
 });

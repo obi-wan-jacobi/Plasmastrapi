@@ -18,9 +18,7 @@ function (Gate, constants) {
                 }
             }, this);
         }, this);
-        if (nextState !== this.getState()) {
-            this.setState(nextState);
-        }
+        this.setState(nextState);
     };
 
     return NandGate;

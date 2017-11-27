@@ -26,6 +26,8 @@
             'xor-gate': './circuits/LogicElements/Gates/XorGate',
             // --- Power ---
             'power-source': './circuits/LogicElements/Power/PowerSource',
+        // Systems
+        'logic-element-state-system': './circuits/Systems/LogicElementStateSystem',
         // Terminals
         'terminal': './circuits/Terminals/Base/Terminal',
         'input-terminal': './circuits/Terminals/InputTerminal',

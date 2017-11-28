@@ -1,5 +1,5 @@
-﻿define(['input-handler'],
-function (InputHandler) {
+﻿define(['input-handler', 'utils'],
+function (InputHandler, utils) {
 
     PlacingTool.prototype = Object.create(InputHandler.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
@@ -12,14 +12,17 @@ function (InputHandler) {
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
         this.__target = target;
-        this.__targetPoseComponent = this.__target.getComponent('pose-component');
+        this.__targetPoseComponent = null;
     };
     // private methods
     PlacingTool.prototype.__oninit = function () {
-        var position = this.__targetPoseComponent.getHandle().getPosition();
-        if (position.x === 0 && position.y === 0) {
-            var currentMousePosition = this.__engine.getController('input-controller').getMousePosition();
-            this.__targetPoseComponent.getHandle().setPosition(currentMousePosition);
+        if (!utils.validator.isInstanceOfType(this.__target, 'selection-box')) {
+            this.__targetPoseComponent = this.__target.getComponent('pose-component');
+            var position = this.__targetPoseComponent.getHandle().getPosition();
+            if (position.x === 0 && position.y === 0) {
+                var currentMousePosition = this.__engine.getController('input-controller').getMousePosition();
+                this.__targetPoseComponent.getHandle().setPosition(currentMousePosition);
+            }
         }
     };
     PlacingTool.prototype.__onload = function () {
@@ -61,7 +64,11 @@ function (InputHandler) {
     PlacingTool.prototype.escape = function () {
     };
     PlacingTool.prototype.mousemove = function (position) {
-        this.__targetPoseComponent.getHandle().setPosition(position);
+        if (this.__targetPoseComponent) {
+            this.__targetPoseComponent.getHandle().setPosition(position);
+        } else {
+            this.__target.pullTo(position);
+        }
     };
     PlacingTool.prototype.mousedown = function () {
     };

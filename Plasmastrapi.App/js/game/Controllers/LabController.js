@@ -113,6 +113,9 @@ function (Controller, utils) {
             if (utils.validator.isInstanceOfType(target, 'logic-element')) {
                 this.place(target);
             }
+            if (utils.validator.isInstanceOfType(target, 'selection-box')) {
+                this.placeSelectionBox(target);
+            }
             if (utils.validator.isInstanceOfType(target, 'terminal')) {
                 this.wire(target);
             }
@@ -138,6 +141,10 @@ function (Controller, utils) {
     LabController.prototype.place = function (logicElement) {
         utils.validator.validateInstanceType(this, logicElement, 'logic-element')
         this.__set('place', logicElement);
+    };
+    LabController.prototype.placeSelectionBox = function (selectionBox) {
+        utils.validator.validateInstanceType(this, selectionBox, 'selection-box')
+        this.__set('place', selectionBox);
     };
     LabController.prototype.spawn = function (logicElementString) {
         utils.validator.validateClassType(this, logicElementString, 'logic-element');

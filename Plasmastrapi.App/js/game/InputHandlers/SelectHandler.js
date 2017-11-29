@@ -9,7 +9,6 @@ function (InputHandler, utils) {
         InputHandler.call(this, engine);
         this.__labController = this.__engine.getController('lab-controller');
         this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
-        this.__wireContainer = this.__engine.getFactory('wire-factory').getContainer();
         this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();
         this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
         this.__selectionBox = null;
@@ -19,22 +18,26 @@ function (InputHandler, utils) {
     SelectHandler.prototype.__oninit = function () {
     };
     SelectHandler.prototype.__onload = function () {
-        // Disable wires
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
-        this.__wireContainer.forEach(disableElement);
-    };
-    SelectHandler.prototype.__onunload = function () {
-        // Re-enable wires
+        // Enable logic elements + terminals
         function enableElement(element) {
             element.getComponent('pick-component').enable();
         };
-        this.__wireContainer.forEach(enableElement);
+        this.__logicElementContainer.forEach(enableElement);
+        this.__inputTerminalContainer.forEach(enableElement);
+        this.__outputTerminalContainer.forEach(enableElement);
+    };
+    SelectHandler.prototype.__onunload = function () {
+        // Disable logic elements + terminals
+        function disableElement(element) {
+            element.getComponent('pick-component').disable();
+        };
+        this.__logicElementContainer.forEach(disableElement);
+        this.__inputTerminalContainer.forEach(disableElement);
+        this.__outputTerminalContainer.forEach(disableElement);
     };
     SelectHandler.prototype.__createSelectionBox = function (position) {
         if (this.__selectionBox) {
-            utils.validator.throw(this, 'initSelectionBox', 'A selection box has already been initialized');
+            utils.validator.throw(this, 'createSelectionBox', 'A selection box has already been initialized');
         }
         this.__selectionBox = this.__engine.getFactory('ui-element-factory').create('selection-box');
         this.__selectionBox.startAt(position);
@@ -63,7 +66,7 @@ function (InputHandler, utils) {
         this.__selectionBox.getComponent('pick-component').addEventListener('onpick', this, placeSelectionBox);
         var handler = this;
         function destroySelectionBox() {
-            // Re-enable everything else (except wires; they get re-enabled later already)
+            // Enable logic elements + terminals
             function enableElement(element) {
                 element.getComponent('pick-component').enable();
             };
@@ -79,7 +82,7 @@ function (InputHandler, utils) {
             this.destroy();
             handler.__selectionBox = null;
         };
-        // Disable everything else (in addition to wires)
+        // Disable logic elements + terminals
         function disableElement(element) {
             element.getComponent('pick-component').disable();
         };
@@ -88,7 +91,7 @@ function (InputHandler, utils) {
         this.__outputTerminalContainer.forEach(disableElement);
     };
     SelectHandler.prototype.__destroySelectionBox = function () {
-        // Re-enable everything else (except wires; they get re-enabled later already)
+        // Enable logic elements + terminals
         function enableElement(element) {
             element.getComponent('pick-component').enable();
         };

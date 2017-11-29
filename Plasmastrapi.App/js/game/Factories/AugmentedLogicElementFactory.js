@@ -80,6 +80,7 @@ function (ExtendedFactory, utils, config) {
         pickComponent.addEventListener('onselect', logicElement, onselect);
         pickComponent.addEventListener('ondeselect', logicElement, ondeselect);
         logicElement.addComponent(pickComponent);
+        pickComponent.disable();
         return logicElement;
     };
     AugmentedLogicElementFactory.prototype.addTerminal = function (logicElement, terminalString, terminalPositionOffset, wireAnchorPositionOffset) {

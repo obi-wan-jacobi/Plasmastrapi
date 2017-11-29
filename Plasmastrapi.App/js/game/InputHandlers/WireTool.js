@@ -7,8 +7,6 @@ function (InputHandler, validator) {
         InputHandler.call(this, engine);
         this.__wireFactory = this.__engine.getFactory('augmented-wire-factory');
         this.__labController = this.__engine.getController('lab-controller');
-        this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
-        this.__wireContainer = this.__engine.getFactory('wire-factory').getContainer();
         this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();
         this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
         this.__target = target;
@@ -21,29 +19,25 @@ function (InputHandler, validator) {
         this.__anchor.getComponent('pose-component').setData(currentMousePosition);
     };
     WireTool.prototype.__onload = function () {
-        // Disable everything except for the complimentary terminal types
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
-        this.__logicElementContainer.forEach(disableElement);
-        this.__wireContainer.forEach(disableElement);
-        if (validator.isInstanceOfType(this.__target, 'input-terminal')) {
-            this.__inputTerminalContainer.forEach(disableElement);
-        } else if (validator.isInstanceOfType(this.__target, 'output-terminal')) {
-            this.__outputTerminalContainer.forEach(disableElement);
-        }
-    };
-    WireTool.prototype.__onunload = function () {
-        // Re-enable everything
+        // Enable the complimentary terminal types
         function enableElement(element) {
             element.getComponent('pick-component').enable();
         };
-        this.__logicElementContainer.forEach(enableElement);
-        this.__wireContainer.forEach(enableElement);
         if (validator.isInstanceOfType(this.__target, 'input-terminal')) {
-            this.__inputTerminalContainer.forEach(enableElement);
-        } else if (validator.isInstanceOfType(this.__target, 'output-terminal')) {
             this.__outputTerminalContainer.forEach(enableElement);
+        } else if (validator.isInstanceOfType(this.__target, 'output-terminal')) {
+            this.__inputTerminalContainer.forEach(enableElement);
+        }
+    };
+    WireTool.prototype.__onunload = function () {
+        // Disable the complimentary terminal types
+        function disableElement(element) {
+            element.getComponent('pick-component').disable();
+        };
+        if (validator.isInstanceOfType(this.__target, 'input-terminal')) {
+            this.__outputTerminalContainer.forEach(disableElement);
+        } else if (validator.isInstanceOfType(this.__target, 'output-terminal')) {
+            this.__inputTerminalContainer.forEach(disableElement);
         }
     };
     // public methods

@@ -61,6 +61,7 @@ function (ExtendedFactory, utils, config) {
         pickComponent.addEventListener('onmouseenter', terminalElement, setHoverImage);
         pickComponent.addEventListener('onmouseleave', terminalElement, revertHoverImage);
         terminalElement.addComponent(pickComponent);
+        pickComponent.disable();
         return terminalElement;
     };
     AugmentedTerminalFactory.prototype.getInputTerminalContainer = function () {

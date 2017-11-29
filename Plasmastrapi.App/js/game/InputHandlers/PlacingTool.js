@@ -5,10 +5,6 @@ function (InputHandler, utils) {
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool(engine, target) {
         InputHandler.call(this, engine);
-        this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
-        this.__wireContainer = this.__engine.getFactory('wire-factory').getContainer();
-        this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();
-        this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
         this.__target = target;
@@ -26,28 +22,12 @@ function (InputHandler, utils) {
         }
     };
     PlacingTool.prototype.__onload = function () {
-        // Disable everything
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
-        this.__logicElementContainer.forEach(disableElement);
-        this.__wireContainer.forEach(disableElement);
-        this.__inputTerminalContainer.forEach(disableElement);
-        this.__outputTerminalContainer.forEach(disableElement);
         // Select target
         this.__target.getComponent('pick-component').select();
         // Set cursor
         this.__cursorController.setMove();
     };
     PlacingTool.prototype.__onunload = function () {
-        // Re-enable everything
-        function enableElement(element) {
-            element.getComponent('pick-component').enable();
-        };
-        this.__logicElementContainer.forEach(enableElement);
-        this.__wireContainer.forEach(enableElement);
-        this.__inputTerminalContainer.forEach(enableElement);
-        this.__outputTerminalContainer.forEach(enableElement);
         // Deselect target
         this.__target.getComponent('pick-component').deselect();
         // Set cursor

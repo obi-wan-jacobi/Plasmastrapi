@@ -36,7 +36,9 @@ function (System, LinkedList, Position) {
     };
     MouseSystem.prototype.__buildInputEventCallback = function (inputBufferKey) {
         return (function (e) {
-            this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(e));
+            if (e.button === 0 /* left */) {
+                this.__inputBuffer[inputBufferKey].push(this.__getMousePosition(e));
+            }
         }).bind(this);
     };
     MouseSystem.prototype.__getMousePosition = function (e) {

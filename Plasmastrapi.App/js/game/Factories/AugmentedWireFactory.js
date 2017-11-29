@@ -38,6 +38,8 @@ function (ExtendedFactory, utils, config) {
         var lineComponentArgs = [tailElement.getComponent('pose-component'), headElement.getComponent('pose-component'), lineDisplaySettings];
         var lineComponent = this.__componentFactory.create('line-component', lineComponentArgs);
         wireElement.addComponent(lineComponent);
+        wireElement.connectTail(tailElement);
+        wireElement.connectHead(headElement);
         function updateStrokeStyle(incomingState) {
             if (incomingState === 1) {
                 this.getComponent('line-component').getDisplaySettings().strokeStyle = config.Wire.highLineColour;
@@ -72,11 +74,10 @@ function (ExtendedFactory, utils, config) {
             pickComponent.addEventListener('onselect', wireElement, setHoverColour);
             pickComponent.addEventListener('ondeselect', wireElement, revertHoverColour);
             wireElement.addComponent(pickComponent);
+            pickComponent.disable();
         } else if (utils.validator.isInstanceOfType(tailElement, 'output-terminal')) {
             updateStrokeStyle.call(wireElement, tailElement.getState());
         }
-        wireElement.connectTail(tailElement);
-        wireElement.connectHead(headElement);
         return wireElement;
     };
     AugmentedWireFactory.prototype.createAnchorWiredToTerminal = function (terminal, /* optional */ wireAnchorPositionOffset) {

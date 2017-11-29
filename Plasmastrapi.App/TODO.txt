@@ -1,6 +1,7 @@
 
 known issues:
-- 
+- stretching selection box outside of design area causes it to freeze
+- memory leak in wire destruction
 
 user experience:
 - 

@@ -8,7 +8,7 @@ function (InputHandler) {
         this.__labController = this.__engine.getController('lab-controller');
         this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
         this.__selectionBox = null;
-        this.__isSelectionBoxPrioritized = true;
+        this.__initSelectionBoxInitialized = true;
     };
     // private methods
     TrashTool.prototype.__oninit = function () {
@@ -17,25 +17,25 @@ function (InputHandler) {
         this.__enableLogicElements();
     };
     TrashTool.prototype.__onunload = function () {
-        if (!this.__isSelectionBoxPrioritized) {
+        if (!this.__initSelectionBoxInitialized) {
             this.__disableLogicElements();
         }
     };
-    TrashTool.prototype.__initSelectionBox = function (position) {
+    TrashTool.prototype.__createSelectionBox = function (position) {
         if (this.__selectionBox) {
             utils.validator.throw(this, 'initSelectionBox', 'A selection box has already been initialized');
         }
         this.__selectionBox = this.__engine.getFactory('ui-element-factory').create('selection-box');
         this.__selectionBox.startAt(position);
     };
-    TrashTool.prototype.__prioritizeSelectionBox = function () {
-        this.__isSelectionBoxPrioritized = true;
+    TrashTool.prototype.__initSelectionBox = function () {
+        this.__initSelectionBoxInitialized = true;
         this.__disableLogicElements();
     };
     TrashTool.prototype.__destroySelectionBox = function () {
         this.__selectionBox.destroy();
         this.__selectionBox = null;
-        this.__isSelectionBoxPrioritized = false;
+        this.__initSelectionBoxInitialized = false;
     };
     TrashTool.prototype.__enableLogicElements = function () {
         function enableElement(element) {
@@ -74,14 +74,14 @@ function (InputHandler) {
             return;
         } else {
             this.__selectionBox.stretchTo(position);
-            if (!this.__isSelectionBoxPrioritized && (this.__selectionBox.getWidth() >= 1 || this.__selectionBox.getHeight() >= 1)) {
-                this.__prioritizeSelectionBox();
+            if (!this.__initSelectionBoxInitialized && (this.__selectionBox.getWidth() >= 1 || this.__selectionBox.getHeight() >= 1)) {
+                this.__initSelectionBox();
             }
         }
     };
     TrashTool.prototype.mousedown = function (position) {
         if (!this.__selectionBox) {
-            this.__initSelectionBox(position);
+            this.__createSelectionBox(position);
         }
     };
     TrashTool.prototype.mouseup = function () {

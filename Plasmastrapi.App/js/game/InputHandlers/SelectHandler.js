@@ -62,17 +62,18 @@ function (InputHandler, utils) {
             designArea.getComponent('pick-component').addEventListener('onpick', this.__selectionBox, destroySelectionBox);
             this.__labController.setTarget(this.__selectionBox);
         };
+        function destroySelectionBox() {
+            var selections = this.flushContents();
+            selections.forEach(function (element) {
+                element.getComponent('pick-component').deselect();
+            });
+            this.destroy();
+        };
         this.__selectionBox.getComponent('pick-component').addEventListener('onpull', this, pullSelectionBox);
         this.__selectionBox.getComponent('pick-component').addEventListener('onpick', this, placeSelectionBox);
+        this.__labController.getDesignArea().getComponent('pick-component').addEventListener('onmouseleave', this.__selectionBox, destroySelectionBox);
         var handler = this;
         function destroySelectionBox() {
-            // Enable logic elements + terminals
-            function enableElement(element) {
-                element.getComponent('pick-component').enable();
-            };
-            handler.__logicElementContainer.forEach(enableElement);
-            handler.__inputTerminalContainer.forEach(enableElement);
-            handler.__outputTerminalContainer.forEach(enableElement);
             var selections = this.flushContents();
             selections.forEach(function (element) {
                 element.getComponent('pick-component').deselect();
@@ -91,13 +92,6 @@ function (InputHandler, utils) {
         this.__outputTerminalContainer.forEach(disableElement);
     };
     SelectHandler.prototype.__destroySelectionBox = function () {
-        // Enable logic elements + terminals
-        function enableElement(element) {
-            element.getComponent('pick-component').enable();
-        };
-        this.__logicElementContainer.forEach(enableElement);
-        this.__inputTerminalContainer.forEach(enableElement);
-        this.__outputTerminalContainer.forEach(enableElement);
         var selections = this.__selectionBox.flushContents();
         selections.forEach(function (element) {
             element.getComponent('pick-component').deselect();
@@ -131,7 +125,10 @@ function (InputHandler, utils) {
     SelectHandler.prototype.mouseup = function () {
     };
     SelectHandler.prototype.click = function () {
-        if (this.__selectionBox.isEmpty) {
+        // If mouse down outside of design area, but mouse up inside design area...
+        if (!this.__selectionBox) {
+            return;
+        } else if (this.__selectionBox.isEmpty) {
             this.__destroySelectionBox();
         } else {
             var handler = this;
@@ -146,6 +143,9 @@ function (InputHandler, utils) {
     };
     SelectHandler.prototype.dispose = function () {
         this.unload();
+        if (this.__selectionBox && (!this.__isSelectionBoxInitialized || this.__selectionBox.isEmpty)) {
+            this.__destroySelectionBox();
+        }
     };
 
     return SelectHandler;

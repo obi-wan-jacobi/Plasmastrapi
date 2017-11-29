@@ -64,7 +64,7 @@ function (InputHandler, validator) {
             } else if (validator.isInstanceOfType(terminal, 'output-terminal')) {
                 this.__wireFactory.create('wire', [terminal, this.__target]);
             } else {
-                validator.throw(this, 'onclick',
+                validator.throw(this, 'click',
                     `Wiring attempt made on incompatible types: ${this.__target.constructor.name} + ${terminal.constructor.name}`
                 );
             }

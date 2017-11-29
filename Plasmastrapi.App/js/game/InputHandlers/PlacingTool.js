@@ -48,6 +48,8 @@ function (InputHandler, utils) {
             this.__targetPoseComponent.getHandle().setPosition(position);
         } else {
             this.__target.pullTo(position);
+            var designArea = this.__labController.getDesignArea();
+            this.__target.forEach(designArea.confine, designArea);
         }
     };
     PlacingTool.prototype.mousedown = function () {

@@ -90,6 +90,9 @@ function (UIElement, Container, utils) {
     SelectionBox.prototype.getHeight = function () {
         return this.getComponent('polygon-component').getData().getHeight();
     };
+    SelectionBox.prototype.forEach = function (fn, caller) {
+        return this.__contents.forEach(fn, caller);
+    };
     SelectionBox.prototype.flushContents = function () {
         var contents = this.__contents;
         this.__contents = null;

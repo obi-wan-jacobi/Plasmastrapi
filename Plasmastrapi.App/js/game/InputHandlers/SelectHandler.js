@@ -1,8 +1,6 @@
 ﻿define(['input-handler', 'utils'],
 function (InputHandler, utils) {
 
-    // *** CLEAN ME ***
-
     SelectHandler.prototype = Object.create(InputHandler.prototype);
     SelectHandler.prototype.constructor = SelectHandler;
     function SelectHandler(engine) {
@@ -44,10 +42,8 @@ function (InputHandler, utils) {
     };
     SelectHandler.prototype.__initSelectionBox = function () {
         this.__isSelectionBoxInitialized = true;
-        var isSelectionBoxBeingPlaced = false;
         var designArea = this.__labController.getDesignArea();
         function pullSelectionBox() {
-            isSelectionBoxBeingPlaced = true;
             this.__selectionBox.getComponent('pick-component').disable();
             this.__selectionBox.getComponent('pick-component').removeEventListener('onpick', this);
             designArea.getComponent('pick-component').removeEventListener('onpick', this.__selectionBox);
@@ -55,7 +51,6 @@ function (InputHandler, utils) {
             this.__labController.setTarget(this.__selectionBox);
         };
         function placeSelectionBox() {
-            isSelectionBoxBeingPlaced = true;
             this.__selectionBox.getComponent('pick-component').disable();
             this.__selectionBox.getComponent('pick-component').removeEventListener('onpick', this);
             designArea.getComponent('pick-component').removeEventListener('onpick', this.__selectionBox);

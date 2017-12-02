@@ -36,6 +36,12 @@ function (ToolHandler, utils) {
         this.__isSelectionBoxInitialized = true;
         var designArea = this.__labController.getDesignArea();
         // *** closures ***
+        function onmouseenter() {
+            this.__cursorController.setPointer();
+        };
+        function onmouseleave() {
+            this.__cursorController.setDefault();
+        };
         function pullSelectionBox() {
             this.__selectionBox.getComponent('pick-component').disable();
             this.__selectionBox.getComponent('pick-component').removeEventListener('onpick', this);
@@ -50,16 +56,6 @@ function (ToolHandler, utils) {
             designArea.getComponent('pick-component').addEventListener('onpick', this.__selectionBox, destroySelectionBox);
             this.__labController.setTarget(this.__selectionBox);
         };
-        function destroySelectionBox() {
-            var selections = this.flushContents();
-            selections.forEach(function (element) {
-                element.getComponent('pick-component').deselect();
-            });
-            this.destroy();
-        };
-        this.__selectionBox.getComponent('pick-component').addEventListener('onpull', this, pullSelectionBox);
-        this.__selectionBox.getComponent('pick-component').addEventListener('onpick', this, placeSelectionBox);
-        this.__labController.getDesignArea().getComponent('pick-component').addEventListener('onmouseleave', this.__selectionBox, destroySelectionBox);
         var handler = this;
         function destroySelectionBox() {
             var selections = this.flushContents();
@@ -71,6 +67,12 @@ function (ToolHandler, utils) {
             this.destroy();
             handler.__selectionBox = null;
         };
+        this.__selectionBox.getComponent('pick-component').addEventListener('onmouseenter', this, onmouseenter);
+        this.__selectionBox.getComponent('pick-component').addEventListener('onmouseleave', this, onmouseleave);
+        this.__selectionBox.getComponent('pick-component').addEventListener('onpull', this, pullSelectionBox);
+        this.__selectionBox.getComponent('pick-component').addEventListener('onpick', this, placeSelectionBox);
+        this.__labController.getDesignArea().getComponent('pick-component')
+            .addEventListener('onmouseleave', this.__selectionBox, destroySelectionBox);
         // Disable logic elements + terminals
         this.__disableAll('logic-element');
         this.__disableAll('input-terminal');
@@ -81,6 +83,8 @@ function (ToolHandler, utils) {
         selections.forEach(function (element) {
             element.getComponent('pick-component').deselect();
         });
+        this.__labController.getDesignArea().getComponent('pick-component')
+            .removeEventListener('onmouseleave', this.__selectionBox);
         this.__selectionBox.destroy();
         this.__selectionBox = null;
     };

@@ -87,7 +87,7 @@ function (ExtendedFactory, utils, config) {
         utils.validator.validateInstanceType(this, logicElement, 'logic-element');
         var terminal = this.__terminalFactory.create(terminalString)
         logicElement.addTerminal(terminal);
-        terminal.follow(logicElement, terminalPositionOffset);
+        terminal.getComponent('pose-component').follow(logicElement.getComponent('pose-component'), terminalPositionOffset);
         this.__wireFactory.createAnchorWiredToTerminal(terminal, wireAnchorPositionOffset);
     };
 

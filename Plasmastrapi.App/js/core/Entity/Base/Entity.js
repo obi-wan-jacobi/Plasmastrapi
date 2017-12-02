@@ -1,5 +1,5 @@
-define(['emitter', 'dictionary', 'loadable', 'destructible', 'position', 'utils'],
-function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
+define(['emitter', 'dictionary', 'loadable', 'destructible', 'utils'],
+function (Emitter, Dictionary, Loadable, Destructible, utils) {
 
     Entity.prototype = Object.create(Emitter.prototype);
     Entity.prototype.constructor = Entity;
@@ -83,28 +83,6 @@ function (Emitter, Dictionary, Loadable, Destructible, Position, utils) {
     };
     Entity.prototype.getComponent = function (componentString) {
         return this.__components.get(componentString);
-    };
-    Entity.prototype.hasComponent = function (componentString) {
-        return this.getComponent(componentString) ? true : false;
-    };
-    Entity.prototype.forEachComponent = function (fn, /* optional */ caller) {
-        return this.__components.forEach(fn, caller);
-    };
-    Entity.prototype.follow = function (entityToFollow, positionOffset) {
-        var poseComponentToFollow = entityToFollow.getComponent('pose-component')
-        var poseComponent = this.getComponent('pose-component');
-        poseComponentToFollow.addEventListener('onpositionchange', this, function () {
-            var position = poseComponentToFollow.getHandle().getPosition();
-            var orientation = poseComponentToFollow.getHandle().getOrientation();
-            var templateX = positionOffset.x;
-            var templateY = positionOffset.y;
-            var x = templateX * Math.cos(orientation) - templateY * Math.sin(orientation) + position.x;
-            var y = templateX * Math.sin(orientation) + templateY * Math.cos(orientation) + position.y;
-            poseComponent.getHandle().setPosition(new Position(x, y));
-        });
-        poseComponentToFollow.addEventListener('onorientationchange', poseComponent.getHandle(), function (newOrientation) {
-            poseComponent.getHandle().setOrientation(newOrientation);
-        });
     };
 
     return Entity;

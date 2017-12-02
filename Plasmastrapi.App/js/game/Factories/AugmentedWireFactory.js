@@ -86,7 +86,7 @@ function (ExtendedFactory, utils, config) {
         wireAnchor.addComponent(this.__componentFactory.create('pose-component'));
         if (wireAnchorPositionOffset) {
             utils.validator.validateInstanceType(this, wireAnchorPositionOffset, 'position');
-            wireAnchor.follow(terminal, wireAnchorPositionOffset);
+            wireAnchor.getComponent('pose-component').follow(terminal.getComponent('pose-component'), wireAnchorPositionOffset);
         }
         wireAnchor.addDependency(terminal);
         this.create('terminal-wire', [terminal, wireAnchor]);

@@ -16,6 +16,7 @@ function (Component, Position) {
         this.__attachEventTriggerToHandleMethod('setOrientation', 'onorientationchange');
 	};
 	PoseComponent.prototype.follow = function (poseComponentToFollow, positionOffset) {
+        // *** closures ***
 	    poseComponentToFollow.addEventListener('onpositionchange', this, function () {
 	        var position = poseComponentToFollow.getHandle().getPosition();
 	        var orientation = poseComponentToFollow.getHandle().getOrientation();

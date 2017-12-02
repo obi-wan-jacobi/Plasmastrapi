@@ -35,6 +35,7 @@ function (ToolHandler, utils) {
     SelectionTool.prototype.__initSelectionBox = function () {
         this.__isSelectionBoxInitialized = true;
         var designArea = this.__labController.getDesignArea();
+        // *** closures ***
         function pullSelectionBox() {
             this.__selectionBox.getComponent('pick-component').disable();
             this.__selectionBox.getComponent('pick-component').removeEventListener('onpick', this);

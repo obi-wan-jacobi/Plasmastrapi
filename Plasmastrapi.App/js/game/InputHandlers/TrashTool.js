@@ -1,12 +1,10 @@
-﻿define(['input-handler'],
-function (InputHandler) {
+﻿define(['tool-handler'],
+function (ToolHandler) {
 
-    TrashTool.prototype = Object.create(InputHandler.prototype);
+    TrashTool.prototype = Object.create(ToolHandler.prototype);
     TrashTool.prototype.constructor = TrashTool;
     function TrashTool(engine) {
-        InputHandler.call(this, engine);
-        this.__labController = this.__engine.getController('lab-controller');
-        this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
+        ToolHandler.call(this, engine);
         this.__selectionBox = null;
         this.__initSelectionBoxInitialized = true;
     };
@@ -14,11 +12,11 @@ function (InputHandler) {
     TrashTool.prototype.__oninit = function () {
     };
     TrashTool.prototype.__onload = function () {
-        this.__enableLogicElements();
+        this.__enableAll('logic-element');
     };
     TrashTool.prototype.__onunload = function () {
         if (!this.__initSelectionBoxInitialized) {
-            this.__disableLogicElements();
+            this.__disableAll('logic-element');
         }
     };
     TrashTool.prototype.__createSelectionBox = function (position) {
@@ -30,24 +28,12 @@ function (InputHandler) {
     };
     TrashTool.prototype.__initSelectionBox = function () {
         this.__initSelectionBoxInitialized = true;
-        this.__disableLogicElements();
+        this.__disableAll('logic-element');
     };
     TrashTool.prototype.__destroySelectionBox = function () {
         this.__selectionBox.destroy();
         this.__selectionBox = null;
         this.__initSelectionBoxInitialized = false;
-    };
-    TrashTool.prototype.__enableLogicElements = function () {
-        function enableElement(element) {
-            element.getComponent('pick-component').enable();
-        };
-        this.__logicElementContainer.forEach(enableElement);
-    };
-    TrashTool.prototype.__disableLogicElements = function () {
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
-        this.__logicElementContainer.forEach(disableElement);
     };
     // public methods
     TrashTool.prototype.keydown = function (keyboardHandle) {
@@ -55,7 +41,7 @@ function (InputHandler) {
         if (keyString === 'shift') {
             this.__labController.setRepeatLastActionOn();
         } else {
-            this.__labController.hotkey(keyboardHandle.getKeyString());
+            ToolHandler.prototype.keydown.call(this, keyboardHandle);
         }
     };
     TrashTool.prototype.keyup = function (keyboardHandle) {

@@ -49,7 +49,7 @@ function (Controller, utils) {
             this.__activeSelection = null;
         }
         if (this.__designAreaPickComponent.isHovered) {
-            this.__inputController.setHandler('select-handler');
+            this.__inputController.setHandler('selection-tool');
         } else {
             this.__inputController.setHandler('idle-handler');
         }

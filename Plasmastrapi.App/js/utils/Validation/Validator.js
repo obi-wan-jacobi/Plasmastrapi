@@ -22,7 +22,7 @@
             return typeof instance === typeString;
         }
         var Type = modules.require(typeString)
-        return instance instanceof Type;
+        return instance instanceof Type || instance.constructor === Type;
     };
 
     validator.isClassOfType = function (classString, typeString) {

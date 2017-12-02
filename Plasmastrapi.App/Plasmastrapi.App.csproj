@@ -106,8 +106,9 @@
     <Content Include="js\game\Factories\AugmentedLogicElementFactory.js" />
     <Content Include="js\game\Factories\AugmentedTerminalFactory.js" />
     <Content Include="js\game\Factories\AugmentedWireFactory.js" />
-    <Content Include="js\game\InputHandlers\IdleHandler.js" />
-    <Content Include="js\game\InputHandlers\SelectHandler.js" />
+    <Content Include="js\game\InputHandlers\Base\ToolHandler.js" />
+    <Content Include="js\game\InputHandlers\Base\IdleHandler.js" />
+    <Content Include="js\game\InputHandlers\SelectionTool.js" />
     <Content Include="js\game\InputHandlers\SpawningTool.js" />
     <Content Include="js\game\InputHandlers\TrashTool.js" />
     <Content Include="js\game\InputHandlers\WireCutterTool.js" />

@@ -1,12 +1,10 @@
-﻿define(['input-handler'],
-function (InputHandler) {
+﻿define(['tool-handler'],
+function (ToolHandler) {
 
-    SpawningTool.prototype = Object.create(InputHandler.prototype);
+    SpawningTool.prototype = Object.create(ToolHandler.prototype);
     SpawningTool.prototype.constructor = SpawningTool;
     function SpawningTool(engine, logicElementString) {
-        InputHandler.call(this, engine);
-        this.__labController = this.__engine.getController('lab-controller');
-        this.__cursorController = this.__engine.getController('cursor-controller');
+        ToolHandler.call(this, engine);
         this.__target = this.__engine.getFactory('augmented-logic-element-factory').create(logicElementString);
         this.__targetPoseComponent = this.__target.getComponent('pose-component');
     };
@@ -32,7 +30,7 @@ function (InputHandler) {
         if (keyString === 'shift') {
             this.__labController.setRepeatLastActionOn();
         } else {
-            this.__labController.hotkey(keyboardHandle.getKeyString());
+            ToolHandler.prototype.keydown.call(this, keyboardHandle);
         }
     };
     SpawningTool.prototype.keyup = function (keyboardHandle) {

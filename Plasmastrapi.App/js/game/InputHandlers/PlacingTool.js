@@ -1,12 +1,10 @@
-﻿define(['input-handler', 'utils'],
-function (InputHandler, utils) {
+﻿define(['tool-handler', 'utils'],
+function (ToolHandler, utils) {
 
-    PlacingTool.prototype = Object.create(InputHandler.prototype);
+    PlacingTool.prototype = Object.create(ToolHandler.prototype);
     PlacingTool.prototype.constructor = PlacingTool;
     function PlacingTool(engine, target) {
-        InputHandler.call(this, engine);
-        this.__labController = this.__engine.getController('lab-controller');
-        this.__cursorController = this.__engine.getController('cursor-controller');
+        ToolHandler.call(this, engine);
         this.__target = target;
         this.__targetPoseComponent = null;
     };
@@ -35,7 +33,7 @@ function (InputHandler, utils) {
     };
     // public methods
     PlacingTool.prototype.keydown = function (keyboardHandle) {
-        this.__labController.hotkey(keyboardHandle.getKeyString());
+        ToolHandler.prototype.keydown.call(this, keyboardHandle);
     };
     PlacingTool.prototype.keyup = function (keyboardHandle) {
     };

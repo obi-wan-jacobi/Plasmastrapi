@@ -12,9 +12,10 @@
         'augmented-terminal-factory': './game/Factories/AugmentedTerminalFactory',
         'augmented-wire-factory': './game/Factories/AugmentedWireFactory',
         // Input Handlers
-        'idle-handler': './game/InputHandlers/IdleHandler',
+        'tool-handler': './game/InputHandlers/Base/ToolHandler',
+        'idle-handler': './game/InputHandlers/Base/IdleHandler',
         'placing-tool': './game/InputHandlers/PlacingTool',
-        'select-handler': './game/InputHandlers/SelectHandler',
+        'selection-tool': './game/InputHandlers/SelectionTool',
         'spawning-tool': './game/InputHandlers/SpawningTool',
         'trash-tool': './game/InputHandlers/TrashTool',
         'wire-cutter-tool': './game/InputHandlers/WireCutterTool',

@@ -1,12 +1,10 @@
-﻿define(['input-handler'],
-function (InputHandler) {
+﻿define(['tool-handler'],
+function (ToolHandler) {
 
-    WireCutterTool.prototype = Object.create(InputHandler.prototype);
+    WireCutterTool.prototype = Object.create(ToolHandler.prototype);
     WireCutterTool.prototype.constructor = WireCutterTool;
     function WireCutterTool(engine) {
-        InputHandler.call(this, engine);
-        this.__labController = this.__engine.getController('lab-controller');
-        this.__wireContainer = this.__engine.getFactory('wire-factory').getContainer();
+        ToolHandler.call(this, engine);
         this.__wireCutter = null;
         this.__isWireCutterPrioritized = false;
     };
@@ -14,11 +12,11 @@ function (InputHandler) {
     WireCutterTool.prototype.__oninit = function () {
     };
     WireCutterTool.prototype.__onload = function () {
-        this.__enableWires();
+        this.__enableAll('wire');
     };
     WireCutterTool.prototype.__onunload = function () {
         if (!this.__isWireCutterPrioritized) {
-            this.__disableWires();
+            this.__disableAll('wire');
         }
     };
     WireCutterTool.prototype.__initWireCutter = function () {
@@ -29,24 +27,12 @@ function (InputHandler) {
     };
     WireCutterTool.prototype.__prioritizeWireCutter = function () {
         this.__isWireCutterPrioritized = true;
-        this.__disableWires();
+        this.__disableAll('wire');
     };
     WireCutterTool.prototype.__destroyWireCutter = function () {
         this.__wireCutter.destroy();
         this.__wireCutter = null;
         this.__isWireCutterPrioritized = false;
-    };
-    WireCutterTool.prototype.__enableWires = function () {
-        function enableElement(element) {
-            element.getComponent('pick-component').enable();
-        };
-        this.__wireContainer.forEach(enableElement);
-    };
-    WireCutterTool.prototype.__disableWires = function () {
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
-        this.__wireContainer.forEach(disableElement);
     };
     // public methods
     WireCutterTool.prototype.keydown = function (keyboardHandle) {
@@ -54,7 +40,7 @@ function (InputHandler) {
         if (keyString === 'shift') {
             this.__labController.setRepeatLastActionOn();
         } else {
-            this.__labController.hotkey(keyboardHandle.getKeyString());
+            ToolHandler.prototype.keydown.call(this, keyboardHandle);
         }
     };
     WireCutterTool.prototype.keyup = function (keyboardHandle) {

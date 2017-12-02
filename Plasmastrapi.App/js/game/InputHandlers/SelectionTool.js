@@ -1,46 +1,38 @@
-﻿define(['input-handler', 'utils'],
-function (InputHandler, utils) {
+﻿define(['tool-handler', 'utils'],
+function (ToolHandler, utils) {
 
-    SelectHandler.prototype = Object.create(InputHandler.prototype);
-    SelectHandler.prototype.constructor = SelectHandler;
-    function SelectHandler(engine) {
-        InputHandler.call(this, engine);
-        this.__labController = this.__engine.getController('lab-controller');
-        this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
-        this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();
-        this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
+    // *** CLEAN ME ***
+
+    SelectionTool.prototype = Object.create(ToolHandler.prototype);
+    SelectionTool.prototype.constructor = SelectionTool;
+    function SelectionTool(engine) {
+        ToolHandler.call(this, engine);
         this.__selectionBox = null;
         this.__isSelectionBoxInitialized = false;
     };
     // private methods
-    SelectHandler.prototype.__oninit = function () {
+    SelectionTool.prototype.__oninit = function () {
     };
-    SelectHandler.prototype.__onload = function () {
+    SelectionTool.prototype.__onload = function () {
         // Enable logic elements + terminals
-        function enableElement(element) {
-            element.getComponent('pick-component').enable();
-        };
-        this.__logicElementContainer.forEach(enableElement);
-        this.__inputTerminalContainer.forEach(enableElement);
-        this.__outputTerminalContainer.forEach(enableElement);
+        this.__enableAll('logic-element');
+        this.__enableAll('input-terminal');
+        this.__enableAll('output-terminal');
     };
-    SelectHandler.prototype.__onunload = function () {
+    SelectionTool.prototype.__onunload = function () {
         // Disable logic elements + terminals
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
-        this.__logicElementContainer.forEach(disableElement);
-        this.__inputTerminalContainer.forEach(disableElement);
-        this.__outputTerminalContainer.forEach(disableElement);
+        this.__disableAll('logic-element');
+        this.__disableAll('input-terminal');
+        this.__disableAll('output-terminal');
     };
-    SelectHandler.prototype.__createSelectionBox = function (position) {
+    SelectionTool.prototype.__createSelectionBox = function (position) {
         if (this.__selectionBox) {
             utils.validator.throw(this, 'createSelectionBox', 'A selection box has already been initialized');
         }
         this.__selectionBox = this.__engine.getFactory('ui-element-factory').create('selection-box');
         this.__selectionBox.startAt(position);
     };
-    SelectHandler.prototype.__initSelectionBox = function () {
+    SelectionTool.prototype.__initSelectionBox = function () {
         this.__isSelectionBoxInitialized = true;
         var designArea = this.__labController.getDesignArea();
         function pullSelectionBox() {
@@ -79,14 +71,11 @@ function (InputHandler, utils) {
             handler.__selectionBox = null;
         };
         // Disable logic elements + terminals
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
-        this.__logicElementContainer.forEach(disableElement);
-        this.__inputTerminalContainer.forEach(disableElement);
-        this.__outputTerminalContainer.forEach(disableElement);
+        this.__disableAll('logic-element');
+        this.__disableAll('input-terminal');
+        this.__disableAll('output-terminal');
     };
-    SelectHandler.prototype.__destroySelectionBox = function () {
+    SelectionTool.prototype.__destroySelectionBox = function () {
         var selections = this.__selectionBox.flushContents();
         selections.forEach(function (element) {
             element.getComponent('pick-component').deselect();
@@ -95,16 +84,16 @@ function (InputHandler, utils) {
         this.__selectionBox = null;
     };
     // public methods
-    SelectHandler.prototype.keydown = function (keyboardHandle) {
-        this.__labController.hotkey(keyboardHandle.getKeyString());
+    SelectionTool.prototype.keydown = function (keyboardHandle) {
+        ToolHandler.prototype.keydown.call(this, keyboardHandle);
     };
-    SelectHandler.prototype.keyup = function (keyboardHandle) { 
+    SelectionTool.prototype.keyup = function (keyboardHandle) { 
     };
-    SelectHandler.prototype.enter = function () {
+    SelectionTool.prototype.enter = function () {
     };
-    SelectHandler.prototype.escape = function () {
+    SelectionTool.prototype.escape = function () {
     };
-    SelectHandler.prototype.mousemove = function (position) {
+    SelectionTool.prototype.mousemove = function (position) {
         if (!this.__selectionBox) {
             return;
         } else {
@@ -114,12 +103,12 @@ function (InputHandler, utils) {
             }
         }
     };
-    SelectHandler.prototype.mousedown = function (position) {
+    SelectionTool.prototype.mousedown = function (position) {
         this.__createSelectionBox(position);
     };
-    SelectHandler.prototype.mouseup = function () {
+    SelectionTool.prototype.mouseup = function () {
     };
-    SelectHandler.prototype.click = function () {
+    SelectionTool.prototype.click = function () {
         // If mouse down outside of design area, but mouse up inside design area...
         if (!this.__selectionBox) {
             return;
@@ -136,12 +125,12 @@ function (InputHandler, utils) {
             this.__labController.idle();
         }
     };
-    SelectHandler.prototype.dispose = function () {
+    SelectionTool.prototype.dispose = function () {
         this.unload();
         if (this.__selectionBox && (!this.__isSelectionBoxInitialized || this.__selectionBox.isEmpty)) {
             this.__destroySelectionBox();
         }
     };
 
-    return SelectHandler;
+    return SelectionTool;
 });

@@ -1,14 +1,11 @@
-﻿define(['input-handler', 'validator'],
-function (InputHandler, validator) {
+﻿define(['tool-handler', 'validator'],
+function (ToolHandler, validator) {
 
-    WireTool.prototype = Object.create(InputHandler.prototype);
+    WireTool.prototype = Object.create(ToolHandler.prototype);
     WireTool.prototype.constructor = WireTool;
     function WireTool(engine, target) {
-        InputHandler.call(this, engine);
+        ToolHandler.call(this, engine);
         this.__wireFactory = this.__engine.getFactory('augmented-wire-factory');
-        this.__labController = this.__engine.getController('lab-controller');
-        this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();
-        this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
         this.__target = target;
         this.__anchor = null;
     };
@@ -20,28 +17,23 @@ function (InputHandler, validator) {
     };
     WireTool.prototype.__onload = function () {
         // Enable the complimentary terminal types
-        function enableElement(element) {
-            element.getComponent('pick-component').enable();
-        };
         if (validator.isInstanceOfType(this.__target, 'input-terminal')) {
-            this.__outputTerminalContainer.forEach(enableElement);
+            this.__enableAll('output-terminal');
         } else if (validator.isInstanceOfType(this.__target, 'output-terminal')) {
-            this.__inputTerminalContainer.forEach(enableElement);
+            this.__enableAll('input-terminal');
         }
     };
     WireTool.prototype.__onunload = function () {
         // Disable the complimentary terminal types
-        function disableElement(element) {
-            element.getComponent('pick-component').disable();
-        };
         if (validator.isInstanceOfType(this.__target, 'input-terminal')) {
-            this.__outputTerminalContainer.forEach(disableElement);
+            this.__disableAll('output-terminal');
         } else if (validator.isInstanceOfType(this.__target, 'output-terminal')) {
-            this.__inputTerminalContainer.forEach(disableElement);
+            this.__disableAll('input-terminal');
         }
     };
     // public methods
-    WireTool.prototype.keydown = function () {
+    WireTool.prototype.keydown = function (keyboardHandle) {
+        ToolHandler.prototype.keydown.call(this, keyboardHandle);
     };
     WireTool.prototype.keyup = function () {
     };

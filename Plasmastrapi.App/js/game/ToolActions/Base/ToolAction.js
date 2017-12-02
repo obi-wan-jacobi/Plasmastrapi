@@ -9,6 +9,9 @@ function (utils) {
         this.__target = null;
     };
     ToolAction.prototype.setTarget = function (target) {
+        if (this.__target) {
+            utils.validator.throw(this, 'setTarget', `A target (${this.__target.constructor.name}) has already been set`);
+        }
         utils.validator.validateInstanceType(this, target, this.__targetTypeString);
         this.__target = target;
     };

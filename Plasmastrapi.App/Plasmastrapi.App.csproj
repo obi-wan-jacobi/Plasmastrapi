@@ -115,7 +115,7 @@
     <Content Include="js\game\InputHandlers\WireTool.js" />
     <Content Include="js\game\Systems\Diagnostics\GameCacheDiagnosticsSystem.js" />
     <Content Include="js\game\ToolActions\Base\ToolAction.js" />
-    <Content Include="js\game\ToolActions\CutterAction.js" />
+    <Content Include="js\game\ToolActions\WireCutterAction.js" />
     <Content Include="js\game\ToolActions\PlaceAction.js" />
     <Content Include="js\game\ToolActions\SpawnAction.js" />
     <Content Include="js\game\ToolActions\TrashAction.js" />

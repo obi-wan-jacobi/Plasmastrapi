@@ -40,9 +40,6 @@ backlog:
 		- ViewportSystem to listen for screen resize events?
 	- Modal panels (move, stretch/resize, close)
 - lab scene
-	- scenario window
-		- zoom in/out
-		- environment
 	- design editor
 		- undo/redo
 		- copy/paste
@@ -54,6 +51,9 @@ backlog:
 		- breakpoints?
 		- step forward/backward
 		- sliding global timer (signal propagation speed)
+	- scenario window
+		- zoom in/out
+		- environment
 	- elements
 		- flip flops (x3)
 		- timers

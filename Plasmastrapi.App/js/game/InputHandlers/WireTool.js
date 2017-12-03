@@ -51,15 +51,19 @@ function (ToolHandler, validator) {
     WireTool.prototype.click = function () {
         var terminal = this.__labController.flushTarget();
         if (terminal) {
+            var wire = null;
             if (validator.isInstanceOfType(terminal, 'input-terminal')) {
-                this.__wireFactory.create('wire', [this.__target, terminal]);
+                wire = this.__wireFactory.create('wire', [this.__target, terminal]);
             } else if (validator.isInstanceOfType(terminal, 'output-terminal')) {
-                this.__wireFactory.create('wire', [terminal, this.__target]);
+                wire = this.__wireFactory.create('wire', [terminal, this.__target]);
             } else {
                 validator.throw(this, 'click',
                     `Wiring attempt made on incompatible types: ${this.__target.constructor.name} + ${terminal.constructor.name}`
                 );
             }
+            var action = this.__toolActionFactory.create('wire-action');
+            action.setTarget(wire);
+            this.__revisionController.addAction(action);
         }
         this.__labController.idle();
     };

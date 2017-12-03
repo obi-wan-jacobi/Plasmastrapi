@@ -57,20 +57,20 @@ function(Dictionary, utils) {
     Emitter.prototype.removeEventListener = function(event, subscriber) {
         utils.validator.validateEventIsRegistered(this, event);
         utils.validator.validateObject(this, subscriber);
-        var removedKeyPair = null;
+        var callback = null;
         if (this.__eventsBuffer[event]) {
-            removedKeyPair = this.__eventsBuffer[event].remove(subscriber);
+            callback = this.__eventsBuffer[event].remove(subscriber);
         }
-        if (!removedKeyPair) {
-            removedKeyPair = this.__events[event].remove(subscriber);
+        if (!callback) {
+            callback = this.__events[event].remove(subscriber);
         }
-        if (!removedKeyPair) {
+        if (!callback) {
             if (utils.config.isInfoLoggingActiveOnFailedEventListenerRemoval) {
                 utils.logging.info(this, 'removeEventListener', `${subscriber.constructor.name} was not subscribed to ${this.constructor.name} for event ${event}`)
             }
             return function () { };
         }
-        return removedKeyPair.value;
+        return callback;
     };
     Emitter.prototype.purgeEventListener = function(subscriber) {
         utils.validator.validateObject(this, subscriber);

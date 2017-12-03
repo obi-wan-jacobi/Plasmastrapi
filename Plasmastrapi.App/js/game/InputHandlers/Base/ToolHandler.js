@@ -15,6 +15,8 @@ function (InputHandler, utils) {
         InputHandler.call(this, engine);
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
+        this.__revisionController = this.__engine.getController('revision-controller');
+        this.__toolActionFactory = this.__engine.getFactory('tool-action-factory');
         this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
         this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();
         this.__outputTerminalContainer = this.__engine.getFactory('terminal-factory').getOutputTerminalContainer();
@@ -50,7 +52,13 @@ function (InputHandler, utils) {
     };
     // public methods
     ToolHandler.prototype.keydown = function (keyboardHandle) {
-        this.__labController.hotkey(keyboardHandle.getKeyString());
+        if (keyboardHandle.getKeyString() === 'z' && keyboardHandle.isCtrlKeyDown) {
+            this.__revisionController.undo();
+        } else if (keyboardHandle.getKeyString() === 'y' && keyboardHandle.isCtrlKeyDown) {
+            this.__revisionController.redo();
+        } else {
+            this.__labController.hotkey(keyboardHandle.getKeyString());
+        }
     };
     ToolHandler.prototype.keyup = function (keyboardHandle) {
     };

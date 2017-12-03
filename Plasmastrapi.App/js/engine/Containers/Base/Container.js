@@ -39,9 +39,15 @@ function (Emitter, Dictionary, validator) {
     Container.prototype.remove = function(item) {
         var removedItem = this.__contents.remove(item);
         if (removedItem) {
-            this.emit('onremove', removedItem.key);
-            return removedItem.key
+            this.emit('onremove', removedItem);
+            return removedItem
         }
+    };
+    Container.prototype.shift = function () {
+        return this.__contents.shift();
+    };
+    Container.prototype.pop = function () {
+        return this.__contents.pop();
     };
     Container.prototype.toArray = function () {
         var result = [];

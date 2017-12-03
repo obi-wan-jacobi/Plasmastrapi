@@ -93,7 +93,7 @@ function (Link, validator) {
                 // A freed link can be identified by the fact that it has a null next() value
                 link.setNext(null);
                 this.__decrementLength();
-                return link.get();
+                return link.get().value;
             }
         });
     };
@@ -103,6 +103,20 @@ function (Link, validator) {
                 return link.get().value;
             }
         }, this);
+    };
+    Dictionary.prototype.shift = function () {
+        if (this.length > 0) {
+            return this.remove(this.__start.next().get().key);
+        } else {
+            return null;
+        }
+    };
+    Dictionary.prototype.pop = function () {
+        if (this.length > 0) {
+            return this.remove(this.__end.previous().get().key);
+        } else {
+            return null;
+        }
     };
     Dictionary.prototype.toArray = function () {
         var result = [];

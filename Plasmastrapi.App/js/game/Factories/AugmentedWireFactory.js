@@ -92,21 +92,9 @@ function (ExtendedFactory, utils, config) {
         this.create('terminal-wire', [terminal, wireAnchor]);
         return wireAnchor;
     };
+    AugmentedWireFactory.prototype.getContainer = function () {
+        return this.__baseFactory.getContainer();
+    }
 
     return AugmentedWireFactory;
 });
-
-/*
-Wire.prototype.__updateState = function () {
-    var lineComponent = this.getComponent('line-component');
-    var displayLayer = config.Wire.displayLayer;
-    var lineWidth = config.Wire.poweredLineWidth;
-    if (!this.outputTerminal.isPowered) {
-        lineComponent.displayOptions = new LineDisplaySettings(displayLayer, config.Wire.noPowerLineColour, lineWidth);
-    } else if (this.outputTerminal.isHigh) {
-        lineComponent.displayOptions = new LineDisplaySettings(displayLayer, config.Wire.highLineColour, lineWidth);
-    } else if (this.outputTerminal.isLow) {
-        lineComponent.displayOptions = new LineDisplaySettings(displayLayer, config.Wire.lowLineColour, lineWidth);
-    }
-};
-*/

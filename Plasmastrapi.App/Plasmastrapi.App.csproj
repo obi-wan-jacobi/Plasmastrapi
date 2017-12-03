@@ -106,6 +106,7 @@
     <Content Include="js\game\Factories\AugmentedLogicElementFactory.js" />
     <Content Include="js\game\Factories\AugmentedTerminalFactory.js" />
     <Content Include="js\game\Factories\AugmentedWireFactory.js" />
+    <Content Include="js\game\Factories\ToolActionFactory.js" />
     <Content Include="js\game\InputHandlers\Base\ToolHandler.js" />
     <Content Include="js\game\InputHandlers\Base\IdleHandler.js" />
     <Content Include="js\game\InputHandlers\SelectionTool.js" />
@@ -115,6 +116,7 @@
     <Content Include="js\game\InputHandlers\WireTool.js" />
     <Content Include="js\game\Systems\Diagnostics\GameCacheDiagnosticsSystem.js" />
     <Content Include="js\game\ToolActions\Base\ToolAction.js" />
+    <Content Include="js\game\ToolActions\WireAction.js" />
     <Content Include="js\game\ToolActions\WireCutterAction.js" />
     <Content Include="js\game\ToolActions\PlaceAction.js" />
     <Content Include="js\game\ToolActions\SpawnAction.js" />

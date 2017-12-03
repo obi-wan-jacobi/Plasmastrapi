@@ -75,6 +75,9 @@ function (ToolHandler) {
         var target = this.__labController.flushTarget();
         if (target) {
             target.destroy();
+            var action = this.__toolActionFactory.create('wire-cutter-action');
+            action.setTarget(target);
+            this.__revisionController.addAction(action);
         }
         if (this.__wireCutter) {
             this.__destroyWireCutter();

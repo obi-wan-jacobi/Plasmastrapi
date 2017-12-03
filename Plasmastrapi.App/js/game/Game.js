@@ -20,11 +20,13 @@ function (Engine, assetUrls, AssetLoader, utils) {
         this.__addFactory('augmented-logic-element-factory');
         this.__addFactory('augmented-terminal-factory');
         this.__addFactory('augmented-wire-factory');
+        this.__addFactory('tool-action-factory');
     };
     Game.prototype.__registerControllers = function () {
         Engine.prototype.__registerControllers.call(this);
         this.__addController('lab-controller');
         this.__addController('cursor-controller');
+        this.__addController('revision-controller');
     };
     Game.prototype.__registerSystems = function () {
         Engine.prototype.__registerSystems.call(this);

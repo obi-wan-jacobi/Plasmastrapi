@@ -7,10 +7,12 @@
         'assets': './game/Assets/assets',
         // Controllers
         'lab-controller': './game/Controllers/LabController',
+        'revision-controller': './game/Controllers/RevisionController',
         // Factories
         'augmented-logic-element-factory': './game/Factories/AugmentedLogicElementFactory',
         'augmented-terminal-factory': './game/Factories/AugmentedTerminalFactory',
         'augmented-wire-factory': './game/Factories/AugmentedWireFactory',
+        'tool-action-factory': './game/Factories/ToolActionFactory',
         // Input Handlers
         'tool-handler': './game/InputHandlers/Base/ToolHandler',
         'idle-handler': './game/InputHandlers/Base/IdleHandler',
@@ -25,6 +27,10 @@
         'lab-scene': './game/Scenes/LabScene',
         // Systems
         'game-cache-diagnostics-system': './game/Systems/Diagnostics/GameCacheDiagnosticsSystem',
+        // Tool Actions
+        'tool-action': './game/ToolActions/Base/ToolAction',
+        'wire-action': './game/ToolActions/WireAction',
+        'wire-cutter-action': './game/ToolActions/WireCutterAction',
         // Tool Helpers
         'selection-box': './game/ToolHelpers/SelectionBox',
         'wire-cutter': './game/ToolHelpers/WireCutter',

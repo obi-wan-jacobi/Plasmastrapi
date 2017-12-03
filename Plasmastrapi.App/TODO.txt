@@ -1,6 +1,6 @@
 
 known issues:
-- 
+- disable everything when selection box is persistent
 
 user experience:
 - 

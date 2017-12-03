@@ -49,7 +49,18 @@ function (UIElement, Container, utils) {
             }
         }, this);
     };
+    // public prototypal variables
+    Object.defineProperties(WireCutter.prototype, {
+        'isEmpty': {
+            get: function () {
+                return this.__contents.toArray().length === 0;
+            }
+        }
+    });
     // public methods
+    WireCutter.prototype.forEach = function (fn, caller) {
+        return this.__contents.forEach(fn, caller);
+    };
     WireCutter.prototype.lineTo = function (position) {
         this.__currentPosition = position;
         this.__curveComponent.getHandle().lineTo(position);

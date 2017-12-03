@@ -31,6 +31,15 @@ function (ToolHandler) {
         this.__disableAll('logic-element');
     };
     TrashTool.prototype.__destroySelectionBox = function () {
+        if (!this.__selectionBox.isEmpty) {
+            var batch = this.__toolActionFactory.create('batch-tool-action');
+            this.__selectionBox.forEach(function (logicElement) {
+                var action = this.__toolActionFactory.create('trash-action');
+                action.setTarget(logicElement);
+                batch.addAction(action);
+            }, this);
+            this.__revisionController.addAction(batch);
+        }
         this.__selectionBox.destroy();
         this.__selectionBox = null;
         this.__initSelectionBoxInitialized = false;

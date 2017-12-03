@@ -18,9 +18,7 @@ function (ToolAction, utils) {
         var wire = this.__wireFactory.create('wire', [this.__outputTerminal, this.__inputTerminal]);
         var target = this.getTarget();
         this.__toolActionContainer.forEach(function (action) {
-            if (action.getTarget() === target) {
-                action.setTarget(wire);
-            }
+            action.updateTarget(target, wire);
         }, this);
     };
     WireCutterAction.prototype.redo = function () {

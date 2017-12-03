@@ -16,9 +16,7 @@ function (ToolAction, utils) {
         var logicElement = this.__logicElementFactory.create(targetModuleName);
         var target = this.getTarget();
         this.__toolActionContainer.forEach(function (action) {
-            if (action.getTarget() === target) {
-                action.setTarget(logicElement);
-            }
+            action.updateTarget(target, logicElement);
         }, this);
         this.__target.getComponent('pose-component').setData(targetPosition);
     };

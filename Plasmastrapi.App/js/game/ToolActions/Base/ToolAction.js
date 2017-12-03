@@ -16,6 +16,11 @@ function (utils) {
         utils.validator.validateInstanceType(this, target, this.__targetTypeString);
         this.__target = target;
     };
+    ToolAction.prototype.updateTarget = function (oldTarget, newTarget) {
+        if (oldTarget === this.__target) {
+            this.setTarget(newTarget);
+        }
+    };
     ToolAction.prototype.undo = function () {
         utils.validator.throwMethodMustBeOverridden(this, 'undo');
     };

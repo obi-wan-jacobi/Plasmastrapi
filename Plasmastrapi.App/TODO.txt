@@ -2,11 +2,14 @@
 known issues:
 - disable everything when selection box is persistent
 - constrain upper limit to revision cache
+- selecting a terminal sometimes fails and freezes the designer tooling
 
 needs testing:
+- undo/redo non-trivial cases (restoring wires on destroyed logic elements, restoring wires on moved logic elements, etc.)
 - (cache performance) undo/redo 
 
 in progress:
+- add execute() to tool actions
 - undo/redo
 
 tech debt:

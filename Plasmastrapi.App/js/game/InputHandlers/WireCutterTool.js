@@ -30,6 +30,15 @@ function (ToolHandler) {
         this.__disableAll('wire');
     };
     WireCutterTool.prototype.__destroyWireCutter = function () {
+        if (!this.__wireCutter.isEmpty) {
+            var batch = this.__toolActionFactory.create('batch-tool-action');
+            this.__wireCutter.forEach(function (wire) {
+                var action = this.__toolActionFactory.create('wire-cutter-action');
+                action.setTarget(wire);
+                batch.addAction(action);
+            }, this);
+            this.__revisionController.addAction(batch);
+        }
         this.__wireCutter.destroy();
         this.__wireCutter = null;
         this.__isWireCutterPrioritized = false;

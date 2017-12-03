@@ -12,6 +12,8 @@ function (Component, Position) {
             'onorientationchange'
         );
         // inject event callbacks into handle
+        this.__attachEventTriggerToHandleMethod('setData', 'onpositionchange');
+        this.__attachEventTriggerToHandleMethod('setData', 'onorientationchange');
         this.__attachEventTriggerToHandleMethod('setPosition', 'onpositionchange');
         this.__attachEventTriggerToHandleMethod('setOrientation', 'onorientationchange');
 	};
@@ -26,8 +28,8 @@ function (Component, Position) {
 	        var y = templateX * Math.sin(orientation) + templateY * Math.cos(orientation) + position.y;
 	        this.getHandle().setPosition(new Position(x, y));
 	    });
-	    poseComponentToFollow.addEventListener('onorientationchange', this.getHandle(), function (newOrientation) {
-	        this.setOrientation(newOrientation);
+        poseComponentToFollow.addEventListener('onorientationchange', this.getHandle(), function (poseHandle) {
+            this.setOrientation(poseHandle.getOrientation());
 	    });
 	};
 

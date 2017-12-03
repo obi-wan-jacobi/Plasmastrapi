@@ -1,18 +1,13 @@
 
 known issues:
 - disable everything when selection box is persistent
-
-user experience:
-- 
+- constrain upper limit to revision cache
 
 needs testing:
-- 
+- (cache performance) undo/redo 
 
 in progress:
-- 
-
-next:
--  
+- undo/redo
 
 tech debt:
 - general

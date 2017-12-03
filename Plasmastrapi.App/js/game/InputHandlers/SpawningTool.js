@@ -52,6 +52,9 @@ function (ToolHandler) {
     SpawningTool.prototype.mouseup = function () {
     };
     SpawningTool.prototype.click = function () {
+        var action = this.__toolActionFactory.create('spawn-action');
+        action.setTarget(this.__target);
+        this.__revisionController.addAction(action);
         this.__target = null;
         this.__targetPoseComponent = null;
         this.__labController.idle();

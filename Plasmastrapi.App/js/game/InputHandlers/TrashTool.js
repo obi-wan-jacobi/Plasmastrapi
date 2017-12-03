@@ -76,6 +76,9 @@ function (ToolHandler) {
     TrashTool.prototype.click = function () {
         var target = this.__labController.flushTarget();
         if (target) {
+            var action = this.__toolActionFactory.create('trash-action');
+            action.setTarget(target);
+            this.__revisionController.addAction(action);
             target.destroy();
         }
         this.__labController.idle();

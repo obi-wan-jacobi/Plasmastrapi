@@ -5,13 +5,14 @@ function (utils) {
         utils.validator.validateInstanceType(this, engine, 'engine');
         utils.validator.validateInstanceType(this, targetTypeString, 'string');
         this.__engine = engine;
+        this.__toolActionContainer = this.__engine.getFactory('tool-action-factory').getContainer();
         this.__targetTypeString = targetTypeString;
         this.__target = null;
     };
+    ToolAction.prototype.getTarget = function (target) {
+        return this.__target;
+    };
     ToolAction.prototype.setTarget = function (target) {
-        if (this.__target) {
-            utils.validator.throw(this, 'setTarget', `A target (${this.__target.constructor.name}) has already been set`);
-        }
         utils.validator.validateInstanceType(this, target, this.__targetTypeString);
         this.__target = target;
     };

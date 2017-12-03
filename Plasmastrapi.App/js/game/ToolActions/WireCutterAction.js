@@ -13,21 +13,18 @@ function (ToolAction, utils) {
         ToolAction.prototype.setTarget.call(this, target);
         this.__inputTerminal = this.__target.inputTerminal;
         this.__outputTerminal = this.__target.outputTerminal;
-        this.__target = null;
     };
     WireCutterAction.prototype.undo = function () {
         var wire = this.__wireFactory.create('wire', [this.__outputTerminal, this.__inputTerminal]);
-        this.setTarget(wire);
-    };
-    WireCutterAction.prototype.redo = function () {
-        var wire = this.__wireFactory.getContainer().forEach(function (wire) {
-            if (wire.inputTerminal === this.__inputTerminal && wire.outputTerminal === this.__outputTerminal) {
-                return wire;
+        var target = this.getTarget();
+        this.__toolActionContainer.forEach(function (action) {
+            if (action.getTarget() === target) {
+                action.setTarget(wire);
             }
         }, this);
-        ToolAction.prototype.setTarget.call(this, wire);
+    };
+    WireCutterAction.prototype.redo = function () {
         this.__target.destroy();
-        this.__target = null;
     };
 
     return WireCutterAction;

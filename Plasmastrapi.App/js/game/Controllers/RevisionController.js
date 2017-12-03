@@ -5,12 +5,16 @@ function (Controller, Container, utils) {
     RevisionController.prototype.constructor = RevisionController;
     function RevisionController(engine) {
         Controller.call(this, engine);
+        this.__toolActionContainer = this.__engine.getFactory('tool-action-factory').getContainer();
         this.__undoContainer = new Container('tool-action');
         this.__redoContainer = new Container('tool-action');
     };
     // public methods
     RevisionController.prototype.addAction = function (action) {
         this.__undoContainer.add(action);
+        this.__redoContainer.forEach(function (action) {
+            this.__toolActionContainer.remove(action);
+        }, this);
         this.__redoContainer = new Container('tool-action');
     };
     RevisionController.prototype.undo = function () {

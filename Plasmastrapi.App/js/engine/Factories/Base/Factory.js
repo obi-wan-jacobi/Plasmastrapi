@@ -14,7 +14,7 @@ function (Base, utils) {
         }
         if (containerString) {
             utils.validator.validateClassType(this, containerString, 'container');
-            this.__container = new (utils.modules.require(containerString))();
+            this.__container = new (utils.modules.require(containerString))(this.__typeString);
             this.__containerString = containerString;
         }
     };

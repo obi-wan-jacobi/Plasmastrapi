@@ -29,6 +29,7 @@
         'game-cache-diagnostics-system': './game/Systems/Diagnostics/GameCacheDiagnosticsSystem',
         // Tool Actions
         'tool-action': './game/ToolActions/Base/ToolAction',
+        'place-action': './game/ToolActions/PlaceAction',
         'spawn-action': './game/ToolActions/SpawnAction',
         'trash-action': './game/ToolActions/TrashAction',
         'wire-action': './game/ToolActions/WireAction',

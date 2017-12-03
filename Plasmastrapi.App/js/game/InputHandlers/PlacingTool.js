@@ -7,6 +7,7 @@ function (ToolHandler, utils) {
         ToolHandler.call(this, engine);
         this.__target = target;
         this.__targetPoseComponent = null;
+        this.__targetInitialPosition = null;
     };
     // private methods
     PlacingTool.prototype.__oninit = function () {
@@ -16,6 +17,8 @@ function (ToolHandler, utils) {
             if (position.x === 0 && position.y === 0) {
                 var currentMousePosition = this.__engine.getController('input-controller').getMousePosition();
                 this.__targetPoseComponent.getHandle().setPosition(currentMousePosition);
+            } else {
+                this.__targetInitialPosition = position;
             }
         }
     };
@@ -61,6 +64,12 @@ function (ToolHandler, utils) {
         this.unload();
         if (this.__target) {
             this.__labController.getDesignArea().confine(this.__target);
+            if (this.__targetInitialPosition) {
+                var action = this.__toolActionFactory.create('place-action');
+                action.setTarget(this.__target);
+                action.setInitialPosition(this.__targetInitialPosition);
+                this.__revisionController.addAction(action);
+            }
         }
         this.__target = null;
         this.__targetPoseComponent = null;

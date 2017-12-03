@@ -6,6 +6,9 @@ function (DataHandle, Pose, Position, Vertex, utils) {
     function PoseHandle(pose, displaySettings) {
         DataHandle.call(this, pose, displaySettings);
     };
+    PoseHandle.prototype.getData = function () {
+        return new Pose(this.__data.x, this.__data.y, this.__data.a);
+    };
     PoseHandle.prototype.setData = function (data) {
         // validate data for this handle
         var modulePrefix = utils.modules.getModulePrefix(this, 'Handle');

@@ -12,7 +12,8 @@ needs testing:
 in progress:
 - add execute() to tool actions
 - undo/redo selection box placing
-- undo/redo toolbar buttons
+- undo/redo destroyed logic elements that had wires
+- undo + redo toolbar buttons
 
 tech debt:
 - general

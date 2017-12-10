@@ -54,13 +54,19 @@ function (ToolHandler, utils) {
     SelectionTool.prototype.mouseup = function () {
     };
     SelectionTool.prototype.click = function () {
-        // If mouse down outside of design area, but mouse up inside design area...
+        // NB: SelectionTool has a life-cycle that accommodates multiple click()'s
         if (!this.__selectionBoxController.isSelectionBoxCreated()) {
+            // If mouse down outside of design area, but mouse up inside design area...
             return;
         } else if (!this.__isSelectionBoxStretchedOnce) {
             this.__selectionBoxController.destroySelectionBox(false);
-        } else if (this.__isSelectionBoxStretchedOnce && this.__selectionBoxController.isSelectionBoxEmpty()) {
-            this.__labController.idle();
+            // Enable logic elements + terminals
+            this.__enableAll('logic-element');
+            this.__enableAll('input-terminal');
+            this.__enableAll('output-terminal');
+        } else if (this.__selectionBoxController.isSelectionBoxEmpty()) {
+            this.__selectionBoxController.destroySelectionBox(false);
+            this.__isSelectionBoxStretchedOnce = false;
         } else {
             this.__selectionBoxController.persistSelectionBox();
         }

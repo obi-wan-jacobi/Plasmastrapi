@@ -17,7 +17,6 @@ in progress:
 tech debt:
 - general
 	- (ongoing) run memory analysis/profiler diagnostics
-	- selection tool's lifecycle is obscure/non-trivial
 - circuits
 	- config
 - scenes

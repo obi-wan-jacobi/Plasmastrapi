@@ -27,6 +27,7 @@ function (Engine, assetUrls, AssetLoader, utils) {
         this.__addController('lab-controller');
         this.__addController('cursor-controller');
         this.__addController('revision-controller');
+        this.__addController('selection-box-controller');
     };
     Game.prototype.__registerSystems = function () {
         Engine.prototype.__registerSystems.call(this);

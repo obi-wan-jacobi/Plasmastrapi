@@ -1,13 +1,12 @@
 
 known issues:
-- disable everything when selection box is persistent
 - constrain upper limit to revision cache
 - selecting a terminal sometimes 'fails' and freezes the designer tooling
 - occasional knockout binding error thrown when page loads
 
 needs testing:
 - undo/redo non-trivial cases (restoring wires on destroyed logic elements, restoring wires on moved logic elements, etc.)
-- (cache performance) undo/redo 
+- (cache performance) undo/redo
 
 in progress:
 - add execute() to tool actions
@@ -18,6 +17,7 @@ in progress:
 tech debt:
 - general
 	- (ongoing) run memory analysis/profiler diagnostics
+	- selection tool's lifecycle is obscure/non-trivial
 - circuits
 	- config
 - scenes

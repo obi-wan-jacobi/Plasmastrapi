@@ -103,6 +103,7 @@
     <Content Include="js\game\Controllers\LabController.js" />
     <Content Include="js\engine\InputHandlers\EmptyHandler.js" />
     <Content Include="js\game\Controllers\RevisionController.js" />
+    <Content Include="js\game\Controllers\SelectionBoxController.js" />
     <Content Include="js\game\Factories\AugmentedLogicElementFactory.js" />
     <Content Include="js\game\Factories\AugmentedTerminalFactory.js" />
     <Content Include="js\game\Factories\AugmentedWireFactory.js" />

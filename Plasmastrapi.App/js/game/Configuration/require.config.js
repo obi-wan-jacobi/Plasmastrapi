@@ -8,6 +8,7 @@
         // Controllers
         'lab-controller': './game/Controllers/LabController',
         'revision-controller': './game/Controllers/RevisionController',
+        'selection-box-controller': './game/Controllers/SelectionBoxController',
         // Factories
         'augmented-logic-element-factory': './game/Factories/AugmentedLogicElementFactory',
         'augmented-terminal-factory': './game/Factories/AugmentedTerminalFactory',

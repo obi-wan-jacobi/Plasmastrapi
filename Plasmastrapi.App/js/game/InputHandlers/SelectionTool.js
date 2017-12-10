@@ -1,14 +1,11 @@
 ﻿define(['tool-handler', 'utils'],
 function (ToolHandler, utils) {
 
-    // *** CLEAN ME ***
-
     SelectionTool.prototype = Object.create(ToolHandler.prototype);
     SelectionTool.prototype.constructor = SelectionTool;
     function SelectionTool(engine) {
         ToolHandler.call(this, engine);
-        this.__selectionBox = null;
-        this.__isSelectionBoxInitialized = false;
+        this.__isSelectionBoxStretchedOnce = false;
     };
     // private methods
     SelectionTool.prototype.__oninit = function () {
@@ -20,73 +17,12 @@ function (ToolHandler, utils) {
         this.__enableAll('output-terminal');
     };
     SelectionTool.prototype.__onunload = function () {
-        // Disable logic elements + terminals
-        this.__disableAll('logic-element');
-        this.__disableAll('input-terminal');
-        this.__disableAll('output-terminal');
-    };
-    SelectionTool.prototype.__createSelectionBox = function (position) {
-        if (this.__selectionBox) {
-            utils.validator.throw(this, 'createSelectionBox', 'A selection box has already been initialized');
+        if (!this.__isSelectionBoxStretchedOnce) {
+            // Disable logic elements + terminals
+            this.__disableAll('logic-element');
+            this.__disableAll('input-terminal');
+            this.__disableAll('output-terminal');
         }
-        this.__selectionBox = this.__engine.getFactory('ui-element-factory').create('selection-box');
-        this.__selectionBox.startAt(position);
-    };
-    SelectionTool.prototype.__initSelectionBox = function () {
-        this.__isSelectionBoxInitialized = true;
-        var designArea = this.__labController.getDesignArea();
-        // *** closures ***
-        function onmouseenter() {
-            this.__cursorController.setPointer();
-        };
-        function onmouseleave() {
-            this.__cursorController.setDefault();
-        };
-        function pullSelectionBox() {
-            this.__selectionBox.getComponent('pick-component').disable();
-            this.__selectionBox.getComponent('pick-component').removeEventListener('onpick', this);
-            designArea.getComponent('pick-component').removeEventListener('onpick', this.__selectionBox);
-            designArea.getComponent('pick-component').addEventListener('onpick', this.__selectionBox, destroySelectionBox);
-            this.__labController.setTarget(this.__selectionBox);
-        };
-        function placeSelectionBox() {
-            this.__selectionBox.getComponent('pick-component').disable();
-            this.__selectionBox.getComponent('pick-component').removeEventListener('onpick', this);
-            designArea.getComponent('pick-component').removeEventListener('onpick', this.__selectionBox);
-            designArea.getComponent('pick-component').addEventListener('onpick', this.__selectionBox, destroySelectionBox);
-            this.__labController.setTarget(this.__selectionBox);
-        };
-        var handler = this;
-        function destroySelectionBox() {
-            var selections = this.flushContents();
-            selections.forEach(function (element) {
-                element.getComponent('pick-component').deselect();
-            });
-            var designArea = handler.__labController.getDesignArea();
-            designArea.getComponent('pick-component').removeEventListener('onpick', this);
-            this.destroy();
-            handler.__selectionBox = null;
-        };
-        this.__selectionBox.getComponent('pick-component').addEventListener('onmouseenter', this, onmouseenter);
-        this.__selectionBox.getComponent('pick-component').addEventListener('onmouseleave', this, onmouseleave);
-        this.__selectionBox.getComponent('pick-component').addEventListener('onpull', this, pullSelectionBox);
-        this.__selectionBox.getComponent('pick-component').addEventListener('onpick', this, placeSelectionBox);
-        this.__labController.getDesignArea().getComponent('pick-component')
-            .addEventListener('onmouseleave', this.__selectionBox, destroySelectionBox);
-        // Disable logic elements + terminals
-        this.__disableAll('logic-element');
-        this.__disableAll('input-terminal');
-        this.__disableAll('output-terminal');
-    };
-    SelectionTool.prototype.__destroySelectionBox = function () {
-        var selections = this.__selectionBox.flushContents();
-        selections.forEach(function (element) {
-            element.getComponent('pick-component').deselect();
-        });
-        this.__labController.getDesignArea().getComponent('pick-component')
-            .removeEventListener('onmouseleave', this.__selectionBox);
-        this.__selectionBox.destroy();
-        this.__selectionBox = null;
     };
     // public methods
     SelectionTool.prototype.keydown = function (keyboardHandle) {
@@ -99,41 +35,40 @@ function (ToolHandler, utils) {
     SelectionTool.prototype.escape = function () {
     };
     SelectionTool.prototype.mousemove = function (position) {
-        if (!this.__selectionBox) {
+        if (!this.__selectionBoxController.isSelectionBoxCreated()) {
             return;
-        } else {
-            this.__selectionBox.stretchTo(position);
-            if (!this.__isSelectionBoxInitialized && (this.__selectionBox.getWidth() >= 1 || this.__selectionBox.getHeight() >= 1)) {
-                this.__initSelectionBox();
+        } else if (!this.__selectionBoxController.isSelectionBoxPersistent()) {
+            this.__selectionBoxController.stretchSelectionBoxTo(position);
+            if (!this.__isSelectionBoxStretchedOnce) {
+                this.__isSelectionBoxStretchedOnce = true;
+                // Disable logic elements + terminals
+                this.__disableAll('logic-element');
+                this.__disableAll('input-terminal');
+                this.__disableAll('output-terminal');
             }
         }
     };
     SelectionTool.prototype.mousedown = function (position) {
-        this.__createSelectionBox(position);
+        this.__selectionBoxController.createSelectionBox(position);
     };
     SelectionTool.prototype.mouseup = function () {
     };
     SelectionTool.prototype.click = function () {
         // If mouse down outside of design area, but mouse up inside design area...
-        if (!this.__selectionBox) {
+        if (!this.__selectionBoxController.isSelectionBoxCreated()) {
             return;
-        } else if (this.__selectionBox.isEmpty) {
-            this.__destroySelectionBox();
-        } else {
-            var handler = this;
-            var designArea = this.__labController.getDesignArea();
-            designArea.getComponent('pick-component').addEventListener('onpick', this.__selectionBox, function () {
-                if (!this.getComponent('pick-component').isProdded) {
-                    handler.__destroySelectionBox();
-                }
-            });
+        } else if (!this.__isSelectionBoxStretchedOnce) {
+            this.__selectionBoxController.destroySelectionBox();
+        } else if (this.__isSelectionBoxStretchedOnce && this.__selectionBoxController.isSelectionBoxEmpty()) {
             this.__labController.idle();
+        } else {
+            this.__selectionBoxController.persistSelectionBox();
         }
     };
     SelectionTool.prototype.dispose = function () {
         this.unload();
-        if (this.__selectionBox && (!this.__isSelectionBoxInitialized || this.__selectionBox.isEmpty)) {
-            this.__destroySelectionBox();
+        if (this.__selectionBoxController.isSelectionBoxCreated() && !this.__selectionBoxController.isSelectionBoxPersistent()) {
+            this.__selectionBoxController.destroySelectionBox();
         }
     };
 

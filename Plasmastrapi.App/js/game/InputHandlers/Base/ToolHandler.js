@@ -16,6 +16,7 @@ function (InputHandler, utils) {
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
         this.__revisionController = this.__engine.getController('revision-controller');
+        this.__selectionBoxController = this.__engine.getController('selection-box-controller');
         this.__toolActionFactory = this.__engine.getFactory('tool-action-factory');
         this.__logicElementContainer = this.__engine.getFactory('logic-element-factory').getContainer();
         this.__inputTerminalContainer = this.__engine.getFactory('terminal-factory').getInputTerminalContainer();

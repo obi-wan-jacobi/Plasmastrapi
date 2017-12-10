@@ -9,8 +9,6 @@ needs testing:
 - (cache performance) undo/redo
 
 in progress:
-- add execute() to tool actions
-- undo/redo selection box placing
 - undo/redo destroyed logic elements that had wires
 - undo + redo toolbar buttons
 

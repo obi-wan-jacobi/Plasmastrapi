@@ -5,8 +5,7 @@ function (ToolHandler) {
     TrashTool.prototype.constructor = TrashTool;
     function TrashTool(engine) {
         ToolHandler.call(this, engine);
-        this.__selectionBox = null;
-        this.__initSelectionBoxInitialized = true;
+        this.__isSelectionBoxStretchedOnce = false;
     };
     // private methods
     TrashTool.prototype.__oninit = function () {
@@ -15,34 +14,9 @@ function (ToolHandler) {
         this.__enableAll('logic-element');
     };
     TrashTool.prototype.__onunload = function () {
-        if (!this.__initSelectionBoxInitialized) {
+        if (!this.__isSelectionBoxStretchedOnce) {
             this.__disableAll('logic-element');
         }
-    };
-    TrashTool.prototype.__createSelectionBox = function (position) {
-        if (this.__selectionBox) {
-            utils.validator.throw(this, 'initSelectionBox', 'A selection box has already been initialized');
-        }
-        this.__selectionBox = this.__engine.getFactory('ui-element-factory').create('selection-box');
-        this.__selectionBox.startAt(position);
-    };
-    TrashTool.prototype.__initSelectionBox = function () {
-        this.__initSelectionBoxInitialized = true;
-        this.__disableAll('logic-element');
-    };
-    TrashTool.prototype.__destroySelectionBox = function () {
-        if (!this.__selectionBox.isEmpty) {
-            var batch = this.__toolActionFactory.create('batch-tool-action');
-            this.__selectionBox.forEach(function (logicElement) {
-                var action = this.__toolActionFactory.create('trash-action');
-                action.setTarget(logicElement);
-                batch.addAction(action);
-            }, this);
-            this.__revisionController.addAction(batch);
-        }
-        this.__selectionBox.destroy();
-        this.__selectionBox = null;
-        this.__initSelectionBoxInitialized = false;
     };
     // public methods
     TrashTool.prototype.keydown = function (keyboardHandle) {
@@ -65,18 +39,19 @@ function (ToolHandler) {
     TrashTool.prototype.escape = function () {
     };
     TrashTool.prototype.mousemove = function (position) {
-        if (!this.__selectionBox) {
+        if (!this.__selectionBoxController.isSelectionBoxCreated()) {
             return;
         } else {
-            this.__selectionBox.stretchTo(position);
-            if (!this.__initSelectionBoxInitialized && (this.__selectionBox.getWidth() >= 1 || this.__selectionBox.getHeight() >= 1)) {
-                this.__initSelectionBox();
+            this.__selectionBoxController.stretchSelectionBoxTo(position);
+            if (!this.__isSelectionBoxStretchedOnce) {
+                this.__isSelectionBoxStretchedOnce = true;
+                this.__disableAll('logic-element');
             }
         }
     };
     TrashTool.prototype.mousedown = function (position) {
-        if (!this.__selectionBox) {
-            this.__createSelectionBox(position);
+        if (!this.__selectionBoxController.isSelectionBoxCreated()) {
+            this.__selectionBoxController.createSelectionBox(position);
         }
     };
     TrashTool.prototype.mouseup = function () {
@@ -94,9 +69,7 @@ function (ToolHandler) {
     };
     TrashTool.prototype.dispose = function () {
         this.unload();
-        if (this.__selectionBox) {
-            this.__destroySelectionBox();
-        }
+        this.__selectionBoxController.destroySelectionBox(true);
         this.__labController.setRepeatLastActionOff();
     };
 

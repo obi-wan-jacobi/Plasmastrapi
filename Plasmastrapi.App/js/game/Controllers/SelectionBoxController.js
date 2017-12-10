@@ -7,6 +7,8 @@ function (Controller, utils) {
         Controller.call(this, engine);
         this.__labController = null;
         this.__cursorController = null;
+        this.__revisionController = null;
+        this.__toolActionFactory = null;
         this.__selectionBox = null;
         this.__isSelectionBoxPersistent = false;
     };
@@ -15,6 +17,8 @@ function (Controller, utils) {
         Controller.prototype.__oninit.call(this);
         this.__labController = this.__engine.getController('lab-controller');
         this.__cursorController = this.__engine.getController('cursor-controller');
+        this.__revisionController = this.__engine.getController('revision-controller');
+        this.__toolActionFactory = this.__engine.getFactory('tool-action-factory');
     };
     SelectionBoxController.prototype.__createSelectionBox = function (position) {
         if (this.__selectionBox) {
@@ -62,11 +66,21 @@ function (Controller, utils) {
             }
         });
     };
-    SelectionBoxController.prototype.__destroySelectionBox = function () {
-        var selections = this.__selectionBox.flushContents();
-        selections.forEach(function (element) {
-            element.getComponent('pick-component').deselect();
-        });
+    SelectionBoxController.prototype.__destroySelectionBox = function (isContentAlsoToBeDestroyed) {
+        if (isContentAlsoToBeDestroyed && !this.__selectionBox.isEmpty) {
+            var batch = this.__toolActionFactory.create('batch-tool-action');
+            this.__selectionBox.forEach(function (logicElement) {
+                var action = this.__toolActionFactory.create('trash-action');
+                action.setTarget(logicElement);
+                batch.addAction(action);
+            }, this);
+            this.__revisionController.addAction(batch);
+        } else {
+            var selections = this.__selectionBox.flushContents();
+            selections.forEach(function (element) {
+                element.getComponent('pick-component').deselect();
+            });
+        }
         if (this.__isSelectionBoxPersistent) {
             this.__labController.getDesignArea().getComponent('pick-component').removeEventListener('onmouseleave', this.__selectionBox);
         }
@@ -93,9 +107,9 @@ function (Controller, utils) {
             return false;
         }
     };
-    SelectionBoxController.prototype.destroySelectionBox = function () {
+    SelectionBoxController.prototype.destroySelectionBox = function (isContentAlsoToBeDestroyed) {
         if (this.__selectionBox) {
-            this.__destroySelectionBox();
+            this.__destroySelectionBox(isContentAlsoToBeDestroyed);
             return true;
         } else {
             return false;

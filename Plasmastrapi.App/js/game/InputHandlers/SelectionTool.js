@@ -58,7 +58,7 @@ function (ToolHandler, utils) {
         if (!this.__selectionBoxController.isSelectionBoxCreated()) {
             return;
         } else if (!this.__isSelectionBoxStretchedOnce) {
-            this.__selectionBoxController.destroySelectionBox();
+            this.__selectionBoxController.destroySelectionBox(false);
         } else if (this.__isSelectionBoxStretchedOnce && this.__selectionBoxController.isSelectionBoxEmpty()) {
             this.__labController.idle();
         } else {
@@ -68,7 +68,7 @@ function (ToolHandler, utils) {
     SelectionTool.prototype.dispose = function () {
         this.unload();
         if (this.__selectionBoxController.isSelectionBoxCreated() && !this.__selectionBoxController.isSelectionBoxPersistent()) {
-            this.__selectionBoxController.destroySelectionBox();
+            this.__selectionBoxController.destroySelectionBox(false);
         }
     };
 

@@ -20,6 +20,8 @@ function (ToolHandler, utils) {
             } else {
                 this.__targetInitialPosition = position;
             }
+        } else {
+            this.__selectionBoxController.beginSelectionBoxPlacement();
         }
     };
     PlacingTool.prototype.__onload = function () {
@@ -48,9 +50,7 @@ function (ToolHandler, utils) {
         if (this.__targetPoseComponent) {
             this.__targetPoseComponent.getHandle().setPosition(position);
         } else {
-            this.__target.pullTo(position);
-            var designArea = this.__labController.getDesignArea();
-            this.__target.forEach(designArea.confine, designArea);
+            this.__selectionBoxController.moveSelectionBoxTo(position);
         }
     };
     PlacingTool.prototype.mousedown = function () {
@@ -69,6 +69,8 @@ function (ToolHandler, utils) {
                 action.setTarget(this.__target);
                 action.setInitialPosition(this.__targetInitialPosition);
                 this.__revisionController.addAction(action);
+            } else {
+                this.__selectionBoxController.endSelectionBoxPlacement();
             }
         }
         this.__target = null;

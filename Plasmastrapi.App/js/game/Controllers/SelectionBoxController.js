@@ -1,5 +1,5 @@
-﻿define(['controller', 'utils'],
-function (Controller, utils) {
+﻿define(['controller', 'dictionary', 'utils'],
+function (Controller, Dictionary, utils) {
 
     SelectionBoxController.prototype = Object.create(Controller.prototype);
     SelectionBoxController.prototype.constructor = SelectionBoxController;
@@ -11,8 +11,15 @@ function (Controller, utils) {
         this.__toolActionFactory = null;
         this.__selectionBox = null;
         this.__isSelectionBoxPersistent = false;
+        this.__isSelectionBoxBeingPlaced = false;
+        this.__initialPositions = new Dictionary('position');
     };
     // private methods
+    SelectionBoxController.prototype.__validateSelectionBoxHasBeenCreated = function () {
+        if (!this.__selectionBox) {
+            utils.validator.throw(this, 'validateSelectionBoxHasBeenCreated', 'Selection box has not been created');
+        }
+    };
     SelectionBoxController.prototype.__oninit = function () {
         Controller.prototype.__oninit.call(this);
         this.__labController = this.__engine.getController('lab-controller');
@@ -22,12 +29,19 @@ function (Controller, utils) {
     };
     SelectionBoxController.prototype.__createSelectionBox = function (position) {
         if (this.__selectionBox) {
-            utils.validator.throw(this, 'createSelectionBox', 'A selection box has already been initialized');
+            utils.validator.throw(this, 'createSelectionBox', 'A selection box has already been created');
         }
         this.__selectionBox = this.__engine.getFactory('ui-element-factory').create('selection-box');
         this.__selectionBox.startAt(position);
     };
     SelectionBoxController.prototype.__persistSelectionBox = function () {
+        this.__validateSelectionBoxHasBeenCreated();
+        if (this.__isSelectionBoxPersistent) {
+            utils.validator.throw(this, 'persistSelectionBox', 'Selection box has already been persisted');
+        }
+        if (!(this.__selectionBox.getWidth() >= 1 || this.__selectionBox.getHeight() >= 1)) {
+            return;
+        }
         this.__isSelectionBoxPersistent = true;
         var designArea = this.__labController.getDesignArea();
         // *** closures ***
@@ -67,6 +81,7 @@ function (Controller, utils) {
         });
     };
     SelectionBoxController.prototype.__destroySelectionBox = function (isContentAlsoToBeDestroyed) {
+        this.__validateSelectionBoxHasBeenCreated();
         if (isContentAlsoToBeDestroyed && !this.__selectionBox.isEmpty) {
             var batch = this.__toolActionFactory.create('batch-tool-action');
             this.__selectionBox.forEach(function (logicElement) {
@@ -90,30 +105,13 @@ function (Controller, utils) {
     };
     // public methods
     SelectionBoxController.prototype.createSelectionBox = function (position) {
-        if (!this.__selectionBox) {
-            this.__createSelectionBox(position);
-            return true;
-        } else {
-            return false;
-        }
+        this.__createSelectionBox(position);
     };
     SelectionBoxController.prototype.persistSelectionBox = function () {
-        if (this.__selectionBox && !this.__isSelectionBoxPersistent &&
-            (this.__selectionBox.getWidth() >= 1 || this.__selectionBox.getHeight() >= 1)
-        ) {
-            this.__persistSelectionBox();
-            return true;
-        } else {
-            return false;
-        }
+        this.__persistSelectionBox();
     };
     SelectionBoxController.prototype.destroySelectionBox = function (isContentAlsoToBeDestroyed) {
-        if (this.__selectionBox) {
-            this.__destroySelectionBox(isContentAlsoToBeDestroyed);
-            return true;
-        } else {
-            return false;
-        }
+        this.__destroySelectionBox(isContentAlsoToBeDestroyed);
     };
     SelectionBoxController.prototype.isSelectionBoxCreated = function () {
         return !utils.validator.isNullOrUndefined(this.__selectionBox);
@@ -125,12 +123,42 @@ function (Controller, utils) {
         return this.__selectionBox ? this.__selectionBox.isEmpty : true;
     };
     SelectionBoxController.prototype.stretchSelectionBoxTo = function (position) {
-        if (this.__selectionBox) {
-            this.__selectionBox.stretchTo(position);
-            return true;
-        } else {
-            return false;
+        this.__validateSelectionBoxHasBeenCreated();
+        this.__selectionBox.stretchTo(position);
+    };
+    SelectionBoxController.prototype.beginSelectionBoxPlacement = function () {
+        this.__validateSelectionBoxHasBeenCreated();
+        if (this.__isSelectionBoxBeingPlaced) {
+            utils.validator.throw(this, 'beginSelectionBoxPlacement', 'Selection box is already being placed');
         }
+        this.__isSelectionBoxBeingPlaced = true;
+        this.__selectionBox.forEach(function (element) {
+            var data = element.getComponent('pose-component').getHandle().getPosition();
+            this.__initialPositions.add(element, data);
+        }, this);
+    };
+    SelectionBoxController.prototype.moveSelectionBoxTo = function (position) {
+        this.__validateSelectionBoxHasBeenCreated();
+        if (!this.__isSelectionBoxBeingPlaced) {
+            utils.validator.throw(this, 'beginSelectionBoxPlacement', 'beginSelectionBoxPlacement() must be called before this method');
+        }
+        this.__selectionBox.pullTo(position);
+        var designArea = this.__labController.getDesignArea();
+        this.__selectionBox.forEach(designArea.confine, designArea);
+    };
+    SelectionBoxController.prototype.endSelectionBoxPlacement = function () {
+        if (!this.__isSelectionBoxBeingPlaced) {
+            utils.validator.throw(this, 'beginSelectionBoxPlacement', 'beginSelectionBoxPlacement() must be called before this method');
+        }
+        this.__isSelectionBoxBeingPlaced = false;
+        var batch = this.__toolActionFactory.create('batch-tool-action');
+        this.__initialPositions.forEach(function (element, position) {
+            var action = this.__toolActionFactory.create('place-action');
+            action.setTarget(element);
+            action.setInitialPosition(position);
+            batch.addAction(action);
+        }, this);
+        this.__revisionController.addAction(batch);
     };
 
     return SelectionBoxController;

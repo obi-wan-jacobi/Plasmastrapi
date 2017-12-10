@@ -49,7 +49,9 @@ function (ToolHandler, utils) {
         }
     };
     SelectionTool.prototype.mousedown = function (position) {
-        this.__selectionBoxController.createSelectionBox(position);
+        if (!this.__selectionBoxController.isSelectionBoxCreated()) {
+            this.__selectionBoxController.createSelectionBox(position);
+        }
     };
     SelectionTool.prototype.mouseup = function () {
     };
@@ -67,7 +69,7 @@ function (ToolHandler, utils) {
         } else if (this.__selectionBoxController.isSelectionBoxEmpty()) {
             this.__selectionBoxController.destroySelectionBox(false);
             this.__isSelectionBoxStretchedOnce = false;
-        } else {
+        } else if (!this.__selectionBoxController.isSelectionBoxPersistent()) {
             this.__selectionBoxController.persistSelectionBox();
         }
     };

@@ -140,7 +140,7 @@ function (Controller, Dictionary, utils) {
     SelectionBoxController.prototype.moveSelectionBoxTo = function (position) {
         this.__validateSelectionBoxHasBeenCreated();
         if (!this.__isSelectionBoxBeingPlaced) {
-            utils.validator.throw(this, 'beginSelectionBoxPlacement', 'beginSelectionBoxPlacement() must be called before this method');
+            utils.validator.throw(this, 'moveSelectionBoxTo', 'beginSelectionBoxPlacement() must be called before this method');
         }
         this.__selectionBox.pullTo(position);
         var designArea = this.__labController.getDesignArea();
@@ -148,7 +148,7 @@ function (Controller, Dictionary, utils) {
     };
     SelectionBoxController.prototype.endSelectionBoxPlacement = function () {
         if (!this.__isSelectionBoxBeingPlaced) {
-            utils.validator.throw(this, 'beginSelectionBoxPlacement', 'beginSelectionBoxPlacement() must be called before this method');
+            utils.validator.throw(this, 'endSelectionBoxPlacement', 'beginSelectionBoxPlacement() must be called before this method');
         }
         this.__isSelectionBoxBeingPlaced = false;
         var batch = this.__toolActionFactory.create('batch-tool-action');

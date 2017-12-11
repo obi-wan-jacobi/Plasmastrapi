@@ -31,8 +31,8 @@ function (Engine, assetUrls, AssetLoader, utils) {
     };
     Game.prototype.__registerSystems = function () {
         Engine.prototype.__registerSystems.call(this);
-        // diagnostics
         this.__addSystem('logic-element-state-system');
+        // diagnostics
         this.__addSystem('game-cache-diagnostics-system');
     };
     // public methods

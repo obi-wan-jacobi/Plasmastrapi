@@ -69,7 +69,9 @@ function (ToolHandler) {
     };
     TrashTool.prototype.dispose = function () {
         this.unload();
-        this.__selectionBoxController.destroySelectionBox(true);
+        if (this.__selectionBoxController.isSelectionBoxCreated()) {
+            this.__selectionBoxController.destroySelectionBox(true);
+        }
         this.__labController.setRepeatLastActionOff();
     };
 

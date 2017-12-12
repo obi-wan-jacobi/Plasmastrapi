@@ -1,7 +1,9 @@
 
 known issues:
-- constrain upper limit to revision cache
+- undo/redo destroyed logic elements that had wires can lead to exception in inputTerminal.removeConnection
+	- elements (with wires) that are destroyed then un-destroyed are not properly connected to the un-destroyed wires
 - selecting a terminal sometimes 'fails' and freezes the designer tooling
+	- stretching selection box to contain a logic element then stretching is away so that it doesn't produces a similar effect
 - occasional knockout binding error thrown when page loads
 
 needs testing:
@@ -9,7 +11,7 @@ needs testing:
 - (cache performance) undo/redo
 
 in progress:
-- undo/redo destroyed logic elements that had wires
+- constrain upper limit to revision cache
 - undo + redo toolbar buttons
 
 tech debt:

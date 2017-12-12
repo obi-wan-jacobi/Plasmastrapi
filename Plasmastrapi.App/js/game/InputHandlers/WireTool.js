@@ -61,9 +61,11 @@ function (ToolHandler, validator) {
                     `Wiring attempt made on incompatible types: ${this.__target.constructor.name} + ${terminal.constructor.name}`
                 );
             }
-            var action = this.__toolActionFactory.create('wire-action');
-            action.setTarget(wire);
-            this.__revisionController.addAction(action);
+            if (wire) {
+                var action = this.__toolActionFactory.create('wire-action');
+                action.setTarget(wire);
+                this.__revisionController.addAction(action);
+            }
         }
         this.__labController.idle();
     };

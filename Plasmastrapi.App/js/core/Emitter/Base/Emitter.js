@@ -65,10 +65,7 @@ function(Dictionary, utils) {
             callback = this.__events[event].remove(subscriber);
         }
         if (!callback) {
-            if (utils.config.isInfoLoggingActiveOnFailedEventListenerRemoval) {
-                utils.logging.info(this, 'removeEventListener', `${subscriber.constructor.name} was not subscribed to ${this.constructor.name} for event ${event}`)
-            }
-            return function () { };
+            utils.validator.throw(this, 'removeEventListener', `${subscriber.constructor.name} was not subscribed to ${this.constructor.name} for event ${event}`);   
         }
         return callback;
     };

@@ -74,6 +74,12 @@ function (Emitter, Dictionary, Loadable, Destructible, utils) {
         this.addDependency(parent);
         this.__parent = parent;
     };
+    Entity.prototype.isChildOf = function (parent) {
+        if (this.__parent) {
+            return this.__parent === parent;
+        }
+        return false;
+    };
     Entity.prototype.addComponent = function (component) {
         this.__components.add(utils.modules.getModuleName(component), component);
         component.setEntity(this);

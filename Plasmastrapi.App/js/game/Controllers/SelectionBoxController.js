@@ -84,9 +84,11 @@ function (Controller, Dictionary, utils) {
         this.__validateSelectionBoxHasBeenCreated();
         if (isContentAlsoToBeDestroyed && !this.__selectionBox.isEmpty) {
             var batch = this.__toolActionFactory.create('batch-tool-action');
-            this.__selectionBox.forEach(function (logicElement) {
+            var selections = this.__selectionBox.flushContents();
+            selections.forEach(function (logicElement) {
                 var action = this.__toolActionFactory.create('trash-action');
                 action.setTarget(logicElement);
+                logicElement.destroy();
                 batch.addAction(action);
             }, this);
             this.__revisionController.addAction(batch);

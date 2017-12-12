@@ -6,6 +6,8 @@ function (CircuitElement, Container, constants, validator) {
     function LogicElement() {
         // inherits from
         CircuitElement.call(this);
+        this.__outputTerminal = null;
+        this.__inputTerminal = null;
         this.__inputs = new Container('input-terminal');
         this.__state = constants.STATES.NO_POWER;
         this.__isStateTransitionRequired = false;
@@ -13,6 +15,16 @@ function (CircuitElement, Container, constants, validator) {
     };
     // public prototypal variables
     Object.defineProperties(LogicElement.prototype, {
+        'inputTerminal': {
+            get: function () {
+                return this.__inputTerminal;
+            }
+        },
+        'outputTerminal': {
+            get: function () {
+                return this.__outputTerminal;
+            }
+        },
         'isPowered': {
             get: function () {
                 return this.__state > constants.STATES.NO_POWER;
@@ -34,10 +46,12 @@ function (CircuitElement, Container, constants, validator) {
         validator.validateInstanceType(this, inputTerminal, 'input-terminal');
         inputTerminal.setParent(this);
         this.__inputs.add(inputTerminal);
+        this.__inputTerminal = inputTerminal;
     };
     LogicElement.prototype.attachOutput = function (outputTerminal) {
         validator.validateInstanceType(this, outputTerminal, 'output-terminal');
         outputTerminal.setParent(this);
+        this.__outputTerminal = outputTerminal;
     };
     LogicElement.prototype.addTerminal = function (terminal) {
         if (validator.isInstanceOfType(terminal, 'input-terminal')) {

@@ -12,7 +12,6 @@
         'string': String
     };
 
-    $.isInfoLoggingActiveOnFailedEventListenerRemoval = true;
     $.isInfoLoggingActiveOnFailedRequires = false;
     // *** /modules ***
 

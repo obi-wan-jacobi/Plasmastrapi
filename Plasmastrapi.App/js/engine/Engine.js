@@ -94,7 +94,6 @@ function (System, Dictionary, utils) {
                 var deltaMs = tNow - tPrevious;
                 if (deltaMs < 2000) {
                     isRunning = self.loopOnce(deltaMs);
-                    throw new Error('hi hi hi');
                 } else {
                     //isRunning = false;
                 }

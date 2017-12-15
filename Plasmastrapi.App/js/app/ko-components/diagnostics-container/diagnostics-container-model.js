@@ -1,10 +1,11 @@
-﻿define(['ko', 'root', 'ko-component-model', 'game'],
-function (ko, root, KOComponentModel, Game) {
+﻿define(['ko', 'ko-root', 'ko-component-model'],
+function (ko, root, KOComponentModel) {
 
     DiagnosticsContainerModel.prototype = Object.create(KOComponentModel.prototype);
     DiagnosticsContainerModel.prototype.constructor = DiagnosticsContainerModel;
     function DiagnosticsContainerModel() {
         KOComponentModel.call(this);
+        this.exception = ko.observable();
         this.gameObjects = ko.observableArray();
         this.engineObjects = ko.observableArray();
         this.viewportDiagnostics = ko.observable('Loading...');

@@ -34,7 +34,7 @@ function (Controller, Dictionary, utils) {
 	    this.__entityFactory.getContainer()[`${actionString}EventListener`]('onremove', this.__scene, this.__scene.remove);
 	};
     // public methods
-	SceneController.prototype.setScene = function (sceneString) {
+    SceneController.prototype.setScene = function (sceneString) {
 	    utils.validator.validateClassType(this, sceneString, 'scene');
 	    if (this.__scene) {
 	        this.__updateEntityContainerSubscriptions('remove');

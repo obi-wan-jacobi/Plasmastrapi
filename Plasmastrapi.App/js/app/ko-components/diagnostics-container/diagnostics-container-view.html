@@ -2,54 +2,63 @@
     <table>
         <tbody>
             <tr>
-                <td>
-                    <div id="engine-cache-diagnostics">
-                        <u>Engine Cache Diagnostics</u>
-                        <table>
-                            <tbody>
-                                <!-- ko foreach: engineObjects -->
-                                <tr>
-                                    <td>
-                                        <div data-bind="text: key + ':'"></div>
-                                    </td>
-                                    <td>
-                                        <div data-bind="text: value.length"></div>
-                                    </td>
-                                </tr>
-                                <!-- /ko -->
-                            </tbody>
-                        </table>
-                    </div>
+                <td id="design-area-overlay-column">
+                    <div id="exception-container" data-bind="text: exception"></div>
                 </td>
                 <td>
-                    <div id="game-cache-diagnostics">
-                        <u>Game Cache Diagnostics</u>
-                        <table>
-                            <tbody>
-                                <!-- ko foreach: gameObjects -->
-                                <tr>
-                                    <td>
-                                        <div data-bind="text: key + ':'"></div>
-                                    </td>
-                                    <td>
-                                        <div data-bind="text: value.length"></div>
-                                    </td>
-                                </tr>
-                                <!-- /ko -->
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="viewport-diagnostics" data-bind="{afterRender: afterRender}">
-                        <u>Viewport Diagnostics</u>
-                        <div data-bind="text: `FPS: ${viewportDiagnostics()}`"></div>
-                    </div>
-                </td>
-                <td>
-
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div id="engine-cache-diagnostics">
+                                        <u>Engine Cache Diagnostics</u>
+                                        <table>
+                                            <tbody>
+                                                <!-- ko foreach: engineObjects -->
+                                                <tr>
+                                                    <td>
+                                                        <div data-bind="text: key + ':'"></div>
+                                                    </td>
+                                                    <td>
+                                                        <div data-bind="text: value.length"></div>
+                                                    </td>
+                                                </tr>
+                                                <!-- /ko -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div id="game-cache-diagnostics">
+                                        <u>Game Cache Diagnostics</u>
+                                        <table>
+                                            <tbody>
+                                                <!-- ko foreach: gameObjects -->
+                                                <tr>
+                                                    <td>
+                                                        <div data-bind="text: key + ':'"></div>
+                                                    </td>
+                                                    <td>
+                                                        <div data-bind="text: value.length"></div>
+                                                    </td>
+                                                </tr>
+                                                <!-- /ko -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="viewport-diagnostics" data-bind="{afterRender: afterRender}">
+                                        <u>Viewport Diagnostics</u>
+                                        <div data-bind="text: `FPS: ${viewportDiagnostics()}`"></div>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </td>
             </tr>
         </tbody>

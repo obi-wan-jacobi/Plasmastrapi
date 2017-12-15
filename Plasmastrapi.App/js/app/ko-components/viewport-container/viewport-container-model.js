@@ -1,5 +1,5 @@
-﻿define(['ko', 'root', 'ko-component-model', 'game', 'validator'],
-function (ko, root, KOComponentModel, Game, validator) {
+﻿define(['ko', 'ko-root', 'ko-component-model', 'game', 'ko-diagnostics-container-model', 'validator'],
+function (ko, root, KOComponentModel, Game, diagnosticsContainerModel, validator) {
 
     ViewportContainerModel.prototype = Object.create(KOComponentModel.prototype);
     ViewportContainerModel.prototype.constructor = ViewportContainerModel;
@@ -11,12 +11,12 @@ function (ko, root, KOComponentModel, Game, validator) {
         this.__viewport = viewport;
     };
     ViewportContainerModel.prototype.start = function () {
-        try {
-            root.game = new Game(this.__viewport);
-            root.game.start();
-        } catch (ex) {
-            validator.throw(this, 'start', ex.message);
-        }
+        root.game = new Game(this.__viewport);
+        var promise = root.game.start();
+        diagnosticsContainerModel.initDiagnosticsReporting();
+        promise.catch(function (error) {
+            diagnosticsContainerModel.exception(error);
+        });
     };
 
     return new ViewportContainerModel();

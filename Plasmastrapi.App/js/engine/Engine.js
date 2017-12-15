@@ -94,6 +94,7 @@ function (System, Dictionary, utils) {
                 var deltaMs = tNow - tPrevious;
                 if (deltaMs < 2000) {
                     isRunning = self.loopOnce(deltaMs);
+                    throw new Error('hi hi hi');
                 } else {
                     //isRunning = false;
                 }
@@ -103,7 +104,9 @@ function (System, Dictionary, utils) {
                 utils.validator.throw(this, 'main-loop', 'Critical failure in main loop');
             }
         };
-        loop(tPrevious);
+        return new Promise(function (resolve, reject) {
+            loop(tPrevious);
+        });
     };
     // public methods
     Engine.prototype.getViewport = function () {
@@ -130,7 +133,7 @@ function (System, Dictionary, utils) {
     };
     Engine.prototype.start = function () {
         this.load();
-        this.__beginMainLoop();
+        return this.__beginMainLoop();
     };
 
 	return Engine;

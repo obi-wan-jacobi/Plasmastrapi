@@ -40,13 +40,14 @@ function (Engine, assetUrls, AssetLoader, utils) {
         return this.__assetLoader.get();
     };
     Game.prototype.start = function () {
-        Engine.prototype.start.call(this);
+        var promise = Engine.prototype.start.call(this);
         // load assets
         this.__assetLoader.download(assetUrls).done((function () {
             utils.logging.write(this, 'start', 'Assets have been loaded.');
             this.getController('scene-controller').setScene('lab-scene');
             utils.logging.write(this, 'start', 'We have ignition!');
         }).bind(this));
+        return promise;
     };
 
 	return Game;

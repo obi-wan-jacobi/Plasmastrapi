@@ -1,7 +1,7 @@
 ﻿define(function () {
     var paths = {
         'ko': './lib/knockout-latest',
-        'root': './app/root',
+        'ko-root': './app/root',
         'ko-components': './app/config/components',
         'ko-component-model': './app/ko-components/ko-component/ko-component-model',
         'ko-component-viewmodel': './app/ko-components/ko-component/ko-component-viewmodel'

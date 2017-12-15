@@ -14,6 +14,15 @@ function (ToolAction, utils) {
         this.__inputTerminal = this.__target.inputTerminal;
         this.__outputTerminal = this.__target.outputTerminal;
     };
+    WireAction.prototype.updateTarget = function (oldTarget, newTarget) {
+        ToolAction.prototype.updateTarget.call(this, oldTarget, newTarget);
+        if (this.__inputTerminal.isChildOf(oldTarget)) {
+            this.__inputTerminal = newTarget.inputTerminal;
+        }
+        if (this.__outputTerminal.isChildOf(oldTarget)) {
+            this.__outputTerminal = newTarget.outputTerminal;
+        }
+    };
     WireAction.prototype.undo = function () {
         this.__target.destroy();
     };

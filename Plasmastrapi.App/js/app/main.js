@@ -10,7 +10,7 @@ function (ko) {
     };
 });
 
-require(['ko', 'root', 'ko-components'],
+require(['ko', 'ko-root', 'ko-components'],
 function (ko, root, components) {
     components.register();
     ko.applyBindings(root);

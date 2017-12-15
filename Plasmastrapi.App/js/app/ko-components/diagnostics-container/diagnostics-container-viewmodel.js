@@ -7,7 +7,6 @@ function (KOComponentViewmodel) {
         KOComponentViewmodel.call(this, modelModuleString);
     };
     DiagnosticsContainerViewmodel.prototype.afterRender = function () {
-        this.initDiagnosticsReporting();
     };
 
     return DiagnosticsContainerViewmodel;

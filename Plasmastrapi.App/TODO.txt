@@ -3,6 +3,8 @@ known issues:
 - elements (with wires) that are destroyed then un-destroyed are not properly connected to the un-destroyed wires
 - selecting a terminal sometimes 'fails' and freezes the designer tooling
 	- stretching selection box to contain a logic element then stretching it away so that it doesn't produces a similar effect
+- hotkeys only work while design area is hovered
+- undo/redo do not accommodate the currently selected tool
 
 needs testing:
 - undo/redo non-trivial cases (restoring wires on destroyed logic elements, restoring wires on moved logic elements, etc.)

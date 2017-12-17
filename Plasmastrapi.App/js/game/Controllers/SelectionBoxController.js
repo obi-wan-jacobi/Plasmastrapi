@@ -88,8 +88,8 @@ function (Controller, Dictionary, utils) {
             selections.forEach(function (logicElement) {
                 var action = this.__toolActionFactory.create('trash-action');
                 action.setTarget(logicElement);
-                logicElement.destroy();
                 batch.addAction(action);
+                logicElement.destroy();
             }, this);
             this.__revisionController.addAction(batch);
         } else {

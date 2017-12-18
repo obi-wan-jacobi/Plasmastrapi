@@ -51,7 +51,7 @@ function (Controller, utils) {
         if (this.__designAreaPickComponent.isHovered) {
             this.__inputController.setHandler('selection-tool');
         } else {
-            this.__inputController.setHandler('idle-handler');
+            this.__inputController.setHandler('no-tool');
         }
     };
     LabController.prototype.__place = function (logicElement) {

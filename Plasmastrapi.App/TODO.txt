@@ -13,7 +13,6 @@ in progress:
 
 tech debt:
 - general
-	- contains() duplicated between panel and selection box
 	- (ongoing) run memory analysis/profiler diagnostics
 - circuits
 	- config

@@ -20,15 +20,6 @@ function (UIElement, utils) {
         var newPosition = this.__engine.getFactory('primitive-factory').create('position', [boundedX, boundedY]);
         entity.getComponent('pose-component').setData(newPosition);
     };
-    Panel.prototype.contains = function (entity) {
-        utils.validator.validateInstanceType(this, entity, 'entity');
-        var position = entity.getComponent('pose-component')
-            .getHandle()
-            .getPosition();
-        return this.getComponent('polygon-component')
-            .getHandle()
-            .checkPointCollision(position);
-    };
 
     return Panel;
 });

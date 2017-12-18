@@ -109,7 +109,7 @@
     <Content Include="js\game\Factories\AugmentedWireFactory.js" />
     <Content Include="js\game\Factories\ToolActionFactory.js" />
     <Content Include="js\game\InputHandlers\Base\ToolHandler.js" />
-    <Content Include="js\game\InputHandlers\Base\IdleHandler.js" />
+    <Content Include="js\game\InputHandlers\NoTool.js" />
     <Content Include="js\game\InputHandlers\SelectionTool.js" />
     <Content Include="js\game\InputHandlers\SpawningTool.js" />
     <Content Include="js\game\InputHandlers\TrashTool.js" />

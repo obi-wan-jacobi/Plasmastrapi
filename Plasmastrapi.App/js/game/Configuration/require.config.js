@@ -16,7 +16,7 @@
         'tool-action-factory': './game/Factories/ToolActionFactory',
         // Input Handlers
         'tool-handler': './game/InputHandlers/Base/ToolHandler',
-        'idle-handler': './game/InputHandlers/Base/IdleHandler',
+        'no-tool': './game/InputHandlers/NoTool',
         'placing-tool': './game/InputHandlers/PlacingTool',
         'selection-tool': './game/InputHandlers/SelectionTool',
         'spawning-tool': './game/InputHandlers/SpawningTool',

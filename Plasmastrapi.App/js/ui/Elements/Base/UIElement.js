@@ -9,6 +9,15 @@ function (Entity, utils) {
         this.__engine = engine;
         this.__engine.getFactory('decorator-factory').create('easy-composition-decorator', this);
     };
+    UIElement.prototype.contains = function (entity) {
+        utils.validator.validateInstanceType(this, entity, 'entity');
+        var position = entity.getComponent('pose-component')
+            .getHandle()
+            .getPosition();
+        return this.getComponent('polygon-component')
+            .getHandle()
+            .checkPointCollision(position);
+    };
 
     return UIElement;
 });

@@ -1,11 +1,10 @@
-﻿define(['input-handler'],
-function (InputHandler) {
+﻿define(['tool-handler'],
+function (ToolHandler) {
 
-    IdleHandler.prototype = Object.create(InputHandler.prototype);
+    IdleHandler.prototype = Object.create(ToolHandler.prototype);
     IdleHandler.prototype.constructor = IdleHandler;
     function IdleHandler(engine) {
-        InputHandler.call(this, engine);
-        this.__labController = this.__engine.getController('lab-controller');
+        ToolHandler.call(this, engine);
     };
     // private methods
     IdleHandler.prototype.__oninit = function () {
@@ -16,7 +15,7 @@ function (InputHandler) {
     };
     // public methods
     IdleHandler.prototype.keydown = function (keyboardHandle) {
-        this.__labController.hotkey(keyboardHandle.getKeyString());
+        ToolHandler.prototype.keydown.call(this, keyboardHandle);
     };
     IdleHandler.prototype.keyup = function (keyboardHandle) {
     };

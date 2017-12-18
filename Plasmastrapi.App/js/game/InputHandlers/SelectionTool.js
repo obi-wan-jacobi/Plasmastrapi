@@ -27,6 +27,10 @@ function (ToolHandler, utils) {
     // public methods
     SelectionTool.prototype.keydown = function (keyboardHandle) {
         ToolHandler.prototype.keydown.call(this, keyboardHandle);
+        // Enable logic elements + terminals
+        this.__enableAll('logic-element');
+        this.__enableAll('input-terminal');
+        this.__enableAll('output-terminal');
     };
     SelectionTool.prototype.keyup = function (keyboardHandle) { 
     };

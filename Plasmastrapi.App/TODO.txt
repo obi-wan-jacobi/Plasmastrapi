@@ -1,14 +1,13 @@
 
 known issues:
-- hotkeys only work while design area is hovered
-- undo/redo do not accommodate the currently selected tool
+- 
 
 needs testing:
 - undo/redo non-trivial cases (restoring wires on destroyed logic elements, restoring wires on moved logic elements, etc.)
 - (cache performance) undo/redo
 
 in progress:
-- known issues
+- shift-click wire creation
 - undo + redo toolbar buttons
 - constrain upper limit to revision cache
 

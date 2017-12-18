@@ -60,15 +60,13 @@ function (ToolHandler, utils) {
         if (!this.__selectionBoxController.isSelectionBoxCreated()) {
             // If mouse down outside of design area, but mouse up inside design area...
             return;
-        } else if (!this.__isSelectionBoxStretchedOnce) {
+        } else if (this.__selectionBoxController.isSelectionBoxEmpty()) {
             this.__selectionBoxController.destroySelectionBox(false);
+            this.__isSelectionBoxStretchedOnce = false;
             // Enable logic elements + terminals
             this.__enableAll('logic-element');
             this.__enableAll('input-terminal');
             this.__enableAll('output-terminal');
-        } else if (this.__selectionBoxController.isSelectionBoxEmpty()) {
-            this.__selectionBoxController.destroySelectionBox(false);
-            this.__isSelectionBoxStretchedOnce = false;
         } else if (!this.__selectionBoxController.isSelectionBoxPersistent()) {
             this.__selectionBoxController.persistSelectionBox();
         }

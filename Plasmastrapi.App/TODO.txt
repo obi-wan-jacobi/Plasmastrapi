@@ -1,7 +1,5 @@
 
 known issues:
-- selecting a terminal sometimes 'fails' and freezes the designer tooling
-	- stretching selection box to contain a logic element then stretching it away so that it doesn't produces a similar effect
 - hotkeys only work while design area is hovered
 - undo/redo do not accommodate the currently selected tool
 
@@ -16,6 +14,7 @@ in progress:
 
 tech debt:
 - general
+	- contains() duplicated between panel and selection box
 	- (ongoing) run memory analysis/profiler diagnostics
 - circuits
 	- config

@@ -9,6 +9,7 @@ function (Controller, Dictionary, utils) {
         this.__cursorController = null;
         this.__revisionController = null;
         this.__toolActionFactory = null;
+        this.__wireContainer = null;
         this.__selectionBox = null;
         this.__isSelectionBoxPersistent = false;
         this.__isSelectionBoxBeingPlaced = false;
@@ -26,6 +27,7 @@ function (Controller, Dictionary, utils) {
         this.__cursorController = this.__engine.getController('cursor-controller');
         this.__revisionController = this.__engine.getController('revision-controller');
         this.__toolActionFactory = this.__engine.getFactory('tool-action-factory');
+        this.__wireContainer = this.__engine.getFactory('augmented-wire-factory').getContainer();
     };
     SelectionBoxController.prototype.__createSelectionBox = function (position) {
         if (this.__selectionBox) {
@@ -83,15 +85,22 @@ function (Controller, Dictionary, utils) {
     SelectionBoxController.prototype.__destroySelectionBox = function (isContentAlsoToBeDestroyed) {
         this.__validateSelectionBoxHasBeenCreated();
         if (isContentAlsoToBeDestroyed && !this.__selectionBox.isEmpty) {
-            var batch = this.__toolActionFactory.create('batch-tool-action');
+            var batch = this.__toolActionFactory.create('batch-destroy-logic-elements-action');
             var selections = this.__selectionBox.flushContents();
             selections.forEach(function (logicElement) {
-                var action = this.__toolActionFactory.create('trash-action');
+                var action = this.__toolActionFactory.create('destroy-logic-element-action');
                 action.setTarget(logicElement);
                 batch.addAction(action);
-                logicElement.destroy();
+            }, this);
+            this.__wireContainer.forEach(function (wire) {
+                if (this.__selectionBox.contains(wire.inputTerminal) || this.__selectionBox.contains(wire.outputTerminal)) {
+                    var action = this.__toolActionFactory.create('destroy-wire-action');
+                    action.setTarget(wire);
+                    batch.addAction(action);
+                }
             }, this);
             this.__revisionController.addAction(batch);
+            batch.execute();
         } else {
             var selections = this.__selectionBox.flushContents();
             selections.forEach(function (element) {

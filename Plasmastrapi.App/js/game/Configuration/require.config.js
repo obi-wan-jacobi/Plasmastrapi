@@ -31,6 +31,9 @@
         // Tool Actions
         'tool-action': './game/ToolActions/Base/ToolAction',
         'batch-tool-action': './game/ToolActions/BatchToolAction',
+        'batch-destroy-logic-elements-action': './game/ToolActions/BatchDestroyLogicElementsAction',
+        'destroy-logic-element-action': './game/ToolActions/DestroyLogicElementAction',
+        'destroy-wire-action': './game/ToolActions/DestroyWireAction',
         'place-action': './game/ToolActions/PlaceAction',
         'spawn-action': './game/ToolActions/SpawnAction',
         'trash-action': './game/ToolActions/TrashAction',

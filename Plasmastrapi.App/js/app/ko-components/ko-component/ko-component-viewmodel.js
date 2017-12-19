@@ -13,7 +13,7 @@ function (utils) {
                 target[propertyName] = source[propertyName];
             }
         }
-    }
+    };
 
     function KOComponentViewmodel(modelModuleString) {
         var model = utils.modules.require(modelModuleString);

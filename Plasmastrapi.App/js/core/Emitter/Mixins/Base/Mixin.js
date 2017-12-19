@@ -19,7 +19,7 @@ function (utils) {
         }
         Mixin.prototype.defineProperty.call(this, `is${MixinPrototype.constructor.name}`, function () { return true; });
         for (var propertyName in MixinPrototype) {
-            if (MixinPrototype.hasOwnProperty(propertyName) && !(propertyName === 'constructor')) {
+            if (MixinPrototype.hasOwnProperty(propertyName) && propertyName !== 'constructor') {
                 if (propertyName.slice(0, 2) === '__') {
                     Mixin.prototype.proxyMethod.call(this, MixinPrototype, propertyName);
                 } else {

@@ -10,7 +10,7 @@ function (Mixin, utils) {
         this.__engine = engine;
         var DecoratorPrototype = utils.modules.require(decoratorString).prototype;
         for (var propertyName in DecoratorPrototype) {
-            if (DecoratorPrototype.hasOwnProperty(propertyName) && !(propertyName === 'constructor')) {
+            if (DecoratorPrototype.hasOwnProperty(propertyName) && propertyName !== 'constructor') {
                 if (propertyName.slice(0, 2) === '__') {
                     Mixin.prototype.proxyMethod.call(this, DecoratorPrototype, propertyName);
                 } else {

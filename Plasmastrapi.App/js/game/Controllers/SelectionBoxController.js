@@ -113,6 +113,8 @@ function (Controller, Dictionary, utils) {
         this.__selectionBox.destroy();
         this.__selectionBox = null;
         this.__isSelectionBoxPersistent = false;
+        this.__initialPositions = new Dictionary('position');
+
     };
     // public methods
     SelectionBoxController.prototype.createSelectionBox = function (position) {

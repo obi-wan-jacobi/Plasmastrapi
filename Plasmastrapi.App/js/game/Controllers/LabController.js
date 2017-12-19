@@ -12,7 +12,7 @@ function (Controller, utils) {
         this.__target = null;
         this.__hotkeys = {};
         this.__isRepeatLastActionOn = false;
-        this.__activeSelection = null;
+        this.__activeToolButtonSelection = null;
     };
     // private methods
     LabController.prototype.__oninit = function () {
@@ -44,9 +44,9 @@ function (Controller, utils) {
         }
     };
     LabController.prototype.__idle = function () {
-        if (this.__activeSelection) {
-            this.__activeSelection.deselect();
-            this.__activeSelection = null;
+        if (this.__activeToolButtonSelection) {
+            this.__activeToolButtonSelection.deselect();
+            this.__activeToolButtonSelection = null;
         }
         if (this.__designAreaPickComponent.isHovered) {
             this.__inputController.setHandler('selection-tool');
@@ -75,8 +75,8 @@ function (Controller, utils) {
         var self = this;
         this.__hotkeys[hotkey] = function () {
             self.spawn(typeString);
-            self.__activeSelection = button.getComponent('pick-component');
-            self.__activeSelection.select();
+            self.__activeToolButtonSelection = button.getComponent('pick-component');
+            self.__activeToolButtonSelection.select();
         };
         button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
     };
@@ -84,8 +84,8 @@ function (Controller, utils) {
         var self = this;
         this.__hotkeys[hotkey] = function () {
             self.trash();
-            self.__activeSelection = button.getComponent('pick-component');
-            self.__activeSelection.select();
+            self.__activeToolButtonSelection = button.getComponent('pick-component');
+            self.__activeToolButtonSelection.select();
         };
         button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
     };
@@ -93,8 +93,8 @@ function (Controller, utils) {
         var self = this;
         this.__hotkeys[hotkey] = function () {
             self.cut();
-            self.__activeSelection = button.getComponent('pick-component');
-            self.__activeSelection.select();
+            self.__activeToolButtonSelection = button.getComponent('pick-component');
+            self.__activeToolButtonSelection.select();
         };
         button.set('pick-component:onpick', [this.__hotkeys[hotkey]]);
     };

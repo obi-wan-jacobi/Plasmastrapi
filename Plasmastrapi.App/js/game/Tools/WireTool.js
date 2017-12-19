@@ -8,6 +8,7 @@ function (ToolHandler, validator) {
         this.__wireFactory = this.__engine.getFactory('augmented-wire-factory');
         this.__target = target;
         this.__anchor = null;
+        this.__isRepeatLastActionOn = false;
     };
     // private methods
     WireTool.prototype.__oninit = function () {
@@ -33,9 +34,21 @@ function (ToolHandler, validator) {
     };
     // public methods
     WireTool.prototype.keydown = function (keyboardHandle) {
-        ToolHandler.prototype.keydown.call(this, keyboardHandle);
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOn();
+            this.__isRepeatLastActionOn = true;
+        } else {
+            ToolHandler.prototype.keydown.call(this, keyboardHandle);
+        }
     };
-    WireTool.prototype.keyup = function () {
+    WireTool.prototype.keyup = function (keyboardHandle) {
+        var keyString = keyboardHandle.getKeyString();
+        if (keyString === 'shift') {
+            this.__labController.setRepeatLastActionOff();
+            this.__isRepeatLastActionOn = false;
+            this.__labController.idle();
+        }
     };
     WireTool.prototype.enter = function () {
     };
@@ -50,7 +63,7 @@ function (ToolHandler, validator) {
     };
     WireTool.prototype.click = function () {
         var terminal = this.__labController.flushTarget();
-        if (terminal) {
+        if (terminal !== this.__target && terminal) {
             var wire = null;
             if (validator.isInstanceOfType(terminal, 'input-terminal')) {
                 wire = this.__wireFactory.create('wire', [this.__target, terminal]);
@@ -67,7 +80,11 @@ function (ToolHandler, validator) {
                 this.__revisionController.addAction(action);
             }
         }
-        this.__labController.idle();
+        if (this.__isRepeatLastActionOn) {
+            this.__labController.setTarget(this.__target);
+        } else {
+            this.__labController.idle();
+        }
     };
     WireTool.prototype.dispose = function () {
         this.unload();
@@ -76,6 +93,7 @@ function (ToolHandler, validator) {
         }
         this.__target = null;
         this.__anchor = null;
+        this.__labController.setRepeatLastActionOff();
     };
 
     return WireTool;

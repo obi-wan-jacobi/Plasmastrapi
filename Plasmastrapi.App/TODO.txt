@@ -7,7 +7,6 @@ needs testing:
 - (cache performance) undo/redo
 
 in progress:
-- shift-click wire creation
 - undo + redo toolbar buttons
 - constrain upper limit to revision cache
 
@@ -54,7 +53,7 @@ backlog:
 	- elements
 		- flip flops (x3)
 		- timers
-		- SOCs + design contexts (tabs? overlay? panels?)
+		- SOCs + design contexts (tabs? overlay?)
 
 technology/resources (current + future):
 - linting

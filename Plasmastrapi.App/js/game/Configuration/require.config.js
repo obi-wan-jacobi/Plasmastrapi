@@ -14,15 +14,6 @@
         'augmented-terminal-factory': './game/Factories/AugmentedTerminalFactory',
         'augmented-wire-factory': './game/Factories/AugmentedWireFactory',
         'tool-action-factory': './game/Factories/ToolActionFactory',
-        // Input Handlers
-        'tool-handler': './game/InputHandlers/Base/ToolHandler',
-        'no-tool': './game/InputHandlers/NoTool',
-        'placing-tool': './game/InputHandlers/PlacingTool',
-        'selection-tool': './game/InputHandlers/SelectionTool',
-        'spawning-tool': './game/InputHandlers/SpawningTool',
-        'trash-tool': './game/InputHandlers/TrashTool',
-        'wire-cutter-tool': './game/InputHandlers/WireCutterTool',
-        'wire-tool': './game/InputHandlers/WireTool',
         // Scenes
         'main-menu-scene': './game/Scenes/MainMenuScene',
         'lab-scene': './game/Scenes/LabScene',
@@ -42,6 +33,15 @@
         // Tool Helpers
         'selection-box': './game/ToolHelpers/SelectionBox',
         'wire-cutter': './game/ToolHelpers/WireCutter',
+        // Tools
+        'tool-handler': './game/Tools/Base/ToolHandler',
+        'no-tool': './game/Tools/NoTool',
+        'placing-tool': './game/Tools/PlacingTool',
+        'selection-tool': './game/Tools/SelectionTool',
+        'spawning-tool': './game/Tools/SpawningTool',
+        'trash-tool': './game/Tools/TrashTool',
+        'wire-cutter-tool': './game/Tools/WireCutterTool',
+        'wire-tool': './game/Tools/WireTool',
         // Game
         'game': './game/Game'
     };

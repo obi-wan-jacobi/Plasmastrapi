@@ -11,6 +11,7 @@ function (Scene) {
         var engine = this.__engine;
         var uiElementFactory = this.__engine.getFactory('ui-element-factory');
         var labController = this.__engine.getController('lab-controller');
+        var revisionController = this.__engine.getController('revision-controller');
 
         var stage = uiElementFactory.create('panel');
         stage.set('position', [1200, 350]);
@@ -78,6 +79,20 @@ function (Scene) {
         powerSourceButton.set('rectangle', [30, 30]);
         powerSourceButton.set('label', ['[5]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
         labController.setSpawnerButton(powerSourceButton, 'power-source', '5');
+
+        var undoButton = uiElementFactory.create('button');
+        undoButton.set('image', ['undo']);
+        undoButton.set('position', [631, 25]);
+        undoButton.set('rectangle', [30, 30]);
+        undoButton.set('label', ['[ctrl+z]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        undoButton.set('pick-component:onpick', [revisionController.undo.bind(revisionController)]);
+
+        var redoButton = uiElementFactory.create('button');
+        redoButton.set('image', ['redo']);
+        redoButton.set('position', [676, 25]);
+        redoButton.set('rectangle', [30, 30]);
+        redoButton.set('label', ['[ctrl+y]'], { offset: { x: 0, y: 28 }, fontSize: 12 });
+        redoButton.set('pick-component:onpick', [revisionController.redo.bind(revisionController)]);
 
         var trashButton = uiElementFactory.create('button');
         trashButton.set('image', ['trashcan']);

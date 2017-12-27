@@ -7,8 +7,11 @@ needs testing:
 - (cache performance) undo/redo
 
 in progress:
-- undo + redo toolbar buttons
-- constrain upper limit to revision cache
+	- circuit testing ('debug' mode)
+		- pause/stop/play
+		- breakpoints?
+		- step forward/backward
+		- sliding global timer (signal propagation speed)
 
 tech debt:
 - general
@@ -26,6 +29,7 @@ tech debt:
 	- PolygonHandle point-collision checking is disgusting
 	- PolygonComponent --> combine translate + rotate into one function (leverage a single for-loop)?
 - scalability concerns
+	- constrain upper limit to revision cache
 	- single-canvas viewport
 
 backlog:
@@ -37,16 +41,9 @@ backlog:
 	- Modal panels (move, stretch/resize, close)
 - lab scene
 	- design editor
-		- undo/redo
-		- copy/paste
 		- save/load design
 		- rotatable components
 		- wire routing
-	- circuit testing ('debug' mode)
-		- pause/stop/play
-		- breakpoints?
-		- step forward/backward
-		- sliding global timer (signal propagation speed)
 	- scenario window
 		- zoom in/out
 		- environment

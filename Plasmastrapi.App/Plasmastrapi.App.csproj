@@ -64,6 +64,8 @@
   <ItemGroup>
     <Content Include="css\main.css" />
     <Content Include="favicon.ico" />
+    <Content Include="img\Tools\Revision\redo.png" />
+    <Content Include="img\Tools\Revision\undo.png" />
     <Content Include="js\app\config\components.js" />
     <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-model.js" />
     <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-view.html" />

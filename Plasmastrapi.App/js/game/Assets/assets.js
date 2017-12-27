@@ -21,6 +21,8 @@ function () {
         'img/Terminals/input-terminal.png',
         'img/Terminals/output-terminal.png',
         // *** Tools ***
+        'img/Tools/Revision/undo.png',
+        'img/Tools/Revision/redo.png',
         'img/Tools/Trashcan/trashcan.png',
         'img/Tools/WireCutter/wire-cutter-closed.png',
         'img/Tools/WireCutter/wire-cutter-open.png',

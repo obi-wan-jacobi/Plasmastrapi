@@ -16,6 +16,8 @@ in progress:
 tech debt:
 - general
 	- (ongoing) run memory analysis/profiler diagnostics
+- tools
+	- (SelectionBoxController): destroySelectionBox is called before endSelectionBoxPlacement
 - circuits
 	- config
 - scenes

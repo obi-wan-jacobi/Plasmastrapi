@@ -113,8 +113,6 @@ function (Controller, Dictionary, utils) {
         this.__selectionBox.destroy();
         this.__selectionBox = null;
         this.__isSelectionBoxPersistent = false;
-        this.__initialPositions = new Dictionary('position');
-
     };
     // public methods
     SelectionBoxController.prototype.createSelectionBox = function (position) {
@@ -145,6 +143,7 @@ function (Controller, Dictionary, utils) {
             utils.validator.throw(this, 'beginSelectionBoxPlacement', 'Selection box is already being placed');
         }
         this.__isSelectionBoxBeingPlaced = true;
+        this.__initialPositions = new Dictionary('position');
         this.__selectionBox.forEach(function (element) {
             var data = element.getComponent('pose-component').getHandle().getPosition();
             this.__initialPositions.add(element, data);

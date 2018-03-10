@@ -1,5 +1,5 @@
-﻿define(['diagnostics-system', 'utils'],
-function (DiagnosticsSystem) {
+﻿define(['diagnostics-system', 'viewport-diagnostics-report'],
+function (DiagnosticsSystem, ViewportDiagnosticsReport) {
 
     ViewportDiagnosticsSystem.prototype = Object.create(DiagnosticsSystem.prototype);
     ViewportDiagnosticsSystem.prototype.constructor = ViewportDiagnosticsSystem;
@@ -16,7 +16,8 @@ function (DiagnosticsSystem) {
         if (!loopOnce) {
             return true;
         }
-        this.__diagnosticsController.reportDiagnostics('viewport-diagnostics-system', deltaMs);
+        var diagnosticsReport = new ViewportDiagnosticsReport(1000 / deltaMs);
+        this.__diagnosticsController.reportDiagnostics('viewport-diagnostics-system', diagnosticsReport);
         return true;
     };
 

@@ -1,5 +1,5 @@
-﻿define(['ko', 'ko-component-viewmodel', 'utils'],
-function (ko, KOComponentViewmodel, utils) {
+﻿define(['ko', 'ko-root', 'ko-component-viewmodel', 'utils'],
+function (ko, root, KOComponentViewmodel, utils) {
 
     var componentNames = [
         'viewport-container',
@@ -12,13 +12,12 @@ function (ko, KOComponentViewmodel, utils) {
 
     components.register = function () {
         this.names.forEach(function (name) {
-            var DefaultViewmodel = KOComponentViewmodel.bind.apply(KOComponentViewmodel, [null].concat([`ko-${name}-model`]));
-            var RequiredViewModel = utils.modules.requireIfExists(`ko-${name}-viewmodel`);
-            if (RequiredViewModel) {
-                RequiredViewModel = RequiredViewModel.bind.apply(RequiredViewModel, [null].concat([`ko-${name}-model`]));
-            }
+            var RequiredViewmodel = utils.modules.requireIfExists(`ko-${name}-viewmodel`);
+            var ViewmodelType = RequiredViewmodel || KOComponentViewmodel;
+            var viewmodelInstance = new ViewmodelType();
+            root[`${name}-viewmodel`] = viewmodelInstance;
             ko.components.register(name, {
-                viewModel: RequiredViewModel || DefaultViewmodel,
+                viewModel: { instance: viewmodelInstance },
                 template: { require: `text!app/ko-components/${name}/${name}-view.html` }
             });
         });

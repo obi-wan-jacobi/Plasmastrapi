@@ -67,11 +67,8 @@
     <Content Include="img\Tools\Revision\redo.png" />
     <Content Include="img\Tools\Revision\undo.png" />
     <Content Include="js\app\config\components.js" />
-    <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-model.js" />
     <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-view.html" />
     <Content Include="js\app\ko-components\diagnostics-container\diagnostics-container-viewmodel.js" />
-    <Content Include="js\app\ko-components\ko-component\ko-component-model.js" />
-    <Content Include="js\app\ko-components\viewport-container\viewport-container-model.js" />
     <Content Include="js\app\ko-components\viewport-container\viewport-container-viewmodel.js" />
     <Content Include="js\app\root.js" />
     <Content Include="js\app\ko-components\viewport-container\viewport-container-view.html" />
@@ -94,6 +91,9 @@
     <Content Include="js\engine\Containers\EntityContainer.js" />
     <Content Include="js\engine\Controllers\DiagnosticsController.js" />
     <Content Include="js\engine\Controllers\ViewportController.js" />
+    <Content Include="js\engine\Diagnostics\Reports\Base\DiagnosticsReport.js" />
+    <Content Include="js\engine\Diagnostics\Reports\CacheDiagnosticsReport.js" />
+    <Content Include="js\engine\Diagnostics\Reports\ViewportDiagnosticsReport.js" />
     <Content Include="js\engine\Factories\Base\ExtendedFactory.js" />
     <Content Include="js\engine\Factories\DataHandleFactory.js" />
     <Content Include="js\engine\Factories\DisplaySettingsFactory.js" />
@@ -193,6 +193,7 @@
     <Content Include="js\ui\Factories\DecoratorFactory.js" />
     <Content Include="js\ui\Factories\UIElementFactory.js" />
     <Content Include="js\utils\Configuration\config.js" />
+    <Content Include="js\utils\Helpers\oop.js" />
     <Content Include="js\utils\Logging\logging.js" />
     <Content Include="js\utils\Modules\modules.js" />
     <Content Include="js\utils\utils.js" />

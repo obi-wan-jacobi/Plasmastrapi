@@ -29,9 +29,6 @@ function (Emitter, Dictionary, validator) {
     Container.prototype.forEach = function (fn, /* optional */ caller) {
         return this.__contents.forEach(fn, caller);
     };
-    Container.prototype.get = function (item) {
-        return this.__contents.get(item);
-    };
     Container.prototype.add = function(item) {
         this.__contents.add(item, item);
         this.emit('onadd', item);

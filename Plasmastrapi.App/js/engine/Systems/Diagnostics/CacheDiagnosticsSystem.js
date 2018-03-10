@@ -1,5 +1,5 @@
-﻿define(['diagnostics-system', 'dictionary', 'utils'],
-function (DiagnosticsSystem, Dictionary, utils) {
+﻿define(['diagnostics-system', 'cache-diagnostics-report', 'dictionary', 'utils'],
+function (DiagnosticsSystem, CacheDiagnosticsReport, Dictionary, utils) {
 
     CacheDiagnosticsSystem.prototype = Object.create(DiagnosticsSystem.prototype);
     CacheDiagnosticsSystem.prototype.constructor = CacheDiagnosticsSystem;
@@ -35,7 +35,8 @@ function (DiagnosticsSystem, Dictionary, utils) {
         if (!loopOnce) {
             return true;
         }
-        this.__diagnosticsController.reportDiagnostics('cache-diagnostics-system', this.__containers);
+        var diagnosticsReport = new CacheDiagnosticsReport(this.__containers);
+        this.__diagnosticsController.reportDiagnostics('cache-diagnostics-system', diagnosticsReport);
         return true;
     };
 

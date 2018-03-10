@@ -18,14 +18,6 @@ function (Container, ComponentContainer, config) {
             }
         }
     };
-    DrawableComponentContainer.prototype.get = function (component) {
-        for (var i = 0, L = config.constants.DISPLAY_LAYERS.length; i < L; i++) {
-            var result = this.__containers[config.constants.DISPLAY_LAYERS[i]].get(component);
-            if (result) {
-                return result;
-            }
-        }
-    };
     DrawableComponentContainer.prototype.add = function (component) {
         var displayLayer = component.getDisplaySettings().displayLayer;
         this.__containers[displayLayer].add(component);

@@ -1,5 +1,5 @@
-﻿define(['diagnostics-system', 'dictionary', 'utils'],
-function (DiagnosticsSystem, Dictionary, utils) {
+﻿define(['diagnostics-system', 'cache-diagnostics-report', 'dictionary', 'utils'],
+function (DiagnosticsSystem, CacheDiagnosticsReport, Dictionary, utils) {
 
     GameCacheDiagnosticsSystem.prototype = Object.create(DiagnosticsSystem.prototype);
     GameCacheDiagnosticsSystem.prototype.constructor = GameCacheDiagnosticsSystem;
@@ -21,7 +21,8 @@ function (DiagnosticsSystem, Dictionary, utils) {
         if (!loopOnce) {
             return true;
         }
-        this.__diagnosticsController.reportDiagnostics('game-cache-diagnostics-system', this.__containers);
+        var diagnosticsReport = new CacheDiagnosticsReport(this.__containers);
+        this.__diagnosticsController.reportDiagnostics('game-cache-diagnostics-system', diagnosticsReport);
         return true;
     };
 

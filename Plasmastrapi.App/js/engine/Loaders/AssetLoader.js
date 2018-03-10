@@ -15,21 +15,14 @@ function (Dictionary, validator) {
         this.__loadCounter++;
         if (this.__loadCounter === this.__loadTotal) {
             this.__isFinishedloading = true;
-            while(this.__callbacks.length > 0) {
-                this.__callbacks.shift()();
+            while (this.__callbacks.length > 0) {
+                this.__callbacks.shift()(this.__assetMap);
             }
             this.__isExecuting = false;
         }
     };
     AssetLoader.prototype.__itemFinishedLoadingWithError = function(){
         validator.throw(this, 'itemFinishedLoadingWithError', 'An asset failed to load');
-    };
-    AssetLoader.prototype.__initDownload = function (assetUrls) {
-        if (this.__isExecuting || this.__isFinishedLoading) {
-            validator.throw(this, 'initDownload', 'Download has already been called');
-        }
-        this.__isExecuting = true;
-        this.__loadTotal = assetUrls.length;
     };
     // public prototypal variables
     Object.defineProperties(AssetLoader.prototype, {
@@ -40,8 +33,12 @@ function (Dictionary, validator) {
 		}
     });
     // public methods
-    AssetLoader.prototype.download = function (assetUrls) {
-        this.__initDownload(assetUrls);
+    AssetLoader.prototype.load = function (assetUrls) {
+        if (this.__isExecuting || this.__isFinishedLoading) {
+            validator.throw(this, 'initLoad', 'Load has already been called');
+        }
+        this.__isExecuting = true;
+        this.__loadTotal = assetUrls.length;
         for (var property in assetUrls) {
             var image = new Image();
             image.onload = this.__itemFinishedLoading.bind(this);
@@ -51,9 +48,9 @@ function (Dictionary, validator) {
         }
         return this;
     };
-    AssetLoader.prototype.done = function(callback) {
+    AssetLoader.prototype.then = function(callback) {
         if (this.__isFinishedLoading) {
-            return callback();
+            return callback(this.__assetMap);
         }
         this.__callbacks.push(callback);
     };

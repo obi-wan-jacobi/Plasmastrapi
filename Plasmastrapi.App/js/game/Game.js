@@ -42,7 +42,7 @@ function (Engine, assetUrls, AssetLoader, utils) {
     Game.prototype.start = function () {
         var promise = Engine.prototype.start.call(this);
         // load assets
-        this.__assetLoader.download(assetUrls).done((function () {
+        this.__assetLoader.load(assetUrls).then((function () {
             utils.logging.write(this, 'start', 'Assets have been loaded.');
             this.getController('scene-controller').setScene('lab-scene');
             utils.logging.write(this, 'start', 'We have ignition!');

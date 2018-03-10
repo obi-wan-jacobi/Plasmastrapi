@@ -18,6 +18,10 @@
         'input-controller': './engine/Controllers/InputController',
         'scene-controller': './engine/Controllers/SceneController',
         'viewport-controller': './engine/Controllers/ViewportController',
+        // Diagnostics
+        'diagnostics-report': './engine/Diagnostics/Reports/Base/DiagnosticsReport',
+        'cache-diagnostics-report': './engine/Diagnostics/Reports/CacheDiagnosticsReport',
+        'viewport-diagnostics-report': './engine/Diagnostics/Reports/ViewportDiagnosticsReport',
         // Factories
         'factory': './engine/Factories/Base/Factory',
         'extended-factory': './engine/Factories/Base/ExtendedFactory',

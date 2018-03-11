@@ -3,19 +3,15 @@ function (Base, utils) {
 
     Factory.prototype = Object.create(Base.prototype);
     Factory.prototype.constructor = Factory;
-    function Factory(engine, /* optional */ typeString, /* optional */ containerString) {
+    function Factory(engine, typeString, /* optional */ containerString) {
+        utils.validator.validateInstanceType(this, typeString, 'string');
         Base.call(this, engine);
-        this.__typeString = null;
-        this.__containerString = null;
+        this.__typeString = typeString;
         this.__container = null;
-        if (typeString) {
-            utils.validator.validateInstanceType(this, typeString, 'string');
-            this.__typeString = typeString;
-        }
         if (containerString) {
             utils.validator.validateClassType(this, containerString, 'container');
-            this.__container = new (utils.modules.require(containerString))(this.__typeString);
-            this.__containerString = containerString;
+            var ContainerType = utils.modules.require(containerString);
+            this.__container = new ContainerType(this.__typeString);
         }
     };
     // private methods
@@ -24,15 +20,12 @@ function (Base, utils) {
     Factory.prototype.__onunload = function () { };
     // public methods
     Factory.prototype.create = function (typeString, args) {
-        if (!this.__typeString) {
-            utils.validator.throw(this, 'create', `${this.name} must be constructed with a typeString in order to create()`);
-        }
         args = args || [];
         utils.validator.validateInstanceType(this, args, 'array');
         utils.validator.validateClassType(this, typeString, this.__typeString);
         var ObjectType = utils.modules.require(typeString);
         var instance = new (Function.prototype.bind.apply(ObjectType, [null].concat(args)))();
-        if (this.__container && this.__containerString) {
+        if (this.__container) {
             this.__container.add(instance);
         }
         return instance;

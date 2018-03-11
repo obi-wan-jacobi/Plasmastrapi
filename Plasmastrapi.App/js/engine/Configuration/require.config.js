@@ -43,10 +43,10 @@
         'keyboard-system': './engine/Systems/KeyboardSystem',
         'mouse-system': './engine/Systems/MouseSystem',
         'pick-system': './engine/Systems/PickSystem',
-        // diagnostics
-        'diagnostics-system': './engine/Systems/Diagnostics/Base/DiagnosticsSystem',
-        'cache-diagnostics-system': './engine/Systems/Diagnostics/CacheDiagnosticsSystem',
-        'viewport-diagnostics-system': './engine/Systems/Diagnostics/ViewportDiagnosticsSystem',
+            // --- Diagnostics ---
+            'diagnostics-system': './engine/Systems/Diagnostics/Base/DiagnosticsSystem',
+            'cache-diagnostics-system': './engine/Systems/Diagnostics/CacheDiagnosticsSystem',
+            'viewport-diagnostics-system': './engine/Systems/Diagnostics/ViewportDiagnosticsSystem',
         // Scenes
         'scene': './engine/Scenes/Base/Scene',
         // Engine

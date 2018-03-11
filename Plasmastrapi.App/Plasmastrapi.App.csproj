@@ -81,6 +81,7 @@
     <Content Include="js\circuits\Containers\InputTerminalContainer.js" />
     <Content Include="js\circuits\Containers\LogicElementContainer.js" />
     <Content Include="js\circuits\Containers\OutputTerminalContainer.js" />
+    <Content Include="js\circuits\Factories\TerminalWireFactory.js" />
     <Content Include="js\circuits\Systems\LogicElementStateSystem.js" />
     <Content Include="js\core\Components\Inputs\KeyboardComponent.js" />
     <Content Include="js\core\Configuration\config.js" />

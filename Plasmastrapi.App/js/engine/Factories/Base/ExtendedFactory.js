@@ -6,23 +6,14 @@ function (Factory, utils) {
     function EntendedFactory(engine, baseFactoryString, typeString, /* optional */ containerString) {
         utils.validator.validateClassType(this, baseFactoryString, 'factory');
         utils.validator.validateInstanceType(this, baseFactoryString, 'string');
-        utils.validator.validateInstanceType(this, typeString, 'string');
         Factory.call(this, engine, typeString, containerString);
-        this.__baseFactoryString = baseFactoryString;
-        this.__baseFactory = null;
-    };
-    // private methods
-    EntendedFactory.prototype.__oninit = function () {
-        Factory.prototype.__oninit.call(this);
-        this.__baseFactory = this.__engine.getFactory(this.__baseFactoryString);
+        this.__baseFactory = this.__engine.getFactory(baseFactoryString);
     };
     // public methods
     EntendedFactory.prototype.create = function (typeString, args) {
-        args = args || [];
-        utils.validator.validateInstanceType(this, args, 'array');
         utils.validator.validateClassType(this, typeString, this.__typeString);
         var instance = this.__baseFactory.create(typeString, args);
-        if (this.__container && this.__containerString) {
+        if (this.__container) {
             this.__container.add(instance);
         }
         return instance;

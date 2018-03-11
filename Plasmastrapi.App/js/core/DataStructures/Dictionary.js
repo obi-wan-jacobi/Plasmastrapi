@@ -59,7 +59,15 @@ function (Link, validator) {
     Dictionary.prototype.forEach = function(fn, /* optional */ caller) {
         return this.__forEachLink(function (link) {
             var item = link.get();
-            return fn.call(caller, item.key, item.value);
+            fn.call(caller, item.key, item.value);
+        });
+    };
+    Dictionary.prototype.find = function (fn, /* optional */ caller) {
+        return this.__forEachLink(function (link) {
+            var item = link.get();
+            if (true === fn.call(caller, item.key, item.value)) {
+                return item.value;
+            }
         });
     };
     Dictionary.prototype.add = function (key, /* optional */ value) {

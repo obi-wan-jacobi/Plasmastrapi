@@ -4,7 +4,7 @@ function (Factory, utils) {
     DecoratorFactory.prototype = Object.create(Factory.prototype);
     DecoratorFactory.prototype.constructor = DecoratorFactory;
     function DecoratorFactory(engine) {
-        Factory.call(this, engine);
+        Factory.call(this, engine, 'decorator');
     };
     DecoratorFactory.prototype.create = function (decoratorString, entity) {
         utils.validator.validateClassType(this, decoratorString, 'decorator');

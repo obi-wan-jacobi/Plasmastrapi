@@ -12,6 +12,7 @@ function (Engine, assetUrls, AssetLoader, utils) {
     Game.prototype.__registerFactories = function () {
         Engine.prototype.__registerFactories.call(this);
         this.__addFactory('circuit-element-factory');
+        this.__addFactory('terminal-wire-factory');
         this.__addFactory('wire-factory');
         this.__addFactory('terminal-factory');
         this.__addFactory('logic-element-factory');

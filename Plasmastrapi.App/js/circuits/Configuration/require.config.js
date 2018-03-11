@@ -15,6 +15,7 @@
         'circuit-element-factory': './circuits/Factories/CircuitElementFactory',
         'logic-element-factory': './circuits/Factories/LogicElementFactory',
         'terminal-factory': './circuits/Factories/TerminalFactory',
+        'terminal-wire-factory': './circuits/Factories/TerminalWireFactory',
         'wire-factory': './circuits/Factories/WireFactory',
         // Logic Elements
         'logic-element': './circuits/LogicElements/Base/LogicElement',

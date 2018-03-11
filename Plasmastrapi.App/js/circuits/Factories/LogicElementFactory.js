@@ -5,7 +5,6 @@ function (ExtendedFactory, utils, config) {
     LogicElementFactory.prototype.constructor = LogicElementFactory;
     function LogicElementFactory(engine) {
         ExtendedFactory.call(this, engine, 'circuit-element-factory', 'logic-element', 'logic-element-container');
-        this.__circuitElementFactory = null;
     };
 
     return LogicElementFactory;

@@ -27,7 +27,7 @@ function (ToolAction, utils) {
         this.__target.destroy();
     };
     WireAction.prototype.redo = function () {
-        var wire = this.__wireFactory.create('wire', [this.__outputTerminal, this.__inputTerminal]);
+        var wire = this.__wireFactory.create([this.__outputTerminal, this.__inputTerminal]);
         var target = this.getTarget();
         this.__toolActionContainer.forEach(function (action) {
             action.updateTarget(target, wire);

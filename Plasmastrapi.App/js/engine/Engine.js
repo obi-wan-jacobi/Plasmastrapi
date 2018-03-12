@@ -107,6 +107,12 @@ function (System, Dictionary, utils) {
             loop(tPrevious);
         });
     };
+    Engine.prototype.__get = function (key) {
+        var result = this.__factories.get(key) || this.__controllers.get(key) || this.__systems.get(key);
+        if (!result) {
+            utils.validator.throw(this, 'get', `No result found for ${key}`);
+        }
+    };
     // public methods
     Engine.prototype.getViewport = function () {
         return this.__viewport;

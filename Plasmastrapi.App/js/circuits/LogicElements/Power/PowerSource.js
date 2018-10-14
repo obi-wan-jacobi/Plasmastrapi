@@ -5,7 +5,6 @@ function (LogicElement, constants, utils) {
     PowerSource.prototype.constructor = PowerSource;
     function PowerSource() {
         LogicElement.call(this);
-        // initialize high
         this.__state = constants.STATES.HIGH;
     };
     // public methods
@@ -14,9 +13,6 @@ function (LogicElement, constants, utils) {
     };
     PowerSource.prototype.updateState = function (inputState) {
         utils.validator.throw(this, 'updateState', 'This method is not permitted');
-    };
-    PowerSource.prototype.getState = function (state) {
-        return this.__state;
     };
     PowerSource.prototype.setState = function (state) {
         utils.validator.throw(this, 'setState', 'This method is not permitted');

@@ -5,24 +5,19 @@ function (ExtendedFactory, InputTerminalContainer, OutputTerminalContainer, util
     TerminalFactory.prototype.constructor = TerminalFactory;
     function TerminalFactory(engine) {
         ExtendedFactory.call(this, engine, 'circuit-element-factory', 'terminal');
-        this.__inputTerminalContainer = new InputTerminalContainer();
-        this.__outputTerminalContainer = new OutputTerminalContainer();
+        this.__containers = {
+            'input-terminal': new InputTerminalContainer(),
+            'output-terminal': new OutputTerminalContainer()
+        };
     };
     // public methods
     TerminalFactory.prototype.create = function (terminalString) {
         var terminal = ExtendedFactory.prototype.create.call(this, terminalString);
-        if (utils.validator.isInstanceOfType(terminal, 'input-terminal')) {
-            this.__inputTerminalContainer.add(terminal);
-        } else if (utils.validator.isInstanceOfType(terminal, 'output-terminal')) {
-            this.__outputTerminalContainer.add(terminal);
-        }
+        this.__containers[terminalString].add(terminal);
         return terminal;
     };
-    TerminalFactory.prototype.getInputTerminalContainer = function () {
-        return this.__inputTerminalContainer;
-    };
-    TerminalFactory.prototype.getOutputTerminalContainer = function () {
-        return this.__outputTerminalContainer;
+    TerminalFactory.prototype.getContainer = function (terminalString) {
+        return this.__containers[terminalString];
     };
 
     return TerminalFactory;

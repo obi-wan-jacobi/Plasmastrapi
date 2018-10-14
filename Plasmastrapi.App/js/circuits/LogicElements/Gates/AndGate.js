@@ -9,14 +9,20 @@ function (Gate, constants) {
     AndGate.prototype.updateState = function () {
         var nextState = constants.STATES.NO_POWER;
         this.__inputs.forEach(function (input) {
-            return input.getConnections().forEach(function (connection) {
-                if (connection.isHigh) {
-                    nextState = constants.STATES.HIGH;
-                } else if (connection.isLow) {
-                    nextState = constants.STATES.LOW;
-                    return 'break';
-                }
-            }, this);
+            var isConnectedToALow = input.getConnections().find(function (connection) {
+                return connection.isLow;
+            });
+            if (isConnectedToALow) {
+                nextState = constants.STATES.LOW;
+                return false;
+            }
+            var isConnectedToAHigh = input.getConnections().find(function (connection) {
+                return connection.isHigh;
+            });
+            if (isConnectedToAHigh) {
+                nextState = constants.STATES.HIGH;
+                return false;
+            }
         }, this);
         this.setState(nextState);
     };

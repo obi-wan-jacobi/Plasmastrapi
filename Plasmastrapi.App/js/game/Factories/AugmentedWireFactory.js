@@ -5,14 +5,26 @@ function (Factory, utils, config) {
     AugmentedWireFactory.prototype.constructor = AugmentedWireFactory;
     function AugmentedWireFactory(engine) {
         Factory.call(this, engine, 'wire-element');
-        this.__wireFactory = engine.getFactory('wire-factory');
-        this.__terminalWireFactory = engine.getFactory('terminal-wire-factory');
-        this.__displaySettingsFactory = engine.getFactory('display-settings-factory');
-        this.__componentFactory = engine.getFactory('component-factory');
-        this.__primitiveFactory = engine.getFactory('primitive-factory');
-        this.__circuitElementFactory = engine.getFactory('circuit-element-factory');
-        this.__labController = engine.getController('lab-controller');
-        this.__cursorController = engine.getController('cursor-controller');
+        this.__wireFactory = null;
+        this.__terminalWireFactory = null;
+        this.__displaySettingsFactory = null;
+        this.__componentFactory = null;
+        this.__primitiveFactory = null;
+        this.__circuitElementFactory = null;
+        this.__labController = null;
+        this.__cursorController = null;
+    };
+    // private methods
+    AugmentedWireFactory.prototype.__oninit = function () {
+        Factory.prototype.__oninit.call(this);
+        this.__wireFactory = this.__engine.getFactory('wire-factory');
+        this.__terminalWireFactory = this.__engine.getFactory('terminal-wire-factory');
+        this.__displaySettingsFactory = this.__engine.getFactory('display-settings-factory');
+        this.__componentFactory = this.__engine.getFactory('component-factory');
+        this.__primitiveFactory = this.__engine.getFactory('primitive-factory');
+        this.__circuitElementFactory = this.__engine.getFactory('circuit-element-factory');
+        this.__labController = this.__engine.getController('lab-controller');
+        this.__cursorController = this.__engine.getController('cursor-controller');
     };
     // public methods
     AugmentedWireFactory.prototype.create = function (args) {
